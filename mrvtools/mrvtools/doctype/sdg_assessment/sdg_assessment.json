@@ -1,0 +1,121 @@
+{
+ "_liked_by": "[\"Administrator\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{SDG}-{###}",
+ "creation": "2023-07-03 13:44:21.526974",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_id",
+  "category_section",
+  "poverty_reduction_check",
+  "reducing_inequality_check",
+  "gender_pairity_check",
+  "column_break_17ahq",
+  "select_all",
+  "unselect_all",
+  "fetch",
+  "column_break_bd1ml",
+  "section_break_dpxxa",
+  "qualitative_impact",
+  "quantitative_impact"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "label": "Project ID",
+   "options": "Project"
+  },
+  {
+   "fieldname": "qualitative_impact",
+   "fieldtype": "Table",
+   "label": "Qualitative Impact",
+   "options": "SDG Qualitative ChildTable"
+  },
+  {
+   "fieldname": "quantitative_impact",
+   "fieldtype": "Table",
+   "label": "Quantitative Impact",
+   "options": "SDG Quantitative ChildTable"
+  },
+  {
+   "fieldname": "section_break_dpxxa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_17ahq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fetch",
+   "fieldtype": "Button",
+   "label": "Fetch"
+  },
+  {
+   "fieldname": "column_break_bd1ml",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "poverty_reduction_check",
+   "fieldtype": "Check",
+   "label": "Poverty Reduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "reducing_inequality_check",
+   "fieldtype": "Check",
+   "label": "Reducing Inequality"
+  },
+  {
+   "fieldname": "category_section",
+   "fieldtype": "Section Break",
+   "label": "Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "gender_pairity_check",
+   "fieldtype": "Check",
+   "label": "Gender Pairity"
+  },
+  {
+   "fieldname": "select_all",
+   "fieldtype": "Button",
+   "label": "Select All"
+  },
+  {
+   "fieldname": "unselect_all",
+   "fieldtype": "Button",
+   "label": "UnSelect All"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-05 15:27:06.575225",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "SDG Assessment",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

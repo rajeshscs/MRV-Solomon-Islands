@@ -1,0 +1,216 @@
+{
+ "_liked_by": "[\"Administrator\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{project_name}-{###}",
+ "creation": "2023-06-30 19:15:49.067132",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "project_description",
+  "section_break_rbstb",
+  "type_of_instrument",
+  "key_sector",
+  "status",
+  "location",
+  "geographical_co_ordinate",
+  "other_agency",
+  "end_date",
+  "lifetime",
+  "cost",
+  "column_break_prrqs",
+  "objective",
+  "key_sub_sector",
+  "included_in",
+  "please_specify_location",
+  "implementing_entity",
+  "start_date",
+  "financial_closure_date",
+  "costusd",
+  "source_of_funding",
+  "remarks",
+  "upload_document"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project_description",
+   "fieldtype": "Small Text",
+   "label": "Brief Description of Project"
+  },
+  {
+   "fieldname": "section_break_rbstb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "type_of_instrument",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type of Instrument",
+   "options": "\nRegulatory\nEconomic instrument\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "key_sector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Key Sector",
+   "options": "Project Key Sector",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nPlanning\nPlanned\nAdopted\nUnder Implementation\nImplemented\nOperational\nCompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Select",
+   "label": "Location",
+   "options": "\nNational Level\nProvince Level\nCity Level\nMunicipality\nOthers",
+   "reqd": 1
+  },
+  {
+   "fieldname": "geographical_co_ordinate",
+   "fieldtype": "Geolocation",
+   "label": "Geographical Co Ordinate"
+  },
+  {
+   "fieldname": "other_agency",
+   "fieldtype": "Data",
+   "label": "Other Agency"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "column_break_prrqs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "objective",
+   "fieldtype": "Link",
+   "label": "Objective",
+   "options": "Project Objective",
+   "reqd": 1
+  },
+  {
+   "fieldname": "key_sub_sector",
+   "fieldtype": "Link",
+   "label": "Key Sub Sector",
+   "options": "Project Key Sub Sector"
+  },
+  {
+   "fieldname": "included_in",
+   "fieldtype": "Table MultiSelect",
+   "label": "Included in",
+   "options": "Project Included In ChildTable"
+  },
+  {
+   "fieldname": "please_specify_location",
+   "fieldtype": "Data",
+   "label": "Please Specify Location"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "financial_closure_date",
+   "fieldtype": "Date",
+   "label": "Financial Closure Date"
+  },
+  {
+   "fieldname": "costusd",
+   "fieldtype": "Float",
+   "label": "Cost(USD)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "source_of_funding",
+   "fieldtype": "Select",
+   "label": "Source of Funding",
+   "options": "\nBroad source funding/Govt.\nGrant\nLoan\nODA\nOOF/Others"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "upload_document",
+   "fieldtype": "Attach",
+   "label": "Upload Document"
+  },
+  {
+   "fieldname": "lifetime",
+   "fieldtype": "Int",
+   "label": "Lifetime(Years)"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Float",
+   "label": "Cost(SBD)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "implementing_entity",
+   "fieldtype": "Data",
+   "label": "Implementing Entity"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Adaptation",
+   "link_fieldname": "project_name"
+  },
+  {
+   "link_doctype": "Mitigation",
+   "link_fieldname": "project_name"
+  },
+  {
+   "link_doctype": "SDG Assessment",
+   "link_fieldname": "project_id"
+  }
+ ],
+ "modified": "2023-07-05 18:47:25.838580",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Project",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

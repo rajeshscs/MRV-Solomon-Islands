@@ -1,0 +1,135 @@
+{
+ "_liked_by": "[\"Administrator\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{user_name} - {role} - {##}",
+ "creation": "2023-07-01 16:16:18.778694",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "user_name",
+  "contact_number",
+  "email_id",
+  "column_break_75kqi",
+  "password",
+  "confirm_password",
+  "role",
+  "permissions_required_section",
+  "ghg",
+  "column_break_3tdks",
+  "project_tracking",
+  "column_break_5tduo",
+  "reports"
+ ],
+ "fields": [
+  {
+   "fieldname": "user_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Number",
+   "options": "Phone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "E-mail ID",
+   "options": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Password",
+   "in_list_view": 1,
+   "label": "Password",
+   "reqd": 1
+  },
+  {
+   "fieldname": "confirm_password",
+   "fieldtype": "Password",
+   "label": "Confirm Password",
+   "reqd": 1
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Select",
+   "label": "Role",
+   "options": "\nUser\nApprover\nObserver",
+   "reqd": 1
+  },
+  {
+   "fieldname": "permissions_required_section",
+   "fieldtype": "Section Break",
+   "label": "Permissions Required"
+  },
+  {
+   "fieldname": "ghg",
+   "fieldtype": "Table MultiSelect",
+   "hidden": 1,
+   "label": "GHG",
+   "options": "User Permissions ChildTable"
+  },
+  {
+   "fieldname": "column_break_3tdks",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_tracking",
+   "fieldtype": "Table MultiSelect",
+   "hidden": 1,
+   "label": "Project Tracking",
+   "options": "User Permissions ChildTable"
+  },
+  {
+   "fieldname": "column_break_5tduo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reports",
+   "fieldtype": "Table MultiSelect",
+   "hidden": 1,
+   "label": "Reports",
+   "options": "User Permissions ChildTable"
+  },
+  {
+   "fieldname": "column_break_75kqi",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-06 12:11:20.188825",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "User Registration",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

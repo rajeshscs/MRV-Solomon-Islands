@@ -1,0 +1,160 @@
+{
+ "_liked_by": "[\"Administrator\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{Adaptation}-{###}",
+ "creation": "2023-07-01 15:45:30.622164",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_details_tab",
+  "project_name",
+  "section_break_z1cqh",
+  "project_description",
+  "column_break_uxdpi",
+  "key_sector",
+  "key_sub_sector",
+  "included_in",
+  "implementing_entity",
+  "other_agency",
+  "column_break_wsxo0",
+  "end_date",
+  "financial_closure_date",
+  "start_date",
+  "section_break_bbseg",
+  "ndp_coverage",
+  "column_break_mdmpy",
+  "ndp_cov",
+  "agriculture_livestock_and_fisheries_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "label": "Project Name",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "project_name.project_description",
+   "fieldname": "project_description",
+   "fieldtype": "Small Text",
+   "label": "Brief Description"
+  },
+  {
+   "fetch_from": "project_name.key_sector",
+   "fieldname": "key_sector",
+   "fieldtype": "Data",
+   "label": "Adaptation Sector"
+  },
+  {
+   "fetch_from": "project_name.key_sub_sector",
+   "fieldname": "key_sub_sector",
+   "fieldtype": "Data",
+   "label": "Adaptation Sub-Sector"
+  },
+  {
+   "fieldname": "included_in",
+   "fieldtype": "Data",
+   "label": "Included in"
+  },
+  {
+   "fetch_from": "project_name.financial_closure_date",
+   "fieldname": "financial_closure_date",
+   "fieldtype": "Date",
+   "label": "Financial Closure Date"
+  },
+  {
+   "fetch_from": "project_name.implementing_entity",
+   "fieldname": "implementing_entity",
+   "fieldtype": "Data",
+   "label": "Implementing Entities or entity"
+  },
+  {
+   "fetch_from": "project_name.other_agency",
+   "fieldname": "other_agency",
+   "fieldtype": "Data",
+   "label": "Other Party"
+  },
+  {
+   "fetch_from": "project_name.end_date",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Project End Date"
+  },
+  {
+   "fetch_from": "project_name.start_date",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Project Start Date"
+  },
+  {
+   "fieldname": "ndp_coverage",
+   "fieldtype": "Link",
+   "label": "NDP Objective Coverage",
+   "options": "NDP Objective Coverage"
+  },
+  {
+   "fieldname": "ndp_cov",
+   "fieldtype": "Table MultiSelect",
+   "label": "NDP Coverage",
+   "options": "NDP Objective Coverage Child table"
+  },
+  {
+   "fieldname": "section_break_z1cqh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_wsxo0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_bbseg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_uxdpi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_mdmpy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "agriculture_livestock_and_fisheries_tab",
+   "fieldtype": "Tab Break",
+   "label": "AGRICULTURE, LIVESTOCK, AND FISHERIES"
+  },
+  {
+   "fieldname": "project_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Project Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-05 19:14:54.966413",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Adaptation",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
