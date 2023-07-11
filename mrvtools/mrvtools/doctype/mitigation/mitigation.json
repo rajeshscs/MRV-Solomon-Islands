@@ -23,7 +23,7 @@
   "expected_annual_ghg",
   "non_ghg_mitigation_benefits",
   "beneficiaries",
-  "expected_project_utput",
+  "expected_project_output",
   "market_based_mechanism",
   "ghg_estimation_methodology_text",
   "ghg_estimation_methodology_file",
@@ -44,6 +44,7 @@
   "upload_calculation_sheet",
   "section_break_pdgvc",
   "performance_indicator",
+  "upload_document",
   "remarks"
  ],
  "fields": [
@@ -91,7 +92,6 @@
    "read_only": 1
   },
   {
-   "fetch_from": "project_name.included_in",
    "fieldname": "included_in",
    "fieldtype": "Data",
    "label": "Included In",
@@ -223,12 +223,6 @@
    "options": "\nYes\nNo\nNot Applicable"
   },
   {
-   "fieldname": "expected_project_utput",
-   "fieldtype": "Data",
-   "label": "Expected Project Outputs",
-   "reqd": 1
-  },
-  {
    "fieldname": "project_impacts",
    "fieldtype": "Data",
    "label": "Project Impacts",
@@ -268,11 +262,22 @@
   {
    "fieldname": "section_break_pdgvc",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "expected_project_output",
+   "fieldtype": "Data",
+   "label": "Expected Project Outputs",
+   "reqd": 1
+  },
+  {
+   "fieldname": "upload_document",
+   "fieldtype": "Attach",
+   "label": "Upload Document"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 16:28:36.901732",
+ "modified": "2023-07-11 12:31:29.147855",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation",

@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-10 19:54:51.086179",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "performance_indicator",
+  "unit",
+  "expected_value",
+  "actual_monitored_value",
+  "reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "performance_indicator",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Performance Indicator"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Unit"
+  },
+  {
+   "fieldname": "expected_value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Expected Value"
+  },
+  {
+   "fieldname": "actual_monitored_value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Actual Monitored Value"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-10 19:54:51.086179",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Mitigation Monitoring Information ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

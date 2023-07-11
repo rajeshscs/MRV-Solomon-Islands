@@ -25,19 +25,19 @@ frappe.ui.form.on('User Registration', {
             }
         });
 	},
-	role :function(frm){
-		if (frm.doc.role == "Observer" ){
-			frm.fields_dict["ghg"].df.hidden = 1
-			frm.fields_dict["project_tracking"].df.hidden = 1
-			frm.fields_dict["reports"].df.hidden = 0
-		}
-		else{
-			frm.fields_dict["ghg"].df.hidden = 0
-			frm.fields_dict["project_tracking"].df.hidden = 0
-			frm.fields_dict["reports"].df.hidden = 0
-		}
-		frm.refresh_field("ghg")
-		frm.refresh_field("project_tracking")
-		frm.refresh_field("reports")
-	}
+	// role :function(frm){
+	// 	if (frm.doc.role == "Observer" ){
+	// 		frm.fields_dict["ghg"].df.hidden = 1
+	// 		frm.fields_dict["project_tracking"].df.hidden = 1
+	// 		frm.fields_dict["reports"].df.hidden = 0
+	// 	}
+	// 	else{
+	// 		frm.fields_dict["ghg"].df.hidden = 0
+	// 		frm.fields_dict["project_tracking"].df.hidden = 0
+	// 		frm.fields_dict["reports"].df.hidden = 0
+	// 	}
+	// 	frm.refresh_field("ghg")
+	// 	frm.refresh_field("project_tracking")
+	// 	frm.refresh_field("reports")
+	// }
 });

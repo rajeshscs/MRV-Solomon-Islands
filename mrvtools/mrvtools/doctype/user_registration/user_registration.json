@@ -18,9 +18,9 @@
   "role",
   "permissions_required_section",
   "ghg",
-  "column_break_3tdks",
+  "column_break_r6ovv",
   "project_tracking",
-  "column_break_5tduo",
+  "column_break_laza1",
   "reports"
  ],
  "fields": [
@@ -74,41 +74,35 @@
   },
   {
    "fieldname": "ghg",
-   "fieldtype": "Table MultiSelect",
-   "hidden": 1,
-   "label": "GHG",
-   "options": "User Permissions ChildTable"
-  },
-  {
-   "fieldname": "column_break_3tdks",
-   "fieldtype": "Column Break"
+   "fieldtype": "Data",
+   "label": "GHG"
   },
   {
    "fieldname": "project_tracking",
-   "fieldtype": "Table MultiSelect",
-   "hidden": 1,
-   "label": "Project Tracking",
-   "options": "User Permissions ChildTable"
-  },
-  {
-   "fieldname": "column_break_5tduo",
-   "fieldtype": "Column Break"
+   "fieldtype": "Data",
+   "label": "Project Tracking"
   },
   {
    "fieldname": "reports",
-   "fieldtype": "Table MultiSelect",
-   "hidden": 1,
-   "label": "Reports",
-   "options": "User Permissions ChildTable"
+   "fieldtype": "Data",
+   "label": "Reports"
   },
   {
    "fieldname": "column_break_75kqi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_r6ovv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_laza1",
    "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 12:11:20.188825",
+ "modified": "2023-07-11 18:08:21.589005",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Registration",
@@ -124,6 +118,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "MRV Admin",
    "share": 1,
    "write": 1
   }
