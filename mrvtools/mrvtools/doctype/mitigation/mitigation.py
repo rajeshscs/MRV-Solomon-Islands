@@ -7,5 +7,10 @@ from frappe.model.document import Document
 class Mitigation(Document):
 	@frappe.whitelist()
 	def get_data(self):
-		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE Parent ='{self.project_name}'""")
+		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name}'""")
 		return get_doc
+	
+	@frappe.whitelist()
+	def get_user(self):
+		doc = frappe.db.sql(f""" SELECT parent FROM `tabHas Role` WHERE role = 'Approver Mitigation Tracking'""")
+		return doc

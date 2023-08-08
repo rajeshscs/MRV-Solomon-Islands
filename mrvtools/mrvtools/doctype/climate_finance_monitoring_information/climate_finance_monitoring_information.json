@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-07-27 12:15:37.107280",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "project_name",
+  "financing_mode",
+  "financial_year",
+  "approval_date",
+  "budget_code",
+  "select_approver",
+  "column_break_xfzp6",
+  "monitoring_year",
+  "applied_exchange_rate",
+  "financial_closure_date",
+  "expected_end_date",
+  "effectiveness_date",
+  "section_break_svbhp",
+  "budget_expenditure",
+  "section_break_05k4e",
+  "total_budget_disbursement",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "monitoring_year",
+   "fieldtype": "Select",
+   "label": "Monitoring Year"
+  },
+  {
+   "fetch_from": "project.financial_year",
+   "fieldname": "financial_year",
+   "fieldtype": "Data",
+   "label": "Financial Year"
+  },
+  {
+   "fetch_from": "project.applied_exchange_rate",
+   "fieldname": "applied_exchange_rate",
+   "fieldtype": "Data",
+   "label": "Applied Exchange Rate"
+  },
+  {
+   "fetch_from": "project.financing_mode",
+   "fieldname": "financing_mode",
+   "fieldtype": "Data",
+   "label": "Financing Mode"
+  },
+  {
+   "fetch_from": "project.budget_code",
+   "fieldname": "budget_code",
+   "fieldtype": "Data",
+   "label": "Budget Code"
+  },
+  {
+   "fetch_from": "project.financial_closure_date",
+   "fieldname": "financial_closure_date",
+   "fieldtype": "Data",
+   "label": "Financial Closure Date"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "CLFM-"
+  },
+  {
+   "fieldname": "section_break_svbhp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "options": "Climate Finance"
+  },
+  {
+   "fieldname": "approval_date",
+   "fieldtype": "Date",
+   "label": "Approval Date"
+  },
+  {
+   "fieldname": "effectiveness_date",
+   "fieldtype": "Data",
+   "label": "Effectiveness Date"
+  },
+  {
+   "fieldname": "expected_end_date",
+   "fieldtype": "Data",
+   "label": "Expected End Date"
+  },
+  {
+   "fieldname": "column_break_xfzp6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget_expenditure",
+   "fieldtype": "Table",
+   "label": "Budget Expenditure",
+   "options": "Climate Monitoring Information Budget Expenditure ChildTable"
+  },
+  {
+   "fieldname": "section_break_05k4e",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_budget_disbursement",
+   "fieldtype": "Table",
+   "label": "Total Budget Disbursement",
+   "options": "Climate Finance Total Budget Disbursement ChildTable"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-05 15:05:39.386170",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Climate Finance Monitoring Information",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{Mitigation}-{###}",
@@ -41,6 +40,7 @@
   "project_impacts",
   "weblink",
   "start_date",
+  "select_approver",
   "upload_calculation_sheet",
   "section_break_pdgvc",
   "performance_indicator",
@@ -273,11 +273,17 @@
    "fieldname": "upload_document",
    "fieldtype": "Attach",
    "label": "Upload Document"
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-11 12:31:29.147855",
+ "modified": "2023-08-04 19:42:36.364742",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation",
@@ -297,7 +303,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "project_name"
 }

@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "project_name1",
   "project_name",
   "column_break_adszg",
   "monitoring_year",
@@ -43,6 +44,7 @@
   "project_impacts",
   "weblink",
   "start_date",
+  "select_approver",
   "upload_calculation_sheet",
   "section_break_pdgvc",
   "performance_indicator",
@@ -53,9 +55,8 @@
   {
    "fieldname": "project_name",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Project Name",
-   "options": "Project",
+   "options": "Mitigation",
    "reqd": 1
   },
   {
@@ -200,7 +201,7 @@
   },
   {
    "fieldname": "lifetime",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Project Lifetime(years)",
    "read_only": 1
@@ -266,8 +267,7 @@
   {
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
-   "label": "Monitoring Year",
-   "options": "\n2001\n2002\n2003\n2004\n2005\n2006\n2007\n2008\n2009\n2010\n2011\n2012\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033\n2034\n2035\n2036\n2037\n2038\n2039\n2040\n2041\n2042\n2043\n2044\n2045\n2046\n2047\n2048\n2049\n2050"
+   "label": "Monitoring Year"
   },
   {
    "fieldname": "column_break_adszg",
@@ -295,11 +295,25 @@
    "fieldname": "upload_document",
    "fieldtype": "Attach",
    "label": "Upload Document"
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
+  },
+  {
+   "fieldname": "project_name1",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Project Name",
+   "options": "Project"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-11 11:22:50.879740",
+ "modified": "2023-08-05 17:12:38.807002",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",
@@ -321,5 +335,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "project_name1"
 }

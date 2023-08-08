@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{user_name} - {role} - {##}",
@@ -21,7 +20,8 @@
   "column_break_r6ovv",
   "project_tracking",
   "column_break_laza1",
-  "reports"
+  "reports",
+  "amended_from"
  ],
  "fields": [
   {
@@ -79,8 +79,9 @@
   },
   {
    "fieldname": "project_tracking",
-   "fieldtype": "Data",
-   "label": "Project Tracking"
+   "fieldtype": "Table MultiSelect",
+   "label": "Project Tracking",
+   "options": "Project Tracking ChildTable"
   },
   {
    "fieldname": "reports",
@@ -98,11 +99,21 @@
   {
    "fieldname": "column_break_laza1",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "User Registration",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2023-07-11 18:08:21.589005",
+ "modified": "2023-08-04 19:19:19.473159",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Registration",

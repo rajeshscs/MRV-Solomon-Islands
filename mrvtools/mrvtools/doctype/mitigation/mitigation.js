@@ -9,15 +9,44 @@ frappe.ui.form.on('Mitigation', {
 			async:false,
 			callback:function(r){
 				var values=[]
-				console.log(r);
 				for(var i of r.message){
 					values.push(i)
 					
 				}
 				values=values.join(",")
-				console.log(values);
+				// console.log(values);
 				
 				frm.set_value("included_in",values)
+			}
+		})
+		
+	},
+	refresh: function(frm){
+		frm.call({
+		  doc:frm.doc,
+		  method:'get_user',
+		  callback: function(r){
+			var userList = []
+			
+			for (var i of r.message){
+			  userList.push(i[0])
+			}
+			console.log(userList);
+			frm.set_query("select_approver",function(){
+			  return {
+				filters:{
+				  email:['in',userList]
+				}
+			  }
+			})
+		  }
+		})
+		frm.set_query("project_name",function(){
+			return{
+				filters:{
+					objective: ['in',['Cross-Cutting','Mitigation']],
+					workflow_state:"Approved"
+				}
 			}
 		})
 	}

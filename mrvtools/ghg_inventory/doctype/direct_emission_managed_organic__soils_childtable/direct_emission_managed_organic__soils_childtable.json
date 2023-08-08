@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-28 15:17:14.847504",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "anthropogenic_n_input",
+  "annual_area",
+  "organic_solis_emission_factor",
+  "refrence"
+ ],
+ "fields": [
+  {
+   "fieldname": "anthropogenic_n_input",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Anthropogenic N input type"
+  },
+  {
+   "fieldname": "annual_area",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Annual area of managed/drained organic soils (Ha)"
+  },
+  {
+   "fieldname": "organic_solis_emission_factor",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Emission Factor (kg N2O-N per Ha per year)"
+  },
+  {
+   "fieldname": "refrence",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-31 18:06:16.077114",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "Direct Emission Managed Organic  Soils ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{table_name} - {##}",
+ "creation": "2023-07-31 16:41:03.058852",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "table_name",
+  "anthropogenic_n_input",
+  "amount",
+  "emission_factor",
+  "annual_area",
+  "organic_solis_emission_factor",
+  "grazed_soils_amount",
+  "grazed_soils_emissoin_factor",
+  "description",
+  "value",
+  "unit",
+  "reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "table_name",
+   "fieldtype": "Data",
+   "label": "Table name"
+  },
+  {
+   "fieldname": "anthropogenic_n_input",
+   "fieldtype": "Small Text",
+   "label": "Anthropogenic N input type"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Data",
+   "label": "Amount (kg/yr)"
+  },
+  {
+   "fieldname": "emission_factor",
+   "fieldtype": "Data",
+   "label": "Emission Factor (kg N2O-N per kg N input)"
+  },
+  {
+   "fieldname": "annual_area",
+   "fieldtype": "Data",
+   "label": "Annual area of managed/drained organic soils (Ha)"
+  },
+  {
+   "fieldname": "organic_solis_emission_factor",
+   "fieldtype": "Data",
+   "label": "Emission Factor (kg N2O-N per Ha per year)"
+  },
+  {
+   "fieldname": "grazed_soils_amount",
+   "fieldtype": "Data",
+   "label": "Amount of urine and dung N deposited by grazing animals on pasture, range and paddock (kg per year)"
+  },
+  {
+   "fieldname": "grazed_soils_emissoin_factor",
+   "fieldtype": "Data",
+   "label": "Emission Factor (kg N2O-N per kg N input)"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Data",
+   "label": "Value"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-31 19:08:24.008729",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "Direct and Indirect Managed Soils Master List",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

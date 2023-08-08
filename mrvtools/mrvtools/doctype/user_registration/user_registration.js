@@ -10,13 +10,16 @@ frappe.ui.form.on('User Registration', {
                 }
             }
         });
-		frm.set_query("project_tracking", function(){
-            return {
-                filters: {
-                    category : "Project Tracking"
-                }
-            }
-        });
+		// let child = frm.add_child('Project Tracking ChildTable')
+		// child.project_tracking = 'Adaptation Tracking'
+		// frm.refresh_field('project_tracking')
+		// frm.set_query("project_tracking", function(){
+        //     return {
+        //         filters: {
+        //             category : "Project Tracking"
+        //         }
+        //     }
+        // });
 		frm.set_query("reports", function(){
             return {
                 filters: {

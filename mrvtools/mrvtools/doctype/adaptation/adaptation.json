@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{Adaptation}-{###}",
@@ -9,7 +8,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "project_details_tab",
   "project_name",
   "section_break_z1cqh",
   "project_description",
@@ -26,8 +24,13 @@
   "section_break_bbseg",
   "ndp_coverage",
   "column_break_mdmpy",
+  "select_approver",
   "ndp_cov",
-  "agriculture_livestock_and_fisheries_tab"
+  "section_break_62rin",
+  "json",
+  "load_categories",
+  "qualitative_impact",
+  "quantitative_impact"
  ],
  "fields": [
   {
@@ -122,19 +125,42 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "agriculture_livestock_and_fisheries_tab",
-   "fieldtype": "Tab Break",
-   "label": "AGRICULTURE, LIVESTOCK, AND FISHERIES"
+   "fieldname": "section_break_62rin",
+   "fieldtype": "Section Break"
   },
   {
-   "fieldname": "project_details_tab",
-   "fieldtype": "Tab Break",
-   "label": "Project Details"
+   "fieldname": "qualitative_impact",
+   "fieldtype": "Table",
+   "label": "Qualitative Impact",
+   "options": "Adaptation Qualitative ChildTable"
+  },
+  {
+   "fieldname": "quantitative_impact",
+   "fieldtype": "Table",
+   "label": "Quantitative Impact",
+   "options": "Adaptation Quantitative ChildTable"
+  },
+  {
+   "fieldname": "load_categories",
+   "fieldtype": "Button",
+   "label": "Load Categories"
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
+  },
+  {
+   "fieldname": "json",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "JSON"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 19:14:54.966413",
+ "modified": "2023-08-08 21:15:23.021965",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",

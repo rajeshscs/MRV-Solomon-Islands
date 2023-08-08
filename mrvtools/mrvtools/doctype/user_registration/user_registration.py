@@ -23,9 +23,9 @@ def createUser(formData):
 	ghgString = ",".join(ghgData)
 	doc.ghg = ghgString
 
-	projectTrackingData = formData['Project Tracking']
-	projectTrackingString = ",".join(projectTrackingData)
-	doc.project_tracking = projectTrackingString
+	# projectTrackingData = formData['Project Tracking']
+	# projectTrackingString = ",".join(projectTrackingData)
+	# doc.project_tracking = projectTrackingString
 
 	reportsData = formData['Reports']
 	reportsString = ",".join(reportsData)

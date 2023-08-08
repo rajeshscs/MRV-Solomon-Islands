@@ -1,9 +1,8 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{project_name}-{###}",
- "creation": "2023-06-30 19:15:49.067132",
+ "creation": "2023-07-17 15:17:12.102832",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -16,6 +15,8 @@
   "key_sector",
   "status",
   "location",
+  "coordinates",
+  "get_location",
   "geographical_co_ordinate",
   "other_agency",
   "end_date",
@@ -32,7 +33,8 @@
   "costusd",
   "source_of_funding",
   "remarks",
-  "upload_document"
+  "upload_document",
+  "select_approver"
  ],
  "fields": [
   {
@@ -83,6 +85,16 @@
    "reqd": 1
   },
   {
+   "fieldname": "coordinates",
+   "fieldtype": "Data",
+   "label": "Co-Ordinates"
+  },
+  {
+   "fieldname": "get_location",
+   "fieldtype": "Button",
+   "label": "Get Location"
+  },
+  {
    "fieldname": "geographical_co_ordinate",
    "fieldtype": "Geolocation",
    "label": "Geographical Co Ordinate"
@@ -98,13 +110,24 @@
    "label": "End Date"
   },
   {
+   "fieldname": "lifetime",
+   "fieldtype": "Int",
+   "label": "Lifetime(Years)"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Float",
+   "label": "Cost(SBD)",
+   "precision": "2"
+  },
+  {
    "fieldname": "column_break_prrqs",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "objective",
    "fieldtype": "Link",
-   "label": "Objective",
+   "label": "Objective (Please Select)",
    "options": "Project Objective",
    "reqd": 1
   },
@@ -124,6 +147,11 @@
    "fieldname": "please_specify_location",
    "fieldtype": "Data",
    "label": "Please Specify Location"
+  },
+  {
+   "fieldname": "implementing_entity",
+   "fieldtype": "Data",
+   "label": "Implementing Entity"
   },
   {
    "fieldname": "start_date",
@@ -159,20 +187,10 @@
    "label": "Upload Document"
   },
   {
-   "fieldname": "lifetime",
-   "fieldtype": "Int",
-   "label": "Lifetime(Years)"
-  },
-  {
-   "fieldname": "cost",
-   "fieldtype": "Float",
-   "label": "Cost(SBD)",
-   "precision": "2"
-  },
-  {
-   "fieldname": "implementing_entity",
-   "fieldtype": "Data",
-   "label": "Implementing Entity"
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -190,7 +208,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-07-05 18:47:25.838580",
+ "modified": "2023-08-03 19:31:30.249342",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

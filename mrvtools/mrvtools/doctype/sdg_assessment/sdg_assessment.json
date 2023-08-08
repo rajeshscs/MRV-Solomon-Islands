@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{SDG}-{###}",
@@ -9,27 +8,17 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "project_id",
+  "project_name",
+  "load_categories",
+  "column_break_xb4rr",
+  "select_approver",
+  "category",
   "category_section",
-  "poverty_reduction_check",
-  "reducing_inequality_check",
-  "gender_pairity_check",
-  "column_break_17ahq",
-  "select_all",
-  "unselect_all",
-  "fetch",
-  "column_break_bd1ml",
-  "section_break_dpxxa",
+  "json",
   "qualitative_impact",
   "quantitative_impact"
  ],
  "fields": [
-  {
-   "fieldname": "project_id",
-   "fieldtype": "Link",
-   "label": "Project ID",
-   "options": "Project"
-  },
   {
    "fieldname": "qualitative_impact",
    "fieldtype": "Table",
@@ -43,59 +32,47 @@
    "options": "SDG Quantitative ChildTable"
   },
   {
-   "fieldname": "section_break_dpxxa",
+   "fieldname": "category_section",
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "column_break_17ahq",
+   "fieldname": "category",
+   "fieldtype": "Table MultiSelect",
+   "hidden": 1,
+   "label": "Category",
+   "options": "SDG Category ChildTable"
+  },
+  {
+   "fieldname": "column_break_xb4rr",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "fetch",
+   "fieldname": "project_name",
+   "fieldtype": "Link",
+   "label": "Project Name",
+   "options": "Project"
+  },
+  {
+   "fieldname": "load_categories",
    "fieldtype": "Button",
-   "label": "Fetch"
+   "label": "Load Categories"
   },
   {
-   "fieldname": "column_break_bd1ml",
-   "fieldtype": "Column Break"
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
   },
   {
-   "default": "0",
-   "fieldname": "poverty_reduction_check",
-   "fieldtype": "Check",
-   "label": "Poverty Reduction"
-  },
-  {
-   "default": "0",
-   "fieldname": "reducing_inequality_check",
-   "fieldtype": "Check",
-   "label": "Reducing Inequality"
-  },
-  {
-   "fieldname": "category_section",
-   "fieldtype": "Section Break",
-   "label": "Category"
-  },
-  {
-   "default": "0",
-   "fieldname": "gender_pairity_check",
-   "fieldtype": "Check",
-   "label": "Gender Pairity"
-  },
-  {
-   "fieldname": "select_all",
-   "fieldtype": "Button",
-   "label": "Select All"
-  },
-  {
-   "fieldname": "unselect_all",
-   "fieldtype": "Button",
-   "label": "UnSelect All"
+   "fieldname": "json",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "JSON"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 15:27:06.575225",
+ "modified": "2023-08-08 21:14:47.240724",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
