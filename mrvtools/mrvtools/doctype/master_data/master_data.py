@@ -8,7 +8,7 @@ class MasterData(Document):
 	@frappe.whitelist()
 	def getMasterValues(self):
 		masterValues = frappe.db.get_all("Master Data Test",
-			  fields = ["module","table","impact_area","indicator"])
+			  fields = ["module","table","sdg_mapping","impact_area","indicator"])
 		# masterValues = [
 		# 	{'module': 'SDG', 'table': 'Quantitative', 'impact_area': 'Poverty Reduction', 'indicator': 'Additional gender-sensitive policy frameworks at regional and national level to accelerate investment in poverty reduction:'}, 
 		# 	{'module': 'SDG', 'table': 'Quantitative', 'impact_area': 'Poverty Reduction', 'indicator': 'Additional resources to implement programmes and policies for poverty reduction:'}, 

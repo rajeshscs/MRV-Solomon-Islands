@@ -5,7 +5,31 @@ import frappe , json
 from frappe.model.document import Document
 
 class UserRegistration(Document):
-	pass
+	@frappe.whitelist()
+	def check_user_exists(self):
+		if not frappe.db.exists("User", self.email_id):
+			role_list = [{"role":"Adaptation Tracking"}]
+			self.insert_user(role_list)
+
+	def insert_user(self, roles):
+		# user = frappe.new_doc("User")
+		# user.email = self.email_id,
+		# user.first_name = self.user_name,
+		# user.mobile_no = self.contact_number,
+		# user.send_welcome_email = 1,
+		# user.roles = roles
+		# user.save(ignore_permissions=True)
+		
+		frappe.get_doc({
+			"doctype": "User",
+			"name": self.email_id,
+			"email": self.email_id,
+			"first_name": self.user_name,
+			"mobile_no": self.contact_number,
+			"send_welcome_email": 1,
+			"roles":roles
+		}).insert(ignore_permissions=True)
+	
 @frappe.whitelist()
 def createUser(formData):
 	formData = json.loads(formData)
@@ -20,18 +44,26 @@ def createUser(formData):
 	doc.role = formData['role']
 
 	ghgData = formData['GHG']
-	ghgString = ",".join(ghgData)
-	doc.ghg = ghgString
+	for i in ghgData:
+		row = doc.append('ghg',{})
+		row.project_tracking = i
 
-	# projectTrackingData = formData['Project Tracking']
+	projectTrackingData = formData['Project Tracking']
+	for i in projectTrackingData:
+		row = doc.append('project_tracking',{})
+		row.project_tracking = i
+
 	# projectTrackingString = ",".join(projectTrackingData)
 	# doc.project_tracking = projectTrackingString
 
 	reportsData = formData['Reports']
-	reportsString = ",".join(reportsData)
-	doc.reports = reportsString
+	for i in reportsData:
+		row = doc.append('reports',{})
+		row.project_tracking = i
+	# reportsString = ",".join(reportsData)
+	# doc.reports = reportsString
 
 	
 	doc.insert(ignore_permissions = True)
-
-	return("User Registration Successful! Waiting for Approval.")
+	frappe.log_error("Title", formData)
+	return({"message":"User Registration Successful! Waiting for Approval.","data":[ghgData,projectTrackingData,reportsData]})

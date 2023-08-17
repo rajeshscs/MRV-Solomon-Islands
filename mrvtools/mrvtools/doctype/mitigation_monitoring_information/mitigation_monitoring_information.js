@@ -3,6 +3,12 @@
 
 frappe.ui.form.on('Mitigation Monitoring Information', {
 	refresh: function(frm){
+		$.ajax({
+			success:function(){
+				$('[id="page-Mitigation Monitoring Information"] [class="grid-buttons"]').css("display","none")
+				$('[id="page-Mitigation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
@@ -126,6 +132,11 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 					child.expected_value = i.expected_value
 					frm.refresh_field("performance_indicator")
 				}
+			}
+		})
+		$.ajax({
+			success:function(){
+				$('[id="page-Mitigation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
 			}
 		})
 		frm.call({

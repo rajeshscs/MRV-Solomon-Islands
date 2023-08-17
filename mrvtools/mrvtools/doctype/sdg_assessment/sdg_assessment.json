@@ -9,12 +9,25 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
-  "load_categories",
   "column_break_xb4rr",
   "select_approver",
   "category",
   "category_section",
   "json",
+  "poverty_reduction",
+  "inequality",
+  "gender",
+  "industry",
+  "column_break_qvzfz",
+  "environment",
+  "employment",
+  "education",
+  "column_break_5g8fw",
+  "water",
+  "food",
+  "health",
+  "section_break_j9xm0",
+  "load_categories",
   "qualitative_impact",
   "quantitative_impact"
  ],
@@ -68,11 +81,83 @@
    "fieldtype": "JSON",
    "hidden": 1,
    "label": "JSON"
+  },
+  {
+   "default": "0",
+   "fieldname": "poverty_reduction",
+   "fieldtype": "Check",
+   "label": "Poverty Reduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "inequality",
+   "fieldtype": "Check",
+   "label": "Inequality"
+  },
+  {
+   "default": "0",
+   "fieldname": "gender",
+   "fieldtype": "Check",
+   "label": "Gender"
+  },
+  {
+   "default": "0",
+   "fieldname": "industry",
+   "fieldtype": "Check",
+   "label": "Industry"
+  },
+  {
+   "fieldname": "column_break_qvzfz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "environment",
+   "fieldtype": "Check",
+   "label": "Environment"
+  },
+  {
+   "default": "0",
+   "fieldname": "employment",
+   "fieldtype": "Check",
+   "label": "Employment"
+  },
+  {
+   "default": "0",
+   "fieldname": "education",
+   "fieldtype": "Check",
+   "label": "Education"
+  },
+  {
+   "fieldname": "column_break_5g8fw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "water",
+   "fieldtype": "Check",
+   "label": "Water"
+  },
+  {
+   "default": "0",
+   "fieldname": "food",
+   "fieldtype": "Check",
+   "label": "Food"
+  },
+  {
+   "default": "0",
+   "fieldname": "health",
+   "fieldtype": "Check",
+   "label": "Health"
+  },
+  {
+   "fieldname": "section_break_j9xm0",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-08 21:14:47.240724",
+ "modified": "2023-08-16 20:16:53.059578",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
@@ -92,7 +177,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "project_name"
 }

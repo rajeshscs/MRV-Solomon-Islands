@@ -19,7 +19,8 @@ frappe.ui.form.on('Master Data', {
 						module: docList[i].module,
 						table: docList[i].table,
 						impact_area: docList[i].impact_area,
-						indicator: docList[i].indicator
+						indicator: docList[i].indicator,
+						sdg_mapping:docList[i].sdg_mapping
 					});
 					frm.refresh_field('master_data');
 				}

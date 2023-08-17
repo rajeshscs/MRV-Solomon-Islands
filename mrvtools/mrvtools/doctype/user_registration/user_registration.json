@@ -74,8 +74,9 @@
   },
   {
    "fieldname": "ghg",
-   "fieldtype": "Data",
-   "label": "GHG"
+   "fieldtype": "Table MultiSelect",
+   "label": "GHG",
+   "options": "Project Tracking ChildTable"
   },
   {
    "fieldname": "project_tracking",
@@ -85,8 +86,9 @@
   },
   {
    "fieldname": "reports",
-   "fieldtype": "Data",
-   "label": "Reports"
+   "fieldtype": "Table MultiSelect",
+   "label": "Reports",
+   "options": "Project Tracking ChildTable"
   },
   {
    "fieldname": "column_break_75kqi",
@@ -113,7 +115,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-08-04 19:19:19.473159",
+ "modified": "2023-08-10 11:24:30.903667",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Registration",

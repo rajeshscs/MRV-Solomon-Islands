@@ -23,10 +23,22 @@
   "start_date",
   "section_break_bbseg",
   "ndp_coverage",
+  "ndp_cov",
   "column_break_mdmpy",
   "select_approver",
-  "ndp_cov",
   "section_break_62rin",
+  "forest_health",
+  "watershed_health",
+  "coastal_health",
+  "column_break_6oeye",
+  "water_security",
+  "security_of_place",
+  "energy_security",
+  "column_break_ywnxg",
+  "income_security",
+  "community_health",
+  "food_security",
+  "section_break_nnlur",
   "json",
   "load_categories",
   "qualitative_impact",
@@ -156,11 +168,77 @@
    "fieldtype": "JSON",
    "hidden": 1,
    "label": "JSON"
+  },
+  {
+   "fieldname": "section_break_nnlur",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "forest_health",
+   "fieldtype": "Check",
+   "label": "Forest Health"
+  },
+  {
+   "default": "0",
+   "fieldname": "watershed_health",
+   "fieldtype": "Check",
+   "label": "Watershed Health"
+  },
+  {
+   "default": "0",
+   "fieldname": "coastal_health",
+   "fieldtype": "Check",
+   "label": "Coastal Health"
+  },
+  {
+   "fieldname": "column_break_6oeye",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "water_security",
+   "fieldtype": "Check",
+   "label": "Water Security"
+  },
+  {
+   "default": "0",
+   "fieldname": "security_of_place",
+   "fieldtype": "Check",
+   "label": "Security of place"
+  },
+  {
+   "default": "0",
+   "fieldname": "energy_security",
+   "fieldtype": "Check",
+   "label": "Energy Security"
+  },
+  {
+   "fieldname": "column_break_ywnxg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "income_security",
+   "fieldtype": "Check",
+   "label": "Income Security"
+  },
+  {
+   "default": "0",
+   "fieldname": "community_health",
+   "fieldtype": "Check",
+   "label": "Community Health"
+  },
+  {
+   "default": "0",
+   "fieldname": "food_security",
+   "fieldtype": "Check",
+   "label": "Food Security"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-08 21:15:23.021965",
+ "modified": "2023-08-17 18:56:13.028796",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",
@@ -180,7 +258,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "project_name"
 }

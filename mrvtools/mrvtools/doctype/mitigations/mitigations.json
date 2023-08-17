@@ -51,7 +51,6 @@
   {
    "fieldname": "project_name",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Project Name",
    "options": "Project",
    "reqd": 1
@@ -112,9 +111,10 @@
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.implementing_entity",
    "fieldname": "contact_details",
    "fieldtype": "Data",
-   "label": "Contact Details"
+   "label": "Implementing Entity Contact Details"
   },
   {
    "fetch_from": "project_name.other_agency",
@@ -124,9 +124,10 @@
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.other_agency",
    "fieldname": "other_contact_details",
    "fieldtype": "Data",
-   "label": "Contact Details"
+   "label": "Other Party Contact Details "
   },
   {
    "fetch_from": "project_name.costusd",
@@ -166,21 +167,18 @@
   {
    "fieldname": "lifetime",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Lifetime(years)",
    "reqd": 1
   },
   {
    "fieldname": "expected_annual_ghg",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Expected Annual GHG Emission Reductions (tCO2e/Year)",
    "reqd": 1
   },
   {
    "fieldname": "upload_calculation_sheet",
    "fieldtype": "Attach",
-   "in_list_view": 1,
    "label": "Upload Calculation Sheet"
   },
   {
@@ -191,7 +189,8 @@
   },
   {
    "fieldname": "ghg_estimation_methodology_file",
-   "fieldtype": "Attach"
+   "fieldtype": "Attach",
+   "label": "GHG Estimation Methodology"
   },
   {
    "fieldname": "target_ghgs",
@@ -231,6 +230,7 @@
   {
    "fieldname": "market_based_mechanism",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Registered With Market Based Mechanism",
    "options": "\nYes\nNo\nNot Applicable",
    "reqd": 1
@@ -283,10 +283,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-04 19:42:36.364742",
+ "modified": "2023-08-17 18:30:05.089102",
  "modified_by": "Administrator",
  "module": "Mrvtools",
- "name": "Mitigation",
+ "name": "Mitigations",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [

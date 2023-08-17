@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestGHGInventory(FrappeTestCase):
+class TestMitigations(FrappeTestCase):
 	pass

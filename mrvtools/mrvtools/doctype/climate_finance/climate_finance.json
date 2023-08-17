@@ -32,10 +32,19 @@
   "others",
   "section_break_ancd0",
   "sources_of_finance",
+  "total_sources_of_finance",
   "detailed_budget_tab",
   "cost_breakdown",
+  "section_break_nemih",
+  "total_amount_of_cost_breakdown",
+  "column_break_norqp",
+  "total_percentage_of_cost_breakdown",
   "section_break_hkkzc",
-  "budget_disbursement_schedule"
+  "budget_disbursement_schedule",
+  "section_break_x2bqd",
+  "total_amount_of_budget_disbursement_schedule",
+  "column_break_ldoh9",
+  "total_percentage_of_budget_disbursement_schedule"
  ],
  "fields": [
   {
@@ -53,8 +62,10 @@
   },
   {
    "fieldname": "financial_year",
-   "fieldtype": "Data",
-   "label": "Financial Year"
+   "fieldtype": "Int",
+   "label": "Financial Year (YYYY)",
+   "length": 4,
+   "non_negative": 1
   },
   {
    "fieldname": "applied_exchange_rate",
@@ -119,27 +130,32 @@
   {
    "fieldname": "total_project_cost",
    "fieldtype": "Float",
-   "label": "Total Project Cost (USD)"
+   "label": "Total Project Cost (USD)",
+   "precision": "2"
   },
   {
    "fieldname": "national_budget",
    "fieldtype": "Float",
-   "label": "National Budget (USD)"
+   "label": "National Budget (USD)",
+   "precision": "2"
   },
   {
    "fieldname": "sub_national_budget",
-   "fieldtype": "Data",
-   "label": "Sub National Budget (USD)"
+   "fieldtype": "Float",
+   "label": "Sub National Budget (USD)",
+   "precision": "2"
   },
   {
    "fieldname": "green_bonds",
-   "fieldtype": "Data",
-   "label": "Green Bonds (USD)"
+   "fieldtype": "Float",
+   "label": "Green Bonds (USD)",
+   "precision": "2"
   },
   {
    "fieldname": "others",
-   "fieldtype": "Data",
-   "label": "Others (USD)"
+   "fieldtype": "Float",
+   "label": "Others (USD)",
+   "precision": "2"
   },
   {
    "fieldname": "financial_flow_tab_tab",
@@ -180,11 +196,57 @@
   {
    "fieldname": "section_break_hkkzc",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_sources_of_finance",
+   "fieldtype": "Float",
+   "label": "Total Amount of Sources of Finance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_nemih",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_norqp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_percentage_of_cost_breakdown",
+   "fieldtype": "Percent",
+   "label": "Total Percentage of Cost Breakdown",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_x2bqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ldoh9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_percentage_of_budget_disbursement_schedule",
+   "fieldtype": "Percent",
+   "label": "Total Percentage of Budget Disbursement Schedule ",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_amount_of_cost_breakdown",
+   "fieldtype": "Float",
+   "label": "Total Amount of Cost Breakdown",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_amount_of_budget_disbursement_schedule",
+   "fieldtype": "Float",
+   "label": "Total Amount of Budget Disbursement Schedule",
+   "precision": "2"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-05 13:21:20.575910",
+ "modified": "2023-08-17 13:51:10.019325",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",
@@ -204,8 +266,10 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "project_name",
  "track_changes": 1
 }

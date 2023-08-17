@@ -8,7 +8,7 @@ class SDGAssessment(Document):
 	@frappe.whitelist()
 	def getValues(self):
 		docs = frappe.db.get_all("Master Data ChildTable",
-			  fields = ["module","table","impact_area","indicator"],
+			  fields = ["module","table","impact_area","indicator","sdg_mapping"],
 			  filters = {"module" : "SDG"})
 		
 		return docs
