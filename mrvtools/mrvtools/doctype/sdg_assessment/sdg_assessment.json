@@ -1,7 +1,8 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{SDG}-{###}",
+ "autoname": "naming_series:",
  "creation": "2023-07-03 13:44:21.526974",
  "default_view": "List",
  "doctype": "DocType",
@@ -12,6 +13,7 @@
   "column_break_xb4rr",
   "select_approver",
   "category",
+  "included_in",
   "category_section",
   "json",
   "poverty_reduction",
@@ -29,7 +31,8 @@
   "section_break_j9xm0",
   "load_categories",
   "qualitative_impact",
-  "quantitative_impact"
+  "quantitative_impact",
+  "naming_series"
  ],
  "fields": [
   {
@@ -153,15 +156,27 @@
   {
    "fieldname": "section_break_j9xm0",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "options": "SDG-PRO-INFO-.###"
+  },
+  {
+   "fieldname": "included_in",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Included In"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-16 20:16:53.059578",
+ "modified": "2023-08-29 21:09:21.994158",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

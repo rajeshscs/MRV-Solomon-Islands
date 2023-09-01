@@ -1,7 +1,9 @@
 {
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{Mitigation}-{###}",
+ "autoname": "naming_series:",
  "creation": "2023-07-01 15:04:56.125444",
  "default_view": "List",
  "doctype": "DocType",
@@ -9,6 +11,9 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
+  "column_break_6ci8v",
+  "project_name1",
+  "section_break_m5uc6",
   "project_description",
   "section_break_bxjiw",
   "type_of_instrument",
@@ -45,13 +50,14 @@
   "section_break_pdgvc",
   "performance_indicator",
   "upload_document",
-  "remarks"
+  "remarks",
+  "naming_series"
  ],
  "fields": [
   {
    "fieldname": "project_name",
    "fieldtype": "Link",
-   "label": "Project Name",
+   "label": "Project ID",
    "options": "Project",
    "reqd": 1
   },
@@ -93,8 +99,7 @@
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
-   "label": "Included In",
-   "read_only": 1
+   "label": "Included In"
   },
   {
    "fetch_from": "project_name.location",
@@ -113,7 +118,7 @@
   {
    "depends_on": "eval:doc.implementing_entity",
    "fieldname": "contact_details",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Implementing Entity Contact Details"
   },
   {
@@ -126,7 +131,7 @@
   {
    "depends_on": "eval:doc.other_agency",
    "fieldname": "other_contact_details",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Other Party Contact Details "
   },
   {
@@ -172,7 +177,7 @@
   },
   {
    "fieldname": "expected_annual_ghg",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Expected Annual GHG Emission Reductions (tCO2e/Year)",
    "reqd": 1
   },
@@ -279,15 +284,34 @@
    "fieldtype": "Link",
    "label": "Select Approver",
    "options": "User"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "options": "MIT-PRO-INFO-.###"
+  },
+  {
+   "fieldname": "project_name1",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  },
+  {
+   "fieldname": "column_break_6ci8v",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_m5uc6",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-17 18:30:05.089102",
+ "modified": "2023-08-30 16:17:05.824140",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -307,5 +331,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name1"
 }

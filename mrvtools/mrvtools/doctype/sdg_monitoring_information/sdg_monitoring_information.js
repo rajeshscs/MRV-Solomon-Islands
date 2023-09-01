@@ -54,7 +54,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 						var child=frm.add_child("quantitative_impact")
 						child.category = i.category
 						child.question = i.question
-						child.data = i.data
 						child.sdg_mapping = i.sdg_mapping
 					}
 					frm.refresh_field("quantitative_impact")

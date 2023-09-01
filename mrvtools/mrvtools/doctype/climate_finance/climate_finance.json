@@ -9,7 +9,6 @@
  "engine": "InnoDB",
  "field_order": [
   "tab_break_eii2f",
-  "naming_series",
   "project_name",
   "financial_year",
   "applied_exchange_rate",
@@ -44,15 +43,15 @@
   "section_break_x2bqd",
   "total_amount_of_budget_disbursement_schedule",
   "column_break_ldoh9",
-  "total_percentage_of_budget_disbursement_schedule"
+  "total_percentage_of_budget_disbursement_schedule",
+  "naming_series"
  ],
  "fields": [
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "label": "Naming Series",
-   "options": "CLIF-"
+   "options": "CLI-FIN-PRO-INFO-.###"
   },
   {
    "fieldname": "project_name",
@@ -246,7 +245,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-17 13:51:10.019325",
+ "modified": "2023-08-23 12:09:35.334392",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",

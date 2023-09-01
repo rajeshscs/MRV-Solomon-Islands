@@ -1,7 +1,8 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{Adaptation}-{###}",
+ "autoname": "naming_series:",
  "creation": "2023-07-01 15:45:30.622164",
  "default_view": "List",
  "doctype": "DocType",
@@ -42,7 +43,8 @@
   "json",
   "load_categories",
   "qualitative_impact",
-  "quantitative_impact"
+  "quantitative_impact",
+  "naming_series"
  ],
  "fields": [
   {
@@ -234,15 +236,21 @@
    "fieldname": "food_security",
    "fieldtype": "Check",
    "label": "Food Security"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "options": "ADA-PRO-INFO-.###"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-17 18:56:13.028796",
+ "modified": "2023-08-23 12:12:55.308120",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

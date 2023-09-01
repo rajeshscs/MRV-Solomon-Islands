@@ -1,7 +1,8 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{Mitigation}-{###}",
+ "autoname": "naming_series:",
  "creation": "2023-07-07 12:50:12.674612",
  "default_view": "List",
  "doctype": "DocType",
@@ -27,6 +28,7 @@
   "beneficiaries",
   "market_based_mechanism",
   "expected_project_output",
+  "expected_annual_ghg",
   "actual_annual_ghg",
   "objective",
   "ghg_estimation_methodology_text",
@@ -49,7 +51,8 @@
   "section_break_pdgvc",
   "performance_indicator",
   "upload_document",
-  "remarks"
+  "remarks",
+  "naming_series"
  ],
  "fields": [
   {
@@ -195,7 +198,7 @@
   {
    "fetch_from": "project_name.financial_closure_date",
    "fieldname": "financial_closure_date",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "label": "Financial Closure Date",
    "read_only": 1
   },
@@ -265,7 +268,8 @@
   {
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
-   "label": "Monitoring Year"
+   "label": "Monitoring Year",
+   "options": "\n2001\n2002\n2003\n2004\n2005\n2006\n2007\n2008\n2009\n2010\n2011\n2012\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033\n2034\n2035\n2036\n2037\n2038\n2039\n2040\n2041\n2042\n2043\n2044\n2045\n2046\n2047\n2048\n2049\n2050"
   },
   {
    "fieldname": "column_break_adszg",
@@ -306,15 +310,27 @@
    "hidden": 1,
    "label": "Project Name",
    "options": "Project"
+  },
+  {
+   "fetch_from": "project_name.expected_annual_ghg",
+   "fieldname": "expected_annual_ghg",
+   "fieldtype": "Int",
+   "label": "Expected Annual GHG"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "options": "MIT-MONI-INFO-.###"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-09 15:53:23.555965",
+ "modified": "2023-08-30 13:40:04.075836",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

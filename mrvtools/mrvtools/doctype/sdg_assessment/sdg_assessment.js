@@ -28,7 +28,6 @@ frappe.ui.form.on('SDG Assessment', {
 						}
 						if (i.table == "Quantitative"){
 							json_code["quantitative"].push({"category":i.impact_area,"question":i.indicator,"data":0,"data_source":"","sdg_mapping":i.sdg_mapping,"table":i.table});
-
 						}
 					}
 					frm.set_value("json", JSON.stringify(json_code))
@@ -73,6 +72,24 @@ frappe.ui.form.on('SDG Assessment', {
 			})
 		})
 		
+	},
+
+	project_name: function(frm) {
+		frm.call({
+			doc:cur_frm.doc,
+			method:"get_data",
+			async:false,
+			callback:function(r){
+				var values=[]
+				for(var i of r.message){
+					values.push(i)
+					
+				}
+				values=values.join(",")
+				
+				frm.set_value("included_in",values)
+			}
+		})
 	},
 	
 	load_categories: function(frm){	

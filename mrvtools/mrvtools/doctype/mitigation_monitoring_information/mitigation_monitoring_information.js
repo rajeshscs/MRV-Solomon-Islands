@@ -123,9 +123,8 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			callback:function(r){
 				var col=r.message
 				console.log(col);
+				frm.set_value("performance_indicator",[])
 				for (var i of col){
-					frm.set_value("performance_indicator",[])
-					
 					var child=frm.add_child("performance_indicator")
 					child.performance_indicator = i.performance_indicator
 					child.unit = i.unit

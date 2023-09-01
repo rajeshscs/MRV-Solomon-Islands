@@ -1,14 +1,14 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2023-07-17 15:17:12.102832",
+ "creation": "2023-08-19 18:27:49.955765",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "project_id",
   "project_name",
   "project_description",
   "section_break_rbstb",
@@ -36,7 +36,8 @@
   "remarks",
   "upload_document",
   "select_approver",
-  "naming_series"
+  "naming_series",
+  "workflow"
  ],
  "fields": [
   {
@@ -222,10 +223,20 @@
    "permlevel": 1
   },
   {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "label": "Project ID",
+   "options": "Project"
+  },
+  {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "hidden": 1,
-   "options": "PRO-.###"
+   "options": "PRO-APPRO.###"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Select",
+   "options": "\nPending\nApproved\nRejected"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -243,11 +254,11 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-08-23 13:44:16.871599",
+ "modified": "2023-08-31 20:29:03.711113",
  "modified_by": "Administrator",
  "module": "Mrvtools",
- "name": "Project",
- "naming_rule": "By \"Naming Series\" field",
+ "name": "Project Approval",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -309,6 +320,5 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "title_field": "project_name"
+ "states": []
 }

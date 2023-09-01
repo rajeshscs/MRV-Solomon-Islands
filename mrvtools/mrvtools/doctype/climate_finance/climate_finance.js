@@ -39,6 +39,12 @@ frappe.ui.form.on('Climate Finance', {
 		  }
 		})
 	},
+	project_name:function(frm){
+		frappe.db.get_value('Project',`${frm.doc.project_name}`,'financial_closure_date').then(r =>
+			{
+			frm.set_value('financial_closure_date',r.message.financial_closure_date)
+		})
+		},
 	total_project_cost:function(frm){
 		var others = frm.doc.total_project_cost - frm.doc.national_budget - frm.doc.sub_national_budget - frm.doc.green_bonds - frm.doc.total_sources_of_finance
 		if(others >= 0){
@@ -96,21 +102,21 @@ frappe.ui.form.on('Climate Finance', {
 	},
 
 	financial_closure_date:function(frm){
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_years",
-			async:false,
-			callback: function(r){
-				console.log(r.message);
-				var year_options=""
-				for (var i of r.message){
-					year_options += ('\n'+ i)
-				}
-				frm.fields_dict.budget_disbursement_schedule.grid.update_docfield_property("financial_year","options",year_options);
-				frm.refresh_field('budget_disbursement_schedule')
-				console.log(year_options);
-			}
-		})
+		// frm.call({
+		// 	doc:cur_frm.doc,
+		// 	method:"get_years",
+		// 	async:false,
+		// 	callback: function(r){
+		// 		console.log(r.message);
+		// 		var year_options=""
+		// 		for (var i of r.message){
+		// 			year_options += ('\n'+ i)
+		// 		}
+		// 		frm.fields_dict.budget_disbursement_schedule.grid.update_docfield_property("financial_year","options",year_options);
+		// 		frm.refresh_field('budget_disbursement_schedule')
+		// 		// console.log(year_options);
+		// 	}
+		// })
 	}
 });
 
@@ -199,6 +205,33 @@ frappe.ui.form.on('Climate Finance detailed Budget ChildTable',{
 
 
 frappe.ui.form.on('Climate Finance Disbursement Schedule ChildTable',{
+	budget_disbursement_schedule_add:function(frm,cdt,cdn){
+		// var child = locals[cdt][cdn]
+		var yearList = []
+		for (var i of frm.doc.budget_disbursement_schedule){
+			if(i.financial_year != undefined){
+				yearList.push(i.financial_year)
+			}
+		}
+		console.log(yearList);
+		frm.call({
+			doc:cur_frm.doc,
+			method:"get_years",
+			async:false,
+			callback: function(r){
+				// console.log(r.message);
+				var year_options=""
+				for (var i of r.message){
+					if(!yearList.includes(i)){
+						year_options += ('\n'+ i)
+					}
+				}
+				frm.fields_dict.budget_disbursement_schedule.grid.update_docfield_property("financial_year","options",year_options);
+				frm.refresh_field('budget_disbursement_schedule')
+				// console.log(year_options);
+			}
+		})
+	},
 	amount:function(frm,cdt,cdn){
 		var child = locals[cdt][cdn];
 		frappe.model.set_value(cdt, cdn, "percentage",  ((child.amount / frm.doc.total_project_cost)*100).toFixed(2));

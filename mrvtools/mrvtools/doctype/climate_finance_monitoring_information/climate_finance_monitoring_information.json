@@ -8,7 +8,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "project_name",
   "project_name1",
   "financing_mode",
@@ -26,7 +25,8 @@
   "budget_expenditure",
   "section_break_05k4e",
   "total_budget_disbursement",
-  "remarks"
+  "remarks",
+  "naming_series"
  ],
  "fields": [
   {
@@ -70,11 +70,12 @@
    "label": "Remarks"
   },
   {
+   "default": "CLI-FIN-MONI-INFO-.###",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Naming Series",
-   "options": "CLFM-"
+   "options": "CLI-FIN-MONI-INFO-.###"
   },
   {
    "fieldname": "section_break_svbhp",
@@ -135,12 +136,13 @@
    "fetch_from": "project_name.project_name",
    "fieldname": "project_name1",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Project Name 1"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-16 12:08:12.005337",
+ "modified": "2023-08-28 20:53:47.851232",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",
