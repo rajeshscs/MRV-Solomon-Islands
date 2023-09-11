@@ -11,10 +11,11 @@ frappe.ui.form.on('Mitigations', {
 				var values=[]
 				for(var i of r.message){
 					values.push(i)
-					
+					console.log(i);					
 				}
+				console.log(values);
 				values=values.join(",")
-				// console.log(values);
+				console.log(values);
 				
 				frm.set_value("included_in",values)
 			}
@@ -45,6 +46,7 @@ frappe.ui.form.on('Mitigations', {
 		// 	}
 		// })
 		// Sample
+		
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
@@ -78,26 +80,28 @@ frappe.ui.form.on('Mitigations', {
 					}
 				}
 			})
-		});},
-		before_save:function(frm){
+		});
+	},
+	before_save:function(frm){
 		if(!frm.doc.included_in){
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_data",
-			async:false,
-			callback:function(r){
-				var values=[]
-				for(var i of r.message){
-					values.push(i)
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_data",
+				async:false,
+				callback:function(r){
+					var values=[]
+					for(var i of r.message){
+						values.push(i)
+						
+					}
+					values=values.join(",")
+					console.log(values);
 					
+					
+					frm.set_value("included_in",values)
+					frm.refresh_field('included_in')
 				}
-				values=values.join(",")
-				console.log(values);
-				
-				frm.set_value("included_in",values)
-				frm.refresh_field('included_in')
-			}
-		})
-	}
+			})
+		}
 	}
 });

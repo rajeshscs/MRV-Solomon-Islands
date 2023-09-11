@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-07 18:50:52.243416",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "anaerobic_lagoon",
+  "liquid_system",
+  "daily_spread",
+  "solid_storage",
+  "pit_storage",
+  "dry_lot",
+  "deep_bedding",
+  "composting",
+  "digesters",
+  "other",
+  "emission_factor_per_animals_direct_kg_n2oheadyr"
+ ],
+ "fields": [
+  {
+   "fieldname": "anaerobic_lagoon",
+   "fieldtype": "Float",
+   "label": "Anaerobic lagoon ",
+   "precision": "2"
+  },
+  {
+   "fieldname": "liquid_system",
+   "fieldtype": "Float",
+   "label": "Liquid system",
+   "precision": "2"
+  },
+  {
+   "fieldname": "daily_spread",
+   "fieldtype": "Float",
+   "label": "Daily spread",
+   "precision": "2"
+  },
+  {
+   "fieldname": "solid_storage",
+   "fieldtype": "Float",
+   "label": "Solid storage",
+   "precision": "2"
+  },
+  {
+   "fieldname": "pit_storage",
+   "fieldtype": "Float",
+   "label": "Pit storage",
+   "precision": "2"
+  },
+  {
+   "fieldname": "dry_lot",
+   "fieldtype": "Float",
+   "label": "Dry lot",
+   "precision": "2"
+  },
+  {
+   "fieldname": "deep_bedding",
+   "fieldtype": "Float",
+   "label": "Deep bedding",
+   "precision": "2"
+  },
+  {
+   "fieldname": "composting",
+   "fieldtype": "Float",
+   "label": "Composting",
+   "precision": "2"
+  },
+  {
+   "fieldname": "digesters",
+   "fieldtype": "Float",
+   "label": "Digesters",
+   "precision": "2"
+  },
+  {
+   "fieldname": "other",
+   "fieldtype": "Float",
+   "label": "Other",
+   "precision": "2"
+  },
+  {
+   "fieldname": "emission_factor_per_animals_direct_kg_n2oheadyr",
+   "fieldtype": "Float",
+   "label": "Emission factor per animals Direct (kg N2O/head/yr)",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-07 18:50:52.243416",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "AFLOU Direct N2O Emission ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

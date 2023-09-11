@@ -1,5 +1,6 @@
 {
- "add_total_row": 0,
+ "_liked_by": "[\"Administrator\"]",
+ "add_total_row": 1,
  "columns": [],
  "creation": "2023-08-23 16:55:31.519308",
  "disable_prepared_report": 0,
@@ -9,7 +10,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-08-23 16:55:31.519308",
+ "modified": "2023-09-01 13:15:37.285485",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Tracking Report",

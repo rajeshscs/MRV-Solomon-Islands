@@ -21,52 +21,69 @@
   "column_break_gyrzb",
   "sub_sector",
   "calculation_approach",
+  "section_break_7vl9b",
+  "uncertainity_analysis",
+  "column_break_o4tvx",
+  "qa_qc_implemented",
   "section_break_zx9sk",
+  "table_label",
   "reference_approach",
-  "section_break_eq6sh",
   "electricity_generation",
-  "section_break_xt7jn",
+  "manufacturing_industries",
   "transport",
-  "section_break_2g3bv",
-  "others",
-  "section_break_cdhkf",
+  "other_sectors",
+  "other_energy",
+  "international_bunkers_tab",
+  "co2_emissions_from_biomass",
+  "cement_production_tab",
+  "lime_production",
+  "chemical_industry",
+  "lubricant_section",
   "lubricant_use",
-  "section_break_stofq",
+  "section_break_shpf2",
+  "other_ippu",
+  "section_break_xabuv",
+  "refrigeration",
+  "foam_blowing_agents_section",
+  "foam_blowing_agents",
+  "fire_protection_section",
+  "fire_protection",
+  "aerosols_section",
+  "aerosols",
+  "solvents_section",
+  "solvents",
+  "other_applications_section",
+  "other_applications",
+  "section_break_jvzrb",
+  "electrical_equipment",
+  "sf6_and_pfcs_from_other_product_use_section",
+  "sf6_and_pfcs_from_other_product_use",
+  "n2o_from_product_uses_section",
+  "n2o_from_product_uses",
+  "other_section",
+  "other_use",
+  "section_break_7vpnb",
+  "activity_data",
   "enteric_fermentation",
-  "section_break_2hvsb",
-  "manure_management",
-  "section_break_zjbsr",
-  "forest_land",
-  "section_break_2vtri",
-  "urea_application",
-  "section_break_u7upb",
-  "direct_managed_soils",
-  "section_break_bzglh",
-  "direct_flooded_rice",
-  "section_break_otfip",
-  "direct_managed_organic_soils",
-  "section_break_c8tyo",
-  "direct_grazed_soils",
-  "section_break_1qjbm",
-  "atmospheric_deposit",
-  "section_break_kxj4c",
-  "n2o_from_n_leaching",
-  "section_break_ffjzu",
   "indirect_manure_management",
-  "section_break_2dcsr",
+  "direct_emissions_mms",
+  "direct_managed_soils",
+  "atmospheric_deposit",
+  "n2o_from_n_leaching",
+  "activity_data_burning",
+  "activity_data_agriculture",
+  "urea_application",
+  "forest_land",
   "solid_waste",
-  "section_break_wg4hf",
   "ch4_wastewater_treatment",
-  "section_break_v9ayb",
   "n2o_wastewater_treatment",
-  "section_break_t93jg",
   "industrial_wastewater_treatment"
  ],
  "fields": [
   {
+   "depends_on": "eval:doc.sector=='1. Energy'",
    "fieldname": "approach",
    "fieldtype": "Select",
-   "hidden": 1,
    "label": "Approach Type",
    "options": "\nReference Approach\nSectoral Approach",
    "read_only_depends_on": "// eval:doc.approach"
@@ -82,6 +99,7 @@
   {
    "fieldname": "year",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Inventory Year",
    "options": "\n1990\n1991\n1992\n1993\n1994\n1995\n1996\n1997\n1998\n1999\n2000\n2001\n2002\n2003\n2004\n2005\n2006\n2007\n2008\n2009\n2010\n2011\n2012\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033\n2034\n2035\n2036\n2037\n2038\n2039\n2040\n2041\n2042\n2043\n2044\n2045\n2046\n2047\n2048\n2049\n2050"
@@ -89,14 +107,12 @@
   {
    "fieldname": "category",
    "fieldtype": "Select",
-   "label": "Category",
-   "options": "\n1.A. Fuel combustion activities\n2.D  Non-Energy Products from Fuels and Solvent Use\n2.F. Product uses as substitutes for ODS\n2.H. Other\n3.A. Livestock\n3.B. Land\n3.C. Aggregate sources and non-CO2 emissions sources on land\n4.A. Solid Waste Disposal\n4.D. Wastewater Treatment and Discharge"
+   "label": "Category"
   },
   {
    "fieldname": "sub_category",
    "fieldtype": "Select",
-   "label": "Sub Category",
-   "options": "\n1.A.1.a.i. Electricity generation"
+   "label": "Sub Category"
   },
   {
    "fieldname": "column_break_gyrzb",
@@ -106,14 +122,12 @@
    "fieldname": "sector",
    "fieldtype": "Select",
    "in_standard_filter": 1,
-   "label": "Sector",
-   "options": "\n1. Energy\n2. Industrial processes and product use\n3. Agriculture, Forestry and Other Land Use\n4. Waste"
+   "label": "Sector"
   },
   {
    "fieldname": "sub_sector",
    "fieldtype": "Select",
-   "label": "Sub Sector",
-   "options": "\n1.A.3. Transport\n1.A.4. Other sectors\n2.D.1. Lubricant use\n3.A.1. Enteric Fermentation\n3.A.2. Manure Management\n3.B.1. Forest Land\n3.C.3. Urea Application\n3.C.4. Direct N2O Emissions from managed soils\n3.C.5. Indirect N2O Emissions from managed soils\n3.C.6. Indirect N2O Emissions from manure management"
+   "label": "Sub Sector"
   },
   {
    "fieldname": "calculation_approach",
@@ -126,74 +140,31 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "others",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Others",
-   "options": "Energy Sector ChildTable"
-  },
-  {
-   "fieldname": "section_break_eq6sh",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.1. Energy industries' && doc.sub_category == '1.A.1.a.i. Electricity generation'",
    "fieldname": "electricity_generation",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "Electricity Generation",
    "options": "Energy Sector ChildTable"
   },
   {
-   "fieldname": "section_break_xt7jn",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.3. Transport' && doc.sub_category",
    "fieldname": "transport",
    "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Transport",
    "options": "Energy Sector ChildTable"
   },
   {
-   "fieldname": "section_break_2g3bv",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.approach == 'Reference Approach'",
    "fieldname": "reference_approach",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "Reference Approach",
    "options": "Energy Reference ChildTable"
   },
   {
-   "fieldname": "section_break_cdhkf",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "section_break_stofq",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.A. Enteric fermentation'",
    "fieldname": "enteric_fermentation",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "Enteric Fermentation",
    "options": "Manure Management ChildTable"
-  },
-  {
-   "fieldname": "section_break_2hvsb",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "manure_management",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Manure Management",
-   "options": "Manure Management ChildTable"
-  },
-  {
-   "fieldname": "section_break_zjbsr",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "forest_land",
@@ -203,78 +174,32 @@
    "options": "Forest Land ChildTable"
   },
   {
-   "fieldname": "section_break_2vtri",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.H. Urea application'",
    "fieldname": "urea_application",
    "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Urea Application",
+   "label": "Urea Fertilization",
    "options": "Urea Application ChildTable"
   },
   {
-   "fieldname": "section_break_u7upb",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.1.  Direct N2O emissions from managed soils'",
    "fieldname": "direct_managed_soils",
    "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Managed Soils",
+   "label": "Direct N2O emissions from managed soils",
    "options": "Direct Emission Managed Organic  Soils ChildTable"
   },
   {
-   "fieldname": "section_break_bzglh",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "direct_managed_organic_soils",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Managed Organic Soils",
-   "options": "Direct Emission Managed Organic  Soils ChildTable"
-  },
-  {
-   "fieldname": "section_break_c8tyo",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "direct_grazed_soils",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Grazed Soils",
-   "options": "Direct Emission Grazed Soils ChildTable"
-  },
-  {
-   "fieldname": "section_break_1qjbm",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
    "fieldname": "atmospheric_deposit",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "N2O Atmospheric Deposition",
    "options": "Indirect Emission Managed Soils ChildTable"
   },
   {
-   "fieldname": "section_break_kxj4c",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
    "fieldname": "n2o_from_n_leaching",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "N2O from N Leaching/ Runoff",
    "options": "Indirect Emission Managed Soils ChildTable"
-  },
-  {
-   "fieldname": "section_break_ffjzu",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "section_break_2dcsr",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "solid_waste",
@@ -284,23 +209,11 @@
    "options": "Solid Waste Disposal ChildTable"
   },
   {
-   "fieldname": "section_break_wg4hf",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "section_break_v9ayb",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "n2o_wastewater_treatment",
    "fieldtype": "Table",
    "hidden": 1,
    "label": "Wastewater Treatment and Discharge - N2O Emissions",
    "options": "Waste Water Treatment Emission ChildTable"
-  },
-  {
-   "fieldname": "section_break_t93jg",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "industrial_wastewater_treatment",
@@ -310,31 +223,19 @@
    "options": "Industrial Wastewater Treatment and Discharge ChildTable"
   },
   {
-   "fieldname": "section_break_otfip",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "column_break_qwkjk",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
    "fieldname": "lubricant_use",
    "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Lubricant Use",
    "options": "Lubricant Data ChildTable"
   },
   {
-   "fieldname": "direct_flooded_rice",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Flooded Rice",
-   "options": "Direct Emission Managed Organic  Soils ChildTable"
-  },
-  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.a. Manure management'&&doc.sub_sector=='3.B.5. Indirect N2O emissions'",
    "fieldname": "indirect_manure_management",
    "fieldtype": "Table",
-   "hidden": 1,
    "label": "Manure Management - Indirect N2O Emissions",
    "options": "Manure Management ChildTable"
   },
@@ -350,14 +251,265 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "-",
    "fieldname": "dynamic_title",
    "fieldtype": "Small Text",
    "read_only": 1
+  },
+  {
+   "fieldname": "uncertainity_analysis",
+   "fieldtype": "Select",
+   "label": "Was uncertainty analysis performed ?",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "qa_qc_implemented",
+   "fieldtype": "Select",
+   "label": "Were quality assurance/quality control (QA/QC) and verification procedures implemented ?",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.2 Manufacturing industries and construction' && doc.sub_category",
+   "fieldname": "manufacturing_industries",
+   "fieldtype": "Table",
+   "label": "Manufacturing Industries and Construction",
+   "options": "Energy Sector ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.4. Other sectors'&& doc.sub_category",
+   "fieldname": "other_sectors",
+   "fieldtype": "Table",
+   "options": "Energy Sector ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.5. Other'",
+   "fieldname": "other_energy",
+   "fieldtype": "Table",
+   "options": "Energy Sector ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.1. International bunkers'",
+   "fieldname": "international_bunkers_tab",
+   "fieldtype": "Table",
+   "label": " International Bunkers ",
+   "options": "Energy Sector ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.3. CO2 emissions from biomass'",
+   "fieldname": "co2_emissions_from_biomass",
+   "fieldtype": "Table",
+   "label": "CO2 emissions from biomass",
+   "options": "Energy Biomass ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
+   "fieldname": "cement_production_tab",
+   "fieldtype": "Table",
+   "label": "Cement production",
+   "options": "IPPU Cement ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.2. Lime production'",
+   "fieldname": "lime_production",
+   "fieldtype": "Table",
+   "label": "Lime production",
+   "options": "IPPU Lime ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.B. Chemical industry'",
+   "fieldname": "chemical_industry",
+   "fieldtype": "Table",
+   "label": "Chemical industry",
+   "options": "IPPU Chemical ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
+   "fieldname": "other_ippu",
+   "fieldtype": "Table",
+   "options": "IPPU Non Energy Others ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "refrigeration",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "foam_blowing_agents",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "fire_protection",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "aerosols",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "solvents",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "other_applications",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "electrical_equipment",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "sf6_and_pfcs_from_other_product_use",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "n2o_from_product_uses",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "other_use",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.H. Other'&&doc.sub_sector=='2.H.2. Food and beverages industry'",
+   "fieldname": "activity_data",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "IPPU Food ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.b. Direct N2O emissions per MMS (kt N2O)'",
+   "fieldname": "direct_emissions_mms",
+   "fieldtype": "Table",
+   "label": "Direct N2O emissions per MMS",
+   "options": "AFLOU Direct N2O Emission ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.E. Prescribed burning of savannahs'",
+   "fieldname": "activity_data_burning",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "AFOLU Prescribed Burning ChildTable"
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.F. Field burning of agricultural residues'",
+   "fieldname": "activity_data_agriculture",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "AFLOU Agricultural Residues ChildTable"
+  },
+  {
+   "fieldname": "section_break_7vl9b",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_o4tvx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.sub_category",
+   "fieldname": "table_label",
+   "fieldtype": "Heading"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "lubricant_section",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Lubricant Use"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_xabuv",
+   "fieldtype": "Section Break",
+   "label": "Refrigeration and Air-Conditioning"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_shpf2",
+   "fieldtype": "Section Break",
+   "label": "Other"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "foam_blowing_agents_section",
+   "fieldtype": "Section Break",
+   "label": "Foam blowing Agents "
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "fire_protection_section",
+   "fieldtype": "Section Break",
+   "label": "Fire protection"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "aerosols_section",
+   "fieldtype": "Section Break",
+   "label": "Aerosols"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "solvents_section",
+   "fieldtype": "Section Break",
+   "label": "Solvents"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "other_applications_section",
+   "fieldtype": "Section Break",
+   "label": "Other applications"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_jvzrb",
+   "fieldtype": "Section Break",
+   "label": "Electrical equipment"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sf6_and_pfcs_from_other_product_use_section",
+   "fieldtype": "Section Break",
+   "label": "SF6 and PFCs from other product use"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "n2o_from_product_uses_section",
+   "fieldtype": "Section Break",
+   "label": "N2O from product uses"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "other_section",
+   "fieldtype": "Section Break",
+   "label": "Other"
+  },
+  {
+   "fieldname": "section_break_7vpnb",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-04 16:21:15.350759",
+ "modified": "2023-09-11 16:43:49.237155",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

@@ -1,31 +1,23 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-07-28 11:12:53.515589",
+ "creation": "2023-09-07 17:59:02.727826",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "fuel_type",
-  "fuel",
+  "gas_consumed",
   "unit",
   "amount",
   "reference"
  ],
  "fields": [
   {
-   "fieldname": "fuel_type",
+   "fieldname": "gas_consumed",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Fuel Type",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "fuel_type.fuel",
-   "fieldname": "fuel",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Fuel",
+   "label": "Gas Consumed",
    "reqd": 1
   },
   {
@@ -33,13 +25,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Unit",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "amount",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Amount",
+   "length": 10,
    "reqd": 1
   },
   {
@@ -52,10 +45,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 13:24:35.090265",
+ "modified": "2023-09-07 17:59:02.727826",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
- "name": "Energy Sector ChildTable",
+ "name": "IPPU Ozone ChildTable",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

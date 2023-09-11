@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-02 14:45:00.881587",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "field_name",
+  "field_label",
+  "old_values",
+  "new_values"
+ ],
+ "fields": [
+  {
+   "fieldname": "field_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Field"
+  },
+  {
+   "fieldname": "old_values",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Old Values"
+  },
+  {
+   "fieldname": "new_values",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "New Values"
+  },
+  {
+   "fieldname": "field_label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Field Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-11 15:52:05.969971",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Edited Project Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

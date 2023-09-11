@@ -133,6 +133,7 @@ frappe.ui.form.on('SDG Assessment', {
 						}
 					// }
 				});
+				console.log(form_data);
 				for(var i of JSON.parse(frm.doc.json).qualitative){
 					
 					for(let [key,value] of Object.entries(form_data)){

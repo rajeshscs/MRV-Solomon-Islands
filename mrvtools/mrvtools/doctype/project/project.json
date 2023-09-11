@@ -9,6 +9,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name",
   "project_description",
   "section_break_rbstb",
@@ -36,7 +37,9 @@
   "remarks",
   "upload_document",
   "select_approver",
-  "naming_series"
+  "naming_series",
+  "tab2",
+  "edited_project_details"
  ],
  "fields": [
   {
@@ -226,6 +229,22 @@
    "fieldtype": "Select",
    "hidden": 1,
    "options": "PRO-.###"
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "tab2",
+   "fieldtype": "Tab Break",
+   "label": "Edited Details"
+  },
+  {
+   "fieldname": "edited_project_details",
+   "fieldtype": "Table",
+   "label": "Edited Project Details",
+   "options": "Edited Project Details"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -243,7 +262,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-08-23 13:44:16.871599",
+ "modified": "2023-09-04 19:10:56.397738",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

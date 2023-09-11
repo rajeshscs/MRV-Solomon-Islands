@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-07 18:01:38.937018",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "lime_type",
+  "amount_produced_tonnes",
+  "reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "lime_type",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Lime Type"
+  },
+  {
+   "fieldname": "amount_produced_tonnes",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount Produced (tonnes)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-07 18:01:38.937018",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "IPPU Lime ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-07 18:54:25.395191",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "total_amount",
+  "dry_matter_content",
+  "fraction_of_fossil",
+  "oxidation_factor",
+  "reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Float",
+   "label": "Total Amount of WasteIncinerated (wet weight) (tonnes)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "dry_matter_content",
+   "fieldtype": "Float",
+   "label": "Dry Matter Content -  dm  (fraction)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "fraction_of_fossil",
+   "fieldtype": "Float",
+   "label": "Fraction of Fossil Carbon in Total Carbon FCF (fraction)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "oxidation_factor",
+   "fieldtype": "Float",
+   "label": "Oxidation Factor- OF (fraction)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Small Text",
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-07 18:54:25.395191",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "Waste Incineration ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
