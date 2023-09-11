@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{sub_category}",
  "creation": "2023-07-28 16:06:48.093610",
@@ -26,7 +27,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-28 16:06:48.093610",
+ "modified": "2023-09-11 19:22:02.156787",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Sub Category",

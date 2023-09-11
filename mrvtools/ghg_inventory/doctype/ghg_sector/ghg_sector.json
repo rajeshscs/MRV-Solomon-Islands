@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{sector}",
  "creation": "2023-07-28 12:03:41.952081",
@@ -20,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-28 12:09:50.486988",
+ "modified": "2023-09-11 19:21:11.992703",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Sector",
