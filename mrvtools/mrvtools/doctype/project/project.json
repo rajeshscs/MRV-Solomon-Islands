@@ -38,8 +38,13 @@
   "upload_document",
   "select_approver",
   "naming_series",
+  "work_state",
   "tab2",
-  "edited_project_details"
+  "edited_project_details",
+  "geographical_coordinates_section",
+  "original_coordinates",
+  "column_break_mbxz1",
+  "new_coordinates"
  ],
  "fields": [
   {
@@ -228,23 +233,62 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "PRO-.###"
+   "options": "PRO-.###",
+   "permlevel": 1
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details"
+   "label": "Details",
+   "permlevel": 1
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details"
+   "label": "Edited Details",
+   "permlevel": 1
   },
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited Project Details",
-   "options": "Edited Project Details"
+   "options": "Edited Project Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "work_state",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Work State",
+   "options": "\nPending\nApproved\nRejected",
+   "permlevel": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.new_coordinates",
+   "fieldname": "geographical_coordinates_section",
+   "fieldtype": "Section Break",
+   "label": "Geographical Coordinates",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "original_coordinates",
+   "fieldtype": "Geolocation",
+   "label": "Original Coordinates",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mbxz1",
+   "fieldtype": "Column Break",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "new_coordinates",
+   "fieldtype": "Geolocation",
+   "label": "New Coordinates",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -262,7 +306,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-09-04 19:10:56.397738",
+ "modified": "2023-09-13 18:32:55.691529",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",
@@ -329,5 +373,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name",
+ "track_changes": 1
 }

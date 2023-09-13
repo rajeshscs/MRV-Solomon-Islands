@@ -45,7 +45,7 @@ frappe.ui.form.on('Adaptation', {
 				return{
 					filters:{
 						objective: ['in',['Cross-Cutting','Adaptation']],
-						workflow_state:"Approved",
+						work_state:"Approved",
 						name:['not in',r]
 					}
 				}

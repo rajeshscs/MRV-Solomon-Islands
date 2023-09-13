@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{year}-{category}{sub_sector}{sub_category}",
+ "autoname": "format:{year}-{sector}-{category}{sub_sector}{sub_category}",
  "creation": "2023-07-29 13:25:37.350039",
  "default_view": "List",
  "doctype": "DocType",
@@ -323,7 +323,7 @@
    "options": "IPPU Chemical ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D. Non-Energy Products from Fuels and Solvent Use'",
    "fieldname": "other_ippu",
    "fieldtype": "Table",
    "options": "IPPU Non Energy Others ChildTable"
@@ -509,7 +509,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-09-11 16:43:49.237155",
+ "modified": "2023-09-12 16:29:08.161066",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

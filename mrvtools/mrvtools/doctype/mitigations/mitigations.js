@@ -75,7 +75,7 @@ frappe.ui.form.on('Mitigations', {
 				return{
 					filters:{
 						objective: ['in',['Cross-Cutting','Mitigation']],
-						workflow_state:"Approved",
+						work_state:"Approved",
 						name:['not in',r]
 					}
 				}
@@ -105,3 +105,7 @@ frappe.ui.form.on('Mitigations', {
 		}
 	}
 });
+
+// frappe.ui.form.on('Sample ChildTable',{
+	
+// })

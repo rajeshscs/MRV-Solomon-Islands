@@ -19,13 +19,17 @@ class Project(Document):
 		fields = meta_dict["fields"]
 		for field in fields:
 			if frappe.db.exists("Project",self.name):
-				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table":
+				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation":
+
 					if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
+
 				elif field["fieldtype"] == "Date" and old_doc.get(field["fieldname"]) != None  and field["fieldtype"] != "Table" and field["fieldtype"] != "Table MultiSelect":
 					Date = frappe.utils.formatdate(old_doc.get(field["fieldname"]),"yyyy-mm-dd")
+
 					if Date != self.get(field["fieldname"] ):
 						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
+
 				elif field["fieldtype"] == "Table MultiSelect":
 					if len(self.get(field["fieldname"])) != len(old_doc.get(field["fieldname"])):
 						if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
@@ -33,15 +37,25 @@ class Project(Document):
 									fields = ["included_in"],
 									filters = {"parent" : old_doc.name},pluck="included_in")
 							field_list[field["fieldname"]] = ",".join(old_list)
+
 					if len(self.get(field["fieldname"])) == len(old_doc.get(field["fieldname"])):
 						for i in self.get(field["fieldname"]):
 							new_list.append(i.included_in)
 						old_list=frappe.db.get_all(field["options"],
 									fields = ["included_in"],
 									filters = {"parent" : old_doc.name},pluck="included_in")
+						old_list.sort()
+						new_list.sort()
+						
 						if old_list != new_list:
+							frappe.log_error("old",old_list)
+							frappe.log_error("new",new_list)
 							if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 								field_list[field["fieldname"]] = ",".join(old_list)
+
+				elif field["fieldtype"] == "Geolocation":
+					if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
+						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
 		return field_list
 		
 	

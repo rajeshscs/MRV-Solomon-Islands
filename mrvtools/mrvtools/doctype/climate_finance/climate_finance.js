@@ -12,7 +12,7 @@ frappe.ui.form.on('Climate Finance', {
 				console.log(r);
 				return{
 					filters:{
-						workflow_state:"Approved",
+						work_state:"Approved",
 						name:['not in',r]
 					}
 				}
