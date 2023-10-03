@@ -3,18 +3,21 @@
 
 frappe.ui.form.on('Mitigation Monitoring Information', {
 	refresh: function(frm){
-		$.ajax({
-			success:function(){
-				$('[id="page-Mitigation Monitoring Information"] [class="grid-buttons"]').css("display","none")
-				$('[id="page-Mitigation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
+		$('[id="page-Mitigation Monitoring Information"] [class="grid-buttons"]').css("display","none")
+		$('[id="page-Mitigation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
+			
+
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
+			frm.fields_dict.performance_indicator.df.read_only = 1
+			frm.refresh_field("performance_indicator")
+		}
+
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
+		  async:false,
 		  callback: function(r){
 			var userList = []
-			
 			for (var i of r.message){
 			  userList.push(i[0])
 			}
@@ -35,7 +38,128 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				}
 			}
 		})
+
+
+		if (frm.doc.workflow_state == "Rejected"){
+			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			frm.set_value("edited_project_details",[])
+			frm.set_value("edited_performance_indicator",[])
+			frm.set_value("workflow_state","Approved")
+			frm.set_value('work_state','Approved')
+			frm.dirty()
+			frm.save()
+		}
+		if (frm.doc.workflow_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
+			for (var i of frm.doc.edited_project_details){
+				console.log("Field Name of i","=",i.field_name);
+					frm.set_value(i.field_name,i.new_values)
+			}
+			frm.set_value("edited_project_details",[])
+			console.log("edited_project_details = ",frm.doc.edited_project_details);
+			frm.set_value('work_state','Approved')
+			if(frm.doc.edited_performance_indicator.length != 0){
+				frm.set_value("performance_indicator",[])
+				for(var i of frm.doc.edited_performance_indicator){
+					var child = frm.add_child("performance_indicator")
+					child.performance_indicator = i.performance_indicator
+					child.unit = i.unit
+					child.expected_value = i.expected_value
+					child.actual_monitored_value = i.actual_monitored_value
+					child.reference = i.reference
+				}
+				
+				frm.refresh_field("performance_indicator")
+				frm.set_value("edited_project_details",[])
+			}
+			frm.set_value("edited_performance_indicator",[])
+			frm.refresh_field("edited_performance_indicator")
+			frm.save()
+		}
+		
+
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
+			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
+		}
+		else{
+			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
+		}
 	},
+	
+	edit_button:function(frm){
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
+			frm.set_value("performance_indicator",[])
+			for(var i of frm.doc.edited_performance_indicator){
+				var child = frm.add_child("performance_indicator")
+				child.performance_indicator = i.performance_indicator
+				child.unit = i.unit
+				child.expected_value = i.expected_value
+				child.reference = i.reference
+			}
+			frm.fields_dict.performance_indicator.df.read_only = 0
+			frm.refresh_field("performance_indicator")
+		}
+	},
+
+	before_save:function(frm){
+		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+			if(frm.fields_dict.performance_indicator.df.read_only == 0){
+				frm.call({
+					doc:frm.doc,
+					method:"before_saving_table",
+					async:false,
+					callback:function(r){
+						console.log("Mudinchhh!",r.message);
+					}
+				})
+			}
+			console.log("edited_project_details = ",frm.doc.edited_project_details);
+			frm.call({
+				doc:frm.doc,
+				method:"get_all_data",
+				async:false,
+				callback:function(r){
+					var result= r.message
+					console.log("Res = ",result)
+					var field_name_list = []
+					for(let [key,value] of Object.entries(result)){
+						field_name_list.push(key)
+					}
+					console.log(field_name_list);
+					for (var i of frm.doc.edited_project_details){
+						console.log("Field Name ", i.field_name);
+						if (field_name_list.includes(i.field_name) ){
+							i.new_values = frm.doc[`${i.field_name}`].toString()
+							frm.set_value(i.field_name,i.old_values)
+							frm.refresh_field("edited_project_details")
+
+							const index = field_name_list.indexOf(i.field_name);
+							const x = field_name_list.splice(index, 1)
+						}
+					}
+					if (field_name_list){
+						console.log("field_name_list"," = ",field_name_list);
+						for (var i of field_name_list){
+							var label = i.replaceAll("_"," ")
+							label = toTitleCase(label)
+							console.log("label","=",label);
+							var child =frm.add_child("edited_project_details")
+							console.log("i ",result[`${i}`] );
+							console.log("j ",frm.doc[`${i}`]);
+							child.field_label = label
+							child.field_name = i
+							child.old_values = result[`${i}`]
+							child.new_values = frm.doc[`${i}`].toString()
+							frm.set_value(i,result[`${i}`])
+							console.log("Edited Table1 =  ",frm.doc.edited_project_details);
+						}
+					}
+				}
+			})
+		}
+	},
+
 	project_name: function(frm) {
 		frm.set_value("project_name1","")
 		frm.set_value("contact_details","")
@@ -53,10 +177,9 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 
 		frm.call({
 			doc:cur_frm.doc,
-			method:"get_all_data",
+			method:"get_data",
 			async:false,
 			callback:function(r){
-				console.log(r.message);
 				frm.set_value("project_name1",r.message[0].project_name)
 				frm.set_value("contact_details",r.message[0].contact_details)
 				frm.set_value("other_contact_details",r.message[0].other_contact_details)
@@ -69,7 +192,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				frm.set_value("market_based_mechanism",r.message[0].market_based_mechanism)
 				frm.set_value("weblink",r.message[0].weblink)
 				frm.set_value("beneficiaries",r.message[0].beneficiaries)
-
 			}
 		})
 		frm.call({
@@ -156,3 +278,12 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		})
 	}
 });
+
+function toTitleCase(str) {
+	return str.replace(
+	  /\w\S*/g,
+	  function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	  }
+	); 
+}

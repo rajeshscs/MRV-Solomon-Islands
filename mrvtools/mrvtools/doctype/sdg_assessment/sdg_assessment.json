@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
@@ -9,10 +8,10 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name",
   "column_break_xb4rr",
   "select_approver",
-  "category",
   "included_in",
   "category_section",
   "json",
@@ -32,147 +31,208 @@
   "load_categories",
   "qualitative_impact",
   "quantitative_impact",
-  "naming_series"
+  "naming_series",
+  "tab2",
+  "html_json",
+  "edited_project_details",
+  "html_table",
+  "work_state"
  ],
  "fields": [
   {
    "fieldname": "qualitative_impact",
    "fieldtype": "Table",
    "label": "Qualitative Impact",
-   "options": "SDG Qualitative ChildTable"
+   "options": "SDG Qualitative ChildTable",
+   "permlevel": 1
   },
   {
    "fieldname": "quantitative_impact",
    "fieldtype": "Table",
    "label": "Quantitative Impact",
-   "options": "SDG Quantitative ChildTable"
+   "options": "SDG Quantitative ChildTable",
+   "permlevel": 1
   },
   {
    "fieldname": "category_section",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "category",
-   "fieldtype": "Table MultiSelect",
-   "hidden": 1,
-   "label": "Category",
-   "options": "SDG Category ChildTable"
+   "fieldtype": "Section Break",
+   "permlevel": 1
   },
   {
    "fieldname": "column_break_xb4rr",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "permlevel": 1
   },
   {
    "fieldname": "project_name",
    "fieldtype": "Link",
    "label": "Project Name",
-   "options": "Project"
+   "options": "Project",
+   "permlevel": 1
   },
   {
    "fieldname": "load_categories",
    "fieldtype": "Button",
-   "label": "Load Categories"
+   "label": "Load Categories",
+   "permlevel": 1
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User"
+   "options": "User",
+   "permlevel": 1
   },
   {
    "fieldname": "json",
    "fieldtype": "JSON",
    "hidden": 1,
-   "label": "JSON"
+   "label": "JSON",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "poverty_reduction",
    "fieldtype": "Check",
-   "label": "Poverty Reduction"
+   "label": "Poverty Reduction",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "inequality",
    "fieldtype": "Check",
-   "label": "Inequality"
+   "label": "Inequality",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "gender",
    "fieldtype": "Check",
-   "label": "Gender"
+   "label": "Gender",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "industry",
    "fieldtype": "Check",
-   "label": "Industry"
+   "label": "Industry",
+   "permlevel": 1
   },
   {
    "fieldname": "column_break_qvzfz",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "environment",
    "fieldtype": "Check",
-   "label": "Environment"
+   "label": "Environment",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "employment",
    "fieldtype": "Check",
-   "label": "Employment"
+   "label": "Employment",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "education",
    "fieldtype": "Check",
-   "label": "Education"
+   "label": "Education",
+   "permlevel": 1
   },
   {
    "fieldname": "column_break_5g8fw",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "water",
    "fieldtype": "Check",
-   "label": "Water"
+   "label": "Water",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "food",
    "fieldtype": "Check",
-   "label": "Food"
+   "label": "Food",
+   "permlevel": 1
   },
   {
    "default": "0",
    "fieldname": "health",
    "fieldtype": "Check",
-   "label": "Health"
+   "label": "Health",
+   "permlevel": 1
   },
   {
    "fieldname": "section_break_j9xm0",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "permlevel": 1
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "SDG-PRO-INFO-.###"
+   "options": "SDG-PRO-INFO-.###",
+   "permlevel": 1
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "Included In"
+   "label": "Included In",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "edited_project_details",
+   "fieldtype": "Table",
+   "label": "Edited Project Details",
+   "options": "Edited Project Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "html_table",
+   "fieldtype": "HTML",
+   "label": "Edited Table Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
+   "label": "Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "tab2",
+   "fieldtype": "Tab Break",
+   "label": "Edited Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "html_json",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "Html Json",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "work_state",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Work State",
+   "options": "\nPending\nApproved\nRejected",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-29 21:09:21.994158",
+ "modified": "2023-09-28 18:54:02.535854",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
@@ -188,6 +248,90 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Approver SDG Tracking",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 2,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Approver SDG Tracking",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "SDG Tracking",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "SDG Tracking",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects",
    "share": 1,
    "write": 1
   }

@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestProjectApproval(FrappeTestCase):
+class TestIPPUCementClinkerChildTable(FrappeTestCase):
 	pass

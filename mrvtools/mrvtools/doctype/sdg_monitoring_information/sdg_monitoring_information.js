@@ -3,16 +3,21 @@
 var userList = []
 frappe.ui.form.on('SDG Monitoring Information', {
 	refresh: function(frm){
+		// $.ajax({
+		// 	success:function(){
+		// 		$('[id="page-SDG Monitoring Information"] [class="grid-buttons"]').css("display","none")
+		// 		$('[id="page-SDG Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
+		// 	}
+		// })
 
-		$.ajax({
-			success:function(){
-				$('[id="page-SDG Monitoring Information"] [class="grid-buttons"]').css("display","none")
-				$('[id="page-SDG Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
+			frm.fields_dict.quantitative_impact.df.read_only = 1
+			frm.refresh_field("quantitative_impact")
+		}
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
+		  async:false,
 		  callback: function(r){
 			
 			
@@ -35,6 +40,72 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				}
 			}
 		})
+
+		if (frm.doc.workflow_state == "Rejected"){
+			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			frm.set_value("edited_project_details",[])
+			frm.set_value("edited_quantitative_impact",[])
+			frm.set_value("workflow_state","Approved")
+			frm.set_value('work_state','Approved')
+			frm.dirty()
+			frm.save()
+		}
+		if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
+			for (var i of frm.doc.edited_project_details){
+				console.log("Field Name of i","=",i.field_name);
+				frm.set_value(i.field_name,i.new_values)
+			}
+
+			console.log("edited_project_details = ",frm.doc.edited_project_details);
+			frm.set_value('work_state','Approved')
+			if(frm.doc.edited_quantitative_impact.length != 0){
+				frm.set_value("quantitative_impact",[])
+				for(var i of frm.doc.edited_quantitative_impact){
+					var row = frm.add_child("quantitative_impact")
+					row.category = i.category
+					row.question = i.question
+					row.sdg_mapping = i.sdg_mapping
+					row.data = i.data
+					row.data_source = i.data_source
+				}
+				
+				frm.refresh_field("quantitative_impact")
+				frm.set_value("edited_project_details",[])
+			}
+			frm.set_value("edited_quantitative_impact",[])
+			frm.refresh_field("edited_quantitative_impact")
+			frm.save()
+		}
+	},
+	edit_button:function(frm){
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
+			frm.set_value("quantitative_impact")
+			for(var i of frm.doc.edited_quantitative_impact){
+				var row = frm.add_child("quantitative_impact")
+				row.category = i.category
+				row.question = i.question
+				row.sdg_mapping = i.sdg_mapping
+				row.data = i.data
+				row.data_source = i.data_source
+			}
+			frm.fields_dict.quantitative_impact.df.read_only = 0
+			frm.refresh_field("quantitative_impact")
+		}
+	},
+	before_save:function(frm){
+		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+			if(frm.fields_dict.quantitative_impact.df.read_only == 0){
+				frm.call({
+					doc:frm.doc,
+					method:"before_saving_table",
+					async:false,
+					callback:function(r){
+						console.log("Mudinchhh!",r.message);
+					}
+				})
+			}
+			
+		}
 	},
 	project_name: function(frm) {
 		frm.call({

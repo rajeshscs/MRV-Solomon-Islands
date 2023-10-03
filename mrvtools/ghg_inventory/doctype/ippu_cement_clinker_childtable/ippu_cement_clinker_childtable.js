@@ -1,7 +1,7 @@
 // Copyright (c) 2023, tridotstech and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Project Approval', {
+frappe.ui.form.on('IPPU Cement Clinker ChildTable', {
 	// refresh: function(frm) {
 
 	// }

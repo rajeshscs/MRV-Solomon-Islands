@@ -11,12 +11,6 @@
  "field_order": [
   "table_name",
   "anthropogenic_n_input",
-  "amount",
-  "emission_factor",
-  "annual_area",
-  "organic_solis_emission_factor",
-  "grazed_soils_amount",
-  "grazed_soils_emissoin_factor",
   "description",
   "value",
   "unit",
@@ -24,44 +18,19 @@
  ],
  "fields": [
   {
-   "fieldname": "table_name",
-   "fieldtype": "Data",
-   "label": "Table name"
-  },
-  {
    "fieldname": "anthropogenic_n_input",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Anthropogenic N input type"
   },
   {
-   "fieldname": "amount",
+   "fieldname": "reference",
    "fieldtype": "Data",
-   "label": "Amount (kg/yr)"
+   "label": "Reference"
   },
   {
-   "fieldname": "emission_factor",
+   "fieldname": "table_name",
    "fieldtype": "Data",
-   "label": "Emission Factor (kg N2O-N per kg N input)"
-  },
-  {
-   "fieldname": "annual_area",
-   "fieldtype": "Data",
-   "label": "Annual area of managed/drained organic soils (Ha)"
-  },
-  {
-   "fieldname": "organic_solis_emission_factor",
-   "fieldtype": "Data",
-   "label": "Emission Factor (kg N2O-N per Ha per year)"
-  },
-  {
-   "fieldname": "grazed_soils_amount",
-   "fieldtype": "Data",
-   "label": "Amount of urine and dung N deposited by grazing animals on pasture, range and paddock (kg per year)"
-  },
-  {
-   "fieldname": "grazed_soils_emissoin_factor",
-   "fieldtype": "Data",
-   "label": "Emission Factor (kg N2O-N per kg N input)"
+   "label": "Table Name"
   },
   {
    "fieldname": "description",
@@ -77,16 +46,11 @@
    "fieldname": "unit",
    "fieldtype": "Data",
    "label": "Unit"
-  },
-  {
-   "fieldname": "reference",
-   "fieldtype": "Data",
-   "label": "Reference"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-31 19:08:24.008729",
+ "modified": "2023-09-14 18:42:00.250349",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Direct and Indirect Managed Soils Master List",

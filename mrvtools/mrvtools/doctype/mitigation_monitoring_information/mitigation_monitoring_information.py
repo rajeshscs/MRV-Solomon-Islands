@@ -5,6 +5,66 @@ import frappe
 from frappe.model.document import Document
 
 class MitigationMonitoringInformation(Document):
+
+
+# _____________________________________________________________________________________________________________________
+
+
+	@frappe.whitelist()
+	def before_saving_table(self):
+		old_doc =self.get_doc_before_save()
+		self.edited_performance_indicator = []
+		for i in self.performance_indicator:
+			row = self.append('edited_performance_indicator',{})
+			row.performance_indicator = i.performance_indicator
+			row.unit = i.unit
+			row.expected_value = i.expected_value
+			row.actual_monitored_value = i.actual_monitored_value
+			row.reference = i.reference
+		
+
+		self.performance_indicator = []
+		for i in old_doc.performance_indicator:
+			row = self.append('performance_indicator',{})
+			row.performance_indicator = i.performance_indicator
+			row.unit = i.unit
+			row.expected_value = i.expected_value
+			row.actual_monitored_value = i.actual_monitored_value
+			row.reference = i.reference
+		return "Yess"
+
+
+# _____________________________________________________________________________________________________________________
+
+
+
+
+	@frappe.whitelist()
+	def get_all_data(self):
+		old_doc =self.get_doc_before_save()
+		field_list = {}
+		new_list1=[]
+		new_list2=[]
+		meta = frappe.get_meta(self.doctype)
+		meta_dict = meta.as_dict()
+		fields = meta_dict["fields"]
+		for field in fields:
+			if frappe.db.exists(self.doctype,self.name):
+				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
+					repeated_list=["project_name1","project_name", "monitoring_year", "project_description", "key_sector", "included_in", "type_of_instrument", "implementing_entity", "contact_details", "costusd", "end_date", "lifetime", "non_ghg_mitigation_benefits", "beneficiaries","market_based_mechanism", "expected_project_output", "objective", "key_sub_sector", "location", "other_agency", "other_contact_details", "source_of_funding", "financial_closure_date", "target_ghgs", "status", "gender_inclusiveness_assessment", "project_impacts", "weblink", "start_date"]
+					if field["fieldname"] not in repeated_list:
+						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
+							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
+		frappe.log_error("List 2",field_list)
+		return field_list
+	
+
+
+# _____________________________________________________________________________________________________________________
+
+
+
+
 	@frappe.whitelist()
 	def get_data(self):
 		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name1}'""")
@@ -21,7 +81,7 @@ class MitigationMonitoringInformation(Document):
 		return get_doc
 	
 	@frappe.whitelist()
-	def get_all_data(self):
+	def get_data(self):
 		get_doc=frappe.db.sql(f"""SELECT * FROM `tabMitigations` where name = '{self.project_name}'""",as_dict=1)
 		return get_doc
 	

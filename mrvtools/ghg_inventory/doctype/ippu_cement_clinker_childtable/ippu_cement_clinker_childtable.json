@@ -1,34 +1,28 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-07-01 16:32:23.657502",
+ "creation": "2023-09-16 13:01:54.850751",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "performance_indicator",
-  "unit",
-  "expected_value",
+  "clinker_import_tonnes",
+  "clinker_export_tonnes",
   "reference"
  ],
  "fields": [
   {
-   "fieldname": "performance_indicator",
-   "fieldtype": "Data",
+   "fieldname": "clinker_import_tonnes",
+   "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Performance Indicator"
+   "label": "Clinker Import (tonnes)"
   },
   {
-   "fieldname": "unit",
-   "fieldtype": "Data",
+   "fieldname": "clinker_export_tonnes",
+   "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Unit"
-  },
-  {
-   "fieldname": "expected_value",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Expected Value"
+   "label": "Clinker Export (tonnes)"
   },
   {
    "fieldname": "reference",
@@ -40,10 +34,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-27 20:29:51.969192",
+ "modified": "2023-09-16 16:59:53.317185",
  "modified_by": "Administrator",
- "module": "Mrvtools",
- "name": "Mitigation Performance Indicator ChildTable",
+ "module": "GHG Inventory",
+ "name": "IPPU Cement Clinker ChildTable",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

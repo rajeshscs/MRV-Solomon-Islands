@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{category}",
  "creation": "2023-08-02 13:41:11.575758",
@@ -8,6 +9,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "link_category",
   "category"
  ],
  "fields": [
@@ -15,11 +17,17 @@
    "fieldname": "category",
    "fieldtype": "Data",
    "label": "Category"
+  },
+  {
+   "fieldname": "link_category",
+   "fieldtype": "Select",
+   "label": "Link Category",
+   "options": "4.A. Forest land\n4.B. Cropland\n4.C. Grassland\n4.D. Wetlands\n4.E. Settlements\n4.F. Other land"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-02 13:42:45.639163",
+ "modified": "2023-09-14 19:44:40.782159",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Forest Category Master List",

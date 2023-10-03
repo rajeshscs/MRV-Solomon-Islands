@@ -24,14 +24,14 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Initial Land Use",
-   "options": "Forestland\nGrassland\nCropland\nWetlands\nSettlements\nOther lands"
+   "options": "\nForestland\nGrassland\nCropland\nWetlands\nSettlements\nOther lands"
   },
   {
    "fieldname": "reporting_year",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Land Use during Reporting Year",
-   "options": "Forestland\nGrassland\nCropland\nWetlands\nSettlements\nOther lands"
+   "options": "\nForestland\nGrassland\nCropland\nWetlands\nSettlements\nOther lands"
   },
   {
    "fieldname": "subcategory",
@@ -91,7 +91,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 18:49:03.112948",
+ "modified": "2023-09-14 19:33:57.398023",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "AFOLU Biomass Burning ChildTable",

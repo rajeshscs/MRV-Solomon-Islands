@@ -4,33 +4,95 @@ var counter = 0
 frappe.ui.form.on('Climate Finance Monitoring Information', {
 	
 	refresh: function(frm){
-		
-		$.ajax({
-			success:function(){
-				$('[id="page-Climate Finance Monitoring Information"] [data-fieldname="total_budget_disbursement"] [class="grid-buttons"]').css("display","none")
-				$('[id="page-Climate Finance Monitoring Information"] [data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_expenditure.length != 0){
+			frm.fields_dict.budget_expenditure.df.read_only = 1
+			frm.refresh_field("budget_expenditure")
+		}
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
+		  async:false,
 		  callback: function(r){
 			var userList = []
 			
 			for (var i of r.message){
-			  userList.push(i[0])
+				userList.push(i[0])
 			}
 			console.log(userList);
 			frm.set_query("select_approver",function(){
-			  return {
+				return {
 				filters:{
 				  email:['in',userList]
 				}
-			  }
+			}
 			})
 		  }
 		})
 		console.log(counter);
+
+		if (frm.doc.workflow_state == "Rejected"){
+			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			frm.set_value("edited_project_details",[])
+			frm.set_value("edited_budget_expenditure",[])
+			frm.set_value("edited_total_budget_disbursement",[])
+			frm.set_value("workflow_state","Approved")
+			frm.set_value('work_state','Approved')
+			frm.dirty()
+			frm.save()
+		}
+
+		if (frm.doc.workflow_state == "Approved"  && (frm.doc.budget_expenditure.length != 0 || frm.doc.edited_project_details.length != 0)){
+			for (var i of frm.doc.edited_project_details){
+					frm.set_value(i.field_name,i.new_values)
+			}
+			frm.set_value("edited_project_details",[])
+			console.log("edited_project_details = ",frm.doc.edited_project_details);
+			frm.set_value('work_state','Approved')
+			if(frm.doc.edited_budget_expenditure.length != 0 != 0){
+				frm.set_value("budget_expenditure",[])
+				for(var i of frm.doc.edited_budget_expenditure){
+					var row = frm.add_child("budget_expenditure")
+					row.disbursement_category = i.disbursement_category
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total = i.total
+				}
+				frm.refresh_field("budget_expenditure")
+			
+				frm.set_value("total_budget_disbursement",[])
+				for(var i of frm.doc.edited_total_budget_disbursement){
+					var row = frm.add_child("total_budget_disbursement")
+					row.financial_year = i.financial_year
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total_disbursement_usd = i.total_disbursement_usd
+				}
+				frm.refresh_field("total_budget_disbursement")
+			}
+			frm.set_value("edited_budget_expenditure",[])
+			frm.set_value("edited_total_budget_disbursement",[])
+			frm.save()
+		}
+
+
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
+			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
+		}
+		else{
+			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
+		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
+			
 	},
 	project_name:function(frm){
 		
@@ -56,11 +118,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				frm.refresh_field("total_budget_disbursement")
 			}
 		})
-		$.ajax({
-			success:function(){
-				$('[id="page-Climate Finance Monitoring Information"] [data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
+		
 		console.log(counter);
 
 		frm.call({
@@ -82,9 +140,14 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 		})
 
 
-		frm.add_child
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	},
 	monitoring_year: function(frm){
+		
 		if(cur_frm.doc.monitoring_year == ""){
 			counter = 0
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].remove();
@@ -136,8 +199,111 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				frm.refresh_field("total_budget_disbursement")
 			}
 		}
-		 
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
+	},
+
+	edit_button:function(frm){
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_expenditure.length != 0){
+			frm.set_value("budget_expenditure",[])
+				for(var i of frm.doc.edited_budget_expenditure){
+					var row = frm.add_child("budget_expenditure")
+					row.disbursement_category = i.disbursement_category
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total = i.total
+				}
+				frm.refresh_field("budget_expenditure")
+			frm.fields_dict.budget_expenditure.df.read_only = 0
+			frm.set_value("total_budget_disbursement",[])
+				for(var i of frm.doc.edited_total_budget_disbursement){
+					var row = frm.add_child("total_budget_disbursement")
+					row.financial_year = i.financial_year
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total_disbursement_usd = i.total_disbursement_usd
+				}
+				frm.refresh_field("total_budget_disbursement")
+		}
+	},
+
+	before_save:function(frm){
+		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+			
+			if(frm.fields_dict.budget_expenditure.df.read_only == 0){
+				frm.call({
+					doc:frm.doc,
+					method:"before_saving_table",
+					async:false,
+					callback:function(r){
+						console.log("Mudinchhh!",r.message);
+					}
+				})
+			}
+
+			frm.call({
+				doc:frm.doc,
+				method:"get_all_datas",
+				async:false,
+				callback:function(r){
+					var result= r.message
+					console.log("Result",result)
+					var field_name_list = []
+					for(let [key,value] of Object.entries(result)){
+						field_name_list.push(key)
+					}
+					for (var i of frm.doc.edited_project_details){
+						if (field_name_list.includes(i.field_name) ){
+							if (frm.doc[`${i.field_name}`] != undefined){
+								i.new_values = frm.doc[`${i.field_name}`].toString()
+							}
+							frm.set_value(i.field_name,i.old_values)
+							console.log("i","=",i.new_values);
+							frm.refresh_field("edited_project_details")
+							const index = field_name_list.indexOf(i.field_name);
+							const x = field_name_list.splice(index, 1)
+						}
+					}
+					if (field_name_list){
+						console.log("field_name_list"," = ",field_name_list);
+						
+						for (var i of field_name_list){
+							var label = i.replaceAll("_"," ")
+							label = toTitleCase(label)
+							console.log("label","=",label);
+							var child =frm.add_child("edited_project_details")
+							if (result[`${i}`] == null && frm.doc[`${i}`] != undefined){
+								child.field_label = label
+								child.field_name = i
+								child.old_values = result[`${i}`]
+								child.new_values = frm.doc[`${i}`].tostring()
+							}
+							else if (result[`${i}`] != null && frm.doc[`${i}`] != undefined){
+								child.field_label = label
+								child.field_name = i
+								child.old_values = result[`${i}`]
+								child.new_values = frm.doc[`${i}`].toString()
+							}
+							frm.set_value(i,result[`${i}`])
+						}
+					}
+				}
+			})
+		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	}
+	
 });
 
 
@@ -167,6 +333,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.total_disbursement_usd =total
 			frm.refresh_field("total_budget_disbursement")
 		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	},
 
 	q2:function(frm,cdt,cdn){
@@ -189,6 +360,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.total_disbursement_usd =total
 			frm.refresh_field("total_budget_disbursement")
 		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	},
 
 	q3:function(frm,cdt,cdn){
@@ -211,6 +387,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.total_disbursement_usd =total
 			frm.refresh_field("total_budget_disbursement")
 		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	},
 	q4:function(frm,cdt,cdn){
 		var child = locals[cdt][cdn]
@@ -232,6 +413,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.total_disbursement_usd =total
 			frm.refresh_field("total_budget_disbursement")
 		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	},
 	total:function(frm,cdt,cdn){
 		var child = locals[cdt][cdn]
@@ -256,6 +442,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.total_disbursement_usd =total
 			frm.refresh_field("total_budget_disbursement")
 		}
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 		
 	},
 	budget_expenditure_add:function(frm){
@@ -271,6 +462,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 			}
 		})
 		frm.refresh_fields("disbursement_category")
+		$.ajax({
+			success:function(){
+				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
+			}
+		})
 	}
 	
 	
@@ -290,4 +486,13 @@ function total_function(child){
 		total = total + child.q4
 	}
 	return total.toFixed(2)
+}
+
+function toTitleCase(str) {
+	return str.replace(
+	  /\w\S*/g,
+	  function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	  }
+	); 
 }

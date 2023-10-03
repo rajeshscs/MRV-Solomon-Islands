@@ -24,7 +24,7 @@ class Project(Document):
 					if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
 
-				elif field["fieldtype"] == "Date" and old_doc.get(field["fieldname"]) != None  and field["fieldtype"] != "Table" and field["fieldtype"] != "Table MultiSelect":
+				elif field["fieldtype"] == "Date" and ((old_doc.get(field["fieldname"]) == None and self.get(field["fieldname"]) != None) or (old_doc.get(field["fieldname"]) != None)) :
 					Date = frappe.utils.formatdate(old_doc.get(field["fieldname"]),"yyyy-mm-dd")
 
 					if Date != self.get(field["fieldname"] ):

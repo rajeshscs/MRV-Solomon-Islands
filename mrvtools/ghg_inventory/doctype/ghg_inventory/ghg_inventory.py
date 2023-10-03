@@ -30,5 +30,6 @@ class GHGInventory(Document):
 		fields = meta_dict["fields"]
 		for field in fields:
 			if field["fieldtype"] == "Table":
-				field_list.append(field["fieldname"])
+				if field["fieldname"] in  ["electricity_generation","transport","manufacturing_industries","other_sectors","international_bunkers"]:
+					field_list.append(field["fieldname"])
 		return field_list

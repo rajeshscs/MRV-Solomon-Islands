@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
@@ -258,7 +257,6 @@
   {
    "fieldname": "work_state",
    "fieldtype": "Select",
-   "hidden": 1,
    "label": "Work State",
    "options": "\nPending\nApproved\nRejected",
    "permlevel": 1
@@ -306,7 +304,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-09-13 18:32:55.691529",
+ "modified": "2023-09-27 11:14:45.631301",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

@@ -7,6 +7,32 @@ from frappe.model.document import Document
 class AdaptationMonitoringInformation(Document):
 	
 	@frappe.whitelist()
+	def before_saving_table(self):
+		old_doc =self.get_doc_before_save()
+		if old_doc.quantitative_impact != self.quantitative_impact:
+			self.edited_quantitative_impact = []
+			for i in self.quantitative_impact:
+				row = self.append('edited_quantitative_impact',{})
+				row.category = i.category
+				row.question = i.question
+				row.expected_value = i.expected_value
+				row.actual_value = i.actual_value
+				row.data_source = i.data_source
+				frappe.log_error(" Before Edited",self.edited_quantitative_impact)
+
+			self.quantitative_impact = []
+			for i in old_doc.quantitative_impact:
+				row = self.append('quantitative_impact',{})
+				row.category = i.category
+				row.question = i.question
+				row.expected_value = i.expected_value
+				row.actual_value = i.actual_value
+				row.data_source = i.data_source
+				# frappe.log_error("Before Self",self.performance_indicator)
+		return "Yess"
+
+
+	@frappe.whitelist()
 	def get_json(self):
 		get_json_field=frappe.db.sql(f"""SELECT json from `tabAdaptation` WHERE project_name ='{self.project_name}'""")
 		return get_json_field

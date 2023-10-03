@@ -86,11 +86,12 @@ frappe.ui.form.on('Project', {
 
 
 	before_save:function(frm){
-		if (frm.doc.workflow_state != "Approved"){
+		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 			var list=[]
 			frm.call({
 				doc:frm.doc,
 				method:"get_all_datas",
+				async:false,
 				callback:function(r){
 					var result= r.message
 					console.log("Result",result)
@@ -197,6 +198,15 @@ frappe.ui.form.on('Project', {
 
 
 	refresh: function(frm){
+		$('[id="project-tab2-tab"]').on('click',function(){
+			frm.refresh_field('original_coordinates')
+			frm.refresh_field('new_coordinates')
+		})
+		
+		$('[id="project-tab1-tab"]').on('click',function(){
+			frm.refresh_field('geographical_co_ordinate')
+		})
+		
 		if (frm.doc.workflow_state == "Rejected"){
 			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
@@ -237,24 +247,40 @@ frappe.ui.form.on('Project', {
 			frm.set_value("new_coordinates",'')
 			// frm.fields_dict.new_coordinates.df.hidden = 1
 			frm.refresh_field("new_coordinates")
-			frm.set_value('work_state','Approved')
+			
 			frm.dirty()
 			frm.save()
 			
 			
 		}
+		if (frm.doc.workflow_state == "Approved"){
+			if(!frm.doc.work_state){
+				frm.set_value('work_state','Approved')
+				frm.dirty()
+				frm.save()
+			}
+			
+		}
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			
 			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-			
-			
-			
+			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
 		}
 		else{
 			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
+			// frm.refresh_field("tab2")
+			// frm.fields_dict.original_coordinates.df.hidden = 0
+			// frm.refresh_field("original_coordinates")
+			// frm.fields_dict.new_coordinates.df.hidden = 0
+			// frm.refresh_field("new_coordinates")
+			// frm.fields_dict.edited_project_details.df.hidden = 0
+			// frm.refresh_field("edited_project_details")
 		}
+
 		frm.call({
 		doc:frm.doc,
 		method:'get_user',
+		async:false,
 		callback: function(r){
 			var userList = []
 			
