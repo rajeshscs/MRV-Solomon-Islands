@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name1",
   "project_name",
   "column_break_adszg",
@@ -49,7 +50,7 @@
   "upload_calculation_sheet",
   "section_break_pdgvc",
   "performance_indicator",
-  "edit_details",
+  "edit_button",
   "upload_document",
   "remarks",
   "tab2",
@@ -382,14 +383,16 @@
    "fieldtype": "Table",
    "label": "Edited Mitigation Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edited_performance_indicator",
    "fieldtype": "Table",
    "label": "Edited Performance Indicator",
    "options": "Mitigation Monitoring Information ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -400,15 +403,20 @@
    "permlevel": 1
   },
   {
-   "fieldname": "edit_details",
+   "fieldname": "edit_button",
    "fieldtype": "Button",
    "label": "Edit Performance Indicator",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
    "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 17:02:37.365040",
+ "modified": "2023-10-05 20:02:33.471249",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

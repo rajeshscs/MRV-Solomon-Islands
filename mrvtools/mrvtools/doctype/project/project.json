@@ -252,7 +252,8 @@
    "fieldtype": "Table",
    "label": "Edited Project Details",
    "options": "Edited Project Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -304,7 +305,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-09-27 11:14:45.631301",
+ "modified": "2023-10-04 21:28:11.243663",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

@@ -110,15 +110,13 @@ frappe.ui.form.on('Climate Finance', {
 			frm.save()
 		}
 		
-
-		// if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-		// 	$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
-		// 	// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-		// 	// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
-		// }
-		// else{
-		// 	$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
-		// }
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$('[id="climate-finance-tab_break_eii2f-tab"]').addClass("active")
+			$('#climate-finance-tab_break_eii2f-tab').attr('aria-selected', 'true');
+			$('[id="climate-finance-tab_break_eii2f"]').addClass("active")
+			
+		}
+		
 
 	},
 

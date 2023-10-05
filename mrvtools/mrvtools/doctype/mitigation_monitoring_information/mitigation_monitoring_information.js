@@ -3,9 +3,9 @@
 
 frappe.ui.form.on('Mitigation Monitoring Information', {
 	refresh: function(frm){
-		$('[id="page-Mitigation Monitoring Information"] [class="grid-buttons"]').css("display","none")
-		$('[id="page-Mitigation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
-			
+		$('[data-fieldname="performance_indicator"] [class="grid-buttons"]').css("display","none")
+		$('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:last-child {display:none !important;}</style>')
+		$('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:first-child {display:none !important;}</style>')
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
 			frm.fields_dict.performance_indicator.df.read_only = 1
@@ -46,7 +46,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
-			frm.dirty()
 			frm.save()
 		}
 		if (frm.doc.workflow_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
@@ -69,21 +68,15 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				}
 				
 				frm.refresh_field("performance_indicator")
-				frm.set_value("edited_project_details",[])
 			}
+			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.refresh_field("edited_performance_indicator")
 			frm.save()
 		}
-		
 
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
-			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
-		}
-		else{
-			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
+			$('[id="mitigation-monitoring-information-tab1"]').addClass("active")
 		}
 	},
 	
@@ -95,6 +88,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				child.performance_indicator = i.performance_indicator
 				child.unit = i.unit
 				child.expected_value = i.expected_value
+				child.actual_monitored_value = i.actual_monitored_value
 				child.reference = i.reference
 			}
 			frm.fields_dict.performance_indicator.df.read_only = 0

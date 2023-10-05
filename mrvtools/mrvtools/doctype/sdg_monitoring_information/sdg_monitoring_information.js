@@ -70,11 +70,15 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				}
 				
 				frm.refresh_field("quantitative_impact")
-				frm.set_value("edited_project_details",[])
 			}
+			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_quantitative_impact",[])
 			frm.refresh_field("edited_quantitative_impact")
 			frm.save()
+		}
+
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$('[id="sdg-monitoring-information-tab1"]').addClass("active")
 		}
 	},
 	edit_button:function(frm){

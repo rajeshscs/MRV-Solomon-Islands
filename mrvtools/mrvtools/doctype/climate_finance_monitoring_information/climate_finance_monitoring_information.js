@@ -35,17 +35,14 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_budget_expenditure",[])
 			frm.set_value("edited_total_budget_disbursement",[])
-			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
-			frm.dirty()
-			frm.save()
+			frm.set_value("workflow_state","Approved")
 		}
 
 		if (frm.doc.workflow_state == "Approved"  && (frm.doc.budget_expenditure.length != 0 || frm.doc.edited_project_details.length != 0)){
 			for (var i of frm.doc.edited_project_details){
 					frm.set_value(i.field_name,i.new_values)
 			}
-			frm.set_value("edited_project_details",[])
 			console.log("edited_project_details = ",frm.doc.edited_project_details);
 			frm.set_value('work_state','Approved')
 			if(frm.doc.edited_budget_expenditure.length != 0 != 0){
@@ -60,7 +57,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 					row.total = i.total
 				}
 				frm.refresh_field("budget_expenditure")
-			
+				
 				frm.set_value("total_budget_disbursement",[])
 				for(var i of frm.doc.edited_total_budget_disbursement){
 					var row = frm.add_child("total_budget_disbursement")
@@ -73,25 +70,17 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				}
 				frm.refresh_field("total_budget_disbursement")
 			}
+			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_budget_expenditure",[])
 			frm.set_value("edited_total_budget_disbursement",[])
 			frm.save()
 		}
 
+		
 
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
-			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
+			$('[id="climate-finance-monitoring-information-tab1"]').addClass("active")
 		}
-		else{
-			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
-		}
-		$.ajax({
-			success:function(){
-				$('[data-fieldname="total_budget_disbursement"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
 			
 	},
 	project_name:function(frm){

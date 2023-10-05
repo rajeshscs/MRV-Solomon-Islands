@@ -107,14 +107,16 @@
    "fieldtype": "Table",
    "label": "Edited SDG Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edited_quantitative_impact",
    "fieldtype": "Table",
    "label": "Edited Quantitative Impact",
    "options": "SDG Quantitative ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -145,7 +147,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 16:58:22.696839",
+ "modified": "2023-10-05 17:19:53.648510",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",

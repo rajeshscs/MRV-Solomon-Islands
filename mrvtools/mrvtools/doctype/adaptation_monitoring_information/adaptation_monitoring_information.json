@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name",
   "project_name1",
   "column_break_5urkg",
@@ -23,7 +24,7 @@
   "remarks",
   "naming_series",
   "work_state",
-  "edited_details_tab",
+  "tab2",
   "edited_project_details",
   "edited_quantitative_impact"
  ],
@@ -114,24 +115,20 @@
    "permlevel": 1
   },
   {
-   "fieldname": "edited_details_tab",
-   "fieldtype": "Tab Break",
-   "label": "Edited Adaptation Monitoring Details",
-   "permlevel": 1
-  },
-  {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited Adaptation Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edited_quantitative_impact",
    "fieldtype": "Table",
    "label": "Edited Quantitative Impact",
    "options": "Adaptation Monitoring ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -146,11 +143,23 @@
    "fieldtype": "Button",
    "label": "Edit Quantitative Impact",
    "permlevel": 1
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
+   "label": "Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "tab2",
+   "fieldtype": "Tab Break",
+   "label": "Edited Adaptation Monitoring Details",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 17:03:49.308068",
+ "modified": "2023-10-05 13:40:46.751958",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",

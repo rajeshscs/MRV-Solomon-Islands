@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name",
   "column_break_6ci8v",
   "project_name1",
@@ -53,12 +54,8 @@
   "naming_series",
   "work_state",
   "tab2",
-  "html_output",
-  "html_json",
   "edited_project_details",
-  "edited_table_details",
-  "edited_performance_indicator",
-  "json"
+  "edited_performance_indicator"
  ],
  "fields": [
   {
@@ -361,21 +358,7 @@
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "html_output",
-   "fieldtype": "Long Text",
-   "hidden": 1,
-   "label": "Html Output",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "html_json",
-   "fieldtype": "JSON",
-   "hidden": 1,
-   "label": "Html JSON",
+   "label": "Edited Mitigation Details",
    "permlevel": 1
   },
   {
@@ -383,13 +366,8 @@
    "fieldtype": "Table",
    "label": "Edited Project Details",
    "options": "Edited Project Details",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "edited_table_details",
-   "fieldtype": "HTML",
-   "label": "Edited Table Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "non_ghg_mitigation_benefits",
@@ -403,25 +381,24 @@
    "fieldtype": "Table",
    "label": "Edited Performance Indicator",
    "options": "Edited Performance Indicator ChildTable",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "json",
-   "fieldtype": "JSON",
-   "hidden": 1,
-   "label": "JSON",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edit_button",
    "fieldtype": "Button",
    "label": "Edit Performance Indicator",
    "permlevel": 1
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
+   "label": "Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-09-30 14:59:04.933429",
+ "modified": "2023-10-04 13:32:58.511828",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",

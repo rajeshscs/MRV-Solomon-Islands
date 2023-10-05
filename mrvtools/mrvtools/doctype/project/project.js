@@ -59,8 +59,6 @@ frappe.ui.form.on('Project', {
 		frm.set_value("coordinates","") 
 	},
 
-
-
 	objective: function(frm){
 		if(!frm.doc.objective){
 			frm.set_df_property('key_sector','hidden',1)
@@ -208,7 +206,6 @@ frappe.ui.form.on('Project', {
 		})
 		
 		if (frm.doc.workflow_state == "Rejected"){
-			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("original_coordinates",'')
 			frm.refresh_field("original_coordinates")
@@ -261,21 +258,7 @@ frappe.ui.form.on('Project', {
 			}
 			
 		}
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			
-			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
-		}
-		else{
-			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
-			// frm.refresh_field("tab2")
-			// frm.fields_dict.original_coordinates.df.hidden = 0
-			// frm.refresh_field("original_coordinates")
-			// frm.fields_dict.new_coordinates.df.hidden = 0
-			// frm.refresh_field("new_coordinates")
-			// frm.fields_dict.edited_project_details.df.hidden = 0
-			// frm.refresh_field("edited_project_details")
-		}
+		
 
 		frm.call({
 		doc:frm.doc,
@@ -323,6 +306,21 @@ frappe.ui.form.on('Project', {
 				}
 			}
 		});
+
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$('[id="project-tab1"]').addClass("active")
+			$('[id="project-tab1-tab"]').hide()
+			$('[id="project-tab2-tab"]').hide()
+		}
+		else{
+			$('[id="project-tab1-tab"]').addClass("active")
+			$('[id="project-tab1-tab"]').attr('aria-selected', 'true');
+			$('[id="project-tab2-tab"]').removeClass("active")
+			$('[id="project-tab1-tab"]').show()
+			$('[id="project-tab2-tab"]').show()
+			$('[id="project-tab1"]').addClass("active")
+			
+		}
 	}
 });
 function toTitleCase(str) {

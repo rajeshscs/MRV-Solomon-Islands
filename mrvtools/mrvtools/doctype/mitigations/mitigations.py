@@ -8,24 +8,22 @@ class Mitigations(Document):
 	@frappe.whitelist()
 	def before_saving_table(self):
 		old_doc =self.get_doc_before_save()
-		if old_doc.performance_indicator != self.performance_indicator:
-			self.edited_performance_indicator = []
-			for i in self.performance_indicator:
-				row = self.append('edited_performance_indicator',{})
-				row.performance_indicator = i.performance_indicator
-				row.unit = i.unit
-				row.expected_value = i.expected_value
-				row.reference = i.reference
-				frappe.log_error(" Before Edited",self.edited_performance_indicator)
+		self.edited_performance_indicator = []
+		for i in self.performance_indicator:
+			row = self.append('edited_performance_indicator',{})
+			row.performance_indicator = i.performance_indicator
+			row.unit = i.unit
+			row.expected_value = i.expected_value
+			row.reference = i.reference
+			frappe.log_error(" Before Edited",self.edited_performance_indicator)
 
-			self.performance_indicator = []
-			for i in old_doc.performance_indicator:
-				row = self.append('performance_indicator',{})
-				row.performance_indicator = i.performance_indicator
-				row.unit = i.unit
-				row.expected_value = i.expected_value
-				row.reference = i.reference
-				# frappe.log_error("Before Self",self.performance_indicator)
+		self.performance_indicator = []
+		for i in old_doc.performance_indicator:
+			row = self.append('performance_indicator',{})
+			row.performance_indicator = i.performance_indicator
+			row.unit = i.unit
+			row.expected_value = i.expected_value
+			row.reference = i.reference
 		return "Yess"
 	
 

@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab1",
   "project_name",
   "project_name1",
   "financing_mode",
@@ -170,7 +171,8 @@
    "fieldtype": "Table",
    "label": "Edited Climate Finance Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "tab2",
@@ -183,14 +185,16 @@
    "fieldtype": "Table",
    "label": "Edited Budget Expenditure",
    "options": "Climate Monitoring Information Budget Expenditure ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edited_total_budget_disbursement",
    "fieldtype": "Table",
    "label": "Edited Total Budget Disbursement",
    "options": "Climate Finance Total Budget Disbursement ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -205,11 +209,17 @@
    "fieldtype": "Button",
    "label": "Edit Budget Expenditure",
    "permlevel": 1
+  },
+  {
+   "fieldname": "tab1",
+   "fieldtype": "Tab Break",
+   "label": "Details",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 17:58:22.193369",
+ "modified": "2023-10-05 20:25:18.201007",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",

@@ -47,7 +47,6 @@
   "naming_series",
   "work_state",
   "tab2",
-  "html_output",
   "html_json",
   "edited_project_details",
   "html_table"
@@ -289,7 +288,8 @@
    "fieldname": "html_table",
    "fieldtype": "HTML",
    "label": "Edited Table Details",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "tab1",
@@ -306,16 +306,10 @@
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
-   "label": "Edited Project Details",
+   "label": "Edited Adaptation Details",
    "options": "Edited Project Details",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "html_output",
-   "fieldtype": "Long Text",
-   "hidden": 1,
-   "label": "Html Output",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "work_state",
@@ -330,12 +324,13 @@
    "fieldtype": "JSON",
    "hidden": 1,
    "label": "Html Json",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-09-25 12:55:44.803193",
+ "modified": "2023-10-04 19:49:17.302732",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",

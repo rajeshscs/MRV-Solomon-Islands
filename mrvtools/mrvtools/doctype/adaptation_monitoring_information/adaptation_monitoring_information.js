@@ -51,7 +51,6 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 				console.log("Field Name of i","=",i.field_name);
 				frm.set_value(i.field_name,i.new_values)
 			}
-
 			console.log("edited_project_details = ",frm.doc.edited_project_details);
 			frm.set_value('work_state','Approved')
 			if(frm.doc.edited_quantitative_impact.length){
@@ -64,13 +63,16 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 					row.actual_value = i.actual_value
 					row.data_source = i.data_source
 				}
-				
 				frm.refresh_field("quantitative_impact")
-				frm.set_value("edited_project_details",[])
 			}
+			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_quantitative_impact",[])
 			frm.refresh_field("edited_quantitative_impact")
 			frm.save()
+		}
+
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$('[id="adaptation-monitoring-information-tab1"]').addClass("active")
 		}
 	},
 	edit_button:function(frm){
@@ -128,12 +130,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 				}
 			}
 		})
-		$.ajax({
-			success:function(){
-				$('[id="page-Adaptation Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
-
+		
 
 		frm.call({
 			doc:cur_frm.doc,

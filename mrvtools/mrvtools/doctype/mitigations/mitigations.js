@@ -1,7 +1,6 @@
 // Copyright (c) 2023, tridotstech and contributors
 // For license information, please see license.txt
 
-var counter = 0
 frappe.ui.form.on('Mitigations', {
 	project_name: function(frm) {
 		if(!frm.doc.included_in){
@@ -113,12 +112,11 @@ frappe.ui.form.on('Mitigations', {
 
 
 		if (frm.doc.workflow_state == "Rejected"){
-			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
+			$("head").append(`<style>[id="mitigations-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
-			frm.dirty()
 			frm.save()
 		}
 		if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
@@ -176,18 +174,10 @@ frappe.ui.form.on('Mitigations', {
 			frm.refresh_field("edited_performance_indicator")
 			frm.save()
 		}
-		
 
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$("head").append(`<style>[id="project-tab1"] {display:block !important}</style>`)
-			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
-			// frm.toggle_display(['project_name', 'original_coordinates','new_coordinates'], frm.doc.workflow_state == 'Approved');
+			$('[id="mitigations-tab1"]').addClass("active")
 		}
-		else{
-			$("head").append(`<style>[id="project-tab2-tab"] {display:inline-block !important}</style>`)
-		}
-
-
 	},
 
 
