@@ -264,7 +264,7 @@
   },
   {
    "collapsible": 1,
-   "collapsible_depends_on": "eval:doc.new_coordinates",
+   "depends_on": "eval:doc.new_coordinates",
    "fieldname": "geographical_coordinates_section",
    "fieldtype": "Section Break",
    "label": "Geographical Coordinates",
@@ -305,7 +305,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-10-04 21:28:11.243663",
+ "modified": "2023-10-06 19:18:26.593846",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

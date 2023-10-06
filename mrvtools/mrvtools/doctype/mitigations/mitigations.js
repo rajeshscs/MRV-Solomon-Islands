@@ -54,11 +54,18 @@ frappe.ui.form.on('Mitigations', {
 			frm.refresh_field("performance_indicator")
 		}
 	},
-
+	
+	performance_indicator:function(frm){
+		console.log("Workinggg.....");
+	},
 
 	refresh: function(frm){
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
 			frm.fields_dict.performance_indicator.df.read_only = 1
+			frm.refresh_field("performance_indicator")
+		}
+		else{
+			frm.fields_dict.performance_indicator.df.read_only = 0
 			frm.refresh_field("performance_indicator")
 		}
 
@@ -179,23 +186,6 @@ frappe.ui.form.on('Mitigations', {
 			$('[id="mitigations-tab1"]').addClass("active")
 		}
 	},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

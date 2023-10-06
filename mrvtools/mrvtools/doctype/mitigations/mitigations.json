@@ -385,6 +385,7 @@
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.edited_performance_indicator.length != 0",
    "fieldname": "edit_button",
    "fieldtype": "Button",
    "label": "Edit Performance Indicator",
@@ -393,12 +394,13 @@
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details"
+   "label": "Details",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-04 13:32:58.511828",
+ "modified": "2023-10-06 19:46:05.165804",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",

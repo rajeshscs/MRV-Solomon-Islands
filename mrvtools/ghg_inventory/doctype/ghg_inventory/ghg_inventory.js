@@ -626,6 +626,16 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	frm.refresh_field('indirect_manure_management')
 		// }
 	},
+	before_save:function(frm){
+		frm.call({
+			doc:frm.doc,
+			method:"before_saving_table",
+			async:false,
+			callback:function(r){
+				console.log("Mudinchhh!",r.message);
+			}
+		})
+	},
 
 	/////////////////////////////////////////////////////////////////////
 	/////////// Conditions to Show/Hide Respective Table Fields /////////
@@ -636,10 +646,6 @@ frappe.ui.form.on('GHG Inventory', {
 		dynamicTitleList[3] = "/"+frm.doc.sub_category}
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
 		frm.refresh_field('dynamic_title')
-
-		frm.fields_dict.sample_table.df.options = "Energy Sector ChildTable"
-		console.log("sample_table", frm.fields_dict.sample_table.df.options);
-		frm.refresh_field("sample_table")
 		// cur_frm.fields_dict.table_label.df.options = frm.doc.sub_category
 		// frm.set_value("table_label",frm.doc.sub_category)
 		if(frm.doc.sub_category != ""){

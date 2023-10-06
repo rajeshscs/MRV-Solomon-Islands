@@ -273,11 +273,11 @@ frappe.ui.form.on('SDG Assessment', {
 		}
 		else{
 			$('[id="sdg-assessment-tab1-tab"]').addClass("active")
-			$('[id="sdg-assessment-tab1-tab"]').attr('aria-selected', 'true');
-			$('[id="sdg-assessment-tab2-tab"]').removeClass("active")
-			$('[id="sdg-assessment-tab1-tab"]').show()
-			$('[id="sdg-assessment-tab2-tab"]').show()
-			$('[id="sdg-assessment-tab1"]').addClass("active")
+			// $('[id="sdg-assessment-tab1-tab"]').attr('aria-selected', 'true');
+			// $('[id="sdg-assessment-tab2-tab"]').removeClass("active")
+			// $('[id="sdg-assessment-tab1-tab"]').show()
+			// $('[id="sdg-assessment-tab2-tab"]').show()
+			// $('[id="sdg-assessment-tab1"]').addClass("active")
 			console.log("HELLLOOO...");
 			
 		}
