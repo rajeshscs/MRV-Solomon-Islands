@@ -89,10 +89,10 @@ frappe.ui.form.on('SDG Assessment', {
 		});
 
 		frappe.db.get_list('SDG Assessment', {
-			fields: ['project_name'],
-			pluck:'project_name'
+			fields: ['project_id'],
+			pluck:'project_id'
 		}).then(r => {
-			frm.set_query("project_name",function(){
+			frm.set_query("project_id",function(){
 				console.log(r);
 				return{
 					filters:{
@@ -269,35 +269,15 @@ frappe.ui.form.on('SDG Assessment', {
 			$('[id="sdg-assessment-tab1"]').addClass("active")
 			$('[id="sdg-assessment-tab1-tab"]').hide()
 			$('[id="sdg-assessment-tab2-tab"]').hide()
-			console.log("HIII/...");
 		}
 		else{
 			$('[id="sdg-assessment-tab1-tab"]').addClass("active")
-			// $('[id="sdg-assessment-tab1-tab"]').attr('aria-selected', 'true');
-			// $('[id="sdg-assessment-tab2-tab"]').removeClass("active")
-			// $('[id="sdg-assessment-tab1-tab"]').show()
-			// $('[id="sdg-assessment-tab2-tab"]').show()
-			// $('[id="sdg-assessment-tab1"]').addClass("active")
-			console.log("HELLLOOO...");
-			
+			$('[id="sdg-assessment-tab1-tab"]').attr('aria-selected', 'true');
+			$('[id="sdg-assessment-tab2-tab"]').removeClass("active")
+			$('[id="sdg-assessment-tab1-tab"]').show()
+			$('[id="sdg-assessment-tab2-tab"]').show()
+			$('[id="sdg-assessment-tab1"]').addClass("active")
 		}
-	},
-
-	project_name: function(frm) {
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_data",
-			async:false,
-			callback:function(r){
-				var values=[]
-				for(var i of r.message){
-					values.push(i)
-				}
-				values=values.join(",")
-				
-				frm.set_value("included_in",values)
-			}
-		})
 	},
 	
 	load_categories: function(frm){	

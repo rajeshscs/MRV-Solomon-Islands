@@ -14,6 +14,36 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			frm.fields_dict.quantitative_impact.df.read_only = 1
 			frm.refresh_field("quantitative_impact")
 		}
+		else{
+			frm.fields_dict.quantitative_impact.df.read_only = 0
+			frm.refresh_field("quantitative_impact")
+		}
+
+		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
+			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
+			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.monitoring_year.df.read_only = 1
+		}
+
+		if(frm.doc.project_id && frm.doc.work_state != "Approved"){
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_years",
+				async:false,
+				args:{
+					name:frm.doc.project_id
+				},
+				callback: function(r){
+					var year_options=""
+					for (var i of r.message){
+						year_options += ('\n'+ i)
+					}
+					cur_frm.fields_dict.monitoring_year.df.options = year_options
+					frm.refresh_field('monitoring_year')
+				}
+			})
+		}
+
 		frm.call({
 		  doc:frm.doc,
 		  method:'get_user',
@@ -33,10 +63,10 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			})
 		  }
 		})
-		frm.set_query("project_name1",function(){
+		frm.set_query("project_id",function(){
 			return{
 				filters:{
-					workflow_state:"Approved"
+					work_state:"Approved"
 				}
 			}
 		})
@@ -50,30 +80,33 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			frm.dirty()
 			frm.save()
 		}
-		if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
-			for (var i of frm.doc.edited_project_details){
-				console.log("Field Name of i","=",i.field_name);
-				frm.set_value(i.field_name,i.new_values)
-			}
-
-			console.log("edited_project_details = ",frm.doc.edited_project_details);
-			frm.set_value('work_state','Approved')
-			if(frm.doc.edited_quantitative_impact.length != 0){
-				frm.set_value("quantitative_impact",[])
-				for(var i of frm.doc.edited_quantitative_impact){
-					var row = frm.add_child("quantitative_impact")
-					row.category = i.category
-					row.question = i.question
-					row.sdg_mapping = i.sdg_mapping
-					row.data = i.data
-					row.data_source = i.data_source
+		if(frm.doc.workflow_state == "Approved"){
+			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
+				for (var i of frm.doc.edited_project_details){
+					console.log("Field Name of i","=",i.field_name);
+					frm.set_value(i.field_name,i.new_values)
 				}
-				
-				frm.refresh_field("quantitative_impact")
+
+				console.log("edited_project_details = ",frm.doc.edited_project_details);
+				frm.set_value('work_state','Approved')
+				if(frm.doc.edited_quantitative_impact.length != 0){
+					frm.set_value("quantitative_impact",[])
+					for(var i of frm.doc.edited_quantitative_impact){
+						var row = frm.add_child("quantitative_impact")
+						row.category = i.category
+						row.question = i.question
+						row.sdg_mapping = i.sdg_mapping
+						row.data = i.data
+						row.data_source = i.data_source
+					}
+					
+					frm.refresh_field("quantitative_impact")
+				}
+				frm.set_value("edited_project_details",[])
+				frm.set_value("edited_quantitative_impact",[])
+				frm.refresh_field("edited_quantitative_impact")
 			}
-			frm.set_value("edited_project_details",[])
-			frm.set_value("edited_quantitative_impact",[])
-			frm.refresh_field("edited_quantitative_impact")
+			frm.set_value('work_state','Approved')
 			frm.save()
 		}
 
@@ -111,7 +144,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			
 		}
 	},
-	project_name: function(frm) {
+	project_id: function(frm) {
 		frm.call({
 			doc:cur_frm.doc,
 			method:"get_json",
@@ -135,18 +168,14 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				}
 			}
 		})
-		$.ajax({
-			success:function(){
-				$('[id="page-SDG Monitoring Information"] [class="row-check sortable-handle col"]').css("display","none")
-			}
-		})
+		
 
 		frm.call({
 			doc:cur_frm.doc,
 			method:"get_years",
 			async:false,
 			args:{
-				name:frm.doc.project_name
+				name:frm.doc.project_id
 			},
 			callback: function(r){
 				var year_options=""
@@ -157,5 +186,29 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				frm.refresh_field('monitoring_year')
 			}
 		})
+	},
+
+	monitoring_year:function(frm){
+		frappe.db.get_list(frm.doc.doctype, {
+			fields: ['monitoring_year'],
+			filters:{'project_id':frm.doc.project_id},
+			pluck:'monitoring_year',
+			order_by: "monitoring_year asc",
+		}).then(r => {
+				console.log(r);
+				if(frm.doc.project_id){
+					if (r.includes(frm.doc.monitoring_year)){
+						frm.set_value("monitoring_year","")
+						frm.refresh_field("monitoring_year")
+						// console.log(r);
+						var yearList =""
+						for (var y of r){
+							yearList += `<li> ${y} </li>`
+						}
+						// year = r.join(",")
+						frappe.msgprint({title:("Already Exists"),message:(`<b>${frm.doc.project_id}</b> <b><ul>${yearList}</b></ul>`)})
+					}
+				}
+			});
 	}
 });

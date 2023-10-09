@@ -9,19 +9,19 @@
  "engine": "InnoDB",
  "field_order": [
   "tab1",
-  "project_name",
-  "project_name1",
+  "project_id",
   "financing_mode",
   "financial_year",
   "approval_date",
   "budget_code",
-  "select_approver",
+  "effectiveness_date",
   "column_break_xfzp6",
+  "project_name",
   "monitoring_year",
   "applied_exchange_rate",
   "financial_closure_date",
   "expected_end_date",
-  "effectiveness_date",
+  "select_approver",
   "section_break_svbhp",
   "budget_expenditure",
   "edit_button",
@@ -40,7 +40,8 @@
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
    "label": "Monitoring Year",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   },
   {
    "fetch_from": "project_name.financial_year",
@@ -84,7 +85,6 @@
    "permlevel": 1
   },
   {
-   "default": "CLI-FIN-MONI-INFO-.###",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
@@ -105,11 +105,10 @@
    "permlevel": 1
   },
   {
+   "fetch_from": "project_name.project_name",
    "fieldname": "project_name",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Data",
    "label": "Project Name",
-   "options": "Climate Finance",
    "permlevel": 1
   },
   {
@@ -157,14 +156,6 @@
    "options": "Climate Finance Total Budget Disbursement ChildTable",
    "permlevel": 1,
    "read_only": 1
-  },
-  {
-   "fetch_from": "project_name.project_name",
-   "fieldname": "project_name1",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Project Name 1",
-   "permlevel": 1
   },
   {
    "fieldname": "edited_project_details",
@@ -215,11 +206,19 @@
    "fieldtype": "Tab Break",
    "label": "Details",
    "permlevel": 1
+  },
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project ID",
+   "options": "Climate Finance",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-05 20:25:18.201007",
+ "modified": "2023-10-09 20:19:42.289730",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",
@@ -325,5 +324,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "project_name"
 }

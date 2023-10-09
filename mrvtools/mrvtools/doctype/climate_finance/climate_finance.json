@@ -9,10 +9,11 @@
  "engine": "InnoDB",
  "field_order": [
   "tab_break_eii2f",
-  "project_name",
+  "project_id",
   "financial_year",
   "applied_exchange_rate",
   "column_break_jdbsc",
+  "project_name",
   "financing_mode",
   "budget_code",
   "section_break_hosoz",
@@ -57,17 +58,11 @@
  ],
  "fields": [
   {
+   "default": "CLI-FIN-PRO-INFO-.###",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "CLIF-",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "project_name",
-   "fieldtype": "Link",
-   "label": "Project Name",
-   "options": "Project",
+   "options": "CLI-FIN-PRO-INFO-.###",
    "permlevel": 1
   },
   {
@@ -351,18 +346,30 @@
    "options": "Sources of Climate Finance ChildTable",
    "permlevel": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "label": "Project ID",
+   "options": "Project",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 19:29:21.735463",
+ "modified": "2023-10-09 20:38:32.023669",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [],
- "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

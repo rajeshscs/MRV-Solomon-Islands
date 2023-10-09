@@ -216,48 +216,42 @@ frappe.ui.form.on('Project', {
 			frm.dirty()
 			frm.save()
 		}
-		if ((frm.doc.workflow_state == "Approved" && frm.doc.edited_project_details.length != 0) || (frm.doc.workflow_state == "Approved" && frm.doc.new_coordinates)){
-			for (var i of frm.doc.edited_project_details){
-				console.log("Field Name of i","=",i.field_name);
-				if(i.field_name != "included_in" && i.field_name != "geographical_co_ordinate"){
-					frm.set_value(i.field_name,i.new_values)
-				}
-				
-				else if(i.field_name == "included_in"){
-					var new_list = i.new_values.split(",")
-					frm.clear_table("included_in")
-					for (var value of new_list){
-						var row = frm.add_child("included_in")
-						row.included_in = value
+		if(frm.doc.workflow_state == "Approved"){
+				if ((frm.doc.workflow_state == "Approved" && frm.doc.edited_project_details.length != 0) || (frm.doc.workflow_state == "Approved" && frm.doc.new_coordinates)){
+				for (var i of frm.doc.edited_project_details){
+					console.log("Field Name of i","=",i.field_name);
+					if(i.field_name != "included_in" && i.field_name != "geographical_co_ordinate"){
+						frm.set_value(i.field_name,i.new_values)
 					}
+					
+					else if(i.field_name == "included_in"){
+						var new_list = i.new_values.split(",")
+						frm.clear_table("included_in")
+						for (var value of new_list){
+							var row = frm.add_child("included_in")
+							row.included_in = value
+						}
+					}
+					
 				}
-				
+				frm.set_value("edited_project_details",[])
+				// frm.fields_dict.edited_project_details.df.hidden = 1
+				frm.set_value("geographical_co_ordinate",frm.doc.new_coordinates)
+				frm.refresh_field("geographical_co_ordinate")
+				console.log("Coordinates"," = ",frm.doc.geographical_co_ordinate);
+				frm.set_value("original_coordinates",'')
+				// frm.fields_dict.original_coordinates.df.hidden = 1
+				frm.refresh_field("original_coordinates")
+				frm.set_value("new_coordinates",'')
+				// frm.fields_dict.new_coordinates.df.hidden = 1
+				frm.refresh_field("new_coordinates")
 			}
-			frm.set_value("edited_project_details",[])
-			// frm.fields_dict.edited_project_details.df.hidden = 1
-			frm.set_value("geographical_co_ordinate",frm.doc.new_coordinates)
-			frm.refresh_field("geographical_co_ordinate")
-			console.log("Coordinates"," = ",frm.doc.geographical_co_ordinate);
-			frm.set_value("original_coordinates",'')
-			// frm.fields_dict.original_coordinates.df.hidden = 1
-			frm.refresh_field("original_coordinates")
-			frm.set_value("new_coordinates",'')
-			// frm.fields_dict.new_coordinates.df.hidden = 1
-			frm.refresh_field("new_coordinates")
-			
-			frm.dirty()
+			frm.set_value('work_state','Approved')
 			frm.save()
 			
 			
 		}
-		if (frm.doc.workflow_state == "Approved"){
-			if(!frm.doc.work_state){
-				frm.set_value('work_state','Approved')
-				frm.dirty()
-				frm.save()
-			}
-			
-		}
+		
 		
 
 		frm.call({

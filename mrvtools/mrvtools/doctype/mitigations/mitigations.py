@@ -31,7 +31,7 @@ class Mitigations(Document):
 
 	@frappe.whitelist()
 	def get_data(self):
-		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name}'""")
+		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_id}'""")
 		return get_doc
 	
 	@frappe.whitelist()
@@ -52,7 +52,7 @@ class Mitigations(Document):
 		for field in fields:
 			if frappe.db.exists(self.doctype,self.name):
 				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
-					repeated_list=["project_name", "project_name1","project_description", "type_of_instrument", "objective","key_sector","implementing_entity","costusd", "end_date","key_sub_sector", "location", "other_agency", "source_of_funding", "financial_closure_date","included_in", "start_date"]
+					repeated_list=["project_id", "project_name","project_description", "type_of_instrument", "objective","key_sector","implementing_entity","costusd", "end_date","key_sub_sector", "location", "other_agency", "source_of_funding", "financial_closure_date","included_in", "start_date"]
 					if field["fieldname"] not in repeated_list:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))

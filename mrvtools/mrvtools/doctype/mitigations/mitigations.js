@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Mitigations', {
-	project_name: function(frm) {
+	project_id: function(frm) {
 		if(!frm.doc.included_in){
 			frm.call({
 				doc:cur_frm.doc,
@@ -25,7 +25,7 @@ frappe.ui.form.on('Mitigations', {
 		}
 		
 	
-	// project_name: function(frm) {
+	// project_id: function(frm) {
 		// frm.call({
 		// 	doc:cur_frm.doc,
 		// 	method:"get_data",
@@ -91,10 +91,10 @@ frappe.ui.form.on('Mitigations', {
 		})
 		
 		frappe.db.get_list('Mitigations', {
-			fields: ['project_name'],
-			pluck:'project_name'
+			fields: ['project_id'],
+			pluck:'project_id'
 		}).then(r => {
-			frm.set_query("project_name",function(){
+			frm.set_query("project_id",function(){
 				console.log(r);
 				return{
 					filters:{
@@ -126,59 +126,61 @@ frappe.ui.form.on('Mitigations', {
 			frm.set_value('work_state','Approved')
 			frm.save()
 		}
-		if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
-			for (var i of frm.doc.edited_project_details){
-				console.log("Field Name of i","=",i.field_name);
-				if(i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
-					frm.set_value(i.field_name,i.new_values)
-				}
-				
-				else if(i.field_name == "non_ghg_mitigation_benefits"){
-					console.log(i.field_name," = ",i.new_values);
-					var new_list = i.new_values.split(",")
-					console.log(i.field_name," = ",new_list);
-					frm.clear_table("non_ghg_mitigation_benefits")
-					for (var value of new_list){
-						var row = frm.add_child("non_ghg_mitigation_benefits")
-						row.non_ghg_mitigation_benefits = value
-						console.log("Row value = ",row.non_ghg_mitigation_benefits);
-
-						console.log("Value 1 = ",value);
+		if(frm.doc.workflow_state == "Approved"){
+			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
+				for (var i of frm.doc.edited_project_details){
+					console.log("Field Name of i","=",i.field_name);
+					if(i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
+						frm.set_value(i.field_name,i.new_values)
 					}
-				}
+					
+					else if(i.field_name == "non_ghg_mitigation_benefits"){
+						console.log(i.field_name," = ",i.new_values);
+						var new_list = i.new_values.split(",")
+						console.log(i.field_name," = ",new_list);
+						frm.clear_table("non_ghg_mitigation_benefits")
+						for (var value of new_list){
+							var row = frm.add_child("non_ghg_mitigation_benefits")
+							row.non_ghg_mitigation_benefits = value
+							console.log("Row value = ",row.non_ghg_mitigation_benefits);
 
-				else if(i.field_name == "target_ghgs"){
-					console.log(i.field_name," = ",i.new_values);
-					var new_list = i.new_values.split(",")
-					console.log(i.field_name," = ",new_list);
-					frm.clear_table("target_ghgs")
-					for (var value of new_list){
-						var row = frm.add_child("target_ghgs")
-						row.target_ghgs = value
-						console.log("Row Value = ",row.target_ghgs);
-						console.log("Value 2 = ",value);
-
+							console.log("Value 1 = ",value);
+						}
 					}
+
+					else if(i.field_name == "target_ghgs"){
+						console.log(i.field_name," = ",i.new_values);
+						var new_list = i.new_values.split(",")
+						console.log(i.field_name," = ",new_list);
+						frm.clear_table("target_ghgs")
+						for (var value of new_list){
+							var row = frm.add_child("target_ghgs")
+							row.target_ghgs = value
+							console.log("Row Value = ",row.target_ghgs);
+							console.log("Value 2 = ",value);
+
+						}
+					}
+					
 				}
-				
+				console.log("edited_project_details = ",frm.doc.edited_project_details);
+				if(frm.doc.edited_performance_indicator.length != 0){
+					frm.set_value("performance_indicator",[])
+					for(var i of frm.doc.edited_performance_indicator){
+						var child = frm.add_child("performance_indicator")
+						child.performance_indicator = i.performance_indicator
+						child.unit = i.unit
+						child.expected_value = i.expected_value
+						child.reference = i.reference
+					}
+					
+					frm.refresh_field("performance_indicator")
+				}
+				frm.set_value("edited_project_details",[])
+				frm.set_value("edited_performance_indicator",[])
+				frm.refresh_field("edited_performance_indicator")
 			}
-			console.log("edited_project_details = ",frm.doc.edited_project_details);
 			frm.set_value('work_state','Approved')
-			if(frm.doc.edited_performance_indicator.length != 0){
-				frm.set_value("performance_indicator",[])
-				for(var i of frm.doc.edited_performance_indicator){
-					var child = frm.add_child("performance_indicator")
-					child.performance_indicator = i.performance_indicator
-					child.unit = i.unit
-					child.expected_value = i.expected_value
-					child.reference = i.reference
-				}
-				
-				frm.refresh_field("performance_indicator")
-			}
-			frm.set_value("edited_project_details",[])
-			frm.set_value("edited_performance_indicator",[])
-			frm.refresh_field("edited_performance_indicator")
 			frm.save()
 		}
 

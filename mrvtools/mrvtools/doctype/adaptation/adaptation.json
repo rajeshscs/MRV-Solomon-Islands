@@ -9,6 +9,8 @@
  "engine": "InnoDB",
  "field_order": [
   "tab1",
+  "project_id",
+  "column_break_jfwbz",
   "project_name",
   "section_break_z1cqh",
   "project_description",
@@ -19,9 +21,9 @@
   "implementing_entity",
   "other_agency",
   "column_break_wsxo0",
-  "end_date",
-  "financial_closure_date",
   "start_date",
+  "financial_closure_date",
+  "end_date",
   "section_break_bbseg",
   "ndp_coverage",
   "ndp_cov",
@@ -52,13 +54,6 @@
   "html_table"
  ],
  "fields": [
-  {
-   "fieldname": "project_name",
-   "fieldtype": "Link",
-   "label": "Project Name",
-   "options": "Project",
-   "permlevel": 1
-  },
   {
    "fetch_from": "project_name.project_description",
    "fieldname": "project_description",
@@ -326,11 +321,29 @@
    "label": "Html Json",
    "permlevel": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "label": "Project ID",
+   "options": "Project",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "column_break_jfwbz",
+   "fieldtype": "Column Break",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-04 19:49:17.302732",
+ "modified": "2023-10-07 16:16:47.778384",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",
@@ -434,7 +447,6 @@
    "write": 1
   }
  ],
- "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

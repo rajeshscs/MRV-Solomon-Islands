@@ -5,8 +5,7 @@ import frappe
 from frappe.model.document import Document
 
 class MitigationMonitoringInformation(Document):
-
-
+	
 # _____________________________________________________________________________________________________________________
 
 
@@ -51,7 +50,7 @@ class MitigationMonitoringInformation(Document):
 		for field in fields:
 			if frappe.db.exists(self.doctype,self.name):
 				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
-					repeated_list=["project_name1","project_name", "monitoring_year", "project_description", "key_sector", "included_in", "type_of_instrument", "implementing_entity", "contact_details", "costusd", "end_date", "lifetime", "non_ghg_mitigation_benefits", "beneficiaries","market_based_mechanism", "expected_project_output", "objective", "key_sub_sector", "location", "other_agency", "other_contact_details", "source_of_funding", "financial_closure_date", "target_ghgs", "status", "gender_inclusiveness_assessment", "project_impacts", "weblink", "start_date"]
+					repeated_list=["project_name","project_id", "monitoring_year", "project_description", "key_sector", "included_in", "type_of_instrument", "implementing_entity", "contact_details", "costusd", "end_date", "lifetime", "non_ghg_mitigation_benefits", "beneficiaries","market_based_mechanism", "expected_project_output", "objective", "key_sub_sector", "location", "other_agency", "other_contact_details", "source_of_funding", "financial_closure_date", "target_ghgs", "status", "gender_inclusiveness_assessment", "project_impacts", "weblink", "start_date"]
 					if field["fieldname"] not in repeated_list:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
@@ -66,28 +65,25 @@ class MitigationMonitoringInformation(Document):
 
 
 	@frappe.whitelist()
-	def get_data(self):
-		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name1}'""")
-		return get_doc
+	# def get_data(self):
+	# 	get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name}'""")
+	# 	return get_doc
 	
 	@frappe.whitelist()
 	def get_value1(self):
-		get_doc=frappe.db.sql(f"""SELECT MTC.non_gng_mitigation_benifits FROM `tabMitigation Non GHG in  ChildTable` MTC INNER JOIN `tabMitigations` MT on MT.name = MTC.parent WHERE MT.project_name ='{self.project_name1}'""")
+		get_doc=frappe.db.sql(f"""SELECT MTC.non_ghg_mitigation_benefits FROM `tabMitigation Non GHG in  ChildTable` MTC INNER JOIN `tabMitigations` MT on MT.name = MTC.parent WHERE MT.name ='{self.project_id}'""")
 		return get_doc
 	
 	@frappe.whitelist()
 	def get_value2(self):
-		get_doc=frappe.db.sql(f"""SELECT target_ghgs FROM `tabMitigation Target GHGs in  ChildTable` MTC INNER JOIN `tabMitigations` MT on MT.name = MTC.parent WHERE MT.project_name ='{self.project_name1}'""")
+		get_doc=frappe.db.sql(f"""SELECT target_ghgs FROM `tabMitigation Target GHGs in  ChildTable` MTC INNER JOIN `tabMitigations` MT on MT.name = MTC.parent WHERE MT.name ='{self.project_id}'""")
 		return get_doc
 	
-	@frappe.whitelist()
-	def get_data(self):
-		get_doc=frappe.db.sql(f"""SELECT * FROM `tabMitigations` where name = '{self.project_name}'""",as_dict=1)
-		return get_doc
+	
 	
 	@frappe.whitelist()
 	def get_child(self):
-		get_column=frappe.db.sql(f"""SELECT * FROM `tabMitigation Performance Indicator ChildTable` MPIC INNER JOIN `tabMitigations` MT on MT.name = MPIC.parent WHERE MT.project_name ='{self.project_name1}'""",as_dict=1)
+		get_column=frappe.db.sql(f"""SELECT * FROM `tabMitigation Performance Indicator ChildTable` MPIC INNER JOIN `tabMitigations` MT on MT.name = MPIC.parent WHERE MT.name ='{self.project_id}'""",as_dict=1)
 		return get_column
 	
 	@frappe.whitelist()

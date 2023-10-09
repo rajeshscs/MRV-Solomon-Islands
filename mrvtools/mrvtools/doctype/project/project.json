@@ -258,6 +258,7 @@
   {
    "fieldname": "work_state",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Work State",
    "options": "\nPending\nApproved\nRejected",
    "permlevel": 1
@@ -305,7 +306,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-10-06 19:18:26.593846",
+ "modified": "2023-10-07 12:39:14.013569",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

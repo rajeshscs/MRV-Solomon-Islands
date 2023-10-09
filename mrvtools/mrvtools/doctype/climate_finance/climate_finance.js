@@ -7,20 +7,32 @@ frappe.ui.form.on('Climate Finance', {
 			frm.fields_dict.sources_of_finance.df.read_only = 1
 			frm.refresh_field("sources_of_finance")
 		}
+		else{
+			frm.fields_dict.sources_of_finance.df.read_only = 0
+			frm.refresh_field("sources_of_finance")
+		}
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_cost_breakdown.length != 0){
 			frm.fields_dict.cost_breakdown.df.read_only = 1
+			frm.refresh_field("cost_breakdown")
+		}
+		else{
+			frm.fields_dict.cost_breakdown.df.read_only = 0
 			frm.refresh_field("cost_breakdown")
 		}
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_disbursement_schedule.length != 0){
 			frm.fields_dict.budget_disbursement_schedule.df.read_only = 1
 			frm.refresh_field("budget_disbursement_schedule")
 		}
+		else{
+			frm.fields_dict.budget_disbursement_schedule.df.read_only = 0
+			frm.refresh_field("budget_disbursement_schedule")
+		}
 
 		frappe.db.get_list('Climate Finance', {
-			fields: ['project_name'],
-			pluck:'project_name'
+			fields: ['project_id'],
+			pluck:'project_id'
 		}).then(r => {
-			frm.set_query("project_name",function(){
+			frm.set_query("project_id",function(){
 				console.log(r);
 				return{
 					filters:{
@@ -59,17 +71,12 @@ frappe.ui.form.on('Climate Finance', {
 			frm.set_value("edited_budget_disbursement_schedule",[])
 			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
-			frm.dirty()
-			frm.save()
 		}
 
 		if ((frm.doc.workflow_state == "Approved")){
 			for (var i of frm.doc.edited_project_details){
 					frm.set_value(i.field_name,i.new_values)
 			}
-			frm.set_value("edited_project_details",[])
-			console.log("edited_project_details = ",frm.doc.edited_project_details);
-			frm.set_value('work_state','Approved')
 			if(frm.doc.edited_sources_of_finance.length != 0){
 				frm.set_value("sources_of_finance",[])
 				for(var i of frm.doc.edited_sources_of_finance){
@@ -93,7 +100,7 @@ frappe.ui.form.on('Climate Finance', {
 				}
 				frm.refresh_field("cost_breakdown")
 			}
-
+			
 			if(frm.doc.edited_budget_disbursement_schedule.length != 0){
 				frm.set_value("budget_disbursement_schedule",[])
 				for(var i of frm.doc.edited_budget_disbursement_schedule){
@@ -104,6 +111,8 @@ frappe.ui.form.on('Climate Finance', {
 				}
 				frm.refresh_field("budget_disbursement_schedule")
 			}
+			frm.set_value("edited_project_details",[])
+			frm.set_value('work_state','Approved')
 			frm.set_value("edited_sources_of_finance",[])
 			frm.set_value("edited_cost_breakdown",[])
 			frm.set_value("edited_budget_disbursement_schedule",[])
@@ -114,13 +123,10 @@ frappe.ui.form.on('Climate Finance', {
 			$('[id="climate-finance-tab_break_eii2f-tab"]').addClass("active")
 			$('#climate-finance-tab_break_eii2f-tab').attr('aria-selected', 'true');
 			$('[id="climate-finance-tab_break_eii2f"]').addClass("active")
-			
 		}
 		
 
 	},
-
-
 	edit_button1:function(frm){
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_sources_of_finance.length != 0){
 			frm.set_value("sources_of_finance")
@@ -247,8 +253,8 @@ frappe.ui.form.on('Climate Finance', {
 			})
 		}
 	},
-	project_name:function(frm){
-		frappe.db.get_value('Project',`${frm.doc.project_name}`,'financial_closure_date').then(r =>
+	project_id:function(frm){
+		frappe.db.get_value('Project',`${frm.doc.project_id}`,'financial_closure_date').then(r =>
 			{
 			frm.set_value('financial_closure_date',r.message.financial_closure_date)
 		})
@@ -410,6 +416,34 @@ frappe.ui.form.on('Climate Finance detailed Budget ChildTable',{
 		frm.set_value('total_percentage_of_cost_breakdown', ((frm.doc.total_amount_of_cost_breakdown / frm.doc.total_project_cost)*100))
 		refresh_field('total_percentage_of_cost_breakdown')
 	},
+	disbursement_category:function(frm,cdt,cdn){
+		var category_list=[]
+		for(var i of frm.doc.cost_breakdown){
+			category_list.push(i.disbursement_category)
+		}
+		frm.set_query("disbursement_category","cost_breakdown",function(){
+			return {
+				filters:{
+				"disbursement_category":["not in",category_list]
+				}
+			}
+		})
+		frm.refresh_fields("disbursement_category")
+	},
+	cost_breakdown_add:function(frm){
+		var category_list=[]
+		for(var i of frm.doc.cost_breakdown){
+			category_list.push(i.disbursement_category)
+		}
+		frm.set_query("disbursement_category","cost_breakdown",function(){
+			return {
+				filters:{
+				"disbursement_category":["not in",category_list]
+				}
+			}
+		})
+		frm.refresh_fields("disbursement_category")
+	}
 });
 
 

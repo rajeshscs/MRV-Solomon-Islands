@@ -9,14 +9,15 @@
  "engine": "InnoDB",
  "field_order": [
   "tab1",
-  "project_name1",
-  "project_name",
+  "project_id",
   "column_break_adszg",
+  "project_name",
   "monitoring_year",
   "section_break_px1zu",
   "project_description",
   "section_break_bxjiw",
-  "key_sector",
+  "objective",
+  "key_sub_sector",
   "included_in",
   "type_of_instrument",
   "implementing_entity",
@@ -30,11 +31,10 @@
   "expected_project_output",
   "expected_annual_ghg",
   "actual_annual_ghg",
-  "objective",
   "ghg_estimation_methodology_text",
   "ghg_estimation_methodology_file",
   "column_break_pgchz",
-  "key_sub_sector",
+  "key_sector",
   "location",
   "other_agency",
   "other_contact_details",
@@ -53,20 +53,18 @@
   "edit_button",
   "upload_document",
   "remarks",
+  "work_state",
   "tab2",
   "naming_series",
-  "work_state",
   "edited_project_details",
   "edited_performance_indicator"
  ],
  "fields": [
   {
    "fieldname": "project_name",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Project Name",
-   "options": "Mitigations",
-   "permlevel": 1,
-   "reqd": 1
+   "permlevel": 1
   },
   {
    "fetch_from": "project_name.project_description",
@@ -308,7 +306,6 @@
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
    "label": "Monitoring Year",
-   "options": "\n2001\n2002\n2003\n2004\n2005\n2006\n2007\n2008\n2009\n2010\n2011\n2012\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030\n2031\n2032\n2033\n2034\n2035\n2036\n2037\n2038\n2039\n2040\n2041\n2042\n2043\n2044\n2045\n2046\n2047\n2048\n2049\n2050",
    "permlevel": 1
   },
   {
@@ -348,14 +345,6 @@
    "fieldtype": "Link",
    "label": "Select Approver",
    "options": "User",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "project_name1",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Project Name",
-   "options": "Project",
    "permlevel": 1
   },
   {
@@ -413,11 +402,19 @@
    "fieldtype": "Tab Break",
    "label": "Details",
    "permlevel": 1
+  },
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "label": "Project ID",
+   "options": "Mitigations",
+   "permlevel": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-06 19:09:55.162145",
+ "modified": "2023-10-09 13:22:30.642178",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",
@@ -524,5 +521,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name1"
+ "title_field": "project_name"
 }

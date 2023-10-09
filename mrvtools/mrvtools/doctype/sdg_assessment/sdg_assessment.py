@@ -34,11 +34,6 @@ class SDGAssessment(Document):
 		frappe.log_error("Doc",result_fields)
 		return result_fields
 	
-	@frappe.whitelist()
-	def get_data(self):
-		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name}'""")
-		return get_doc
-
 	
 	@frappe.whitelist()
 	def get_user(self):

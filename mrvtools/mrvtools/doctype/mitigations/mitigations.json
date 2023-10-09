@@ -9,9 +9,9 @@
  "engine": "InnoDB",
  "field_order": [
   "tab1",
-  "project_name",
+  "project_id",
   "column_break_6ci8v",
-  "project_name1",
+  "project_name",
   "section_break_m5uc6",
   "project_description",
   "section_break_bxjiw",
@@ -60,15 +60,11 @@
  "fields": [
   {
    "fieldname": "project_name",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Project ID",
-   "options": "Project",
-   "permlevel": 1,
-   "reqd": 1
+   "fieldtype": "Data",
+   "label": "Project Name",
+   "permlevel": 1
   },
   {
-   "fetch_from": "project_name.project_description",
    "fieldname": "project_description",
    "fieldtype": "Small Text",
    "label": "Brief Description",
@@ -332,13 +328,6 @@
    "permlevel": 1
   },
   {
-   "fetch_from": "project_name.project_name",
-   "fieldname": "project_name1",
-   "fieldtype": "Data",
-   "label": "Project Name",
-   "permlevel": 1
-  },
-  {
    "fieldname": "column_break_6ci8v",
    "fieldtype": "Column Break",
    "permlevel": 1
@@ -385,7 +374,6 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.edited_performance_indicator.length != 0",
    "fieldname": "edit_button",
    "fieldtype": "Button",
    "label": "Edit Performance Indicator",
@@ -396,11 +384,20 @@
    "fieldtype": "Tab Break",
    "label": "Details",
    "permlevel": 1
+  },
+  {
+   "fieldname": "project_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project ID",
+   "options": "Project",
+   "permlevel": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-06 19:46:05.165804",
+ "modified": "2023-10-07 13:33:09.391349",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",
@@ -456,9 +453,8 @@
    "write": 1
   }
  ],
- "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name1"
+ "title_field": "project_name"
 }

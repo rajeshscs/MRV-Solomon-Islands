@@ -6,6 +6,8 @@ from frappe.model.document import Document
 
 class AdaptationMonitoringInformation(Document):
 	
+	
+
 	@frappe.whitelist()
 	def before_saving_table(self):
 		old_doc =self.get_doc_before_save()
@@ -44,7 +46,7 @@ class AdaptationMonitoringInformation(Document):
 	
 	@frappe.whitelist()
 	def get_years(self,name):
-		start_date = frappe.db.get_value("Project",name,"start_date")
+		start_date = frappe.db.get_value("Adaptation",name,"start_date")
 		if start_date:
 			start_year = str(start_date).split("-")[0]
 			return [str(year) for year in range(int(start_year), 2051)]
