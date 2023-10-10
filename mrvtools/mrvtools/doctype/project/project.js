@@ -93,7 +93,7 @@ frappe.ui.form.on('Project', {
 					async:false,
 					callback:function(r){
 						var result= r.message
-						console.log("Result",result)
+
 						var field_name_list = []
 						for(let [key,value] of Object.entries(result)){
 							field_name_list.push(key)
@@ -106,7 +106,7 @@ frappe.ui.form.on('Project', {
 								}
 								else if(i.field_name == "included_in"){
 									var included_in_result = ""
-									console.log(frm.doc.included_in);
+
 									for(var res of frm.doc.included_in){
 										if(included_in_result == ""){
 											included_in_result += res.included_in
@@ -115,7 +115,7 @@ frappe.ui.form.on('Project', {
 											included_in_result += res.included_in
 										}
 									}
-									console.log(included_in_result);
+
 									i.new_values = included_in_result
 									list=i.old_values.split(",")
 									frm.clear_table("included_in")
@@ -124,11 +124,11 @@ frappe.ui.form.on('Project', {
 										row.included_in = value
 									}
 									frm.refresh_field("included_in")
-									console.log(list);
+
 								}
 								
 								
-								console.log("i","=",i.new_values);
+
 								frm.refresh_field("edited_project_details")
 								const index = field_name_list.indexOf(i.field_name);
 								const x = field_name_list.splice(index, 1)
@@ -136,12 +136,12 @@ frappe.ui.form.on('Project', {
 						}
 						if (field_name_list){
 							var list2=[]
-							console.log("field_name_list"," = ",field_name_list);
+
 							
 							for (var i of field_name_list){
 								var label = i.replaceAll("_"," ")
 								label = toTitleCase(label)
-								console.log("label","=",label);
+
 								var child =frm.add_child("edited_project_details")
 								
 								if (i != "included_in" && i != "geographical_co_ordinate" && i != "original_coordinates"&& i != "new_coordinates"){
@@ -156,7 +156,7 @@ frappe.ui.form.on('Project', {
 									child.field_name = i
 									child.old_values = result[`${i}`]
 									var included_in_result = ""
-									console.log(frm.doc.included_in);
+
 									for(var res of frm.doc.included_in){
 										if(included_in_result == ""){
 											included_in_result += res.included_in
@@ -165,15 +165,15 @@ frappe.ui.form.on('Project', {
 											included_in_result += res.included_in
 										}
 									}
-									console.log(included_in_result);
+
 									child.new_values = included_in_result
 									list2 = result[`${i}`].split(",")
-									// console.log("list1",result[`${i}`].split(","));
-									console.log("list2",list2);
+									
+
 									frm.clear_table("included_in")
 									for(var value of list2){
 										var row = frm.add_child("included_in")
-										console.log(value);
+
 										row.included_in = value
 									}
 									frm.refresh_field("included_in")
@@ -182,8 +182,8 @@ frappe.ui.form.on('Project', {
 									frm.set_value("original_coordinates",result[`${i}`])
 									frm.set_value("new_coordinates",frm.doc.geographical_co_ordinate)
 									frm.set_value(i,result[`${i}`])
-									console.log("old_values"," = ",result[`${i}`]);
-									console.log(i," = ",frm.doc.geographical_co_ordinate);
+
+
 								}
 								
 								
@@ -221,7 +221,7 @@ frappe.ui.form.on('Project', {
 		if(frm.doc.workflow_state == "Approved"){
 				if ((frm.doc.workflow_state == "Approved" && frm.doc.edited_project_details.length != 0) || (frm.doc.workflow_state == "Approved" && frm.doc.new_coordinates)){
 				for (var i of frm.doc.edited_project_details){
-					console.log("Field Name of i","=",i.field_name);
+
 					if(i.field_name != "included_in" && i.field_name != "geographical_co_ordinate"){
 						frm.set_value(i.field_name,i.new_values)
 					}
@@ -240,7 +240,7 @@ frappe.ui.form.on('Project', {
 				// frm.fields_dict.edited_project_details.df.hidden = 1
 				frm.set_value("geographical_co_ordinate",frm.doc.new_coordinates)
 				frm.refresh_field("geographical_co_ordinate")
-				console.log("Coordinates"," = ",frm.doc.geographical_co_ordinate);
+
 				frm.set_value("original_coordinates",'')
 				// frm.fields_dict.original_coordinates.df.hidden = 1
 				frm.refresh_field("original_coordinates")

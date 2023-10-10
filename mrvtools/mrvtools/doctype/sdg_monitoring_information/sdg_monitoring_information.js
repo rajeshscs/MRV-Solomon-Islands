@@ -88,11 +88,11 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
-					console.log("Field Name of i","=",i.field_name);
+
 					frm.set_value(i.field_name,i.new_values)
 				}
 
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				frm.set_value('work_state','Approved')
 				if(frm.doc.edited_quantitative_impact.length != 0){
 					frm.set_value("quantitative_impact",[])
@@ -143,7 +143,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 						method:"before_saving_table",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -157,10 +157,10 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			method:"get_json",
 			async:false,
 			callback:function(r){
-				console.log(r.message);
+
 				var json_field=JSON.parse(r.message).quantitative
-				console.log(json_field);
-				// console.log(JSON.parse(r.message).quantitative);
+
+				
 				frm.set_value("json",JSON.stringify(json_field))
 				frm.refresh_field("json")
 				frm.set_value("quantitative_impact",[])
@@ -202,12 +202,12 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			pluck:'monitoring_year',
 			order_by: "monitoring_year asc",
 		}).then(r => {
-				console.log(r);
+
 				if(frm.doc.project_id){
 					if (r.includes(frm.doc.monitoring_year)){
 						frm.set_value("monitoring_year","")
 						frm.refresh_field("monitoring_year")
-						// console.log(r);
+						
 						var yearList =""
 						for (var y of r){
 							yearList += `<li> ${y} </li>`

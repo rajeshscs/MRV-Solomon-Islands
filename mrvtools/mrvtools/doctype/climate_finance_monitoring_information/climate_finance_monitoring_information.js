@@ -46,7 +46,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			for (var i of r.message){
 				userList.push(i[0])
 			}
-			console.log(userList);
+
 			frm.set_query("select_approver",function(){
 				return {
 				filters:{
@@ -56,7 +56,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			})
 		  }
 		})
-		console.log(counter);
+
 
 		if (frm.doc.workflow_state == "Rejected"){
 			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
@@ -139,7 +139,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			}
 		})
 		
-		console.log(counter);
+
 
 		frm.call({
 			doc:cur_frm.doc,
@@ -170,12 +170,12 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			pluck:'monitoring_year',
 			order_by: "monitoring_year asc",
 		}).then(r => {
-				console.log(r);
+
 				if(frm.doc.project_id){
 					if (r.includes(frm.doc.monitoring_year)){
 						frm.set_value("monitoring_year","")
 						frm.refresh_field("monitoring_year")
-						// console.log(r);
+						
 						var yearList =""
 						for (var y of r){
 							yearList += `<li> ${y} </li>`
@@ -195,13 +195,13 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 		// }
 		if(frm.doc.project_id && frm.doc.monitoring_year){
 			counter += 1
-			console.log(counter);
+
 			if (counter == 1){
 				if(frm.doc.monitoring_year == ""){
 					cur_frm.get_field("total_budget_disbursement").grid.grid_rows[`${cur_frm.get_field("total_budget_disbursement").grid.grid_rows.length}` - 1].doc.financial_year = " "
 					frm.refresh_field("total_budget_disbursement")
 				}
-				console.log(counter);
+
 				for (var row of frm.doc.total_budget_disbursement){
 					if(row.financial_year == frm.doc.monitoring_year){
 						counter = 0
@@ -216,7 +216,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			}
 			else{
 				counter = 0
-				console.log(counter);
+
 				counter += 1
 				
 				for (var row of frm.doc.total_budget_disbursement){
@@ -271,7 +271,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 						method:"before_saving_table",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -282,7 +282,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 					async:false,
 					callback:function(r){
 						var result= r.message
-						console.log("Result",result)
+
 						var field_name_list = []
 						for(let [key,value] of Object.entries(result)){
 							field_name_list.push(key)
@@ -293,19 +293,19 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 									i.new_values = frm.doc[`${i.field_name}`].toString()
 								}
 								frm.set_value(i.field_name,i.old_values)
-								console.log("i","=",i.new_values);
+
 								frm.refresh_field("edited_project_details")
 								const index = field_name_list.indexOf(i.field_name);
 								const x = field_name_list.splice(index, 1)
 							}
 						}
 						if (field_name_list){
-							console.log("field_name_list"," = ",field_name_list);
+
 							
 							for (var i of field_name_list){
 								var label = i.replaceAll("_"," ")
 								label = toTitleCase(label)
-								console.log("label","=",label);
+
 								var child =frm.add_child("edited_project_details")
 								if (result[`${i}`] == null && frm.doc[`${i}`] != undefined){
 									child.field_label = label

@@ -4,15 +4,15 @@
 frappe.ui.form.on('Adaptation Monitoring Information', {
 	
 	refresh: function(frm){
-		console.log("Unsaved == ",cur_frm.doc.__unsaved);
+
 		if (frm.doc.workflow_state =="Draft" && frm.doc.__unsaved ==1 && frm.doc.work_state == "Approved"){
 			frm.call({
 				doc:frm.doc,
 				method:"year_validation",
 				async:false,
 				callback:function(r){
-					console.log(r.message);
-					console.log("HIIIIIIIIIIIIIIIII");
+
+
 				}
 			})
 		}
@@ -65,7 +65,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			for (var i of r.message){
 			  userList.push(i[0])
 			}
-			console.log(userList);
+
 			frm.set_query("select_approver",function(){
 			  return {
 				filters:{
@@ -96,10 +96,10 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
-					console.log("Field Name of i","=",i.field_name);
+
 					frm.set_value(i.field_name,i.new_values)
 				}
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				frm.set_value('work_state','Approved')
 				if(frm.doc.edited_quantitative_impact.length){
 					frm.set_value("quantitative_impact",[])
@@ -153,7 +153,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 						method:"before_saving_table",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -165,8 +165,8 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			// 		method:"year_validation",
 			// 		async:false,
 			// 		callback:function(r){
-			// 			console.log(r.message);
-			// 			console.log("HIIIIIIIIIIIIIIIII");
+			
+			
 			// 		}
 			// 	})
 			// }
@@ -181,7 +181,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			async:false,
 			callback:function(r){
 				var json_field=JSON.parse(r.message).quantitative
-				console.log(JSON.parse(r.message).quantitative);
+
 				frm.set_value("json",JSON.stringify(json_field))
 				frm.refresh_field("json")
 				frm.set_value("quantitative_impact",[])
@@ -224,12 +224,12 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			pluck:'monitoring_year',
 			order_by: "monitoring_year asc",
 		}).then(r => {
-				console.log(r);
+
 				if(frm.doc.project_id){
 					if (r.includes(frm.doc.monitoring_year)){
 						frm.set_value("monitoring_year","")
 						frm.refresh_field("monitoring_year")
-						// console.log(r);
+						
 						var yearList =""
 						for (var y of r){
 							yearList += `<li> ${y} </li>`

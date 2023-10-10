@@ -15,7 +15,7 @@ frappe.ui.form.on('Mitigations', {
 						
 					}
 					values=values.join(",")
-					console.log(values);
+
 					
 					
 					frm.set_value("included_in",values)
@@ -31,7 +31,7 @@ frappe.ui.form.on('Mitigations', {
 		// 	method:"get_data",
 		// 	async:false,
 		// 	callback:function(r){
-		// 		console.log(r.message);
+		
 		// 		for( var i of r.message){
 		// 			var child = frm.add_child("included_in")
 		// 		}
@@ -83,7 +83,7 @@ frappe.ui.form.on('Mitigations', {
 				for (var i of r.message){
 				userList.push(i[0])
 				}
-				console.log(userList);
+
 				frm.set_query("select_approver",function(){
 				return {
 					filters:{
@@ -99,7 +99,7 @@ frappe.ui.form.on('Mitigations', {
 			pluck:'project_id'
 		}).then(r => {
 			frm.set_query("project_id",function(){
-				console.log(r);
+
 				return{
 					filters:{
 						objective: ['in',['Cross-Cutting','Mitigation']],
@@ -133,41 +133,41 @@ frappe.ui.form.on('Mitigations', {
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
-					console.log("Field Name of i","=",i.field_name);
+
 					if(i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
 						frm.set_value(i.field_name,i.new_values)
 					}
 					
 					else if(i.field_name == "non_ghg_mitigation_benefits"){
-						console.log(i.field_name," = ",i.new_values);
+
 						var new_list = i.new_values.split(",")
-						console.log(i.field_name," = ",new_list);
+
 						frm.clear_table("non_ghg_mitigation_benefits")
 						for (var value of new_list){
 							var row = frm.add_child("non_ghg_mitigation_benefits")
 							row.non_ghg_mitigation_benefits = value
-							console.log("Row value = ",row.non_ghg_mitigation_benefits);
 
-							console.log("Value 1 = ",value);
+
+
 						}
 					}
 
 					else if(i.field_name == "target_ghgs"){
-						console.log(i.field_name," = ",i.new_values);
+
 						var new_list = i.new_values.split(",")
-						console.log(i.field_name," = ",new_list);
+
 						frm.clear_table("target_ghgs")
 						for (var value of new_list){
 							var row = frm.add_child("target_ghgs")
 							row.target_ghgs = value
-							console.log("Row Value = ",row.target_ghgs);
-							console.log("Value 2 = ",value);
+
+
 
 						}
 					}
 					
 				}
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				if(frm.doc.edited_performance_indicator.length != 0){
 					frm.set_value("performance_indicator",[])
 					for(var i of frm.doc.edited_performance_indicator){
@@ -208,13 +208,13 @@ frappe.ui.form.on('Mitigations', {
 						method:"before_saving_table",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
 				
 				
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				var list=[]
 				var new_list =[]
 				frm.call({
@@ -223,13 +223,13 @@ frappe.ui.form.on('Mitigations', {
 					async:false,
 					callback:function(r){
 						var result= r.message
-						console.log("Result",result)
+
 						var field_name_list = []
 						for(let [key,value] of Object.entries(result)){
 							field_name_list.push(key)
 						}
 						for (var i of frm.doc.edited_project_details){
-							console.log("Field Name ", i.field_name);
+
 							if (field_name_list.includes(i.field_name) ){
 								if (i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
 									i.new_values = frm.doc[`${i.field_name}`].toString()
@@ -237,20 +237,20 @@ frappe.ui.form.on('Mitigations', {
 								}
 								else if(i.field_name == "non_ghg_mitigation_benefits"){
 									var non_ghg_mitigation_benefits_result = ""
-									console.log("Checking 1 = ",non_ghg_mitigation_benefits_result);
-									console.log(frm.doc.non_ghg_mitigation_benefits);
+
+
 									for(var res of frm.doc.non_ghg_mitigation_benefits){
-										console.log(res);
+
 										if(non_ghg_mitigation_benefits_result == ""){
-											console.log(res.non_ghg_mitigation_benefits);
+
 											non_ghg_mitigation_benefits_result += res.non_ghg_mitigation_benefits
 										}else{
-											console.log(res.non_ghg_mitigation_benefits_result);
+
 											non_ghg_mitigation_benefits_result += ","
 											non_ghg_mitigation_benefits_result += res.non_ghg_mitigation_benefits
 										}
 									}
-									console.log("Checking 1 = ",non_ghg_mitigation_benefits_result);
+
 									i.new_values = non_ghg_mitigation_benefits_result
 									list=i.old_values.split(",")
 									frm.clear_table("non_ghg_mitigation_benefits")
@@ -259,11 +259,11 @@ frappe.ui.form.on('Mitigations', {
 										row.non_ghg_mitigation_benefits = value
 									}
 									frm.refresh_field("non_ghg_mitigation_benefits")
-									console.log("List1","=",list);
+
 								}
 								else if(i.field_name == "target_ghgs"){
 									var target_ghgs_result = ""
-									console.log(frm.doc.target_ghgs);
+
 									for(var res of frm.doc.target_ghgs){
 										if(target_ghgs_result == ""){
 											target_ghgs_result += res.target_ghgs
@@ -272,7 +272,7 @@ frappe.ui.form.on('Mitigations', {
 											target_ghgs_result += res.target_ghgs
 										}
 									}
-									console.log(target_ghgs_result);
+
 									i.new_values = target_ghgs_result
 									new_list=i.old_values.split(",")
 									frm.clear_table("target_ghgs")
@@ -281,7 +281,7 @@ frappe.ui.form.on('Mitigations', {
 										row.target_ghgs = value
 									}
 									frm.refresh_field("target_ghgs")
-									console.log("new_list1","=",new_list);
+
 								}
 								frm.refresh_field("edited_project_details")
 								const index = field_name_list.indexOf(i.field_name);
@@ -292,53 +292,53 @@ frappe.ui.form.on('Mitigations', {
 						if (field_name_list){
 							var list2=[]
 							var new_list2 =[]
-							console.log("field_name_list"," = ",field_name_list);
+
 							for (var i of field_name_list){
 								var label = i.replaceAll("_"," ")
 								label = toTitleCase(label)
-								console.log("label","=",label);
+
 								var child =frm.add_child("edited_project_details")
 								if (i != "non_ghg_mitigation_benefits"  && i != "target_ghgs"){
-									console.log("i ",result[`${i}`] );
-									console.log("j ",frm.doc[`${i}`]);
+
+
 									child.field_label = label
 									child.field_name = i
 									child.old_values = result[`${i}`]
 									child.new_values = frm.doc[`${i}`].toString()
 									frm.set_value(i,result[`${i}`])
-									console.log("Edited Table1 =  ",frm.doc.edited_project_details);
+
 								}
 								else if(i == "non_ghg_mitigation_benefits"){
 									child.field_label = label
 									child.field_name = i
 									child.old_values = result[`${i}`]
-									console.log("Field Label = ",child.field_label);
-									console.log("Field Name = ",child.field_name);
-									console.log("Old  Values = ",child.old_values);
+
+
+
 									var non_ghg_mitigation_benefits_result = ""
-									console.log("Checking = ",non_ghg_mitigation_benefits_result);
-									console.log(frm.doc.non_ghg_mitigation_benefits);
+
+
 									for(var res of frm.doc.non_ghg_mitigation_benefits){
 										if(non_ghg_mitigation_benefits_result == ""){
-											console.log("RES",res.non_ghg_mitigation_benefits);
+
 											non_ghg_mitigation_benefits_result += res.non_ghg_mitigation_benefits
 										}else{
-											console.log("RES",res.non_ghg_mitigation_benefits);
+
 											non_ghg_mitigation_benefits_result += ","
 											non_ghg_mitigation_benefits_result += res.non_ghg_mitigation_benefits
 										}
 									}
-									console.log("Non GHG Result",non_ghg_mitigation_benefits_result);
+
 									child.new_values = non_ghg_mitigation_benefits_result
-									console.log("New Values =  ",child.new_values);
+
 									frm.refresh_fields("edited_project_details")
-									console.log("Edited Table2 =  ",frm.doc.edited_project_details);
+
 									list2 = result[`${i}`].split(",")
-									console.log("list2",list2);
+
 									frm.clear_table("non_ghg_mitigation_benefits")
 									for(var value of list2){
 										var row = frm.add_child("non_ghg_mitigation_benefits")
-										console.log(value);
+
 										row.non_ghg_mitigation_benefits = value      
 									}
 									frm.refresh_fields("non_ghg_mitigation_benefits")
@@ -347,11 +347,11 @@ frappe.ui.form.on('Mitigations', {
 									child.field_label = label
 									child.field_name = i
 									child.old_values = result[`${i}`]
-									console.log("Field Label = ",child.field_label);
-									console.log("Field Name = ",child.field_name);
-									console.log("Old  Values = ",child.old_values);
+
+
+
 									var target_ghgs_result = ""
-									console.log(frm.doc.target_ghgs);
+
 									for(var res of frm.doc.target_ghgs){
 										if(target_ghgs_result == ""){
 											target_ghgs_result += res.target_ghgs
@@ -360,23 +360,23 @@ frappe.ui.form.on('Mitigations', {
 											target_ghgs_result += res.target_ghgs
 										}
 									}
-									console.log("NDP Result",target_ghgs_result);
+
 									child.new_values = target_ghgs_result
-									console.log("New Values =  ",child.new_values);
+
 									frm.refresh_fields("edited_project_details")
-									console.log("Edited Table2 =  ",frm.doc.edited_project_details);
+
 									new_list2 = result[`${i}`].split(",")
-									// console.log("list1",result[`${i}`].split(","));
-									console.log("new_list2",new_list2);
+									
+
 									frm.clear_table("target_ghgs")
 									for(var value of new_list2){
 										var row = frm.add_child("target_ghgs")
-										console.log(value);
+
 										row.target_ghgs = value
 									}
 									frm.refresh_fields("target_ghgs")
 								}
-								console.log("Edited Table3 =  ",frm.doc.edited_project_details);
+
 								
 							}
 						}

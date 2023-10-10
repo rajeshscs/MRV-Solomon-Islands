@@ -39,7 +39,7 @@ frappe.ui.form.on('Climate Finance', {
 			pluck:'project_id'
 		}).then(r => {
 			frm.set_query("project_id",function(){
-				console.log(r);
+
 				return{
 					filters:{
 						work_state:"Approved",
@@ -59,7 +59,7 @@ frappe.ui.form.on('Climate Finance', {
 			for (var i of r.message){
 			  userList.push(i[0])
 			}
-			console.log(userList);
+
 			frm.set_query("select_approver",function(){
 			  return {
 				filters:{
@@ -185,7 +185,7 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table1",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -195,7 +195,7 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table2",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -205,7 +205,7 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table3",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
@@ -216,7 +216,7 @@ frappe.ui.form.on('Climate Finance', {
 					async:false,
 					callback:function(r){
 						var result= r.message
-						console.log("Result",result)
+
 						var field_name_list = []
 						for(let [key,value] of Object.entries(result)){
 							field_name_list.push(key)
@@ -230,19 +230,19 @@ frappe.ui.form.on('Climate Finance', {
 									i.new_values = frm.doc[`${i.field_name}`].toString()
 								}
 								frm.set_value(i.field_name,i.old_values)
-								console.log("i","=",i.new_values);
+
 								frm.refresh_field("edited_project_details")
 								const index = field_name_list.indexOf(i.field_name);
 								const x = field_name_list.splice(index, 1)
 							}
 						}
 						if (field_name_list){
-							console.log("field_name_list"," = ",field_name_list);
+
 							
 							for (var i of field_name_list){
 								var label = i.replaceAll("_"," ")
 								label = toTitleCase(label)
-								console.log("label","=",label);
+
 								var child =frm.add_child("edited_project_details")
 									child.field_label = label
 									child.field_name = i
@@ -330,14 +330,14 @@ frappe.ui.form.on('Climate Finance', {
 	// 	// 	method:"get_years",
 	// 	// 	async:false,
 	// 	// 	callback: function(r){
-	// 	// 		console.log(r.message);
+	
 	// 	// 		var year_options=""
 	// 	// 		for (var i of r.message){
 	// 	// 			year_options += ('\n'+ i)
 	// 	// 		}
 	// 	// 		frm.fields_dict.budget_disbursement_schedule.grid.update_docfield_property("financial_year","options",year_options);
 	// 	// 		frm.refresh_field('budget_disbursement_schedule')
-	// 	// 		// console.log(year_options);
+	
 	// 	// 	}
 	// 	// })
 	// }
@@ -464,13 +464,13 @@ frappe.ui.form.on('Climate Finance Disbursement Schedule ChildTable',{
 				yearList.push(i.financial_year)
 			}
 		}
-		console.log(yearList);
+
 		frm.call({
 			doc:cur_frm.doc,
 			method:"get_years",
 			async:false,
 			callback: function(r){
-				// console.log(r.message);
+				
 				var year_options=""
 				for (var i of r.message){
 					if(!yearList.includes(i)){
@@ -479,7 +479,7 @@ frappe.ui.form.on('Climate Finance Disbursement Schedule ChildTable',{
 				}
 				frm.fields_dict.budget_disbursement_schedule.grid.update_docfield_property("financial_year","options",year_options);
 				frm.refresh_field('budget_disbursement_schedule')
-				// console.log(year_options);
+				
 			}
 		})
 	},

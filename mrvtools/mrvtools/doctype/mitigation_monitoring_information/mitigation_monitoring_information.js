@@ -54,7 +54,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			for (var i of r.message){
 			  userList.push(i[0])
 			}
-			console.log(userList);
+
 			frm.set_query("select_approver",function(){
 			  return {
 				filters:{
@@ -84,10 +84,10 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
-					console.log("Field Name of i","=",i.field_name);
+
 						frm.set_value(i.field_name,i.new_values)
 				}
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				if(frm.doc.edited_performance_indicator.length != 0){
 					frm.set_value("performance_indicator",[])
 					for(var i of frm.doc.edited_performance_indicator){
@@ -140,25 +140,25 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						method:"before_saving_table",
 						async:false,
 						callback:function(r){
-							console.log("Mudinchhh!",r.message);
+
 						}
 					})
 				}
-				console.log("edited_project_details = ",frm.doc.edited_project_details);
+
 				frm.call({
 					doc:frm.doc,
 					method:"get_all_data",
 					async:false,
 					callback:function(r){
 						var result= r.message
-						console.log("Res = ",result)
+
 						var field_name_list = []
 						for(let [key,value] of Object.entries(result)){
 							field_name_list.push(key)
 						}
-						console.log(field_name_list);
+
 						for (var i of frm.doc.edited_project_details){
-							console.log("Field Name ", i.field_name);
+
 							if (field_name_list.includes(i.field_name) ){
 								i.new_values = frm.doc[`${i.field_name}`].toString()
 								frm.set_value(i.field_name,i.old_values)
@@ -169,20 +169,20 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 							}
 						}
 						if (field_name_list){
-							console.log("field_name_list"," = ",field_name_list);
+
 							for (var i of field_name_list){
 								var label = i.replaceAll("_"," ")
 								label = toTitleCase(label)
-								console.log("label","=",label);
+
 								var child =frm.add_child("edited_project_details")
-								console.log("i ",result[`${i}`] );
-								console.log("j ",frm.doc[`${i}`]);
+
+
 								child.field_label = label
 								child.field_name = i
 								child.old_values = result[`${i}`]
 								child.new_values = frm.doc[`${i}`].toString()
 								frm.set_value(i,result[`${i}`])
-								console.log("Edited Table1 =  ",frm.doc.edited_project_details);
+
 							}
 						}
 					}
@@ -234,7 +234,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		// 		var values=[]
 		// 		for(var i of r.message){
 		// 			values.push(i)
-		// 			console.log("included_in","-",r.message);
+		
 		// 		}
 		// 		values=values.join(",")
 		// 		frm.set_value("included_in",values)
@@ -245,7 +245,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			method:"get_value1",
 			async:false,
 			callback:function(r){
-				console.log("Value1 = ",r.message);
+
 				var values=[]
 				for(var i of r.message){
 					values.push(i)
@@ -260,7 +260,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			method:"get_value2",
 			async:false,
 			callback:function(r){
-				console.log("Value2 = ",r.message);
+
 
 				var values=[]
 				for(var i of r.message){
@@ -278,7 +278,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			async:false,
 			callback:function(r){
 				var col=r.message
-				console.log(col);
+
 				frm.set_value("performance_indicator",[])
 				for (var i of col){
 					var child=frm.add_child("performance_indicator")
@@ -315,12 +315,12 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			pluck:'monitoring_year',
 			order_by: "monitoring_year asc",
 		}).then(r => {
-				console.log(r);
+
 				if(frm.doc.project_id){
 					if (r.includes(frm.doc.monitoring_year)){
 						frm.set_value("monitoring_year","")
 						frm.refresh_field("monitoring_year")
-						// console.log(r);
+						
 						var yearList =""
 						for (var y of r){
 							yearList += `<li> ${y} </li>`
