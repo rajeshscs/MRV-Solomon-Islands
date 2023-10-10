@@ -3,6 +3,12 @@
 
 frappe.ui.form.on('Climate Finance', {
 	refresh: function(frm){
+
+
+		if ((frm.doc.work_state == "Approved")){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+		}
+
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_sources_of_finance.length != 0){
 			frm.fields_dict.sources_of_finance.df.read_only = 1
 			frm.refresh_field("sources_of_finance")
@@ -171,86 +177,88 @@ frappe.ui.form.on('Climate Finance', {
 	},
 
 	before_save:function(frm){
-		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-			if(frm.fields_dict.sources_of_finance.df.read_only == 0){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table1",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
-			}
-			if(frm.fields_dict.cost_breakdown.df.read_only == 0){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table2",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
-			}
-			if(frm.fields_dict.budget_disbursement_schedule.df.read_only == 0){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table3",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
-			}
-
-			frm.call({
-				doc:frm.doc,
-				method:"get_all_datas",
-				async:false,
-				callback:function(r){
-					var result= r.message
-					console.log("Result",result)
-					var field_name_list = []
-					for(let [key,value] of Object.entries(result)){
-						field_name_list.push(key)
-					}
-					for (var i of frm.doc.edited_project_details){
-						if (field_name_list.includes(i.field_name) ){
-							if(["approval_date","expected_end_date","financial_closure_date","effectiveness_date"].includes(i.field_name)){
-								i.new_values = frm.doc[`${i.field_name}`]
-							}
-							else{
-								i.new_values = frm.doc[`${i.field_name}`].toString()
-							}
-							frm.set_value(i.field_name,i.old_values)
-							console.log("i","=",i.new_values);
-							frm.refresh_field("edited_project_details")
-							const index = field_name_list.indexOf(i.field_name);
-							const x = field_name_list.splice(index, 1)
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.fields_dict.sources_of_finance.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table1",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
 						}
-					}
-					if (field_name_list){
-						console.log("field_name_list"," = ",field_name_list);
-						
-						for (var i of field_name_list){
-							var label = i.replaceAll("_"," ")
-							label = toTitleCase(label)
-							console.log("label","=",label);
-							var child =frm.add_child("edited_project_details")
-								child.field_label = label
-								child.field_name = i
-								child.old_values = result[`${i}`]
-								if(["approval_date","expected_end_date","financial_closure_date","effectiveness_date"].includes(i)){
-									child.new_values = frm.doc[`${i}`]
+					})
+				}
+				if(frm.fields_dict.cost_breakdown.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table2",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
+						}
+					})
+				}
+				if(frm.fields_dict.budget_disbursement_schedule.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table3",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
+						}
+					})
+				}
+
+				frm.call({
+					doc:frm.doc,
+					method:"get_all_datas",
+					async:false,
+					callback:function(r){
+						var result= r.message
+						console.log("Result",result)
+						var field_name_list = []
+						for(let [key,value] of Object.entries(result)){
+							field_name_list.push(key)
+						}
+						for (var i of frm.doc.edited_project_details){
+							if (field_name_list.includes(i.field_name) ){
+								if(["approval_date","expected_end_date","financial_closure_date","effectiveness_date"].includes(i.field_name)){
+									i.new_values = frm.doc[`${i.field_name}`]
 								}
 								else{
-									child.new_values = frm.doc[`${i}`].toString()
+									i.new_values = frm.doc[`${i.field_name}`].toString()
 								}
-							frm.set_value(i,result[`${i}`])
+								frm.set_value(i.field_name,i.old_values)
+								console.log("i","=",i.new_values);
+								frm.refresh_field("edited_project_details")
+								const index = field_name_list.indexOf(i.field_name);
+								const x = field_name_list.splice(index, 1)
+							}
+						}
+						if (field_name_list){
+							console.log("field_name_list"," = ",field_name_list);
+							
+							for (var i of field_name_list){
+								var label = i.replaceAll("_"," ")
+								label = toTitleCase(label)
+								console.log("label","=",label);
+								var child =frm.add_child("edited_project_details")
+									child.field_label = label
+									child.field_name = i
+									child.old_values = result[`${i}`]
+									if(["approval_date","expected_end_date","financial_closure_date","effectiveness_date"].includes(i)){
+										child.new_values = frm.doc[`${i}`]
+									}
+									else{
+										child.new_values = frm.doc[`${i}`].toString()
+									}
+								frm.set_value(i,result[`${i}`])
+							}
 						}
 					}
-				}
-			})
+				})
+			}
 		}
 	},
 	project_id:function(frm){

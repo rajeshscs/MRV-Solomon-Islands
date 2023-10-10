@@ -19,9 +19,12 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			frm.refresh_field("quantitative_impact")
 		}
 
+		if ((frm.doc.work_state == "Approved")){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+		}
+
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
-			cur_frm.fields_dict.project_id.df.read_only = 1
 			cur_frm.fields_dict.monitoring_year.df.read_only = 1
 		}
 
@@ -80,6 +83,8 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			frm.dirty()
 			frm.save()
 		}
+
+		
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
@@ -130,18 +135,20 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		}
 	},
 	before_save:function(frm){
-		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-			if(frm.fields_dict.quantitative_impact.df.read_only == 0){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
+						}
+					})
+				}
+				
 			}
-			
 		}
 	},
 	project_id: function(frm) {

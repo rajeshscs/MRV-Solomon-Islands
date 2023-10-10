@@ -16,9 +16,13 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			frm.refresh_field("performance_indicator")
 		}
 
+
+		if ((frm.doc.work_state == "Approved")){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+		}
+
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
-			cur_frm.fields_dict.project_id.df.read_only = 1
 			cur_frm.fields_dict.monitoring_year.df.read_only = 1
 		}
 
@@ -128,60 +132,62 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 	},
 
 	before_save:function(frm){
-		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-			if(frm.fields_dict.performance_indicator.df.read_only == 0){
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.fields_dict.performance_indicator.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
+						}
+					})
+				}
+				console.log("edited_project_details = ",frm.doc.edited_project_details);
 				frm.call({
 					doc:frm.doc,
-					method:"before_saving_table",
+					method:"get_all_data",
 					async:false,
 					callback:function(r){
-						console.log("Mudinchhh!",r.message);
+						var result= r.message
+						console.log("Res = ",result)
+						var field_name_list = []
+						for(let [key,value] of Object.entries(result)){
+							field_name_list.push(key)
+						}
+						console.log(field_name_list);
+						for (var i of frm.doc.edited_project_details){
+							console.log("Field Name ", i.field_name);
+							if (field_name_list.includes(i.field_name) ){
+								i.new_values = frm.doc[`${i.field_name}`].toString()
+								frm.set_value(i.field_name,i.old_values)
+								frm.refresh_field("edited_project_details")
+
+								const index = field_name_list.indexOf(i.field_name);
+								const x = field_name_list.splice(index, 1)
+							}
+						}
+						if (field_name_list){
+							console.log("field_name_list"," = ",field_name_list);
+							for (var i of field_name_list){
+								var label = i.replaceAll("_"," ")
+								label = toTitleCase(label)
+								console.log("label","=",label);
+								var child =frm.add_child("edited_project_details")
+								console.log("i ",result[`${i}`] );
+								console.log("j ",frm.doc[`${i}`]);
+								child.field_label = label
+								child.field_name = i
+								child.old_values = result[`${i}`]
+								child.new_values = frm.doc[`${i}`].toString()
+								frm.set_value(i,result[`${i}`])
+								console.log("Edited Table1 =  ",frm.doc.edited_project_details);
+							}
+						}
 					}
 				})
 			}
-			console.log("edited_project_details = ",frm.doc.edited_project_details);
-			frm.call({
-				doc:frm.doc,
-				method:"get_all_data",
-				async:false,
-				callback:function(r){
-					var result= r.message
-					console.log("Res = ",result)
-					var field_name_list = []
-					for(let [key,value] of Object.entries(result)){
-						field_name_list.push(key)
-					}
-					console.log(field_name_list);
-					for (var i of frm.doc.edited_project_details){
-						console.log("Field Name ", i.field_name);
-						if (field_name_list.includes(i.field_name) ){
-							i.new_values = frm.doc[`${i.field_name}`].toString()
-							frm.set_value(i.field_name,i.old_values)
-							frm.refresh_field("edited_project_details")
-
-							const index = field_name_list.indexOf(i.field_name);
-							const x = field_name_list.splice(index, 1)
-						}
-					}
-					if (field_name_list){
-						console.log("field_name_list"," = ",field_name_list);
-						for (var i of field_name_list){
-							var label = i.replaceAll("_"," ")
-							label = toTitleCase(label)
-							console.log("label","=",label);
-							var child =frm.add_child("edited_project_details")
-							console.log("i ",result[`${i}`] );
-							console.log("j ",frm.doc[`${i}`]);
-							child.field_label = label
-							child.field_name = i
-							child.old_values = result[`${i}`]
-							child.new_values = frm.doc[`${i}`].toString()
-							frm.set_value(i,result[`${i}`])
-							console.log("Edited Table1 =  ",frm.doc.edited_project_details);
-						}
-					}
-				}
-			})
 		}
 		
 	},

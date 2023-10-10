@@ -64,7 +64,8 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.project_description",
@@ -160,8 +161,7 @@
    "fieldtype": "Data",
    "label": "Registered With Market Based Mechanism",
    "permlevel": 1,
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "ghg_estimation_methodology_text",
@@ -178,8 +178,7 @@
   {
    "fieldname": "column_break_pgchz",
    "fieldtype": "Column Break",
-   "permlevel": 1,
-   "read_only": 1
+   "permlevel": 1
   },
   {
    "fetch_from": "project_name.key_sub_sector",
@@ -306,7 +305,8 @@
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
    "label": "Monitoring Year",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   },
   {
    "fieldname": "column_break_adszg",
@@ -324,15 +324,13 @@
    "in_list_view": 1,
    "label": "Expected Project Outputs",
    "permlevel": 1,
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "actual_annual_ghg",
    "fieldtype": "Int",
    "label": "Actual Annual GHG Emission Reductions (tCO2e/Year)",
-   "permlevel": 1,
-   "reqd": 1
+   "permlevel": 1
   },
   {
    "fieldname": "upload_document",
@@ -352,7 +350,8 @@
    "fieldname": "expected_annual_ghg",
    "fieldtype": "Int",
    "label": "Expected Annual GHG",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "naming_series",
@@ -414,7 +413,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-09 13:22:30.642178",
+ "modified": "2023-10-10 13:29:42.931219",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

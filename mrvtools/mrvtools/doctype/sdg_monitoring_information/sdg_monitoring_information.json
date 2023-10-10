@@ -32,7 +32,8 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_5urkg",
@@ -45,7 +46,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Monitoring Year",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   },
   {
    "fieldname": "section_break_62rin",
@@ -139,12 +141,13 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "SDG Assessment",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-09 13:22:59.170923",
+ "modified": "2023-10-10 13:39:06.774163",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",

@@ -62,7 +62,8 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "project_description",
@@ -340,6 +341,7 @@
   {
    "fieldname": "work_state",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Work state",
    "options": "\nPending\nApproved\nRejected",
    "permlevel": 1
@@ -397,7 +399,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-07 13:33:09.391349",
+ "modified": "2023-10-10 13:24:58.513103",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",

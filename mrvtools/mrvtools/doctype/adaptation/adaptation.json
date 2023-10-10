@@ -48,6 +48,7 @@
   "quantitative_impact",
   "naming_series",
   "work_state",
+  "remarks",
   "tab2",
   "html_json",
   "edited_project_details",
@@ -59,62 +60,71 @@
    "fieldname": "project_description",
    "fieldtype": "Small Text",
    "label": "Brief Description",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.key_sector",
    "fieldname": "key_sector",
    "fieldtype": "Data",
    "label": "Adaptation Sector",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.key_sub_sector",
    "fieldname": "key_sub_sector",
    "fieldtype": "Data",
    "label": "Adaptation Sub-Sector",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
    "label": "Included in",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.financial_closure_date",
    "fieldname": "financial_closure_date",
    "fieldtype": "Date",
    "label": "Financial Closure Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.implementing_entity",
    "fieldname": "implementing_entity",
    "fieldtype": "Data",
    "label": "Implementing Entities or entity",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.other_agency",
    "fieldname": "other_agency",
    "fieldtype": "Data",
    "label": "Other Party",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.end_date",
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "Project End Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.start_date",
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Project Start Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "ndp_coverage",
@@ -325,9 +335,11 @@
   {
    "fieldname": "project_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Project ID",
    "options": "Project",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   },
   {
    "fieldname": "column_break_jfwbz",
@@ -338,12 +350,19 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
    "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-07 16:16:47.778384",
+ "modified": "2023-10-10 13:34:31.606497",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",

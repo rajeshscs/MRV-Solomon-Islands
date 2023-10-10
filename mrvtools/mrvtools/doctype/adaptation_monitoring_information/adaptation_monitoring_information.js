@@ -26,9 +26,14 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			frm.refresh_field("quantitative_impact")
 		}
 
+
+		if ((frm.doc.work_state == "Approved")){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+		}
+
+
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
-			cur_frm.fields_dict.project_id.df.read_only = 1
 			cur_frm.fields_dict.monitoring_year.df.read_only = 1
 		}
 
@@ -140,31 +145,32 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 	},
 
 	before_save:function(frm){
-		if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-			if(frm.fields_dict.quantitative_impact.df.read_only == 0){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
+					frm.call({
+						doc:frm.doc,
+						method:"before_saving_table",
+						async:false,
+						callback:function(r){
+							console.log("Mudinchhh!",r.message);
+						}
+					})
+				}
+				
 			}
-			
+			// if (frm.doc.workflow_state =="Draft" && frm.doc.__unsaved ==1 && frm.doc.work_state == "Approved"){
+			// 	frm.call({
+			// 		doc:frm.doc,
+			// 		method:"year_validation",
+			// 		async:false,
+			// 		callback:function(r){
+			// 			console.log(r.message);
+			// 			console.log("HIIIIIIIIIIIIIIIII");
+			// 		}
+			// 	})
+			// }
 		}
-		// if (frm.doc.workflow_state =="Draft" && frm.doc.__unsaved ==1 && frm.doc.work_state == "Approved"){
-		// 	frm.call({
-		// 		doc:frm.doc,
-		// 		method:"year_validation",
-		// 		async:false,
-		// 		callback:function(r){
-		// 			console.log(r.message);
-		// 			console.log("HIIIIIIIIIIIIIIIII");
-		// 		}
-		// 	})
-		// }
-		
 	},
 
 

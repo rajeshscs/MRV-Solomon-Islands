@@ -34,6 +34,7 @@
   "qualitative_impact",
   "quantitative_impact",
   "naming_series",
+  "remarks",
   "tab2",
   "html_table",
   "html_json",
@@ -182,7 +183,8 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Included In",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "edited_project_details",
@@ -228,27 +230,37 @@
   {
    "fieldname": "project_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Project ID",
    "options": "Project",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   },
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
    "hidden": 1,
    "label": "Start Date",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
    "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-07 18:09:12.210009",
+ "modified": "2023-10-10 13:37:43.911177",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",

@@ -34,14 +34,16 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.project_description",
    "fieldname": "project_description",
    "fieldtype": "Small Text",
    "label": "Brief Description",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "monitoring_year",
@@ -153,12 +155,13 @@
    "fieldtype": "Link",
    "label": "Project ID",
    "options": "Adaptation",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-09 15:22:36.663902",
+ "modified": "2023-10-10 13:32:01.676853",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",

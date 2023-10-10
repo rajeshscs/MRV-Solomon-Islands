@@ -48,35 +48,40 @@
    "fieldname": "financial_year",
    "fieldtype": "Data",
    "label": "Financial Year",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.applied_exchange_rate",
    "fieldname": "applied_exchange_rate",
    "fieldtype": "Data",
    "label": "Applied Exchange Rate",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.financing_mode",
    "fieldname": "financing_mode",
    "fieldtype": "Data",
    "label": "Financing Mode",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.budget_code",
    "fieldname": "budget_code",
    "fieldtype": "Data",
    "label": "Budget Code",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.financial_closure_date",
    "fieldname": "financial_closure_date",
    "fieldtype": "Data",
    "label": "Financial Closure Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "remarks",
@@ -109,28 +114,32 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.approval_date",
    "fieldname": "approval_date",
    "fieldtype": "Date",
    "label": "Approval Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.effectiveness_date",
    "fieldname": "effectiveness_date",
    "fieldtype": "Data",
    "label": "Effectiveness Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fetch_from": "project_name.expected_end_date",
    "fieldname": "expected_end_date",
    "fieldtype": "Data",
    "label": "Expected End Date",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_xfzp6",
@@ -213,12 +222,13 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "Climate Finance",
-   "permlevel": 1
+   "permlevel": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-09 20:19:42.289730",
+ "modified": "2023-10-10 13:42:45.125723",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",
