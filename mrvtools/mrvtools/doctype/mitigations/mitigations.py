@@ -24,6 +24,15 @@ class Mitigations(Document):
 			row.unit = i.unit
 			row.expected_value = i.expected_value
 			row.reference = i.reference
+
+
+		if len(self.original_performance_indicator) == 0:	
+			for i in old_doc.performance_indicator:
+				row = self.append('original_performance_indicator',{})
+				row.performance_indicator = i.performance_indicator
+				row.unit = i.unit
+				row.expected_value = i.expected_value
+				row.reference = i.reference
 		return "Yess"
 	
 

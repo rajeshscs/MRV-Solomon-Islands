@@ -55,6 +55,7 @@
   "work_state",
   "tab2",
   "edited_project_details",
+  "original_performance_indicator",
   "edited_performance_indicator"
  ],
  "fields": [
@@ -395,11 +396,19 @@
    "options": "Project",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "original_performance_indicator",
+   "fieldtype": "Table",
+   "label": "Original Performance Indicator",
+   "options": "Edited Performance Indicator ChildTable",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 13:24:58.513103",
+ "modified": "2023-10-10 15:36:18.659692",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",
@@ -458,5 +467,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name",
+ "track_changes": 1
 }

@@ -362,7 +362,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 13:34:31.606497",
+ "modified": "2023-10-10 15:36:36.559102",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",
@@ -469,5 +469,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name",
+ "track_changes": 1
 }

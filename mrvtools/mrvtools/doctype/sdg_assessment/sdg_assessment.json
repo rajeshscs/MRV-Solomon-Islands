@@ -260,7 +260,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 13:37:43.911177",
+ "modified": "2023-10-10 15:37:36.857125",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
@@ -367,5 +367,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name",
+ "track_changes": 1
 }

@@ -123,7 +123,6 @@ frappe.ui.form.on('Mitigations', {
 
 
 		if (frm.doc.workflow_state == "Rejected"){
-			$("head").append(`<style>[id="mitigations-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("workflow_state","Approved")

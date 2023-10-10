@@ -161,7 +161,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 13:32:01.676853",
+ "modified": "2023-10-10 15:36:56.228131",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",
@@ -268,5 +268,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "project_name"
+ "title_field": "project_name",
+ "track_changes": 1
 }
