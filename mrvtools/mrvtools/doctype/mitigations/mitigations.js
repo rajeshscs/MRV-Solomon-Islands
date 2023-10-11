@@ -51,6 +51,8 @@ frappe.ui.form.on('Mitigations', {
 				child.reference = i.reference
 			}
 			frm.fields_dict.performance_indicator.df.read_only = 0
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 			frm.refresh_field("performance_indicator")
 		}
 	},
@@ -58,18 +60,23 @@ frappe.ui.form.on('Mitigations', {
 	refresh: function(frm){
 
 
-		if ((frm.doc.work_state == "Approved")){
+		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 
 
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
 			frm.fields_dict.performance_indicator.df.read_only = 1
+			frm.fields_dict.edit_button.df.hidden = 0
+			frm.refresh_field("edit_button")
 			frm.refresh_field("performance_indicator")
 		}
 		else{
 			frm.fields_dict.performance_indicator.df.read_only = 0
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 			frm.refresh_field("performance_indicator")
 		}
 
@@ -125,6 +132,7 @@ frappe.ui.form.on('Mitigations', {
 		if (frm.doc.workflow_state == "Rejected"){
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
+			frm.set_value("original_performance_indicator",[])
 			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
 			frm.save()
@@ -183,6 +191,7 @@ frappe.ui.form.on('Mitigations', {
 				frm.set_value("edited_performance_indicator",[])
 				frm.refresh_field("edited_performance_indicator")
 			}
+			frm.set_value("original_performance_indicator",[])
 			frm.set_value('work_state','Approved')
 			frm.save()
 		}
@@ -201,6 +210,9 @@ frappe.ui.form.on('Mitigations', {
 	before_save:function(frm){
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.doc.original_performance_indicator.length == 0){
+					window.location.href = `${frm.doc.name}`
+				}
 				if(frm.fields_dict.performance_indicator.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,
@@ -381,6 +393,7 @@ frappe.ui.form.on('Mitigations', {
 						}
 					}
 				})
+				
 			}
 		}
 	}

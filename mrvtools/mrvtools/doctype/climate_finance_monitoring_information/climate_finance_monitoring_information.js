@@ -7,14 +7,23 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_expenditure.length != 0){
 			frm.fields_dict.budget_expenditure.df.read_only = 1
 			frm.refresh_field("budget_expenditure")
+			frm.fields_dict.edit_button.df.hidden = 0
+			frm.refresh_field("edit_button")
 		}
 		else{
 			frm.fields_dict.budget_expenditure.df.read_only = 0
 			frm.refresh_field("budget_expenditure")
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 		}
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
 			cur_frm.fields_dict.monitoring_year.df.read_only = 1
+		}
+
+		if (frm.doc.work_state == "Approved"){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 
 		if(frm.doc.project_id && frm.doc.work_state != "Approved"){
@@ -59,7 +68,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 
 
 		if (frm.doc.workflow_state == "Rejected"){
-			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_budget_expenditure",[])
 			frm.set_value("edited_total_budget_disbursement",[])
@@ -248,6 +256,8 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				frm.refresh_field("budget_expenditure")
 			frm.fields_dict.budget_expenditure.df.read_only = 0
 			frm.set_value("total_budget_disbursement",[])
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 				for(var i of frm.doc.edited_total_budget_disbursement){
 					var row = frm.add_child("total_budget_disbursement")
 					row.financial_year = i.financial_year
@@ -324,6 +334,8 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 						}
 					}
 				})
+
+				window.location.href = `${frm.doc.name}`
 			}
 		}
 		

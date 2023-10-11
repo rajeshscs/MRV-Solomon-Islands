@@ -19,16 +19,21 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 		
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
 			frm.fields_dict.quantitative_impact.df.read_only = 1
+			frm.fields_dict.edit_button.df.hidden = 0
+			frm.refresh_field("edit_button")
 			frm.refresh_field("quantitative_impact")
 		}
 		else{
 			frm.fields_dict.quantitative_impact.df.read_only = 0
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 			frm.refresh_field("quantitative_impact")
 		}
 
 
-		if ((frm.doc.work_state == "Approved")){
+		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 
 
@@ -141,6 +146,8 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			}
 			frm.fields_dict.quantitative_impact.df.read_only = 0
 			frm.refresh_field("quantitative_impact")
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 		}
 	},
 
@@ -157,19 +164,11 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 						}
 					})
 				}
+
+				window.location.href = `${frm.doc.name}`
 				
 			}
-			// if (frm.doc.workflow_state =="Draft" && frm.doc.__unsaved ==1 && frm.doc.work_state == "Approved"){
-			// 	frm.call({
-			// 		doc:frm.doc,
-			// 		method:"year_validation",
-			// 		async:false,
-			// 		callback:function(r){
 			
-			
-			// 		}
-			// 	})
-			// }
 		}
 	},
 

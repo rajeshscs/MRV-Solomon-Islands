@@ -5,33 +5,46 @@ frappe.ui.form.on('Climate Finance', {
 	refresh: function(frm){
 
 
-		if ((frm.doc.work_state == "Approved")){
+		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_sources_of_finance.length != 0){
 			frm.fields_dict.sources_of_finance.df.read_only = 1
 			frm.refresh_field("sources_of_finance")
+			frm.fields_dict.edit_button1.df.hidden = 0
+			frm.refresh_field("edit_button1")
 		}
 		else{
 			frm.fields_dict.sources_of_finance.df.read_only = 0
 			frm.refresh_field("sources_of_finance")
+			frm.fields_dict.edit_button1.df.hidden = 1
+			frm.refresh_field("edit_button1")
 		}
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_cost_breakdown.length != 0){
 			frm.fields_dict.cost_breakdown.df.read_only = 1
 			frm.refresh_field("cost_breakdown")
+			frm.fields_dict.edit_button2.df.hidden = 0
+			frm.refresh_field("edit_button2")
 		}
 		else{
 			frm.fields_dict.cost_breakdown.df.read_only = 0
 			frm.refresh_field("cost_breakdown")
+			frm.fields_dict.edit_button2.df.hidden = 1
+			frm.refresh_field("edit_button2")
 		}
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_disbursement_schedule.length != 0){
 			frm.fields_dict.budget_disbursement_schedule.df.read_only = 1
 			frm.refresh_field("budget_disbursement_schedule")
+			frm.fields_dict.edit_button3.df.hidden = 0
+			frm.refresh_field("edit_button3")
 		}
 		else{
 			frm.fields_dict.budget_disbursement_schedule.df.read_only = 0
 			frm.refresh_field("budget_disbursement_schedule")
+			frm.fields_dict.edit_button3.df.hidden = 1
+			frm.refresh_field("edit_button3")
 		}
 
 		frappe.db.get_list('Climate Finance', {
@@ -133,6 +146,7 @@ frappe.ui.form.on('Climate Finance', {
 		
 
 	},
+	
 	edit_button1:function(frm){
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_sources_of_finance.length != 0){
 			frm.set_value("sources_of_finance")
@@ -147,6 +161,8 @@ frappe.ui.form.on('Climate Finance', {
 			}
 			frm.fields_dict.sources_of_finance.df.read_only = 0
 			frm.refresh_field("sources_of_finance")
+			frm.fields_dict.edit_button1.df.hidden = 1
+			frm.refresh_field("edit_button1")
 		}
 	},
 	edit_button2:function(frm){
@@ -160,6 +176,8 @@ frappe.ui.form.on('Climate Finance', {
 			}
 			frm.fields_dict.cost_breakdown.df.read_only = 0
 			frm.refresh_field("cost_breakdown")
+			frm.fields_dict.edit_button2.df.hidden = 1
+			frm.refresh_field("edit_button2")
 		}
 	},
 	edit_button3:function(frm){
@@ -173,6 +191,8 @@ frappe.ui.form.on('Climate Finance', {
 			}
 			frm.fields_dict.budget_disbursement_schedule.df.read_only = 0
 			frm.refresh_field("budget_disbursement_schedule")
+			frm.fields_dict.edit_button3.df.hidden = 1
+			frm.refresh_field("edit_button3")
 		}
 	},
 
@@ -258,6 +278,8 @@ frappe.ui.form.on('Climate Finance', {
 						}
 					}
 				})
+
+				window.location.href = `${frm.doc.name}`
 			}
 		}
 	},

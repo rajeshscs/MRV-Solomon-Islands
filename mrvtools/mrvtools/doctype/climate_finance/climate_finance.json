@@ -22,6 +22,7 @@
   "column_break_wgs3g",
   "financial_closure_date",
   "effectiveness_date",
+  "select_approver",
   "financial_flow_tab_tab",
   "project_size_million",
   "total_project_cost",
@@ -381,11 +382,18 @@
    "fieldtype": "Small Text",
    "label": "Remarks",
    "permlevel": 1
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 13:41:41.838784",
+ "modified": "2023-10-11 20:40:16.926305",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",

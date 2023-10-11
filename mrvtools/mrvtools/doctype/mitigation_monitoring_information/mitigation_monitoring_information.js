@@ -10,15 +10,20 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
 			frm.fields_dict.performance_indicator.df.read_only = 1
 			frm.refresh_field("performance_indicator")
+			frm.fields_dict.edit_button.df.hidden = 0
+			frm.refresh_field("edit_button")
 		}
 		else{
 			frm.fields_dict.performance_indicator.df.read_only = 0
 			frm.refresh_field("performance_indicator")
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 		}
 
 
-		if ((frm.doc.work_state == "Approved")){
+		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
@@ -74,7 +79,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 
 
 		if (frm.doc.workflow_state == "Rejected"){
-			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("workflow_state","Approved")
@@ -113,6 +117,15 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
 			$('[id="mitigation-monitoring-information-tab1"]').addClass("active")
 		}
+		// if(frm.is_dirty()){
+		// 	console.log("Hiii");
+		// 	// $('[id="mitigation-monitoring-information-tab1"]').addClass("active")
+		// 	$('[id="mitigation-monitoring-information-tab1-tab"]').addClass("active")
+		// 	// $('[id="mitigation-monitoring-information-tab1-tab"]').attr('aria-selected', 'true');
+		// 	$('[id="mitigation-monitoring-information-tab2-tab"]').removeClass("active")
+		// 	// $('[id="mitigation-monitoring-information-tab2-tab"]').attr('aria-selected', 'false');
+		// }
+		
 	},
 	
 	edit_button:function(frm){
@@ -128,6 +141,8 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			}
 			frm.fields_dict.performance_indicator.df.read_only = 0
 			frm.refresh_field("performance_indicator")
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
 		}
 	},
 
@@ -187,9 +202,9 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						}
 					}
 				})
+				window.location.href = `${frm.doc.name}`
 			}
 		}
-		
 	},
 
 	project_id: function(frm) {
@@ -298,6 +313,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				name:frm.doc.project_id
 			},
 			callback: function(r){
+				console.log("R = ",r.message);
 				var year_options=""
 				for (var i of r.message){
 					year_options += ('\n'+ i)

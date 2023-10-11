@@ -15,7 +15,6 @@ class Mitigations(Document):
 			row.unit = i.unit
 			row.expected_value = i.expected_value
 			row.reference = i.reference
-			frappe.log_error(" Before Edited",self.edited_performance_indicator)
 
 		self.performance_indicator = []
 		for i in old_doc.performance_indicator:
@@ -25,7 +24,7 @@ class Mitigations(Document):
 			row.expected_value = i.expected_value
 			row.reference = i.reference
 
-
+		frappe.log_error("Len",len(self.original_performance_indicator))
 		if len(self.original_performance_indicator) == 0:	
 			for i in old_doc.performance_indicator:
 				row = self.append('original_performance_indicator',{})
@@ -74,7 +73,6 @@ class Mitigations(Document):
 								old_list=frappe.db.get_all(field["options"],
 										fields = ["non_ghg_mitigation_benefits"],
 										filters = {"parent" : old_doc.name},pluck="non_ghg_mitigation_benefits")
-								frappe.log_error("MultiSelect 1",old_list)
 								field_list[field["fieldname"]] = ",".join(old_list)
 
 						if len(self.get(field["fieldname"])) == len(old_doc.get(field["fieldname"])):
@@ -87,8 +85,6 @@ class Mitigations(Document):
 							new_list1.sort()
 							
 							if old_list != new_list1:
-								frappe.log_error("old",old_list)
-								frappe.log_error("new",new_list1)
 								if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 									field_list[field["fieldname"]] = ",".join(old_list)
 
@@ -110,11 +106,8 @@ class Mitigations(Document):
 							new_list2.sort()
 							
 							if old_list != new_list2:
-								frappe.log_error("old",old_list)
-								frappe.log_error("new",new_list2)
 								if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 									field_list[field["fieldname"]] = ",".join(old_list)
 
-			frappe.log_error("List 1",field_list)	
 		return field_list
 	

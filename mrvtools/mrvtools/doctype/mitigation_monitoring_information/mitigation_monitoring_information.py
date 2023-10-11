@@ -93,7 +93,7 @@ class MitigationMonitoringInformation(Document):
 	
 	@frappe.whitelist()
 	def get_years(self,name):
-		start_date = frappe.db.get_value("Project",name,"start_date")
+		start_date = frappe.db.get_value("Mitigations",name,"start_date")
 		if start_date:
 			start_year = str(start_date).split("-")[0]
 			return [str(year) for year in range(int(start_year), 2051)]

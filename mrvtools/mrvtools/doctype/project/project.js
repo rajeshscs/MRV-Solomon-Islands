@@ -191,6 +191,7 @@ frappe.ui.form.on('Project', {
 						}
 					}
 				})
+				window.location.href = `${frm.doc.name}`
 			}
 		}
 		
@@ -198,14 +199,10 @@ frappe.ui.form.on('Project', {
 
 
 	refresh: function(frm){
-		$('[id="project-tab2-tab"]').on('click',function(){
-			frm.refresh_field('original_coordinates')
-			frm.refresh_field('new_coordinates')
-		})
-		
-		$('[id="project-tab1-tab"]').on('click',function(){
-			frm.refresh_field('geographical_co_ordinate')
-		})
+
+		if (frm.doc.work_state == "Approved"){
+			cur_frm.fields_dict.select_approver.df.read_only = 1
+		}
 		
 		if (frm.doc.workflow_state == "Rejected"){
 			frm.set_value("edited_project_details",[])
@@ -308,15 +305,14 @@ frappe.ui.form.on('Project', {
 			$('[id="project-tab1-tab"]').hide()
 			$('[id="project-tab2-tab"]').hide()
 		}
-		else{
-			$('[id="project-tab1-tab"]').addClass("active")
-			$('[id="project-tab1-tab"]').attr('aria-selected', 'true');
-			$('[id="project-tab2-tab"]').removeClass("active")
-			$('[id="project-tab1-tab"]').show()
-			$('[id="project-tab2-tab"]').show()
-			$('[id="project-tab1"]').addClass("active")
-			
-		}
+	// 	else{
+	// 		$('[id="project-tab1-tab"]').addClass("active")
+	// 		$('[id="project-tab1-tab"]').attr('aria-selected', 'true');
+	// 		$('[id="project-tab2-tab"]').removeClass("active")
+	// 		$('[id="project-tab1-tab"]').show()
+	// 		$('[id="project-tab2-tab"]').show()
+	// 		$('[id="project-tab1"]').addClass("active")
+	// 	}
 	}
 });
 function toTitleCase(str) {
