@@ -59,6 +59,7 @@
   {
    "fieldname": "category_section",
    "fieldtype": "Section Break",
+   "label": "Select Categories and Click Load Categories Button",
    "permlevel": 1
   },
   {
@@ -260,7 +261,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:37:36.857125",
+ "modified": "2023-10-12 12:03:10.226110",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",

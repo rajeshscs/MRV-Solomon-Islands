@@ -1,99 +1,100 @@
 <template>
-    <header class="header-one">
-    <div class="lower-topbar">
-       <div class="container">
-          <div class="row">
-             <div class="col col-sm-3">
-                <div class="site-logo">
-                   <a href="#"><img src="http://www.mecdm.gov.sb/templates/g5_hydrogen/custom/images/sig-coa.png" alt=""></a>
-                </div>
-             </div>
-             <div class="col col-sm-9">
-                <!---<div class="awards">
-                   <div>
-                       <div class="icon"><i class="fa fa-phone-square"></i></div>
-                       <div class="award-info">
-                           <h4>Call Us</h4>
-                           <p>+254719439126</p>
-                       </div>
-                   </div>
-                   <div>
-                       <div class="icon"><i class="fa fa-envelope"></i></div>
-                       <div class="award-info">
-                           <h4>Email Us</h4>
-                           <p>muchiri66@Yahoo.com</p>
-                       </div>
-                   </div>
-                   </div>--->
-             </div>
-          </div>
+   <header class="header">
+     <nav class="navbar cus-navbar navbar-expand-lg fixed-top navbar-light bg p-0">
+       <button
+         class="navbar-toggler"
+         type="button"
+         data-toggle="collapse"
+         data-target="#navbarNav"
+         aria-controls="navbarNav"
+         aria-expanded="false"
+         aria-label="Toggle navigation"
+       >
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="site-logo">
+         <!-- Update the src attribute to the correct path -->
+         <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid" />
        </div>
-    </div>
-    <!-- header-area start -->
-    <div id="sticker" class="header-area header-area-2 hidden-xs">
-       <div class="container">
-          <div class="row">
-             <!-- logo start -->
-             <div class="col-md-12 col-sm-12">
-                <div class="header-right-link">
-                   <!-- search option start -->
-                   <div class="search-inner">
-                      <form action="#">
-                         <div class="search-option">
-                            <input type="text" placeholder="Search...">
-                            <button class="button" type="submit"><i class="bi bi-search"></i></button>
-                         </div>
-                         <a class="main-search" href="#"><i class="bi bi-search"></i></a>
-                      </form>
-                   </div>
-                   <a class="s-menu" href="http://144.91.97.45:3000/" target="_blank">Login</a>
-                </div>
-                <!-- mainmenu start -->
-                <nav class="navbar navbar-default">
-                   <div class="collapse navbar-collapse" id="navbar-example">
-                      <div class="main-menu">
-                         <ul class="nav navbar-nav navbar-right">
-                            <li><router-link :to="`/landing`">Home</router-link></li>
-                            <li><router-link :to="`/about`">About MRV Tool</router-link></li>
-                            <li><router-link :to="`/project`">Project</router-link></li>
-                            <li><router-link :to="`/reports`">Reports</router-link></li>
-                            <li><router-link :to="`/knowledgeresource`">Knowledge Resources</router-link></li>
-                         </ul>
-                      </div>
-                   </div>
-                </nav>
-                <!-- mainmenu end -->
-             </div>
-          </div>
+       <div class="collapse navbar-collapse" id="navbarNav">
+         <ul class="navbar-nav ml-auto">
+           <li class="nav-item mr-4">
+             <router-link to="/home" class="custom-link">Home</router-link>
+           </li>
+           <li class="nav-item mr-4">
+             <router-link to="/about" class="custom-link">About MRV Tool</router-link>
+           </li>
+           <li class="nav-item mr-4">
+             <router-link to="/project" class="custom-link">Project</router-link>
+           </li>
+           <li class="nav-item mr-4">
+             <router-link to="/reports" class="custom-link">Reports</router-link>
+           </li>
+           <li class="nav-item mr-4">
+             <router-link to="/knowledgeresource" class="custom-link">Knowledge Resources</router-link>
+           </li>
+         </ul>
        </div>
-    </div>
-    <!-- header-area end -->
-    <!-- mobile-menu-area start -->
-    <div class="mobile-menu-area hidden-lg hidden-md hidden-sm">
-       <div class="container">
-          <div class="row">
-             <div class="col-md-12">
-                <div class="mobile-menu">
-                   <div class="logo">
-                      <!-- <a href="landing"><img src="landingwp-content/uploads/2022/03/logo.png" alt="" /></a> -->
-                   </div>
-                   <nav id="dropdown">
-                      <ul class="nav navbar-nav navbar-right">
-                         <li><a href="/landing">Home</a></li>
-                         <li><a href="/about">About IMRV Tool</a></li>
-                         <li><a href="/project">Projects</a></li>
-                         <li><a href="/reports">Reports</a></li>
-                         <li><a href="/knowledgeresources">Knowledge  Resources</a></li>
-                      </ul>
-                   </nav>
-                </div>
-             </div>
-          </div>
+       <div class="ml-auto">
+        <button class="btn custom-btn btn-md"><a class="s-menu" href="http://144.91.97.45:3000/" target="_blank">Login</a></button>
        </div>
-    </div>
-    <!-- mobile-menu-area end -->		
- </header>
-</template>
-<style>
-    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
-</style>    
+     </nav>
+   </header>
+ </template>
+ 
+ <style scoped>
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins:wght@300&display=swap');
+
+ .site-logo img {
+   max-width: 25%; 
+   margin-left: 70px;
+ }
+ 
+ li {
+   font-size: 18px;
+   font-weight: 500;
+   color: rgb(255, 255, 255);
+ }
+ 
+ .mr-4 {
+   margin-right: 30px;
+ }
+
+ .custom-link {
+   color: aliceblue;
+   margin-left: 10px;
+   font-size: 14px;
+   font-weight: 600;
+   font-family: 'Inter'
+ }
+ 
+ .bg {
+   background-color: #006600;
+ }
+ 
+ .custom-link:hover {
+   color: red;
+   text-decoration: none;
+ }
+ 
+ .custom-btn {
+   background-color: rgb(202, 0, 0);
+   color: #fff;
+   text-decoration: none;
+   border: none;
+   margin-right: 40px;
+   border-radius: 4px;
+ }
+ 
+ .custom-btn:hover {
+   background-color: #ff0000;
+   text-decoration: none;
+   color: #fff;
+ }
+  .cus-navbar {
+   margin-bottom: 0 !important;
+   border-radius: 0 !important;
+ }
+ 
+ </style>
+ 

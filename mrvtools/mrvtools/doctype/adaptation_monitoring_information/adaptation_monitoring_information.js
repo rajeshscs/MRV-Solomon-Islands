@@ -164,7 +164,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 						}
 					})
 				}
-
+				
 				window.location.href = `${frm.doc.name}`
 				
 			}

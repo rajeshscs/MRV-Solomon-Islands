@@ -213,6 +213,8 @@ frappe.ui.form.on('Mitigations', {
 				if(frm.doc.original_performance_indicator.length == 0){
 					window.location.href = `${frm.doc.name}`
 				}
+
+				
 				if(frm.fields_dict.performance_indicator.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,

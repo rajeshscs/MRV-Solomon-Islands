@@ -191,7 +191,9 @@ frappe.ui.form.on('Project', {
 						}
 					}
 				})
-				window.location.href = `${frm.doc.name}`
+				if (frm.doc.edited_project_details.length != 0 || frm.doc.new_coordinates != ''){
+					window.location.href = `${frm.doc.name}`
+				}
 			}
 		}
 		

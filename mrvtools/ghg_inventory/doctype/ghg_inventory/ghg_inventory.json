@@ -26,6 +26,7 @@
   "uncertainity_analysis",
   "column_break_o4tvx",
   "qa_qc_implemented",
+  "work_state",
   "section_break_zx9sk",
   "reference_approach",
   "electricity_generation",
@@ -105,31 +106,18 @@
   "edited_clinker_data",
   "edited_lime_production",
   "edited_chemical_industry",
-  "edited_lubricant_section",
   "edited_lubricant_use",
-  "edited_section_break_shpf2",
   "edited_other_ippu",
-  "edited_section_break_xabuv",
   "edited_refrigeration",
-  "edited_foam_blowing_agents_section",
   "edited_foam_blowing_agents",
-  "edited_fire_protection_section",
   "edited_fire_protection",
-  "edited_aerosols_section",
   "edited_aerosols",
-  "edited_solvents_section",
   "edited_solvents",
-  "edited_other_applications_section",
   "edited_other_applications",
-  "edited_section_break_jvzrb",
   "edited_electrical_equipment",
-  "edited_sf6_and_pfcs_from_other_product_use_section",
   "edited_sf6_and_pfcs_from_other_product_use",
-  "edited_n2o_from_product_uses_section",
   "edited_n2o_from_product_uses",
-  "edited_other_section",
   "edited_other_use",
-  "edited_section_break_7vpnb",
   "edited_activity_data",
   "edited_enteric_fermentation",
   "edited_indirect_manure_management",
@@ -158,7 +146,6 @@
   "edited_other_wastewater_treatement",
   "edited_other_waste",
   "edited_other_sector"
-  
  ],
  "fields": [
   {
@@ -458,116 +445,116 @@
    "options": "AFLOU Agricultural Residues ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.B. Cropland'",
-  "fieldname": "cropland",
-  "fieldtype": "Table",
-  "label": "Cropland",
-  "options": "Forest Land ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.B. Cropland'",
+   "fieldname": "cropland",
+   "fieldtype": "Table",
+   "label": "Cropland",
+   "options": "Forest Land ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.C. Grassland'",
-  "fieldname": "grassland",
-  "fieldtype": "Table",
-  "label": "Grassland",
-  "options": "Forest Land ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.C. Grassland'",
+   "fieldname": "grassland",
+   "fieldtype": "Table",
+   "label": "Grassland",
+   "options": "Forest Land ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.D. Wetlands'",
-  "fieldname": "wetlands",
-  "fieldtype": "Table",
-  "label": "Wetlands",
-  "options": "Forest Land ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.D. Wetlands'",
+   "fieldname": "wetlands",
+   "fieldtype": "Table",
+   "label": "Wetlands",
+   "options": "Forest Land ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.E. Settlements'",
-  "fieldname": "settlements",
-  "fieldtype": "Table",
-  "label": "Settlements",
-  "options": "Forest Land ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.E. Settlements'",
+   "fieldname": "settlements",
+   "fieldtype": "Table",
+   "label": "Settlements",
+   "options": "Forest Land ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.F. Other land'",
-  "fieldname": "other_land",
-  "fieldtype": "Table",
-  "label": "Other land",
-  "options": "Forest Land ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.F. Other land'",
+   "fieldname": "other_land",
+   "fieldtype": "Table",
+   "label": "Other land",
+   "options": "Forest Land ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.G. Harvested wood products'",
-  "fieldname": "harvested_wood_products",
-  "fieldtype": "Table",
-  "label": "Harvested wood products",
-  "options": "AFOLU  Wood Product ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.G. Harvested wood products'",
+   "fieldname": "harvested_wood_products",
+   "fieldtype": "Table",
+   "label": "Harvested wood products",
+   "options": "AFOLU  Wood Product ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.H. Biomass Burning'",
-  "fieldname": "biomass_burning",
-  "fieldtype": "Table",
-  "label": "Biomass Burning",
-  "options": "AFOLU Biomass Burning ChildTable"
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.H. Biomass Burning'",
+   "fieldname": "biomass_burning",
+   "fieldtype": "Table",
+   "label": "Biomass Burning",
+   "options": "AFOLU Biomass Burning ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
-  "fieldname": "waste_incineration",
-  "fieldtype": "Table",
-  "label": "Incineration and open burning of waste-Waste Incineration",
-  "options": "Waste Incineration ChildTable"
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
+   "fieldname": "waste_incineration",
+   "fieldtype": "Table",
+   "label": "Incineration and open burning of waste-Waste Incineration",
+   "options": "Waste Incineration ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
-  "fieldname": "open_burning_of_waste",
-  "fieldtype": "Table",
-  "label": "Incineration and open burning of waste-Open Burning of Waste",
-  "options": "Open Burning Waste ChildTable"
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
+   "fieldname": "open_burning_of_waste",
+   "fieldtype": "Table",
+   "label": "Incineration and open burning of waste-Open Burning of Waste",
+   "options": "Open Burning Waste ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.B. Biological treatment of solid waste'",
-  "fieldname": "biological_treatment",
-  "fieldtype": "Table",
-  "label": "Biological treatment of solid waste",
-  "options": "Waste Biological Treatment ChildTable"
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.B. Biological treatment of solid waste'",
+   "fieldname": "biological_treatment",
+   "fieldtype": "Table",
+   "label": "Biological treatment of solid waste",
+   "options": "Waste Biological Treatment ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
-  "fieldname": "other_wastewater_treatement",
-  "fieldtype": "Table",
-  "label": "Other",
-  "options": "Waste Water Treatment Other ChildTable"
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
+   "fieldname": "other_wastewater_treatement",
+   "fieldtype": "Table",
+   "label": "Other",
+   "options": "Waste Water Treatment Other ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.E. Other'",
-  "fieldname": "other_waste",
-  "fieldtype": "Table",
-  "label": "Other",
-  "options": "Waste Others ChildTable"
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.E. Other'",
+   "fieldname": "other_waste",
+   "fieldtype": "Table",
+   "label": "Other",
+   "options": "Waste Others ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector == '6. Other'",
-  "fieldname": "other_sector",
-  "fieldtype": "Table",
-  "label": "Other",
-  "options": "Others ChildTable"
+   "depends_on": "eval:doc.sector == '6. Other'",
+   "fieldname": "other_sector",
+   "fieldtype": "Table",
+   "label": "Other",
+   "options": "Others ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
-  "fieldname": "clinker_data",
-  "fieldtype": "Table",
-  "label": "Clinker Data",
-  "options": "IPPU Cement Clinker ChildTable"
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
+   "fieldname": "clinker_data",
+   "fieldtype": "Table",
+   "label": "Clinker Data",
+   "options": "IPPU Cement Clinker ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.1. International bunkers' && doc.sub_category",
-  "fieldname": "international_bunkers",
-  "fieldtype": "Table",
-  "label": " International Bunkers ",
-  "options": "Energy Sector ChildTable"
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.1. International bunkers' && doc.sub_category",
+   "fieldname": "international_bunkers",
+   "fieldtype": "Table",
+   "label": " International Bunkers ",
+   "options": "Energy Sector ChildTable"
   },
   {
-  "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
-  "fieldname": "cement_production",
-  "fieldtype": "Table",
-  "label": "Cement production",
-  "options": "IPPU Cement ChildTable"
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
+   "fieldname": "cement_production",
+   "fieldtype": "Table",
+   "label": "Cement production",
+   "options": "IPPU Cement ChildTable"
   },
   {
    "fieldname": "column_break_qwkjk",
@@ -691,358 +678,417 @@
    "label": "Details"
   },
   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.1. Energy industries' && doc.sub_category == '1.A.1.a.i. Electricity generation'",
-	"fieldname": "edited_electricity_generation",
-	"fieldtype": "Table",
-	"label": "Electricity Generation",
-	"options": "Energy Sector ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.3. Transport' && doc.sub_category",
-	"fieldname": "edited_transport",
-	"fieldtype": "Table",
-	"options": "Energy Sector ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.approach == 'Reference Approach'",
-	"fieldname": "edited_reference_approach",
-	"fieldtype": "Table",
-	"label": "Reference Approach",
-	"options": "Energy Reference ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.A. Enteric fermentation'",
-	"fieldname": "edited_enteric_fermentation",
-	"fieldtype": "Table",
-	"label": "Enteric Fermentation",
-	"options": "Manure Management ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.A. Forest land'",
-	"fieldname": "edited_forest_land",
-	"fieldtype": "Table",
-	"label": "Forest Land",
-	"options": "Forest Land ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.H. Urea application'",
-	"fieldname": "edited_urea_application",
-	"fieldtype": "Table",
-	"label": "Urea Fertilization",
-	"options": "Urea Application ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.1.  Direct N2O emissions from managed soils'",
-	"fieldname": "edited_direct_managed_soils",
-	"fieldtype": "Table",
-	"label": "Direct N2O emissions from managed soils",
-	"options": "Direct Emission Managed Organic  Soils ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
-	"fieldname": "edited_atmospheric_deposit",
-	"fieldtype": "Table",
-	"label": "N2O Atmospheric Deposition",
-	"options": "Indirect Emission Managed Soils ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
-	"fieldname": "edited_n2o_from_n_leaching",
-	"fieldtype": "Table",
-	"label": "N2O from N Leaching/ Runoff",
-	"options": "Indirect Emission Managed Soils ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.A. Solid waste disposal'",
-	"fieldname": "edited_solid_waste",
-	"fieldtype": "Table",
-	"label": "Solid Waste",
-	"options": "Solid Waste Disposal ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
-	"fieldname": "edited_n2o_wastewater_treatment",
-	"fieldtype": "Table",
-	"label": "Domestic wastewater - N2O Emissions",
-	"options": "Waste Water Treatment Emission ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
-	"fieldname": "edited_industrial_wastewater_treatment",
-	"fieldtype": "Table",
-	"label": "Industrial Wastewater",
-	"options": "Industrial Wastewater Treatment and Discharge ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
-	"fieldname": "edited_lubricant_use",
-	"fieldtype": "Table",
-	"options": "Lubricant Data ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.a. Manure management'&&doc.sub_sector=='3.B.5. Indirect N2O emissions'",
-	"fieldname": "edited_indirect_manure_management",
-	"fieldtype": "Table",
-	"label": "Manure Management - Indirect N2O Emissions",
-	"options": "Manure Management ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
-	"fieldname": "edited_ch4_wastewater_treatment",
-	"fieldtype": "Table",
-	"label": "Domestic wastewater - CH4 Emissions",
-	"options": "Waste Water Treatment ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.2 Manufacturing industries and construction' && doc.sub_category",
-	"fieldname": "edited_manufacturing_industries",
-	"fieldtype": "Table",
-	"options": "Energy Sector ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.4. Other sectors'&& doc.sub_category",
-	"fieldname": "edited_other_sectors",
-	"fieldtype": "Table",
-	"options": "Energy Sector ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.5. Other'",
-	"fieldname": "edited_other_energy",
-	"fieldtype": "Table",
-	"label": "1.A.5. Other",
-	"options": "Energy Sector ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.3. CO2 emissions from biomass'",
-	"fieldname": "edited_co2_emissions_from_biomass",
-	"fieldtype": "Table",
-	"label": "CO2 emissions from biomass",
-	"options": "Energy Biomass ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.2. Lime production'",
-	"fieldname": "edited_lime_production",
-	"fieldtype": "Table",
-	"label": "Lime production",
-	"options": "IPPU Lime ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.B. Chemical industry'",
-	"fieldname": "edited_chemical_industry",
-	"fieldtype": "Table",
-	"label": "Chemical industry",
-	"options": "IPPU Chemical ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D. Non-Energy Products from Fuels and Solvent Use'",
-	"fieldname": "edited_other_ippu",
-	"fieldtype": "Table",
-	"options": "IPPU Non Energy Others ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_refrigeration",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_foam_blowing_agents",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_fire_protection",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_aerosols",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_solvents",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
-	"fieldname": "edited_other_applications",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
-	"fieldname": "edited_electrical_equipment",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
-	"fieldname": "edited_sf6_and_pfcs_from_other_product_use",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
-	"fieldname": "edited_n2o_from_product_uses",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
-	"fieldname": "edited_other_use",
-	"fieldtype": "Table",
-	"options": "IPPU Ozone ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.H. Other'&&doc.sub_sector=='2.H.2. Food and beverages industry'",
-	"fieldname": "edited_activity_data",
-	"fieldtype": "Table",
-	"label": "Activity Data",
-	"options": "IPPU Food ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.b. Direct N2O emissions per MMS (kt N2O)'",
-	"fieldname": "edited_direct_emissions_mms",
-	"fieldtype": "Table",
-	"label": "Direct N2O emissions per MMS",
-	"options": "AFLOU Direct N2O Emission ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.E. Prescribed burning of savannahs'",
-	"fieldname": "edited_activity_data_burning",
-	"fieldtype": "Table",
-	"label": "Activity Data",
-	"options": "AFOLU Prescribed Burning ChildTable"
-   },
-   {
-	"depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.F. Field burning of agricultural residues'",
-	"fieldname": "edited_activity_data_agriculture",
-	"fieldtype": "Table",
-	"label": "Activity Data",
-	"options": "AFLOU Agricultural Residues ChildTable"
-   },
-   {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.1. Energy industries' && doc.sub_category == '1.A.1.a.i. Electricity generation'",
+   "fieldname": "edited_electricity_generation",
+   "fieldtype": "Table",
+   "label": "Electricity Generation",
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.3. Transport' && doc.sub_category",
+   "fieldname": "edited_transport",
+   "fieldtype": "Table",
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.approach == 'Reference Approach'",
+   "fieldname": "edited_reference_approach",
+   "fieldtype": "Table",
+   "label": "Reference Approach",
+   "options": "Energy Reference ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.A. Enteric fermentation'",
+   "fieldname": "edited_enteric_fermentation",
+   "fieldtype": "Table",
+   "label": "Enteric Fermentation",
+   "options": "Manure Management ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.A. Forest land'",
+   "fieldname": "edited_forest_land",
+   "fieldtype": "Table",
+   "label": "Forest Land",
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.H. Urea application'",
+   "fieldname": "edited_urea_application",
+   "fieldtype": "Table",
+   "label": "Urea Fertilization",
+   "options": "Urea Application ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.1.  Direct N2O emissions from managed soils'",
+   "fieldname": "edited_direct_managed_soils",
+   "fieldtype": "Table",
+   "label": "Direct N2O emissions from managed soils",
+   "options": "Direct Emission Managed Organic  Soils ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
+   "fieldname": "edited_atmospheric_deposit",
+   "fieldtype": "Table",
+   "label": "N2O Atmospheric Deposition",
+   "options": "Indirect Emission Managed Soils ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.2. Indirect N2O Emissions from managed soils'",
+   "fieldname": "edited_n2o_from_n_leaching",
+   "fieldtype": "Table",
+   "label": "N2O from N Leaching/ Runoff",
+   "options": "Indirect Emission Managed Soils ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.A. Solid waste disposal'",
+   "fieldname": "edited_solid_waste",
+   "fieldtype": "Table",
+   "label": "Solid Waste",
+   "options": "Solid Waste Disposal ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
+   "fieldname": "edited_n2o_wastewater_treatment",
+   "fieldtype": "Table",
+   "label": "Domestic wastewater - N2O Emissions",
+   "options": "Waste Water Treatment Emission ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
+   "fieldname": "edited_industrial_wastewater_treatment",
+   "fieldtype": "Table",
+   "label": "Industrial Wastewater",
+   "options": "Industrial Wastewater Treatment and Discharge ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
+   "fieldname": "edited_lubricant_use",
+   "fieldtype": "Table",
+   "options": "Lubricant Data ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.a. Manure management'&&doc.sub_sector=='3.B.5. Indirect N2O emissions'",
+   "fieldname": "edited_indirect_manure_management",
+   "fieldtype": "Table",
+   "label": "Manure Management - Indirect N2O Emissions",
+   "options": "Manure Management ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
+   "fieldname": "edited_ch4_wastewater_treatment",
+   "fieldtype": "Table",
+   "label": "Domestic wastewater - CH4 Emissions",
+   "options": "Waste Water Treatment ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.2 Manufacturing industries and construction' && doc.sub_category",
+   "fieldname": "edited_manufacturing_industries",
+   "fieldtype": "Table",
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.4. Other sectors'&& doc.sub_category",
+   "fieldname": "edited_other_sectors",
+   "fieldtype": "Table",
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.A. Fuel combustion activities' && doc.sub_sector == '1.A.5. Other'",
+   "fieldname": "edited_other_energy",
+   "fieldtype": "Table",
+   "label": "1.A.5. Other",
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.3. CO2 emissions from biomass'",
+   "fieldname": "edited_co2_emissions_from_biomass",
+   "fieldtype": "Table",
+   "label": "CO2 emissions from biomass",
+   "options": "Energy Biomass ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.2. Lime production'",
+   "fieldname": "edited_lime_production",
+   "fieldtype": "Table",
+   "label": "Lime production",
+   "options": "IPPU Lime ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.B. Chemical industry'",
+   "fieldname": "edited_chemical_industry",
+   "fieldtype": "Table",
+   "label": "Chemical industry",
+   "options": "IPPU Chemical ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D. Non-Energy Products from Fuels and Solvent Use'",
+   "fieldname": "edited_other_ippu",
+   "fieldtype": "Table",
+   "options": "IPPU Non Energy Others ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_refrigeration",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_foam_blowing_agents",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_fire_protection",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_aerosols",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_solvents",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.F. Product uses as substitutes for ODS'",
+   "fieldname": "edited_other_applications",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "edited_electrical_equipment",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "edited_sf6_and_pfcs_from_other_product_use",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "edited_n2o_from_product_uses",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "fieldname": "edited_other_use",
+   "fieldtype": "Table",
+   "options": "IPPU Ozone ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.H. Other'&&doc.sub_sector=='2.H.2. Food and beverages industry'",
+   "fieldname": "edited_activity_data",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "IPPU Food ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.B.b. Direct N2O emissions per MMS (kt N2O)'",
+   "fieldname": "edited_direct_emissions_mms",
+   "fieldtype": "Table",
+   "label": "Direct N2O emissions per MMS",
+   "options": "AFLOU Direct N2O Emission ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.E. Prescribed burning of savannahs'",
+   "fieldname": "edited_activity_data_burning",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "AFOLU Prescribed Burning ChildTable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.F. Field burning of agricultural residues'",
+   "fieldname": "edited_activity_data_agriculture",
+   "fieldtype": "Table",
+   "label": "Activity Data",
+   "options": "AFLOU Agricultural Residues ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.B. Cropland'",
    "fieldname": "edited_cropland",
    "fieldtype": "Table",
    "label": "Cropland",
-   "options": "Forest Land ChildTable"
-   },
-   {
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.C. Grassland'",
    "fieldname": "edited_grassland",
    "fieldtype": "Table",
    "label": "Grassland",
-   "options": "Forest Land ChildTable"
-   },
-   {
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.D. Wetlands'",
    "fieldname": "edited_wetlands",
    "fieldtype": "Table",
    "label": "Wetlands",
-   "options": "Forest Land ChildTable"
-   },
-   {
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.E. Settlements'",
    "fieldname": "edited_settlements",
    "fieldtype": "Table",
    "label": "Settlements",
-   "options": "Forest Land ChildTable"
-   },
-   {
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.F. Other land'",
    "fieldname": "edited_other_land",
    "fieldtype": "Table",
    "label": "Other land",
-   "options": "Forest Land ChildTable"
-   },
-   {
+   "options": "Forest Land ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.G. Harvested wood products'",
    "fieldname": "edited_harvested_wood_products",
    "fieldtype": "Table",
    "label": "Harvested wood products",
-   "options": "AFOLU  Wood Product ChildTable"
-   },
-   {
+   "options": "AFOLU  Wood Product ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.H. Biomass Burning'",
    "fieldname": "edited_biomass_burning",
    "fieldtype": "Table",
    "label": "Biomass Burning",
-   "options": "AFOLU Biomass Burning ChildTable"
-   },
-   {
+   "options": "AFOLU Biomass Burning ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
    "fieldname": "edited_waste_incineration",
    "fieldtype": "Table",
    "label": "Incineration and open burning of waste-Waste Incineration",
-   "options": "Waste Incineration ChildTable"
-   },
-   {
+   "options": "Waste Incineration ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.C. Incineration and open burning of waste'",
    "fieldname": "edited_open_burning_of_waste",
    "fieldtype": "Table",
    "label": "Incineration and open burning of waste-Open Burning of Waste",
-   "options": "Open Burning Waste ChildTable"
-   },
-   {
+   "options": "Open Burning Waste ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.B. Biological treatment of solid waste'",
    "fieldname": "edited_biological_treatment",
    "fieldtype": "Table",
    "label": "Biological treatment of solid waste",
-   "options": "Waste Biological Treatment ChildTable"
-   },
-   {
+   "options": "Waste Biological Treatment ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.D. Wastewater treatment and discharge'",
    "fieldname": "edited_other_wastewater_treatement",
    "fieldtype": "Table",
    "label": "Other",
-   "options": "Waste Water Treatment Other ChildTable"
-   },
-   {
+   "options": "Waste Water Treatment Other ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '5. Waste' && doc.category == '5.E. Other'",
    "fieldname": "edited_other_waste",
    "fieldtype": "Table",
    "label": "Other",
-   "options": "Waste Others ChildTable"
-   },
-   {
+   "options": "Waste Others ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector == '6. Other'",
    "fieldname": "edited_other_sector",
    "fieldtype": "Table",
    "label": "Other",
-   "options": "Others ChildTable"
-   },
-   {
+   "options": "Others ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
    "fieldname": "edited_clinker_data",
    "fieldtype": "Table",
    "label": "Clinker Data",
-   "options": "IPPU Cement Clinker ChildTable"
-   },
-   {
+   "options": "IPPU Cement Clinker ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector=='1. Energy' && doc.category == '1.D. Memo Items' && doc.sub_sector == '1.D.1. International bunkers' && doc.sub_category",
    "fieldname": "edited_international_bunkers",
    "fieldtype": "Table",
    "label": " International Bunkers ",
-   "options": "Energy Sector ChildTable"
-   },
-   {
+   "options": "Energy Sector ChildTable",
+   "read_only": 1
+  },
+  {
    "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.A. Mineral industry' && doc.sub_sector == '2.A.1. Cement production'",
    "fieldname": "edited_cement_production",
    "fieldtype": "Table",
    "label": "Cement production",
-   "options": "IPPU Cement ChildTable"
-   }
+   "options": "IPPU Cement ChildTable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "work_state",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Work State",
+   "options": "\nPending\nApproved\nRejected"
+  }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-05 20:43:59.419551",
+ "modified": "2023-10-12 20:07:32.690429",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

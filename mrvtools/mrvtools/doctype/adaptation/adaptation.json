@@ -168,6 +168,7 @@
   {
    "fieldname": "section_break_62rin",
    "fieldtype": "Section Break",
+   "label": "Select Categories and Click Load Categories Button",
    "permlevel": 1
   },
   {
@@ -305,7 +306,7 @@
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
+   "label": "Edited Adaptation Details",
    "permlevel": 1
   },
   {
@@ -362,7 +363,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:36:36.559102",
+ "modified": "2023-10-12 13:09:29.078963",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",

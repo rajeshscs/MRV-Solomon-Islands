@@ -60,5 +60,17 @@ class GHGInventory(Document):
 								for idx, j in enumerate(self.get(field["fieldname"])):
 									row = self.get('edited_' + field["fieldname"])[idx]
 									row.set(i["fieldname"], j.get(i["fieldname"]))
+
+						# self.set(field["fieldname"],[])
+						# for i in fields1:
+						# 	if counter == 0:
+						# 		counter = 1
+						# 		for j in old_doc.get(field["fieldname"]):
+						# 			row = self.append(field["fieldname"],{})
+						# 			row.set(i["fieldname"], j.get(i["fieldname"]))
+						# 	else:
+						# 		for idx, j in enumerate(old_doc.get(field["fieldname"])):
+						# 			row = self.get(field["fieldname"])[idx]
+						# 			row.set(i["fieldname"], j.get(i["fieldname"]))
 					
 		return "YES"

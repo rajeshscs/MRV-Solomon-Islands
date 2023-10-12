@@ -20,9 +20,7 @@
   "get_location",
   "geographical_co_ordinate",
   "other_agency",
-  "end_date",
   "lifetime",
-  "cost",
   "column_break_prrqs",
   "objective",
   "key_sub_sector",
@@ -33,11 +31,14 @@
   "financial_closure_date",
   "costusd",
   "source_of_funding",
-  "remarks",
   "upload_document",
+  "end_date",
+  "cost",
   "select_approver",
   "naming_series",
   "work_state",
+  "section_break_m3lhf",
+  "remarks",
   "tab2",
   "edited_project_details",
   "geographical_coordinates_section",
@@ -289,6 +290,10 @@
    "label": "New Coordinates",
    "permlevel": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_m3lhf",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -306,7 +311,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-10-07 12:39:14.013569",
+ "modified": "2023-10-12 14:00:43.341991",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

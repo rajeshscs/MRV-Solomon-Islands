@@ -36,6 +36,14 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.refresh_field('sub_category')
 		}
 		
+
+		if(frm.doc.workflow_state == "Approved"){
+			if (frm.doc.workflow_state == "Approved"){
+
+			}
+			frm.set_value('work_state','Approved')
+			frm.save()
+		}
 		// if(frm.doc.sub_sector == '3.C.6. Indirect N2O Emissions from manure management'){
 		// 	// frm.fields_dict.indirect_manure_management.df.hidden = 0
 		// 	frm.refresh_field('indirect_manure_management')
@@ -627,14 +635,19 @@ frappe.ui.form.on('GHG Inventory', {
 		// }
 	},
 	before_save:function(frm){
-		frm.call({
-			doc:frm.doc,
-			method:"before_saving_table",
-			async:false,
-			callback:function(r){
-				console.log("Mudinchhh!",r.message);
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				frm.call({
+					doc:frm.doc,
+					method:"before_saving_table",
+					async:false,
+					callback:function(r){
+						console.log("Mudinchhh!",r.message);
+					}
+				})
 			}
-		})
+		}
+		
 	},
 
 	/////////////////////////////////////////////////////////////////////
@@ -892,7 +905,7 @@ frappe.ui.form.on('Energy Reference ChildTable',{
 			for (var i of r){
 				fuel_options += ('\n'+ i)
 			}
-			if(cur_frm.fields_dict.reference_approach.df.hidden == 0){
+			if(cur_frm.doc.reference_approach.length != 0 && frm.doc.approach=="Reference Approach"){
 				cur_frm.grids[0].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('reference_approach')
 			}
@@ -1015,27 +1028,29 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 			for (var i of r){
 				fuel_options += ('\n'+ i)
 			}
-			if(cur_frm.fields_dict.electricity_generation.df.hidden == 0){
+			console.log(fuel_options);
+			if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
 				cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('electricity_generation')
 				}
-			if(cur_frm.fields_dict.manufacturing_industries.df.hidden == 0){
+			if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
+				console.log(fuel_options);
 				cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('manufacturing_industries')
 				}
-			if(cur_frm.fields_dict.transport.df.hidden == 0){
+			if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.3. Transport"){
 				cur_frm.grids[3].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('transport')
 				}
-			if(cur_frm.fields_dict.other_sectors.df.hidden == 0){
+			if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.4. Other sectors"){
 				cur_frm.grids[4].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('other_sectors')
 				}
-			if(cur_frm.fields_dict.other_energy.df.hidden == 0){
+			if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.5. Other"){
 				cur_frm.grids[5].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('other_energy')
 				}
-			if(cur_frm.fields_dict.international_bunkers.df.hidden == 0){
+			if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.D.1. International bunkers"){
 				cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field('international_bunkers')
 				}
