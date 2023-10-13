@@ -670,6 +670,7 @@ frappe.ui.form.on('Adaptation', {
 					method:"get_jsons",
 					async: false,
 					callback:function(r){
+						console.log(r.message);
 						if (r.message[0].length != 0){
 
 

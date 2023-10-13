@@ -2,11 +2,10 @@
    <Header />
    <!-- header end -->
    <section class="breadcrumb-area">
-   <div class="container-fluid p-0">
+   <!-- <div class="container-fluid">
       <div class="row">
          <div class="col-12">
             <div class="all-banner" style="position: relative;">
-               <img src="http://environment.goappssolutions.com/wp-content/uploads/2021/11/all.jpg" alt=""/>
             </div>
             <br><br>
             <div class="inner-content clearfix">
@@ -14,58 +13,60 @@
                   <h1 style="font-weight: 800; color: white;">Projects</h1>
                   <div style="position: absolute; top: -10px; left: 0; width: 10%; border-top: 5px solid white;"></div>
                </div>
-               <div class="breadcrumb-menu" style="position: absolute; top: 200px; right: 200px; word-spacing: 30px; padding: 20px;">
+                <div class="breadcrumb-menu" style="position: absolute; top: 200px; right: 200px; word-spacing: 30px; padding: 20px;">
                   <a style="color: #fff;" href="#">Home </a>
                   <a style="color: #fff;" href="#"> Projects</a>
-               </div>
+               </div> 
             </div>
          </div>
       </div>
-   </div>
+   </div> -->
 </section>
 
    <div class="tab-area fix area-padding bg-color wow fadeInUp" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
            <div class="section-headline text-center">
-            <h3 class="p-5" style="font-size: 40px; font-weight:500;"> Our Projects</h3>
+            <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
            </div>
            <ul class="pr-blw-img-list" style="list-style: none; display: flex;">
-               <li style="margin-right: 20px;"><img src="http://imrvtool.com/wp-content/uploads/2022/05/p-1.jpg" style="max-width: 100%; height: auto;"></li>
-               <li style="margin-right: 20px;"><img src="http://imrvtool.com/wp-content/uploads/2022/05/p-2.jpg" style="max-width: 100%; height: auto;"></li>
-               <li><img src="http://imrvtool.com/wp-content/uploads/2022/05/p-3.jpg" style="max-width: 100%; height: auto;"></li>
+            <li style="margin-right: 20px;"><img src="../assets/images/Total-ADC-Action.png" style="max-width: 100%; height: auto;"></li>
+               <li style="margin-right: 20px;"><img src="../assets/images/Total-Climate-Finance-mobilised.png" style="max-width: 100%; height: auto;"></li>
+               <li style="margin-right: 20px;"><img src="../assets/images/NDC-Actions-by-source.png" style="max-width: 100%; height: auto;"></li>
            </ul>
+           <br>
            <br>
 
            <div class="row">
-               <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
-                   <div class="tab-menu d-flex justify-content-between">
-                       <!-- Start Nav tabs -->
-                       <ul class="nav nav-pills mb-4 shadow-sm w-100 d-flex justify-content-center" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                        <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false" style="color: black; background-color: white; border-radius: 0.5rem 0.5rem 0 0; font-size: 20px; font-weight: 500; margin-left: 10px;">Adaptation Action</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false" style="color: black; background-color: white; border-radius: 0.5rem 0.5rem 0 0; font-size: 20px; font-weight: 500; margin-left: 10px;">Mitigation action</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false" style="color: black; background-color: white; border-radius: 0.5rem 0.5rem 0 0; font-size: 20px; font-weight: 500; margin-left: 10px;">Cross cutting</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false" style="color: black; background-color: white; border-radius: 0.5rem 0.5rem 0 0; font-size: 20px; font-weight: 500; margin-left: 10px;">Enablers</a>
-                     </li>
-                     </ul>
+            <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
+         </div> -->
+         <div class="tab-menu d-flex mx-5 mb-4 justify-content-between">
+               <!-- Start Nav tabs -->
+               <ul class=" nav nav-pills  shadow-sm" id="pills-tab" role="tablist"> <!-- Use w-100 for full width tabs -->
+                  <li class="nav-item">
+                     <a class="nav-link style-class " id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true" >Adaptation action</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation aaction</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
+                  </li>
 
-                   </div>
-               </div>
+               </ul>  
+            </div>
 
-               <div class="container-fluid p-5">
+
+               <div class="container-fluid">
             <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
                <div class="tab-content p-4">
                   <!-- Start Tab Content -->
                   <div class="tab-pane active" id="p-view-2">
                   <div class="tab-inner">
                      <div class="table-responsive">
-                     <table class="table table-rounded">
+                     <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
                            <th scope="col">Sno</th>
@@ -116,8 +117,8 @@
                   <div class="tab-pane" id="p-view-5">
                   <div class="tab-inner">
                      <div class="table-responsive">
-                     <table class="table">
-                        <thead style="background-color: #006600; color:white; padding: 20px">
+                     <table class="table table-striped table-bordered table-hover">
+             <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
                            <th style="padding: 20px;" scope="col">Sno</th>
                            <th style="padding: 20px;" scope="col">Intervention</th>
@@ -167,8 +168,8 @@
                   <div class="tab-pane" id="p-view-6">
                   <div class="tab-inner">
                      <div class="table-responsive">
-                     <table class="table">
-                        <thead style="background-color: #006600; color:white; padding: 20px">
+                     <table class="table table-striped table-bordered table-hover">
+             <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
                            <th style="padding: 20px;" scope="col">Sno</th>
                            <th style="padding: 20px;" scope="col">Intervention</th>
@@ -205,8 +206,8 @@
                   <div class="tab-pane" id="p-view-7">
                   <div class="tab-inner">
                      <div class="table-responsive">
-                     <table class="table">
-                        <thead style="background-color: #006600; color:white; padding: 20px">
+                     <table class="table table-striped table-bordered table-hover">
+             <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
                            <th style="padding: 20px;" scope="col">Sno</th>
                            <th style="padding: 20px;" scope="col">Intervention</th>
@@ -254,17 +255,18 @@ import Footer from '../components/Footer.vue'
 import Header from '../components/Header.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 </script>
-<style style="padding: 15px;" scoped>
-/* .tab-area .nav-.tab-area .nav-pills .nav-link.active {
-    border: none !important; 
-    color: #0f0f0f !important;
+<style>
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff !important;
+    background-color: green;
+    border:none !important;
+    box-shadow: #014b05be 0 0 10px;
+    
 }
 
 .tab-area .nav-pills .nav-link:not(.active):hover {
-    color: #55c57a !important;
-} */
-.style-class {
-  font-weight: 900;
+    color: #000000 !important;
+    background-color: green !important;
 }
 
 .style-class:hover {
@@ -272,5 +274,17 @@ import Breadcrumb from '../components/Breadcrumb.vue'
   font-weight: 700;
 }
 
+.style-class {
+    color: rgb(0, 0, 0) !important;
+    background-color:none !important;
+    border: 0.1px solid #0000006c !important;
+    font-size: 15px !important;
+    font-weight: 500;
+    border-radius: 100px !important ; 
+    margin-left: 10px;
+  }
 
+.tab-menu{
+   size: 20% !important;
+}
 </style>

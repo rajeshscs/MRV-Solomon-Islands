@@ -40,9 +40,18 @@ const routes = [
   },
 ]
 
+
+
+
+
 let router = createRouter({
   history: createWebHistory('/frontend'),
   routes,
+
+  scrollBehavior(to, from, savedPosition){
+    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+    // return savedPosition || {top:0}
+  }
 })
 
 router.beforeEach(async (to, from, next) => {

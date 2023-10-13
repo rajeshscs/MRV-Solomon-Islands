@@ -2,11 +2,7 @@
 // For license information, please see license.txt
 var dynamicTitleList = ['','','','']
 frappe.ui.form.on('GHG Inventory', {
-	// after_save:function(frm){
-	// 	frm.set_value('name','Sample')
-	// 	frm.refresh_field('name')
-	// 	// frm.doc.name = "Sample"
-	// },
+	
 	refresh: function(frm) {
 		if(frm.is_new()){
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
@@ -39,11 +35,62 @@ frappe.ui.form.on('GHG Inventory', {
 
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"){
-
 			}
 			frm.set_value('work_state','Approved')
 			frm.save()
 		}
+
+		frm.call({
+			doc:frm.doc,
+			method:'table_list',
+			async:false,
+			callback: function(r){
+				console.log(r.message);
+				for (var i of r.message){
+					var table_name = ""
+					var parts = i.split("_");
+					parts.shift();
+					table_name = parts.join("_");
+					if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc[i].length != 0){
+						frm.fields_dict[table_name].df.read_only = 1
+						frm.refresh_field(table_name)
+						frm.fields_dict.edit_button.df.hidden = 0
+						frm.refresh_field("edit_button")
+					}
+
+					if (frm.doc.workflow_state == "Rejected"){
+						frm.set_value("edited_performance_indicator",[])
+						frm.set_value('work_state','Approved')
+						frm.save()
+					}
+
+					if(frm.doc.workflow_state == "Approved"){
+						if (frm.doc.workflow_state == "Approved" && i.length != 0){
+							frm.call({
+								doc:frm.doc,
+								method:"after_saving_table",
+								async:false,
+								callback:function(res){
+									console.log("Working.......");
+								}
+							})
+							frm.set_value(i,[])
+							frm.refresh_field(i)
+						}
+						// frm.set_value("edited_project_details",[])
+						frm.set_value('work_state','Approved')
+						frm.save()
+					}
+
+
+					if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+						$('[id="ghg-inventory-tab1"]').addClass("active")
+					}
+				}
+			}
+		})
+
+		
 		// if(frm.doc.sub_sector == '3.C.6. Indirect N2O Emissions from manure management'){
 		// 	// frm.fields_dict.indirect_manure_management.df.hidden = 0
 		// 	frm.refresh_field('indirect_manure_management')
@@ -63,6 +110,94 @@ frappe.ui.form.on('GHG Inventory', {
 		// cur_frm.fields_dict.sub_category.df.options = ''
 		// frm.refresh_field('sub_category')
 	},
+
+	before_save:function(frm){
+		if(frm.doc.work_state == "Approved"){
+			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				frm.call({
+					doc:frm.doc,
+					method:"before_saving_table",
+					async:false,
+					callback:function(r){
+						console.log("Mudinchhh!");
+					}
+				})
+				window.location.href = `${frm.doc.name}`
+			}
+		}
+		
+	},
+
+	edit_button:function(frm,cdt,cdn){
+		
+		frm.call({
+			doc:frm.doc,
+			method:'edited_table_list',
+			async:false,
+			callback: function(r){
+				for(var [key,value] of Object.entries(r.message)){
+					var table_name = ""
+					var parts = key.split("_");
+					parts.shift();
+					table_name = parts.join("_");
+					frm.set_value(table_name,[])
+					var counter1=0
+					if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
+						for (var i of value){
+							console.log(i);
+							if (counter1 == 0){
+								counter1 = 1
+								for(var row of frm.doc[key]){
+									var child = frm.add_child(table_name)
+									console.log(i,row[i]);
+									child[i] = row[i]
+								}
+							}
+							else{
+								for(var j=0;j<frm.doc[key].length;j++){
+									frm.doc[table_name][j][i] = frm.doc[key][j][i]
+									frm.refresh_field(table_name);
+								}
+								
+							}
+							
+						}
+						frm.refresh_field(table_name)
+					}
+
+					
+
+				}
+			}
+		})
+		// frm.call({
+		// 	doc:frm.doc,
+		// 	method:'edit_table',
+		// 	async:false,
+		// 	callback: function(r){
+		// 		console.log(r.message);
+		// 		for (var i of r.message){
+		// 			if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected")){
+		// 				frm.call({
+		// 					doc:frm.doc,
+		// 					method:"after_saving_table",
+		// 					async:false,
+		// 					callback:function(res){
+		// 						console.log("Working.......");
+		// 					}
+		// 				})
+		// 				frm.set_value(i,[])
+		// 				frm.refresh_field(i)
+		// 			}
+		// 			// frm.set_value("edited_project_details",[])
+		// 			frm.set_value('work_state','Approved')
+		// 			frm.save()
+		// 		}
+				
+		// 	}
+		// })
+	},
+
 	sector: function(frm){
 
 		dynamicTitleList[0] = frm.doc.sector
@@ -150,6 +285,28 @@ frappe.ui.form.on('GHG Inventory', {
 
 			
 		};
+
+
+		frm.call({
+			doc:frm.doc,
+			method:'get_user',
+			async:false,
+			callback: function(r){
+			  var userList = []
+			  
+				for (var i of r.message){
+					userList.push(i[0])
+				}
+				console.log(userList);
+				frm.set_query("select_approver",function(){
+				return {
+					filters:{
+						email:['in',userList]
+					}
+				}
+				})
+			}
+		  });
 		// frm.set_query("category", function(){
         //     return {
         //         filters: {
@@ -634,21 +791,7 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	frm.refresh_field('indirect_manure_management')
 		// }
 	},
-	before_save:function(frm){
-		if(frm.doc.work_state == "Approved"){
-			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!",r.message);
-					}
-				})
-			}
-		}
-		
-	},
+	
 
 	/////////////////////////////////////////////////////////////////////
 	/////////// Conditions to Show/Hide Respective Table Fields /////////

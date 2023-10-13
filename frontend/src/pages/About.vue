@@ -2,66 +2,68 @@
    <Header />
     <!-- .entry-header -->
     <section class="breadcrumb-area">
-      <div class="container-fluid p-0">
-      <div class="row">
-         <div class="col-12">
-            <div class="all-banner" style="position: relative;">
-               <img src="http://environment.goappssolutions.com/wp-content/uploads/2021/11/all.jpg" alt=""/>
-            </div>
-            <br><br>
-            <div class="inner-content clearfix">
-               <div class="title" style="margin-left: 100px; margin-top: 10px; position: relative;">
-                  <h1 style="font-weight: 800; color: white;">About</h1>
-                  <div style="position: absolute; top: -10px; left: 0; width: 10%; border-top: 5px solid white;"></div>
-               </div>
-               <div class="breadcrumb-menu" style="position: absolute; top: 200px; right: 200px; word-spacing: 30px; padding: 20px;">
-                  <a style="color: #fff;" href="#">Home </a>
-                  <a style="color: #fff;" href="#"> About</a>
-               </div>
-            </div>
-         </div>
+      <div class="overlay">
+
+      </div>
+<!-- <div class="container-fluid">
+<div class="row">
+   <div class="col-12">
+      <div class="all-banner" style="position: relative;">
+      </div>
+      <br><br>
+      <div class="inner-content clearfix">
+         <div class="title" style="margin-left: 100px; margin-top: 10px; position: relative;">
+            <h1 style="font-weight: 800; color: white;">About</h1>
+            <div style="position: absolute; top: -10px; left: 0; width: 10%; border-top: 5px solid white;"></div>
+         </div> -->
+         <!-- <div class="breadcrumb-menu" style="position: absolute; top: 200px; right: 200px; word-spacing: 30px; padding: 20px;">
+            <a style="color: #fff;" href="#">Home </a>
+            <a style="color: #fff;" href="#"> About</a>
+         </div> 
       </div>
    </div>
-   </section>
+</div>
+</div> -->
+</section>
 
 <div class="counter-area fix area-padding" id="about">
  <div class="container-fluid ">
     <div class="row">
        <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
-         <h3 class="fs-3" style="font-size: xx-large;">Brief information on iMRV Tool of Kenya</h3>
+         <h3 style="color: #000; font-weight: 700;" class="text-start">Basic information of MRV tool</h3>
          <br> 
 
-          <p>The Ministry of Environment and Forestry developed Kenya’s Monitoring Reporting and Verification (MRV) system/tool to facilitate climate change reporting by sectors as is required by the Climate Change Act, 2016.In the context of NDC implementation and according to the National Climate Change Action Plan (NCCAP) 2018-2022, Kenya’s MRV system entails the process by which the following will be tracked and reported at both national and international levels</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure adipisci doloribus dicta eius. Quia eligendi tempora eaque excepturi aspernatur, cupiditate accusantium officia ex dignissimos quae, sunt laboriosam quisquam. Hic molestiae quia deleniti voluptatem exercitationem esse obcaecati dolor doloremque! Enim molestiae illum culpa ullam nostrum nulla vero earum maiores aliquam neque?</p>
           <br> 
 
-          <p> 1. The implementation and impacts of mitigation actions, including the national GHG inventory to enable tracking of progress on implementing and achieving the mitigation component of the NDC.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum magnam autem assumenda molestias quasi quod? </p>
           <br> 
 
-          <p>2. The implementation and impacts of adaptation actions, including information related to climate change impacts, vulnerabilities and adaptation</p>
+          <p>2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam praesentium, ea obcaecati assumenda explicabo repellendus cumque aspernatur numquam.</p>
           <br> 
 
-          <p>3. Climate finance flows- external support needed and received (finance) towards these actions, including information on financial, technology development and transfer, and capacity building needs and support received from developed countries. Such support could be financial, technology transfer or capacity building</p>
+          <p>3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum assumenda est, harum illo, placeat non aliquid voluptates blanditiis, eos explicabo ut deleniti laborum ab? </p>
           <br> 
 
-          <p>4. Sustainable Development (SDG) impacts based on the UNDP Climate Action Impact Tool (CAIT) also known as UNDP SDG tool</p>
+          <p>4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores a, aliquid fugit omnis ullam rem, perspiciatis obcaecati facere earum assumenda quod ea dolores!</p>
           <br> 
 
-          <h3 class="fs-3"  style="font-size: xx-large;">What’s New and latest development in MRV of Kenya</h3>
+          <h3 style="color: #000; font-weight: 700;" class="text-start">What is the new and latest development in MRV </h3>
           <br> 
 
-          <p>In line with NDC implementation and according to the National Climate Change Action Plan (NCCAP) 2018-2022, Kenya’s long term MRV plan is to effectively track and report on all key climate change components both nationally and internationally. Kenya hopes to also link MRV with ongoing processes in the country including tracking of climate finance as well as National and County M & E processes</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptas laborum natus qui possimus enim architecto hic quo. Quaerat velit debitis pariatur recusandae repudiandae, aut numquam illum error mollitia voluptate at dolores nihil repellendus?</p>
           <br> 
 
-          <p>The ultimate goal is to have a system that will be efficient in: </p>
+          <p>The ultimate MRV Tool</p>
           <br> 
 
-          <p> 1. Strengthening national institutions in Kenya for MRV and transparency-related activities in line with Kenya’s national priorities</p>
+          <p> 1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, architecto facere! Suscipit iure impedit neque vel? Non et voluptate sit quis dolorum id! </p>
           <br> 
 
-          <p>2. Improving MRV by allowing provision of data to drive development in Kenya’s agricultural sector, food security and natural resource management.</p>
+          <p>2. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur natus neque iure perferendis fuga.</p>
           <br> 
 
-          <p>3. Enhancing coordination between national, regional and global transparency-related accomplishments in Kenya</p>
+          <p>3. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus, ratione dolore eius error voluptas quis facere consectetur ea quidem hic libero illo doloremque consequatur! Dolorum beatae eaque id officia corrupti.</p>
           
        </div>
     </div>
@@ -76,7 +78,7 @@
 <script setup>
 import Footer from '../components/Footer.vue'
 import Header from '../components/Header.vue'
-import Breadcrumb from '../components/Breadcrumb.vue'
+// import Breadcrumb from '../components/Breadcrumb.vue'
 
 </script> 
 
@@ -85,5 +87,8 @@ import Breadcrumb from '../components/Breadcrumb.vue'
 <style scoped>
 p, h3{
 margin-left: 20px;
+}
+.overlay{
+background-color: black  !important;
 }
 </style>

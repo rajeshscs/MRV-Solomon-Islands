@@ -88,7 +88,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
-
 						frm.set_value(i.field_name,i.new_values)
 				}
 
@@ -102,7 +101,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						child.actual_monitored_value = i.actual_monitored_value
 						child.reference = i.reference
 					}
-					
 					frm.refresh_field("performance_indicator")
 				}
 				frm.set_value("edited_project_details",[])

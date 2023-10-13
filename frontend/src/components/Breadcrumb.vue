@@ -1,5 +1,5 @@
 <template>
-    <section class="breadcrumb-area">
+    <!-- <section class="breadcrumb-area">
     <div class="row">
         <div class="col-xl-12">
             <div class="all-banner"><img src="http://environment.goappssolutions.com/wp-content/uploads/2021/11/all.jpg" alt=""/></div>
@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <div class="post-inner thin ">
 

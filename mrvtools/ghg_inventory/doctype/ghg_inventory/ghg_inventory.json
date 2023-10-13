@@ -27,6 +27,7 @@
   "column_break_o4tvx",
   "qa_qc_implemented",
   "work_state",
+  "select_approver",
   "section_break_zx9sk",
   "reference_approach",
   "electricity_generation",
@@ -93,6 +94,7 @@
   "other_wastewater_treatement",
   "other_waste",
   "other_sector",
+  "edit_button",
   "tab2",
   "edited_reference_approach",
   "edited_electricity_generation",
@@ -1084,11 +1086,22 @@
    "hidden": 1,
    "label": "Work State",
    "options": "\nPending\nApproved\nRejected"
+  },
+  {
+   "fieldname": "select_approver",
+   "fieldtype": "Link",
+   "label": "Select Approver",
+   "options": "User"
+  },
+  {
+   "fieldname": "edit_button",
+   "fieldtype": "Button",
+   "label": "Edit Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-12 20:07:32.690429",
+ "modified": "2023-10-13 12:55:04.007793",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

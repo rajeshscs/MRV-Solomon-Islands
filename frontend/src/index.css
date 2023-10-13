@@ -1,2 +1,31 @@
 @import './assets/Inter/inter.css';
 @import 'frappe-ui/src/style.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins:wght@300&display=swap');
+
+
+.breadcrumb-area {
+  /* position: relative; */
+  /* background: url('../assets/images/footer.png');  */
+  background: url('../src/assets/images/edited.jpeg'); /* no-repeat center center fixed; */
+  background-size:cover;
+  /* background-attachment: fixed; */
+  height: 500px; 
+}
+
+a, p{
+  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+h3{
+    font-size: 30px;
+    font-weight: 60px;
+    padding: 20px;
+    color: #fff;
+}
+.card-link:hover .card {
+    transition: .2s;
+     box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.2); /* Customize the shadow style as needed */
+   }
+ 
