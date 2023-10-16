@@ -1,5 +1,5 @@
 from . import __version__ as app_version
-from mrvtools.route import routes
+# from mrvtools.route import routes
 
 
 app_name = "mrvtools"
@@ -8,6 +8,13 @@ app_publisher = "tridotstech"
 app_description = "mrvtools"
 app_email = "info@tridotstech.com"
 app_license = "MIT"
+
+
+website_redirects = [
+    {"source": "/", "target": "/frontend/home"},
+]
+
+# website_route_rules = routes
 
 # Includes in <head>
 # ------------------
@@ -56,7 +63,6 @@ app_license = "MIT"
 
 # Jinja
 # ----------
-website_route_rules = routes
 # add methods and filters to jinja environment
 # jinja = {
 #	"methods": "mrvtools.utils.jinja_methods",
