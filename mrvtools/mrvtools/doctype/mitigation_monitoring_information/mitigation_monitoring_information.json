@@ -57,6 +57,7 @@
   "tab2",
   "naming_series",
   "edited_project_details",
+  "original_performance_indicator",
   "edited_performance_indicator"
  ],
  "fields": [
@@ -409,11 +410,18 @@
    "options": "Mitigations",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "original_performance_indicator",
+   "fieldtype": "Table",
+   "label": "Original Performance Indicator",
+   "options": "Edited Performance Indicator ChildTable",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:37:12.408948",
+ "modified": "2023-10-16 15:32:53.134489",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

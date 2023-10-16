@@ -1,4 +1,6 @@
 from . import __version__ as app_version
+from mrvtools.route import routes
+
 
 app_name = "mrvtools"
 app_title = "Mrvtools"
@@ -51,9 +53,10 @@ app_license = "MIT"
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
 
+
 # Jinja
 # ----------
-
+website_route_rules = routes
 # add methods and filters to jinja environment
 # jinja = {
 #	"methods": "mrvtools.utils.jinja_methods",

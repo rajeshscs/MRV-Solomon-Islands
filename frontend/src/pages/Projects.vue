@@ -1,7 +1,7 @@
-<template class="page-template page-template-templates page-template-projects page-template-templatesprojects-php page page-id-14 wp-embed-responsive singular enable-search-modal missing-post-thumbnail has-no-pagination not-showing-comments show-avatars projects footer-top-visible">
+<template >
    <Header />
    <!-- header end -->
-   <section class="breadcrumb-area">
+   <!-- <section class="breadcrumb-area"> -->
    <!-- <div class="container-fluid">
       <div class="row">
          <div class="col-12">
@@ -21,7 +21,7 @@
          </div>
       </div>
    </div> -->
-</section>
+<!-- </section> -->
 
    <div class="tab-area fix area-padding bg-color wow fadeInUp" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
@@ -39,6 +39,7 @@
            <div class="row">
             <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
          </div> -->
+         <!-- <div class="col"> -->
          <div class="tab-menu d-flex mx-5 mb-4 justify-content-between">
                <!-- Start Nav tabs -->
                <ul class=" nav nav-pills  shadow-sm" id="pills-tab" role="tablist"> <!-- Use w-100 for full width tabs -->
@@ -57,14 +58,15 @@
 
                </ul>  
             </div>
+         <!-- </div> -->
 
 
                <div class="container-fluid">
             <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-               <div class="tab-content p-4">
+               <div class="tab-content p-4" >
                   <!-- Start Tab Content -->
-                  <div class="tab-pane active" id="p-view-2">
-                  <div class="tab-inner">
+                  <div class="tab-pane active" id="p-view-2" >
+                  <div class="tab-inner" >
                      <div class="table-responsive">
                      <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
@@ -82,7 +84,7 @@
                            <th scope="col">End Date</th>
                         </tr>
                         </thead>
-                        <tbody class="table-group-divider table-divider-color">
+                        <tbody class="table-group-divider table-divider-color"  style="overflow: auto;">
                         <tr>
                            <th style="padding: 10px;" scope="row">1</th>
                            <td>Adaptation Actions</td>
@@ -286,5 +288,9 @@ import Breadcrumb from '../components/Breadcrumb.vue'
 
 .tab-menu{
    size: 20% !important;
+   width: 90%;
+}
+.tab-menu ul{
+   box-shadow: none !important;
 }
 </style>

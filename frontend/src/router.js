@@ -4,6 +4,18 @@ import { session } from './data/session'
 
 const routes = [
   {
+    path:"",
+    redirect:()=>{
+     return{path:"/home"}    
+    }
+  },
+  {
+    path:"/frontend",
+    redirect:()=>{
+     return{path:"/home"}   
+    }
+  },
+  {
     path: '/home',
     name: 'Home',
     component: () => import('@/pages/Home.vue'),
@@ -22,6 +34,11 @@ const routes = [
     name: 'About',
     path: '/about',
     component: () => import('@/pages/About.vue'),
+  },
+  {
+    name: 'AboutPage',
+    path: '/aboutpage',
+    component: () => import('@/pages/AboutPage.vue'),
   },
   {
     name: 'Project',
@@ -54,21 +71,21 @@ let router = createRouter({
   }
 })
 
-router.beforeEach(async (to, from, next) => {
-  let isLoggedIn = session.isLoggedIn
-  // try {
-  //   await userResource.promise
-  // } catch (error) {
-  //   isLoggedIn = false
-  // }
+// router.beforeEach(async (to, from, next) => {
+//   let isLoggedIn = session.isLoggedIn
+//   // try {
+//   //   await userResource.promise
+//   // } catch (error) {
+//   //   isLoggedIn = false
+//   // }
 
-  if (to.name === 'Login' && isLoggedIn) {
-    next({ name: 'Landing' })
-  } else if (to.name !== 'Login' && !isLoggedIn) {
-    next({ name: 'Login' })
-  } else {
-    next()
-  }
-})
+//   if (to.name === 'Login' && isLoggedIn) {
+//     next({ name: 'Landing' })
+//   } else if (to.name !== 'Login' && !isLoggedIn) {
+//     next({ name: 'Login' })
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

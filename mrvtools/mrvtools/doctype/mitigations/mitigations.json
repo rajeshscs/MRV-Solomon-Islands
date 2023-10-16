@@ -356,7 +356,7 @@
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
-   "label": "Edited Project Details",
+   "label": "Edited Mitigation Details",
    "options": "Edited Project Details",
    "permlevel": 1,
    "read_only": 1
@@ -408,7 +408,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:36:18.659692",
+ "modified": "2023-10-16 15:06:19.225362",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",

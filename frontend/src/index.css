@@ -4,10 +4,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins:wght@300&display=swap');
 
 
+
 .breadcrumb-area {
   /* position: relative; */
   /* background: url('../assets/images/footer.png');  */
-  background: url('../src/assets/images/edited.jpeg'); /* no-repeat center center fixed; */
+  background: url('../src/assets/images/hero-banner.png'); /* no-repeat center center fixed; */
   background-size:cover;
   /* background-attachment: fixed; */
   height: 500px; 

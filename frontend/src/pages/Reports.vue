@@ -1,7 +1,7 @@
-<template class="page-template page-template-templates page-template-reports page-template-templatesreports-php page page-id-16 wp-embed-responsive singular enable-search-modal missing-post-thumbnail has-no-pagination not-showing-comments show-avatars reports footer-top-visible">
+<template >
    <Header />
    <!-- .entry-header -->
-   <section class="breadcrumb-area">
+   <!-- <section class="breadcrumb-area"> -->
    <!-- <div class="container-fluid">
       <div class="row">
          <div class="col-12">
@@ -21,7 +21,7 @@
          </div>
       </div>
    </div> -->
-</section>
+<!-- </section> -->
 
 
    <div class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">

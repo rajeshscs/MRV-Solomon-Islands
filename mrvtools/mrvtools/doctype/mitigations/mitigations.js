@@ -59,11 +59,93 @@ frappe.ui.form.on('Mitigations', {
 
 	refresh: function(frm){
 
+		//Start
+
+		// Hide the Custom Actions Button while changes Occur
+		if(frm.doc.__unsaved){
+			console.log("dirty:",frm.doc.__unsaved);
+			console.log("frm is dirty");
+			$('.inner-group-button').hide()
+			// $('.custom-actions').prop('hidden', true);
+		}
+
+		//Hide and Show the Original Actions Button w.r.t folloing condition
+		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+			$(".actions-btn-group").hide()
+		}else{
+			$(".actions-btn-group").show()
+		}
+
+		
 
 		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
 			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
+
+		if(frm.doc.workflow_state == "Pending"){
+			frm.add_custom_button('Approve',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Approved")
+						
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
+			frm.add_custom_button('Reject',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Rejected")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
+			
+		}
+		else if(frm.doc.workflow_state == "Approved"){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
+	
+					})
+	
+				},"Actions")
+		}
+		else if(frm.doc.workflow_state == "Draft"){
+			frm.add_custom_button('Send for Approval',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Pending")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
+					
+				})
+				
+			},"Actions")
+		}
+		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
+
+		
+
+
+		//End
 
 
 
@@ -133,9 +215,7 @@ frappe.ui.form.on('Mitigations', {
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("original_performance_indicator",[])
-			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
-			frm.save()
 		}
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){

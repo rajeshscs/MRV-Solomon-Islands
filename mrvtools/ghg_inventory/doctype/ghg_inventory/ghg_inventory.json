@@ -601,6 +601,7 @@
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.refrigeration && doc.refrigeration.length > 0",
    "fieldname": "section_break_xabuv",
    "fieldtype": "Section Break",
    "label": "Refrigeration and Air-Conditioning"
@@ -613,54 +614,63 @@
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.foam_blowing_agents && doc.foam_blowing_agents.length > 0",
    "fieldname": "foam_blowing_agents_section",
    "fieldtype": "Section Break",
    "label": "Foam blowing Agents "
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.fire_protection && doc.fire_protection.length > 0",
    "fieldname": "fire_protection_section",
    "fieldtype": "Section Break",
    "label": "Fire protection"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.aerosols && doc.aerosols.length > 0",
    "fieldname": "aerosols_section",
    "fieldtype": "Section Break",
    "label": "Aerosols"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.solvents && doc.solvents.length > 0",
    "fieldname": "solvents_section",
    "fieldtype": "Section Break",
    "label": "Solvents"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.other_applications && doc.other_applications.length > 0",
    "fieldname": "other_applications_section",
    "fieldtype": "Section Break",
    "label": "Other applications"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.electrical_equipment && doc.electrical_equipment.length > 0",
    "fieldname": "section_break_jvzrb",
    "fieldtype": "Section Break",
    "label": "Electrical equipment"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.sf6_and_pfcs_from_other_product_use && doc.sf6_and_pfcs_from_other_product_use.length > 0",
    "fieldname": "sf6_and_pfcs_from_other_product_use_section",
    "fieldtype": "Section Break",
    "label": "SF6 and PFCs from other product use"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.n2o_from_product_uses && doc.n2o_from_product_uses.length > 0",
    "fieldname": "n2o_from_product_uses_section",
    "fieldtype": "Section Break",
    "label": "N2O from product uses"
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.other_use && doc.other_use > 0",
    "fieldname": "other_section",
    "fieldtype": "Section Break",
    "label": "Other"
@@ -1084,7 +1094,7 @@
    "fieldname": "work_state",
    "fieldtype": "Select",
    "hidden": 1,
-   "label": "Work State",
+   "label": "Overall",
    "options": "\nPending\nApproved\nRejected"
   },
   {
@@ -1101,7 +1111,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 12:55:04.007793",
+ "modified": "2023-10-14 17:39:22.000274",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

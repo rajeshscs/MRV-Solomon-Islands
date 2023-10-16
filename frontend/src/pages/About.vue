@@ -1,10 +1,8 @@
 <template>
    <Header />
     <!-- .entry-header -->
-    <section class="breadcrumb-area">
-      <div class="overlay">
+    <!-- <section class="breadcrumb-area"> -->
 
-      </div>
 <!-- <div class="container-fluid">
 <div class="row">
    <div class="col-12">
@@ -24,9 +22,9 @@
    </div>
 </div>
 </div> -->
-</section>
+<!-- </section> -->
 
-<div class="counter-area fix area-padding" id="about">
+<div data-aos="flip-up" data-aos-delay="300" class="counter-area fix area-padding" id="about">
  <div class="container-fluid ">
     <div class="row">
        <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
@@ -71,6 +69,7 @@
 </div>
 
 
+<router-view />
 
 
 <Footer />
@@ -80,15 +79,23 @@ import Footer from '../components/Footer.vue'
 import Header from '../components/Header.vue'
 // import Breadcrumb from '../components/Breadcrumb.vue'
 
+
 </script> 
 
 
 
 <style scoped>
+.breadcrumb-area {
+  /* position: relative; */
+  /* background: url('../assets/images/footer.png');  */
+  background: url('../src/assets/images/edited.jpeg'); /* no-repeat center center fixed; */
+  background-size:cover;
+  /* background-attachment: fixed; */
+  height: 500px; 
+}
+
 p, h3{
 margin-left: 20px;
 }
-.overlay{
-background-color: black  !important;
-}
+
 </style>

@@ -18,6 +18,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Fuel Type",
+   "options": "\nBiomass\nLiquid Fuels\nNatural gas\nOther fossil fuels\nPeat\nSolid Fuels",
    "reqd": 1
   },
   {
@@ -52,7 +53,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 13:24:35.090265",
+ "modified": "2023-10-16 15:39:29.373282",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Energy Sector ChildTable",
