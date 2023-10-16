@@ -35,7 +35,7 @@
                   <div class="about-company">
                      <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-                           <img src="http://imrvtool.com/wp-content/uploads/2022/05/reprt.jpg" style="height:600px; width:100%;">
+                           <img src="../assets/images/report.jpg" style="height:600px; width:100%;">
                         </div>
                      </div>
                   </div>

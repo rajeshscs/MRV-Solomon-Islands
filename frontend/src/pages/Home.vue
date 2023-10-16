@@ -237,7 +237,7 @@
                   <div class="about-company">
                      <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-                           <img src="http://imrvtool.com/wp-content/uploads/2022/05/reprt.jpg" style="height:600px; width:100%;">
+                           <img src="../assets/images/report.jpg" style="height:600px; width:100%;">
                         </div>
                      </div>
                   </div>
@@ -266,13 +266,9 @@
             </div>
          </div>
       </div>
-      <!-- Duplicate the carousel items and adjust the image paths as needed -->
-      <!-- Make sure to update the image paths in the duplicated carousel items -->
 
       <div class="carousel-item pt-4 pb-3">
          <div class="card-wrapper container-sm d-flex justify-content-between">
-            <!-- Duplicate the card elements with different image paths -->
-            <!-- Adjust the image paths accordingly -->
             <div class="card mx-3 image-overlay cus-card">
                <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
                <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
@@ -292,7 +288,6 @@
          </div>
       </div>
       
-      <!-- Add more carousel items as needed -->
 
    </div>
 
