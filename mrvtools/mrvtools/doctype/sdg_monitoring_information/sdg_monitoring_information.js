@@ -155,7 +155,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 					})
 				}
 
-				window.location.href = `${frm.doc.name}`
+				// window.location.href = `${frm.doc.name}`
 			}
 		}
 	},

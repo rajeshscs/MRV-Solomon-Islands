@@ -57,7 +57,7 @@
   "tab2",
   "naming_series",
   "edited_project_details",
-  "original_performance_indicator",
+  "actual_performance_indicator",
   "edited_performance_indicator"
  ],
  "fields": [
@@ -412,16 +412,17 @@
    "reqd": 1
   },
   {
-   "fieldname": "original_performance_indicator",
+   "fieldname": "actual_performance_indicator",
    "fieldtype": "Table",
-   "label": "Original Performance Indicator",
+   "label": "Actual Performance Indicator",
    "options": "Edited Performance Indicator ChildTable",
-   "permlevel": 1
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 15:32:53.134489",
+ "modified": "2023-10-16 17:00:02.109527",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

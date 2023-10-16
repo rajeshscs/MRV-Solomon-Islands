@@ -31,6 +31,15 @@ class SDGMonitoringInformation(Document):
 				row.data = i.data
 				row.data_source = i.data_source
 				# frappe.log_error("Before Self",self.performance_indicator)
+
+			if len(self.actual_quantitative_impact) == 0:	
+				for i in old_doc.quantitative_impact:
+					row = self.append('actual_quantitative_impact',{})
+					row.category = i.category
+					row.question = i.question
+					row.sdg_mapping = i.sdg_mapping
+					row.data = i.data
+					row.data_source = i.data_source
 		return "Yess"
 
 	@frappe.whitelist()

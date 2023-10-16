@@ -31,6 +31,16 @@ class AdaptationMonitoringInformation(Document):
 				row.actual_value = i.actual_value
 				row.data_source = i.data_source
 				# frappe.log_error("Before Self",self.performance_indicator)
+
+			if len(self.actual_performance_indicator) == 0:	
+				for i in old_doc.quantitative_impact:
+					row = self.append('actual_performance_indicator',{})
+					row.category = i.category
+					row.question = i.question
+					row.expected_value = i.expected_value
+					row.actual_value = i.actual_value
+					row.data_source = i.data_source
+				
 		return "Yess"
 
 

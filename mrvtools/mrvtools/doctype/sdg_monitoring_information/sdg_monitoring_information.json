@@ -24,6 +24,7 @@
   "work_state",
   "tab2",
   "edited_project_details",
+  "actual_quantitative_impact",
   "edited_quantitative_impact"
  ],
  "fields": [
@@ -143,11 +144,18 @@
    "options": "SDG Assessment",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "actual_quantitative_impact",
+   "fieldtype": "Table",
+   "label": "Actual Quantitative Impact",
+   "options": "SDG Quantitative ChildTable",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:37:26.442801",
+ "modified": "2023-10-16 17:14:09.023362",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",

@@ -1,69 +1,69 @@
 <template >
 
   <Header />
-  <div>
-   <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-4 pb-3 text-center">Knowledge <span style="color: green; font-weight: 700;">Resources</span></h1>
-   <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-      <div class="carousel-inner justify-between ">
-         <div class="carousel-item  pt-4 pb-3 active">
-            <div class="card-wrapper container-sm d-flex  justify-content-around">
-               <div class="card  mx-3  cus-card">
-                  <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
+  <h1 data-aos="fade-right " data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-4 pb-3 text-center">Knowledge <span style="color: green; font-weight: 700;">Resources</span></h1>
+  <div id="carouselExampleControls"   class="carousel carousel-dark   slide" data-bs-ride="carousel">
+   <div class="carousel-inner">
+      <div class="carousel-item pt-4 pb-3 active">
+         <div class="card-wrapper container-sm d-flex justify-content-between">
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
             </div>
-         </div>
-         <div class="carousel-item pt-4 pb-3">
-            <div class="card-wrapper container-sm d-flex   justify-content-around">
-               <div class="card   mx-3  cus-card">
-                  <img src="../assets/images/b5.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b7.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
             </div>
-         </div>
-         <div class="carousel-item pt-4 pb-3">
-            <div class="card-wrapper container-sm d-flex  justify-content-around">
-               <div class="card  mx-3  cus-card">
-                  <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
-               <div class="card mx-3  cus-card">
-                  <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                     <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                 </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
             </div>
+            <!-- <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b5.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div> -->
          </div>
-         <button  class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-         <span style="margin-right: 80%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
-         <span class="visually-hidden">Previous</span>
-         </button>
-         <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-         <span style="margin-left: 80%;" class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="visually-hidden">Next</span>
-         </button>
       </div>
+      <!-- Duplicate the carousel items and adjust the image paths as needed -->
+      <!-- Make sure to update the image paths in the duplicated carousel items -->
+
+      <div class="carousel-item pt-4 pb-3">
+         <div class="card-wrapper container-sm d-flex justify-content-between">
+            <!-- Duplicate the card elements with different image paths -->
+            <!-- Adjust the image paths accordingly -->
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b7.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            <!-- </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div> -->
+         </div>
+      </div>
+      </div>
+      <!-- Add more carousel items as needed -->
+
    </div>
-  </div>
+
+   <!-- Add carousel controls -->
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span  class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+   </button>
+</div>
   <Footer />
 </template>
 <script setup>
@@ -100,4 +100,5 @@
   font: inline;
   }
   }
+  
 </style>

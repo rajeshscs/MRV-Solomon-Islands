@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer p-0 bg" style=" color: aliceblue;">
+  <footer data-aos="fade-down " data-aos-delay="50" class="footer p-0 bg" style=" color: aliceblue;">
     <br>
     <div class="container-fluid px-5">
       <div class="row">

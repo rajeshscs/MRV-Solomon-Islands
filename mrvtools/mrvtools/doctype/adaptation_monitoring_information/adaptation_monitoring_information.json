@@ -26,6 +26,7 @@
   "work_state",
   "tab2",
   "edited_project_details",
+  "actual_performance_indicator",
   "edited_quantitative_impact"
  ],
  "fields": [
@@ -157,11 +158,19 @@
    "options": "Adaptation",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "actual_performance_indicator",
+   "fieldtype": "Table",
+   "label": "Actual Quantitative Impact",
+   "options": "Adaptation Monitoring ChildTable",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:36:56.228131",
+ "modified": "2023-10-16 17:01:04.312605",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",

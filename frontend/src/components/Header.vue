@@ -22,7 +22,7 @@
         <router-link to="/home"  class="custom-link text-lg p-3" style="transition:.3s;">Home</router-link>
       </li>
       <li class="nav-item mr-2"> <!-- Reduce margin -->
-        <router-link to="/aboutpage" class="custom-link text-lg p-3" style="transition:.3s;">About MRV Tool</router-link>
+        <router-link to="/about" class="custom-link text-lg p-3" style="transition:.3s;">About MRV Tool</router-link>
       </li>
       <li class="nav-item mr-2"> <!-- Reduce margin -->
         <router-link to="/project"  class="custom-link text-lg p-3" style="transition:.3s;">Project</router-link>
@@ -41,7 +41,7 @@
     </a>
   </div> 
 </nav>
-<section class="breadcrumb-area">
+<section  class="breadcrumb-area">
 
 </section>
 

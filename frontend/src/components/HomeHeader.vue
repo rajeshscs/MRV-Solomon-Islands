@@ -16,13 +16,13 @@
       <!-- Update the src attribute to the correct path -->
       <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" />
     </div>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div  class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100 mr-2">
         <li class="nav-item mr-2"> <!-- Reduce margin -->
           <router-link to="/home"  class="custom-link text-lg p-3" style="transition:.3s;">Home</router-link>
         </li>
         <li class="nav-item mr-2"> <!-- Reduce margin -->
-          <router-link to="/aboutpage" class="custom-link text-lg p-3" style="transition:.3s;">About MRV Tool</router-link>
+          <router-link to="/about" class="custom-link text-lg p-3" style="transition:.3s;">About MRV Tool</router-link>
         </li>
         <li class="nav-item mr-2"> <!-- Reduce margin -->
           <router-link to="/project"  class="custom-link text-lg p-3" style="transition:.3s;">Project</router-link>
@@ -41,32 +41,30 @@
       </a>
     </div> 
   </nav>
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <!-- <div class="carousel-indicators">
-    <button class="indicator active" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
-    <button class="indicator" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button class="indicator" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div> -->
+
+  <div  id="carouselExampleIndicators"  data-aos="fade-down " data-aos-delay="50"  class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../assets/images/herobanner-2.jpg" class="d-block w-100" alt="...">
+      <img src="../assets/images/herobanner-2.jpg" class="d-block w-100 h-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="../assets/images/herobanner-3.jpg" class="d-block w-100" alt="...">
+      <img src="../assets/images/herobanner-3.jpg" class="d-block w-100 h-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="../assets/images/bann5.jpg" class="d-block w-100" alt="...">
+      <img src="../assets/images/bann5.jpg" class="d-block w-100 h-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <i class="bi bi-chevron-left bi bi-2x"></i>
+    <i class="bi bi-chevron-left bi-2x"></i>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <i class="bi bi-chevron-right bi bi-2x"></i>
+    <i class="bi bi-chevron-right bi-2x"></i>
     <span class="visually-hidden">Next</span>
   </button>
-</div>  <router-view />
+</div>
+
+<router-view />
   
     </header>
   </template>

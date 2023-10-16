@@ -35,7 +35,6 @@ class Mitigations(Document):
 	
 
 	
-
 	@frappe.whitelist()
 	def get_data(self):
 		get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_id}'""")

@@ -2,11 +2,11 @@
     <Header/>
     <!-- <section class="breadcrumb-area">
     </section> -->
-    <div class="counter-area fix area-padding" id="about">
+    <div data-aos="fade-right " data-aos-delay="10" class="counter-area fix area-padding" id="about">
         <div class="container-fluid ">
            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
-                <h3 style="color: #000; font-weight: 700;" class="text-start">Basic information of MRV tool</h3>
+                <h3 data-aos="fade-right " data-aos-delay="50" style="color: #000; font-weight: 700;" class="text-start">Basic information of MRV tool</h3>
                 <br> 
        
                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure adipisci doloribus dicta eius. Quia eligendi tempora eaque excepturi aspernatur, cupiditate accusantium officia ex dignissimos quae, sunt laboriosam quisquam. Hic molestiae quia deleniti voluptatem exercitationem esse obcaecati dolor doloremque! Enim molestiae illum culpa ullam nostrum nulla vero earum maiores aliquam neque?</p>
@@ -24,7 +24,7 @@
                  <p>4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores a, aliquid fugit omnis ullam rem, perspiciatis obcaecati facere earum assumenda quod ea dolores!</p>
                  <br> 
        
-                 <h3 style="color: #000; font-weight: 700;" class="text-start">What is the new and latest development in MRV </h3>
+                 <h3 data-aos="fade-right " data-aos-delay="50" style="color: #000; font-weight: 700;" class="text-start">What is the new and latest development in MRV </h3>
                  <br> 
        
                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptas laborum natus qui possimus enim architecto hic quo. Quaerat velit debitis pariatur recusandae repudiandae, aut numquam illum error mollitia voluptate at dolores nihil repellendus?</p>

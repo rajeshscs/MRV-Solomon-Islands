@@ -8,7 +8,15 @@
 </template>
 
 <script>
+ import AOS from 'aos';
+ 
 
+
+ AOS.init({
+   duration: 300,
+   offset: 100,
+   once: true,
+ });
 </script>
 <!-- 
 .breadcrumb-area {

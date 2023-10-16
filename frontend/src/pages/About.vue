@@ -24,9 +24,9 @@
 </div> -->
 <!-- </section> -->
 
-<div data-aos="flip-up" data-aos-delay="300" class="counter-area fix area-padding" id="about">
- <div class="container-fluid ">
-    <div class="row">
+<div  class="counter-area fix area-padding"  id="about">
+ <div class="container-fluid" data-aos="flip-up " data-aos-delay="100">
+    <div class="row" data-aos="flip-up " data-aos-delay="100">
        <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
          <h3 style="color: #000; font-weight: 700;" class="text-start">Basic information of MRV tool</h3>
          <br> 
@@ -46,7 +46,7 @@
           <p>4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores a, aliquid fugit omnis ullam rem, perspiciatis obcaecati facere earum assumenda quod ea dolores!</p>
           <br> 
 
-          <h3 style="color: #000; font-weight: 700;" class="text-start">What is the new and latest development in MRV </h3>
+          <h3 data-aos="flip-up " data-aos-delay="100" style="color: #000; font-weight: 700;" class="text-start">What is the new and latest development in MRV </h3>
           <br> 
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptas laborum natus qui possimus enim architecto hic quo. Quaerat velit debitis pariatur recusandae repudiandae, aut numquam illum error mollitia voluptate at dolores nihil repellendus?</p>
@@ -77,7 +77,6 @@
 <script setup>
 import Footer from '../components/Footer.vue'
 import Header from '../components/Header.vue'
-// import Breadcrumb from '../components/Breadcrumb.vue'
 
 
 </script> 

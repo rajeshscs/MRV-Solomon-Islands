@@ -58,16 +58,21 @@ frappe.ui.form.on('Mitigations', {
 	},
 
 	refresh: function(frm){
-
+	
 		//Start
 
 		// Hide the Custom Actions Button while changes Occur
-		if(frm.doc.__unsaved){
-			console.log("dirty:",frm.doc.__unsaved);
-			console.log("frm is dirty");
-			$('.inner-group-button').hide()
-			// $('.custom-actions').prop('hidden', true);
-		}
+		// $('[class="btn btn-primary btn-sm primary-action"]')
+		// if($ ('.primary-action').is (':visible')){
+		// 	console.log("Hi...");
+		// 	$('.inner-group-button').hide()
+		// 	// $('[class="btn ellipsis btn-primary"]').prop("hidden","true")
+		// 	// $('head').append('<style>[class="inner-group-button"].grid-row .col:last-child {display:none !important;}</style>')
+		// }
+		// else{
+		// 	$('.inner-group-button').show()
+
+		// }
 
 		//Hide and Show the Original Actions Button w.r.t folloing condition
 		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){

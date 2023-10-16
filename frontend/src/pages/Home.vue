@@ -3,7 +3,7 @@
    <HomeHeader />
 
 
-      <div class="tab-area fix area-padding bg-color wow fadeInUp" data-wow-delay="0.3s" id="projects">
+      <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right" data-aos-delay="10 no-repeat" id="projects">
        <div class="container-fluid">
            <div class="section-headline text-center">
             <h3 style="font-size: 40px; font-weight:500; color: #000; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green;">Projects</span></h3>
@@ -17,24 +17,23 @@
            <div class="row">
             <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
          </div> -->
-         <div class="tab-menu d-flex mx-5 mb-4 justify-content-between">
-               <!-- Start Nav tabs -->
-               <ul class=" nav nav-pills  shadow-sm" id="pills-tab" role="tablist"> <!-- Use w-100 for full width tabs -->
-                  <li class="nav-item">
-                     <a class="nav-link style-class " id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true" >Adaptation action</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation aaction</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
-                  </li>
-
-               </ul>  
-            </div>
+         <div class="tab-menu mx-5 mb-4" data-aos="fade-right" data-aos-delay="10">
+   <!-- Start Nav tabs -->
+            <ul class="nav nav-pills flex-column flex-sm-row flex-wrap" id="pills-tab" role="tablist">
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true">Adaptation action</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation action</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
+               </li>
+            </ul>
+         </div>
 
 
                <div class="container-fluid">
@@ -227,13 +226,13 @@
        </div>
     </div>
     <br>
-    <div class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
-      <div class="container-fluid ">
+    <div data-aos="fade-right " data-aos-delay="50" class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
+      <div class="container-fluid">
          <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
                <div class="support-all about-content">
                   <div class="section-headline right-headline text-center">
-                     <h3 style="font-size: 40px; font-weight:500; color: #000; font-size: 3rem; font-family: Inter;" class="p-5 text-center">National <span style="color: green;">GHG</span> Inventory</h3>
+                     <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">National <span style="color: green; font-weight: 700;">GHG</span> Inventory</h1>
                   </div>
                   <div class="about-company">
                      <div class="row">
@@ -248,67 +247,65 @@
          </div>
       </div>
    </div>
-   <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-4 pb-3 text-center">Knowledge <span style="color: green; font-weight: 700;">Resources</span></h1>
-  <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-     <div class="carousel-inner justify-between ">
-        <div class="carousel-item  pt-4 pb-3 active">
-           <div class="card-wrapper container-sm d-flex  justify-content-around">
-              <div class="card  mx-3  cus-card">
-                 <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-           </div>
-        </div>
-        <div class="carousel-item pt-4 pb-3">
-           <div class="card-wrapper container-sm d-flex   justify-content-around">
-              <div class="card   mx-3  cus-card">
-                 <img src="../assets/images/b5.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b7.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-           </div>
-        </div>
-        <div class="carousel-item pt-4 pb-3">
-           <div class="card-wrapper container-sm d-flex  justify-content-around">
-              <div class="card  mx-3  cus-card">
-                 <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-              <div class="card mx-3  cus-card">
-                 <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-                    <a href="#" class="p-3" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-                </div>
-           </div>
-        </div>
-        <button  class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span style="margin-right: 80%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-        </button>
-        <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span style="margin-left: 80%;" class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-        </button>
-     </div>
-  </div>   
+   <h1 data-aos="fade-right " data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-4 pb-3 text-center">Knowledge <span style="color: green; font-weight: 700;">Resources</span></h1>
+  <div id="carouselExampleControls"   class="carousel carousel-dark   slide" data-bs-ride="carousel">
+   <div class="carousel-inner">
+      <div class="carousel-item pt-4 pb-3 active">
+         <div class="card-wrapper container-sm d-flex justify-content-between">
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+         </div>
+      </div>
+      <!-- Duplicate the carousel items and adjust the image paths as needed -->
+      <!-- Make sure to update the image paths in the duplicated carousel items -->
+
+      <div class="carousel-item pt-4 pb-3">
+         <div class="card-wrapper container-sm d-flex justify-content-between">
+            <!-- Duplicate the card elements with different image paths -->
+            <!-- Adjust the image paths accordingly -->
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b7.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+            <div class="card mx-3 image-overlay cus-card">
+               <img src="../assets/images/b5.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
+               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
+            </div>
+         </div>
+      </div>
+      
+      <!-- Add more carousel items as needed -->
+
+   </div>
+
+   <!-- Add carousel controls -->
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span  class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+   </button>
+</div>
     
     
     <Footer />

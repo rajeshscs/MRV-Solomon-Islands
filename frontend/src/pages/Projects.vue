@@ -23,7 +23,7 @@
    </div> -->
 <!-- </section> -->
 
-   <div class="tab-area fix area-padding bg-color wow fadeInUp" data-wow-delay="0.3s" id="projects">
+   <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right " data-aos-delay="100" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
            <div class="section-headline text-center">
             <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
@@ -40,24 +40,23 @@
             <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
          </div> -->
          <!-- <div class="col"> -->
-         <div class="tab-menu d-flex mx-5 mb-4 justify-content-between">
-               <!-- Start Nav tabs -->
-               <ul class=" nav nav-pills  shadow-sm" id="pills-tab" role="tablist"> <!-- Use w-100 for full width tabs -->
-                  <li class="nav-item">
-                     <a class="nav-link style-class " id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true" >Adaptation action</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation aaction</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
-                  </li>
-
-               </ul>  
-            </div>
+            <div class="tab-menu mx-5 mb-4">
+   <!-- Start Nav tabs -->
+            <ul data-aos="fade-right " data-aos-delay="100" class="nav nav-pills flex-column flex-sm-row flex-wrap" id="pills-tab" role="tablist">
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true">Adaptation action</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation action</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
+               </li>
+            </ul>
+         </div>
          <!-- </div> -->
 
 
@@ -67,7 +66,7 @@
                   <!-- Start Tab Content -->
                   <div class="tab-pane active" id="p-view-2" >
                   <div class="tab-inner" >
-                     <div class="table-responsive">
+                     <div class="table-responsive" data-aos="fade-right " data-aos-delay="100">
                      <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>

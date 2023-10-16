@@ -15,7 +15,8 @@
     "vue": "^3.2.25",
     "vue-motion": "^0.2.3",
     "vue-router": "^4.0.12",
-    "vue3-bootstrap": "^1.0.0"
+    "vue3-bootstrap": "^1.0.0",
+    "wow": "0.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

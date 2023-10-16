@@ -24,7 +24,7 @@
 <!-- </section> -->
 
 
-   <div class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
+   <div data-aos="fade-right " data-aos-delay="50" class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
       <div class="container-fluid">
          <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
