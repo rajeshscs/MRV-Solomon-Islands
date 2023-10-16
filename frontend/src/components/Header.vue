@@ -73,6 +73,9 @@ $(function () {
 </script>
 
 <style scoped>
+.navbar-nav .nav-item.active {
+  color: red;
+}
 .bg {
   background-image: linear-gradient(rgba(128, 128, 128, 0.701), rgba(128, 128, 128, 0.118));
   border: none;

@@ -93,7 +93,7 @@ import Header from '../components/Header.vue'
   height: 500px; 
 }
 
-p, h3{
+p{
 margin-left: 20px;
 }
 
