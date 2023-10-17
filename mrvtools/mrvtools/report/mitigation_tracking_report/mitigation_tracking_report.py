@@ -85,7 +85,7 @@ def getColumns():
 		{
 			"fieldname": "till_date_expected_ghg",
 			"label": "Till Date Expected GHG",
-			"fieldtype": 'Data',
+			"fieldtype": 'int',
 		},
 		{
 			"fieldname": "till_date_actual_ghg",
@@ -140,7 +140,12 @@ def getData(filters):
 					  fields = "sum(actual_annual_ghg) as till_date_actual_ghg")
 		frappe.log_error("Data",tillDateActual)
 		i['actual_annual_ghg'] = actualAnnualValue.actual_annual_ghg if actualAnnualValue else 0
-		i['till_date_expected_ghg'] = int(i.expected_annual_ghg) * (datetime.now().year - int(startDate))
+		if i.expected_annual_ghg == None or startDate == None:
+			i.expected_annual_ghg = 0
+			startDate = 0
+			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
+		else:
+			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
 		i['till_date_actual_ghg'] = tillDateActual[0].till_date_actual_ghg
 		
 	return data

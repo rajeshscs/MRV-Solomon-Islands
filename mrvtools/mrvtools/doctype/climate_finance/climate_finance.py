@@ -65,6 +65,15 @@ class ClimateFinance(Document):
 			row.channels = i.channels
 			row.agency_name = i.agency_name
 			row.country = i.country
+		if len(self.actual_sources_of_finance) == 0:	
+			for i in old_doc.sources_of_finance:
+					row = self.append('actual_sources_of_finance',{})
+					row.type = i.type
+					row.national_international = i.national_international
+					row.amount = i.amount
+					row.channels = i.channels
+					row.agency_name = i.agency_name
+					row.country = i.country
 			
 #######################################################
 	@frappe.whitelist()
@@ -83,6 +92,14 @@ class ClimateFinance(Document):
 			row.disbursement_category = i.disbursement_category
 			row.amount = i.amount
 			row.percentage = i.percentage
+
+		if len(self.actual_cost_breakdown) == 0:	
+			for i in old_doc.cost_breakdown:
+					row = self.append('actual_cost_breakdown',{})
+					row.disbursement_category = i.disbursement_category
+					row.amount = i.amount
+					row.percentage = i.percentage
+
 #######################################################
 	@frappe.whitelist()
 	def before_saving_table3(self):
@@ -100,4 +117,12 @@ class ClimateFinance(Document):
 			row.financial_year = i.financial_year
 			row.amount = i.amount
 			row.percentage = i.percentage
+
+		if len(self.actual_budget_disbursement_schedule) == 0:	
+			for i in old_doc.budget_disbursement_schedule:
+					row = self.append('actual_budget_disbursement_schedule',{})
+					row.financial_year = i.financial_year
+					row.amount = i.amount
+					row.percentage = i.percentage
+
 		return "Yess"

@@ -83,6 +83,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			$("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_quantitative_impact",[])
+			frm.set_value("actual_quantitative_impact",[])
 			frm.set_value("workflow_state","Approved")
 			frm.set_value('work_state','Approved')
 			frm.dirty()
@@ -117,6 +118,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				frm.refresh_field("edited_quantitative_impact")
 			}
 			frm.set_value('work_state','Approved')
+			frm.set_value("actual_quantitative_impact",[])
 			frm.save()
 		}
 
@@ -144,6 +146,10 @@ frappe.ui.form.on('SDG Monitoring Information', {
 	before_save:function(frm){
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.doc.actual_quantitative_impact.length == 0){
+					window.location.href = `${frm.doc.name}`
+				}
+
 				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,
@@ -155,7 +161,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 					})
 				}
 
-				// window.location.href = `${frm.doc.name}`
+				
 			}
 		}
 	},

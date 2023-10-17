@@ -10,6 +10,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
+      
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="site-logo ml-auto mr-auto "> <!-- Display only on lg and smaller screens -->

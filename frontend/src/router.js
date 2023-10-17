@@ -12,7 +12,7 @@ const routes = [
   {
     path:"/frontend",
     redirect:()=>{
-     return{path:"/frontend/home"}   
+     return{path:"/home"}   
     }
   },
   {

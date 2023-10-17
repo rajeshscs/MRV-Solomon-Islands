@@ -225,7 +225,6 @@
            <!-- end Row -->
        </div>
     </div>
-    <br>
 
     <!-- Report  -->
 <div>
@@ -277,7 +276,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-1.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -293,7 +292,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-2.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -309,7 +308,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-3.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -325,7 +324,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-4.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -349,7 +348,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-5.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -366,7 +365,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-6.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -382,7 +381,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-7.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -398,7 +397,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-8.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-top: 20px;"
                      alt="..."
                    />
                    <a
@@ -502,7 +501,7 @@
 }
 .card-link:hover .card {
   transition: .2s;
-  box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.2); /* Customize the shadow style as needed */
+  box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.098); /* Customize the shadow style as needed */
   }
 .cus-card{
    transition: .2s;

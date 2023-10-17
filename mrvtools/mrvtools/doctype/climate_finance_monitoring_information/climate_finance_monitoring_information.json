@@ -32,7 +32,9 @@
   "work_state",
   "tab2",
   "edited_project_details",
+  "actual_budget_expenditure",
   "edited_budget_expenditure",
+  "actual_total_budget_disbursement",
   "edited_total_budget_disbursement"
  ],
  "fields": [
@@ -224,11 +226,27 @@
    "options": "Climate Finance",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "actual_budget_expenditure",
+   "fieldtype": "Table",
+   "label": "Actual Budget Expenditure",
+   "options": "Climate Monitoring Information Budget Expenditure ChildTable",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_total_budget_disbursement",
+   "fieldtype": "Table",
+   "label": "Actual Total Budget Disbursement",
+   "options": "Climate Finance Total Budget Disbursement ChildTable",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-10 15:38:00.674076",
+ "modified": "2023-10-17 11:23:47.084012",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",

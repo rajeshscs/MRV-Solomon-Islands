@@ -71,6 +71,9 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_budget_expenditure",[])
 			frm.set_value("edited_total_budget_disbursement",[])
+
+			frm.set_value("actual_budget_expenditure",[])
+			frm.set_value("actual_total_budget_disbursement",[])
 			frm.set_value('work_state','Approved')
 			frm.set_value("workflow_state","Approved")
 		}
@@ -109,6 +112,8 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			frm.set_value('work_state','Approved')
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_budget_expenditure",[])
+			frm.set_value("actual_budget_expenditure",[])
+			frm.set_value("actual_total_budget_disbursement",[])
 			frm.set_value("edited_total_budget_disbursement",[])
 			frm.save()
 		}
@@ -254,10 +259,11 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 					row.total = i.total
 				}
 				frm.refresh_field("budget_expenditure")
-			frm.fields_dict.budget_expenditure.df.read_only = 0
-			frm.set_value("total_budget_disbursement",[])
-			frm.fields_dict.edit_button.df.hidden = 1
-			frm.refresh_field("edit_button")
+				frm.set_value("total_budget_disbursement",[])
+				frm.fields_dict.edit_button.df.hidden = 1
+				frm.refresh_field("edit_button")
+				frm.fields_dict.budget_expenditure.df.read_only = 0
+				frm.refresh_field("budget_expenditure")
 				for(var i of frm.doc.edited_total_budget_disbursement){
 					var row = frm.add_child("total_budget_disbursement")
 					row.financial_year = i.financial_year
@@ -274,7 +280,9 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 	before_save:function(frm){
 		if(frm.doc.work_state =="Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				
+				if(frm.doc.actual_budget_expenditure.length == 0){
+					window.location.href = `${frm.doc.name}`
+				}
 				if(frm.fields_dict.budget_expenditure.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,

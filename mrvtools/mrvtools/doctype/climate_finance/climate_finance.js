@@ -85,6 +85,9 @@ frappe.ui.form.on('Climate Finance', {
 
 		if (frm.doc.workflow_state == "Rejected"){
 			frm.set_value("edited_project_details",[])
+			frm.set_value("actual_sources_of_finance",[])
+			frm.set_value("actual_cost_breakdown",[])
+			frm.set_value("actual_budget_disbursement_schedule",[])
 			frm.set_value("edited_sources_of_finance",[])
 			frm.set_value("edited_cost_breakdown",[])
 			frm.set_value("edited_budget_disbursement_schedule",[])
@@ -132,6 +135,9 @@ frappe.ui.form.on('Climate Finance', {
 			}
 			frm.set_value("edited_project_details",[])
 			frm.set_value('work_state','Approved')
+			frm.set_value("actual_sources_of_finance",[])
+			frm.set_value("actual_cost_breakdown",[])
+			frm.set_value("actual_budget_disbursement_schedule",[])
 			frm.set_value("edited_sources_of_finance",[])
 			frm.set_value("edited_cost_breakdown",[])
 			frm.set_value("edited_budget_disbursement_schedule",[])
@@ -199,6 +205,9 @@ frappe.ui.form.on('Climate Finance', {
 	before_save:function(frm){
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+				if(frm.doc.actual_sources_of_finance.length == 0 ||frm.doc.actual_cost_breakdown.length == 0 || frm.doc.actual_budget_disbursement_schedule.length == 0   ){
+					window.location.href = `${frm.doc.name}`
+				}
 				if(frm.fields_dict.sources_of_finance.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,
@@ -209,6 +218,7 @@ frappe.ui.form.on('Climate Finance', {
 						}
 					})
 				}
+			
 				if(frm.fields_dict.cost_breakdown.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,
@@ -219,6 +229,7 @@ frappe.ui.form.on('Climate Finance', {
 						}
 					})
 				}
+				
 				if(frm.fields_dict.budget_disbursement_schedule.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,
@@ -279,7 +290,7 @@ frappe.ui.form.on('Climate Finance', {
 					}
 				})
 
-				window.location.href = `${frm.doc.name}`
+				// window.location.href = `${frm.doc.name}`
 			}
 		}
 	},

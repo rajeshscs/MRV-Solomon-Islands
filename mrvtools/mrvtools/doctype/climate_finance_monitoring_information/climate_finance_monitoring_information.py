@@ -69,6 +69,15 @@ class ClimateFinanceMonitoringInformation(Document):
 			row.q3 = i.q3
 			row.q4 = i.q4
 			row.total = i.total
+		if len(self.actual_budget_expenditure) == 0:	
+			for i in old_doc.budget_expenditure:
+					row = self.append('actual_budget_expenditure',{})
+					row.disbursement_category = i.disbursement_category
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total = i.total
 
 		self.edited_total_budget_disbursement = []
 		for i in self.total_budget_disbursement:
@@ -89,4 +98,15 @@ class ClimateFinanceMonitoringInformation(Document):
 			row.q3 = i.q3
 			row.q4 = i.q4
 			row.total_disbursement_usd = i.total_disbursement_usd
+
+		if len(self.actual_total_budget_disbursement) == 0:	
+			for i in old_doc.total_budget_disbursement:
+					row = self.append('actual_total_budget_disbursement',{})
+					row.financial_year = i.financial_year
+					row.q1 = i.q1
+					row.q2 = i.q2
+					row.q3 = i.q3
+					row.q4 = i.q4
+					row.total_disbursement_usd = i.total_disbursement_usd
+
 		return "Yess"

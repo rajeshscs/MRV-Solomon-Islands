@@ -54,8 +54,11 @@
   "remarks",
   "tab2",
   "edited_project_details",
+  "actual_sources_of_finance",
   "edited_sources_of_finance",
+  "actual_cost_breakdown",
   "edited_cost_breakdown",
+  "actual_budget_disbursement_schedule",
   "edited_budget_disbursement_schedule"
  ],
  "fields": [
@@ -389,11 +392,35 @@
    "label": "Select Approver",
    "options": "User",
    "permlevel": 1
+  },
+  {
+   "fieldname": "actual_sources_of_finance",
+   "fieldtype": "Table",
+   "label": "Actual Source of Finance",
+   "options": "Sources of Climate Finance ChildTable",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_cost_breakdown",
+   "fieldtype": "Table",
+   "label": "Actual Cost Breakdown",
+   "options": "Climate Finance detailed Budget ChildTable",
+   "permlevel": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_budget_disbursement_schedule",
+   "fieldtype": "Table",
+   "label": "Actual Budget Disbursement Schedule",
+   "options": "Climate Finance Disbursement Schedule ChildTable",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-11 20:40:16.926305",
+ "modified": "2023-10-16 20:15:44.382384",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",

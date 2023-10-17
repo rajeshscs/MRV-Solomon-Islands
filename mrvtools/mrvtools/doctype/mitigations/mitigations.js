@@ -58,97 +58,182 @@ frappe.ui.form.on('Mitigations', {
 	},
 
 	refresh: function(frm){
-	
-		//Start
+		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 
-		// Hide the Custom Actions Button while changes Occur
-		// $('[class="btn btn-primary btn-sm primary-action"]')
-		// if($ ('.primary-action').is (':visible')){
-		// 	console.log("Hi...");
-		// 	$('.inner-group-button').hide()
-		// 	// $('[class="btn ellipsis btn-primary"]').prop("hidden","true")
-		// 	// $('head').append('<style>[class="inner-group-button"].grid-row .col:last-child {display:none !important;}</style>')
-		// }
-		// else{
-		// 	$('.inner-group-button').show()
+		$('.control-input').on("keyup",function(){
+			console.log("Successs...");
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			
+		})
+		$('.control-input').on("change",function(){
+			console.log("Successs...");
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		})
 
-		// }
-
-		//Hide and Show the Original Actions Button w.r.t folloing condition
-		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-			$(".actions-btn-group").hide()
-		}else{
-			$(".actions-btn-group").show()
-		}
-
+		$('.btn-default').on("click",function(){
+			console.log("Successs child...");
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		})
 		
+		$('.table-multiselect').on("change",function(){
+			console.log("Successs child...");
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		})
+		
+		$('.form-group').on("click",function(){
+			console.log("Successs child...");
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		})
+		
+		
+		// $('.table-multiselect').on("change",function(){
+		// 	console.log("Successs...");
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			
+		// })
 
-		if (frm.doc.work_state == "Approved"){
-			cur_frm.fields_dict.project_id.df.read_only = 1
-			cur_frm.fields_dict.select_approver.df.read_only = 1
-		}
-
-		if(frm.doc.workflow_state == "Pending"){
-			frm.add_custom_button('Approve',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Approved")
+				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+				
+						$(".actions-btn-group").hide();
 						
-						frm.refresh_field("workflow_state")
-						frm.save()
-					}, () => {
+					}else{
+						$(".actions-btn-group").show()
+					}
+			
+					if (frm.doc.work_state == "Approved"){
+						cur_frm.fields_dict.project_id.df.read_only = 1
+						cur_frm.fields_dict.select_approver.df.read_only = 1
+					}
+			
+					if(frm.doc.workflow_state == "Pending"){
+						frm.add_custom_button('Approve',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Approved")
+									frm.refresh_field("workflow_state")
+									frm.save()
+								}, () => {
+			
+							})
+			
+						},"Actions")
+			
+						frm.add_custom_button('Reject',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Rejected")
+									frm.refresh_field("workflow_state")
+									frm.save()
+								}, () => {
+			
+							})
+			
+						},"Actions")
+			
+						
+					}
+					else if(frm.doc.workflow_state == "Approved"){
+						frm.add_custom_button('Edit',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Draft")
+									frm.refresh_field("workflow_state")
+									console.log(frm.doc.workflow_state);
+									frm.save()
+								}, () => {
+				
+								})
+				
+							},"Actions")
+					}
+					else if(frm.doc.workflow_state == "Draft"){
+						frm.add_custom_button('Send for Approval',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Pending")
+									frm.refresh_field("workflow_state")
+									console.log(frm.doc.workflow_state);
+									frm.save()
+								}, () => {
+								
+							})
+							
+						},"Actions")
+					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+		
+				
+		
+			
 
-				})
 
-			},"Actions")
+		//Hide and Show the Original Actions Button w.r.t following condition
+		// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+		// 	$(".actions-btn-group").hide()
+		// }else{
+		// 	$(".actions-btn-group").show()
+		// }
 
-			frm.add_custom_button('Reject',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Rejected")
-						frm.refresh_field("workflow_state")
-						frm.save()
-					}, () => {
+		// if (frm.doc.work_state == "Approved"){
+		// 	cur_frm.fields_dict.project_id.df.read_only = 1
+		// 	cur_frm.fields_dict.select_approver.df.read_only = 1
+		// }
 
-				})
+		// if(frm.doc.workflow_state == "Pending"){
+		// 	frm.add_custom_button('Approve',()=>{
+		// 		frappe.confirm('Are you sure you want to proceed?',
+		// 			() => {
+		// 				frm.set_value("workflow_state","Approved")
+		// 				frm.refresh_field("workflow_state")
+		// 				frm.save()
+		// 			}, () => {
 
-			},"Actions")
+		// 		})
+
+		// 	},"Actions")
+
+		// 	frm.add_custom_button('Reject',()=>{
+		// 		frappe.confirm('Are you sure you want to proceed?',
+		// 			() => {
+		// 				frm.set_value("workflow_state","Rejected")
+		// 				frm.refresh_field("workflow_state")
+		// 				frm.save()
+		// 			}, () => {
+
+		// 		})
+
+		// 	},"Actions")
 
 			
-		}
-		else if(frm.doc.workflow_state == "Approved"){
-			frm.add_custom_button('Edit',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Draft")
-						frm.refresh_field("workflow_state")
-						console.log(frm.doc.workflow_state);
-						frm.save()
-					}, () => {
+		// }
+		// else if(frm.doc.workflow_state == "Approved"){
+		// 	frm.add_custom_button('Edit',()=>{
+		// 		frappe.confirm('Are you sure you want to proceed?',
+		// 			() => {
+		// 				frm.set_value("workflow_state","Draft")
+		// 				frm.refresh_field("workflow_state")
+		// 				console.log(frm.doc.workflow_state);
+		// 				frm.save()
+		// 			}, () => {
 	
-					})
+		// 			})
 	
-				},"Actions")
-		}
-		else if(frm.doc.workflow_state == "Draft"){
-			frm.add_custom_button('Send for Approval',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Pending")
-						frm.refresh_field("workflow_state")
-						console.log(frm.doc.workflow_state);
-						frm.save()
-					}, () => {
+		// 		},"Actions")
+		// }
+		// else if(frm.doc.workflow_state == "Draft"){
+		// 	frm.add_custom_button('Send for Approval',()=>{
+		// 		frappe.confirm('Are you sure you want to proceed?',
+		// 			() => {
+		// 				frm.set_value("workflow_state","Pending")
+		// 				frm.refresh_field("workflow_state")
+		// 				console.log(frm.doc.workflow_state);
+		// 				frm.save()
+		// 			}, () => {
 					
-				})
+		// 		})
 				
-			},"Actions")
-		}
-		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-
-		
-
+		// 	},"Actions")
+		// }
+		// $('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 		//End
 
