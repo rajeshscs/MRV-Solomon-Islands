@@ -17,19 +17,19 @@
            <div class="row">
             <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
          </div> -->
-         <div class="tab-menu mx-5 mb-4" data-aos="fade-right" data-aos-delay="10">
+         <div class="tab-menu mx-5 mb-4">
    <!-- Start Nav tabs -->
-            <ul class="nav nav-pills flex-column flex-sm-row flex-wrap" id="pills-tab" role="tablist">
-               <li class="nav-item">
-                  <a class="nav-link style-class" id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true">Adaptation action</a>
+   <ul style="margin-right: 35px;" data-aos="fade-right " data-aos-delay="100" class="nav nav-pills flex-wrap tab_parent" id="pills-tab" role="tablist" >
+               <li class="nav-item active tab_child">
+                  <a class="nav-link style-class" id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true">Adaptation </a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation action</a>
+               <li class="nav-item tab_child">
+                  <a class="nav-link style-class" id="pills-profile-tab" href="#p-view-5" role="tab" data-toggle="tab" aria-controls="pills-profile" aria-selected="false">Mitigation </a>
                </li>
-               <li class="nav-item">
+               <li class="nav-item tab_child">
                   <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-6" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Cross cutting</a>
-               </li>
-               <li class="nav-item">
+               </li> 
+               <li class="nav-item tab_child">
                   <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
                </li>
             </ul>
@@ -226,91 +226,220 @@
        </div>
     </div>
     <br>
-    <div data-aos="fade-right " data-aos-delay="50" class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-               <div class="support-all about-content">
-                  <div class="section-headline right-headline text-center">
-                     <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">National <span style="color: green; font-weight: 700;">GHG</span> Inventory</h1>
-                  </div>
-                  <div class="about-company">
-                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-                           <img src="../assets/images/report.jpg" style="height:600px; width:100%;">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- column end -->
+
+    <!-- Report  -->
+    <div
+    data-aos="fade-right"
+    data-aos-delay="50"
+    class="about-area report-section about-2 fix wow fadeInUp"
+    data-wow-delay="0.3s"
+    id="reports"
+  >
+    <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
+      National <span style="color: green; font-weight: 700;">GHG</span> Inventory
+    </h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="img p-1">
+          <div class="pattern-background">
+            <img src="../assets/images/pattern.png" style="height: 100%;">
+          </div>
+          <img src="../assets/images/report.jpg" class="p-5 report-image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Knowledge Resource Carousel -->
+
+<div>
+   <h1
+       data-aos="fade-right"
+       data-aos-delay="100"
+       style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;"
+       class="pt-5 pb-3 text-center"
+     >
+       Knowledge <span style="color: green; font-weight: 700;">Resources</span>
+     </h1>
+     <div
+       id="carouselExampleControls"
+       class="carousel carousel-dark slide"
+       data-bs-ride="carousel"
+     >
+       <div class="carousel-inner">
+         <div class="carousel-item pt-4 pb-3 active">
+           <div class="container">
+             <div class="row">
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-1.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Ministry of Environment <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
                </div>
-            </div>
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-2.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Kenya <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-3.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Climate Change <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-4.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Kenya <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+             </div>
+           </div>
          </div>
-      </div>
+         <!-- Duplicate the carousel items and adjust the image paths as needed -->
+         <div class="carousel-item pt-4 pb-3">
+           <div class="container">
+             <div class="row">
+               <!-- Duplicate the three columns here -->
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-5.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Kenya <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-6.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Ministry of Environment <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-7.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Kenya <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+               <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
+                 <div class="card mx-3 image-overlay cus-card">
+                   <img
+                     src="../assets/images/carousel/Untitled-8.jpg"
+                     class="card-img-top"
+                     style="border-radius: 1px;"
+                     alt="..."
+                   />
+                   <a
+                     href="#"
+                     class="cus-text p-3 mobile-hidden"
+                     style="text-decoration: none; color: #000; font-weight: 900;"
+                     >Climate Change <i class="bi bi-chevron-right "></i
+                   ></a>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+ 
+       <button
+         class="carousel-control-prev"
+         type="button"
+         data-bs-target="#carouselExampleControls"
+         data-bs-slide="prev"
+       >
+         <span
+           style="margin-right: 40px;"
+           class="carousel-control-prev-icon"
+           aria-hidden="true"
+         ></span>
+         <span class="visually-hidden">Previous</span>
+       </button>
+       <button
+         class="carousel-control-next"
+         type="button"
+         data-bs-target="#carouselExampleControls"
+         data-bs-slide="next"
+       >
+         <span
+           style="margin-left: 40px !important;"
+           class="carousel-control-next-icon"
+           aria-hidden="true"
+         ></span>
+         <span class="visually-hidden">Next</span>
+       </button>
+     </div>
    </div>
-   <h1 data-aos="fade-right " data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-4 pb-3 text-center">Knowledge <span style="color: green; font-weight: 700;">Resources</span></h1>
-  <div id="carouselExampleControls"   class="carousel carousel-dark   slide" data-bs-ride="carousel">
-   <div class="carousel-inner">
-      <div class="carousel-item pt-4 pb-3 active">
-         <div class="card-wrapper container-sm d-flex justify-content-between">
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div>
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div>
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b4.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div>
-            <!-- <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b5.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div> -->
-         </div>
-      </div>
-      <!-- Duplicate the carousel items and adjust the image paths as needed -->
-      <!-- Make sure to update the image paths in the duplicated carousel items -->
-
-      <div class="carousel-item pt-4 pb-3">
-         <div class="card-wrapper container-sm d-flex justify-content-between">
-            <!-- Duplicate the card elements with different image paths -->
-            <!-- Adjust the image paths accordingly -->
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b6.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div>
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b7.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div>
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b2.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            <!-- </div>
-            <div class="card mx-3 image-overlay cus-card">
-               <img src="../assets/images/b3.jpg" class="card-img-top" style='border-radius: 1px;' alt="...">
-               <a href="#" class="p-3 mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">Link to <i style="margin-left: 80%;" class="bi bi-chevron-right "></i></a>
-            </div> -->
-         </div>
-      </div>
-      </div>
-      <!-- Add more carousel items as needed -->
-
-   </div>
-
-   <!-- Add carousel controls -->
-   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-   </button>
-   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span  class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-   </button>
-</div>
-    
     
     <Footer />
  </template>
@@ -336,14 +465,13 @@
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: #fff !important;
     background-color: green;
-    font-weight: 600;
     border:none !important;
-    box-shadow: #014b054a 0 0 10px;
+    box-shadow: #014b053e 0 0 10px;
     
 }
 
 .tab-area .nav-pills .nav-link:not(.active):hover {
-    color: #ffffff !important;
+    color: #000000 !important;
     background-color: green !important;
 }
 
@@ -358,11 +486,12 @@
     border: 0.1px solid #0000006c !important;
     font-size: 15px !important;
     font-weight: 500;
-    border-radius: 100px !important ; 
+    border-radius: 4px !important ; 
     margin-left: 10px;
+    margin-top: 10px !important;
   }
 
-  .tab-menu{
+.tab-menu{
    size: 20% !important;
    width: 90%;
 }
@@ -383,4 +512,89 @@
    box-shadow: 0 0 10px #00000056;
 }       /* Media Queries for responsiveness */
 
+
+
+/* Report view css */
+.img {
+  position: relative;
+  background-color: #00220012;
+  height: 50rem;
+}
+
+.pattern-background {
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.report-image {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  position: relative;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .img{
+    position: relative;
+    background-color: #00220012;
+    height: 19rem;
+}
+.report-image{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: relative;
+}
+.cus-card {
+   text-overflow: hidden;
+   width: 100%;
+   /* width: 48%;  */
+   margin-right: 10px;
+   }
+  .text-center{
+  font: inline;
+  }
+  .custom-col{
+   padding: 20px !important;
+   display: table !important;
+  }
+  .container{
+   width: 90%;
+  }
+
+  }
+
+  @media only screen and (max-width: 600px) {
+   .tab_parent{
+       display: flex!important;
+       gap: 5px!important;
+       margin: 0!important;
+       justify-content: space-between;
+       flex-wrap: nowrap!important;
+       overflow: auto!important;
+   }
+   .tab_child{
+      flex: 0 0 auto;
+   }
+   .nav-item a{
+    margin: 0!important;
+    font-size: 11px!important;
+    padding: 5px 10px !important;
+    border: 1px solid #ddd!important;
+   }
+   .tab-menu{
+      margin: auto;
+      margin: 0!important;
+      width: 100%!important;
+      padding-inline: 13px!important;
+   }
+   .tab-content{
+      padding: 0!important;
+      margin-top: 25px!important;
+   }
+  }
 </style>

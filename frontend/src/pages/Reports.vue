@@ -1,56 +1,68 @@
-<template >
-   <Header />
-   <!-- .entry-header -->
-   <!-- <section class="breadcrumb-area"> -->
-   <!-- <div class="container-fluid">
+<template>
+  <Header />
+
+  <div
+    data-aos="fade-right"
+    data-aos-delay="50"
+    class="about-area report-section about-2 fix wow fadeInUp"
+    data-wow-delay="0.3s"
+    id="reports"
+  >
+    <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
+      National <span style="color: green; font-weight: 700;">GHG</span> Inventory
+    </h1>
+    <div class="container-fluid">
       <div class="row">
-         <div class="col-12">
-            <div class="all-banner" style="position: relative;">
-            </div>
-            <br><br>
-            <div class="inner-content clearfix">
-               <div class="title" style="margin-left: 100px; margin-top: 10px; position: relative;">
-                  <h1 style=" font-weight: 800; color: white;">Report</h1>
-                  <div style="position: absolute; top: -10px; left: 0; width: 10%; border-top: 5px solid white;"></div>
-               </div>
-                <div class="breadcrumb-menu" style="position: absolute; top: 200px; right: 200px; word-spacing: 30px; padding: 20px;">
-                  <a style="color: #fff;" href="#">Home </a>
-                  <a style="color: #fff;" href="#"> Report</a>
-               </div> 
-            </div>
-         </div>
+        <div class="img p-1">
+          <div class="pattern-background">
+            <img src="../assets/images/pattern.png" style="height: 100%;">
+          </div>
+          <img src="../assets/images/report.jpg" class="p-5 report-image">
+        </div>
       </div>
-   </div> -->
-<!-- </section> -->
-
-
-   <div data-aos="fade-right " data-aos-delay="50" class="about-area report-section about-2 fix wow fadeInUp" data-wow-delay="0.3s" id="reports">
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-               <div class="support-all about-content">
-                  <div class="section-headline right-headline text-center">
-                     <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">National <span style="color: green; font-weight: 700;">GHG</span> Inventory</h1>
-                  </div>
-                  <div class="about-company">
-                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
-                           <img src="../assets/images/report.jpg" style="height:600px; width:100%;">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- column end -->
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <Footer />
+    </div>
+  </div>
+  <Footer />
 </template>
+
 <script setup>
 import Footer from '../components/Footer.vue'
 import Header from '../components/Header.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
-
 </script>
 
+<style scoped>
+.img {
+  position: relative;
+  background-color: #00220012;
+  height: 50rem;
+}
+
+.pattern-background {
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .img{
+      position: relative;
+      background-color: #00220012;
+      height: 19rem;
+  }
+  .report-image{
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      position: relative;
+  }
+}
+
+.report-image {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  position: relative;
+}
+
+</style>

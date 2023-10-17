@@ -10,7 +10,9 @@
 <script>
  import AOS from 'aos';
  
+ // Initialize AOS with your preferred options
 
+ 
 
  AOS.init({
    duration: 300,
@@ -21,7 +23,7 @@
 <!-- 
 .breadcrumb-area {
   position: relative;
-  background: url('http://environment.goappssolutions.com/wp-content/uploads/2021/11/all.jpg') no-repeat center center fixed;
+  background: url('http://environment.g oappssolutions.com/wp-content/uploads/2021/11/all.jpg') no-repeat center center fixed;
   background-size:cover;
   background-attachment: fixed;
   height: 300px; /* Set the desired fixed height */
