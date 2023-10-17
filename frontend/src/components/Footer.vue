@@ -1,13 +1,13 @@
 <template>
   <footer data-aos="fade-down " data-aos-delay="50" class="footer p-0 bg" style=" color: aliceblue; background-color: #001000 !important;">
     <br>
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-5 text-start">
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6">
           <div class="site-logo">
             <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid"  />
           </div>
-          <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula ante et massa rhoncus, non bibendum ligula bibendum. Nulla facilisi. Morbi sed ante vitae erat bibendum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque luctus libero a fringilla.</p>
+          <p class="text-left text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula ante et massa rhoncus, non bibendum ligula bibendum. Nulla facilisi. Morbi sed ante vitae erat bibendum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque luctus libero a fringilla.</p>
         </div> 
         <div class="col-lg-3 col-md-3 col-sm-6">
           <h3 class="mr-3" >Contact Information</h3>

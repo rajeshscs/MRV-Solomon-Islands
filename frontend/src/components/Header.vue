@@ -190,13 +190,20 @@ background-color: rgba(255, 0, 0, 0.678);
 }
 
 @media (max-width: 576px) {
+  .img-fluid{
+    padding: 10px;
+    height: 50%;
+  }
     .navbar-toggler:focus {
       text-decoration: none;
       outline: 0;
       box-shadow:none !important;
   }
-  .mr-auto {
-      margin-right: 85px !important;
+    .mr-auto {
+          margin-right: 79px !important;
+      }
+    .ml-auto {
+    margin-left: -20px;
   }
   .breadcrumb-area {
     /* position: relative; */

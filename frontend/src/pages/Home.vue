@@ -282,7 +282,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Ministry of Environment <i class="bi bi-chevron-right "></i
+                     >Fertilize <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -298,7 +298,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Kenya <i class="bi bi-chevron-right "></i
+                     >Cultivation <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -314,7 +314,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Climate Change <i class="bi bi-chevron-right "></i
+                     >Adaptation <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -330,7 +330,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Kenya <i class="bi bi-chevron-right "></i
+                     >Planting <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -354,7 +354,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Kenya <i class="bi bi-chevron-right "></i
+                     >Resources <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -371,7 +371,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Ministry of Environment <i class="bi bi-chevron-right "></i
+                     >Mitigation <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -387,7 +387,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Kenya <i class="bi bi-chevron-right "></i
+                     >Navigation <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>
@@ -403,7 +403,7 @@
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Climate Change <i class="bi bi-chevron-right "></i
+                     >Enablers <i class="bi bi-chevron-right "></i
                    ></a>
                  </div>
                </div>

@@ -193,17 +193,23 @@ background-color: rgba(255, 0, 0, 0.678);
 
 
 @media (max-width: 576px) {
-    /* .carousel {
+    /* .carousel {x
       margin-top: 80px;
     } */
+    .img-fluid{
+    padding: 20px !important;
+  }
     .navbar-toggler:focus {
       text-decoration: none;
       outline: 0;
       box-shadow:none !important;
     }
     .mr-auto {
-        margin-right: 95px !important;
+        margin-right: 99px !important;
     }
+    .ml-auto {
+    margin-left: -31px;
+  }
     .site-logo img {
     width: 31%;
     margin-right: 10px;

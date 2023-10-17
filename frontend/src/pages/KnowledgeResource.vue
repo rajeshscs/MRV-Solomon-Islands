@@ -167,7 +167,7 @@
          data-bs-slide="prev"
        >
          <span
-           style="margin-right: 40px;"
+           style="margin-right: 40px !important;"
            class="carousel-control-prev-icon"
            aria-hidden="true"
          ></span>
@@ -208,6 +208,13 @@
   }     
 
 @media (max-width: 576px) {
+   /* .carousel-control-next{
+      margin-right: 30px!important;
+   }
+   .carousel-control-prev{
+      margin-left: 30px!important;
+   } */
+
   .cus-card {
    text-overflow: hidden;
    width: 100%;
@@ -224,9 +231,7 @@
   .container{
    width: 90%;
   }
-  .mr-auto {
-    margin-right: 210px !important;
-}
+
 }
 
   
