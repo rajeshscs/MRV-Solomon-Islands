@@ -216,8 +216,9 @@ background-color: rgba(255, 0, 0, 0.678);
     padding: 0px !important;
 }
 }
-.bi-chevron-right{
-  size: 2rem;
+.bi-chevron-left{
+    font-weight: bold !important;
+    font-size: xx-large !important;
 }
 
 .bg {

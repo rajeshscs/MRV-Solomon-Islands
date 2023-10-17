@@ -228,7 +228,8 @@
     <br>
 
     <!-- Report  -->
-    <div
+<div>
+   <div
     data-aos="fade-right"
     data-aos-delay="50"
     class="about-area report-section about-2 fix wow fadeInUp"
@@ -250,6 +251,7 @@
     </div>
   </div>
 
+</div>
 <!-- Knowledge Resource Carousel -->
 
 <div>
