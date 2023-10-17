@@ -218,8 +218,13 @@ background-color: rgba(255, 0, 0, 0.678);
 }
 .bi-chevron-left{
     font-weight: bold !important;
-    font-size: xx-large !important;
+    font-size: 3rem !important;
 }
+.bi-chevron-right{
+    font-weight: bold !important;
+    font-size: 3rem !important;
+}
+
 
 .bg {
   background-image: linear-gradient(rgba(58, 58, 58, 0.701), rgba(79, 79, 79, 0.289));
