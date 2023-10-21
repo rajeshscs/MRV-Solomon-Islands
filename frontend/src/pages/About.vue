@@ -67,7 +67,7 @@
     </div>
  </div>
 </div>
-
+<br>
 <br>
 <router-view />
 

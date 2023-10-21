@@ -19,11 +19,11 @@
            <div class="container">
              <div class="row">
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-1.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -35,11 +35,11 @@
                  </div>
                </div>
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-2.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -51,11 +51,11 @@
                  </div>
                </div>
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-3.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -67,11 +67,11 @@
                  </div>
                </div>
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-4.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -91,11 +91,11 @@
              <div class="row">
                <!-- Duplicate the three columns here -->
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-5.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -108,11 +108,11 @@
                </div>
 
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-6.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -124,27 +124,27 @@
                  </div>
                </div>
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-7.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
                      href="#"
                      class="cus-text p-3 mobile-hidden"
                      style="text-decoration: none; color: #000; font-weight: 900;"
-                     >Navigation <i class="bi bi-chevron-right "></i
+                     >Navigation <i class="bi bi-chevron-right "></i>
                    ></a>
                  </div>
                </div>
                <div class="col col-md-3 col-sm-2 col-xs-3 custom-col">
-                 <div class="card mx-3 image-overlay cus-card">
+                 <div class="card mx-0 image-overlay cus-card">
                    <img
                      src="../assets/images/carousel/Untitled-8.jpg"
                      class="card-img-top"
-                     style="border-radius: 1px;"
+                     style="border-radius: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                      alt="..."
                    />
                    <a
@@ -167,9 +167,9 @@
          data-bs-slide="prev"
        >
          <span
-           style="margin-right: 40px !important;"
            class="carousel-control-prev-icon"
            aria-hidden="true"
+           style="margin-right: 50px!important;"
          ></span>
          <span class="visually-hidden">Previous</span>
        </button>
@@ -180,9 +180,9 @@
          data-bs-slide="next"
        >
          <span
-           style="margin-left: 40px !important;"
            class="carousel-control-next-icon"
            aria-hidden="true"
+           style="margin-left: 50px!important;"
          ></span>
          <span class="visually-hidden">Next</span>
        </button>
@@ -200,33 +200,34 @@
 <style scoped>
   .cus-card{
   transition: .2s;
-  box-shadow: 0px 0px 10px #0000002e;
-  border-radius: 10px;
+  box-shadow: 0px 0px 10px #00000006;
+  border-radius: 6px;
   }
   .cus-card:hover{
   transition: .2s;
-  box-shadow: 0 0 10px #00000056;
+  box-shadow: 0 0 10px #2121213e;
   }     
 
 @media (max-width: 576px) {
-   /* .carousel-control-next{
-      margin-right: 30px!important;
+  .carousel-control-prev-icon{
+    margin-right: 44px;
    }
-   .carousel-control-prev{
-      margin-left: 30px!important;
-   } */
-
-  .cus-card {
+   
+   .carousel-control-next-icon{
+    margin-left: 44px;
+   }
+    .cus-card {
    text-overflow: hidden;
    width: 100%;
    /* width: 48%;  */
+   border-radius: 6px;
    margin-right: 10px;
    }
   .text-center{
   font: inline;
   }
   .custom-col{
-   padding: 20px !important;
+   padding: 16px !important;
    display: table !important;
   }
   .container{

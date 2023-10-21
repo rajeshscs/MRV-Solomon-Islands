@@ -45,6 +45,23 @@ class GHGInventory(Document):
 		# get_doc = frappe.db.sql(f"""SELECT category,heads FROM `tabLivestock Population ChildTable` WHERE parent = '{self.year}'""")
 		return get_doc
 	
+	@frappe.whitelist()
+	def get_all_data(self):
+		old_doc =self.get_doc_before_save()
+		field_list = {}
+		meta = frappe.get_meta(self.doctype)
+		meta_dict = meta.as_dict()
+		fields = meta_dict["fields"]
+		for field in fields:
+			if frappe.db.exists(self.doctype,self.name):
+				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
+					repeated_list=["calculation_approach","was_uncertainty_analysis_performed","were_qa_or_qc_and_verification_procedures_implemented"]
+					if field["fieldname"] in repeated_list:
+						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
+							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
+		frappe.log_error("List 2",field_list)
+		return field_list
+	
 
 	@frappe.whitelist()
 	def get_table(self):
@@ -67,7 +84,7 @@ class GHGInventory(Document):
 		fields = meta_dict["fields"]
 		for field in fields:
 			if field["fieldtype"] == "Table":
-				if field["fieldname"] not in ["edited_reference_approach","edited_electricity_generation","edited_manufacturing_industries","edited_transport","edited_other_sectors","edited_other_energy","edited_international_bunkers","edited_co2_emissions_from_biomass","edited_cement_production","edited_clinker_data","edited_lime_production","edited_chemical_industry","edited_lubricant_section","edited_lubricant_use","edited_section_break_shpf2","edited_other_ippu","edited_section_break_xabuv","edited_refrigeration","edited_foam_blowing_agents_section","edited_foam_blowing_agents","edited_fire_protection_section","edited_fire_protection","edited_aerosols_section","edited_aerosols","edited_solvents_section","edited_solvents","edited_other_applications_section","edited_other_applications","edited_section_break_jvzrb","edited_electrical_equipment","edited_sf6_and_pfcs_from_other_product_use_section","edited_sf6_and_pfcs_from_other_product_use","edited_n2o_from_product_uses_section","edited_n2o_from_product_uses","edited_other_section","edited_other_use","edited_section_break_7vpnb","edited_activity_data","edited_enteric_fermentation","edited_indirect_manure_management","edited_direct_emissions_mms","edited_direct_managed_soils","edited_atmospheric_deposit","edited_n2o_from_n_leaching","edited_activity_data_burning","edited_activity_data_agriculture","edited_urea_application","edited_forest_land","edited_cropland","edited_grassland","edited_wetlands","edited_settlements","edited_other_land","edited_harvested_wood_products","edited_biomass_burning","edited_solid_waste","edited_biological_treatment","edited_waste_incineration","edited_open_burning_of_waste","edited_ch4_wastewater_treatment","edited_n2o_wastewater_treatment","edited_industrial_wastewater_treatment","edited_other_wastewater_treatement","edited_other_waste","edited_other_sector"]:
+				if field["fieldname"] not in ["ghg_inventory_details","edited_reference_approach","edited_electricity_generation","edited_manufacturing_industries","edited_transport","edited_other_sectors","edited_other_energy","edited_international_bunkers","edited_co2_emissions_from_biomass","edited_cement_production","edited_clinker_data","edited_lime_production","edited_chemical_industry","edited_lubricant_section","edited_lubricant_use","edited_section_break_shpf2","edited_other_ippu","edited_section_break_xabuv","edited_refrigeration","edited_foam_blowing_agents_section","edited_foam_blowing_agents","edited_fire_protection_section","edited_fire_protection","edited_aerosols_section","edited_aerosols","edited_solvents_section","edited_solvents","edited_other_applications_section","edited_other_applications","edited_section_break_jvzrb","edited_electrical_equipment","edited_sf6_and_pfcs_from_other_product_use_section","edited_sf6_and_pfcs_from_other_product_use","edited_n2o_from_product_uses_section","edited_n2o_from_product_uses","edited_other_section","edited_other_use","edited_section_break_7vpnb","edited_activity_data","edited_enteric_fermentation","edited_indirect_manure_management","edited_direct_emissions_mms","edited_direct_managed_soils","edited_atmospheric_deposit","edited_n2o_from_n_leaching","edited_activity_data_burning","edited_activity_data_agriculture","edited_urea_application","edited_forest_land","edited_cropland","edited_grassland","edited_wetlands","edited_settlements","edited_other_land","edited_harvested_wood_products","edited_biomass_burning","edited_solid_waste","edited_biological_treatment","edited_waste_incineration","edited_open_burning_of_waste","edited_ch4_wastewater_treatment","edited_n2o_wastewater_treatment","edited_industrial_wastewater_treatment","edited_other_wastewater_treatement","edited_other_waste","edited_other_sector"]:
 					if len(self.get(field["fieldname"])) != 0:
 						meta1 = frappe.get_meta(field["options"])
 						meta_dict2 = meta1.as_dict()

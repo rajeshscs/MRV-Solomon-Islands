@@ -57,9 +57,9 @@ class SDGAssessment(Document):
 		for field in fields:
 			if frappe.db.exists(self.doctype,self.name):
 				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
-
-					if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
-						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
+					if field["fieldname"] not in ["workflow_state","work_state"]:
+						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
+							field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
 
 				elif field["fieldtype"] == "Date" and old_doc.get(field["fieldname"]) != None  and field["fieldtype"] != "Table" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
 					Date = frappe.utils.formatdate(old_doc.get(field["fieldname"]),"yyyy-mm-dd")
@@ -132,4 +132,15 @@ class SDGAssessment(Document):
 								new_field_dict["type"] = key
 								new_field_list.append(new_field_dict)
 		return [field_list,new_field_list]
+	
+	@frappe.whitelist()
+	def get_approvers(self):
+		doc= frappe.db.get_list("Role",
+			fields=['name'],
+			filters={
+				"name":["Like","%Approver%"]
+			},
+			pluck="name",
+			ignore_permissions=True)
+		return doc
 	

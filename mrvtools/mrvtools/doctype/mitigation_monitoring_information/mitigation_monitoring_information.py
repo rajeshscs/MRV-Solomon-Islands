@@ -31,12 +31,13 @@ class MitigationMonitoringInformation(Document):
 			row.actual_monitored_value = i.actual_monitored_value
 			row.reference = i.reference
 
-		if len(self.original_performance_indicator) == 0:	
+		if len(self.actual_performance_indicator) == 0:	
 			for i in old_doc.performance_indicator:
-				row = self.append('original_performance_indicator',{})
+				row = self.append('actual_performance_indicator',{})
 				row.performance_indicator = i.performance_indicator
 				row.unit = i.unit
 				row.expected_value = i.expected_value
+				row.actual_monitored_value = i.actual_monitored_value
 				row.reference = i.reference
 		return "Yess"
 
@@ -58,7 +59,7 @@ class MitigationMonitoringInformation(Document):
 		for field in fields:
 			if frappe.db.exists(self.doctype,self.name):
 				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation" and field["fieldtype"] != "JSON" and field["fieldtype"] != "HTML" and field["fieldtype"] != "Button" and field["fieldtype"] != "Check":
-					repeated_list=["project_name","project_id", "monitoring_year", "project_description", "key_sector", "included_in", "type_of_instrument", "implementing_entity", "contact_details", "costusd", "end_date", "lifetime", "non_ghg_mitigation_benefits", "beneficiaries","market_based_mechanism", "expected_project_output", "objective", "key_sub_sector", "location", "other_agency", "other_contact_details", "source_of_funding", "financial_closure_date", "target_ghgs", "status", "gender_inclusiveness_assessment", "project_impacts", "weblink", "start_date"]
+					repeated_list=["workflow_state","work_state","project_name","project_id", "monitoring_year", "project_description", "key_sector", "included_in", "type_of_instrument", "implementing_entity", "contact_details", "costusd", "end_date", "lifetime", "non_ghg_mitigation_benefits", "beneficiaries","market_based_mechanism", "expected_project_output", "objective", "key_sub_sector", "location", "other_agency", "other_contact_details", "source_of_funding", "financial_closure_date", "target_ghgs", "status", "gender_inclusiveness_assessment", "project_impacts", "weblink", "start_date"]
 					if field["fieldname"] not in repeated_list:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
@@ -107,3 +108,15 @@ class MitigationMonitoringInformation(Document):
 			return [str(year) for year in range(int(start_year), 2051)]
 		else:
 			return [str(year) for year in range(1990, 2051)]
+		
+	@frappe.whitelist()
+	def get_approvers(self):
+		doc= frappe.db.get_list("Role",
+			fields=['name'],
+			filters={
+				"name":["Like","%Approver%"]
+			},
+			pluck="name",
+			ignore_permissions=True)
+		return doc
+	

@@ -4,20 +4,49 @@ var dynamicTitleList = ['','','','']
 frappe.ui.form.on('GHG Inventory', {
 	
 	refresh: function(frm) {
+		// $('.control-input').on("change",function(){
+			
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// })
+		// $('.primary-action').on('checkVisibility', function() {
+		// if ($('.primary-action').is(':visible')) {
+		// 	console.log("Hello");
+		// 	$('.actions-btn-group').hide();
+		// } else {
+		// 	$('.actions-btn-group').show();
+		// }
+		// });
+
+	// $('[data-fieldname]').on("keyup",function(){
+	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+	// 	$('.primary-action').removeClass('hide');
+    //     $('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+	// 	console.log("Hi..");
+	// })
+	$(document).ready(function(){
+		$('[data-fieldname]').on("keyup",function(){
+			$('.primary-action').removeClass('hide');
+			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+			frm.dirty()
+			console.log("Hi..");
+		});
+	});
+	
 		if(frm.is_new()){
-		frm.set_value('dynamic_title',dynamicTitleList.join(''))
-		frm.refresh_field('dynamic_title')
-		frappe.db.get_list('GHG Sector',{
-			order_by : 'name asc',
-			pluck: 'name'
-		}).then(r =>{
-			var sector_options = ""
-			for (var i of r){
-				sector_options += ('\n'+ i)
-			}
-			cur_frm.fields_dict.sector.df.options = sector_options
-			frm.refresh_field('sector')
-		})}
+			frm.set_value('dynamic_title',dynamicTitleList.join(''))
+			frm.refresh_field('dynamic_title')
+			frappe.db.get_list('GHG Sector',{
+				order_by : 'name asc',
+				pluck: 'name'
+			}).then(r =>{
+				var sector_options = ""
+				for (var i of r){
+					sector_options += ('\n'+ i)
+				}
+				cur_frm.fields_dict.sector.df.options = sector_options
+				frm.refresh_field('sector')
+			})
+		}
 		else{
 			cur_frm.fields_dict.sector.df.options = frm.doc.sector
 			frm.refresh_field('sector')
@@ -34,7 +63,8 @@ frappe.ui.form.on('GHG Inventory', {
 		
 
 		if(frm.doc.workflow_state == "Approved"){
-			if (frm.doc.workflow_state == "Approved"){
+			if (frm.doc.workflow_state == "Approved" || frm.doc.ghg_inventory_details.length != 0){
+
 			}
 			frm.set_value('work_state','Approved')
 			frm.save()
@@ -56,7 +86,7 @@ frappe.ui.form.on('GHG Inventory', {
 			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;")
+				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
 				frm.save()
 			}
 			else if(frm.doc.workflow_state == "Approved"){
@@ -77,7 +107,7 @@ frappe.ui.form.on('GHG Inventory', {
 				frm.save()
 			}
 			else if(frm.doc.workflow_state == "Rejected"){
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;")
+				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
 				frm.set_value("work_state","Rejected")
 				frm.save()
 			}
@@ -94,6 +124,7 @@ frappe.ui.form.on('GHG Inventory', {
 			async:false,
 			callback: function(r){
 				for (var i of r.message){
+					console.log(i)
 					var table_name = ""
 					var parts = i.split("_");
 					parts.shift();
@@ -117,19 +148,27 @@ frappe.ui.form.on('GHG Inventory', {
 					}
 
 					if(frm.doc.workflow_state == "Approved"){
-						if (frm.doc.workflow_state == "Approved" && i.length != 0){
-							frm.call({
-								doc:frm.doc,
-								method:"after_saving_table",
-								async:false,
-								callback:function(res){
-									console.log("Working.......");
-								}
-							})
-							frm.set_value(i,[])
-							frm.refresh_field(i)
+						if (frm.doc.workflow_state == "Approved" && (frm.doc[i].length != 0 || frm.doc.ghg_inventory_details.length != 0)){
+
+							for (let row of frm.doc.ghg_inventory_details){
+								frm.set_value(row.field_name,row.new_values)
+							}
+							if(frm.doc[i].length!=0){
+								frm.call({
+									doc:frm.doc,
+									method:"after_saving_table",
+									async:false,
+									callback:function(res){
+										console.log("Working.......");
+									}
+								})
+								frm.set_value(i,[])
+								frm.refresh_field(i)
+							}
+							
 						}
-						// frm.set_value("edited_project_details",[])
+						console.log("HIII......:)");
+						frm.set_value("ghg_inventory_details",[])
 						frm.set_value('work_state','Approved')
 						frm.save()
 					}
@@ -148,6 +187,7 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.call({
 				doc:frm.doc,
 				method:"get_table",
+				async:false,
 				callback:function(r){
 					for (var i of r.message){
 						$(`[data-fieldname=${i}] [class="control-label"]`).prop("textContent",`${frm.doc.sub_category}`)
@@ -161,6 +201,7 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.call({
 				doc:frm.doc,
 				method:"table_list",
+				async:false,
 				callback:function(r){
 					for (var i of r.message){
 						$(`[data-fieldname=${i}] [class="control-label"]`).prop("textContent",'Edited '+`${frm.doc.sub_category}`  + ' table')
@@ -416,10 +457,50 @@ frappe.ui.form.on('GHG Inventory', {
 						console.log("Mudinchhh!");
 					}
 				})
-				window.location.href = `${frm.doc.name}`
+
+				
+				frm.call({
+					doc:frm.doc,
+					method:"get_all_data",
+					async:false,
+					callback:function(r){
+						var result= r.message
+
+						var field_name_list = []
+						for(let [key,value] of Object.entries(result)){
+							field_name_list.push(key)
+						}
+
+						for (var i of frm.doc.ghg_inventory_details){
+
+							if (field_name_list.includes(i.field_name) ){
+								i.new_values = frm.doc[`${i.field_name}`].toString()
+								frm.set_value(i.field_name,i.old_values)
+								frm.refresh_field("ghg_inventory_details")
+
+								const index = field_name_list.indexOf(i.field_name);
+								const x = field_name_list.splice(index, 1)
+							}
+						}
+						if (field_name_list){
+
+							for (var i of field_name_list){
+								var label = i.replaceAll("_"," ")
+								label = toTitleCase(label)
+								var child =frm.add_child("ghg_inventory_details")
+								child.field_label = label
+								child.field_name = i
+								child.old_values = result[`${i}`]
+								child.new_values = frm.doc[`${i}`].toString()
+								frm.set_value(i,result[`${i}`])
+
+							}
+						}
+					}
+				})
+				// window.location.href = `${frm.doc.name}`
 			}
 		}
-		
 	},
 
 	edit_button:function(frm,cdt,cdn){
@@ -487,7 +568,7 @@ frappe.ui.form.on('GHG Inventory', {
 		// 				frm.set_value(i,[])
 		// 				frm.refresh_field(i)
 		// 			}
-		// 			// frm.set_value("edited_project_details",[])
+		// 			// frm.set_value("ghg_inventory_details",[])
 		// 			frm.set_value('work_state','Approved')
 		// 			frm.save()
 		// 		}
@@ -1106,6 +1187,7 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.call({
 				doc:frm.doc,
 				method:"get_table",
+				async:false,
 				callback:function(r){
 					for (var i of r.message){
 						$(`[data-fieldname=${i}] [class="control-label"]`).prop("textContent",`${frm.doc.sub_category}`)
@@ -1600,8 +1682,77 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 	}
 })
 
+frappe.ui.form.on('IPPU Ozone ChildTable',{
+	electrical_equipment_add:function(frm,cdt,cdn){
+		var d = locals[cdt][cdn]
+		frappe.db.get_list("IPPU GWP Master List",{
+			fields : ['gas_name'],
+			filters:{name:["like","%PFC%"]},
+			order_by : 'name asc',
+			pluck: 'gas_name'
+		}).then(r =>{
+			console.log(r);
+			var gas_name_list = ["Sulfur hexafluoride"]
+
+			for (let i of r){
+				gas_name_list.push(i)
+			}
+
+			console.log(gas_name_list);
+			frm.set_query("gas_consumed", "electrical_equipment", function() {
+				return {
+					filters: {
+						"name": ["in", gas_name_list] 
+						
+					}
+				}
+			});
+			frm.refresh_fields("gas_consumed");
+		})
+		
+		
+	},
+	sf6_and_pfcs_from_other_product_use_add:function(frm,cdt,cdn){
+		var d = locals[cdt][cdn]
+		frappe.db.get_list("IPPU GWP Master List",{
+			fields : ['gas_name'],
+			filters:{name:["like","%PFC%"]},
+			order_by : 'name asc',
+			pluck: 'gas_name'
+		}).then(r =>{
+			console.log(r);
+			var gas_name_list = ["Sulfur hexafluoride"]
+
+			for (let i of r){
+				gas_name_list.push(i)
+			}
+
+			console.log(gas_name_list);
+			frm.set_query("gas_consumed", "electrical_equipment", function() {
+				return {
+					filters: {
+						"name": ["in", gas_name_list] 
+						
+					}
+				}
+			});
+			frm.refresh_fields("gas_consumed");
+		})
+		
+		
+	},
+
+})
 
 
+function toTitleCase(str) {
+	return str.replace(
+	  /\w\S*/g,
+	  function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	  }
+	); 
+}
 
 
 // Functions //

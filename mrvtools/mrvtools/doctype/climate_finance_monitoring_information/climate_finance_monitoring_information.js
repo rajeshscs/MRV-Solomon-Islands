@@ -4,6 +4,205 @@ var counter = 0
 frappe.ui.form.on('Climate Finance Monitoring Information', {
 	
 	refresh: function(frm){
+		frm.call({
+			doc:frm.doc,
+			method:"get_approvers",
+			async:false,
+			callback:function(r){
+				if(frm.doc.workflow_state == "Pending"){
+					console.log(r.message);
+					console.log(frappe.user_roles);
+					for (let i of r.message){
+						if (frappe.session.user != "Administrator"){
+
+							if(frappe.user_roles.includes(i)){
+								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+							}
+						}
+
+					}
+				}
+			}
+		})
+		
+		$(document).ready(function(){
+			$('[data-fieldname]').on({
+				keyup:function(){
+					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+					$('.primary-action').removeClass('hide');
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+					frm.dirty()
+				},
+				click:function(){
+					$('[data-fieldname]').on("focus",function(){
+						
+						$('[data-fieldname]').on("click",function(){
+							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+							$('.primary-action').removeClass('hide')
+							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+							frm.dirty()
+						})
+					})
+				},
+				
+				change:function(){
+					$('[data-fieldtype = "Select"]').on("change",function(){
+						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+						$('.primary-action').removeClass('hide')
+						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+						frm.dirty()
+					})
+				}
+			});
+
+			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+				$('.primary-action').removeClass('hide')
+				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+				frm.dirty()
+			})
+
+			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+
+				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+					var hide = true;
+					if(hide){
+					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+					$('.primary-action').removeClass('hide')
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+					frm.dirty()
+					}
+					else{
+						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+					}
+				});		
+			});
+		});
+		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
+
+		// $('[data-fieldname="budget_expenditure"]').on("keyup",function(){
+		// 	$('[data-fieldname="disbursement_category"],[data-fieldname="q1"],[data-fieldname="q2"],[data-fieldname="q3"],[data-fieldname="q4"],[data-fieldname="total"]').on("focusout",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 	})
+		// })
+		// $('.btn-default').on("click",function(){
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// })
+		// $('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// })
+
+		if (frm.doc.__islocal == 1) {
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
+		}
+
+		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+		
+				$(".actions-btn-group").hide();
+				
+			}else{
+				$(".actions-btn-group").show()
+			}
+	
+			if (frm.doc.work_state == "Approved"){
+				cur_frm.fields_dict.project_id.df.read_only = 1
+				cur_frm.fields_dict.select_approver.df.read_only = 1
+			}
+			
+			if (frm.doc.work_state == '' && !frm.doc.__islocal){
+				if (frm.doc.workflow_state == "Pending") {
+					frm.set_value("work_state","Pending")
+					frm.save()
+				}
+			}
+			else if(frm.doc.work_state == "Pending"){
+				console.log(frm.doc.work_state);
+				if (frm.doc.workflow_state == "Rejected"){
+					frm.set_value("work_state","Rejected")
+					frm.save()
+				}
+				else if(frm.doc.workflow_state == "Approved"){
+					frm.set_value("work_state","Approved")
+					frm.save()
+				}
+			}
+			else if(frm.doc.work_state == "Rejected"){
+				if (frm.doc.workflow_state == "Draft"){
+					frm.set_value("work_state","Rejected")
+					frm.save()
+				}
+				else if(frm.doc.workflow_state == "Approved"){
+					// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
+					frm.set_value("work_state","Approved")
+					frm.save()
+				}
+				else if(frm.doc.workflow_state == "Rejected"){
+					// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
+					frm.set_value("work_state","Rejected")
+					frm.save()
+				}
+				else if(frm.doc.workflow_state == "Pending"){
+					frm.set_value("work_state","Rejected")
+					frm.save()
+				}
+			}
+	
+			if(frm.doc.workflow_state == "Pending"){
+				frm.add_custom_button('Approve',()=>{
+					frappe.confirm('Are you sure you want to proceed?',
+						() => {
+							frm.set_value("workflow_state","Approved")
+							frm.refresh_field("workflow_state")
+							frm.save()
+						}, () => {
+	
+					})
+	
+				},"Actions")
+	
+				frm.add_custom_button('Reject',()=>{
+					frappe.confirm('Are you sure you want to proceed?',
+						() => {
+							frm.set_value("workflow_state","Rejected")
+							frm.refresh_field("workflow_state")
+							frm.save()
+						}, () => {
+	
+					})
+	
+				},"Actions")
+	
+				
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.add_custom_button('Edit',()=>{
+					frappe.confirm('Are you sure you want to proceed?',
+						() => {
+							frm.set_value("workflow_state","Draft")
+							frm.refresh_field("workflow_state")
+							console.log(frm.doc.workflow_state);
+							frm.save()
+						}, () => {
+		
+						})
+		
+					},"Actions")
+			}
+			else if(frm.doc.workflow_state == "Draft"){
+				frm.add_custom_button('Send for Approval',()=>{
+					frappe.confirm('Are you sure you want to proceed?',
+						() => {
+							frm.set_value("workflow_state","Pending")
+							frm.refresh_field("workflow_state")
+							console.log(frm.doc.workflow_state);
+							frm.save()
+						}, () => {
+						
+					})
+					
+				},"Actions")
+			}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_budget_expenditure.length != 0){
 			frm.fields_dict.budget_expenditure.df.read_only = 1
 			frm.refresh_field("budget_expenditure")
@@ -74,8 +273,8 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 
 			frm.set_value("actual_budget_expenditure",[])
 			frm.set_value("actual_total_budget_disbursement",[])
-			frm.set_value('work_state','Approved')
-			frm.set_value("workflow_state","Approved")
+			// frm.set_value('work_state','Approved')
+			// frm.set_value("workflow_state","Approved")
 		}
 
 		if ((frm.doc.workflow_state == "Approved")){
@@ -508,12 +707,11 @@ frappe.ui.form.on('Climate Monitoring Information Budget Expenditure ChildTable'
 		frm.set_query("disbursement_category","budget_expenditure",function(){
 			return {
 				filters:{
-				"disbursement_category":["not in",category_list]
+					"disbursement_category":["not in",category_list]
 				}
 			}
 		})
 		frm.refresh_fields("disbursement_category")
-		
 	}
 	
 	

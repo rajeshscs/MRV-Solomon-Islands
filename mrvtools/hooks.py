@@ -20,7 +20,8 @@ website_redirects = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/mrvtools/css/mrvtools.css"
+app_include_css = "/assets/mrvtools/css/sample_theme.css"
+# app_include_css = "/assets/mrvtools/css/sample_theme.css"
 # app_include_js = "/assets/mrvtools/js/mrvtools.js"
 
 # include js, css files in header of web template

@@ -11,28 +11,28 @@
         aria-label="Toggle navigation"
       >
       
-        <span class="navbar-toggler-icon"></span>
+        <span><i class="bi bi-list" style="color: white !important;"></i></span>
       </button>
-      <div class="site-logo ml-auto mr-auto "> <!-- Display only on lg and smaller screens -->
-        <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" />
+      <div class="site-logo ml-auto mr-4 ">
+        <router-link to='/home'><img  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 mr-2">
           <li class="nav-item mr-2">
-            <router-link to='/home' class="custom-link text-lg p-3" style="transition:.3s;">Home</router-link>
+            <router-link to='/home' class="custom-link text-lg " style="transition:.3s; margin-right:20px;">Home</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/about' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/about' }" style="transition:.3s;">About MRV Tool</router-link>
+            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="transition:.3s; margin-right:20px;">About MRV Tool</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/project' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s;">Project</router-link>
+            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s; margin-right:20px;">Project</router-link>
           </li>
           <li>
-            <router-link to='/reports' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s;">Reports</router-link>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s; margin-right:20px;">Reports</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/knowledgeresource' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s;">Knowledge Resource</router-link>
+            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s; margin-right:20px;">Knowledge Resource</router-link>
           </li>
         </ul>
       </div>
@@ -102,18 +102,18 @@ onUnmounted(() => {
 
 
 .bg {
-  background-image: linear-gradient(rgba(128, 128, 128, 0.701), rgba(128, 128, 128, 0.118));
+  background-image: linear-gradient(rgba(33, 46, 36, 0.519), rgba(128, 128, 128, 0.118));
   border: none;
 }
 .navbar-fixed-top.scrolled {
-  /* transition: 10s; */
-  background-color: #ffffffe1 !important;
+  transition: 1s;
+  background-color: #7b7b7b96 !important;
   transition: background-color 200ms linear;
 }
 
 .custom-link.scrolled {
-  /* transition: 10s; */
-  color: black;
+  transition: 1s;
+  color: rgb(255, 255, 255);
 }
 
 /* Reduce the logo size */
@@ -155,8 +155,13 @@ background-color: rgba(255, 0, 0, 0.678);
     color: #fff;
     text-decoration: none;
     border: none;
-    margin-right: 40px;
+    margin-right: 34px;
+    width: 92px;
     border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
   }
   
   .custom-btn:hover {
@@ -172,19 +177,14 @@ background-color: rgba(255, 0, 0, 0.678);
 
 
 /* toggle area */
-.navbar-toggler-icon {
-    display: inline-block;
-    width: 2.5em;
-    height: 2.5em;
-    vertical-align: middle;
-    background-image: var(--bs-navbar-toggler-icon-bg);
-    background-repeat: no-repeat;
-    background-position: center;
+.bi-list {
+  
+  font-size: 32px;
+  border: none;
     background-size: 93%;
-    color: #fff;
 }
 
-.navbar-toggler:hover {
+.bi-list:hover {
     text-decoration: none;
     height: 30px;
     width: 45px;
@@ -200,40 +200,30 @@ background-color: rgba(255, 0, 0, 0.678);
       outline: 0;
       box-shadow:none !important;
   }
-    .mr-auto {
-          margin-right: 79px !important;
-      }
-    .ml-auto {
-    margin-left: -20px;
-  }
-  .breadcrumb-area {
-    /* position: relative; */
-    /* background: url(../assets/images/footer.png); */
-    background: url(/src/assets/images/banner.jpeg);
-    background-size: contain;
-    /* background-attachment: fixed; */
-    background-repeat: no-repeat;
-    height: 130px;
-    width: 100%;
+.mr-4 {
+    margin-left: -14px;
+}
+.ml-auto {
+    margin-right: 232px;
+    margin-top: 4px;
+
 }
 .site-logo img {
     width: 31%;
-    margin-right: 10px;
+    margin-right: -19px;
     padding: 0px !important;
-}
-.bg {
-  background-image: linear-gradient(rgba(86, 86, 86, 0.823), rgba(57, 57, 57, 0.27));
-  border: none;
-  color: #fff;
+  }
+
+
+.custom-link.scrolled {
+  transition: 10s;
+  color: rgb(255, 255, 255);
 }
 
-.navbar-fixed-top.scrolled {
-  /* transition: 10s; */
-  background-color: #ffffffe1 !important;
-  transition: background-color 200ms linear;
-}
-.custom-link.scrolled {
-  color: rgb(255, 255, 255);
+.breadcrumb-area {
+    background: url("../assets/images/carousel/Untitled-3.jpg");
+    background-size: cover;
+    height: 202px;
 }
 }
 </style>

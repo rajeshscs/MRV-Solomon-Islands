@@ -1,25 +1,25 @@
 <template >
    
    <HomeHeader />
-
-
-      <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right" data-aos-delay="10 no-repeat" id="projects">
+<div>
+   <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right " data-aos-delay="100" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
            <div class="section-headline text-center">
-            <h3 style="font-size: 40px; font-weight:500; color: #000; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green;">Projects</span></h3>
+            <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
            </div>
-           <ul class="pr-blw-img-list" style="list-style: none; display: flex;">
-               <li style="margin-right: 20px;"><img src="../assets/images/Total-ADC-Action.png" style="max-width: 100%; height: auto;"></li>
-               <li style="margin-right: 20px;"><img src="../assets/images/Total-Climate-Finance-mobilised.png" style="max-width: 100%; height: auto;"></li>
-               <li style="margin-right: 20px;"><img src="../assets/images/NDC-Actions-by-source.png" style="max-width: 100%; height: auto;"></li>
+           <ul class="pr-blw-img-list" style="list-style: none; padding: 0!important; display: flex;">
+            <li style="margin-right: 10px; margin-left:10px;"><img src="../assets/images/Total-ADC-Action.png" style="max-width: 100%; height: auto;"></li>
+               <li style="margin-right: 10px; margin-left:10px;"><img src="../assets/images/Total-Climate-Finance-mobilised.png" style="max-width: 100%; height: auto;"></li>
+               <li style="margin-right: 10px; margin-left:10px;"><img src="../assets/images/NDC-Actions-by-source.png" style="max-width: 100%; height: auto;"></li>
            </ul>
-           <br><br>
+           <br>
+           <br>
+ 
            <div class="row">
-            <!-- <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.5s">
-         </div> -->
-         <div class="tab-menu mx-5 mb-4">
+            <div class="tab-menu mx-5 mb-4">
    <!-- Start Nav tabs -->
-   <ul style="margin-right: 35px;" data-aos="fade-right " data-aos-delay="100" class="nav nav-pills flex-wrap tab_parent" id="pills-tab" role="tablist" >
+
+            <ul style="margin-right: 35px; " data-aos="fade-right " data-aos-delay="100" class="nav nav-pills flex-wrap tab_parent" id="pills-tab" role="tablist" >
                <li class="nav-item active tab_child">
                   <a class="nav-link style-class" id="pills-home-tab" href="#p-view-2" role="tab" data-toggle="tab" aria-controls="pills-home" aria-selected="true">Adaptation </a>
                </li>
@@ -37,12 +37,12 @@
 
 
                <div class="container-fluid">
-            <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
+            <div class="col-md-12 col-sm-12 col-xs-12 table-column wow fadeInUp" data-wow-delay="0.7s" >
                <div class="tab-content p-4">
                   <!-- Start Tab Content -->
                   <div class="tab-pane active" id="p-view-2">
                   <div class="tab-inner">
-                     <div class="table-responsive">
+                     <div class="table-responsive table-rounded">
                      <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
@@ -253,8 +253,9 @@
 </div>
 <!-- Knowledge Resource Carousel -->
 
-<div>
-   <h1
+  <div>
+    <div class="container-fluid">
+      <h1
        data-aos="fade-right"
        data-aos-delay="100"
        style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;"
@@ -276,7 +277,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-1.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -292,7 +293,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-2.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -308,7 +309,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-3.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -324,7 +325,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-4.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -348,7 +349,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-5.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -365,7 +366,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-6.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -381,7 +382,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-7.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -397,7 +398,7 @@
                    <img
                      src="../assets/images/carousel/Untitled-8.jpg"
                      class="card-img-top"
-                     style="border-top: 20px;"
+                     style="border-radius: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px;"
                      alt="..."
                    />
                    <a
@@ -420,9 +421,9 @@
          data-bs-slide="prev"
        >
          <span
-           style="margin-right: 40px;"
            class="carousel-control-prev-icon"
            aria-hidden="true"
+           style="margin-right: 50px !important; "
          ></span>
          <span class="visually-hidden">Previous</span>
        </button>
@@ -433,15 +434,16 @@
          data-bs-slide="next"
        >
          <span
-           style="margin-left: 40px !important;"
            class="carousel-control-next-icon"
            aria-hidden="true"
+           style="margin-left: 50px !important; "
          ></span>
          <span class="visually-hidden">Next</span>
        </button>
      </div>
-   </div>
-    
+    </div>
+  </div>
+</div>
     <Footer />
  </template>
  <script setup>
@@ -453,12 +455,12 @@
     
  </script>
 <style scoped>
-.right.carousel-control:hover{
+/* .right.carousel-control:hover{
    border-radius: 20px;
    border-width: 20% red;
    border:navy;
    color: red;
-}
+} */
 
 .style-class:hover {
   color: red !important;
@@ -506,7 +508,7 @@
 .cus-card{
    transition: .2s;
    box-shadow: 0px 0px 10px #0000002e;
-   border-radius: 10px;
+   border-radius: 6px;
 }
 .cus-card:hover{
    transition: .2s;
@@ -535,20 +537,26 @@
   position: relative;
 }
 
+/* Table */
+
 
 
 
 @media (max-width: 768px) {
-  .img{
-    position: relative;
-    background-color: #00220012;
-    height: 19rem;
+  .cus-card{
+   border-radius: 6px;
 }
-.report-image{
-    width: 100%;
-    height: 100%;
+
+  .img{
+      position: relative;
+      background-color: #00220012;
+      height: 19rem;
+  }
+  .report-image {
+    width: 94%;
+    height: 106%;
     margin: auto;
-    position: relative;
+    position: unset;
 }
 .cus-card {
    text-overflow: hidden;
@@ -560,12 +568,20 @@
   font: inline;
   }
   .custom-col{
-   padding: 20px !important;
+   padding: 10px !important;
    display: table !important;
   }
+
   .container{
    width: 90%;
   }
+  /* .carousel-control-prev-icon{
+    margin-right: 34px;
+   }
+   
+   .carousel-control-next-icon{
+    margin-left: 34px;
+   } */
 
   }
 
@@ -577,6 +593,9 @@
        justify-content: space-between;
        flex-wrap: nowrap!important;
        overflow: auto!important;
+   }
+   .pr-blw-img-list{
+    padding: 10px !important;
    }
    .tab_child{
       flex: 0 0 auto;

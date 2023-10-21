@@ -3,6 +3,236 @@
 
 frappe.ui.form.on('Climate Finance', {
 	refresh: function(frm){
+		frm.call({
+			doc:frm.doc,
+			method:"get_approvers",
+			async:false,
+			callback:function(r){
+				if(frm.doc.workflow_state == "Pending"){
+					console.log(r.message);
+					console.log(frappe.user_roles);
+					for (let i of r.message){
+						if (frappe.session.user != "Administrator"){
+
+							if(frappe.user_roles.includes(i)){
+								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+							}
+						}
+
+					}
+				}
+			}
+		})
+		
+		$(document).ready(function(){
+			$('[data-fieldname]').on({
+				keyup:function(){
+					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+					$('.primary-action').removeClass('hide');
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+					frm.dirty()
+				},
+				click:function(){
+					$('[data-fieldname]').on("focus",function(){
+						
+						$('[data-fieldname]').on("click",function(){
+							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+							$('.primary-action').removeClass('hide')
+							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+							frm.dirty()
+						})
+					})
+				},
+				
+				change:function(){
+					$('[data-fieldtype = "Select"]').on("change",function(){
+						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+						$('.primary-action').removeClass('hide')
+						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+						frm.dirty()
+					})
+				}
+			});
+
+			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+				$('.primary-action').removeClass('hide')
+				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+				frm.dirty()
+			})
+
+			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+
+				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+					var hide = true;
+					if(hide){
+					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+					$('.primary-action').removeClass('hide')
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+					frm.dirty()
+					}
+					else{
+						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+					}
+				});
+			});
+		});
+// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
+
+// 		$('[data-fieldtype="Select"]').on("change",function(){
+			
+// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// 		})
+		$('[data-fieldtype="Date"]').on("change",function(){
+			
+			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		})
+
+// 		$('[data-fieldtype="Float"],[data-fieldtype="Int"]').on("focusout",function(){
+// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			
+// 		})
+// 		$('[data-fieldtype="Data"],[data-fieldtype="Small Text"],[data-fieldtype="Percentage"]').on("keyup",function(){
+// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			
+// 		})
+// 		$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
+// 			console.log("Successs child...");
+// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// 		})
+
+// 	$('.btn-default').on("click",function(){	
+// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// 	})
+// 	$('[data-fieldname="sources_of_finance"]').on("keyup",function(){
+// 		$('[data-fieldname="national_international"],[data-fieldname="type"],[data-fieldname="amount"],[data-fieldname="channels"],[data-fieldname="country"],[data-fieldname="agency_name"]').on("focusout",function(){
+// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// 	})
+// })
+// $('[data-fieldname="cost_breakdown"]').on("keyup",function(){
+// 	$('[data-fieldname="disbursement_category"],[data-fieldname="amount"],[data-fieldname="percentage"]').on("focusout",function(){
+// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// })
+// })
+// $('[data-fieldname="budget_disbursement_schedule"]').on("keyup",function(){
+// 	$('[data-fieldname="financial_year"],[data-fieldname="amount"],[data-fieldname="percentage"]').on("focusout",function(){
+// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+// })
+// })
+	
+		
+		
+// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
+if (frm.doc.__islocal == 1) {
+	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
+}
+
+if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+
+		$(".actions-btn-group").hide();
+		
+	}else{
+		$(".actions-btn-group").show()
+	}
+
+	if (frm.doc.work_state == "Approved"){
+		cur_frm.fields_dict.project_id.df.read_only = 1
+		cur_frm.fields_dict.select_approver.df.read_only = 1
+	}
+	
+	if (frm.doc.work_state == '' && !frm.doc.__islocal){
+		if (frm.doc.workflow_state == "Pending") {
+			frm.set_value("work_state","Pending")
+			frm.save()
+		}
+	}
+	else if(frm.doc.work_state == "Pending"){
+		console.log(frm.doc.work_state);
+		if (frm.doc.workflow_state == "Rejected"){
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+		else if(frm.doc.workflow_state == "Approved"){
+			frm.set_value("work_state","Approved")
+			frm.save()
+		}
+	}
+	else if(frm.doc.work_state == "Rejected"){
+		if (frm.doc.workflow_state == "Draft"){
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+		else if(frm.doc.workflow_state == "Approved"){
+			// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
+			frm.set_value("work_state","Approved")
+			frm.save()
+		}
+		else if(frm.doc.workflow_state == "Rejected"){
+			// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+		else if(frm.doc.workflow_state == "Pending"){
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+	}
+
+	if(frm.doc.workflow_state == "Pending"){
+		frm.add_custom_button('Approve',()=>{
+			frappe.confirm('Are you sure you want to proceed?',
+				() => {
+					frm.set_value("workflow_state","Approved")
+					frm.refresh_field("workflow_state")
+					frm.save()
+				}, () => {
+
+			})
+
+		},"Actions")
+
+		frm.add_custom_button('Reject',()=>{
+			frappe.confirm('Are you sure you want to proceed?',
+				() => {
+					frm.set_value("workflow_state","Rejected")
+					frm.refresh_field("workflow_state")
+					frm.save()
+				}, () => {
+
+			})
+
+		},"Actions")
+
+		
+	}
+	else if(frm.doc.workflow_state == "Approved"){
+		frm.add_custom_button('Edit',()=>{
+			frappe.confirm('Are you sure you want to proceed?',
+				() => {
+					frm.set_value("workflow_state","Draft")
+					frm.refresh_field("workflow_state")
+					console.log(frm.doc.workflow_state);
+					frm.save()
+				}, () => {
+
+				})
+
+			},"Actions")
+	}
+	else if(frm.doc.workflow_state == "Draft"){
+		frm.add_custom_button('Send for Approval',()=>{
+			frappe.confirm('Are you sure you want to proceed?',
+				() => {
+					frm.set_value("workflow_state","Pending")
+					frm.refresh_field("workflow_state")
+					console.log(frm.doc.workflow_state);
+					frm.save()
+				}, () => {
+				
+			})
+			
+		},"Actions")
+	}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 		if (frm.doc.work_state == "Approved"){
@@ -91,8 +321,8 @@ frappe.ui.form.on('Climate Finance', {
 			frm.set_value("edited_sources_of_finance",[])
 			frm.set_value("edited_cost_breakdown",[])
 			frm.set_value("edited_budget_disbursement_schedule",[])
-			frm.set_value("workflow_state","Approved")
-			frm.set_value('work_state','Approved')
+			// frm.set_value("workflow_state","Approved")
+			// frm.set_value('work_state','Approved')
 		}
 
 		if ((frm.doc.workflow_state == "Approved")){

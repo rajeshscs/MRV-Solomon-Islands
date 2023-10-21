@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{EF} - {###}",
+ "creation": "2023-10-20 12:10:59.496645",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cement_section",
+  "cement_subsector",
+  "emission_factor_1",
+  "unit_1",
+  "reference_1",
+  "lime_section",
+  "lime_subsector",
+  "emission_factor_2",
+  "unit_2",
+  "reference_2"
+ ],
+ "fields": [
+  {
+   "default": "Cement",
+   "fieldname": "cement_subsector",
+   "fieldtype": "Data",
+   "label": "Cement Subsector",
+   "read_only": 1
+  },
+  {
+   "fieldname": "emission_factor_1",
+   "fieldtype": "Data",
+   "label": "Emission Factor"
+  },
+  {
+   "default": "Lime",
+   "fieldname": "lime_subsector",
+   "fieldtype": "Data",
+   "label": "Lime Subsector",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cement_section",
+   "fieldtype": "Section Break",
+   "label": "Cement Production"
+  },
+  {
+   "fieldname": "lime_section",
+   "fieldtype": "Section Break",
+   "label": "Lime Production"
+  },
+  {
+   "fieldname": "unit_1",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "reference_1",
+   "fieldtype": "Small Text",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "emission_factor_2",
+   "fieldtype": "Data",
+   "label": "Emission Factor"
+  },
+  {
+   "fieldname": "unit_2",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "reference_2",
+   "fieldtype": "Small Text",
+   "label": "Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-20 12:22:37.040140",
+ "modified_by": "Administrator",
+ "module": "GHG Inventory",
+ "name": "IPPU Emission Factors Master List",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -45,18 +45,18 @@ import Breadcrumb from '../components/Breadcrumb.vue'
   z-index: -1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     .img{
       position: relative;
       background-color: #00220012;
       height: 19rem;
   }
-  .report-image{
-      width: 100%;
-      height: 100%;
-      margin: auto;
-      position: relative;
-  }
+  .report-image {
+    width: 94%;
+    height: 106%;
+    margin: auto;
+    position: unset;
+}
 }
 
 .report-image {

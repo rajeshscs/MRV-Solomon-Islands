@@ -65,7 +65,6 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -73,20 +72,17 @@
    "fieldname": "project_description",
    "fieldtype": "Small Text",
    "label": "Brief Description",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "section_break_bxjiw",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fetch_from": "project_name.type_of_instrument",
    "fieldname": "type_of_instrument",
    "fieldtype": "Data",
    "label": "Type of Instrument",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -94,7 +90,6 @@
    "fieldname": "objective",
    "fieldtype": "Data",
    "label": "Objective",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -102,14 +97,12 @@
    "fieldname": "key_sector",
    "fieldtype": "Data",
    "label": "Mitigation Sector",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
    "label": "Included In",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -117,14 +110,12 @@
    "fieldname": "implementing_entity",
    "fieldtype": "Data",
    "label": "Implementing Entity",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "contact_details",
    "fieldtype": "Data",
    "label": "Contact Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -132,7 +123,6 @@
    "fieldname": "costusd",
    "fieldtype": "Data",
    "label": "Cost(USD)",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -140,53 +130,45 @@
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "non_ghg_mitigation_benefits",
    "fieldtype": "Data",
    "label": "Mitigation Non-GHG Benifits",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "beneficiaries",
    "fieldtype": "Data",
    "label": "Beneficiaries ",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "market_based_mechanism",
    "fieldtype": "Data",
    "label": "Registered With Market Based Mechanism",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "ghg_estimation_methodology_text",
    "fieldtype": "Data",
    "label": "GHG Estimation Methodology",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "ghg_estimation_methodology_file",
-   "fieldtype": "Attach",
-   "permlevel": 1
+   "fieldtype": "Attach"
   },
   {
    "fieldname": "column_break_pgchz",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fetch_from": "project_name.key_sub_sector",
    "fieldname": "key_sub_sector",
    "fieldtype": "Data",
    "label": "Mitigation Sub- Sector",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -194,7 +176,6 @@
    "fieldname": "location",
    "fieldtype": "Data",
    "label": "Location",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -202,14 +183,12 @@
    "fieldname": "other_agency",
    "fieldtype": "Data",
    "label": "Other Party",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "other_contact_details",
    "fieldtype": "Data",
    "label": "Contact Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -217,7 +196,6 @@
    "fieldname": "source_of_funding",
    "fieldtype": "Data",
    "label": "Source of Funding",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -225,49 +203,42 @@
    "fieldname": "financial_closure_date",
    "fieldtype": "Data",
    "label": "Financial Closure Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "lifetime",
    "fieldtype": "Data",
    "label": "Project Lifetime(years)",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "target_ghgs",
    "fieldtype": "Data",
    "label": "Target GHGs",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Data",
    "label": "Status",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "gender_inclusiveness_assessment",
    "fieldtype": "Data",
    "label": "Gender Inclusiveness Assessment",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "project_impacts",
    "fieldtype": "Data",
    "label": "Project Impacts",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "weblink",
    "fieldtype": "Data",
    "label": "Provide Weblink",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -275,104 +246,88 @@
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Start Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "upload_calculation_sheet",
    "fieldtype": "Attach",
-   "label": "Upload Calculation Sheet",
-   "permlevel": 1
+   "label": "Upload Calculation Sheet"
   },
   {
    "fieldname": "section_break_pdgvc",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "performance_indicator",
    "fieldtype": "Table",
    "label": "Performance Indicator",
-   "options": "Mitigation Monitoring Information ChildTable",
-   "permlevel": 1
+   "options": "Mitigation Monitoring Information ChildTable"
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   },
   {
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
    "label": "Monitoring Year",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "column_break_adszg",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_px1zu",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "expected_project_output",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Expected Project Outputs",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "actual_annual_ghg",
    "fieldtype": "Int",
-   "label": "Actual Annual GHG Emission Reductions (tCO2e/Year)",
-   "permlevel": 1
+   "label": "Actual Annual GHG Emission Reductions (tCO2e/Year)"
   },
   {
    "fieldname": "upload_document",
    "fieldtype": "Attach",
-   "label": "Upload Document",
-   "permlevel": 1
+   "label": "Upload Document"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fetch_from": "project_name.expected_annual_ghg",
    "fieldname": "expected_annual_ghg",
    "fieldtype": "Int",
    "label": "Expected Annual GHG",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "MIT-MONI-INFO-.###",
-   "permlevel": 1
+   "options": "MIT-MONI-INFO-.###"
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
-   "permlevel": 1
+   "label": "Edited Details"
   },
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited Mitigation Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -380,7 +335,6 @@
    "fieldtype": "Table",
    "label": "Edited Performance Indicator",
    "options": "Mitigation Monitoring Information ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -388,27 +342,23 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "fieldname": "edit_button",
    "fieldtype": "Button",
-   "label": "Edit Performance Indicator",
-   "permlevel": 1
+   "label": "Edit Performance Indicator"
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "project_id",
    "fieldtype": "Link",
    "label": "Project ID",
    "options": "Mitigations",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -416,13 +366,12 @@
    "fieldtype": "Table",
    "label": "Actual Performance Indicator",
    "options": "Edited Performance Indicator ChildTable",
-   "permlevel": 1,
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 17:00:02.109527",
+ "modified": "2023-10-21 15:12:54.073799",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

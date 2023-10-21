@@ -52,19 +52,16 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Project Name",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "project_description",
    "fieldtype": "Small Text",
-   "label": "Brief Description of Project",
-   "permlevel": 1
+   "label": "Brief Description of Project"
   },
   {
    "fieldname": "section_break_rbstb",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "type_of_instrument",
@@ -72,7 +69,6 @@
    "in_list_view": 1,
    "label": "Type of Instrument",
    "options": "\nRegulatory\nEconomic instrument\nOther",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -81,7 +77,6 @@
    "in_list_view": 1,
    "label": "Key Sector",
    "options": "Project Key Sector",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -90,7 +85,6 @@
    "in_list_view": 1,
    "label": "Status",
    "options": "\nPlanning\nPlanned\nAdopted\nUnder Implementation\nImplemented\nOperational\nCompleted",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -98,162 +92,137 @@
    "fieldtype": "Select",
    "label": "Location",
    "options": "\nNational Level\nProvince Level\nCity Level\nMunicipality\nOthers",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "coordinates",
    "fieldtype": "Data",
-   "label": "Co-Ordinates",
-   "permlevel": 1
+   "label": "Co-Ordinates"
   },
   {
    "fieldname": "get_location",
    "fieldtype": "Button",
-   "label": "Get Location",
-   "permlevel": 1
+   "label": "Get Location"
   },
   {
    "fieldname": "geographical_co_ordinate",
    "fieldtype": "Geolocation",
-   "label": "Geographical Co Ordinate",
-   "permlevel": 1
+   "label": "Geographical Co Ordinate"
   },
   {
    "fieldname": "other_agency",
    "fieldtype": "Data",
-   "label": "Other Agency",
-   "permlevel": 1
+   "label": "Other Agency"
   },
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date",
-   "permlevel": 1
+   "label": "End Date"
   },
   {
    "fieldname": "lifetime",
    "fieldtype": "Int",
-   "label": "Lifetime(Years)",
-   "permlevel": 1
+   "label": "Lifetime(Years)"
   },
   {
    "fieldname": "cost",
    "fieldtype": "Float",
    "label": "Cost(SBD)",
-   "permlevel": 1,
    "precision": "2"
   },
   {
    "fieldname": "column_break_prrqs",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "objective",
    "fieldtype": "Link",
    "label": "Objective (Please Select)",
    "options": "Project Objective",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "key_sub_sector",
    "fieldtype": "Link",
    "label": "Key Sub Sector",
-   "options": "Project Key Sub Sector",
-   "permlevel": 1
+   "options": "Project Key Sub Sector"
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Table MultiSelect",
    "label": "Included in",
-   "options": "Project Included In ChildTable",
-   "permlevel": 1
+   "options": "Project Included In ChildTable"
   },
   {
    "fieldname": "please_specify_location",
    "fieldtype": "Data",
-   "label": "Please Specify Location",
-   "permlevel": 1
+   "label": "Please Specify Location"
   },
   {
    "fieldname": "implementing_entity",
    "fieldtype": "Data",
-   "label": "Implementing Entity",
-   "permlevel": 1
+   "label": "Implementing Entity"
   },
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Start Date",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "financial_closure_date",
    "fieldtype": "Date",
-   "label": "Financial Closure Date",
-   "permlevel": 1
+   "label": "Financial Closure Date"
   },
   {
    "fieldname": "costusd",
    "fieldtype": "Float",
    "label": "Cost(USD)",
-   "permlevel": 1,
    "precision": "2"
   },
   {
    "fieldname": "source_of_funding",
    "fieldtype": "Select",
    "label": "Source of Funding",
-   "options": "\nBroad source funding/Govt.\nGrant\nLoan\nODA\nOOF/Others",
-   "permlevel": 1
+   "options": "\nBroad source funding/Govt.\nGrant\nLoan\nODA\nOOF/Others"
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   },
   {
    "fieldname": "upload_document",
    "fieldtype": "Attach",
-   "label": "Upload Document",
-   "permlevel": 1
+   "label": "Upload Document"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "PRO-.###",
-   "permlevel": 1
+   "options": "PRO-.###"
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
-   "permlevel": 1
+   "label": "Edited Details"
   },
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited Project Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -261,34 +230,29 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "collapsible": 1,
    "depends_on": "eval:doc.new_coordinates",
    "fieldname": "geographical_coordinates_section",
    "fieldtype": "Section Break",
-   "label": "Geographical Coordinates",
-   "permlevel": 1
+   "label": "Geographical Coordinates"
   },
   {
    "fieldname": "original_coordinates",
    "fieldtype": "Geolocation",
    "label": "Original Coordinates",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "column_break_mbxz1",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "new_coordinates",
    "fieldtype": "Geolocation",
    "label": "New Coordinates",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -311,7 +275,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-10-12 14:00:43.341991",
+ "modified": "2023-10-21 15:54:34.777117",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",
@@ -327,6 +291,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   },

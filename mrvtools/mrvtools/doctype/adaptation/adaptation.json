@@ -60,7 +60,6 @@
    "fieldname": "project_description",
    "fieldtype": "Small Text",
    "label": "Brief Description",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -68,7 +67,6 @@
    "fieldname": "key_sector",
    "fieldtype": "Data",
    "label": "Adaptation Sector",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -76,14 +74,12 @@
    "fieldname": "key_sub_sector",
    "fieldtype": "Data",
    "label": "Adaptation Sub-Sector",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
    "label": "Included in",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -91,7 +87,6 @@
    "fieldname": "financial_closure_date",
    "fieldtype": "Date",
    "label": "Financial Closure Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -99,7 +94,6 @@
    "fieldname": "implementing_entity",
    "fieldtype": "Data",
    "label": "Implementing Entities or entity",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -107,7 +101,6 @@
    "fieldname": "other_agency",
    "fieldtype": "Data",
    "label": "Other Party",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -115,7 +108,6 @@
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "Project End Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -123,198 +115,167 @@
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Project Start Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "ndp_coverage",
    "fieldtype": "Link",
    "label": "NDP Objective Coverage",
-   "options": "NDP Objective Coverage",
-   "permlevel": 1
+   "options": "NDP Objective Coverage"
   },
   {
    "fieldname": "ndp_cov",
    "fieldtype": "Table MultiSelect",
    "label": "NDP Coverage",
-   "options": "NDP Objective Coverage Child table",
-   "permlevel": 1
+   "options": "NDP Objective Coverage Child table"
   },
   {
    "fieldname": "section_break_z1cqh",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_wsxo0",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_bbseg",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_uxdpi",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_mdmpy",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_62rin",
    "fieldtype": "Section Break",
-   "label": "Select Categories and Click Load Categories Button",
-   "permlevel": 1
+   "label": "Select Categories and Click Load Categories Button"
   },
   {
    "fieldname": "qualitative_impact",
    "fieldtype": "Table",
    "label": "Qualitative Impact",
-   "options": "Adaptation Qualitative ChildTable",
-   "permlevel": 1
+   "options": "Adaptation Qualitative ChildTable"
   },
   {
    "fieldname": "quantitative_impact",
    "fieldtype": "Table",
    "label": "Quantitative Impact",
-   "options": "Adaptation Quantitative ChildTable",
-   "permlevel": 1
+   "options": "Adaptation Quantitative ChildTable"
   },
   {
    "fieldname": "load_categories",
    "fieldtype": "Button",
-   "label": "Load Categories",
-   "permlevel": 1
+   "label": "Load Categories"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fieldname": "json",
    "fieldtype": "JSON",
    "hidden": 1,
-   "label": "JSON",
-   "permlevel": 1
+   "label": "JSON"
   },
   {
    "fieldname": "section_break_nnlur",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "default": "0",
    "fieldname": "forest_health",
    "fieldtype": "Check",
-   "label": "Forest Health",
-   "permlevel": 1
+   "label": "Forest Health"
   },
   {
    "default": "0",
    "fieldname": "watershed_health",
    "fieldtype": "Check",
-   "label": "Watershed Health",
-   "permlevel": 1
+   "label": "Watershed Health"
   },
   {
    "default": "0",
    "fieldname": "coastal_health",
    "fieldtype": "Check",
-   "label": "Coastal Health",
-   "permlevel": 1
+   "label": "Coastal Health"
   },
   {
    "fieldname": "column_break_6oeye",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
    "fieldname": "water_security",
    "fieldtype": "Check",
-   "label": "Water Security",
-   "permlevel": 1
+   "label": "Water Security"
   },
   {
    "default": "0",
    "fieldname": "security_of_place",
    "fieldtype": "Check",
-   "label": "Security of place",
-   "permlevel": 1
+   "label": "Security of place"
   },
   {
    "default": "0",
    "fieldname": "energy_security",
    "fieldtype": "Check",
-   "label": "Energy Security",
-   "permlevel": 1
+   "label": "Energy Security"
   },
   {
    "fieldname": "column_break_ywnxg",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
    "fieldname": "income_security",
    "fieldtype": "Check",
-   "label": "Income Security",
-   "permlevel": 1
+   "label": "Income Security"
   },
   {
    "default": "0",
    "fieldname": "community_health",
    "fieldtype": "Check",
-   "label": "Community Health",
-   "permlevel": 1
+   "label": "Community Health"
   },
   {
    "default": "0",
    "fieldname": "food_security",
    "fieldtype": "Check",
-   "label": "Food Security",
-   "permlevel": 1
+   "label": "Food Security"
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "ADA-PRO-INFO-.###",
-   "permlevel": 1
+   "options": "ADA-PRO-INFO-.###"
   },
   {
    "fieldname": "html_table",
    "fieldtype": "HTML",
    "label": "Edited Table Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Adaptation Details",
-   "permlevel": 1
+   "label": "Edited Adaptation Details"
   },
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited Adaptation Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -322,15 +283,13 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "fieldname": "html_json",
    "fieldtype": "JSON",
    "hidden": 1,
    "label": "Html Json",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -339,31 +298,27 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "Project",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "column_break_jfwbz",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-12 13:09:29.078963",
+ "modified": "2023-10-21 13:58:49.947650",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",
@@ -379,90 +334,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Approver Adaptation Tracking",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 2,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Approver Adaptation Tracking",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Adaptation Tracking",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Adaptation Tracking",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Projects",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Projects",
+   "select": 1,
    "share": 1,
    "write": 1
   }

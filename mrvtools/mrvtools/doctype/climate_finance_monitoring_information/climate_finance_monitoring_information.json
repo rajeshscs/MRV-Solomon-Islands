@@ -42,7 +42,6 @@
    "fieldname": "monitoring_year",
    "fieldtype": "Select",
    "label": "Monitoring Year",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -50,7 +49,6 @@
    "fieldname": "financial_year",
    "fieldtype": "Data",
    "label": "Financial Year",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -58,7 +56,6 @@
    "fieldname": "applied_exchange_rate",
    "fieldtype": "Data",
    "label": "Applied Exchange Rate",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -66,7 +63,6 @@
    "fieldname": "financing_mode",
    "fieldtype": "Data",
    "label": "Financing Mode",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -74,7 +70,6 @@
    "fieldname": "budget_code",
    "fieldtype": "Data",
    "label": "Budget Code",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -82,41 +77,35 @@
    "fieldname": "financial_closure_date",
    "fieldtype": "Data",
    "label": "Financial Closure Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Naming Series",
-   "options": "CLI-FIN-MONI-INFO-.###",
-   "permlevel": 1
+   "options": "CLI-FIN-MONI-INFO-.###"
   },
   {
    "fieldname": "section_break_svbhp",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fetch_from": "project_name.project_name",
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -124,7 +113,6 @@
    "fieldname": "approval_date",
    "fieldtype": "Date",
    "label": "Approval Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -132,7 +120,6 @@
    "fieldname": "effectiveness_date",
    "fieldtype": "Data",
    "label": "Effectiveness Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -140,32 +127,27 @@
    "fieldname": "expected_end_date",
    "fieldtype": "Data",
    "label": "Expected End Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "column_break_xfzp6",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "budget_expenditure",
    "fieldtype": "Table",
    "label": "Budget Expenditure",
-   "options": "Climate Monitoring Information Budget Expenditure ChildTable",
-   "permlevel": 1
+   "options": "Climate Monitoring Information Budget Expenditure ChildTable"
   },
   {
    "fieldname": "section_break_05k4e",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "total_budget_disbursement",
    "fieldtype": "Table",
    "label": "Total Budget Disbursement",
    "options": "Climate Finance Total Budget Disbursement ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -173,21 +155,18 @@
    "fieldtype": "Table",
    "label": "Edited Climate Finance Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
-   "permlevel": 1
+   "label": "Edited Details"
   },
   {
    "fieldname": "edited_budget_expenditure",
    "fieldtype": "Table",
    "label": "Edited Budget Expenditure",
    "options": "Climate Monitoring Information Budget Expenditure ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -195,7 +174,6 @@
    "fieldtype": "Table",
    "label": "Edited Total Budget Disbursement",
    "options": "Climate Finance Total Budget Disbursement ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -203,20 +181,17 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "fieldname": "edit_button",
    "fieldtype": "Button",
-   "label": "Edit Budget Expenditure",
-   "permlevel": 1
+   "label": "Edit Budget Expenditure"
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "project_id",
@@ -224,7 +199,6 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "Climate Finance",
-   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -232,7 +206,6 @@
    "fieldtype": "Table",
    "label": "Actual Budget Expenditure",
    "options": "Climate Monitoring Information Budget Expenditure ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -240,13 +213,12 @@
    "fieldtype": "Table",
    "label": "Actual Total Budget Disbursement",
    "options": "Climate Finance Total Budget Disbursement ChildTable",
-   "permlevel": 1,
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-17 11:23:47.084012",
+ "modified": "2023-10-21 15:55:25.747821",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",
@@ -262,6 +234,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   },

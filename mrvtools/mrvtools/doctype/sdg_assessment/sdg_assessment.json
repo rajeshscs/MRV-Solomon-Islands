@@ -46,145 +46,123 @@
    "fieldname": "qualitative_impact",
    "fieldtype": "Table",
    "label": "Qualitative Impact",
-   "options": "SDG Qualitative ChildTable",
-   "permlevel": 1
+   "options": "SDG Qualitative ChildTable"
   },
   {
    "fieldname": "quantitative_impact",
    "fieldtype": "Table",
    "label": "Quantitative Impact",
-   "options": "SDG Quantitative ChildTable",
-   "permlevel": 1
+   "options": "SDG Quantitative ChildTable"
   },
   {
    "fieldname": "category_section",
    "fieldtype": "Section Break",
-   "label": "Select Categories and Click Load Categories Button",
-   "permlevel": 1
+   "label": "Select Categories and Click Load Categories Button"
   },
   {
    "fieldname": "column_break_xb4rr",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "load_categories",
    "fieldtype": "Button",
-   "label": "Load Categories",
-   "permlevel": 1
+   "label": "Load Categories"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fieldname": "json",
    "fieldtype": "JSON",
    "hidden": 1,
-   "label": "JSON",
-   "permlevel": 1
+   "label": "JSON"
   },
   {
    "default": "0",
    "fieldname": "poverty_reduction",
    "fieldtype": "Check",
-   "label": "Poverty Reduction",
-   "permlevel": 1
+   "label": "Poverty Reduction"
   },
   {
    "default": "0",
    "fieldname": "inequality",
    "fieldtype": "Check",
-   "label": "Inequality",
-   "permlevel": 1
+   "label": "Inequality"
   },
   {
    "default": "0",
    "fieldname": "gender",
    "fieldtype": "Check",
-   "label": "Gender",
-   "permlevel": 1
+   "label": "Gender"
   },
   {
    "default": "0",
    "fieldname": "industry",
    "fieldtype": "Check",
-   "label": "Industry",
-   "permlevel": 1
+   "label": "Industry"
   },
   {
    "fieldname": "column_break_qvzfz",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
    "fieldname": "environment",
    "fieldtype": "Check",
-   "label": "Environment",
-   "permlevel": 1
+   "label": "Environment"
   },
   {
    "default": "0",
    "fieldname": "employment",
    "fieldtype": "Check",
-   "label": "Employment",
-   "permlevel": 1
+   "label": "Employment"
   },
   {
    "default": "0",
    "fieldname": "education",
    "fieldtype": "Check",
-   "label": "Education",
-   "permlevel": 1
+   "label": "Education"
   },
   {
    "fieldname": "column_break_5g8fw",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
    "fieldname": "water",
    "fieldtype": "Check",
-   "label": "Water",
-   "permlevel": 1
+   "label": "Water"
   },
   {
    "default": "0",
    "fieldname": "food",
    "fieldtype": "Check",
-   "label": "Food",
-   "permlevel": 1
+   "label": "Food"
   },
   {
    "default": "0",
    "fieldname": "health",
    "fieldtype": "Check",
-   "label": "Health",
-   "permlevel": 1
+   "label": "Health"
   },
   {
    "fieldname": "section_break_j9xm0",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "SDG-PRO-INFO-.###",
-   "permlevel": 1
+   "options": "SDG-PRO-INFO-.###"
   },
   {
    "fieldname": "included_in",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Included In",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -192,41 +170,35 @@
    "fieldtype": "Table",
    "label": "Edited Project Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited Details",
-   "permlevel": 1
+   "label": "Edited Details"
   },
   {
    "fieldname": "html_json",
    "fieldtype": "JSON",
    "hidden": 1,
-   "label": "Html Json",
-   "permlevel": 1
+   "label": "Html Json"
   },
   {
    "fieldname": "work_state",
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "fieldname": "html_table",
    "fieldtype": "HTML",
-   "label": "Edited Table Details",
-   "permlevel": 1
+   "label": "Edited Table Details"
   },
   {
    "fieldname": "project_id",
@@ -234,14 +206,12 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "Project",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -249,19 +219,17 @@
    "fieldtype": "Date",
    "hidden": 1,
    "label": "Start Date",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-12 12:03:10.226110",
+ "modified": "2023-10-21 15:57:59.391604",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",
@@ -277,6 +245,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   },

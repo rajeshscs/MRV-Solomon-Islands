@@ -33,13 +33,11 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "label": "Project Name",
-   "permlevel": 1,
    "read_only": 1
   },
   {
    "fieldname": "column_break_5urkg",
-   "fieldtype": "Column Break",
-   "permlevel": 1
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "monitoring_year",
@@ -47,59 +45,50 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Monitoring Year",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "section_break_62rin",
-   "fieldtype": "Section Break",
-   "permlevel": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "quantitative_impact",
    "fieldtype": "Table",
    "label": "Quantitative Impact",
-   "options": "SDG Quantitative ChildTable",
-   "permlevel": 1
+   "options": "SDG Quantitative ChildTable"
   },
   {
    "fieldname": "upload_document",
    "fieldtype": "Attach",
-   "label": "Upload Document",
-   "permlevel": 1
+   "label": "Upload Document"
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks",
-   "permlevel": 1
+   "label": "Remarks"
   },
   {
    "fieldname": "select_approver",
    "fieldtype": "Link",
    "label": "Select Approver",
-   "options": "User",
-   "permlevel": 1
+   "options": "User"
   },
   {
    "fieldname": "json",
    "fieldtype": "JSON",
    "hidden": 1,
-   "label": "JSON ",
-   "permlevel": 1
+   "label": "JSON "
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "options": "SDG-MONI-INFO-.###",
-   "permlevel": 1
+   "options": "SDG-MONI-INFO-.###"
   },
   {
    "fieldname": "edited_project_details",
    "fieldtype": "Table",
    "label": "Edited SDG Monitoring Details",
    "options": "Edited Project Details",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -107,7 +96,6 @@
    "fieldtype": "Table",
    "label": "Edited Quantitative Impact",
    "options": "SDG Quantitative ChildTable",
-   "permlevel": 1,
    "read_only": 1
   },
   {
@@ -115,26 +103,22 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Work State",
-   "options": "\nPending\nApproved\nRejected",
-   "permlevel": 1
+   "options": "\nPending\nApproved\nRejected"
   },
   {
    "fieldname": "tab1",
    "fieldtype": "Tab Break",
-   "label": "Details",
-   "permlevel": 1
+   "label": "Details"
   },
   {
    "fieldname": "tab2",
    "fieldtype": "Tab Break",
-   "label": "Edited SDG Monitoring Information Details",
-   "permlevel": 1
+   "label": "Edited SDG Monitoring Information Details"
   },
   {
    "fieldname": "edit_button",
    "fieldtype": "Button",
-   "label": "Edit Quantitative Impact",
-   "permlevel": 1
+   "label": "Edit Quantitative Impact"
   },
   {
    "fieldname": "project_id",
@@ -142,20 +126,18 @@
    "in_list_view": 1,
    "label": "Project ID",
    "options": "SDG Assessment",
-   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "actual_quantitative_impact",
    "fieldtype": "Table",
    "label": "Actual Quantitative Impact",
-   "options": "SDG Quantitative ChildTable",
-   "permlevel": 1
+   "options": "SDG Quantitative ChildTable"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 17:14:09.023362",
+ "modified": "2023-10-21 15:57:42.120819",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",
@@ -171,6 +153,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   },

@@ -10,28 +10,28 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+      <span><i class="bi bi-list" style="color: white !important;"></i></span>
       </button>
-      <div class="site-logo ml-auto mr-auto "> <!-- Display only on lg and smaller screens -->
-        <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" />
+      <div class="site-logo ml-auto mr-4 "> <!-- Display only on lg and smaller screens -->
+        <router-link to='/home'><img  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 mr-2">
           <li class="nav-item mr-2">
-            <router-link to='/home' class="custom-link text-lg p-3 active" style="transition:.3s;">Home</router-link>
+            <router-link to='/home' class="custom-link text-lg  active" style="transition:.3s; margin-right:20px;">Home</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/about' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/about' }" style="transition:.3s;">About MRV Tool</router-link>
+            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="transition:.3s; margin-right:20px;">About MRV Tool</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/project' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s;">Project</router-link>
+            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s; margin-right:20px;">Project</router-link>
           </li>
           <li>
-            <router-link to='/reports' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s;">Reports</router-link>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s; margin-right:20px;">Reports</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/knowledgeresource' class="custom-link text-lg p-3" :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s;">Knowledge Resource</router-link>
+            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s; margin-right:20px;">Knowledge Resource</router-link>
           </li>
         </ul>
       </div>
@@ -157,8 +157,14 @@ background-color: rgba(255, 0, 0, 0.678);
     color: #fff;
     text-decoration: none;
     border: none;
-    margin-right: 40px;
+    margin-right: 15px;
+    width: 84px;
     border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+
   }
   
   .custom-btn:hover {
@@ -174,7 +180,7 @@ background-color: rgba(255, 0, 0, 0.678);
 
 /* toggle nav area */
 
-.navbar-toggler-icon {
+/* .navbar-toggler-icon {
     display: inline-block;
     width: 2.5em;
     height: 2.5em;
@@ -184,19 +190,24 @@ background-color: rgba(255, 0, 0, 0.678);
     background-position: center;
     background-size: 93%;
     color: #fff;
-}
+} */
 
-.navbar-toggler:hover {
-    text-decoration: none;
-    height: 30px;
-    width: 45px;
-}
 
 
 @media (max-width: 576px) {
     /* .carousel {x
       margin-top: 80px;
     } */
+
+    .bi-list {
+  
+  font-size: 28px;
+  }
+  .custom-link.scrolled {
+  color: rgb(255, 255, 255);
+  }
+
+
     .img-fluid{
     padding: 20px !important;
   }
@@ -205,13 +216,15 @@ background-color: rgba(255, 0, 0, 0.678);
       outline: 0;
       box-shadow:none !important;
     }
-    .mr-auto {
-        margin-right: 99px !important;
+    .mr-4 {
+    margin-left: -10px;
     }
     .ml-auto {
-    margin-left: -31px;
-  }
-    .site-logo img {
+        margin-right: 203px;
+        margin-top: 4px;
+      }
+    
+.site-logo img {
     width: 31%;
     margin-right: 10px;
     padding: 0px !important;

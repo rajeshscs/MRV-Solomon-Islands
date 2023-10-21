@@ -23,9 +23,9 @@
   "sub_sector",
   "calculation_approach",
   "section_break_7vl9b",
-  "uncertainity_analysis",
+  "was_uncertainty_analysis_performed",
   "column_break_o4tvx",
-  "qa_qc_implemented",
+  "were_qa_or_qc_and_verification_procedures_implemented",
   "work_state",
   "select_approver",
   "section_break_zx9sk",
@@ -96,6 +96,7 @@
   "other_sector",
   "edit_button",
   "tab2",
+  "ghg_inventory_details",
   "edited_reference_approach",
   "edited_electricity_generation",
   "edited_manufacturing_industries",
@@ -571,18 +572,6 @@
    "fieldname": "dynamic_title",
    "fieldtype": "Small Text",
    "read_only": 1
-  },
-  {
-   "fieldname": "uncertainity_analysis",
-   "fieldtype": "Select",
-   "label": "Was uncertainty analysis performed ?",
-   "options": "\nYes\nNo"
-  },
-  {
-   "fieldname": "qa_qc_implemented",
-   "fieldtype": "Select",
-   "label": "Were quality assurance/quality control (QA/QC) and verification procedures implemented ?",
-   "options": "\nYes\nNo"
   },
   {
    "fieldname": "section_break_7vl9b",
@@ -1107,11 +1096,30 @@
    "fieldname": "edit_button",
    "fieldtype": "Button",
    "label": "Edit Table"
+  },
+  {
+   "fieldname": "was_uncertainty_analysis_performed",
+   "fieldtype": "Select",
+   "label": "Was uncertainty analysis performed ?",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "were_qa_or_qc_and_verification_procedures_implemented",
+   "fieldtype": "Select",
+   "label": "Were quality assurance/quality control (QA/QC) and verification procedures implemented ?",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "ghg_inventory_details",
+   "fieldtype": "Table",
+   "label": "Edited GHG Inventory Details",
+   "options": "Edited GHG Inventory Details",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-14 17:39:22.000274",
+ "modified": "2023-10-18 16:17:36.141956",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",
