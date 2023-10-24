@@ -1,9 +1,9 @@
 /* Main */
-/* body {
+ body {
 	font-size: 14px;
-	background-color: #f3f6f9;
+	background-color:#eff2f5;
 }
-a {
+/* a {
     color: #666;
 	font-weight: 500;
 }
@@ -17,27 +17,25 @@ a {
 
 /* Navigation Bar */
 .navbar.navbar-expand.sticky-top {
-    background: linear-gradient(to right, #ffffff, #e7f2fd);
+    background:  #b10176;
     border: none;
 }
 .content.page-container{
-	background-color:#e7f2fd
+	background-color:#eff2f5;
 }
 .col.layout-main-section-wrapper {
-	background-color:#e7f2fd
+	background-color:#eff2f5;
 }
 .layout-main-section{
 	background-color:#e7f2fd !important
 }
 .widget.spacer{
-	background-color:#e7f2fd
-}
+	background-color:#eff2f5}
 
 .col-lg-2.layout-side-section{
-	background-color:#e7f2fd
-}
+	background-color:#eff2f5}
 .widget.number-widget-box{
-	background-color:#ebf5ff
+	background-color:teal
 }
 .widget.shortcut-widget-box{
 	background-color:#e7f2fd
@@ -50,7 +48,10 @@ a {
 	background-color:#ebf5ff;
 		box-shadow: var(--shadow-sm);
 }
-
+/* [number_card_name="Total Projects"],[number_card_name="Projects Planned"]{
+    background-color: teal;
+    color:white;
+} */
 
 /* Widgets */
 /* /* .widget {
@@ -112,14 +113,14 @@ a {
 
 /* Buttons */
 .btn-primary {
-    background-color: #8d2a71;
+    background-color: #c75e8f;
     border-color: #8d2a71;
 }
 .control-label, .grid-heading-row {
     font-size:13px;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background-color: #6a1552;
+    background-color: #c75e8f;
     border-color:#6a1552;
 }
 .indicator-right.blue:after, .indicator.blue:before {

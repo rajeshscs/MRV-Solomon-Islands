@@ -2,6 +2,7 @@
   <header class="header">
     <nav class="navbar cus-navbar navbar-expand-lg navbar-fixed-top bg navbar-light p-0">
       <button
+      style="border: none !important;"
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -11,10 +12,10 @@
         aria-label="Toggle navigation"
       >
       
-        <span><i class="bi bi-list" style="color: white !important;"></i></span>
+        <span><i class="bi bi-list" style="color: rgb(39, 39, 39) !important;"></i></span>
       </button>
-      <div class="site-logo ml-auto mr-4 ">
-        <router-link to='/home'><img  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
+      <div class="site-logo ml-auto mr-4 "> <!-- Display only on lg and smaller screens -->
+        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -94,38 +95,40 @@ onUnmounted(() => {
 
 
 .active-link {
-  color: green !important;
+  color: rgb(0, 174, 0) !important;
   text-decoration: none;
+  font-size: 17px !important;
   font-weight: 700 !important;
 
 }
 
 
 .bg {
-  background-image: linear-gradient(rgba(33, 46, 36, 0.519), rgba(128, 128, 128, 0.118));
+  background-image: linear-gradient(rgba(92, 92, 92, 0.687), rgba(128, 128, 128, 0.118));
   border: none;
 }
 .navbar-fixed-top.scrolled {
   transition: 1s;
-  background-color: #7b7b7b96 !important;
+  background-color: #fff !important;
+  /* background-image: linear-gradient(#ffffffe7, #f3f3f33e) !important;  border: none; */
   transition: background-color 200ms linear;
 }
 
 .custom-link.scrolled {
   transition: 1s;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 /* Reduce the logo size */
 .site-logo img {
-  width: 45%;
-  margin-left: 20px;
-}
-
-li {
+  margin-left: 10px;
+  height: 91px;
+  margin-right: 36px;
+  padding: 12px !important;
+}li {
   font-size: 18px;
   font-weight: 500;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 
@@ -144,14 +147,14 @@ li {
 
 
 .custom-link:hover {
-  color: red;
+  color: rgba(255, 255, 255, 0.749);
   text-decoration: none;
-  font-weight: 700 !important;
+  /* font-weight: 700 !important; */
 }
 
 .custom-btn {
-background-color: rgba(255, 0, 0, 0.678);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.344);
+    background-color: rgba(255, 0, 0, 0.678);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.113);
     color: #fff;
     text-decoration: none;
     border: none;
@@ -159,7 +162,7 @@ background-color: rgba(255, 0, 0, 0.678);
     width: 92px;
     border-radius: 4px;
     position: absolute;
-    top: 0;
+    top: 19px !important;
     right: 0;
     margin: 10px;
   }
@@ -191,6 +194,9 @@ background-color: rgba(255, 0, 0, 0.678);
 }
 
 @media (max-width: 576px) {
+  .custom-btn{
+    top:0 !important;
+  }
   .img-fluid{
     padding: 10px;
     height: 50%;
@@ -200,19 +206,19 @@ background-color: rgba(255, 0, 0, 0.678);
       outline: 0;
       box-shadow:none !important;
   }
-.mr-4 {
-    margin-left: -14px;
-}
+
 .ml-auto {
     margin-right: 232px;
     margin-top: 4px;
 
 }
 .site-logo img {
-    width: 31%;
-    margin-right: -19px;
-    padding: 0px !important;
-  }
+    height: 49px !important;
+    margin-left: 0px !important;
+    margin-right: 34px !important;
+    padding: 1px !important;
+    color: #ffffff41;
+}
 
 
 .custom-link.scrolled {

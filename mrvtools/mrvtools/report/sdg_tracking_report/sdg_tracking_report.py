@@ -31,8 +31,8 @@ def getData(filters):
 	conditions = ""
 	if filters.get("year"):
 		conditions += f" AND  YEAR(P.financial_closure_date) <= '{filters.get('year')}'"
-	if filters.get("year") =="":
-		conditions += f"AND C.financial_closure_date <= '{frappe.utils.today()}'"
+	if filters.get("year") == None:
+		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
 	if filters.get("key_sector"):
 		conditions += f" AND P.key_sector like '{filters.get('key_sector')}'"
 	if filters.get("key_sub_sector"):
@@ -63,12 +63,12 @@ def getData(filters):
 			INNER JOIN
 				`tabSDG Assessment` as SDG 
 			ON
-				P.name = SDG.project_name
+				P.name = SDG.project_id
 			WHERE 
 				P.docstatus != 2
 				{conditions}
 			ORDER BY
-				SDG.project_name
+				SDG.project_id
 	"""
 	result = frappe.db.sql(query, as_dict=1)
 	field_list = []

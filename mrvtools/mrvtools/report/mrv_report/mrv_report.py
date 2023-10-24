@@ -27,7 +27,7 @@ def get_columns(filters):
 			col.append("Unit" + ":Data")
 			col.append("Expected Value" + ":Data")
 			totalMonitoringYearsMitigation = frappe.db.get_all('Mitigation Monitoring Information',
-						filters={'project_name1':filters.get("project")},
+						filters={'proj_id':filters.get("project")},
 						fields = ['monitoring_year'],
 						order_by = 'monitoring_year asc' )
 			monitoringYears = totalMonitoringYearsMitigation
@@ -39,7 +39,7 @@ def get_columns(filters):
 			col.append("Question" + ":Data")
 			col.append("Expected Value" + ":Float")
 			totalMonitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
-							filters={'project_name':filters.get("project")},
+							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc' )
 			for i in totalMonitoringYearsAdaptation:
@@ -47,7 +47,7 @@ def get_columns(filters):
 		
 		if filters.get("report") == "Finance Summary":
 			col.append("Finance Data" + ":Data")
-			name = frappe.db.get_value('Climate Finance', {'project_name': f'{filters.get("project")}'}, 'name')
+			name = frappe.db.get_value('Climate Finance', {'project_id': f'{filters.get("project")}'}, 'name')
 			totalMonitoringYearsFinance = frappe.db.get_list(
 				"Climate Finance Disbursement Schedule ChildTable",
 				fields=['financial_year'],
@@ -62,7 +62,7 @@ def get_columns(filters):
 			col.append("Question" + ":Data")
 			col.append("Expected Value" + ":Float")
 			totalMonitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
-							filters={'project_name':filters.get("project")},
+							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc' )
 			for i in totalMonitoringYearsAdaptation:
@@ -96,16 +96,16 @@ def get_datas(filters):
 				return result
 		
 		if filters.get("report") == "Mitigation Summary":
-				conditions += f" AND MI.project_name = '{filters.get('project')}'"
+				conditions += f" AND MI.project_id = '{filters.get('project')}'"
 
-				expectedValue = frappe.db.get_value('Mitigations',{"project_name":f'{filters.get("project")}'},'expected_annual_ghg')
+				expectedValue = frappe.db.get_value('Mitigations',{"project_id":f'{filters.get("project")}'},'expected_annual_ghg')
 				output = [{"performance_indicator":"GHG Emissions Achieved (tCO2e)","unit":"tCO2e","expected_value":expectedValue}]
 				monitoringYears = frappe.db.get_all('Mitigation Monitoring Information',
-						filters={'project_name1':filters.get("project")},
+						filters={'proj_id':filters.get("project")},
 						fields = ['monitoring_year'],
 						order_by = 'monitoring_year asc' )
 				for i in monitoringYears:
-					currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"project_name1":f'{filters.get("project")}',"monitoring_year":i.monitoring_year},'actual_annual_ghg')
+					currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"proj_id":f'{filters.get("project")}',"monitoring_year":i.monitoring_year},'actual_annual_ghg')
 					output[0][f'{i.monitoring_year}'] = currentValue if currentValue else 0
 				
 				query= f"""
@@ -136,7 +136,7 @@ def get_datas(filters):
 									ON
 										MI.name = MCT.parent
 									WHERE
-										MI.project_name1 = '{filters.get('project')}'
+										MI.proj_id = '{filters.get('project')}'
 									AND
 										MI.monitoring_year = '{i.monitoring_year}'
 									AND 
@@ -152,7 +152,7 @@ def get_datas(filters):
 				return output
 	
 		if filters.get("report") == "Adaptation Summary":
-				conditions += f" AND AM.project_name like '{filters.get('project')}'"
+				conditions += f" AND AM.project_id like '{filters.get('project')}'"
 				query= f"""
 					SELECT
 						QI.category,
@@ -172,7 +172,7 @@ def get_datas(filters):
 					"""
 				result = frappe.db.sql(query, as_dict=1)
 				monitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
-							filters={'project_name':filters.get("project")},
+							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc' )
 				for each in result:
@@ -187,7 +187,7 @@ def get_datas(filters):
 									ON
 										ACT.parent = AMI.name
 									WHERE
-										AMI.project_name = '{filters.get('project')}'
+										AMI.proj_id = '{filters.get('project')}'
 									AND
 										AMI.monitoring_year = '{i.monitoring_year}'
 									AND 
@@ -200,18 +200,18 @@ def get_datas(filters):
 		if filters.get("report") == "Finance Summary":
 				amountExpected = {'finance_data': 'Expected Spend (USD)'}
 				amountSpent = {'finance_data':'Amount Spent (USD)'}
-				# name = frappe.db.get_value('Climate Finance', {'project_name': f'{filters.get("project")}'}, 'name')
+				# name = frappe.db.get_value('Climate Finance', {'project_id': f'{filters.get("project")}'}, 'name')
 				# monitoringYearsFinance = frappe.db.get_list(
 				# 	"Climate Finance Disbursement Schedule ChildTable",
 				# 	fields=['financial_year'],
 				# 	filters = {"parent" : name},
 				# 	order_by = 'financial_year')
-				expectedDoc = frappe.get_doc('Climate Finance',{'project_name': filters.get('project')})
+				expectedDoc = frappe.get_doc('Climate Finance',{'project_id': filters.get('project')})
 				expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
 				for i in expectedDocList:
 					amountExpected[f'{i.financial_year}'] = i.amount
 				
-				spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'project_name1': filters.get('project')})
+				spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': filters.get('project')})
 				spentDocList = spentDoc.as_dict().total_budget_disbursement
 				for i in spentDocList:
 					amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
@@ -220,7 +220,7 @@ def get_datas(filters):
 				return [amountSpent,amountExpected]
 		#############################################
 		if filters.get("report") == "SDG Summary":
-				conditions += f" AND SDG.project_name like '{filters.get('project')}'"
+				conditions += f" AND SDG.project_id like '{filters.get('project')}'"
 				query= f"""
 					SELECT
 						QI.category,
@@ -240,7 +240,7 @@ def get_datas(filters):
 					"""
 				result = frappe.db.sql(query, as_dict=1)
 				monitoringYearsSDG = frappe.db.get_all('SDG Monitoring Information',
-							filters={'project_name':filters.get("project")},
+							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc' )
 				for each in result:
@@ -255,7 +255,7 @@ def get_datas(filters):
 									ON
 										ACT.parent = AMI.name
 									WHERE
-										AMI.project_name = '{filters.get('project')}'
+										AMI.proj_id = '{filters.get('project')}'
 									AND
 										AMI.monitoring_year = '{i.monitoring_year}'
 									AND 
@@ -273,15 +273,15 @@ def get_datas(filters):
 def get_chart(filters):
 	if filters.get("report") == "Mitigation Summary":
 		get_actual_ghg = []
-		expectedValue = frappe.db.get_value('Mitigations',{"project_name":f'{filters.get("project")}'},'expected_annual_ghg')
+		expectedValue = frappe.db.get_value('Mitigations',{"project_id":f'{filters.get("project")}'},'expected_annual_ghg')
 		monitoringYears = frappe.db.get_all('Mitigation Monitoring Information',
-							filters={'project_name1':filters.get("project")},
+							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc',
 							pluck="monitoring_year")
 		frappe.log_error("expectedValue",expectedValue)
 		for i in monitoringYears:
-			currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"project_name1":f'{filters.get("project")}',"monitoring_year":i},'actual_annual_ghg')
+			currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"proj_id":f'{filters.get("project")}',"monitoring_year":i},'actual_annual_ghg')
 			# output[0][f'{i.monitoring_year}'] = currentValue if currentValue else 0
 			get_actual_ghg.append(currentValue)
 		
@@ -300,27 +300,27 @@ def get_chart(filters):
 		year_list=[]
 		amountExpected = []
 		amountSpent = []
-		# name = frappe.db.get_value('Climate Finance', {'project_name': f'{filters.get("project")}'}, 'name')
+		# name = frappe.db.get_value('Climate Finance', {'project_id': f'{filters.get("project")}'}, 'name')
 		# monitoringYearsFinance = frappe.db.get_list(
 		# 	"Climate Finance Disbursement Schedule ChildTable",
 		# 	fields=['financial_year'],
 		# 	filters = {"parent" : name},
 		# 	order_by = 'financial_year')
-		expectedDoc = frappe.get_doc('Climate Finance',{'project_name': filters.get('project')})
+		expectedDoc = frappe.get_doc('Climate Finance',{'project_id': filters.get('project')})
 		frappe.log_error("ExpectedDoc",expectedDoc)
 		expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
 		frappe.log_error("Expected",expectedDocList)
 		for i in expectedDocList:
 			amountExpected.append(i.amount)
 			frappe.log_error("i",i.amount)
-		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'project_name1': filters.get('project')})
+		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': filters.get('project')})
 		spentDocList = spentDoc.as_dict().total_budget_disbursement
 		for i in spentDocList:
 			amountSpent.append(i.total_disbursement_usd)
 			frappe.log_error("s",i.total_disbursement_usd)
 
 
-		name = frappe.db.get_value('Climate Finance', {'project_name': f'{filters.get("project")}'}, 'name')
+		name = frappe.db.get_value('Climate Finance', {'project_id': f'{filters.get("project")}'}, 'name')
 		totalMonitoringYearsFinance = frappe.db.get_list(
 			"Climate Finance Disbursement Schedule ChildTable",
 			fields=['financial_year'],

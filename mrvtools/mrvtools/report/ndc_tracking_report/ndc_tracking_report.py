@@ -23,7 +23,8 @@ def execute(filters=None):
 
 def getColumns(filters):
 	col = []
-	col.append("Project Title" + ":Link/Project")
+	col.append("Project ID" + ":Link/Project")
+	col.append("Project Name" + ":Data")
 	col.append("GHG Reductions Expected"+":Data")
 	# financial_closure_date = frappe.db.get_all('Mitigation Monitoring Information',
 	# 			fields = 'monitoring_year',
@@ -57,8 +58,11 @@ def getData(filters):
 
 	query = f"""
 			SELECT
-				MT.project_name as project_title,
-				MT.expected_annual_ghg as ghg_reductions_expected
+				MT.Project_ID,
+				MT.project_name,
+				MT.expected_annual_ghg as ghg_reductions_expected,
+
+				MT.name
 			FROM
 				`tabMitigations` MT
 			WHERE 
@@ -80,11 +84,12 @@ def getData(filters):
 				group_by = 'monitoring_year',
 				order_by = 'monitoring_year',
 				pluck='monitoring_year')
+	
 	for each in data:
 		for i in monitoringMitigationList:
 			curVal = frappe.db.get_value('Mitigation Monitoring Information',
-				{"project_name1":each.project_title,"monitoring_year":i},
-				'actual_annual_ghg')
+				{"project_id":each.name,"monitoring_year":i},
+				['actual_annual_ghg'])
 			each[f'{i}'] = curVal if curVal else 0
 	# for each in result:
 	# 	for i in monitoringYears:

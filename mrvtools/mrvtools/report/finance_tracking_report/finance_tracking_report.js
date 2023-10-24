@@ -21,13 +21,13 @@ frappe.query_reports["Finance Tracking Report"] = {
 			"fieldtype": "Link",
 			"label": __("Key Sector"),
 			"options":"Project Key Sector",
-			// get_query: function (doc) {
-			// 	return {
-			// 		"filters": {
-			// 			"Objective": ["in", ['Cross-Cutting','Adaptation']]
-			// 		}
-			// 	}
-			// }
+			get_query: function (doc) {
+				return {
+					"filters": {
+						"Objective": ["in", [`${frappe.query_report.filters[1].value}`]]
+					}
+				}
+			}
 		},
 		{
 			"fieldname": "key_sub_sector",
@@ -39,7 +39,7 @@ frappe.query_reports["Finance Tracking Report"] = {
 				return {
 					"filters": {
 						// "key_sector":["like",["%Cross-Cutting%","%Adaptation%"]]
-						"key_sector": ["in", [`${frappe.query_report.filters[1].last_value}`]]
+						"key_sector": ["in", [`${frappe.query_report.filters[2].value}`]]
 					}
 					
 				}

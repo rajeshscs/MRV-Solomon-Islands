@@ -25,7 +25,7 @@ frappe.query_reports["SDG Tracking Report"] = {
 			get_query: function () {
 				return {
 					"filters": {
-						"key_sector": ["in", [`${frappe.query_report.filters[0].last_value}`]]
+						"key_sector": ["in", [`${frappe.query_report.filters[1].value}`]]
 					}
 					
 				}

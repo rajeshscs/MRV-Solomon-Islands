@@ -10,6 +10,7 @@
  "field_order": [
   "tab1",
   "project_id",
+  "proj_id",
   "column_break_5urkg",
   "project_name",
   "monitoring_year",
@@ -146,11 +147,18 @@
    "label": "Actual Quantitative Impact",
    "options": "Adaptation Monitoring ChildTable",
    "read_only": 1
+  },
+  {
+   "fieldname": "proj_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Project",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 16:00:02.462646",
+ "modified": "2023-10-24 19:04:01.321058",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",

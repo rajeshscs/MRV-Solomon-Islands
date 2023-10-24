@@ -10,6 +10,7 @@
  "field_order": [
   "tab1",
   "project_id",
+  "proj_id",
   "column_break_5urkg",
   "project_name",
   "monitoring_year",
@@ -133,11 +134,18 @@
    "fieldtype": "Table",
    "label": "Actual Quantitative Impact",
    "options": "SDG Quantitative ChildTable"
+  },
+  {
+   "fieldname": "proj_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Project",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 15:57:42.120819",
+ "modified": "2023-10-24 19:05:05.922389",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",

@@ -12,7 +12,7 @@ def execute(filters=None):
 def get_columns():
 	col = []
 	col.append("Project ID" + ":Link/Project")
-	col.append("Project Title" + ":Data")
+	col.append("Project Name" + ":Data")
 	col.append("Objective" + ":Data")
 	col.append("Key Sector" + ":Data")
 	col.append("Key Sub-sector" + ":Data")
@@ -21,6 +21,7 @@ def get_columns():
 	col.append("Implementing entity or entities" + ":Data")
 	col.append("Other Agency" + ":Data")
 	col.append("Start Date" + ":Data")
+	col.append("Financial Closure Date" + ":Data")
 	col.append("Lifetime in Years" + ":Int")
 	col.append("Included In" + ":Data")
 	col.append("Impact Summaries" + ":Data")
@@ -30,10 +31,9 @@ def get_datas(filters):
 	conditions = ""
 	if filters.get("year"):
 		frappe.log_error("Not Empty","Not Empty")
-		conditions += f" AND  YEAR(A.financial_closure_date) <= '{filters.get('year')}'"
-	if filters.get("year") ==None:
-		frappe.log_error("Empty","Empty")
-		conditions += f"AND A.financial_closure_date <= '{frappe.utils.today()}'"
+		conditions += f" AND  YEAR(P.financial_closure_date) <= '{filters.get('year')}'"
+	if filters.get("year") == None:
+		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
 	if filters.get("key_sector"):
 		conditions += f" AND P.key_sector like '{filters.get('key_sector')}'"
 	if filters.get("key_sub_sector"):
@@ -48,7 +48,7 @@ def get_datas(filters):
 	query= f"""
 			SELECT
 				P.name as project_id,
-				P.project_name as project_title,
+				P.project_name,
 				P.objective,
 				P.key_sector,
 				P.key_sub_sector,
@@ -57,6 +57,7 @@ def get_datas(filters):
 				P.implementing_entity as implementing_entity_or_entities,
 				P.other_agency,
 				P.start_date,
+				P.financial_closure_date,
 				P.lifetime as lifetime_in_years,
 				A.included_in,
 				A.name
@@ -66,12 +67,12 @@ def get_datas(filters):
 			INNER JOIN
 				`tabAdaptation` as A 
 			ON
-				P.name = A.project_name
+				P.name = A.project_id
 			WHERE 
 				P.docstatus != 2
 				{conditions}
 			ORDER BY
-				A.project_name
+				A.project_id
 	"""
 	result = frappe.db.sql(query, as_dict=1)
 	field_list = []

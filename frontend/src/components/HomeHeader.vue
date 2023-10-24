@@ -2,6 +2,8 @@
   <header class="header">
     <nav class="navbar cus-navbar navbar-expand-lg navbar-fixed-top bg navbar-light p-0">
       <button
+      style="margin-right: 10px; border: none !important;"
+
         class="navbar-toggler text-white"
         type="button"
         data-toggle="collapse"
@@ -13,7 +15,7 @@
       <span><i class="bi bi-list" style="color: white !important;"></i></span>
       </button>
       <div class="site-logo ml-auto mr-4 "> <!-- Display only on lg and smaller screens -->
-        <router-link to='/home'><img  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
+        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -95,21 +97,22 @@
   </script>
   
   <style scoped>
-.active{
-  color: green !important;
+.active {
+  color: rgb(0, 174, 0) !important;
   text-decoration: none;
+  font-size: 17px !important;
   font-weight: 700 !important;
 
 }
 
 
 .bg {
-  background-image: linear-gradient(rgba(128, 128, 128, 0.701), rgba(128, 128, 128, 0.118));
+  background-image: linear-gradient(rgba(255, 255, 255, 0.538), rgba(255, 255, 255, 0.118));
   border: none;
 }
 .navbar-fixed-top.scrolled {
   /* transition: 10s; */
-  background-color: #ffffffe1 !important;
+  background-color: #ffffff !important;
   transition: background-color 200ms linear;
 }
 
@@ -120,8 +123,10 @@
 
 /* Reduce the logo size */
 .site-logo img {
-  width: 45%;
-  margin-left: 20px;
+  margin-left: 10px;
+  height: 91px;
+  margin-right: 36px;
+  padding: 12px !important;
 }
 
 li {
@@ -137,7 +142,7 @@ li {
 
 .custom-link {
   color: rgb(255, 255, 255);
-  margin-left: 10px;
+  margin-left: 10px;  
   font-size: 15px;
   font-weight: 500;
   font-family: 'Inter'
@@ -145,10 +150,10 @@ li {
 
 
 
-.active, .custom-link:hover {
-  color: red;
+.custom-link:hover {
+  color: rgba(255, 255, 255, 0.709)!important;
   text-decoration: none;
-  font-weight: 700 !important;
+  /* font-weight: 700 !important; */
 }
 
 .custom-btn {
@@ -161,7 +166,7 @@ background-color: rgba(255, 0, 0, 0.678);
     width: 84px;
     border-radius: 4px;
     position: absolute;
-    top: 0;
+    top: 19px !important;
     right: 0;
     margin: 10px;
 
@@ -224,11 +229,16 @@ background-color: rgba(255, 0, 0, 0.678);
         margin-top: 4px;
       }
     
-.site-logo img {
-    width: 31%;
-    margin-right: 10px;
-    padding: 0px !important;
+      .site-logo img {
+    height: 49px !important;
+    margin-left: 0px !important;
+    padding: 1px !important;
+    margin-right: 101px;
 }
+.custom-btn{
+    top:0 !important;
+  }
+
 }
 .bi-chevron-left{
     font-weight: bold !important;
@@ -246,5 +256,3 @@ background-color: rgba(255, 0, 0, 0.678);
 }
 
 </style>
-
-  

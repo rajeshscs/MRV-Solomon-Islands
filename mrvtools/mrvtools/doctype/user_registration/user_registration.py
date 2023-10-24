@@ -6,10 +6,42 @@ from frappe.model.document import Document
 
 class UserRegistration(Document):
 	@frappe.whitelist()
-	def check_user_exists(self):
+	def check_user_exists(self,ghg,reports,project):
+		# frappe.log_error("me",reports)		
+		role=[]
 		if not frappe.db.exists("User", self.email_id):
-			role_list = [{"role":"Adaptation Tracking"}]
-			self.insert_user(role_list)
+			if(self.role == "User"):
+				for g in ghg:
+					role.append({"role": g['project_tracking']+" "+"Tracking"})
+				# role.append(g['project_tracking'])
+				for proj in project:
+					role.append({"role": "Projects"})
+					role.append({"role": proj['project_tracking']})
+				for report in reports:
+					role.append({"role": report['project_tracking']})
+
+				frappe.log_error("roles",role)
+				self.insert_user(role)
+			elif(self.role == "Approver"):
+				for g in ghg:
+					role.append({"role": "Approver"+ " " + g['project_tracking']})
+				# role.append(g['project_tracking'])
+				for proj in project:
+					role.append({"role": "Approver Project"})
+					role.append({"role": "Approver"+ " " + proj['project_tracking']})
+				for report in reports:
+					role.append({"role":"Approver"+ " " + report['project_tracking']})
+
+				frappe.log_error("roles",role)
+				self.insert_user(role)
+			else:
+				for report in reports:
+					role.append({"role":"Observer"+ " " + report['project_tracking']})
+
+				frappe.log_error("roles",role)
+				self.insert_user(role)
+		# 	role_list = [{"role":"Adaptation Tracking"},{"role":"Mitigation Tracking"}]
+		
 
 	def insert_user(self, roles):
 		# user = frappe.new_doc("User")

@@ -145,7 +145,6 @@ frappe.ui.form.on('SDG Assessment', {
 						}
 					}
 					else if(frm.doc.work_state == "Pending"){
-						console.log(frm.doc.work_state);
 						if (frm.doc.workflow_state == "Rejected"){
 							frm.set_value("work_state","Rejected")
 							frm.save()

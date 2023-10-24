@@ -1,7 +1,6 @@
 // Copyright (c) 2023, tridotstech and contributors
 // For license information, please see license.txt
 /* eslint-disable */
-console.log(frappe);
 frappe.query_reports["Adaptation Tracking Report"] = {
 	"filters": [
 		{

@@ -6,12 +6,17 @@ from datetime import datetime
 
 
 def execute(filters=None):
-	columns, data = getColumns(),getData(filters)
-	return columns, data
+	columns, data, chart = getColumns(),getData(filters), get_chart(filters)
+	return columns, data , None, chart
 
 
 def getColumns():
 	columns = [
+		{
+			"fieldname": "project_id",
+			"label": "Project ID",
+			"fieldtype": 'Data',
+		},
 		{
 			"fieldname": "project_name",
 			"label": "Project Name",
@@ -75,22 +80,22 @@ def getColumns():
 		{
 			"fieldname": "expected_annual_ghg",
 			"label": "Expected Annual GHG",
-			"fieldtype": 'Data',
+			"fieldtype": 'Float',
 		},
 		{
 			"fieldname": "actual_annual_ghg",
 			"label": "Actual Annual GHG",
-			"fieldtype": 'Data',
+			"fieldtype": 'Float',
 		},
 		{
 			"fieldname": "till_date_expected_ghg",
 			"label": "Till Date Expected GHG",
-			"fieldtype": 'int',
+			"fieldtype": 'Float',
 		},
 		{
 			"fieldname": "till_date_actual_ghg",
 			"label": "Till Date Actual GHG",
-			"fieldtype": 'Data',
+			"fieldtype": 'Float',
 		}
 	]
 	return columns
@@ -115,33 +120,43 @@ def getData(filters):
 
 	query = f"""
 			SELECT
-				MT.project_name, MT.objective, MT.key_sector, MT.key_sub_sector,
-				MT.costusd, MT.location, MT.start_date, MT.lifetime,
-				CASE WHEN  MT.included_in like "%NDC%" THEN "Yes" ELSE "No" END AS included_in,
-				MT.implementing_entity, MT.other_agency, MT.status, MT.expected_annual_ghg
+				MT.name,
+				MT.project_id,
+				MT.project_name, 
+				MT.objective, 
+				MT.key_sector, 
+				MT.key_sub_sector,
+				MT.costusd,
+				MT.location, 
+				MT.start_date, 
+				MT.lifetime,
+				CASE WHEN MT.included_in like "%NDC%" THEN "Yes" ELSE "No" END AS included_in,
+				MT.implementing_entity, 
+				MT.other_agency, 
+				MT.status, 
+				MT.expected_annual_ghg
 			FROM
 				`tabMitigations` MT
 			WHERE 
 				MT.docstatus != 2 
 				{conditions}
 			ORDER BY
-				MT.project_name
+				MT.project_id
 				"""
 	data = frappe.db.sql(query,as_dict =1)
 	
 	for i in data:
 		actualAnnualValue = frappe.db.get_value('Mitigation Monitoring Information',
-				   {'monitoring_year':f"{filters.get('monitoring_year')}","project_name1":i.project_name},
-				   ["actual_annual_ghg"], as_dict=1)
+				{'monitoring_year':f"{filters.get('monitoring_year')}","project_id":i.name},
+				["actual_annual_ghg"], as_dict=1)
 		startDate = frappe.db.get_value('Mitigation Monitoring Information',
-				   {"project_name1":i.project_name},"YEAR('start_date') as start_date")
+				{"project_id":i.name},"YEAR('start_date') as start_date")
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
-				      filters={"project_name1":f"{i.project_name}"},
-					  fields = "sum(actual_annual_ghg) as till_date_actual_ghg")
+					filters={"project_id":f"{i.name}"},
+					fields = "sum(actual_annual_ghg) as till_date_actual_ghg")
 		frappe.log_error("Data",tillDateActual)
 		i['actual_annual_ghg'] = actualAnnualValue.actual_annual_ghg if actualAnnualValue else 0
 		if i.expected_annual_ghg == None or startDate == None:
-			i.expected_annual_ghg = 0
 			startDate = 0
 			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
 		else:
@@ -149,3 +164,58 @@ def getData(filters):
 		i['till_date_actual_ghg'] = tillDateActual[0].till_date_actual_ghg
 		
 	return data
+
+
+
+
+
+
+def get_chart(filters):
+	
+	data = frappe.db.get_all("Mitigation Monitoring Information",
+		# filters={
+		# 	"docstatus" != 2,
+		# 	# "actual_annual_ghg": (">", 0),  
+		# },
+		fields=[ "actual_annual_ghg"]
+	)
+	# project = frappe.db.get_all("Mitigations",
+		
+	# 	fields=[ "project_name"],
+		
+	# )
+	conditions = ""
+	if filters.get("monitoring_year"):
+		conditions += f"AND YEAR(start_date) <= '{filters.get('monitoring_year')}'"
+		
+	project = frappe.db.sql(f"""
+        SELECT project_name
+        FROM `tabMitigations`
+        WHERE docstatus != 2
+        {conditions}
+    """, as_dict=True)
+
+	
+
+	frappe.log_error("hi",project)
+	project_names = [entry.project_name for entry in project]
+	frappe.log_error("hi1",project_names)
+
+	actual_annual_ghg = [entry.actual_annual_ghg for entry in data]
+
+	# Create a bar chart
+	chart = {
+		"data": {
+			"labels": project_names,
+			"datasets": [
+				{
+					"name": "Actual Annual GHG",
+					"values": actual_annual_ghg,
+				},
+			],
+		},
+		"type": "bar",
+		"colors":['green']
+	}
+
+	return chart

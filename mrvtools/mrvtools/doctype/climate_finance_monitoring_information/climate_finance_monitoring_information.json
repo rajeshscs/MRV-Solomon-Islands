@@ -10,6 +10,7 @@
  "field_order": [
   "tab1",
   "project_id",
+  "proj_id",
   "financing_mode",
   "financial_year",
   "approval_date",
@@ -214,11 +215,18 @@
    "label": "Actual Total Budget Disbursement",
    "options": "Climate Finance Total Budget Disbursement ChildTable",
    "read_only": 1
+  },
+  {
+   "fieldname": "proj_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Project",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 15:55:25.747821",
+ "modified": "2023-10-24 19:05:42.315931",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance Monitoring Information",
