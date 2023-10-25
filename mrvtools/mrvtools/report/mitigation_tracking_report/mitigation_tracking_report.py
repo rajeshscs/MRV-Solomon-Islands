@@ -3,7 +3,7 @@
 
 import frappe
 from datetime import datetime
-
+chartData =[]
 
 def execute(filters=None):
 	columns, data, chart = getColumns(),getData(filters), get_chart(filters)
@@ -144,7 +144,9 @@ def getData(filters):
 				MT.project_id
 				"""
 	data = frappe.db.sql(query,as_dict =1)
-	
+	frappe.log_error("dataqqq",data)
+	global chartData 
+	chartData = []
 	for i in data:
 		actualAnnualValue = frappe.db.get_value('Mitigation Monitoring Information',
 				{'monitoring_year':f"{filters.get('monitoring_year')}","project_id":i.name},
@@ -162,6 +164,9 @@ def getData(filters):
 		else:
 			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
 		i['till_date_actual_ghg'] = tillDateActual[0].till_date_actual_ghg
+		chartData.append(tillDateActual[0].till_date_actual_ghg)
+		frappe.log_error("Datum",chartData)
+		frappe.log_error("test",tillDateActual)
 		
 	return data
 
@@ -171,19 +176,6 @@ def getData(filters):
 
 
 def get_chart(filters):
-	
-	data = frappe.db.get_all("Mitigation Monitoring Information",
-		# filters={
-		# 	"docstatus" != 2,
-		# 	# "actual_annual_ghg": (">", 0),  
-		# },
-		fields=[ "actual_annual_ghg"]
-	)
-	# project = frappe.db.get_all("Mitigations",
-		
-	# 	fields=[ "project_name"],
-		
-	# )
 	conditions = ""
 	if filters.get("monitoring_year"):
 		conditions += f"AND YEAR(start_date) <= '{filters.get('monitoring_year')}'"
@@ -193,6 +185,7 @@ def get_chart(filters):
         FROM `tabMitigations`
         WHERE docstatus != 2
         {conditions}
+		ORDER BY project_id
     """, as_dict=True)
 
 	
@@ -201,8 +194,8 @@ def get_chart(filters):
 	project_names = [entry.project_name for entry in project]
 	frappe.log_error("hi1",project_names)
 
-	actual_annual_ghg = [entry.actual_annual_ghg for entry in data]
-
+	actual_annual_ghg = chartData
+	frappe.log_error("qqw",chartData)
 	# Create a bar chart
 	chart = {
 		"data": {

@@ -47,7 +47,7 @@ def get_datas(filters):
 
 	query= f"""
 			SELECT
-				P.name as project_id,
+				P.name as project_id, 
 				P.project_name,
 				P.objective,
 				P.key_sector,

@@ -31,89 +31,89 @@ frappe.ui.form.on('Adaptation', {
 				}
 			}
 		})
-		// $(document).ready(function(){
-		// 	$('[data-fieldname]').on({
-		// 		keyup:function(){
-		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 			$('.primary-action').removeClass('hide');
-		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-		// 			frm.dirty()
-		// 		},
-		// 		click:function(){
-		// 			$('[data-fieldname]').on("focus",function(){
+		$(document).ready(function(){
+			$('[data-fieldname]').on({
+				keyup:function(){
+					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+					$('.primary-action').removeClass('hide');
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+					frm.dirty()
+				},
+				click:function(){
+					$('[data-fieldname]').on("focus",function(){
 						
-		// 				$('[data-fieldname]').on("click",function(){
-		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 					$('.primary-action').removeClass('hide')
-		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 					frm.dirty()
-		// 				})
-		// 			})
-		// 		},
+						$('[data-fieldname]').on("click",function(){
+							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+							$('.primary-action').removeClass('hide')
+							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+							frm.dirty()
+						})
+					})
+				},
 				
-		// 		change:function(){
-		// 			$('[data-fieldtype = "Select"]').on("change",function(){
-		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 				$('.primary-action').removeClass('hide')
-		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 				frm.dirty()
-		// 			})
-		// 		}
-		// 	});
+				change:function(){
+					$('[data-fieldtype = "Select"]').on("change",function(){
+						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+						$('.primary-action').removeClass('hide')
+						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+						frm.dirty()
+					})
+				}
+			});
 
-		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 		$('.primary-action').removeClass('hide')
-		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 		frm.dirty()
-		// 	})
+			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+				$('.primary-action').removeClass('hide')
+				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+				frm.dirty()
+			})
 
-		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-		// 			var hide = true;
-		// 			if(hide){
-		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-		// 			$('.primary-action').removeClass('hide')
-		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 			frm.dirty()
-		// 			}
-		// 			else{
-		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		// 			}
-		// 		});			
-		// 	});
+				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+					var hide = true;
+					if(hide){
+					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+					$('.primary-action').removeClass('hide')
+					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+					frm.dirty()
+					}
+					else{
+						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+					}
+				});			
+			});
 
-		// });
+		});
 		
-		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
+		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 
-		$('.control-input').on("keyup",function(){
-			console.log("Successs...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// $('.control-input').on("keyup",function(){
+		// 	console.log("Successs...");
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 			
-		})
+		// })
 		
 		$('[data-fieldtype="Link"]').on("change",function(){
 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 		})
 
-		$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+		// $('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-			$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-				var hide = true;
-				if(hide){
-				$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-				}
-				else{
-					$('head').append('<style>.btn.ellipsis.btn-primary { display:none !important; }</style>');
-				}
-			});
-		});
-		$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
-			console.log("Successs child...");
+		// 	$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+		// 		var hide = true;
+		// 		if(hide){
+		// 		$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 		}
+		// 		else{
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:none !important; }</style>');
+		// 		}
+		// 	});
+		// });
+		// $('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
+		// 	console.log("Successs child...");
 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
+		// })
 		$('[data-fieldname="load_categories"]').on("click",function(){
 			console.log("Successs child...");
 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
@@ -124,19 +124,19 @@ frappe.ui.form.on('Adaptation', {
 		})
 		
 		
-		$('[data-fieldname="qualitative_impact"]').on("click",function(){
-			$('[data-fieldname="qualitative_impact"]').on("change",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			})
-		})
-			$('[data-fieldname="quantitative_impact"]').on("keyup",function(){
-				$('[data-fieldname="expected_value"],[data-fieldname="data_source"]').on("focusout",function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			})
-		})
+		// $('[data-fieldname="qualitative_impact"]').on("click",function(){
+		// 	$('[data-fieldname="qualitative_impact"]').on("change",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 	})
+		// })
+		// 	$('[data-fieldname="quantitative_impact"]').on("keyup",function(){
+		// 		$('[data-fieldname="expected_value"],[data-fieldname="data_source"]').on("focusout",function(){
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 	})
+		// })
 		
 		
-		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
+		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 		
 		if (frm.doc.__islocal == 1) {
 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
