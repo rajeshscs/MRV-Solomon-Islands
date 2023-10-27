@@ -12,7 +12,10 @@
   "emission_factor_co2",
   "emission_factor_ch4",
   "emission_factor_n2o",
-  "reference"
+  "reference",
+  "calculated_co2",
+  "calculated_ch4",
+  "calculated_n2o"
  ],
  "fields": [
   {
@@ -50,12 +53,27 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Reference"
+  },
+  {
+   "fieldname": "calculated_co2",
+   "fieldtype": "Float",
+   "label": "CO2 Emission"
+  },
+  {
+   "fieldname": "calculated_ch4",
+   "fieldtype": "Float",
+   "label": "CH4 Emission"
+  },
+  {
+   "fieldname": "calculated_n2o",
+   "fieldtype": "Float",
+   "label": "N2O Emission"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-16 18:48:21.685568",
+ "modified": "2023-10-26 17:29:51.542590",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "IPPU Chemical ChildTable",

@@ -24,6 +24,7 @@
   "calculation_approach",
   "section_break_7vl9b",
   "was_uncertainty_analysis_performed",
+  "code",
   "column_break_o4tvx",
   "were_qa_or_qc_and_verification_procedures_implemented",
   "work_state",
@@ -95,6 +96,14 @@
   "other_waste",
   "other_sector",
   "edit_button",
+  "section_break_cfvgj",
+  "cumulative_co2",
+  "column_break_wijty",
+  "cumulative_ch4",
+  "column_break_nlsyk",
+  "cumulative_n2o",
+  "column_break_aybe8",
+  "total_co2",
   "tab2",
   "ghg_inventory_details",
   "edited_reference_approach",
@@ -1115,11 +1124,53 @@
    "label": "Edited GHG Inventory Details",
    "options": "Edited GHG Inventory Details",
    "read_only": 1
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Code",
+   "label": "Formula",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_cfvgj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cumulative_co2",
+   "fieldtype": "Float",
+   "label": "Cumulative CO2"
+  },
+  {
+   "fieldname": "column_break_wijty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_nlsyk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_aybe8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_co2",
+   "fieldtype": "Float",
+   "label": "Total CO2"
+  },
+  {
+   "fieldname": "cumulative_ch4",
+   "fieldtype": "Float",
+   "label": "Cumulative CH4"
+  },
+  {
+   "fieldname": "cumulative_n2o",
+   "fieldtype": "Float",
+   "label": "Cumulative N2O"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 16:17:36.141956",
+ "modified": "2023-10-27 11:40:10.895032",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

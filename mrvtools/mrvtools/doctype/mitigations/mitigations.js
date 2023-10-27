@@ -3,7 +3,7 @@
 
 frappe.ui.form.on('Mitigations', {
 	project_id: function(frm) {
-		if(!frm.doc.included_in){
+		if(!frm.doc.included_in && frm.doc.project_id){
 			frm.call({
 				doc:cur_frm.doc,
 				method:"get_data",
@@ -22,22 +22,8 @@ frappe.ui.form.on('Mitigations', {
 			})
 		}
 		
-	
-		
-	// project_id: function(frm) {
-		// frm.call({
-		// 	doc:cur_frm.doc,
-		// 	method:"get_data",
-		// 	async:false,
-		// 	callback:function(r){
-		
-		// 		for( var i of r.message){
-		// 			var child = frm.add_child("included_in")
-		// 		}
-		// 	}
-		// })
-		
 	},
+
 	
 	edit_button:function(frm){
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
@@ -59,6 +45,32 @@ frappe.ui.form.on('Mitigations', {
 	
 	refresh: function(frm){
 		///////////////////////////////////
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+		
+
 		frm.call({
 			doc:frm.doc,
 			method:"get_approvers",
@@ -80,75 +92,84 @@ frappe.ui.form.on('Mitigations', {
 			}
 		})
 		
-		$(document).ready(function(){
-			$('[data-fieldname]').on({
-				keyup:function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-					$('.primary-action').removeClass('hide');
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-					frm.dirty()
-				},
-				click:function(){
-					$('[data-fieldname]').on("focus",function(){
+		// $(document).ready(function(){
+			// $('[data-fieldname]').on({
+			// 	keyup:function(){
+			// 		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			// 		$('.primary-action').removeClass('hide');
+			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+			// 		frm.dirty()
+			// 	},
+			// 	click:function(){
+			// 		$('[data-fieldname]').on("focus",function(){
 						
-						$('[data-fieldname]').on("click",function(){
-							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-							$('.primary-action').removeClass('hide')
-							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-							frm.dirty()
-						})
-					})
-				},
+			// 			$('[data-fieldname]').on("click",function(){
+			// 				// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			// 				$('.primary-action').removeClass('hide')
+			// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+			// 				frm.dirty()
+			// 			})
+			// 		})
+			// 	},
 				
-				change:function(){
-					$('[data-fieldtype = "Select"]').on("change",function(){
-						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-						$('.primary-action').removeClass('hide')
-						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-						frm.dirty()
-					})
-				}
-			});
+			// 	change:function(){
+			// 		$('[data-fieldtype = "Select"]').on("change",function(){
+			// 			// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			// 			$('.primary-action').removeClass('hide')
+			// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+			// 			frm.dirty()
+			// 		})
+			// 	}
+			// });
 
-			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-				$('.primary-action').removeClass('hide')
-				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-				frm.dirty()
-			})
+			// $('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+			// 	// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			// 	$('.primary-action').removeClass('hide')
+			// 	$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+			// 	frm.dirty()
+			// })
+			// $('[data-fieldtype="Link"]').on("click", function() {
+			// 	var hide = true;
+			// 	if(hide){
+			// 		// $('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+			// 		$('.primary-action').removeClass('hide')
+			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+			// 		frm.dirty()
+			// 	}
+			// 	else{
+			// 		$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+			// 	}
+			// });	
+			// $('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
-
-				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-					var hide = true;
-					if(hide){
-					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-					$('.primary-action').removeClass('hide')
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-					frm.dirty()
-					}
-					else{
-						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-					}
-				});
-				
+			// 	$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+			// 		var hide = true;
+			// 		if(hide){
+			// 		$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+			// 		$('.primary-action').removeClass('hide')
+			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+			// 		frm.dirty()
+			// 		}
+			// 		else{
+			// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+			// 		}
+			// 	});
 	
-				
-			});
+			// });
 
 			// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		});
+		// });
 	
-				if (frm.doc.__islocal == 1) {
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-				}
+				// if (frm.doc.__islocal == 1) {
+				// 	// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
+				// }
 
 				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
 				
-						$(".actions-btn-group").hide();
+					$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
 						
 					}else{
-						$(".actions-btn-group").show()
+						$('[id="page-Mitigations"]').find('.actions-btn-group').show();
 					}
 			
 					if (frm.doc.work_state == "Approved"){
@@ -179,12 +200,10 @@ frappe.ui.form.on('Mitigations', {
 							frm.save()
 						}
 						else if(frm.doc.workflow_state == "Approved"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
 							frm.set_value("work_state","Approved")
 							frm.save()
 						}
 						else if(frm.doc.workflow_state == "Rejected"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
 							frm.set_value("work_state","Rejected")
 							frm.save()
 						}
@@ -194,7 +213,7 @@ frappe.ui.form.on('Mitigations', {
 						}
 					}
 			
-					if(frm.doc.workflow_state == "Pending"){
+					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 						frm.add_custom_button('Approve',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
 								() => {
@@ -221,7 +240,7 @@ frappe.ui.form.on('Mitigations', {
 			
 						
 					}
-					else if(frm.doc.workflow_state == "Approved"){
+					else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
 						frm.add_custom_button('Edit',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
 								() => {
@@ -235,7 +254,7 @@ frappe.ui.form.on('Mitigations', {
 				
 							},"Actions")
 					}
-					else if(frm.doc.workflow_state == "Draft"){
+					else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
 						frm.add_custom_button('Send for Approval',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
 								() => {
@@ -249,78 +268,6 @@ frappe.ui.form.on('Mitigations', {
 							
 						},"Actions")
 					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-		//Hide and Show the Original Actions Button w.r.t following condition
-		// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-		// 	$(".actions-btn-group").hide()
-		// }else{
-		// 	$(".actions-btn-group").show()
-		// }
-
-		// if (frm.doc.work_state == "Approved"){
-		// 	cur_frm.fields_dict.project_id.df.read_only = 1
-		// 	cur_frm.fields_dict.select_approver.df.read_only = 1
-		// }
-
-		// if(frm.doc.workflow_state == "Pending"){
-		// 	frm.add_custom_button('Approve',()=>{
-		// 		frappe.confirm('Are you sure you want to proceed?',
-		// 			() => {
-		// 				frm.set_value("workflow_state","Approved")
-		// 				frm.refresh_field("workflow_state")
-		// 				frm.save()
-		// 			}, () => {
-
-		// 		})
-
-		// 	},"Actions")
-
-		// 	frm.add_custom_button('Reject',()=>{
-		// 		frappe.confirm('Are you sure you want to proceed?',
-		// 			() => {
-		// 				frm.set_value("workflow_state","Rejected")
-		// 				frm.refresh_field("workflow_state")
-		// 				frm.save()
-		// 			}, () => {
-
-		// 		})
-
-		// 	},"Actions")
-
-			
-		// }
-		// else if(frm.doc.workflow_state == "Approved"){
-		// 	frm.add_custom_button('Edit',()=>{
-		// 		frappe.confirm('Are you sure you want to proceed?',
-		// 			() => {
-		// 				frm.set_value("workflow_state","Draft")
-		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
-		// 				frm.save()
-		// 			}, () => {
-	
-		// 			})
-	
-		// 		},"Actions")
-		// }
-		// else if(frm.doc.workflow_state == "Draft"){
-		// 	frm.add_custom_button('Send for Approval',()=>{
-		// 		frappe.confirm('Are you sure you want to proceed?',
-		// 			() => {
-		// 				frm.set_value("workflow_state","Pending")
-		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
-		// 				frm.save()
-		// 			}, () => {
-					
-		// 		})
-				
-		// 	},"Actions")
-		// }
-		// $('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-		//End
-
 
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){

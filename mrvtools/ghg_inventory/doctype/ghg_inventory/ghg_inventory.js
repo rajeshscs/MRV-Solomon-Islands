@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 var dynamicTitleList = ['','','','']
 frappe.ui.form.on('GHG Inventory', {
-	
+	 
 	refresh: function(frm) {
 		// $('.control-input').on("change",function(){
 			
@@ -23,14 +23,32 @@ frappe.ui.form.on('GHG Inventory', {
     //     $('.primary-action').html("S<span class='alt-underline'>a</span>ve");
 	// 	console.log("Hi..");
 	// })
-	$(document).ready(function(){
-		$('[data-fieldname]').on("keyup",function(){
-			$('.primary-action').removeClass('hide');
-			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-			frm.dirty()
-			console.log("Hi..");
-		});
-	});
+	// $(document).ready(function(){
+	// 	$('[class="btn btn-primary btn-sm"]').on("click",function(){
+	// 		console.log("HIii");
+	// 		$('[class="grey-link dropdown-item"]').find('[data-label="Send%20for%20Approval"]').on("click",function(){
+	// 			console.log("Hello");
+	// 			frappe.validated = false;
+	// 			frappe.confirm('Are you sure you want to proceed?',
+	// 				() => {
+	// 					frm.set_value("workflow_state","Pending")
+	// 					frm.refresh_field("workflow_state")
+	// 					console.log(frm.doc.workflow_state);
+	// 					frappe.validated = false;
+	// 					frm.save()
+	// 				}, () => {
+					
+	// 			})
+	// 		})
+	// 	})
+	
+		// $('[data-fieldname]').on("keyup",function(){
+		// 	$('.primary-action').removeClass('hide');
+		// 	$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+		// 	frm.dirty()
+		// 	console.log("Hi..");
+		// });
+	// });
 	
 		if(frm.is_new()){
 			frm.set_value('dynamic_title',dynamicTitleList.join(''))
@@ -501,6 +519,48 @@ frappe.ui.form.on('GHG Inventory', {
 				// window.location.href = `${frm.doc.name}`
 			}
 		}
+		var cumulativeCo2 = 0;
+		var cumulativeCh4 = 0;
+		var cumulativeN2o = 0;
+	
+		frm.doc.electricity_generation.forEach(function (row) {
+			cumulativeCo2 += row.calculated_co2;
+			cumulativeCh4 += row.calculated_ch4;
+			cumulativeN2o += row.calculated_n2o;
+			
+
+		});
+		frappe.db.get_list('IPPU GWP Master List', {
+			fields: ["name","gwp"],
+			filters: {
+				gas_name: ["in",["Methane ","Nitrous oxide"]],
+			}
+
+		}).then(r => {
+			console.log("yes",r)
+			var methane = 0;
+			var n2o =0;	
+			for(var i in r){
+				if(r[i].name == "Nitrous oxide"){
+					methane +=parseFloat( r[i].gwp)
+				}
+				else{
+					n2o += parseFloat(r[i].gwp)
+				}
+			}
+		var total =	cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)
+		frm.set_value("total_co2",total)
+		});
+		frm.set_value('cumulative_co2', cumulativeCo2);
+		frm.set_value('cumulative_ch4', cumulativeCh4);
+		frm.set_value('cumulative_n2o', cumulativeN2o);
+		frm.refresh_field('cumulative_co2')
+		frm.refresh_field('cumulative_ch4')
+		frm.refresh_field('cumulative_n2o')
+		frm.refresh_field('total_co2')
+
+		
+
 	},
 
 	edit_button:function(frm,cdt,cdn){
@@ -1658,6 +1718,86 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				}
 			console.log("fuel_options",fuel_options);
 		});
+	},
+	// fuel:function(frm,cdt,cdn){
+		
+	// 	// var code_list = code.split('\n')
+	// 	// console.log("code",code_list);
+
+	// 	var d = locals[cdt][cdn]
+	// 	frappe.db.get_list('Energy Fuel Master List',{
+	// 		fields : ["ncv","co2_emission_factor","ch4_emission_factor","n2o_emission_factor","amount"],
+	// 		filters:{fuel_type:d.fuel_type,fuel:d.fuel},
+	// 	}).then(r =>{
+	// 		console.log(r[0]);
+	// 		frappe.model.set_value(cdt,cdn,"ncv",r[0].ncv)
+	// 		frm.refresh_field('ncv')
+	// 		frappe.model.set_value(cdt,cdn,"co2",r[0].co2_emission_factor)
+	// 		frm.refresh_field('co2')
+	// 		frappe.model.set_value(cdt,cdn,"ch4",r[0].ch4_emission_factor)
+	// 		frm.refresh_field('ch4')
+	// 		frappe.model.set_value(cdt,cdn,"n2o",r[0].n2o_emission_factor)
+	// 		frm.refresh_field('n2o')
+		
+	// 		var quantity = d.amount; 
+	// 		var ncv = r[0].ncv; 
+	// 		var co2 = r[0].co2_emission_factor;
+	// 		var ch4 = r[0].ch4_emission_factor;
+	// 		var n2o = r[0].n2o_emission_factor
+	// 		var co2EmissionFactor = (quantity * ncv * co2) / Math.pow(10, 9);
+	// 		var ch4EmissionFactor = (Quantity  * NCV * ch4)/ Math.pow(10^9);
+	// 		var n2oEmissionFactor = (Quantity  * NCV * n2o)/ Math.pow(10^9);
+			
+	// 		frappe.model.set_value(cdt, cdn, "calculated_co2", co2EmissionFactor);
+	// 		frm.refresh_field('calculated_co2');
+
+	// 	})
+	// },
+	fuel: function (frm, cdt, cdn) {
+		var d = locals[cdt][cdn];
+	
+		frappe.db.get_list('Energy Fuel Master List', {
+			fields: ["ncv", "co2_emission_factor", "ch4_emission_factor", "n2o_emission_factor"],
+			filters: {
+				fuel_type: d.fuel_type,
+				fuel: d.fuel,
+			}
+		}).then(r => {
+			console.log(r[0]);
+			frappe.model.set_value(cdt, cdn, "ncv", r[0].ncv);
+			frm.refresh_field('ncv');
+			frappe.model.set_value(cdt, cdn, "co2", r[0].co2_emission_factor);
+			frm.refresh_field('co2');
+			frappe.model.set_value(cdt, cdn, "ch4", r[0].ch4_emission_factor);
+			frm.refresh_field('ch4');
+			frappe.model.set_value(cdt, cdn, "n2o", r[0].n2o_emission_factor);
+			frm.refresh_field('n2o');
+	
+			
+		});
+	},
+	
+	amount:function(frm,cdt,cdn){
+		// var code = frm.doc.code
+		var d = locals[cdt][cdn]
+		var quantity = d.amount; 
+			var ncv = d.ncv; 
+			var co2 = d.co2;
+			var ch4 = d.ch4;
+			var n2o = d.n2o;
+			
+			var co2EmissionFactor = (quantity * ncv * co2) / ((10)**9);
+			var ch4EmissionFactor = (quantity * ncv * ch4) / ((10)**9);
+			var n2oEmissionFactor = (quantity * ncv * n2o) / ((10)**9);
+	
+			frappe.model.set_value(cdt, cdn, "calculated_co2", co2EmissionFactor);
+			frappe.model.set_value(cdt, cdn, "calculated_ch4", ch4EmissionFactor);
+			frappe.model.set_value(cdt, cdn, "calculated_n2o", n2oEmissionFactor);
+	
+			frm.refresh_field('calculated_co2');
+			frm.refresh_field('calculated_ch4');
+			frm.refresh_field('calculated_n2o');
+		
 	}
 });
 
@@ -1679,7 +1819,94 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 		}
 		cur_frm.grids[11].grid.grid_rows[d.idx-1].columns.chemical.df.options = chemicalOptions
 		frm.refresh_field('chemical_industry')
+		
+	},
+	emission_factor_co2:function(frm,cdt,cdn){
+		// var code = frm.doc.code
+			var d = locals[cdt][cdn]
+			var quantity = d.amt_of_chemical_tonnes; 
+			var co2 = d.emission_factor_co2; 
+			if(quantity != 0){
+				var co2Emission = (quantity * co2) / ((10)**3);
+			
+					frappe.model.set_value(cdt, cdn, "calculated_co2", co2Emission);
+					frm.refresh_field('calculated_co2');
+			}else{
+				frappe.model.set_value(cdt, cdn, "calculated_co2", 0);
+				frm.refresh_field('calculated_co2');
+
+			}
+	},
+	emission_factor_ch4: function(frm, cdt, cdn) {
+		var d = locals[cdt][cdn];
+		var quantity = d.amt_of_chemical_tonnes;
+		var ch4 = d.emission_factor_ch4;
+		
+		if (quantity != 0) {
+			var ch4Emission = (quantity * ch4) / ((10)**3); // 1000 is used to convert to the desired units (e.g., kg to tonnes).
+			frappe.model.set_value(cdt, cdn, "calculated_ch4", ch4Emission);
+			frm.refresh_field('calculated_ch4');
+		} else {
+			frappe.model.set_value(cdt, cdn, "calculated_ch4", 0);
+			frm.refresh_field('calculated_ch4');
+		}
+	},
+	
+	emission_factor_n2o: function(frm, cdt, cdn) {
+		var d = locals[cdt][cdn];
+		var quantity = d.amt_of_chemical_tonnes;
+		var n2o = d.emission_factor_n2o;
+		
+		if (quantity != 0) {
+			var n2oEmission = (quantity * n2o) /((10)**3); // 1000 is used to convert to the desired units (e.g., kg to tonnes).
+			frappe.model.set_value(cdt, cdn, "calculated_n2o", n2oEmission);
+			frm.refresh_field('calculated_n2o');
+		} else {
+			frappe.model.set_value(cdt, cdn, "calculated_n2o", 0);
+			frm.refresh_field('calculated_n2o');
+		}
+	},
+	// Calculate emissions when the "amount" field changes
+	amt_of_chemical_tonnes: function (frm, cdt, cdn) {
+		console.log("Helloo");
+		var d = locals[cdt][cdn];
+		var quantity = d.amt_of_chemical_tonnes;
+		var co2 = d.emission_factor_co2;
+		var ch4 = d.emission_factor_ch4;
+		var n2o = d.emission_factor_n2o;
+
+		if (co2 != 0) {
+			console.log("co2 = ",co2);
+			var co2Emission = (quantity * co2) /((10)**3); 
+			frappe.model.set_value(cdt, cdn, "calculated_co2", co2Emission);
+			frm.refresh_field("calculated_co2");
+		} else {
+			frappe.model.set_value(cdt, cdn, "calculated_co2", 0);
+			frm.refresh_field("calculated_co2");
+		}
+
+		if ( ch4 !== 0) {
+			var ch4Emission = (quantity * ch4) / ((10)**3); 
+			frappe.model.set_value(cdt, cdn, "calculated_ch4", ch4Emission);
+			frm.refresh_field("calculated_ch4");
+		} else {
+			frappe.model.set_value(cdt, cdn, "calculated_ch4", 0);
+			frm.refresh_field("calculated_ch4");
+		}
+
+		if ( n2o !== 0) {
+			var n2oEmission = (quantity * n2o) /((10)**3); 
+			frappe.model.set_value(cdt, cdn, "calculated_n2o", n2oEmission);
+			frm.refresh_field("calculated_n2o");
+		} else {
+			frappe.model.set_value(cdt, cdn, "calculated_n2o", 0);
+			frm.refresh_field("calculated_n2o");
+		}
 	}
+
+	
+
+	
 })
 
 frappe.ui.form.on('IPPU Ozone ChildTable',{

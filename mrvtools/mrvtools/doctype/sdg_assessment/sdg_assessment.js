@@ -9,6 +9,34 @@ html_head += "<table style='table-layout: fixed;width: 100%;' id=html_table clas
 html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th scope=col style='width:30%;justify-content: center;'>Questions</th><th scope=col>Field Name</th><th scope=col style='width:15%;'>Old Values</th><th scope=col style='width:15%;'>New Values</th></tr>"
 frappe.ui.form.on('SDG Assessment', {
 	refresh:function(frm){
+
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+
+
 		frm.call({
 			doc:frm.doc,
 			method:"get_approvers",
@@ -21,7 +49,7 @@ frappe.ui.form.on('SDG Assessment', {
 						if (frappe.session.user != "Administrator"){
 
 							if(frappe.user_roles.includes(i)){
-								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+								$('[id="sdg-assessment-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
 							}
 						}
 
@@ -30,63 +58,72 @@ frappe.ui.form.on('SDG Assessment', {
 			}
 		})
 
-		$(document).ready(function(){
-			$('[data-fieldname]').on({
-				keyup:function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-					$('.primary-action').removeClass('hide');
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-					frm.dirty()
-				},
-				click:function(){
-					$('[data-fieldname]').on("focus",function(){
+		// $(document).ready(function(){
+		// 	$('[data-fieldname]').on({
+		// 		keyup:function(){
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 			$('.primary-action').removeClass('hide');
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+		// 			frm.dirty()
+		// 		},
+		// 		click:function(){
+		// 			$('[data-fieldname]').on("focus",function(){
 						
-						$('[data-fieldname]').on("click",function(){
-							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-							$('.primary-action').removeClass('hide')
-							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-							frm.dirty()
-						})
-					})
-				},
+		// 				$('[data-fieldname]').on("click",function(){
+		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 					$('.primary-action').removeClass('hide')
+		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 					frm.dirty()
+		// 				})
+		// 			})
+		// 		},
 				
-				change:function(){
-					$('[data-fieldtype = "Select"]').on("change",function(){
-						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-						$('.primary-action').removeClass('hide')
-						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-						frm.dirty()
-					})
-				}
-			});
+		// 		change:function(){
+		// 			$('[data-fieldtype = "Select"]').on("change",function(){
+		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 				$('.primary-action').removeClass('hide')
+		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 				frm.dirty()
+		// 			})
+		// 		}
+		// 	});
+		// 	$('[data-fieldtype="Link"]').on("click", function() {
+		// 		var hide = true;
+		// 		if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 		}
+		// 		else{
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 		}
+		// 	});		
+		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 		$('.primary-action').removeClass('hide')
+		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 		frm.dirty()
+		// 	})
 
-			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-				$('.primary-action').removeClass('hide')
-				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-				frm.dirty()
-			})
+		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
-
-				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-					var hide = true;
-					if(hide){
-					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-					$('.primary-action').removeClass('hide')
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-					frm.dirty()
-					}
-					else{
-						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-					}
-				});
+		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+		// 			var hide = true;
+		// 			if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 			}
+		// 			else{
+		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 			}
+		// 		});
 				
-	
-				
-			});
+		// 	});
 
- 		});
+ 		// });
 	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 
 	// 	$('.control-input').on("keyup",function(){
@@ -98,14 +135,14 @@ frappe.ui.form.on('SDG Assessment', {
 	// 		console.log("Successs child...");
 	// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 	// 	})
-		$('[data-fieldname="load_categories"]').on("click",function(){
-			console.log("Successs child...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
-		$('[data-fieldtype="Check"]').on("click",function(){
-			console.log("Successs child...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
+	// 	$('[data-fieldname="load_categories"]').on("click",function(){
+	// 		console.log("Successs child...");
+	// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+	// 	})
+	// 	$('[data-fieldtype="Check"]').on("click",function(){
+	// 		console.log("Successs child...");
+	// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+	// 	})
 		
 		
 	// 	$('[data-fieldname="qualitative_impact"]').on("click",function(){
@@ -117,20 +154,20 @@ frappe.ui.form.on('SDG Assessment', {
 	// 		$('[data-fieldname="data"],[data-fieldname="data_source"]').on("focusout",function(){
 	// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 	// 	})
-	// })
+	// 	})
+	// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 		
-		
-	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
-		if (frm.doc.__islocal == 1) {
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-				}
+		// if (frm.doc.__islocal == 1) {
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
+		// 		}
 
 				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
 				
-						$(".actions-btn-group").hide();
-						
+						$('[id="page-SDG Assessment"]').find('.actions-btn-group').hide();
+	
 					}else{
-						$(".actions-btn-group").show()
+						$('[id="page-SDG Assessment"]').find('.actions-btn-group').show();
+				
 					}
 			
 					if (frm.doc.work_state == "Approved"){
@@ -160,12 +197,12 @@ frappe.ui.form.on('SDG Assessment', {
 							frm.save()
 						}
 						else if(frm.doc.workflow_state == "Approved"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
+							// $('[id="sdg-assessment-tab1"]').attr("style","pointer-events:auto;")
 							frm.set_value("work_state","Approved")
 							frm.save()
 						}
 						else if(frm.doc.workflow_state == "Rejected"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
+							// $('[id="sdg-assessment-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
 							frm.set_value("work_state","Rejected")
 							frm.save()
 						}
@@ -648,11 +685,103 @@ frappe.ui.form.on('SDG Assessment', {
 		frm.set_value("json", JSON.stringify(existing_json))
 		frm.refresh_field("json")
 
-		
+		var checkedList = []
+		var result=frm.call({
+			doc:frm.doc,
+			method:'categorylist',
+			async:false,
+			callback: function(r){	
+				frm.set_value("qualitative_impact",[]);
+				frm.set_value("quantitative_impact",[]);	
+				$("[type='checkbox']").each(function(){
+					var field_name = $(this).attr('data-fieldname');
+					var value = $(this).prop("checked");
+						if (Array.isArray(form_data[field_name])) {
+							form_data[field_name].push(value);
+						} else {
+							form_data[field_name] = value;
+						}
+				});
+				for(var i of JSON.parse(frm.doc.json).qualitative){
+					for(let [key,value] of Object.entries(form_data)){
+						if(value ==true){
+							if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (!checkedList.includes(i.category)){
+									checkedList.push(i.category)
+								}
+							}
+						}
+					}
+				}
+				
+				if(cur_frm.doc.qualitative_impact.length == 0){
+					for(let [key,value] of  Object.entries(form_data)){	
+						if(value ==true){
+							for(var i of JSON.parse(frm.doc.json).qualitative){
+								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (i.table == "Qualitative"){
+										let row = frm.add_child('qualitative_impact')
+										row.category= i.category,
+										row.question= i.question,
+										row.likelihood = i.likelihood,
+										row.impact = i.impact,
+										row.sdg_mapping = i.sdg_mapping
+										categories.push(i.category)
+										frm.refresh_field('qualitative_impact');
+									}
+								}	
+							}
+							for(var i of JSON.parse(frm.doc.json).quantitative){
+								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (i.table == "Quantitative"){
+										let row = frm.add_child('quantitative_impact')
+												row.category= i.category,
+												row.question= i.question,
+												row.data = i.data,
+												row.data_source = i.data_source,
+												row.sdg_mapping = i.sdg_mapping
+										frm.refresh_field('quantitative_impact');
+									}
+								}
+							}
+							categories=[...new Set(categories)]
+						}
+					}
+				}
+				else{
+					for (var i of  JSON.parse(frm.doc.json)){
+						if (!categories.includes(i.category) && form_data[`${i.category}`]){
+							else_category.push(i.category)
+							if (i.table == "Qualitative"){
+								let row = frm.add_child('qualitative_impact')
+									row.category= i.category,
+									row.question= i.question,
+									row.likelihood = i.likelihood,
+									row.impact = i.impact,
+									row.sdg_mapping = i.sdg_mapping
+								frm.refresh_field('qualitative_impact');
+							}
+							if (i.table == "Quantitative"){
+								let row = frm.add_child('quantitative_impact')
+										row.category= i.category,
+										row.question= i.question,
+										row.data = i.data,
+										row.data_source = i.data_source,
+										row.sdg_mapping = i.sdg_mapping
+								frm.refresh_field('quantitative_impact');
+							}
+						}
+					}
+					categories = categories.concat(else_category)
+					categories=[...new Set(categories)]
+				}
+				frm.refresh_field('qualitative_impact');	
+			}
+		});
 		
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved" && !frm.doc.__islocal){
-
+				// window.location.href = `${frm.doc.name}`
 				var checkedList1 = []
 				var result=frm.call({
 					doc:frm.doc,
@@ -1148,7 +1277,7 @@ frappe.ui.form.on('SDG Assessment', {
 						}
 					}
 				})
-
+				window.location.href = `${frm.doc.name}`
 			}
 		}
 	}

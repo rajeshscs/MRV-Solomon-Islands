@@ -179,6 +179,10 @@ def get_chart(filters):
 	conditions = ""
 	if filters.get("monitoring_year"):
 		conditions += f"AND YEAR(start_date) <= '{filters.get('monitoring_year')}'"
+	if filters.get("ndc") == 'Yes':
+		conditions += f" AND included_in like '%NDC%' "
+	if filters.get("ndc") == 'No':
+		conditions += f" AND included_in not like '%NDC%' "
 		
 	project = frappe.db.sql(f"""
         SELECT project_name
@@ -188,15 +192,11 @@ def get_chart(filters):
 		ORDER BY project_id
     """, as_dict=True)
 
-	
-
-	frappe.log_error("hi",project)
 	project_names = [entry.project_name for entry in project]
-	frappe.log_error("hi1",project_names)
+	
 
 	actual_annual_ghg = chartData
 	frappe.log_error("qqw",chartData)
-	# Create a bar chart
 	chart = {
 		"data": {
 			"labels": project_names,
@@ -208,7 +208,8 @@ def get_chart(filters):
 			],
 		},
 		"type": "bar",
-		"colors":['green']
+		"colors":['green'],
+		"y_axis_label": 'GHG Reduction'
 	}
 
 	return chart

@@ -11,6 +11,36 @@ html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th sc
 frappe.ui.form.on('Adaptation', {
 
 	refresh: function(frm){
+
+
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+
+
+		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 		frm.call({
 			doc:frm.doc,
 			method:"get_approvers",
@@ -23,81 +53,93 @@ frappe.ui.form.on('Adaptation', {
 						if (frappe.session.user != "Administrator"){
 
 							if(frappe.user_roles.includes(i)){
-								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+								$('[id="adaptation-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
 							}
 						}
-
+						
 					}
 				}
 			}
 		})
-		$(document).ready(function(){
-			$('[data-fieldname]').on({
-				keyup:function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-					$('.primary-action').removeClass('hide');
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-					frm.dirty()
-				},
-				click:function(){
-					$('[data-fieldname]').on("focus",function(){
+		// $(document).ready(function(){
+		// 	$('[data-fieldname]').on({
+		// 		keyup:function(){
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 			$('.primary-action').removeClass('hide');
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+		// 			frm.dirty()
+		// 		},
+		// 		click:function(){
+		// 			$('[data-fieldname]').on("focus",function(){
 						
-						$('[data-fieldname]').on("click",function(){
-							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-							$('.primary-action').removeClass('hide')
-							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-							frm.dirty()
-						})
-					})
-				},
+		// 				$('[data-fieldname]').on("click",function(){
+		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 					$('.primary-action').removeClass('hide')
+		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 					frm.dirty()
+		// 				})
+		// 			})
+		// 		},
 				
-				change:function(){
-					$('[data-fieldtype = "Select"]').on("change",function(){
-						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-						$('.primary-action').removeClass('hide')
-						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-						frm.dirty()
-					})
-				}
-			});
+		// 		change:function(){
+		// 			$('[data-fieldtype = "Select"]').on("change",function(){
+		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 				$('.primary-action').removeClass('hide')
+		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 				frm.dirty()
+		// 			})
+		// 		}
+		// 	});
 
-			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-				$('.primary-action').removeClass('hide')
-				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-				frm.dirty()
-			})
+		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 		$('.primary-action').removeClass('hide')
+		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 		frm.dirty()
+		// 	})
+		// 	$('[data-fieldtype="Link"]').on("click", function() {
+		// 		var hide = true;
+		// 		if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 		}
+		// 		else{
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 		}
+		// 	});	
+		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+		// 			var hide = true;
+		// 			if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 			}
+		// 			else{
+		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 			}
+		// 		});
+	
+		// 	});
 
-				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-					var hide = true;
-					if(hide){
-					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-					$('.primary-action').removeClass('hide')
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-					frm.dirty()
-					}
-					else{
-						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-					}
-				});			
-			});
-
-		});
+		// 	// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// });
 		
-		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 
 		// $('.control-input').on("keyup",function(){
-		// 	console.log("Successs...");
-		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+			// 	console.log("Successs...");
+			// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 			
+			// })
+			
+			// $('[data-fieldtype="Link"]').on("change",function(){
+				// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 		// })
 		
-		$('[data-fieldtype="Link"]').on("change",function(){
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
-
 		// $('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
 		// 	$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
@@ -112,16 +154,16 @@ frappe.ui.form.on('Adaptation', {
 		// });
 		// $('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
 		// 	console.log("Successs child...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 		// })
-		$('[data-fieldname="load_categories"]').on("click",function(){
-			console.log("Successs child...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
-		$('[data-fieldtype="Check"]').on("click",function(){
-			console.log("Successs child...");
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		})
+		// $('[data-fieldname="load_categories"]').on("click",function(){
+		// 	console.log("Successs child...");
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// })
+		// $('[data-fieldtype="Check"]').on("click",function(){
+		// 	console.log("Successs child...");
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// })
 		
 		
 		// $('[data-fieldname="qualitative_impact"]').on("click",function(){
@@ -138,17 +180,18 @@ frappe.ui.form.on('Adaptation', {
 		
 		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 		
-		if (frm.doc.__islocal == 1) {
-			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-		}
+		// if (frm.doc.__islocal == 1) {
+		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
+		// }
 
 		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-		
-				$(".actions-btn-group").hide();
+			
+				$("#page-Adaptation").find('.actions-btn-group').hide();
 				
 			}else{
-				$(".actions-btn-group").show()
+				$("#page-Adaptation").find('.actions-btn-group').show()
 			}
+	
 	
 			if (frm.doc.work_state == "Approved"){
 				cur_frm.fields_dict.project_id.df.read_only = 1
@@ -193,7 +236,7 @@ frappe.ui.form.on('Adaptation', {
 				}
 			}
 	
-			if(frm.doc.workflow_state == "Pending"){
+			if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 				frm.add_custom_button('Approve',()=>{
 					frappe.confirm('Are you sure you want to proceed?',
 						() => {
@@ -248,8 +291,6 @@ frappe.ui.form.on('Adaptation', {
 					
 				},"Actions")
 			}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-
 
 
 
@@ -542,22 +583,25 @@ frappe.ui.form.on('Adaptation', {
 		
 	},
 	project_id: function(frm) {
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_data",
-			async:false,
-			callback:function(r){
-				var values=[]
-				for(var i of r.message){
-					values.push(i)
+		if(!frm.doc.included_in && frm.doc.project_id){
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_data",
+				async:false,
+				callback:function(r){
+					var values=[]
+					for(var i of r.message){
+						values.push(i)
+						
+					}
+					values=values.join(",")
 					
+					frm.set_value("included_in",values)
 				}
-				values=values.join(",")
-				
-				frm.set_value("included_in",values)
-			}
-		})
+			})
+		}
 	},
+	
 	
 	load_categories: function(frm){
 		var existing_json = JSON.parse(frm.doc.json)
@@ -696,11 +740,105 @@ frappe.ui.form.on('Adaptation', {
 		frm.set_value("json", JSON.stringify(existing_json))
 		frm.refresh_field("json")
 		
+
+		var checkedList = []
+		var result=frm.call({
+			doc:frm.doc,
+			method:'categorylist',
+			async:false,
+			callback: function(r)
+			{
+				frm.set_value("qualitative_impact",[]);
+				frm.set_value("quantitative_impact",[]);	
+				$("[type='checkbox']").each(function(){
+					var field_name = $(this).attr('data-fieldname');
+					var value = $(this).prop("checked");
+						if (Array.isArray(form_data[field_name])) {
+							form_data[field_name].push(value);
+						} 
+						else {
+							form_data[field_name] = value;
+						}
+				});
+				for(var i of JSON.parse(frm.doc.json).qualitative){
+					for(let [key,value] of Object.entries(form_data)){
+						if(value ==true){
+							if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (!checkedList.includes(i.category)){
+									checkedList.push(i.category)
+								}
+							}
+						}
+					}
+				}
+				
+				if(cur_frm.doc.qualitative_impact.length == 0){
+					for(let [key,value] of  Object.entries(form_data)){
+
+						if(value ==true){
+							for(var i of JSON.parse(frm.doc.json).qualitative){
+								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (i.table == "Qualitative"){
+										let row = frm.add_child('qualitative_impact')
+											row.category= i.category,
+											row.question= i.question,
+											row.likelihood = i.likelihood,
+											row.impact = i.impact
+										
+										categories.push(i.category)
+										frm.refresh_field('qualitative_impact');
+									}
+								}	
+							}
+							for(var i of JSON.parse(frm.doc.json).quantitative){
+								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (i.table == "Quantitative"){
+										let row = frm.add_child('quantitative_impact')
+												row.category= i.category,
+												row.question= i.question,
+												row.expected_value = i.expected_value,
+												row.data_source = i.data_source
+										frm.refresh_field('quantitative_impact');
+									}
+								}
+							}
+							categories=[...new Set(categories)]	
+						}
+					}
+				}
+				else{
+					for (var i of  JSON.parse(frm.doc.json)){
+						if (!categories.includes(i.category) && form_data[`${i.category}`]){
+							else_category.push(i.category)
+							if (i.table == "Qualitative"){
+								let row = frm.add_child('qualitative_impact')
+									row.category= i.category,
+									row.question= i.question,
+									row.likelihood = i.likelihood,
+									row.impact = i.impact
+								frm.refresh_field('qualitative_impact');
+							}
+							if (i.table == "Quantitative"){
+								let row = frm.add_child('quantitative_impact')
+										row.category= i.category,
+										row.question= i.question,
+										row.expected_value = i.expected_value,
+										row.data_source = i.data_source
+								frm.refresh_field('quantitative_impact');
+							}
+						}
+					}
+					categories = categories.concat(else_category)
+					categories=[...new Set(categories)]
+				}	
+				frm.refresh_field('qualitative_impact');
+			}
+		});
 		
 
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved" && !frm.doc.__islocal){
-
+				// window.location.href = `${frm.doc.name}`
 				var checkedList1 = []
 				var result=frm.call({
 					doc:frm.doc,
@@ -750,6 +888,8 @@ frappe.ui.form.on('Adaptation', {
 											}
 										}	
 									}
+
+									
 									for(var i of JSON.parse(frm.doc.json).quantitative){
 										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
 											if (i.table == "Quantitative"){
@@ -1279,7 +1419,6 @@ frappe.ui.form.on('Adaptation', {
 					}
 				})
 				
-			
 			}
 		}
 	}

@@ -201,6 +201,34 @@ frappe.ui.form.on('Project', {
 
 
 	refresh: function(frm){
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+
+
+
 		frm.call({
 			doc:frm.doc,
 			method:"get_approvers",
@@ -213,7 +241,7 @@ frappe.ui.form.on('Project', {
 						if (frappe.session.user != "Administrator"){
 
 							if(frappe.user_roles.includes(i)){
-								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+								$('[id="project-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
 							}
 						}
 
@@ -221,75 +249,85 @@ frappe.ui.form.on('Project', {
 				}
 			}
 		})
-		$(document).ready(function(){
-			$('[data-fieldname]').on({
-				keyup:function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-					$('.primary-action').removeClass('hide');
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-					frm.dirty()
-				},
-				click:function(){
-					$('[data-fieldname]').on("focus",function(){
+
+		
+		// $(document).ready(function(){
+		// 	$('[data-fieldname]').on({
+		// 		keyup:function(){
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 			$('.primary-action').removeClass('hide');
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+		// 			frm.dirty()
+		// 		},
+		// 		click:function(){
+		// 			$('[data-fieldname]').on("focus",function(){
 						
-						$('[data-fieldname]').on("click",function(){
-							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-							$('.primary-action').removeClass('hide')
-							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-							frm.dirty()
-						})
-					})
-				},
+		// 				$('[data-fieldname]').on("click",function(){
+		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 					$('.primary-action').removeClass('hide')
+		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 					frm.dirty()
+		// 				})
+		// 			})
+		// 		},
 				
-				change:function(){
-					$('[data-fieldtype = "Select"]').on("change",function(){
-						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-						$('.primary-action').removeClass('hide')
-						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-						frm.dirty()
-					})
-				}
-			});
+		// 		change:function(){
+		// 			$('[data-fieldtype = "Select"]').on("change",function(){
+		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 				$('.primary-action').removeClass('hide')
+		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 				frm.dirty()
+		// 			})
+		// 		}
+		// 	});
 
-			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-				$('.primary-action').removeClass('hide')
-				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-				frm.dirty()
-			})
+		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 		$('.primary-action').removeClass('hide')
+		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 		frm.dirty()
+		// 	})
+		// 	$('[data-fieldtype="Link"]').on("click", function() {
+		// 		var hide = true;
+		// 		if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 		}
+		// 		else{
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 		}
+		// 	});	
+		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
-
-				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-					var hide = true;
-					if(hide){
-					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-					$('.primary-action').removeClass('hide')
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-					frm.dirty()
-					}
-					else{
-						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-					}
-				});
+		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+		// 			var hide = true;
+		// 			if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 			}
+		// 			else{
+		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 			}
+		// 		});
 				
 	
 				
-			});
+		// 	});
 
-			// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		});
-	
-				if (frm.doc.__islocal == 1) {
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-				}
+		// 	// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// });
 
 				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
 				
-						$(".actions-btn-group").hide();
+					$('[id="page-Project"]').find('.actions-btn-group').hide();
 						
 					}else{
-						$(".actions-btn-group").show()
+						$('[id="page-Project"]').find('.actions-btn-group').show();
+
 					}
 			
 					if (frm.doc.work_state == "Approved"){
@@ -334,7 +372,7 @@ frappe.ui.form.on('Project', {
 						}
 					}
 			
-					if(frm.doc.workflow_state == "Pending"){
+					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 						frm.add_custom_button('Approve',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
 								() => {
@@ -361,6 +399,8 @@ frappe.ui.form.on('Project', {
 			
 						
 					}
+
+
 					else if(frm.doc.workflow_state == "Approved"){
 						frm.add_custom_button('Edit',()=>{
 							frappe.confirm('Are you sure you want to proceed?',

@@ -3,6 +3,32 @@
 
 frappe.ui.form.on('Mitigation Monitoring Information', {
 	refresh: function(frm){
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+		
 		frm.call({
 			doc:frm.doc,
 			method:"get_approvers",
@@ -15,7 +41,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						if (frappe.session.user != "Administrator"){
 
 							if(frappe.user_roles.includes(i)){
-								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+								$('[id="mitigation-monitoring-information-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
 							}
 						}
 
@@ -24,82 +50,87 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			}
 		})
 		
-		$(document).ready(function(){
-			$('[data-fieldname]').on({
-				keyup:function(){
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-					$('.primary-action').removeClass('hide');
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-					frm.dirty()
-				},
-				click:function(){
-					$('[data-fieldname]').on("focus",function(){
+		// $(document).ready(function(){
+		// 	$('[data-fieldname]').on({
+		// 		keyup:function(){
+		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 			$('.primary-action').removeClass('hide');
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
+		// 			frm.dirty()
+		// 		},
+		// 		click:function(){
+		// 			$('[data-fieldname]').on("focus",function(){
 						
-						$('[data-fieldname]').on("click",function(){
-							$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-							$('.primary-action').removeClass('hide')
-							$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-							frm.dirty()
-						})
-					})
-				},
+		// 				$('[data-fieldname]').on("click",function(){
+		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 					$('.primary-action').removeClass('hide')
+		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 					frm.dirty()
+		// 				})
+		// 			})
+		// 		},
 				
-				change:function(){
-					$('[data-fieldtype = "Select"]').on("change",function(){
-						$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-						$('.primary-action').removeClass('hide')
-						$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-						frm.dirty()
-					})
-				}
-			});
+		// 		change:function(){
+		// 			$('[data-fieldtype = "Select"]').on("change",function(){
+		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 				$('.primary-action').removeClass('hide')
+		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 				frm.dirty()
+		// 			})
+		// 		}
+		// 	});
 
-			$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-				$('.primary-action').removeClass('hide')
-				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-				frm.dirty()
-			})
+		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 		$('.primary-action').removeClass('hide')
+		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 		frm.dirty()
+		// 	})
 
-			$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
+		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
 
-				$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-					var hide = true;
-					if(hide){
-					$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-					$('.primary-action').removeClass('hide')
-					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-					frm.dirty()
-					}
-					else{
-						$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-					}
-				});
+		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
+		// 			var hide = true;
+		// 			if(hide){
+		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 			$('.primary-action').removeClass('hide')
+		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 			frm.dirty()
+		// 			}
+		// 			else{
+		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
+		// 			}
+		// 		});
 				
 	
 				
-			});
-		});
+		// 	});
+		// });
 		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 	
-			$('[data-fieldtype="Int"]').on("focusout",function(){
-				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
+		// 	$('[data-fieldtype="Int"]').on("focusout",function(){
+		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 				
-			})
+		// 	})
 		// 	$('[data-fieldtype="Data"],[data-fieldtype="Small Text"]').on("keyup",function(){
 		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 				
 		// 	})
-	
+		// 	// $('[data-fieldtype="Link"]').on("click", function() {
+		// 	// 			var hide = true;
+		// 	// 			if(hide){
+		// 	// 				$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
+		// 	// 				$('.primary-action').removeClass('hide')
+		// 	// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
+		// 	// 				frm.dirty()
+		// 	// 			}
+						
+		// 	// 		});	
 	
 		// 	$('[data-fieldtype="Attach"]').on("change",function(){
 			
 		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 		// 	})
-			
-		
-			
-		// 	// 
 		// 	$('[data-fieldname="performance_indicator"]').on("keyup",function(){
 		// 		$('[data-fieldname="actual_monitored_value"],[data-fieldname="reference"]').on("focusout",function(){
 		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
@@ -107,16 +138,20 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		// })
 			
 		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
-						if (frm.doc.__islocal == 1) {
-					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-				}
+				// if (frm.doc.work_state == "" && frm.doc.workflow_state == "Pending" && frm.doc.project_id == ""){
+				// 	window.location.href = `${frm.doc.name}`		
+				// }
+		
+		
+				
 
 				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
 				
-						$(".actions-btn-group").hide();
+					$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').hide();
 						
 					}else{
-						$(".actions-btn-group").show()
+						$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').show();
+
 					}
 			
 					if (frm.doc.work_state == "Approved"){
@@ -162,7 +197,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						}
 					}
 			
-					if(frm.doc.workflow_state == "Pending"){
+					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 						frm.add_custom_button('Approve',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
 								() => {
@@ -372,6 +407,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				if(frm.doc.actual_performance_indicator.length == 0){
 					window.location.href = `${frm.doc.name}`
+
 				}
 				if(frm.fields_dict.performance_indicator.df.read_only == 0){
 					frm.call({
@@ -426,6 +462,7 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 						}
 					}
 				})
+
 			}
 		}
 	},
@@ -478,73 +515,73 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		// 		frm.set_value("included_in",values)
 		// 	}
 		// })
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_value1",
-			async:false,
-			callback:function(r){
+		if( frm.doc.project_id){
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_value1",
+				async:false,
+				callback:function(r){
 
-				var values=[]
-				for(var i of r.message){
-					values.push(i)
-					
+					var values=[]
+					for(var i of r.message){
+						values.push(i)
+						
+					}
+					values=values.join(",")
+					frm.set_value("non_ghg_mitigation_benefits",values)
 				}
-				values=values.join(",")
-				frm.set_value("non_ghg_mitigation_benefits",values)
-			}
-		})
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_value2",
-			async:false,
-			callback:function(r){
+			})
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_value2",
+				async:false,
+				callback:function(r){
 
 
-				var values=[]
-				for(var i of r.message){
-					values.push(i)
-					
+					var values=[]
+					for(var i of r.message){
+						values.push(i)
+						
+					}
+					values=values.join(",")
+					frm.set_value("target_ghgs",values)
 				}
-				values=values.join(",")
-				frm.set_value("target_ghgs",values)
-			}
-		})
-		
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_child",
-			async:false,
-			callback:function(r){
-				var col=r.message
+			})
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_child",
+				async:false,
+				callback:function(r){
+					var col=r.message
 
-				frm.set_value("performance_indicator",[])
-				for (var i of col){
-					var child=frm.add_child("performance_indicator")
-					child.performance_indicator = i.performance_indicator
-					child.unit = i.unit
-					child.expected_value = i.expected_value
-					frm.refresh_field("performance_indicator")
+					frm.set_value("performance_indicator",[])
+					for (var i of col){
+						var child=frm.add_child("performance_indicator")
+						child.performance_indicator = i.performance_indicator
+						child.unit = i.unit
+						child.expected_value = i.expected_value
+						frm.refresh_field("performance_indicator")
+					}
 				}
-			}
-		})
-		
-		frm.call({
-			doc:cur_frm.doc,
-			method:"get_years",
-			async:false,
-			args:{
-				name:frm.doc.project_id
-			},
-			callback: function(r){
-				console.log("R = ",r.message);
-				var year_options=""
-				for (var i of r.message){
-					year_options += ('\n'+ i)
+			})
+			frm.call({
+				doc:cur_frm.doc,
+				method:"get_years",
+				async:false,
+				args:{
+					name:frm.doc.project_id
+				},
+				callback: function(r){
+					console.log("R = ",r.message);
+					var year_options=""
+					for (var i of r.message){
+						year_options += ('\n'+ i)
+					}
+					cur_frm.fields_dict.monitoring_year.df.options = year_options
+					frm.refresh_field('monitoring_year')
 				}
-				cur_frm.fields_dict.monitoring_year.df.options = year_options
-				frm.refresh_field('monitoring_year')
-			}
-		})
+			})
+		}
 	},
 
 	monitoring_year:function(frm){

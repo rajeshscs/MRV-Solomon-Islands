@@ -11,7 +11,7 @@
  "field_order": [
   "fuel_type",
   "fuel",
-  "nvc",
+  "ncv",
   "co2_emission_factor",
   "ch4_emission_factor",
   "n2o_emission_factor"
@@ -28,11 +28,6 @@
    "label": "Fuel"
   },
   {
-   "fieldname": "nvc",
-   "fieldtype": "Data",
-   "label": "NCV (TJ/Gg)"
-  },
-  {
    "fieldname": "co2_emission_factor",
    "fieldtype": "Data",
    "label": "CO2\u00a0Emission Factor (kgCO2/TJ)"
@@ -46,11 +41,16 @@
    "fieldname": "n2o_emission_factor",
    "fieldtype": "Data",
    "label": "N2O Emission Factor (kgN2O/TJ)"
+  },
+  {
+   "fieldname": "ncv",
+   "fieldtype": "Data",
+   "label": "NCV (TJ/Gg)"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 16:16:19.342156",
+ "modified": "2023-10-25 16:47:08.125504",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Energy Fuel Master List",

@@ -4,6 +4,11 @@
 import frappe
 from frappe.model.document import Document
 
+# @frappe.whitelist(allow_guest=True)
+# def get_user():
+# 	doc = frappe.db.sql(f""" SELECT parent FROM `tabHas Role` WHERE role = 'Approver Climate Tracking'""")
+# 	return doc
+
 class ClimateFinance(Document):
 	@frappe.whitelist()
 	def get_user(self):

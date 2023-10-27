@@ -359,7 +359,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 15:58:26.768326",
+ "modified": "2023-10-26 15:46:41.914743",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",
@@ -382,7 +382,12 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Pending"
+  }
+ ],
  "title_field": "project_name",
  "track_changes": 1
 }
