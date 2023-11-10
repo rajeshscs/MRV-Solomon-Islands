@@ -17,7 +17,7 @@ frappe.query_reports["Adaptation Tracking Report"] = {
 			get_query: function (doc) {
 				return {
 					"filters": {
-						"Objective": ["in", ['Cross-Cutting','Adaptation']]
+						"objective": ["in", ['Cross-Cutting','Adaptation']]
 					}
 				}
 			}

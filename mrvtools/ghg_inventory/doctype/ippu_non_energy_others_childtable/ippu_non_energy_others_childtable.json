@@ -22,24 +22,28 @@
    "label": "Product Name"
   },
   {
+   "default": "0",
    "fieldname": "amount_of_production",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Amount of production (tonnes)"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_co2",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Emission factor  (ton CO2/ton of product produced)"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_ch4",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Emission factor (ton CH4/ton of product produced)"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_n2o",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -55,7 +59,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-06 17:50:56.988803",
+ "modified": "2023-11-09 12:41:03.715238",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "IPPU Non Energy Others ChildTable",

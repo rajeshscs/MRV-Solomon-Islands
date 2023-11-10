@@ -10,14 +10,7 @@
   "fuel",
   "unit",
   "amount",
-  "reference",
-  "ncv",
-  "co2",
-  "ch4",
-  "n2o",
-  "calculated_co2",
-  "calculated_ch4",
-  "calculated_n2o"
+  "reference"
  ],
  "fields": [
   {
@@ -43,6 +36,7 @@
    "read_only": 1
   },
   {
+   "default": "0",
    "fieldname": "amount",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -54,47 +48,12 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Reference"
-  },
-  {
-   "fieldname": "co2",
-   "fieldtype": "Data",
-   "label": "CO2\u00a0Emission Factor (kgCO2/TJ)"
-  },
-  {
-   "fieldname": "ch4",
-   "fieldtype": "Data",
-   "label": "CH4\u00a0Emission Factor (kgCH4/TJ)"
-  },
-  {
-   "fieldname": "n2o",
-   "fieldtype": "Data",
-   "label": "N2O Emission Factor (kgN2O/TJ)"
-  },
-  {
-   "fieldname": "calculated_co2",
-   "fieldtype": "Data",
-   "label": "CO2\u00a0Emission Factor (kgCO2/TJ)"
-  },
-  {
-   "fieldname": "calculated_ch4",
-   "fieldtype": "Data",
-   "label": "CH4\u00a0Emission Factor (kgCH4/TJ)"
-  },
-  {
-   "fieldname": "calculated_n2o",
-   "fieldtype": "Data",
-   "label": "N2O Emission Factor (kgN2O/TJ)"
-  },
-  {
-   "fieldname": "ncv",
-   "fieldtype": "Data",
-   "label": "NCV (TJ/Gg)"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-26 15:35:42.074839",
+ "modified": "2023-11-09 12:42:49.384360",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Energy Sector ChildTable",

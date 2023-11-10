@@ -2,8 +2,43 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Mitigation Monitoring Information', {
+	workflow_state:function(frm){
+		console.log("Ready..");
+		
+			$(document).ready(function() {
+				// Select the node that will be observed for mutations
+				var targetNode = document.querySelector('.indicator-pill');
+			
+				// Options for the observer (which mutations to observe)
+				var config = { attributes: true, attributeFilter: ['class'] };
+			
+				// Callback function to execute when mutations are observed
+				var callback = function(mutationsList, observer) {
+					for(var mutation of mutationsList) {
+						if (mutation.type === 'attributes') {
+							if (targetNode.classList.contains('orange')) {
+								frm.clear_custom_buttons();
+							}
+						}
+					}
+				};
+			
+				// Create an observer instance linked to the callback function
+				var observer = new MutationObserver(callback);
+			
+				// Start observing the target node for configured mutations
+				observer.observe(targetNode, config);
+			});
+		
+	},
 	refresh: function(frm){
+		console.log(frm.doc.ghg_estimation_methodology);
 
+		$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').hide();
+		setTimeout(function() {
+			$('[id="mitigation-monitoring-information-tab1-tab"]').click()
+			$('[id="mitigation-monitoring-information-tab1"]').addClass("active show")
+		})
 		$(document).ready(function() {
 			// Select the node that will be observed for mutations
 			var targetNode = document.querySelector('.indicator-pill');
@@ -145,121 +180,112 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		
 				
 
-				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-				
-					$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').hide();
-						
-					}else{
-						$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').show();
-
-					}
-			
-					if (frm.doc.work_state == "Approved"){
-						cur_frm.fields_dict.project_id.df.read_only = 1
-						cur_frm.fields_dict.select_approver.df.read_only = 1
-					}
+				// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+				// 	$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').hide();
 					
-					if (frm.doc.work_state == '' && !frm.doc.__islocal){
-						if (frm.doc.workflow_state == "Pending") {
-							frm.set_value("work_state","Pending")
-							frm.save()
-						}
+				// }else{
+				// 	$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').show();
+				// }
+		
+				if (frm.doc.work_state == "Approved"){
+					cur_frm.fields_dict.project_id.df.read_only = 1
+					cur_frm.fields_dict.select_approver.df.read_only = 1
+				}
+				
+				if(frm.doc.work_state == "Rejected"){
+					if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+						console.log("Draft");
+						frm.set_value("work_state","Rejected")
+						frm.save()
 					}
-					else if(frm.doc.work_state == "Pending"){
-						console.log(frm.doc.work_state);
-						if (frm.doc.workflow_state == "Rejected"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
+				}
+
+				if(frm.doc.work_state == "Rejected"){
+					if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+						frm.set_value("work_state","Rejected")
+						frm.save()
 					}
-					else if(frm.doc.work_state == "Rejected"){
-						if (frm.doc.workflow_state == "Draft"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Rejected"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Pending"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-					}
-			
-					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-						frm.add_custom_button('Approve',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Approved")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
+				}
+				
+				
+				if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+					frm.add_custom_button('Approve',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								frm.set_value("workflow_state","Approved")
+								frm.refresh_field("workflow_state")
+								frm.save()
+							}, () => {
+		
+						})
+		
+					},"Actions")
+		
+					frm.add_custom_button('Reject',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								frm.set_value("workflow_state","Rejected")
+								frm.refresh_field("workflow_state")
+								frm.save()
+							}, () => {
+		
+						})
+		
+					},"Actions")
+		
+					
+				}
+				else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+					frm.add_custom_button('Edit',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								frm.set_value("workflow_state","Draft")
+								frm.refresh_field("workflow_state")
+								console.log(frm.doc.workflow_state);
+								frm.save()
+							}, () => {
 			
 							})
 			
 						},"Actions")
-			
-						frm.add_custom_button('Reject',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Rejected")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
-			
-							})
-			
-						},"Actions")
-			
-						
-					}
-					else if(frm.doc.workflow_state == "Approved"){
-						frm.add_custom_button('Edit',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Draft")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-				
-								})
-				
-							},"Actions")
-					}
-					else if(frm.doc.workflow_state == "Draft"){
-						frm.add_custom_button('Send for Approval',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Pending")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-								
-							})
+				}
+				else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+					frm.add_custom_button('Send for Approval',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								frm.set_value("workflow_state","Pending")
+								frm.refresh_field("workflow_state")
+								console.log(frm.doc.workflow_state);
+								frm.save()
+							}, () => {
 							
+						})
+						
+					},"Actions")
+				}
+				else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
+					frm.add_custom_button('Edit',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								frm.set_value("workflow_state","Draft")
+								frm.refresh_field("workflow_state")
+								console.log(frm.doc.workflow_state);
+								frm.save()
+							}, () => {
+			
+							})
+			
 						},"Actions")
-					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+				}
+				$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 
 
 
-		$('[data-fieldname="performance_indicator"] [class="grid-buttons"]').css("display","none")
-		$('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:last-child {display:none !important;}</style>')
-		$('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:first-child {display:none !important;}</style>')
+		// $('[data-fieldname="performance_indicator"] [class="grid-buttons"]').css("display","none")
+		// $('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:last-child {display:none !important;}</style>')
+		// $('head').append('<style>[id="page-Mitigation Monitoring Information"] div[data-fieldname="performance_indicator"] .grid-row .col:first-child {display:none !important;}</style>')
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
 			frm.fields_dict.performance_indicator.df.read_only = 1
@@ -274,11 +300,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			frm.refresh_field("edit_button")
 		}
 
-
-		if (frm.doc.work_state == "Approved"){
-			cur_frm.fields_dict.project_id.df.read_only = 1
-			cur_frm.fields_dict.select_approver.df.read_only = 1
-		}
 
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
@@ -332,47 +353,18 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		})
 
 
-		if (frm.doc.workflow_state == "Rejected"){
-			frm.set_value("edited_project_details",[])
-			frm.set_value("edited_performance_indicator",[])
-			frm.set_value("actual_performance_indicator",[])
+		// if (frm.doc.workflow_state == "Rejected"){
+		// 	frm.set_value("edited_project_details",[])
+		// 	frm.set_value("edited_performance_indicator",[])
+		// 	frm.set_value("actual_performance_indicator",[])
 
-			// frm.set_value("workflow_state","Approved")
-			// frm.set_value('work_state','Approved')
-			// frm.save()
-		}
-		if(frm.doc.workflow_state == "Approved"){
-			if (frm.doc.workflow_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
-				for (var i of frm.doc.edited_project_details){
-						frm.set_value(i.field_name,i.new_values)
-				}
+		// 	// frm.set_value("workflow_state","Approved")
+		// 	// frm.set_value('work_state','Approved')
+		// 	// frm.save()
+		// }
+		
 
-				if(frm.doc.edited_performance_indicator.length != 0){
-					frm.set_value("performance_indicator",[])
-					for(var i of frm.doc.edited_performance_indicator){
-						var child = frm.add_child("performance_indicator")
-						child.performance_indicator = i.performance_indicator
-						child.unit = i.unit
-						child.expected_value = i.expected_value
-						child.actual_monitored_value = i.actual_monitored_value
-						child.reference = i.reference
-					}
-					frm.refresh_field("performance_indicator")
-				}
-				frm.set_value("edited_project_details",[])
-				frm.set_value("edited_performance_indicator",[])
-				
-				frm.refresh_field("edited_performance_indicator")
-			}
-			frm.set_value("edited_project_details",[])
-			frm.set_value("actual_performance_indicator",[])
-			frm.set_value('work_state','Approved')
-			frm.save()
-		}
-
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$('[id="mitigation-monitoring-information-tab1"]').addClass("active")
-		}
+		
 		// if(frm.is_dirty()){
 		// 	console.log("Hiii");
 		// 	// $('[id="mitigation-monitoring-information-tab1"]').addClass("active")
@@ -403,10 +395,78 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 	},
 
 	before_save:function(frm){
+		
+		setTimeout(function() {
+			$('[id="mitigation-monitoring-information-tab1-tab"]').click()
+			$('[id="mitigation-monitoring-information-tab1"]').addClass("active show")
+		})
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+		if (frm.doc.workflow_state == "Rejected" && frm.doc.work_state == "Approved"){
+			frm.set_value("edited_project_details",[])
+			frm.set_value("edited_performance_indicator",[])
+			frm.set_value("actual_performance_indicator",[])
+		}
+		if(frm.doc.workflow_state == "Approved"){
+			if (frm.doc.work_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
+				console.log("Entered..");
+				for (var i of frm.doc.edited_project_details){
+						frm.set_value(i.field_name,i.new_values)
+						console.log("i.field_name",i.field_name);
+						console.log(frm.doc.ghg_estimation_methodology);
+						console.log("i.new_values",i.new_values);
+					}
+					
+					console.log(frm.doc.ghg_estimation_methodology);
+					if(frm.doc.edited_performance_indicator.length != 0){
+						frm.set_value("performance_indicator",[])
+					for(var i of frm.doc.edited_performance_indicator){
+						var child = frm.add_child("performance_indicator")
+						child.performance_indicator = i.performance_indicator
+						child.unit = i.unit
+						child.expected_value = i.expected_value
+						child.actual_monitored_value = i.actual_monitored_value
+						child.reference = i.reference
+					}
+					frm.refresh_field("performance_indicator")
+				}
+				console.log(frm.doc.ghg_estimation_methodology);
+				
+				frm.refresh_field("edited_performance_indicator")
+			}
+			frm.set_value("edited_performance_indicator",[])
+			frm.set_value("edited_project_details",[])
+			frm.set_value("actual_performance_indicator",[])
+			frm.set_value('work_state','Approved')
+			// frm.save()
+			console.log(frm.doc.ghg_estimation_methodology);
+		}     
+
+
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				if(frm.doc.actual_performance_indicator.length == 0){
-					window.location.href = `${frm.doc.name}`
+					// window.location.href = `${frm.doc.name}`
 
 				}
 				if(frm.fields_dict.performance_indicator.df.read_only == 0){
@@ -465,6 +525,10 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 
 			}
 		}
+		setTimeout(function() {
+			$('[id="mitigation-monitoring-information-tab1-tab"]').click()
+			$('[id="mitigation-monitoring-information-tab1"]').addClass("active show")
+		})
 	},
 
 	project_id: function(frm) {

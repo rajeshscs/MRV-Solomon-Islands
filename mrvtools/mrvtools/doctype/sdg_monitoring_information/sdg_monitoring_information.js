@@ -2,8 +2,42 @@
 // For license information, please see license.txt
 var userList = []
 frappe.ui.form.on('SDG Monitoring Information', {
+	workflow_state:function(frm){
+		console.log("Ready..");
+		
+			$(document).ready(function() {
+				// Select the node that will be observed for mutations
+				var targetNode = document.querySelector('.indicator-pill');
+			
+				// Options for the observer (which mutations to observe)
+				var config = { attributes: true, attributeFilter: ['class'] };
+			
+				// Callback function to execute when mutations are observed
+				var callback = function(mutationsList, observer) {
+					for(var mutation of mutationsList) {
+						if (mutation.type === 'attributes') {
+							if (targetNode.classList.contains('orange')) {
+								frm.clear_custom_buttons();
+							}
+						}
+					}
+				};
+			
+				// Create an observer instance linked to the callback function
+				var observer = new MutationObserver(callback);
+			
+				// Start observing the target node for configured mutations
+				observer.observe(targetNode, config);
+			});
+		
+	},
 	refresh: function(frm){
+		$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').hide();
+		setTimeout(function() {
+			$('[id="sdg-monitoring-information-tab1-tab"]').click()
+			$('[id="sdg-monitoring-information-tab1"]').addClass("active show")
 
+		})
 		$(document).ready(function() {
 			// Select the node that will be observed for mutations
 			var targetNode = document.querySelector('.indicator-pill');
@@ -147,57 +181,70 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
 		// }
 
-		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+		// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
 		
-				$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').hide();
+		// 		$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').hide();
 				
-			}else{
-				$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').show();
-			}
+		// 	}else{
+		// 		$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').show();
+		// 	}
 	
 			if (frm.doc.work_state == "Approved"){
 				cur_frm.fields_dict.project_id.df.read_only = 1
 				cur_frm.fields_dict.select_approver.df.read_only = 1
 			}
 			
-			if (frm.doc.work_state == '' && !frm.doc.__islocal){
-				if (frm.doc.workflow_state == "Pending") {
-					frm.set_value("work_state","Pending")
+			// if (frm.doc.work_state == '' && !frm.doc.__islocal){
+			// 	if (frm.doc.workflow_state == "Pending") {
+			// 		frm.set_value("work_state","Pending")
+			// 		frm.save()
+			// 	}
+			// }
+			// else if(frm.doc.work_state == "Pending"){
+			// 	console.log(frm.doc.work_state);
+			// 	if (frm.doc.workflow_state == "Rejected"){
+			// 		frm.set_value("work_state","Rejected")
+			// 		frm.save()
+			// 	}
+			// 	else if(frm.doc.workflow_state == "Approved"){
+			// 		frm.set_value("work_state","Approved")
+			// 		frm.save()
+			// 	}
+			// }
+			// else if(frm.doc.work_state == "Rejected"){
+			// 	if (frm.doc.workflow_state == "Draft"){
+			// 		frm.set_value("work_state","Rejected")
+			// 		frm.save()
+			// 	}
+			// 	else if(frm.doc.workflow_state == "Approved"){
+			// 		// $('[id="sdg-monitoring-information-tab1"]').attr("style","pointer-events:auto;")
+			// 		frm.set_value("work_state","Approved")
+			// 		frm.save()
+			// 	}
+			// 	else if(frm.doc.workflow_state == "Rejected"){
+			// 		// $('[id="sdg-monitoring-information-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
+			// 		frm.set_value("work_state","Rejected")
+			// 		frm.save()
+			// 	}
+			// 	else if(frm.doc.workflow_state == "Pending"){
+			// 		frm.set_value("work_state","Rejected")
+			// 		frm.save()
+			// 	}
+			// }
+			if(frm.doc.work_state == "Rejected"){
+				if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+					console.log("Draft");
+					frm.set_value("work_state","Rejected")
 					frm.save()
 				}
 			}
-			else if(frm.doc.work_state == "Pending"){
-				console.log(frm.doc.work_state);
-				if (frm.doc.workflow_state == "Rejected"){
-					frm.set_value("work_state","Rejected")
-					frm.save()
-				}
-				else if(frm.doc.workflow_state == "Approved"){
-					frm.set_value("work_state","Approved")
-					frm.save()
-				}
-			}
-			else if(frm.doc.work_state == "Rejected"){
-				if (frm.doc.workflow_state == "Draft"){
-					frm.set_value("work_state","Rejected")
-					frm.save()
-				}
-				else if(frm.doc.workflow_state == "Approved"){
-					// $('[id="sdg-monitoring-information-tab1"]').attr("style","pointer-events:auto;")
-					frm.set_value("work_state","Approved")
-					frm.save()
-				}
-				else if(frm.doc.workflow_state == "Rejected"){
-					// $('[id="sdg-monitoring-information-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-					frm.set_value("work_state","Rejected")
-					frm.save()
-				}
-				else if(frm.doc.workflow_state == "Pending"){
+
+			if(frm.doc.work_state == "Rejected"){
+				if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
 					frm.set_value("work_state","Rejected")
 					frm.save()
 				}
 			}
-	
 			if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 				frm.add_custom_button('Approve',()=>{
 					frappe.confirm('Are you sure you want to proceed?',
@@ -225,7 +272,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 	
 				
 			}
-			else if(frm.doc.workflow_state == "Approved"){
+			else if(frm.doc.workflow_state == "Approved"  && !frm.doc.__islocal){
 				frm.add_custom_button('Edit',()=>{
 					frappe.confirm('Are you sure you want to proceed?',
 						() => {
@@ -239,7 +286,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		
 					},"Actions")
 			}
-			else if(frm.doc.workflow_state == "Draft"){
+			else if(frm.doc.workflow_state == "Draft"  && !frm.doc.__islocal){
 				frm.add_custom_button('Send for Approval',()=>{
 					frappe.confirm('Are you sure you want to proceed?',
 						() => {
@@ -252,7 +299,22 @@ frappe.ui.form.on('SDG Monitoring Information', {
 					})
 					
 				},"Actions")
-			}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+			}
+			else if(frm.doc.workflow_state == "Rejected"  && !frm.doc.__islocal){
+				frm.add_custom_button('Edit',()=>{
+					frappe.confirm('Are you sure you want to proceed?',
+						() => {
+							frm.set_value("workflow_state","Draft")
+							frm.refresh_field("workflow_state")
+							console.log(frm.doc.workflow_state);
+							frm.save()
+						}, () => {
+		
+						})
+		
+					},"Actions")
+			}
+			$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
@@ -268,10 +330,10 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			frm.refresh_field("edit_button")
 		}
 
-		if (frm.doc.work_state == "Approved"){
-			cur_frm.fields_dict.project_id.df.read_only = 1
-			cur_frm.fields_dict.select_approver.df.read_only = 1
-		}
+		// if (frm.doc.work_state == "Approved"){
+		// 	cur_frm.fields_dict.project_id.df.read_only = 1
+		// 	cur_frm.fields_dict.select_approver.df.read_only = 1
+		// }
 
 		if(frm.doc.monitoring_year && frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.monitoring_year.df.options = frm.doc.monitoring_year
@@ -324,6 +386,58 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			}
 		})
 
+		
+		
+		
+
+		
+	},
+	edit_button:function(frm){
+		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
+			frm.set_value("quantitative_impact")
+			for(var i of frm.doc.edited_quantitative_impact){
+				var row = frm.add_child("quantitative_impact")
+				row.category = i.category
+				row.question = i.question
+				row.sdg_mapping = i.sdg_mapping
+				row.data = i.data
+				row.data_source = i.data_source
+			}
+			frm.fields_dict.quantitative_impact.df.read_only = 0
+			frm.refresh_field("quantitative_impact")
+			frm.fields_dict.edit_button.df.hidden = 1
+			frm.refresh_field("edit_button")
+		}
+	},
+	before_save:function(frm){
+		setTimeout(function() {
+			$('[id="sdg-monitoring-information-tab1-tab"]').click()
+			$('[id="sdg-monitoring-information-tab1"]').addClass("active show")
+
+		})
+		
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
 		if (frm.doc.workflow_state == "Rejected"){
 			// $("head").append(`<style>[id="project-tab2-tab"] {display: none !important}</style>`)
 			frm.set_value("edited_project_details",[])
@@ -334,8 +448,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// frm.dirty()
 			// frm.save()
 		}
-
-		
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_quantitative_impact.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
@@ -364,35 +476,12 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			}
 			frm.set_value('work_state','Approved')
 			frm.set_value("actual_quantitative_impact",[])
-			frm.save()
+			// frm.save()
 		}
-
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$('[id="sdg-monitoring-information-tab1"]').addClass("active")
-		}
-	},
-	edit_button:function(frm){
-		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){
-			frm.set_value("quantitative_impact")
-			for(var i of frm.doc.edited_quantitative_impact){
-				var row = frm.add_child("quantitative_impact")
-				row.category = i.category
-				row.question = i.question
-				row.sdg_mapping = i.sdg_mapping
-				row.data = i.data
-				row.data_source = i.data_source
-			}
-			frm.fields_dict.quantitative_impact.df.read_only = 0
-			frm.refresh_field("quantitative_impact")
-			frm.fields_dict.edit_button.df.hidden = 1
-			frm.refresh_field("edit_button")
-		}
-	},
-	before_save:function(frm){
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				if(frm.doc.actual_quantitative_impact.length == 0){
-					window.location.href = `${frm.doc.name}`
+					// window.location.href = `${frm.doc.name}`
 				}
 
 				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
@@ -408,6 +497,11 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				
 			}
 		}
+		setTimeout(function() {
+			$('[id="sdg-monitoring-information-tab1-tab"]').click()
+			$('[id="sdg-monitoring-information-tab1"]').addClass("active show")
+
+		})
 	},
 	project_id: function(frm) {
 		if( frm.doc.project_id){

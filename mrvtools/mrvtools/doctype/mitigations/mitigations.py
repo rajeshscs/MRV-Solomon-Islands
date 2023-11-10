@@ -33,7 +33,8 @@ class Mitigations(Document):
 				row.reference = i.reference
 		return "Yess"
 
-
+	# @frappe.whitelist()
+	
 
 	@frappe.whitelist()
 	def get_approvers(self):

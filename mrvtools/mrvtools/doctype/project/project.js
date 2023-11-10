@@ -2,6 +2,25 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Project', {
+	// workflow_state:function(frm){
+	// 	console.log("Workflow State = ",frm.doc.workflow_state);
+	// 	if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+	// 		$('[id="project-tab1"]').addClass("active show")
+	// 	}
+	// 	else{
+	// 		console.log("Working");	
+	// 		$('[id="project-tab1-tab"]').addClass("active")
+	// 		$('[id="project-tab2-tab"]').removeClass("active")
+	// 		$('[id="project-tab2-tab"]').addClass("show")
+			
+	// 		// let edit_tab = document.getElementById("project-tab2-tab")
+	// 		// console.log(edit_tab); 
+	// 		// edit_tab.blur()
+	// 		// $('[id="project-tab1"]').addClass("active show")
+	// 		// $('[id="project-tab2"]').removeClass("active hide show")	
+			
+	// 	}
+	// },
 
 	get_location:function(frm){
 		var existingGeoJSON = frm.doc.geographical_co_ordinate || '{"type":"FeatureCollection","features":[]}';
@@ -84,6 +103,77 @@ frappe.ui.form.on('Project', {
 
 
 	before_save:function(frm){
+
+		$('[id="project-tab1-tab"]').click()
+		$('[id="project-tab1"]').addClass("active show")
+
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+
+
+		if (frm.doc.workflow_state == "Rejected"){
+			frm.set_value("edited_project_details",[])
+			frm.set_value("original_coordinates",'')
+			frm.refresh_field("original_coordinates")
+			frm.set_value("new_coordinates",'')
+			frm.refresh_field("new_coordinates")
+		}
+		if(frm.doc.workflow_state == "Approved"){
+				if ((frm.doc.work_state == "Approved" && frm.doc.edited_project_details.length != 0) || (frm.doc.workflow_state == "Approved" && frm.doc.new_coordinates)){
+				for (var i of frm.doc.edited_project_details){
+
+					if(i.field_name != "included_in" && i.field_name != "geographical_co_ordinate"){
+						frm.set_value(i.field_name,i.new_values)
+					}
+					
+					else if(i.field_name == "included_in"){
+						var new_list = i.new_values.split(",")
+						frm.clear_table("included_in")
+						for (var value of new_list){
+							var row = frm.add_child("included_in")
+							row.included_in = value
+						}
+					}
+					
+				}
+				frm.set_value("edited_project_details",[])
+				// frm.fields_dict.edited_project_details.df.hidden = 1
+				frm.set_value("geographical_co_ordinate",frm.doc.new_coordinates)
+				frm.refresh_field("geographical_co_ordinate")
+
+				frm.set_value("original_coordinates",'')
+				// frm.fields_dict.original_coordinates.df.hidden = 1
+				frm.refresh_field("original_coordinates")
+				frm.set_value("new_coordinates",'')
+				// frm.fields_dict.new_coordinates.df.hidden = 1
+				frm.refresh_field("new_coordinates")
+			}
+			frm.set_value('work_state','Approved')
+			
+			
+		}
+
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				var list=[]
@@ -192,15 +282,16 @@ frappe.ui.form.on('Project', {
 					}
 				})
 				if (frm.doc.edited_project_details.length != 0 || frm.doc.new_coordinates != ''){
-					window.location.href = `${frm.doc.name}`
+					// window.location.href = `${frm.doc.name}`
 				}
 			}
 		}
 		
 	},
 
-
 	refresh: function(frm){
+		$('[id="page-Project"]').find('.actions-btn-group').hide();
+
 
 		$(document).ready(function() {
 			// Select the node that will be observed for mutations
@@ -235,8 +326,6 @@ frappe.ui.form.on('Project', {
 			async:false,
 			callback:function(r){
 				if(frm.doc.workflow_state == "Pending"){
-					console.log(r.message);
-					console.log(frappe.user_roles);
 					for (let i of r.message){
 						if (frappe.session.user != "Administrator"){
 
@@ -321,166 +410,107 @@ frappe.ui.form.on('Project', {
 		// 	// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
 		// });
 
-				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-				
-					$('[id="page-Project"]').find('.actions-btn-group').hide();
-						
-					}else{
-						$('[id="page-Project"]').find('.actions-btn-group').show();
-
-					}
+		// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+		// 	$('[id="page-Project"]').find('.actions-btn-group').hide();
 			
-					if (frm.doc.work_state == "Approved"){
-						cur_frm.fields_dict.select_approver.df.read_only = 1
-					}
-					
-					if (frm.doc.work_state == '' && !frm.doc.__islocal){
-						if (frm.doc.workflow_state == "Pending") {
-							frm.set_value("work_state","Pending")
-							frm.save()
-						}
-					}
-					else if(frm.doc.work_state == "Pending"){
-						console.log(frm.doc.work_state);
-						if (frm.doc.workflow_state == "Rejected"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
-					}
-					else if(frm.doc.work_state == "Rejected"){
-						if (frm.doc.workflow_state == "Draft"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Rejected"){
-							// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Pending"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-					}
-			
-					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-						frm.add_custom_button('Approve',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Approved")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
-			
-							})
-			
-						},"Actions")
-			
-						frm.add_custom_button('Reject',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Rejected")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
-			
-							})
-			
-						},"Actions")
-			
-						
-					}
-
-
-					else if(frm.doc.workflow_state == "Approved"){
-						frm.add_custom_button('Edit',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Draft")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-				
-								})
-				
-							},"Actions")
-					}
-					else if(frm.doc.workflow_state == "Draft"){
-						frm.add_custom_button('Send for Approval',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Pending")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-								
-							})
-							
-						},"Actions")
-					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
+		// }else{
+		// 	$('[id="page-Project"]').find('.actions-btn-group').show();
+		// }
 
 		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.select_approver.df.read_only = 1
 		}
 		
-		if (frm.doc.workflow_state == "Rejected"){
-			frm.set_value("edited_project_details",[])
-			frm.set_value("original_coordinates",'')
-			frm.refresh_field("original_coordinates")
-			frm.set_value("new_coordinates",'')
-			frm.refresh_field("new_coordinates")
-			frm.set_value("workflow_state","Approved")
-			frm.set_value('work_state','Approved')
-			frm.dirty()
-			frm.save()
-		}
-		if(frm.doc.workflow_state == "Approved"){
-				if ((frm.doc.workflow_state == "Approved" && frm.doc.edited_project_details.length != 0) || (frm.doc.workflow_state == "Approved" && frm.doc.new_coordinates)){
-				for (var i of frm.doc.edited_project_details){
-
-					if(i.field_name != "included_in" && i.field_name != "geographical_co_ordinate"){
-						frm.set_value(i.field_name,i.new_values)
-					}
-					
-					else if(i.field_name == "included_in"){
-						var new_list = i.new_values.split(",")
-						frm.clear_table("included_in")
-						for (var value of new_list){
-							var row = frm.add_child("included_in")
-							row.included_in = value
-						}
-					}
-					
-				}
-				frm.set_value("edited_project_details",[])
-				// frm.fields_dict.edited_project_details.df.hidden = 1
-				frm.set_value("geographical_co_ordinate",frm.doc.new_coordinates)
-				frm.refresh_field("geographical_co_ordinate")
-
-				frm.set_value("original_coordinates",'')
-				// frm.fields_dict.original_coordinates.df.hidden = 1
-				frm.refresh_field("original_coordinates")
-				frm.set_value("new_coordinates",'')
-				// frm.fields_dict.new_coordinates.df.hidden = 1
-				frm.refresh_field("new_coordinates")
+		if(frm.doc.work_state == "Rejected"){
+			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+				
+				frm.set_value("work_state","Rejected")
+				frm.save()
 			}
-			frm.set_value('work_state','Approved')
-			frm.save()
-			
+		}
+
+		if(frm.doc.work_state == "Rejected"){
+			if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+				frm.set_value("work_state","Rejected")
+				frm.save()
+			}
+		}
+		
+		
+		if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+			frm.add_custom_button('Approve',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Approved")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
+			frm.add_custom_button('Reject',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Rejected")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
 			
 		}
+		else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						
+						frm.save()
+					}, () => {
+	
+					})
+	
+				},"Actions")
+		}
+		else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+			frm.add_custom_button('Send for Approval',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Pending")
+						frm.refresh_field("workflow_state")
+						
+						frm.save()
+					}, () => {
+					
+				})
+				
+			},"Actions")
+		}
+		else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						
+						frm.save()
+					}, () => {
+	
+					})
+	
+				},"Actions")
+		}
+		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
+
+		
+		
 		
 		
 
@@ -531,19 +561,6 @@ frappe.ui.form.on('Project', {
 			}
 		});
 
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$('[id="project-tab1"]').addClass("active")
-			$('[id="project-tab1-tab"]').hide()
-			$('[id="project-tab2-tab"]').hide()
-		}
-	// 	else{
-	// 		$('[id="project-tab1-tab"]').addClass("active")
-	// 		$('[id="project-tab1-tab"]').attr('aria-selected', 'true');
-	// 		$('[id="project-tab2-tab"]').removeClass("active")
-	// 		$('[id="project-tab1-tab"]').show()
-	// 		$('[id="project-tab2-tab"]').show()
-	// 		$('[id="project-tab1"]').addClass("active")
-	// 	}
 	}
 });
 function toTitleCase(str) {

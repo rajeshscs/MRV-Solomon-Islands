@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2023-11-04 13:06:47.157631",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "fa fa-car",
+ "idx": 0,
+ "modified": "2023-11-04 13:06:47.157631",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "test",
+ "owner": "Administrator",
+ "page_name": "test",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "test"
+}

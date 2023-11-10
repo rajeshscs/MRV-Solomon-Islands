@@ -17,23 +17,30 @@
   {
    "fieldname": "type_of_wastewater_generated",
    "fieldtype": "Small Text",
+   "in_list_view": 1,
    "label": "Type of Wastewater generated"
   },
   {
+   "default": "0",
    "fieldname": "waste_water_generated_m3",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Waste Water Generated (m3)",
    "precision": "0"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_tonne_ch4m3_of_wastewater_generated",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Emission Factor (tonne CH4/m3 of wastewater generated)",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_tonne_n2om3_of_wastewater_generated",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Emission Factor (tonne N2O/m3 of wastewater generated)",
    "precision": "2"
   },
@@ -46,7 +53,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 18:53:05.253931",
+ "modified": "2023-11-09 12:36:27.521618",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Waste Water Treatment Other ChildTable",

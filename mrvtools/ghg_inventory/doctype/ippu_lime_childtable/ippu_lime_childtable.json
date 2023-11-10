@@ -19,6 +19,7 @@
    "label": "Lime Type"
   },
   {
+   "default": "0",
    "fieldname": "amount_produced_tonnes",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -35,7 +36,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 18:01:38.937018",
+ "modified": "2023-11-09 12:39:18.607492",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "IPPU Lime ChildTable",

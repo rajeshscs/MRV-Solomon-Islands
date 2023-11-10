@@ -16,36 +16,41 @@
  ],
  "fields": [
   {
+   "default": "0",
    "fieldname": "waste_per_capita",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Waste Per Capita (kg/capita/year)"
   },
   {
+   "default": "0",
    "fieldname": "fraction_of_waste",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Fraction of waste going to managed sites"
   },
   {
+   "default": "0",
    "fieldname": "fractionof_waste_go",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Fraction of waste going to unmanaged sites"
   },
   {
+   "default": "0",
    "fieldname": "ch4_generation",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "CH4 Generation per ton of waste (kg/tonne) - Managed"
   },
   {
+   "default": "0",
    "fieldname": "ch4_generationper_ton",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "CH4 Generation per ton of waste (kg/tonne) - Unmanaged"
@@ -58,8 +63,9 @@
    "label": "Reference"
   },
   {
+   "default": "0",
    "fieldname": "urban_population",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Urban Population"
@@ -68,7 +74,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-14 19:53:52.516964",
+ "modified": "2023-11-09 12:44:10.460673",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Solid Waste Disposal ChildTable",

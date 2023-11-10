@@ -49,32 +49,15 @@
 <router-view />
   
     </header>
-    <div  id="carouselExampleIndicators"  data-aos="fade-down " data-aos-delay="50"  class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../assets/images/herobanner-2.jpg" class="d-block w-100 h-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/images/herobanner-3.jpg" class="d-block w-100 h-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/images/bann5.jpg" class="d-block w-100 h-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <i  class="bi bi-chevron-left bi-2x"></i>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <i  class="bi bi-chevron-right bi-2x"></i>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+
 
 
   </template>
   
   <script scoped>
+
+
+
   export default {
     data() {
       return {
@@ -110,6 +93,11 @@
   background-image: linear-gradient(rgba(255, 255, 255, 0.538), rgba(255, 255, 255, 0.118));
   border: none;
 }
+.bg.scrolled {
+  background-image: linear-gradient(#fff, #fff);
+  border: none;
+}
+
 .navbar-fixed-top.scrolled {
   /* transition: 10s; */
   background-color: #ffffff !important;
@@ -142,23 +130,40 @@ li {
 
 .custom-link {
   color: rgb(255, 255, 255);
-  margin-left: 10px;  
+  margin-left: 10px;
   font-size: 15px;
+  border: none !important;
   font-weight: 500;
-  font-family: 'Inter'
-}
-
-
-
-.custom-link:hover {
-  color: rgba(255, 255, 255, 0.709)!important;
+  font-family: 'Inter';
   text-decoration: none;
-  /* font-weight: 700 !important; */
+  position: relative;
 }
+
+.custom-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 174, 0);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  display: block;
+  content: '';
+}
+
+.custom-link:hover::after {
+  transform: scaleX(1);
+  height: 2px; 
+  font-weight: 500;
+}
+
 
 .custom-btn {
-background-color: rgba(255, 0, 0, 0.678);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.344);
+  background-color: rgba(255, 0, 0, 0.678);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.097);
     color: #fff;
     text-decoration: none;
     border: none;

@@ -21,54 +21,63 @@
   {
    "fieldname": "industry_sector",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Industry Sector"
   },
   {
    "fieldname": "treatment_type",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Treatment Type"
   },
   {
    "fieldname": "production",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Production (tonnes/year)"
   },
   {
    "fieldname": "waste_water_gene",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Waste Water Generated (m3/tonne)"
   },
   {
    "fieldname": "cod",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "COD (kgCOD/m3)"
   },
   {
    "fieldname": "max_methane",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Maximum Methane Producing Capacity (kgCH4/kgCOD)"
   },
   {
    "fieldname": "methane_correction",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Methane Correction Factor (fraction)"
   },
   {
    "fieldname": "stuage_removed",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Sludge Removed (kgCOD/year)"
   },
   {
    "fieldname": "methane_recoverd",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Methane Recovered (kgCH4/year)"
   },
@@ -82,7 +91,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-08-11 11:53:14.781322",
+ "modified": "2023-11-07 17:09:01.291931",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Industrial Wastewater Treatment and Discharge ChildTable",

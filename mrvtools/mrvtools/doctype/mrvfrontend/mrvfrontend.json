@@ -1,0 +1,256 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-26 13:21:35.965669",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "about_section_tab",
+  "about_section_section",
+  "about_heading_1",
+  "column_break_r8fjx",
+  "description_1",
+  "about_2_section",
+  "about_heading_2",
+  "column_break_gsewa",
+  "description_2",
+  "carousel_section_section",
+  "add_home_page_carousel_here_section",
+  "carousel1",
+  "carousel2",
+  "carousel3",
+  "project_section_section",
+  "add_project_image_here_section",
+  "project_image1",
+  "project_image2",
+  "project_image3",
+  "report_section_section",
+  "add_report_image_here_section",
+  "report_image",
+  "knowledge_resource_section_section",
+  "multi_carousel_1_section",
+  "knowledge_resource_details",
+  "multi_carousel_2_section",
+  "knowledge_resource_details2",
+  "our_partner_section_tab",
+  "add_your_partner_logo_here_section",
+  "partner1",
+  "partner2",
+  "column_break_fnczm",
+  "partner3",
+  "partner4",
+  "column_break_3xyl8",
+  "partner5",
+  "partner6"
+ ],
+ "fields": [
+  {
+   "fieldname": "carousel_section_section",
+   "fieldtype": "Tab Break",
+   "label": "Home Carousel Section"
+  },
+  {
+   "fieldname": "carousel1",
+   "fieldtype": "Attach Image",
+   "label": "Carousel1"
+  },
+  {
+   "fieldname": "carousel2",
+   "fieldtype": "Attach",
+   "label": "Carousel2"
+  },
+  {
+   "fieldname": "carousel3",
+   "fieldtype": "Attach Image",
+   "label": "Carousel3"
+  },
+  {
+   "fieldname": "project_section_section",
+   "fieldtype": "Tab Break",
+   "label": "Project Section"
+  },
+  {
+   "fieldname": "project_image1",
+   "fieldtype": "Attach Image",
+   "label": "Project Image1"
+  },
+  {
+   "fieldname": "project_image2",
+   "fieldtype": "Attach Image",
+   "label": "Project Image2"
+  },
+  {
+   "fieldname": "project_image3",
+   "fieldtype": "Attach Image",
+   "label": "Project Image3"
+  },
+  {
+   "fieldname": "report_section_section",
+   "fieldtype": "Tab Break",
+   "label": "Report Section"
+  },
+  {
+   "fieldname": "report_image",
+   "fieldtype": "Attach Image",
+   "label": "Report Image"
+  },
+  {
+   "fieldname": "knowledge_resource_section_section",
+   "fieldtype": "Tab Break",
+   "label": "Knowledge Resource "
+  },
+  {
+   "fieldname": "knowledge_resource_details",
+   "fieldtype": "Table",
+   "label": "Knowledge Resource Details Carousel1",
+   "options": "Knowledge Resource ChildTable"
+  },
+  {
+   "fieldname": "multi_carousel_2_section",
+   "fieldtype": "Section Break",
+   "label": "Multi Carousel 2"
+  },
+  {
+   "fieldname": "multi_carousel_1_section",
+   "fieldtype": "Section Break",
+   "label": "Multi Carousel 1"
+  },
+  {
+   "fieldname": "knowledge_resource_details2",
+   "fieldtype": "Table",
+   "label": "Knowledge Resource Carousel Details2",
+   "options": "Knowledge Resource ChildTableTwo"
+  },
+  {
+   "fieldname": "description_1",
+   "fieldtype": "HTML Editor",
+   "label": "Description 1"
+  },
+  {
+   "fieldname": "about_heading_2",
+   "fieldtype": "Data",
+   "label": "About Heading 2"
+  },
+  {
+   "fieldname": "description_2",
+   "fieldtype": "HTML Editor",
+   "label": "Description 2"
+  },
+  {
+   "fieldname": "about_section_section",
+   "fieldtype": "Section Break",
+   "label": "About 1"
+  },
+  {
+   "fieldname": "column_break_r8fjx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_gsewa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "about_section_tab",
+   "fieldtype": "Tab Break",
+   "label": "About Section"
+  },
+  {
+   "fieldname": "about_2_section",
+   "fieldtype": "Section Break",
+   "label": "About 2"
+  },
+  {
+   "fieldname": "add_home_page_carousel_here_section",
+   "fieldtype": "Section Break",
+   "label": "Add Home page carousel here"
+  },
+  {
+   "fieldname": "add_project_image_here_section",
+   "fieldtype": "Section Break",
+   "label": "Add Project image here "
+  },
+  {
+   "fieldname": "add_report_image_here_section",
+   "fieldtype": "Section Break",
+   "label": "Add Report image here"
+  },
+  {
+   "fieldname": "about_heading_1",
+   "fieldtype": "Data",
+   "label": "About Heading1"
+  },
+  {
+   "fieldname": "our_partner_section_tab",
+   "fieldtype": "Tab Break",
+   "label": "Our Partner Section"
+  },
+  {
+   "fieldname": "add_your_partner_logo_here_section",
+   "fieldtype": "Section Break",
+   "label": "Add Your Partner Logo here"
+  },
+  {
+   "fieldname": "partner1",
+   "fieldtype": "Attach Image",
+   "label": "Partner1"
+  },
+  {
+   "fieldname": "partner2",
+   "fieldtype": "Attach Image",
+   "label": "Partner2"
+  },
+  {
+   "fieldname": "partner3",
+   "fieldtype": "Attach Image",
+   "label": "Partner3"
+  },
+  {
+   "fieldname": "partner4",
+   "fieldtype": "Attach Image",
+   "label": "Partner4"
+  },
+  {
+   "fieldname": "column_break_fnczm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_3xyl8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "partner5",
+   "fieldtype": "Attach Image",
+   "label": "Partner5"
+  },
+  {
+   "fieldname": "partner6",
+   "fieldtype": "Attach Image",
+   "label": "Partner6"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-10-28 13:35:57.369601",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "MrvFrontend",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

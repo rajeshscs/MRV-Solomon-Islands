@@ -21,19 +21,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 mr-2">
           <li class="nav-item mr-2">
-            <router-link to='/home' class="custom-link text-lg " style="transition:.3s; margin-right:20px;">Home</router-link>
+            <router-link to='/home' class="custom-link text-lg " style="margin-right:20px;">Home</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="transition:.3s; margin-right:20px;">About MRV Tool</router-link>
+            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="margin-right:20px;">About MRV Tool</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s; margin-right:20px;">Project</router-link>
+            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="margin-right:20px;">Project</router-link>
           </li>
           <li>
-            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s; margin-right:20px;">Reports</router-link>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="margin-right:20px;">Reports</router-link>
           </li>
           <li class="nav-item mr-2">
-            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s; margin-right:20px;">Knowledge Resource</router-link>
+            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="margin-right:20px;">Knowledge Resource</router-link>
           </li>
         </ul>
       </div>
@@ -43,13 +43,49 @@
         </a>
       </div>
     </nav>
-    <section class="breadcrumb-area"></section> <!-- Hide on small (sm) screens and below -->
+    <section class="breadcrumb-area with-overlay"></section> <!-- Hide on small (sm) screens and below -->
     <router-view />
   </header>
 </template>
 
 <script scoped>
 import { ref, onMounted, onUnmounted } from 'vue';
+import axios from 'axios';
+
+const data = ref([]);
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('http://192.168.0.183:8189/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
+
+    if (response.status === 200) {
+      data.value = response.data;
+    } else {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+  var values = data._rawValue.message.parent_data
+  var field = values.heading
+  var childField = data._rawValue.message.child_table_data
+  for (var item of childField){
+    if (item.image){
+      console.log("item",item.image);
+    }
+    else{
+      console.log("no item found");
+    }
+  }
+
+  console.log("response", values);
+  console.log("response", field);
+};
+
+onMounted(() => {
+  fetchData();
+});
+
 
 // Function to handle the click event and add "active" class
 function handleRouterLinkClick(event) {
@@ -81,10 +117,12 @@ onUnmounted(() => {
   $(function () {
     $(document).scroll(function () {
       var $nav = $(".navbar-fixed-top");
+      var $banner = $(".breadcrumb-area");
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
     $(document).scroll(function () {
       var $nav = $(".custom-link");
+      var $banner = $(".breadcrumb-area");
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
   });
@@ -93,7 +131,22 @@ onUnmounted(() => {
 
 <style scoped>
 
+/* Overlay */
+.breadcrumb-area {
+  position: relative;
+}
 
+.with-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.526), rgba(0, 0, 0, 0.082));
+  z-index: 1;
+}
+/* NAvbar */
 .active-link {
   color: rgb(0, 174, 0) !important;
   text-decoration: none;
@@ -104,7 +157,11 @@ onUnmounted(() => {
 
 
 .bg {
-  background-image: linear-gradient(rgba(92, 92, 92, 0.687), rgba(128, 128, 128, 0.118));
+  background-image: none;
+  border: none;
+}
+.bg.scrolled {
+  background-image: linear-gradient(#fff, #fff);
   border: none;
 }
 .navbar-fixed-top.scrolled {
@@ -115,7 +172,7 @@ onUnmounted(() => {
 }
 
 .custom-link.scrolled {
-  transition: 1s;
+  /* transition: 1s; */
   color: rgb(0, 0, 0);
 }
 
@@ -136,25 +193,46 @@ onUnmounted(() => {
   margin-left: 20px;
 }
 
+
+/* Router-link */
+
 .custom-link {
   color: rgb(255, 255, 255);
   margin-left: 10px;
   font-size: 15px;
+  border: none !important;
   font-weight: 500;
-  font-family: 'Inter'
-}
-
-
-
-.custom-link:hover {
-  color: rgba(255, 255, 255, 0.749);
+  font-family: 'Inter';
   text-decoration: none;
-  /* font-weight: 700 !important; */
+  position: relative;
 }
+
+.custom-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 174, 0);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  display: block;
+  content: '';
+}
+
+.custom-link:hover::after {
+  transform: scaleX(1);
+  height: 2px; 
+  font-weight: 500;
+}
+
+/* Router-link end */
 
 .custom-btn {
     background-color: rgba(255, 0, 0, 0.678);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.113);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.075);
     color: #fff;
     text-decoration: none;
     border: none;
@@ -222,7 +300,7 @@ onUnmounted(() => {
 
 
 .custom-link.scrolled {
-  transition: 10s;
+  /* transition: 10s; */
   color: rgb(255, 255, 255);
 }
 

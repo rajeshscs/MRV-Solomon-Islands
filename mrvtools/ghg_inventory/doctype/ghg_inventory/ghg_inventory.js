@@ -1,55 +1,323 @@
 // Copyright (c) 2023, tridotstech and contributors
 // For license information, please see license.txt
 var dynamicTitleList = ['','','','']
+var tableFields = [];
 frappe.ui.form.on('GHG Inventory', {
-	 
+	
 	refresh: function(frm) {
-		// $('.control-input').on("change",function(){
-			
-		// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// })
-		// $('.primary-action').on('checkVisibility', function() {
-		// if ($('.primary-action').is(':visible')) {
-		// 	console.log("Hello");
-		// 	$('.actions-btn-group').hide();
-		// } else {
-		// 	$('.actions-btn-group').show();
-		// }
-		// });
+		var not_hidden_table_fields = []
+		
+		  
+		frappe.db.get_doc('GHG Inventory Report Formulas', 'Lime')
+    	.then(doc => {
+			for(var i in doc.table_name){
 
-	// $('[data-fieldname]').on("keyup",function(){
-	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-	// 	$('.primary-action').removeClass('hide');
-    //     $('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-	// 	console.log("Hi..");
-	// })
-	// $(document).ready(function(){
-	// 	$('[class="btn btn-primary btn-sm"]').on("click",function(){
-	// 		console.log("HIii");
-	// 		$('[class="grey-link dropdown-item"]').find('[data-label="Send%20for%20Approval"]').on("click",function(){
-	// 			console.log("Hello");
-	// 			frappe.validated = false;
+			}
+        	console.log(doc.table_name[0].name)
+			console.log(doc.cumulative_co2);
+    	})
+		var data = frappe.get_meta('GHG Inventory');
+		for (var field of data.fields) {
+			if (field.fieldtype === 'Table') {
+				if(!field.fieldname.startsWith('edited') && field.fieldname !== 'ghg_inventory_details'){
+					tableFields.push(field.fieldname);
+					if(frm.fields_dict[field.fieldname].df.hidden_due_to_dependency == undefined){
+						console.log("Fieldname = ",field.fieldname);
+						not_hidden_table_fields.push(field.fieldname)
+					}
+				}
+			}
+		}
+			
+		// frm.call({
+		// 	doc:frm.doc,
+		// 	method: 'custom_sql_query',
+		// 	args:{
+		// 		"tablefields":not_hidden_table_fields
+		// 	},
+		// 	async:false,
+		// 	callback: function(r) {
+		// 		// console.log(r.message)
+		// 	}
+		// 	});
+			// console.log(tableFields);
+		// if(frm.doc.sector == "1. Energy")	
+			// frappe.call({
+			// 	// method: 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation',
+			// 	method: frm.doc.sector === "1. Energy" ? 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation'
+        	// 		:'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation',
+			// 	args:{
+			// 		"tablefields":not_hidden_table_fields,
+			// 		"doc":frm.doc.doctype,
+			// 		"doc_name":frm.doc.name
+			// 	},
+			// 	async:true,
+			// 	callback: function(r) {
+			// 		console.log(r.message)				
+			// 	}
+
+			// });
+			let method = '';
+			if (frm.doc.sector == "1. Energy") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation';
+			} else if (frm.doc.sector == "2. Industrial processes and product use") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation';
+			} else if (frm.doc.sector == "3. Agriculture") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture.agri_calculation';
+			} else if (frm.doc.sector == "4. LAND USE, LAND-USE CHANGE AND FORESTRY") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.land_use.land_calculation';
+			} else if (frm.doc.sector == "5. Waste") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.waste.waste_calculation';
+			} else {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.other.other_calculation';
+			}
+			
+
+			frappe.call({
+				method: method,
+				args:{
+					"tablefields": not_hidden_table_fields,
+					"doc": frm.doc.doctype,
+					"doc_name": frm.doc.name
+				},
+				async: true,
+				callback: function(r) {
+					console.log(r.message)
+					// console.log(not_hidden_table_fields);				
+				}
+			});
+
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+		
+
+		frm.call({
+			doc:frm.doc,
+			method:"get_approvers",
+			async:false,
+			callback:function(r){
+				if(frm.doc.workflow_state == "Pending"){
+					for (let i of r.message){
+						if (frappe.session.user != "Administrator"){
+
+							if(frappe.user_roles.includes(i)){
+								$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
+							}
+						}
+
+					}
+				}
+			}
+		})
+		
+					if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+						$('[id="page-GHG Inventory"]').find('.actions-btn-group').hide();
+						
+					}else{
+						$('[id="page-GHG Inventory"]').find('.actions-btn-group').show();
+					}
+			
+					if (frm.doc.work_state == "Approved"){
+						cur_frm.fields_dict.select_approver.df.read_only = 1
+					}
+					
+					if(frm.doc.work_state == "Rejected"){
+						if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+							console.log("Draft");
+							frm.set_value("work_state","Rejected")
+							frm.save()
+						}
+					}
+
+					if(frm.doc.work_state == "Rejected"){
+						if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+							frm.set_value("work_state","Rejected")
+							frm.save()
+						}
+					}
+					
+					
+					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+						frm.add_custom_button('Approve',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									console.log("2 custom button ")
+									frm.set_value("workflow_state","Approved")
+									frm.refresh_field("workflow_state")
+									frm.save()
+								}, () => {
+			
+							})
+			
+						},"Actions")
+			
+						frm.add_custom_button('Reject',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Rejected")
+									frm.refresh_field("workflow_state")
+									frm.save()
+								}, () => {
+			
+							})
+			
+						},"Actions")
+			
+						
+					}
+					else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+						frm.add_custom_button('Edit',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Draft")
+									frm.refresh_field("workflow_state")
+									console.log(frm.doc.workflow_state);
+									frm.save()
+								}, () => {
+				
+								})
+				
+							},"Actions")
+					}
+					else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+						frm.add_custom_button('Send for Approval',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Pending")
+									frm.refresh_field("workflow_state")
+									console.log(frm.doc.workflow_state);
+									frm.save()
+								}, () => {
+								
+							})
+							
+						},"Actions")
+					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
+
+	// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+				
+	// 	$('[id="page-GHG Inventory"]').find('.actions-btn-group').hide();
+			
+	// 	}else{
+	// 		$('[id="page-GHG Inventory"]').find('.actions-btn-group').show();
+	// 	}
+
+	// 	if (frm.doc.work_state == "Approved"){
+	// 		// cur_frm.fields_dict.project_id.df.read_only = 1
+	// 		cur_frm.fields_dict.select_approver.df.read_only = 1
+	// 	}
+		
+	// 	else if(frm.doc.work_state == "Pending"){
+	// 		console.log(frm.doc.work_state);
+	// 		if (frm.doc.workflow_state == "Rejected"){
+	// 			frm.set_value("work_state","Rejected")
+	// 			frm.save()
+	// 		}
+	// 		else if(frm.doc.workflow_state == "Approved"){
+	// 			frm.set_value("work_state","Approved")
+	// 			frm.save()
+	// 		}
+	// 	}
+	// 	else if(frm.doc.work_state == "Rejected"){
+	// 		if (frm.doc.workflow_state == "Draft"){
+	// 			frm.set_value("work_state","Rejected")
+	// 			frm.save()
+	// 		}
+	// 		else if(frm.doc.workflow_state == "Approved"){
+	// 			frm.set_value("work_state","Approved")
+	// 			frm.save()
+	// 		}
+	// 		else if(frm.doc.workflow_state == "Rejected"){
+	// 			frm.set_value("work_state","Rejected")
+	// 			frm.save()
+	// 		}
+	// 		else if(frm.doc.workflow_state == "Pending"){
+	// 			frm.set_value("work_state","Rejected")
+	// 			frm.save()
+	// 		}
+	// 	}
+
+	// 	if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+	// 		frm.add_custom_button('Approve',()=>{
+	// 			frappe.confirm('Are you sure you want to proceed?',
+	// 				() => {
+	// 					frm.set_value("workflow_state","Approved")
+	// 					frm.refresh_field("workflow_state")
+	// 					frm.save()
+	// 				}, () => {
+
+	// 			})
+
+	// 		},"Actions")
+
+	// 		frm.add_custom_button('Reject',()=>{
+	// 			frappe.confirm('Are you sure you want to proceed?',
+	// 				() => {
+	// 					frm.set_value("workflow_state","Rejected")
+	// 					frm.refresh_field("workflow_state")
+	// 					frm.save()
+	// 				}, () => {
+
+	// 			})
+
+	// 		},"Actions")
+
+			
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+	// 		frm.add_custom_button('Edit',()=>{
+	// 			frappe.confirm('Are you sure you want to proceed?',
+	// 				() => {
+	// 					frm.set_value("workflow_state","Draft")
+	// 					frm.refresh_field("workflow_state")
+	// 					console.log(frm.doc.workflow_state);
+	// 					frm.save()
+	// 				}, () => {
+	
+	// 				})
+	
+	// 			},"Actions")
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+	// 		frm.add_custom_button('Send for Approval',()=>{
 	// 			frappe.confirm('Are you sure you want to proceed?',
 	// 				() => {
 	// 					frm.set_value("workflow_state","Pending")
 	// 					frm.refresh_field("workflow_state")
 	// 					console.log(frm.doc.workflow_state);
-	// 					frappe.validated = false;
 	// 					frm.save()
 	// 				}, () => {
 					
 	// 			})
-	// 		})
-	// 	})
-	
-		// $('[data-fieldname]').on("keyup",function(){
-		// 	$('.primary-action').removeClass('hide');
-		// 	$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-		// 	frm.dirty()
-		// 	console.log("Hi..");
-		// });
-	// });
-	
+				
+	// 		},"Actions")
+	// 	}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
+
 		if(frm.is_new()){
 			frm.set_value('dynamic_title',dynamicTitleList.join(''))
 			frm.refresh_field('dynamic_title')
@@ -84,56 +352,13 @@ frappe.ui.form.on('GHG Inventory', {
 			if (frm.doc.workflow_state == "Approved" || frm.doc.ghg_inventory_details.length != 0){
 
 			}
+			console.log("3")
 			frm.set_value('work_state','Approved')
-			frm.save()
 		}
 
 		if (frm.doc.__islocal || frm.doc.work_state != "Approved"){
 			frm.fields_dict.edit_button.df.hidden = 1
 			frm.refresh_field("edit_button")
-		}
-
-		if (frm.doc.work_state == '' && !frm.doc.__islocal){
-			if (frm.doc.workflow_state == "Pending") {
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:auto;")
-				frm.set_value("work_state","Pending")
-				frm.save()
-			}
-		}
-		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
-			if (frm.doc.workflow_state == "Rejected"){
-				frm.set_value("work_state","Rejected")
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-				frm.save()
-			}
-			else if(frm.doc.workflow_state == "Approved"){
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:auto;")
-				frm.set_value("work_state","Approved")
-				frm.save()
-			}
-		}
-		else if(frm.doc.work_state == "Rejected"){
-			if (frm.doc.workflow_state == "Draft"){
-				frm.set_value("work_state","Rejected")
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:auto;")
-				frm.save()
-			}
-			else if(frm.doc.workflow_state == "Approved"){
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:auto;")
-				frm.set_value("work_state","Approved")
-				frm.save()
-			}
-			else if(frm.doc.workflow_state == "Rejected"){
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-				frm.set_value("work_state","Rejected")
-				frm.save()
-			}
-			else if(frm.doc.workflow_state == "Pending"){
-				$('[id="ghg-inventory-tab1"]').attr("style","pointer-events:auto;")
-				frm.set_value("work_state","Rejected")
-				frm.save()
-			}
 		}
 
 		frm.call({
@@ -160,41 +385,13 @@ frappe.ui.form.on('GHG Inventory', {
 						frm.refresh_field("edit_button")
 					}
 					
-					if (frm.doc.workflow_state == "Rejected"){
-						frm.set_value(i,[])
-						frm.save()
-					}
-
-					if(frm.doc.workflow_state == "Approved"){
-						if (frm.doc.workflow_state == "Approved" && (frm.doc[i].length != 0 || frm.doc.ghg_inventory_details.length != 0)){
-
-							for (let row of frm.doc.ghg_inventory_details){
-								frm.set_value(row.field_name,row.new_values)
-							}
-							if(frm.doc[i].length!=0){
-								frm.call({
-									doc:frm.doc,
-									method:"after_saving_table",
-									async:false,
-									callback:function(res){
-										console.log("Working.......");
-									}
-								})
-								frm.set_value(i,[])
-								frm.refresh_field(i)
-							}
-							
-						}
-						console.log("HIII......:)");
-						frm.set_value("ghg_inventory_details",[])
-						frm.set_value('work_state','Approved')
-						frm.save()
-					}
+					// if (frm.doc.workflow_state == "Rejected"){
+					// 	frm.set_value(i,[])
+					// 	frm.save()
+					// }
 
 
-					if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-						$('[id="ghg-inventory-tab1"]').addClass("active")
-					}
+					
 				}
 			}
 		})
@@ -402,7 +599,7 @@ frappe.ui.form.on('GHG Inventory', {
 				frm.refresh_field('international_bunkers')
 			});
 
-		
+			
 			// if(.fuel_type){
 			// 	frappe.db.get_list('Energy Fuel Master List',{
 			// 		fields : ['fuel'],
@@ -462,103 +659,220 @@ frappe.ui.form.on('GHG Inventory', {
 
 		// cur_frm.fields_dict.sub_category.df.options = ''
 		// frm.refresh_field('sub_category')
+		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+			$('[id="ghg-inventory-tab1"]').addClass("active")
+		}
 	},
+	
 
 	before_save:function(frm){
-		if(frm.doc.work_state == "Approved"){
-			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				frm.call({
-					doc:frm.doc,
-					method:"before_saving_table",
-					async:false,
-					callback:function(r){
-						console.log("Mudinchhh!");
-					}
-				})
-
-				
-				frm.call({
-					doc:frm.doc,
-					method:"get_all_data",
-					async:false,
-					callback:function(r){
-						var result= r.message
-
-						var field_name_list = []
-						for(let [key,value] of Object.entries(result)){
-							field_name_list.push(key)
-						}
-
-						for (var i of frm.doc.ghg_inventory_details){
-
-							if (field_name_list.includes(i.field_name) ){
-								i.new_values = frm.doc[`${i.field_name}`].toString()
-								frm.set_value(i.field_name,i.old_values)
-								frm.refresh_field("ghg_inventory_details")
-
-								const index = field_name_list.indexOf(i.field_name);
-								const x = field_name_list.splice(index, 1)
-							}
-						}
-						if (field_name_list){
-
-							for (var i of field_name_list){
-								var label = i.replaceAll("_"," ")
-								label = toTitleCase(label)
-								var child =frm.add_child("ghg_inventory_details")
-								child.field_label = label
-								child.field_name = i
-								child.old_values = result[`${i}`]
-								child.new_values = frm.doc[`${i}`].toString()
-								frm.set_value(i,result[`${i}`])
-
-							}
-						}
-					}
-				})
-				// window.location.href = `${frm.doc.name}`
+   
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
 			}
 		}
-		var cumulativeCo2 = 0;
-		var cumulativeCh4 = 0;
-		var cumulativeN2o = 0;
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				console.log("before save")
+				frm.set_value("work_state","Approved")
+			}
+		}
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+		
+		
+		
+		frm.call({
+			doc:frm.doc,
+			method:'table_list',
+			async:false,
+			callback: function(r){
+				for (var i of r.message){
+
+					if (frm.doc.workflow_state == "Rejected"){
+						console.log("Rejecteddddd...");
+						console.log("i = ",i);
+						frm.set_value(i,[])
+						frm.save()
+					}
+
+					if(frm.doc.workflow_state == "Approved"){
+						if (frm.doc.work_state == "Approved" && (frm.doc[i].length != 0 || frm.doc.ghg_inventory_details.length != 0)){
+
+							for (let row of frm.doc.ghg_inventory_details){
+								frm.set_value(row.field_name,row.new_values)
+							}
+
+
+
+							if(frm.doc[i].length!=0){
+								frm.call({
+									doc:frm.doc,
+									method:"after_saving_table",
+									async:false,
+									callback:function(res){
+										// console.log("Working.......");
+									}
+								})
+								frm.set_value(i,[])
+								frm.refresh_field(i)
+							}
+							
+						}
+						// console.log("HIII......:)");
+						frm.set_value("ghg_inventory_details",[])
+						frm.set_value('work_state','Approved')
+					}
+				}
+			}
+		})
+		frm.call({
+			doc:frm.doc,
+			method:'table_name_list',
+			async:false,
+			callback: function(r){
+				for (var i of r.message){
+					if(frm.doc.work_state == "Approved"){
+						if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
+
+							if(frm.fields_dict[i].df.read_only == 0){
+								frm.call({
+									doc:frm.doc,
+									method:"before_saving_table",
+									async:false,
+									callback:function(r){
+										console.log("Mudinchhh!");
+									}
+								})
+							}
+
+							
+							frm.call({
+								doc:frm.doc,
+								method:"get_all_data",
+								async:false,
+								callback:function(r){
+									var result= r.message
+
+									var field_name_list = []
+									for(let [key,value] of Object.entries(result)){
+										field_name_list.push(key)
+									}
+
+									for (var i of frm.doc.ghg_inventory_details){
+
+										if (field_name_list.includes(i.field_name) ){
+											i.new_values = frm.doc[`${i.field_name}`].toString()
+											frm.set_value(i.field_name,i.old_values)
+											frm.refresh_field("ghg_inventory_details")
+
+											const index = field_name_list.indexOf(i.field_name);
+											const x = field_name_list.splice(index, 1)
+										}
+									}
+									if (field_name_list){
+
+										for (var i of field_name_list){
+											var label = i.replaceAll("_"," ")
+											label = toTitleCase(label)
+											var child =frm.add_child("ghg_inventory_details")
+											child.field_label = label
+											child.field_name = i
+											child.old_values = result[`${i}`]
+											child.new_values = frm.doc[`${i}`].toString()
+											frm.set_value(i,result[`${i}`])
+
+										}
+									}
+								}
+							})
+							// window.location.href = `${frm.doc.name}`
+						}
+					}
+				}
+			}
+		})
+
+		
+		// //energy cumulative calculation
+		// var cumulativeCo2 = 0;
+		// var cumulativeCh4 = 0;
+		// var cumulativeN2o = 0;
+		
+		// // var categoryName = frm.doc.tableFields;
+		// // console.log(categoryName)
 	
-		frm.doc.electricity_generation.forEach(function (row) {
-			cumulativeCo2 += row.calculated_co2;
-			cumulativeCh4 += row.calculated_ch4;
-			cumulativeN2o += row.calculated_n2o;
+		// tableFields.forEach(function (row) {
+		// 	if(frm.doc[row].length != 0){
+		// 		console.log(row)
+		// 		for(let i of frm.doc[row]){
+		// 			console.log(i);
+		// 			cumulativeCo2 += i.calculated_co2;
+		// 			console.log(i.calculated_co2);
+		// 			cumulativeCh4 += i.calculated_ch4;
+		// 			console.log(i.calculated_ch4);
+		// 			cumulativeN2o += i.calculated_n2o;
+		// 			console.log(i.calculated_n2o);
+		// 		}
+				
+		// 	}
+			
 			
 
-		});
-		frappe.db.get_list('IPPU GWP Master List', {
-			fields: ["name","gwp"],
-			filters: {
-				gas_name: ["in",["Methane ","Nitrous oxide"]],
-			}
+		// });
+		// frappe.db.get_list('IPPU GWP Master List', {
+		// 	fields: ["name","gwp"],
+		// 	filters: {
+		// 		gas_name: ["in",["Methane ","Nitrous oxide"]],
+		// 	}
 
-		}).then(r => {
-			console.log("yes",r)
-			var methane = 0;
-			var n2o =0;	
-			for(var i in r){
-				if(r[i].name == "Nitrous oxide"){
-					methane +=parseFloat( r[i].gwp)
-				}
-				else{
-					n2o += parseFloat(r[i].gwp)
-				}
-			}
-		var total =	cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)
-		frm.set_value("total_co2",total)
-		});
-		frm.set_value('cumulative_co2', cumulativeCo2);
-		frm.set_value('cumulative_ch4', cumulativeCh4);
-		frm.set_value('cumulative_n2o', cumulativeN2o);
-		frm.refresh_field('cumulative_co2')
-		frm.refresh_field('cumulative_ch4')
-		frm.refresh_field('cumulative_n2o')
-		frm.refresh_field('total_co2')
+		// }).then(r => {
+			
+		// 	console.log("yes",r)
+		// 	var methane = 0;
+		// 	var n2o =0;	
+		// 	for(var i in r){
+		// 		if(r[i].name == "Nitrous oxide"){
+		// 			n2o +=parseFloat( r[i].gwp)
+		// 		}
+		// 		else{
+		// 			methane += parseFloat(r[i].gwp)
+		// 		}
+		// 	}
+		// 	// var t=	cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)
+		// 	// console.log(t)
 
+		// var formula =	"cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)"
+		// var total = 0
+		// total = eval(formula)
+		// // console.log(cumulativeCo2);
+		
+		// console.log(cumulativeCh4);
+		// console.log(methane);
+		// console.log(cumulativeN2o);
+		// console.log(n2o);
+		// console.log(formula);
+		// console.log(total);
+		// frm.set_value("total_co2",total)
+		// });
+		// frm.set_value('cumulative_co2', cumulativeCo2);
+		// frm.set_value('cumulative_ch4', cumulativeCh4);
+		// frm.set_value('cumulative_n2o', cumulativeN2o);
+		// frm.refresh_field('cumulative_co2')
+		// frm.refresh_field('cumulative_ch4')
+		// frm.refresh_field('cumulative_n2o')
+		// frm.refresh_field('total_co2')
+		// Lime calculation
+    
 		
 
 	},
@@ -836,14 +1150,15 @@ frappe.ui.form.on('GHG Inventory', {
 			frappe.db.get_list('Forest Category Master List', {
 				fields: ['category'],
 				filters:{'link_category':frm.doc.category},
-				pluck:'category',
 				order_by:'category'
 			}).then(records => {
-				for(var i of records){
+				for(var i in records){
+					console.log(records[i].category);
 					var child = frm.add_child(`forest_land`)
-					child.forest_category = i
+					child.forest_category = records[i].category
+					frm.refresh_field(`forest_land`)
+					
 				}
-				frm.refresh_field(`forest_land`)
 			})
 		}
 		else{
@@ -1016,8 +1331,9 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.refresh_field('sub_category')
 		});
 
-		if(frm.doc.sub_sector=='2.A.1. Cement production' && !frm.doc.clinker_data){
+		if(frm.doc.sub_sector=='2.A.1. Cement production'){
 			var row = frm.add_child('clinker_data')
+			frm.refresh_field("clinker_data")
 			
 		}
 		$.ajax({
@@ -1458,7 +1774,45 @@ frappe.ui.form.on('GHG Inventory', {
 	// }
 
 });
+frappe.ui.form.on('Forest Land ChildTable',{
+area_ha:function(frm){
+		var categoryName = frm.doc.category.toLowerCase().split(' ').slice(1).join('_');
+		var totalArea = 0;
+		for (var i = 2; i < frm.doc[categoryName].length; i++) {
+			var row = frm.doc[categoryName][i];
+			totalArea += row.area_ha || 0;	
+		}
+		var secondRow = frm.doc[categoryName][1];
+		secondRow.area_ha = totalArea;
+		frm.refresh_field(categoryName);
+		cur_frm.fields_dict[categoryName].grid.grid_rows[1].docfields.forEach(function(field) {
+				field.read_only = 1;
+			
+		});
+		
+		// Refresh the child table to reflect the changes
+		cur_frm.fields_dict[categoryName].grid.refresh();
+	
+},
+ghg_emissions_tco2:function(frm){
+	var categoryName = frm.doc.category.toLowerCase().split(' ').slice(1).join('_');
+	var totalGHGEmissions  = 0;
+	for (var i = 2; i < frm.doc[categoryName].length; i++) {
+		var row = frm.doc[categoryName][i];
+		totalGHGEmissions  += row.ghg_emissions_tco2 || 0;	
+	}
+	var secondRow = frm.doc[categoryName][1];
+	secondRow.ghg_emissions_tco2 = totalGHGEmissions ;
+	frm.refresh_field(categoryName);
+	cur_frm.fields_dict[categoryName].grid.grid_rows[1].docfields.forEach(function(field) {
+		field.read_only = 1;
+	
+});
 
+// Refresh the child table to reflect the changes
+cur_frm.fields_dict[categoryName].grid.refresh();
+}
+})
 frappe.ui.form.on('Energy Reference ChildTable',{
 	reference_approach_add(frm, cdt, cdn) {
 		var d = locals[cdt][cdn]
@@ -1753,52 +2107,52 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 
 	// 	})
 	// },
-	fuel: function (frm, cdt, cdn) {
-		var d = locals[cdt][cdn];
+	// fuel: function (frm, cdt, cdn) {
+	// 	var d = locals[cdt][cdn];
 	
-		frappe.db.get_list('Energy Fuel Master List', {
-			fields: ["ncv", "co2_emission_factor", "ch4_emission_factor", "n2o_emission_factor"],
-			filters: {
-				fuel_type: d.fuel_type,
-				fuel: d.fuel,
-			}
-		}).then(r => {
-			console.log(r[0]);
-			frappe.model.set_value(cdt, cdn, "ncv", r[0].ncv);
-			frm.refresh_field('ncv');
-			frappe.model.set_value(cdt, cdn, "co2", r[0].co2_emission_factor);
-			frm.refresh_field('co2');
-			frappe.model.set_value(cdt, cdn, "ch4", r[0].ch4_emission_factor);
-			frm.refresh_field('ch4');
-			frappe.model.set_value(cdt, cdn, "n2o", r[0].n2o_emission_factor);
-			frm.refresh_field('n2o');
+	// 	frappe.db.get_list('Energy Fuel Master List', {
+	// 		fields: ["ncv", "co2_emission_factor", "ch4_emission_factor", "n2o_emission_factor"],
+	// 		filters: {
+	// 			fuel_type: d.fuel_type,
+	// 			fuel: d.fuel,
+	// 		}
+	// 	}).then(r => {
+	// 		console.log(r[0]);
+	// 		frappe.model.set_value(cdt, cdn, "ncv", r[0].ncv);
+	// 		frm.refresh_field('ncv');
+	// 		frappe.model.set_value(cdt, cdn, "co2", r[0].co2_emission_factor);
+	// 		frm.refresh_field('co2');
+	// 		frappe.model.set_value(cdt, cdn, "ch4", r[0].ch4_emission_factor);
+	// 		frm.refresh_field('ch4');
+	// 		frappe.model.set_value(cdt, cdn, "n2o", r[0].n2o_emission_factor);
+	// 		frm.refresh_field('n2o');
 	
 			
-		});
-	},
+	// 	});
+	// },
 	
-	amount:function(frm,cdt,cdn){
-		// var code = frm.doc.code
-		var d = locals[cdt][cdn]
-		var quantity = d.amount; 
-			var ncv = d.ncv; 
-			var co2 = d.co2;
-			var ch4 = d.ch4;
-			var n2o = d.n2o;
+	// amount:function(frm,cdt,cdn){
+	// 	// var code = frm.doc.code
+	// 	var d = locals[cdt][cdn]
+	// 	var quantity = d.amount; 
+	// 		var ncv = d.ncv; 
+	// 		var co2 = d.co2;
+	// 		var ch4 = d.ch4;
+	// 		var n2o = d.n2o;
 			
-			var co2EmissionFactor = (quantity * ncv * co2) / ((10)**9);
-			var ch4EmissionFactor = (quantity * ncv * ch4) / ((10)**9);
-			var n2oEmissionFactor = (quantity * ncv * n2o) / ((10)**9);
+	// 		var co2EmissionFactor = (quantity * ncv * co2) / ((10)**9);
+	// 		var ch4EmissionFactor = (quantity * ncv * ch4) / ((10)**9);
+	// 		var n2oEmissionFactor = (quantity * ncv * n2o) / ((10)**9);
 	
-			frappe.model.set_value(cdt, cdn, "calculated_co2", co2EmissionFactor);
-			frappe.model.set_value(cdt, cdn, "calculated_ch4", ch4EmissionFactor);
-			frappe.model.set_value(cdt, cdn, "calculated_n2o", n2oEmissionFactor);
+	// 		frappe.model.set_value(cdt, cdn, "calculated_co2", co2EmissionFactor);
+	// 		frappe.model.set_value(cdt, cdn, "calculated_ch4", ch4EmissionFactor);
+	// 		frappe.model.set_value(cdt, cdn, "calculated_n2o", n2oEmissionFactor);
 	
-			frm.refresh_field('calculated_co2');
-			frm.refresh_field('calculated_ch4');
-			frm.refresh_field('calculated_n2o');
+	// 		frm.refresh_field('calculated_co2');
+	// 		frm.refresh_field('calculated_ch4');
+	// 		frm.refresh_field('calculated_n2o');
 		
-	}
+	// }
 });
 
 frappe.ui.form.on('IPPU Chemical ChildTable',{

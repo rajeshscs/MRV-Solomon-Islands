@@ -104,7 +104,7 @@ class GHGInventory(Document):
 
 						counter2 = 0
 						self.set(field["fieldname"],[])
-						for i in fields1:
+						for i in fields1:	
 							if counter2 == 0:
 								counter2 = 1
 								for j in old_doc.get(field["fieldname"]):
@@ -198,6 +198,21 @@ class GHGInventory(Document):
 						field_list.append(field["fieldname"])
 		return field_list
 	
+
+	@frappe.whitelist()
+	def table_name_list(self):
+		field_list=[]
+		meta = frappe.get_meta(self.doctype)
+		meta_dict = meta.as_dict()
+		fields = meta_dict["fields"]
+		for field in fields:
+			if field["fieldtype"] == "Table":
+				if field["fieldname"] not in ["ghg_inventory_details","edited_reference_approach","edited_electricity_generation","edited_manufacturing_industries","edited_transport","edited_other_sectors","edited_other_energy","edited_international_bunkers","edited_co2_emissions_from_biomass","edited_cement_production","edited_clinker_data","edited_lime_production","edited_chemical_industry","edited_lubricant_section","edited_lubricant_use","edited_section_break_shpf2","edited_other_ippu","edited_section_break_xabuv","edited_refrigeration","edited_foam_blowing_agents_section","edited_foam_blowing_agents","edited_fire_protection_section","edited_fire_protection","edited_aerosols_section","edited_aerosols","edited_solvents_section","edited_solvents","edited_other_applications_section","edited_other_applications","edited_section_break_jvzrb","edited_electrical_equipment","edited_sf6_and_pfcs_from_other_product_use_section","edited_sf6_and_pfcs_from_other_product_use","edited_n2o_from_product_uses_section","edited_n2o_from_product_uses","edited_other_section","edited_other_use","edited_section_break_7vpnb","edited_activity_data","edited_enteric_fermentation","edited_indirect_manure_management","edited_direct_emissions_mms","edited_direct_managed_soils","edited_atmospheric_deposit","edited_n2o_from_n_leaching","edited_activity_data_burning","edited_activity_data_agriculture","edited_urea_application","edited_forest_land","edited_cropland","edited_grassland","edited_wetlands","edited_settlements","edited_other_land","edited_harvested_wood_products","edited_biomass_burning","edited_solid_waste","edited_biological_treatment","edited_waste_incineration","edited_open_burning_of_waste","edited_ch4_wastewater_treatment","edited_n2o_wastewater_treatment","edited_industrial_wastewater_treatment","edited_other_wastewater_treatement","edited_other_waste","edited_other_sector"]:
+					if len(self.get(field["fieldname"])) != 0:
+						field_list.append(field["fieldname"])
+		return field_list
+
+
 	@frappe.whitelist()
 	def edited_table_list(self):
 		field_dict = {}
@@ -216,3 +231,21 @@ class GHGInventory(Document):
 								field_list.append(i["fieldname"])
 							field_dict[field["fieldname"]] = field_list
 		return field_dict
+
+	@frappe.whitelist()
+	def get_approvers(self):
+		doc= frappe.db.get_list("Role",
+			fields=['name'],
+			filters={
+				"name":["Like","%Approver%"]
+			},
+			pluck="name",
+			ignore_permissions=True)
+		return doc
+
+
+
+# @frappe.whitelist()
+# def custom_sql_query(doc,doc_name,tablefields):
+# 	pass
+	

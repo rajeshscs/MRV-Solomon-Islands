@@ -261,7 +261,7 @@
    "options": "Urea Application ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.1.  Direct N2O emissions from managed soils'",
+   "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.D. Agricultural soils'&&doc.sub_sector=='3.D.1. Direct N2O emissions from managed soils'",
    "fieldname": "direct_managed_soils",
    "fieldtype": "Table",
    "label": "Direct N2O emissions from managed soils",
@@ -303,7 +303,7 @@
    "options": "Industrial Wastewater Treatment and Discharge ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D.  Non-Energy Products from Fuels and Solvent Use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.D. Non-Energy Products from Fuels and Solvent Use'",
    "fieldname": "lubricant_use",
    "fieldtype": "Table",
    "options": "Lubricant Data ChildTable"
@@ -405,25 +405,25 @@
    "options": "IPPU Ozone ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G. Other product manufacture and use'",
    "fieldname": "electrical_equipment",
    "fieldtype": "Table",
    "options": "IPPU Ozone ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G. Other product manufacture and use'",
    "fieldname": "sf6_and_pfcs_from_other_product_use",
    "fieldtype": "Table",
    "options": "IPPU Ozone ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G. Other product manufacture and use'",
    "fieldname": "n2o_from_product_uses",
    "fieldtype": "Table",
-   "options": "IPPU Ozone ChildTable"
+   "options": "N2O Product Use ChildTable"
   },
   {
-   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G.  Other product manufacture and use'",
+   "depends_on": "eval:doc.sector=='2. Industrial processes and product use' && doc.category == '2.G. Other product manufacture and use'",
    "fieldname": "other_use",
    "fieldtype": "Table",
    "options": "IPPU Ozone ChildTable"
@@ -447,14 +447,14 @@
    "fieldname": "activity_data_burning",
    "fieldtype": "Table",
    "label": "Activity Data",
-   "options": "AFOLU Prescribed Burning ChildTable"
+   "options": "AFOLU Prescribed Burning of Savannah ChildTable"
   },
   {
    "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.F. Field burning of agricultural residues'",
    "fieldname": "activity_data_agriculture",
    "fieldtype": "Table",
    "label": "Activity Data",
-   "options": "AFLOU Agricultural Residues ChildTable"
+   "options": "AFOLU Agriculture Residue Burning ChildTable"
   },
   {
    "depends_on": "eval:doc.sector == '4. LAND USE, LAND-USE CHANGE AND FORESTRY' && doc.category == '4.B. Cropland'",
@@ -949,7 +949,7 @@
    "fieldname": "edited_activity_data_burning",
    "fieldtype": "Table",
    "label": "Activity Data",
-   "options": "AFOLU Prescribed Burning ChildTable",
+   "options": "AFOLU Agriculture Residue Burning ChildTable",
    "read_only": 1
   },
   {
@@ -957,7 +957,7 @@
    "fieldname": "edited_activity_data_agriculture",
    "fieldtype": "Table",
    "label": "Activity Data",
-   "options": "AFLOU Agricultural Residues ChildTable",
+   "options": "AFOLU Prescribed Burning of Savannah ChildTable",
    "read_only": 1
   },
   {
@@ -1133,44 +1133,52 @@
   },
   {
    "fieldname": "section_break_cfvgj",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "cumulative_co2",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Cumulative CO2"
   },
   {
    "fieldname": "column_break_wijty",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_nlsyk",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_aybe8",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "total_co2",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Total CO2"
   },
   {
    "fieldname": "cumulative_ch4",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Cumulative CH4"
   },
   {
    "fieldname": "cumulative_n2o",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Cumulative N2O"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-27 11:40:10.895032",
+ "modified": "2023-11-08 21:19:32.387771",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

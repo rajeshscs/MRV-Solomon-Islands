@@ -40,6 +40,7 @@
    "label": "Subcategory"
   },
   {
+   "default": "0",
    "fieldname": "area_burnt",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -47,6 +48,7 @@
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "fuel_available_for_combustion",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -54,6 +56,7 @@
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "combustion_factor",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -61,6 +64,7 @@
    "precision": "1"
   },
   {
+   "default": "0",
    "fieldname": "efco2",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -68,6 +72,7 @@
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "efn2o",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -75,6 +80,7 @@
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "efch4",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -91,7 +97,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-14 19:33:57.398023",
+ "modified": "2023-11-09 12:37:36.345365",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "AFOLU Biomass Burning ChildTable",

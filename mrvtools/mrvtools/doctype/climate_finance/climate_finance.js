@@ -2,7 +2,41 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Climate Finance', {
+	workflow_state:function(frm){
+		console.log("Ready..");
+		
+			$(document).ready(function() {
+				// Select the node that will be observed for mutations
+				var targetNode = document.querySelector('.indicator-pill');
+			
+				// Options for the observer (which mutations to observe)
+				var config = { attributes: true, attributeFilter: ['class'] };
+			
+				// Callback function to execute when mutations are observed
+				var callback = function(mutationsList, observer) {
+					for(var mutation of mutationsList) {
+						if (mutation.type === 'attributes') {
+							if (targetNode.classList.contains('orange')) {
+								frm.clear_custom_buttons();
+							}
+						}
+					}
+				};
+			
+				// Create an observer instance linked to the callback function
+				var observer = new MutationObserver(callback);
+			
+				// Start observing the target node for configured mutations
+				observer.observe(targetNode, config);
+			});
+		
+	},
 	refresh: function(frm){
+		$('[id="page-Climate Finance"]').find('.actions-btn-group').hide();
+		setTimeout(function() {
+			$('[id="climate-finance-tab_break_eii2f-tab"]').click()
+			$('[id="climate-finance-tab_break_eii2f"]').addClass("active show")
+		})
 		$(document).ready(function() {
 			// Select the node that will be observed for mutations
 			var targetNode = document.querySelector('.indicator-pill');
@@ -157,56 +191,64 @@ frappe.ui.form.on('Climate Finance', {
 	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
 	// }
 
-	if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+	
 
-		$('[id="page-Climate Finance"]').find('.actions-btn-group').hide();
-		
-	}else{
-		$('[id="page-Climate Finance"]').find('.actions-btn-group').show();
-
-	}
 	if (frm.doc.work_state == "Approved"){
 		cur_frm.fields_dict.project_id.df.read_only = 1
 		cur_frm.fields_dict.select_approver.df.read_only = 1
 	}
+	if(frm.doc.work_state == "Rejected"){
+		if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+			console.log("Draft");
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+	}
+
+	if(frm.doc.work_state == "Rejected"){
+		if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+			frm.set_value("work_state","Rejected")
+			frm.save()
+		}
+	}
 	
-	if (frm.doc.work_state == '' && !frm.doc.__islocal){
-		if (frm.doc.workflow_state == "Pending") {
-			frm.set_value("work_state","Pending")
-			frm.save()
-		}
-	}
-	else if(frm.doc.work_state == "Pending"){
-		console.log(frm.doc.work_state);
-		if (frm.doc.workflow_state == "Rejected"){
-			frm.set_value("work_state","Rejected")
-			frm.save()
-		}
-		else if(frm.doc.workflow_state == "Approved"){
-			frm.set_value("work_state","Approved")
-			frm.save()
-		}
-	}
-	else if(frm.doc.work_state == "Rejected"){
-		if (frm.doc.workflow_state == "Draft"){
-			frm.set_value("work_state","Rejected")
-			frm.save()
-		}
-		else if(frm.doc.workflow_state == "Approved"){
-			// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
-			frm.set_value("work_state","Approved")
-			frm.save()
-		}
-		else if(frm.doc.workflow_state == "Rejected"){
-			// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-			frm.set_value("work_state","Rejected")
-			frm.save()
-		}
-		else if(frm.doc.workflow_state == "Pending"){
-			frm.set_value("work_state","Rejected")
-			frm.save()
-		}
-	}
+	// if (frm.doc.work_state == '' && !frm.doc.__islocal){
+	// 	if (frm.doc.workflow_state == "Pending") {
+	// 		frm.set_value("work_state","Pending")
+	// 		frm.save()
+	// 	}
+	// // }
+	// else if(frm.doc.work_state == "Pending"){
+	// 	console.log(frm.doc.work_state);
+	// 	if (frm.doc.workflow_state == "Rejected"){
+	// 		frm.set_value("work_state","Rejected")
+	// 		frm.save()
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Approved"){
+	// 		frm.set_value("work_state","Approved")
+	// 		frm.save()
+	// 	}
+	// }
+	// else if(frm.doc.work_state == "Rejected"){
+	// 	if (frm.doc.workflow_state == "Draft"){
+	// 		frm.set_value("work_state","Rejected")
+	// 		frm.save()
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Approved"){
+	// 		// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
+	// 		frm.set_value("work_state","Approved")
+	// 		frm.save()
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Rejected"){
+	// 		// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
+	// 		frm.set_value("work_state","Rejected")
+	// 		frm.save()
+	// 	}
+	// 	else if(frm.doc.workflow_state == "Pending"){
+	// 		frm.set_value("work_state","Rejected")
+	// 		frm.save()
+	// 	}
+	// }
 
 	if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 		frm.add_custom_button('Approve',()=>{
@@ -235,7 +277,7 @@ frappe.ui.form.on('Climate Finance', {
 
 		
 	}
-	else if(frm.doc.workflow_state == "Approved"){
+	else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
 		frm.add_custom_button('Edit',()=>{
 			frappe.confirm('Are you sure you want to proceed?',
 				() => {
@@ -249,7 +291,7 @@ frappe.ui.form.on('Climate Finance', {
 
 			},"Actions")
 	}
-	else if(frm.doc.workflow_state == "Draft"){
+	else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
 		frm.add_custom_button('Send for Approval',()=>{
 			frappe.confirm('Are you sure you want to proceed?',
 				() => {
@@ -262,13 +304,28 @@ frappe.ui.form.on('Climate Finance', {
 			})
 			
 		},"Actions")
-	}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+	}
+	else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
+		frm.add_custom_button('Edit',()=>{
+			frappe.confirm('Are you sure you want to proceed?',
+				() => {
+					frm.set_value("workflow_state","Draft")
+					frm.refresh_field("workflow_state")
+					console.log(frm.doc.workflow_state);
+					frm.save()
+				}, () => {
+
+				})
+
+			},"Actions")
+	}
+	$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
-		if (frm.doc.work_state == "Approved"){
-			cur_frm.fields_dict.project_id.df.read_only = 1
-			cur_frm.fields_dict.select_approver.df.read_only = 1
-		}
+		// if (frm.doc.work_state == "Approved"){
+		// 	cur_frm.fields_dict.project_id.df.read_only = 1
+		// 	cur_frm.fields_dict.select_approver.df.read_only = 1
+		// }
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_sources_of_finance.length != 0){
 			frm.fields_dict.sources_of_finance.df.read_only = 1
@@ -343,72 +400,13 @@ frappe.ui.form.on('Climate Finance', {
 		  }
 		})
 
-		if (frm.doc.workflow_state == "Rejected"){
-			frm.set_value("edited_project_details",[])
-			frm.set_value("actual_sources_of_finance",[])
-			frm.set_value("actual_cost_breakdown",[])
-			frm.set_value("actual_budget_disbursement_schedule",[])
-			frm.set_value("edited_sources_of_finance",[])
-			frm.set_value("edited_cost_breakdown",[])
-			frm.set_value("edited_budget_disbursement_schedule",[])
-			// frm.set_value("workflow_state","Approved")
-			// frm.set_value('work_state','Approved')
-		}
-
-		if ((frm.doc.workflow_state == "Approved")){
-			for (var i of frm.doc.edited_project_details){
-					frm.set_value(i.field_name,i.new_values)
-			}
-			if(frm.doc.edited_sources_of_finance.length != 0){
-				frm.set_value("sources_of_finance",[])
-				for(var i of frm.doc.edited_sources_of_finance){
-					var row = frm.add_child("sources_of_finance")
-					row.type = i.type
-					row.national_international = i.national_international
-					row.amount = i.amount
-					row.channels = i.channels
-					row.agency_name = i.agency_name
-					row.country = i.country
-				}
-				frm.refresh_field("sources_of_finance")
-			}
-			if(frm.doc.edited_cost_breakdown.length != 0){
-				frm.set_value("cost_breakdown",[])
-				for(var i of frm.doc.edited_cost_breakdown){
-					var row = frm.add_child("cost_breakdown")
-					row.disbursement_category = i.disbursement_category
-					row.amount = i.amount
-					row.percentage = i.percentage
-				}
-				frm.refresh_field("cost_breakdown")
-			}
-			
-			if(frm.doc.edited_budget_disbursement_schedule.length != 0){
-				frm.set_value("budget_disbursement_schedule",[])
-				for(var i of frm.doc.edited_budget_disbursement_schedule){
-					var row = frm.add_child("budget_disbursement_schedule")
-					row.financial_year = i.financial_year
-					row.amount = i.amount
-					row.percentage = i.percentage
-				}
-				frm.refresh_field("budget_disbursement_schedule")
-			}
-			frm.set_value("edited_project_details",[])
-			frm.set_value('work_state','Approved')
-			frm.set_value("actual_sources_of_finance",[])
-			frm.set_value("actual_cost_breakdown",[])
-			frm.set_value("actual_budget_disbursement_schedule",[])
-			frm.set_value("edited_sources_of_finance",[])
-			frm.set_value("edited_cost_breakdown",[])
-			frm.set_value("edited_budget_disbursement_schedule",[])
-			frm.save()
-		}
 		
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$('[id="climate-finance-tab_break_eii2f-tab"]').addClass("active")
-			$('#climate-finance-tab_break_eii2f-tab').attr('aria-selected', 'true');
-			$('[id="climate-finance-tab_break_eii2f"]').addClass("active")
-		}
+		
+		// if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
+		// 	$('[id="climate-finance-tab_break_eii2f-tab"]').addClass("active")
+		// 	$('#climate-finance-tab_break_eii2f-tab').attr('aria-selected', 'true');
+		// 	$('[id="climate-finance-tab_break_eii2f"]').addClass("active")
+		// }
 		
 
 	},
@@ -463,10 +461,99 @@ frappe.ui.form.on('Climate Finance', {
 	},
 
 	before_save:function(frm){
+		setTimeout(function() {
+			$('[id="climate-finance-tab_break_eii2f-tab"]').click()
+			$('[id="climate-finance-tab_break_eii2f"]').addClass("active show")
+		})
+		
+
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+		if (frm.doc.workflow_state == "Rejected"){
+			frm.set_value("edited_project_details",[])
+			frm.set_value("actual_sources_of_finance",[])
+			frm.set_value("actual_cost_breakdown",[])
+			frm.set_value("actual_budget_disbursement_schedule",[])
+			frm.set_value("edited_sources_of_finance",[])
+			frm.set_value("edited_cost_breakdown",[])
+			frm.set_value("edited_budget_disbursement_schedule",[])
+			// frm.set_value("workflow_state","Approved")
+			// frm.set_value('work_state','Approved')
+		}
+		if ((frm.doc.workflow_state == "Approved")){
+			for (var i of frm.doc.edited_project_details){
+					frm.set_value(i.field_name,i.new_values)
+			}
+			if(frm.doc.edited_sources_of_finance.length != 0){
+				frm.set_value("sources_of_finance",[])
+				for(var i of frm.doc.edited_sources_of_finance){
+					var row = frm.add_child("sources_of_finance")
+					row.type = i.type
+					row.national_international = i.national_international
+					row.amount = i.amount
+					row.channels = i.channels
+					row.agency_name = i.agency_name
+					row.country = i.country
+				}
+				frm.refresh_field("sources_of_finance")
+			}
+			if(frm.doc.edited_cost_breakdown.length != 0){
+				frm.set_value("cost_breakdown",[])
+				for(var i of frm.doc.edited_cost_breakdown){
+					var row = frm.add_child("cost_breakdown")
+					row.disbursement_category = i.disbursement_category
+					row.amount = i.amount
+					row.percentage = i.percentage
+				}
+				frm.refresh_field("cost_breakdown")
+			}
+			
+			if(frm.doc.edited_budget_disbursement_schedule.length != 0){
+				frm.set_value("budget_disbursement_schedule",[])
+				for(var i of frm.doc.edited_budget_disbursement_schedule){
+					var row = frm.add_child("budget_disbursement_schedule")
+					row.financial_year = i.financial_year
+					row.amount = i.amount
+					row.percentage = i.percentage
+				}
+				frm.refresh_field("budget_disbursement_schedule")
+			}
+			frm.set_value("edited_project_details",[])
+			frm.set_value('work_state','Approved')
+			frm.set_value("actual_sources_of_finance",[])
+			frm.set_value("actual_cost_breakdown",[])
+			frm.set_value("actual_budget_disbursement_schedule",[])
+			frm.set_value("edited_sources_of_finance",[])
+			frm.set_value("edited_cost_breakdown",[])
+			frm.set_value("edited_budget_disbursement_schedule",[])
+			// frm.save()
+		}
+		
+
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				if(frm.doc.actual_sources_of_finance.length == 0 ||frm.doc.actual_cost_breakdown.length == 0 || frm.doc.actual_budget_disbursement_schedule.length == 0   ){
-					window.location.href = `${frm.doc.name}`
+					// window.location.href = `${frm.doc.name}`
 				}
 				if(frm.fields_dict.sources_of_finance.df.read_only == 0){
 					frm.call({
@@ -474,6 +561,8 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table1",
 						async:false,
 						callback:function(r){
+							
+					
 
 						}
 					})
@@ -485,6 +574,8 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table2",
 						async:false,
 						callback:function(r){
+							
+					
 
 						}
 					})
@@ -496,6 +587,8 @@ frappe.ui.form.on('Climate Finance', {
 						method:"before_saving_table3",
 						async:false,
 						callback:function(r){
+							
+					
 
 						}
 					})
@@ -552,6 +645,11 @@ frappe.ui.form.on('Climate Finance', {
 
 			}
 		}
+		setTimeout(function() {
+			$('[id="climate-finance-tab_break_eii2f-tab"]').click()
+			$('[id="climate-finance-tab_break_eii2f"]').addClass("active show")
+		})	 
+
 	},
 	project_id:function(frm){
 		frappe.db.get_value('Project',`${frm.doc.project_id}`,'financial_closure_date').then(r =>

@@ -6,6 +6,11 @@ import frappe,json
 from frappe.model.document import Document
 
 class Adaptation(Document):
+
+	@frappe.whitelist()
+	def save_doc(self):
+		self.save(ignore_permissions=True) 
+
 	@frappe.whitelist()
 	def getValues(self):
 		docs = frappe.db.get_all("Master Data ChildTable",

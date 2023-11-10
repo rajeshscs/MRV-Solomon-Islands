@@ -1,5 +1,5 @@
 /* Main */
- body {
+body {
 	font-size: 14px;
 	background-color:#eff2f5;
 }
@@ -17,7 +17,7 @@
 
 /* Navigation Bar */
 .navbar.navbar-expand.sticky-top {
-    background:  #b10176;
+    background:  linear-gradient(to right, #691551, #e0c7d6bf);
     border: none;
 }
 .content.page-container{
@@ -35,8 +35,30 @@
 .col-lg-2.layout-side-section{
 	background-color:#eff2f5}
 .widget.number-widget-box{
-	background-color:teal
+	background-color:#007c46;
+	background-image: url("/files/Group 4.png");
+	background-repeat: no-repeat;
+	background-position: right buttom;
+	color:white;
 }
+.widget.number-widget-box:hover{
+	background-color:#ffc107 !important;
+	background-image: url("/files/Group 4.png");
+	background-repeat: no-repeat;
+	background-position: right buttom;
+	color:white;
+}
+
+.ellipsis{
+	color:rgb(0, 0, 0)
+}
+.percentage-stat-area{
+	color: white !important
+}
+.stat-period.text-muted{
+	color: white !important
+}
+
 .widget.shortcut-widget-box{
 	background-color:#e7f2fd
 }

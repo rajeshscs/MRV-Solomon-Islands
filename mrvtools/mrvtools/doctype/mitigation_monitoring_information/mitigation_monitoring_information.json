@@ -32,7 +32,7 @@
   "expected_project_output",
   "expected_annual_ghg",
   "actual_annual_ghg",
-  "ghg_estimation_methodology_text",
+  "ghg_estimation_methodology",
   "ghg_estimation_methodology_file",
   "column_break_pgchz",
   "key_sector",
@@ -150,12 +150,6 @@
    "fieldtype": "Data",
    "label": "Registered With Market Based Mechanism",
    "read_only": 1
-  },
-  {
-   "fieldname": "ghg_estimation_methodology_text",
-   "fieldtype": "Data",
-   "label": "GHG Estimation Methodology",
-   "reqd": 1
   },
   {
    "fieldname": "ghg_estimation_methodology_file",
@@ -375,11 +369,17 @@
    "hidden": 1,
    "label": "Project",
    "read_only": 1
+  },
+  {
+   "fieldname": "ghg_estimation_methodology",
+   "fieldtype": "Data",
+   "label": "GHG Estimation Methodology",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-24 19:02:46.430764",
+ "modified": "2023-11-09 21:16:38.869088",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",

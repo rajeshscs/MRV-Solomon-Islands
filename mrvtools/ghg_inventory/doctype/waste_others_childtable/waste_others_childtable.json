@@ -15,26 +15,34 @@
  ],
  "fields": [
   {
+   "default": "0",
    "fieldname": "amount_of_waste_generated",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Amount of waste generated/treated  (tonnes)",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_co2",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Emission factor  (ton CO2/ton of waste)",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_ch4",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Emission factor  (ton CH4/ton of waste)",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "emission_factor_n2o",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Emission factor  (ton N2O/ton of waste)",
    "precision": "2"
   },
@@ -47,7 +55,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-07 18:55:07.224595",
+ "modified": "2023-11-09 12:35:22.102784",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Waste Others ChildTable",

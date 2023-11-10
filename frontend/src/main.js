@@ -15,12 +15,7 @@ import {
 
 let app = createApp(App)
 
-
-
-
 AOS.init();
-
-
 
 setConfig('resourceFetcher', frappeRequest)
 

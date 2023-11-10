@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { session } from './data/session'
 // import { userResource } from '@/data/user'
 
+
 const routes = [
   {
     path:"",
@@ -19,41 +20,62 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: () => import('@/pages/Home.vue'),
+    meta: {
+      title: 'MRV Tool'
+    }
   },
   {
     name: 'Login',
     path: '/account/login',
     component: () => import('@/pages/Login.vue'),
+    meta: {
+      title: 'Login'
+    }
   },
-  {
-    name: 'Landing',
-    path: '/landing',
-    component: () => import('@/pages/Landing.vue'),
-  },
+  // {
+  //   name: 'Landing',
+  //   path: '/landing',
+  //   component: () => import('@/pages/Landing.vue'),
+  //   meta: {
+  //     title: 'Landing'
+  //   }
+  // },
   {
     name: 'About',
     path: '/about',
     component: () => import('@/pages/About.vue'),
+    meta: {
+      title: 'About MRV'
+    }
   },
-  {
-    name: 'AboutPage',
-    path: '/aboutpage',
-    component: () => import('@/pages/AboutPage.vue'),
-  },
+  // {
+  //   name: 'AboutPage',
+  //   path: '/aboutpage',
+  //   component: () => import('@/pages/AboutPage.vue'),
+  // },
   {
     name: 'Project',
     path: '/project',
     component: () => import('@/pages/Projects.vue'),
+    meta: {
+      title: 'MRV Project'
+    }
   },
   {
     name: 'Reports',
     path: '/reports',
     component: () => import('@/pages/Reports.vue'),
+    meta: {
+      title: 'MRV Report'
+    }
   },
   {
     name: 'KnowledgeResource',
     path: '/knowledgeresource',
     component: () => import('@/pages/KnowledgeResource.vue'),
+    meta: {
+      title: 'Knowledge Resource'
+    }
   },
 ]
 
@@ -71,21 +93,26 @@ let router = createRouter({
   }
 })
 
-// router.beforeEach(async (to, from, next) => {
-//   let isLoggedIn = session.isLoggedIn
-//   // try {
-//   //   await userResource.promise
-//   // } catch (error) {
-//   //   isLoggedIn = false
-//   // }
+router.beforeEach(async (to, from, next) => {
+  let isLoggedIn = session.isLoggedIn
+  try {
+    await userResource.promise
+  } catch (error) {
+    isLoggedIn = true
+  }
 
-//   if (to.name === 'Login' && isLoggedIn) {
-//     next({ name: 'Landing' })
-//   } else if (to.name !== 'Login' && !isLoggedIn) {
-//     next({ name: 'Login' })
-//   } else {
-//     next()
-//   }
-// })
+  if (to.name === 'Login' && isLoggedIn) {
+    next({ name: 'Home' })
+  } else if (to.name !== 'Login' && !isLoggedIn) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
+})
+
+
+router.beforeEach((to, from) => {
+  document.title = to.meta?.title ?? 'MRV Tool'
+})
 
 export default router

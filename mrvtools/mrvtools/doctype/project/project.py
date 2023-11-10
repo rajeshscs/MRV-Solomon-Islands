@@ -4,6 +4,10 @@
 import frappe
 from frappe.model.document import Document
 class Project(Document):
+
+	def on_update(self):
+		self.reload()
+
 	@frappe.whitelist()
 	def get_user(self):
 		doc = frappe.db.sql(f""" SELECT parent FROM `tabHas Role` WHERE role = 'Approver Project'""")

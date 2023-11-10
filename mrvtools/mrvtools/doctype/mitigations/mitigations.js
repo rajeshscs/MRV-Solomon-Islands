@@ -2,6 +2,35 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Mitigations', {
+	workflow_state:function(frm){
+		console.log("Ready..");
+		
+			$(document).ready(function() {
+				// Select the node that will be observed for mutations
+				var targetNode = document.querySelector('.indicator-pill');
+			
+				// Options for the observer (which mutations to observe)
+				var config = { attributes: true, attributeFilter: ['class'] };
+			
+				// Callback function to execute when mutations are observed
+				var callback = function(mutationsList, observer) {
+					for(var mutation of mutationsList) {
+						if (mutation.type === 'attributes') {
+							if (targetNode.classList.contains('orange')) {
+								frm.clear_custom_buttons();
+							}
+						}
+					}
+				};
+			
+				// Create an observer instance linked to the callback function
+				var observer = new MutationObserver(callback);
+			
+				// Start observing the target node for configured mutations
+				observer.observe(targetNode, config);
+			});
+		
+	},
 	project_id: function(frm) {
 		if(!frm.doc.included_in && frm.doc.project_id){
 			frm.call({
@@ -44,6 +73,13 @@ frappe.ui.form.on('Mitigations', {
 
 	
 	refresh: function(frm){
+
+
+		$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
+		setTimeout(function() {
+			$('[id="mitigations-tab1-tab"]').click()
+			$('[id="mitigations-tab1"]').addClass("active show")
+		})
 		///////////////////////////////////
 		$(document).ready(function() {
 			// Select the node that will be observed for mutations
@@ -77,8 +113,6 @@ frappe.ui.form.on('Mitigations', {
 			async:false,
 			callback:function(r){
 				if(frm.doc.workflow_state == "Pending"){
-					console.log(r.message);
-					console.log(frappe.user_roles);
 					for (let i of r.message){
 						if (frappe.session.user != "Administrator"){
 
@@ -92,127 +126,35 @@ frappe.ui.form.on('Mitigations', {
 			}
 		})
 		
-		// $(document).ready(function(){
-			// $('[data-fieldname]').on({
-			// 	keyup:function(){
-			// 		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			// 		$('.primary-action').removeClass('hide');
-			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-			// 		frm.dirty()
-			// 	},
-			// 	click:function(){
-			// 		$('[data-fieldname]').on("focus",function(){
+
+					// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+					// 	$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
 						
-			// 			$('[data-fieldname]').on("click",function(){
-			// 				// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			// 				$('.primary-action').removeClass('hide')
-			// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-			// 				frm.dirty()
-			// 			})
-			// 		})
-			// 	},
-				
-			// 	change:function(){
-			// 		$('[data-fieldtype = "Select"]').on("change",function(){
-			// 			// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			// 			$('.primary-action').removeClass('hide')
-			// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-			// 			frm.dirty()
-			// 		})
-			// 	}
-			// });
-
-			// $('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-			// 	// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-			// 	$('.primary-action').removeClass('hide')
-			// 	$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-			// 	frm.dirty()
-			// })
-			// $('[data-fieldtype="Link"]').on("click", function() {
-			// 	var hide = true;
-			// 	if(hide){
-			// 		// $('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-			// 		$('.primary-action').removeClass('hide')
-			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-			// 		frm.dirty()
-			// 	}
-			// 	else{
-			// 		$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-			// 	}
-			// });	
-			// $('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
-
-			// 	$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-			// 		var hide = true;
-			// 		if(hide){
-			// 		$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-			// 		$('.primary-action').removeClass('hide')
-			// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-			// 		frm.dirty()
-			// 		}
-			// 		else{
-			// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-			// 		}
-			// 	});
-	
-			// });
-
-			// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		// });
-	
-				// if (frm.doc.__islocal == 1) {
-				// 	// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>');
-				// }
-
-				if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-				
-					$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
-						
-					}else{
-						$('[id="page-Mitigations"]').find('.actions-btn-group').show();
-					}
+					// }else{
+					// 	$('[id="page-Mitigations"]').find('.actions-btn-group').show();
+					// }
 			
 					if (frm.doc.work_state == "Approved"){
 						cur_frm.fields_dict.project_id.df.read_only = 1
 						cur_frm.fields_dict.select_approver.df.read_only = 1
 					}
 					
-					if (frm.doc.work_state == '' && !frm.doc.__islocal){
-						if (frm.doc.workflow_state == "Pending") {
-							frm.set_value("work_state","Pending")
-							frm.save()
-						}
-					}
-					else if(frm.doc.work_state == "Pending"){
-						console.log(frm.doc.work_state);
-						if (frm.doc.workflow_state == "Rejected"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
-					}
-					else if(frm.doc.work_state == "Rejected"){
-						if (frm.doc.workflow_state == "Draft"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Approved"){
-							frm.set_value("work_state","Approved")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Rejected"){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-						else if(frm.doc.workflow_state == "Pending"){
+					if(frm.doc.work_state == "Rejected"){
+						if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+							console.log("Draft");
 							frm.set_value("work_state","Rejected")
 							frm.save()
 						}
 					}
-			
+
+					if(frm.doc.work_state == "Rejected"){
+						if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+							frm.set_value("work_state","Rejected")
+							frm.save()
+						}
+					}
+					
+					
 					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
 						frm.add_custom_button('Approve',()=>{
 							frappe.confirm('Are you sure you want to proceed?',
@@ -267,7 +209,22 @@ frappe.ui.form.on('Mitigations', {
 							})
 							
 						},"Actions")
-					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+					}
+					else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
+						frm.add_custom_button('Edit',()=>{
+							frappe.confirm('Are you sure you want to proceed?',
+								() => {
+									frm.set_value("workflow_state","Draft")
+									frm.refresh_field("workflow_state")
+									console.log(frm.doc.workflow_state);
+									frm.save()
+								}, () => {
+				
+								})
+				
+							},"Actions")
+					}
+					$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_performance_indicator.length != 0){
@@ -332,13 +289,119 @@ frappe.ui.form.on('Mitigations', {
 
 
 
-		if (frm.doc.workflow_state == "Rejected"){
+		
+		// if(frm.doc.workflow_state == "Approved"){
+		// 	if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
+		// 		for (var i of frm.doc.edited_project_details){
+
+		// 			if(i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
+		// 				frm.set_value(i.field_name,i.new_values)
+		// 			}
+					
+		// 			else if(i.field_name == "non_ghg_mitigation_benefits"){
+
+		// 				var new_list = i.new_values.split(",")
+
+		// 				frm.clear_table("non_ghg_mitigation_benefits")
+		// 				for (var value of new_list){
+		// 					var row = frm.add_child("non_ghg_mitigation_benefits")
+		// 					row.non_ghg_mitigation_benefits = value
+
+
+
+		// 				}
+		// 			}
+
+		// 			else if(i.field_name == "target_ghgs"){
+
+		// 				var new_list = i.new_values.split(",")
+
+		// 				frm.clear_table("target_ghgs")
+		// 				for (var value of new_list){
+		// 					var row = frm.add_child("target_ghgs")
+		// 					row.target_ghgs = value
+
+
+
+		// 				}
+		// 			}
+					
+		// 		}
+
+		// 		if(frm.doc.edited_performance_indicator.length != 0){
+		// 			frm.set_value("performance_indicator",[])
+		// 			for(var i of frm.doc.edited_performance_indicator){
+		// 				var child = frm.add_child("performance_indicator")
+		// 				child.performance_indicator = i.performance_indicator
+		// 				child.unit = i.unit
+		// 				child.expected_value = i.expected_value
+		// 				child.reference = i.reference
+		// 			}
+					
+		// 			frm.refresh_field("performance_indicator")
+		// 		}
+		// 		frm.set_value("edited_project_details",[])
+		// 		frm.set_value("edited_performance_indicator",[])
+		// 		frm.refresh_field("edited_performance_indicator")
+		// 	}
+		// 	frm.set_value("original_performance_indicator",[])
+		// 	frm.set_value('work_state','Approved')
+		// 	if(frm.is_dirty()){
+		// 		console.log("Unsaved.....");
+		// 		frm.save()
+		// 	}
+		// 	// frm.save()
+		// }
+
+		
+	},
+
+
+
+
+	
+
+
+	before_save:function(frm){
+		setTimeout(function() {
+			$('[id="mitigations-tab1-tab"]').click()
+			$('[id="mitigations-tab1"]').addClass("active show")
+		})
+
+
+
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+
+		if (frm.doc.workflow_state == "Rejected" && frm.doc.work_state == "Approved"){
 			frm.set_value("edited_project_details",[])
 			frm.set_value("edited_performance_indicator",[])
 			frm.set_value("original_performance_indicator",[])
 		}
-		if(frm.doc.workflow_state == "Approved"){
-			if (frm.doc.workflow_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
+
+		if(frm.doc.workflow_state == "Approved"){ 
+			if (frm.doc.work_state == "Approved"  && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
 				for (var i of frm.doc.edited_project_details){
 
 					if(i.field_name != "non_ghg_mitigation_benefits" && i.field_name != "target_ghgs"){
@@ -393,25 +456,17 @@ frappe.ui.form.on('Mitigations', {
 			}
 			frm.set_value("original_performance_indicator",[])
 			frm.set_value('work_state','Approved')
-			frm.save()
+			// if(frm.is_dirty()){
+			// 	console.log("Unsaved.....");
+			// 	frm.save()
+			// }
+			// frm.save()
 		}
 
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-			$('[id="mitigations-tab1"]').addClass("active")
-		}
-	},
-
-
-
-
-	
-
-
-	before_save:function(frm){
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
 				if(frm.doc.original_performance_indicator.length == 0){
-					window.location.href = `${frm.doc.name}`
+					// window.location.href = `${frm.doc.name}`
 				}
 
 				
@@ -598,6 +653,10 @@ frappe.ui.form.on('Mitigations', {
 				
 			}
 		}
+		setTimeout(function() {
+			$('[id="mitigations-tab1-tab"]').click()
+			$('[id="mitigations-tab1"]').addClass("active show")
+		})
 	}
 });
 function toTitleCase(str) {
