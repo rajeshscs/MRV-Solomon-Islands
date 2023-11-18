@@ -40,7 +40,7 @@
   
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://192.168.0.183:8189/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
+      const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
       
       if (response.status === 200) {
         data.value = response.data;
