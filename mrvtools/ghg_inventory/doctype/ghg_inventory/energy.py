@@ -1,33 +1,46 @@
 import frappe
+import json
 # from frappe.model.document import Document
 
 @frappe.whitelist()
 def energy_calculation(doc,doc_name,tablefields):
 
 	document = frappe.get_doc(doc,doc_name)
-	if frappe.db.exists("GHG Inventory Master Report", document.year):
-		report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
-		calculation_part(tablefields,document,report_doc)
-	else:
-		# Create a new GHG Inventory Master Report if it does not exist
-		report_doc = frappe.get_doc({
-			"doctype": "GHG Inventory Master Report",
-			"year": document.year
-		})
-		category_list = frappe.db.get_list('GHG Inventory Report Categories', 
-				fields= ['category_name','display_order'],
-				limit = 500,
-				order_by ='display_order asc'
-			)
-		for i in category_list:
-			report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
-		report_doc.insert()
-		calculation_part(tablefields,document,report_doc)
-
+	frappe.log_error(document.year,document.name)
+	tables_lst = tablefields
+	if type(tablefields)==str:
+		tables_lst = json.loads(tablefields)
+	tab_fields = []
+	for tf in tables_lst:
+		if document.get(tf):
+			if len(document.get(tf))>0:
+				tab_fields.append(tf)
+	
+	if document.workflow_state == "Approved" and tab_fields:
+		tab_fields = str(tab_fields)
+	
+		if frappe.db.exists("GHG Inventory Master Report", document.year):
+			report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
+			calculation_part(tab_fields,document,report_doc)
+		else:
+			# Create a new GHG Inventory Master Report if it does not exist
+			report_doc = frappe.get_doc({
+				"doctype": "GHG Inventory Master Report",
+				"year": document.year
+			})
+			category_list = frappe.db.get_list('GHG Inventory Report Categories', 
+					fields= ['category_name','display_order'],
+					limit = 500,
+					order_by ='display_order asc'
+				)
+			for i in category_list:
+				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
+			report_doc.insert()
+			calculation_part(tab_fields,document,report_doc)
 
 
 def calculation_part(tablefields,document,report_doc):
-	if(tablefields != []): 
+	if(tablefields != ""): 
 		table_str = str(tablefields)
 		table_str = table_str[1:-1]
 		table_str = "(" + table_str + ")"
@@ -51,9 +64,9 @@ def calculation_part(tablefields,document,report_doc):
 			else:
 				gwp_methane += float(g.gwp)
 		# return result,tablefields
-		for i in result: 
+		for i in result:
 			# return i
-			q=[]  
+			q=[]
 			sum_co2=0
 			sum_ch4=0
 			sum_n2o=0
@@ -65,6 +78,7 @@ def calculation_part(tablefields,document,report_doc):
 			with_land_use_total = 0
 			if(i.name == "reference_approach"):
 				for j in document.get(i.name):
+
 					data = frappe.get_list("Energy Fuel Master List",
 							fields=["ncv", "co2_emission_factor", "ch4_emission_factor", "n2o_emission_factor"],
 							filters={
@@ -95,7 +109,7 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
-				report_doc.save()
+				report_doc.save(ignore_permissions=True)
 				frappe.db.commit() 
 			if(i.name == "co2_emissions_from_biomass"):
 				for j in document.get(i.name):
@@ -107,9 +121,8 @@ def calculation_part(tablefields,document,report_doc):
 					if row.categories == document.sub_sector:
 						row.set("co2",cumulative_co2)
 						row.set("total_co2_eq",cumulative_co2)
-				report_doc.save()
-				frappe.db.commit() 
-				return cumulative_co2
+				report_doc.save(ignore_permissions=True)
+				frappe.db.commit()
 			
 			if(i.name in ["electricity_generation","transport","manufacturing_industries","other_sectors","international_bunkers","other_energy"]):
 				sum_co2=0
@@ -138,7 +151,7 @@ def calculation_part(tablefields,document,report_doc):
 				# report_doc =frappe.get_doc("GHG Inventory Master Report",document.year)
 				# report_doc.report
 				for row in report_doc.report:
-					if row.categories == document.sub_category:
+					if row.categories == document.sub_category:	
 						# return row.categories, document.sub_category
 						row.set("co2",cumulative_co2)
 						row.set("ch4",cumulative_ch4)
@@ -164,7 +177,7 @@ def calculation_part(tablefields,document,report_doc):
 							row.set("ch4",subsector_ch4)
 							row.set("n2o",subsector_n2o)
 							row.set("total_co2_eq",subsector_total)
-					else:
+					if row.categories == "1.A.5. Other" and document.sub_sector == "1.A.5. Other":
 						row.set("co2",cumulative_co2)
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
@@ -175,30 +188,32 @@ def calculation_part(tablefields,document,report_doc):
 				category_n2o=0
 				category_total=0
 				for row in report_doc.report:
-					if row.parent_categories == document.category:
-						category_co2 += row.co2
-						category_ch4 += row.ch4
-						category_n2o += row.n2o
-						category_total += row.total_co2_eq
+					if row.parent_categories != '1.D.1. International bunkers':
+						if row.parent_categories == document.category:
+							category_co2 += row.co2
+							category_ch4 += row.ch4
+							category_n2o += row.n2o
+							category_total += row.total_co2_eq
 				
 				a_co2=0;a_ch4=0;a_n2o=0;a_total=0
 				b_co2=0;b_ch4=0;b_n2o=0;b_total=0
 				energy_co2=0;energy_ch4=0;energy_n2o=0;energy_total=0
 
 				for row in report_doc.report:
-					if(row.categories == document.category):
-						row.set("co2",category_co2)
-						row.set("ch4",category_ch4)
-						row.set("n2o",category_n2o)
-						row.set("total_co2_eq",category_total)
-					
-					if(row.categories == document.sector):
-						row.set("co2",category_co2)    
-						row.set("ch4",category_ch4)
-						row.set("n2o",category_n2o)
-						row.set("total_co2_eq",category_total)
+					if row.categories != '1.D.1. International bunkers' and  document.sub_sector != '1.D.1. International bunkers':
+						if(row.categories == document.category):
+							row.set("co2",category_co2)
+							row.set("ch4",category_ch4)
+							row.set("n2o",category_n2o)
+							row.set("total_co2_eq",category_total)
+						
+						if(row.categories == document.sector):
+							row.set("co2",category_co2)    
+							row.set("ch4",category_ch4)
+							row.set("n2o",category_n2o)
+							row.set("total_co2_eq",category_total)
 
-					if(row.parent_categories == "1.A.4.a. Commercial/institutional" ):
+					if(row.parent_categories == "1.A.4.a. Commercial/institutional"):
 						a_co2 += row.co2
 						a_ch4 += row.ch4
 						a_n2o += row.n2o
@@ -261,10 +276,10 @@ def calculation_part(tablefields,document,report_doc):
 					if(row.categories == 'Total CO2 equivalent emissions with land use'):
 						row.set("total_co2_eq",with_land_use_total)
 
-				report_doc.save()
+				report_doc.save(ignore_permissions=True)
 				frappe.db.commit()
+		# return tablefields,table_str
 
-				# return a_co2,a_ch4,a_n2o,a_total,
 			
 
 				

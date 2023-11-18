@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestLivestockPopulation(FrappeTestCase):
+class TestLivestockPopulationMasterList(FrappeTestCase):
 	pass

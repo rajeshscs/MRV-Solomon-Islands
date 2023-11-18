@@ -1,27 +1,39 @@
 import frappe
+import json
 # from frappe.model.document import Document
 
 @frappe.whitelist()
 def agri_calculation(doc,doc_name,tablefields):
 	document = frappe.get_doc(doc,doc_name)
-	if frappe.db.exists("GHG Inventory Master Report", document.year):
-		report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
-		calculation_part(tablefields,document,report_doc)
-	else:
-		# Create a new GHG Inventory Master Report if it does not exist
-		report_doc = frappe.get_doc({
-			"doctype": "GHG Inventory Master Report",
-			"year": document.year
-		})
-		category_list = frappe.db.get_list('GHG Inventory Report Categories', 
-				fields= ['category_name','display_order'],
-				limit = 500,
-				order_by ='display_order asc'
-			)
-		for i in category_list:
-			report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
-		report_doc.insert()
-		calculation_part(tablefields,document,report_doc)
+	tables_lst = tablefields
+	if type(tablefields)==str:
+		tables_lst = json.loads(tablefields)
+	tab_fields = []
+	for tf in tables_lst:
+		if document.get(tf):
+			if len(document.get(tf))>0:
+				tab_fields.append(tf)
+	
+	if document.workflow_state == "Approved" and tab_fields:
+		tab_fields = str(tab_fields)
+		if frappe.db.exists("GHG Inventory Master Report", document.year):
+			report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
+			calculation_part(tab_fields,document,report_doc)
+		else:
+			# Create a new GHG Inventory Master Report if it does not exist
+			report_doc = frappe.get_doc({
+				"doctype": "GHG Inventory Master Report",
+				"year": document.year
+			})
+			category_list = frappe.db.get_list('GHG Inventory Report Categories', 
+					fields= ['category_name','display_order'],
+					limit = 500,
+					order_by ='display_order asc'
+				)
+			for i in category_list:
+				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
+			report_doc.insert()
+			calculation_part(tab_fields,document,report_doc)
 
 
 
@@ -112,6 +124,30 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
 
+			if i.name == 'direct_emission_mms':
+				for j in document.get(i.name):
+					data = frappe.get_list("Livestock Emission Factor Master List",
+							fields=["manure_management", "excretion_rate", "typical_animal_mass","nitrogen_excretion","direct_n2o_n_emissions","managed_manure","managed_ivestock_manure","atmospheric_deposition"],
+							filters={
+							"category" : j.category
+					})
+					head = float(j.heads)
+					nitrogen_excretion_rate = float(data[0].excretion_rate  )
+					animal_mass = float(data[0].typical_animal_mass)
+					nitrogen_excretion_managed = float(data[0].nitrogen_excretion)
+					direct_n2o_n_emissions = float(data[0].direct_n2o_n_emissions)
+					sum_n2o += eval(i.n2o)
+				cumulative_co2=0
+				cumulative_ch4=0
+				cumulative_n2o=eval(i.cumulative_n2o)
+				total_co2=eval(i.total_co2)
+				
+				for row in report_doc.report:
+					if row.categories == '3.B.b. Direct N2O emissions per MMS (kt N2O)':
+						row.set("n2o",cumulative_n2o)
+						row.set("total_co2_eq",total_co2)
+
+
 			if i.name == 'direct_managed_soils':
 				
 				sum_co2 = 0;sum_ch4 = 0;sum_n2o = 0;sum_total_co2 = 0
@@ -128,7 +164,7 @@ def calculation_part(tablefields,document,report_doc):
 								row.set("total_co2_eq",total_co2)
 
 			if i.name == 'atmospheric_deposit':
-				
+			
 				sum_co2 = 0;sum_ch4 = 0;sum_n2o = 0;sum_total_co2 = 0
 				
 				amount_of_synthetic_n_fertilizers = float(document.get(i.name)[0].value)
@@ -191,7 +227,7 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
-				report_doc.save()
+				report_doc.save(ignore_permissions=True)
 				frappe.db.commit()
 			if(i.name == "activity_data_agriculture"):
 				
@@ -316,6 +352,6 @@ def calculation_part(tablefields,document,report_doc):
 		for row in report_doc.report:
 			if(row.categories == 'Total CO2 equivalent emissions with land use'):
 				row.set("total_co2_eq",with_land_use_total)
-		report_doc.save()
+		report_doc.save(ignore_permissions=True)
 		frappe.db.commit()
 		

@@ -3,8 +3,8 @@
 
 import frappe
 from frappe.model.document import Document
-from mrvtools.ghg_inventory.doctype.ghg_inventory.waste import waste_calculation
-class WastePopulationMasterList(Document):
+from mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture import agri_calculation
+class LivestockPopulationMasterList(Document):
 	def on_update(self):
 		tablefields=[]
 		meta = frappe.get_meta("GHG Inventory")
@@ -20,7 +20,7 @@ class WastePopulationMasterList(Document):
 		doc = "GHG Inventory"
 		for i in document_name:
 			if i.workflow_state == "Approved":
-				if i.sector == '5. Waste':
+				if i.sector == '3. Agriculture':
 					doc_name = i.name
 					docu= frappe.get_doc("GHG Inventory",i.name)
-					frappe.enqueue(waste_calculation, doc=doc, doc_name=doc_name, tablefields=tablefields)
+					frappe.enqueue(agri_calculation, doc=doc, doc_name=doc_name, tablefields=tablefields)

@@ -15,6 +15,7 @@ def getColumns():
 			"fieldname": "categories",
 			"label": "Categories",
 			"fieldtype": 'Small Text',
+			"width": "500"
 		},
 		{
 			"fieldname": "co2",
@@ -45,7 +46,7 @@ def getData(filters):
 	if filters.get("inventory_year"):
 		conditions += f"AND parent = '{filters.get('inventory_year')}'"
 
-		if not filters.get("inventory_unit") or filters.get("inventory_unit") == 'GgCO2e':	
+		if not filters.get("inventory_unit") or filters.get("inventory_unit") == 'tCO2e':	
 			query = f"""
 					SELECT
 						categories, 
@@ -65,7 +66,7 @@ def getData(filters):
 
 			return data
 		
-		if filters.get("inventory_unit") == 'tCO2e':
+		if filters.get("inventory_unit") == 'GgCO2e':
 			query = f"""
 					SELECT
 						categories, 
@@ -86,11 +87,10 @@ def getData(filters):
 			return data
 
 def get_chart(filters):
-	pass
 	conditions = ""
 	if filters.get("inventory_year"):
 		conditions += f"AND parent = '{filters.get('inventory_year')}'"
-	if not filters.get("inventory_unit") or filters.get("inventory_unit") == 'GgCO2e':	
+	if not filters.get("inventory_unit") or filters.get("inventory_unit") == 'tCO2e':
 		query = f"""
 				SELECT
 					co2,
@@ -107,22 +107,23 @@ def get_chart(filters):
 		
 		data = frappe.db.sql(query)	
 		frappe.log_error("data",data)
-		chart = {
-			"data": {
-				"labels": ["CO2","CH4","N2O"],
-				"datasets": [
-					{
-						'name': 'No. of Projects',
-						"values": data[0],
-					},
-				],
-			},
-			"type": "bar",
-			"colors":["blue","red"],
-			"y_axis_label": 'GHG Reduction'
-		}
-		return chart
-	if filters.get("inventory_unit") == 'tCO2e':	
+		if data != ():
+			chart = {
+				"data": {
+					"labels": ["CO2","CH4","N2O"],
+					"datasets": [
+						{
+							'name': 'No. of Projects',
+							"values": data[0],
+						},
+					],
+				},
+				"type": "bar",
+				"colors":["blue","red"],
+				"y_axis_label": 'GHG Reduction'
+			}
+			return chart
+	if filters.get("inventory_unit") == 'GgCO2e':
 		query = f"""
 				SELECT
 					co2 * 1000 as co2,

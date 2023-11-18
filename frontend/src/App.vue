@@ -23,12 +23,14 @@ const fetchData = async () => {
     } else {
       throw new Error('Network response was not ok');
     }
+    console.log("Check response", response);
+
   } catch (error) {
     console.error('Error:', error);
   }
   var values = data._rawValue.message.parent_data
-  var field = values.heading
   var childField = data._rawValue.message.child_table_data
+
   for (var item of childField){
     if (item.image){
       console.log("item",item.image);
@@ -38,8 +40,7 @@ const fetchData = async () => {
     }
   }
 
-  console.log("response", values);
-  console.log("response", field);
+  console.log("responseee", values);
 };
 
 // const fetchPartnerLogos = async () => {

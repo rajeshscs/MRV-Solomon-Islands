@@ -1,32 +1,46 @@
 import frappe
+import json
 
 @frappe.whitelist()
-def ippu_calculation(doc,doc_name,tablefields):
+def ippu_calculation(doc,doc_name,tablefields): 
 
 	document = frappe.get_doc(doc,doc_name)
-	if frappe.db.exists("GHG Inventory Master Report", document.year):
-		report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
-		calculation_part(tablefields,document,report_doc)
-	else:
-		# Create a new GHG Inventory Master Report if it does not exist
-		report_doc = frappe.get_doc({
-			"doctype": "GHG Inventory Master Report",
-			"year": document.year
-		})
-		category_list = frappe.db.get_list('GHG Inventory Report Categories', 
-				fields= ['category_name','display_order'],
-				limit = 500,
-				order_by ='display_order asc'
-			)
-		for i in category_list:
-			report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
-		report_doc.insert()
-		calculation_part(tablefields,document,report_doc)
+	
+	tables_lst = tablefields
+	if type(tablefields)==str:
+		tables_lst = json.loads(tablefields)
+	tab_fields = []
+	for tf in tables_lst:
+		if document.get(tf):
+			if len(document.get(tf))>0:
+				tab_fields.append(tf)
+	
+	if document.workflow_state == "Approved" and tab_fields:
+		tab_fields = str(tab_fields)
+		if frappe.db.exists("GHG Inventory Master Report", document.year):
+			report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
+			calculation_part(tab_fields,document,report_doc)
+		else:
+			# Create a new GHG Inventory Master Report if it does not exist
+			report_doc = frappe.get_doc({
+				"doctype": "GHG Inventory Master Report",
+				"year": document.year
+			})
+			category_list = frappe.db.get_list('GHG Inventory Report Categories', 
+					fields= ['category_name','display_order'],
+					limit = 500,
+					order_by ='display_order asc'
+				)
+			for i in category_list:
+				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
+			report_doc.insert()
+			calculation_part(tab_fields,document,report_doc)
 
 
 
 def calculation_part(tablefields,document,report_doc):
-	if(tablefields != []):
+	if(tablefields != ""):
+		# frappe.log_error(tablefields,type(tablefields))
 		solvents_sum_co2 = 0; solvents_cumulative_co2 = 0
 		refrigeration_sum_co2 = 0; refrigeration_cumulative_co2 = 0
 		other_applications_sum_co2 = 0; other_applications_cumulative_co2 = 0
@@ -135,8 +149,7 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("total_co2_eq",sum_total_co2)
 
 
-			if(i.name in["other_ippu","activity_data"]):
-				
+			if(i.name == "other_ippu"):
 				sum_co2=0
 				sum_ch4=0
 				sum_n2o=0
@@ -152,18 +165,39 @@ def calculation_part(tablefields,document,report_doc):
 				cumulative_ch4=eval(i.cumulative_ch4)
 				cumulative_n2o=eval(i.cumulative_n2o)
 				total_co2=eval(i.total_co2)
-				
+
 				for row in report_doc.report:
 					if row.categories == "2.D.3. Other":
 						row.set("co2",cumulative_co2)
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
+
+
+			if(i.name == "activity_data"):
+				sum_co2=0
+				sum_ch4=0
+				sum_n2o=0
+				for j in document.get(i.name):
+					amount = j.amount_of_production
+					co2 = float(j.emission_factor_co2)
+					ch4 = float(j.emission_factor_ch4)
+					n2o = float(j.emission_factor_n2o)
+					sum_co2 += eval(i.co2)
+					sum_ch4 += eval(i.ch4)
+					sum_n2o += eval(i.n2o)
+				cumulative_co2=eval(i.cumulative_co2)
+				cumulative_ch4=eval(i.cumulative_ch4)
+				cumulative_n2o=eval(i.cumulative_n2o)
+				total_co2=eval(i.total_co2)
+
+				for row in report_doc.report:
 					if row.categories == "2.H.2. Food and beverages industry":
 						row.set("co2",cumulative_co2)
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
+
 
 			if(i.name == "lubricant_use"):
 				
@@ -370,5 +404,5 @@ def calculation_part(tablefields,document,report_doc):
 					row.set("total_co2_eq",with_land_use_total)
 			
 						
-			report_doc.save()
+			report_doc.save(ignore_permissions=True)
 			frappe.db.commit()

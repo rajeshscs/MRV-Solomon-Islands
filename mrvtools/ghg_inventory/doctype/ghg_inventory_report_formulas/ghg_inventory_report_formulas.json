@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2023-11-01 16:08:51.694595",
@@ -163,7 +164,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-08 16:23:22.559765",
+ "modified": "2023-11-15 11:03:22.402742",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory Report Formulas",

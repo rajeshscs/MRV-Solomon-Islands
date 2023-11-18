@@ -26,7 +26,6 @@ const fetchData = async () => {
     console.error('Error:', error);
   }
   var values = data
-  var field = values.heading
   var childField = data._rawValue.message.child_table_data
   for (var item of childField){
     if (item.image){
@@ -36,10 +35,6 @@ const fetchData = async () => {
       console.log("no item found");
     }
   }
-
-  console.log("response", childField);
-  console.log("response", values);
-  console.log("response", field);
 };
 
 onMounted(() => {

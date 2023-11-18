@@ -3,6 +3,15 @@
 
 frappe.ui.form.on('Energy Fuel Master List', {
 	// refresh: function(frm) {
+	// 	frm.call({
+	// 		doc:frm.doc,
+	// 		method:"on_update",
+	// 		async:false,
+	// 		callback:function(r){
+	// 			console.log(r.message);
+				
+	// 		}
+	// 	})
 
 	// }
 });

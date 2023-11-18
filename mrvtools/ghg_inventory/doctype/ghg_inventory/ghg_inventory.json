@@ -440,7 +440,7 @@
    "fieldname": "direct_emissions_mms",
    "fieldtype": "Table",
    "label": "Direct N2O emissions per MMS",
-   "options": "AFLOU Direct N2O Emission ChildTable"
+   "options": "Manure Management ChildTable"
   },
   {
    "depends_on": "eval:doc.sector=='3. Agriculture' && doc.category == '3.E. Prescribed burning of savannahs'",
@@ -941,7 +941,7 @@
    "fieldname": "edited_direct_emissions_mms",
    "fieldtype": "Table",
    "label": "Direct N2O emissions per MMS",
-   "options": "AFLOU Direct N2O Emission ChildTable",
+   "options": "Manure Management ChildTable",
    "read_only": 1
   },
   {
@@ -1178,7 +1178,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-08 21:19:32.387771",
+ "modified": "2023-11-18 19:06:38.425812",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

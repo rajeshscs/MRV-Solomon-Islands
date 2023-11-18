@@ -3,26 +3,70 @@
 var dynamicTitleList = ['','','','']
 var tableFields = [];
 frappe.ui.form.on('GHG Inventory', {
+
+	workflow_state:function(frm){
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+		
+	},
 	
 	refresh: function(frm) {
+
+		$(document).ready(function() {
+			// Select the node that will be observed for mutations
+			var targetNode = document.querySelector('.indicator-pill');
+		
+			// Options for the observer (which mutations to observe)
+			var config = { attributes: true, attributeFilter: ['class'] };
+		
+			// Callback function to execute when mutations are observed
+			var callback = function(mutationsList, observer) {
+				for(var mutation of mutationsList) {
+					if (mutation.type === 'attributes') {
+						if (targetNode.classList.contains('orange')) {
+							frm.clear_custom_buttons();
+						}
+					}
+				}
+			};
+		
+			// Create an observer instance linked to the callback function
+			var observer = new MutationObserver(callback);
+		
+			// Start observing the target node for configured mutations
+			observer.observe(targetNode, config);
+		});
+		
 		var not_hidden_table_fields = []
 		
-		  
-		frappe.db.get_doc('GHG Inventory Report Formulas', 'Lime')
-    	.then(doc => {
-			for(var i in doc.table_name){
-
-			}
-        	console.log(doc.table_name[0].name)
-			console.log(doc.cumulative_co2);
-    	})
 		var data = frappe.get_meta('GHG Inventory');
 		for (var field of data.fields) {
 			if (field.fieldtype === 'Table') {
 				if(!field.fieldname.startsWith('edited') && field.fieldname !== 'ghg_inventory_details'){
 					tableFields.push(field.fieldname);
-					if(frm.fields_dict[field.fieldname].df.hidden_due_to_dependency == undefined){
-						console.log("Fieldname = ",field.fieldname);
+					if(frm.fields_dict[field.fieldname].df.hidden_due_to_dependency == undefined || frm.fields_dict[field.fieldname].df.hidden_due_to_dependency == false){
 						not_hidden_table_fields.push(field.fieldname)
 					}
 				}
@@ -57,61 +101,40 @@ frappe.ui.form.on('GHG Inventory', {
 			// 	}
 
 			// });
-			let method = '';
-			if (frm.doc.sector == "1. Energy") {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation';
-			} else if (frm.doc.sector == "2. Industrial processes and product use") {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation';
-			} else if (frm.doc.sector == "3. Agriculture") {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture.agri_calculation';
-			} else if (frm.doc.sector == "4. LAND USE, LAND-USE CHANGE AND FORESTRY") {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.land_use.land_calculation';
-			} else if (frm.doc.sector == "5. Waste") {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.waste.waste_calculation';
-			} else {
-				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.other.other_calculation';
+			if (frm.doc.workflow_state == "Approved"){
+				let method = '';
+				if (frm.doc.sector == "1. Energy") {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation';
+				} else if (frm.doc.sector == "2. Industrial processes and product use") {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation';
+				} else if (frm.doc.sector == "3. Agriculture") {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture.agri_calculation';
+				} else if (frm.doc.sector == "4. LAND USE, LAND-USE CHANGE AND FORESTRY") {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.land_use.land_calculation';
+				} else if (frm.doc.sector == "5. Waste") {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.waste.waste_calculation';
+				} else {
+					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.other.other_calculation';
+				}
+				
+				
+				console.log(not_hidden_table_fields);				
+				frappe.call({
+					method: method,
+					args:{
+						"tablefields": not_hidden_table_fields,
+						"doc": frm.doc.doctype,
+						"doc_name": frm.doc.name
+					},
+					async: true	,
+					callback: function(r) {
+						console.log(r.message)
+					}
+				});
+
 			}
 			
 
-			frappe.call({
-				method: method,
-				args:{
-					"tablefields": not_hidden_table_fields,
-					"doc": frm.doc.doctype,
-					"doc_name": frm.doc.name
-				},
-				async: true,
-				callback: function(r) {
-					console.log(r.message)
-					// console.log(not_hidden_table_fields);				
-				}
-			});
-
-
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
-		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
 		
 
 		frm.call({

@@ -171,10 +171,12 @@ def get_datas(filters):
 						{conditions}
 					"""
 				result = frappe.db.sql(query, as_dict=1)
+				frappe.log_error("Result",result)
 				monitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
 							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
-							order_by = 'monitoring_year asc' )
+							order_by = 'monitoring_year asc')
+				frappe.log_error("Monitor",monitoringYearsAdaptation)
 				for each in result:
 					for i in monitoringYearsAdaptation:
 						query = f"""

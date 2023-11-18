@@ -41,7 +41,7 @@
   const fetchData = async () => {
     try {
       const response = await axios.get('http://192.168.0.183:8189/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
-  
+      
       if (response.status === 200) {
         data.value = response.data;
       } else {
@@ -50,9 +50,14 @@
     } catch (error) {
       console.error('Error:', error);
     }
-    var values = data._rawValue.message.parent_data
-    var field = values.heading
+    var values = data._rawValue.message.parent_data.contact_number
     var childField = data._rawValue.message.child_table_data
+    // var contactField = data._rawValue.message.parent_data.contact_number
+    // for (number of contactField){
+    //   if(number.contact_number){
+    //     console.log("contact_number", contact_number);
+    //   }
+    // }
     for (var item of childField){
       if (item.image){
         console.log("item",item.image);
@@ -62,22 +67,21 @@
       }
     }
   
-    console.log("response", values);
-    console.log("response", field);
+    console.log("responsee", values);
   };
   
-  const fetchPartnerLogos = async () => {
-    try {
-      const response = await axios.get('http://your-api-url-for-partner-logos');
-      if (response.status === 200) {
-        partnerLogos.value = response.data; // Assuming your API returns an array of partner logos
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  // const fetchPartnerLogos = async () => {
+  //   try {
+  //     const response = await axios.get('http://your-api-url-for-partner-logos');
+  //     if (response.status === 200) {
+  //       partnerLogos.value = response.data; // Assuming your API returns an array of partner logos
+  //     } else {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
   
   onMounted(() => {
     fetchData();

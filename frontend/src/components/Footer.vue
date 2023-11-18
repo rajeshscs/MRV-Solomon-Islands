@@ -11,19 +11,25 @@
            </div>
            <div class="col-lg-3 col-md-3 col-sm-6">
               <h3 class="mr-3" >Contact Information</h3>
-              <div class="media">
-                 <p> <i class="bi bi-geo-alt mr-3 b text-start" ></i>dolor sit amet, consectetur<br>Nullam vehicula ante<br>National Climate Change Resource Centre<br>massa rhoncus, non bibendum<br>a,sk, BOx 75722, 75275 GPO<br>asskj, Lavya</p>
-              </div>
+              <div v-for="item in data.message" :key="item.name">
+
+               <div class="media">
+                  <p  v-if="item.address"> <i class="bi bi-geo-alt mr-3 b text-start" ></i>{{ item.address }}</p>
+               </div>
+               <br>
+               <div class="media">
+                  <p v-if="item.email"><i class="bi bi-envelope mr-3" ></i>{{ item.email }}</p>
+               </div>
+            </div>
               <br>
-              <div class="media">
-                 <p><i class="bi bi-telephone mr-3" ></i>+883 939 3993, +883 939 3453, +883 939 4565</p>
-              </div>
-              <br>
-              <div class="media">
-                 <p><i class="bi bi-envelope mr-3" ></i>sample@gov.com</p>
-              </div>
-              <br>
-           </div>
+            </div>
+            <div  v-for="item in data.message.parent_data.contact_number" :key="item.contact_number" >
+               <div class="media">
+                  <p><i class="bi bi-telephone mr-3" v-if="item.contact_number"></i>{{ item.contact_number }}</p>
+               </div>
+               <br>
+            </div>
+
            <div class="col-lg-3 col-md-3 col-sm-6">
               <h3 class="mr-3 text-start" >Present Pages</h3>
               <ul class="list-unstyled mx-4">

@@ -1,28 +1,40 @@
 import frappe
+import json
 # from frappe.model.document import Document
 
 @frappe.whitelist()
 def land_calculation(doc,doc_name,tablefields):
 
 	document = frappe.get_doc(doc,doc_name)
-	if frappe.db.exists("GHG Inventory Master Report", document.year):
-		report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
-		calculation_part(tablefields,document,report_doc)
-	else:
-		# Create a new GHG Inventory Master Report if it does not exist
-		report_doc = frappe.get_doc({
-			"doctype": "GHG Inventory Master Report",
-			"year": document.year
-		})
-		category_list = frappe.db.get_list('GHG Inventory Report Categories', 
-				fields= ['category_name','display_order'],
-				limit = 500,
-				order_by ='display_order asc'
-			)
-		for i in category_list:
-			report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
-		report_doc.insert()
-		calculation_part(tablefields,document,report_doc)
+	tables_lst = tablefields
+	if type(tablefields)==str:
+		tables_lst = json.loads(tablefields)
+	tab_fields = []
+	for tf in tables_lst:
+		if document.get(tf):
+			if len(document.get(tf))>0:
+				tab_fields.append(tf)
+	
+	if document.workflow_state == "Approved" and tab_fields:
+		tab_fields = str(tab_fields)
+		if frappe.db.exists("GHG Inventory Master Report", document.year):
+			report_doc = frappe.get_doc("GHG Inventory Master Report", document.year)
+			calculation_part(tab_fields,document,report_doc)
+		else:
+			# Create a new GHG Inventory Master Report if it does not exist
+			report_doc = frappe.get_doc({
+				"doctype": "GHG Inventory Master Report",
+				"year": document.year
+			})
+			category_list = frappe.db.get_list('GHG Inventory Report Categories', 
+					fields= ['category_name','display_order'],
+					limit = 500,
+					order_by ='display_order asc'
+				)
+			for i in category_list:
+				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
+			report_doc.insert()
+			calculation_part(tab_fields,document,report_doc)
 
 
 
@@ -83,7 +95,7 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
-				report_doc.save()
+				report_doc.save(ignore_permissions=True)
 				frappe.db.commit()  
 	if(category_name != "biomass_burning"):
 		value=[]
@@ -161,7 +173,7 @@ def calculation_part(tablefields,document,report_doc):
 		for row in report_doc.report:
 			if(row.categories == 'Total CO2 equivalent emissions with land use'):
 				row.set("total_co2_eq",with_land_use_total)
-	report_doc.save()
+	report_doc.save(ignore_permissions=True)
 	frappe.db.commit()    
 	
 
