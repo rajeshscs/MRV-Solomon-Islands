@@ -2,25 +2,6 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Project', {
-	// workflow_state:function(frm){
-	// 	console.log("Workflow State = ",frm.doc.workflow_state);
-	// 	if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
-	// 		$('[id="project-tab1"]').addClass("active show")
-	// 	}
-	// 	else{
-	// 		console.log("Working");	
-	// 		$('[id="project-tab1-tab"]').addClass("active")
-	// 		$('[id="project-tab2-tab"]').removeClass("active")
-	// 		$('[id="project-tab2-tab"]').addClass("show")
-			
-	// 		// let edit_tab = document.getElementById("project-tab2-tab")
-	// 		// console.log(edit_tab); 
-	// 		// edit_tab.blur()
-	// 		// $('[id="project-tab1"]').addClass("active show")
-	// 		// $('[id="project-tab2"]').removeClass("active hide show")	
-			
-	// 	}
-	// },
 
 	get_location:function(frm){
 		var existingGeoJSON = frm.doc.geographical_co_ordinate || '{"type":"FeatureCollection","features":[]}';
@@ -281,44 +262,45 @@ frappe.ui.form.on('Project', {
 						}
 					}
 				})
-				if (frm.doc.edited_project_details.length != 0 || frm.doc.new_coordinates != ''){
-					// window.location.href = `${frm.doc.name}`
-				}
 			}
 		}
 		
 	},
+	// observeDoc(frm){
+	// 	var targetNode = document.querySelector('.indicator-pill');
+		
+	// 		// Options for the observer (which mutations to observe)
+	// 		var config = { attributes: true, attributeFilter: ['class'] };
+		
+	// 		// Callback function to execute when mutations are observed
+	// 		var callback = function(mutationsList, observer) {
+	// 			for(var mutation of mutationsList) {
+	// 				if (mutation.type === 'attributes') {
+	// 					if (targetNode.innerText == "Not Saved") {
+	// 						console.log(targetNode.innerText);
+	// 						frm.clear_custom_buttons();
+	// 					}
+	// 				}
+	// 			}
+	// 		};
+		
+	// 		// Create an observer instance linked to the callback function
+	// 		var observer = new MutationObserver(callback);
+		
+	// 		// Start observing the target node for configured mutations
+	// 		observer.observe(targetNode, config);
+	// },
+	// onload_post_render(frm){
+	// 	frm.trigger("observeDoc")
+	// },
 
 	refresh: function(frm){
 		$('[id="page-Project"]').find('.actions-btn-group').hide();
-
-
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
-		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
-
-
+		// $.each(cur_frm.fields_dict, function(fieldname, field) {
+		// 	field.df.onchange = function() {
+		// 		frm.clear_custom_buttons()
+		// 	};
+		// })
 
 		frm.call({
 			doc:frm.doc,
@@ -340,82 +322,6 @@ frappe.ui.form.on('Project', {
 		})
 
 		
-		// $(document).ready(function(){
-		// 	$('[data-fieldname]').on({
-		// 		keyup:function(){
-		// 			$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 			$('.primary-action').removeClass('hide');
-		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve");
-		// 			frm.dirty()
-		// 		},
-		// 		click:function(){
-		// 			$('[data-fieldname]').on("focus",function(){
-						
-		// 				$('[data-fieldname]').on("click",function(){
-		// 					$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 					$('.primary-action').removeClass('hide')
-		// 					$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 					frm.dirty()
-		// 				})
-		// 			})
-		// 		},
-				
-		// 		change:function(){
-		// 			$('[data-fieldtype = "Select"]').on("change",function(){
-		// 				$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 				$('.primary-action').removeClass('hide')
-		// 				$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 				frm.dirty()
-		// 			})
-		// 		}
-		// 	});
-
-		// 	$('[class="btn btn-xs btn-secondary grid-add-row"], [data-fieldname="edit_button"]').on("click",function(){
-		// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
-		// 		$('.primary-action').removeClass('hide')
-		// 		$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 		frm.dirty()
-		// 	})
-		// 	$('[data-fieldtype="Link"]').on("click", function() {
-		// 		var hide = true;
-		// 		if(hide){
-		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-		// 			$('.primary-action').removeClass('hide')
-		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 			frm.dirty()
-		// 		}
-		// 		else{
-		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		// 		}
-		// 	});	
-		// 	$('[data-fieldtype="Table MultiSelect"]').on("mouseenter", function() {
-
-		// 		$('[data-fieldtype="Table MultiSelect"]').on("focusout", function() {
-		// 			var hide = true;
-		// 			if(hide){
-		// 			$('head').append('<style>.btn.ellipsis.btn-primary { display: none !important; }</style>');
-		// 			$('.primary-action').removeClass('hide')
-		// 			$('.primary-action').html("S<span class='alt-underline'>a</span>ve")
-		// 			frm.dirty()
-		// 			}
-		// 			else{
-		// 				$('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		// 			}
-		// 		});
-				
-	
-				
-		// 	});
-
-		// 	// $('head').append('<style>.btn.ellipsis.btn-primary { display:inline-block !important; }</style>');
-		// });
-
-		// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-		// 	$('[id="page-Project"]').find('.actions-btn-group').hide();
-			
-		// }else{
-		// 	$('[id="page-Project"]').find('.actions-btn-group').show();
-		// }
 
 		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.select_approver.df.read_only = 1
@@ -571,3 +477,4 @@ function toTitleCase(str) {
 	  }
 	); 
 }
+

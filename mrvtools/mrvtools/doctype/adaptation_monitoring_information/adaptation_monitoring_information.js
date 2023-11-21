@@ -2,35 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Adaptation Monitoring Information', {
-	workflow_state:function(frm){
-		console.log("Ready..");
-		
-			$(document).ready(function() {
-				// Select the node that will be observed for mutations
-				var targetNode = document.querySelector('.indicator-pill');
-			
-				// Options for the observer (which mutations to observe)
-				var config = { attributes: true, attributeFilter: ['class'] };
-			
-				// Callback function to execute when mutations are observed
-				var callback = function(mutationsList, observer) {
-					for(var mutation of mutationsList) {
-						if (mutation.type === 'attributes') {
-							if (targetNode.classList.contains('orange')) {
-								frm.clear_custom_buttons();
-							}
-						}
-					}
-				};
-			
-				// Create an observer instance linked to the callback function
-				var observer = new MutationObserver(callback);
-			
-				// Start observing the target node for configured mutations
-				observer.observe(targetNode, config);
-			});
-		
-	},
+	
 	
 	refresh: function(frm){
 		$('[id="page-Adaptation Monitoring Information"]').find('.actions-btn-group').hide();
@@ -39,30 +11,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			$('[id="adaptation-monitoring-information-tab1"]').addClass("active show")
 
 		})
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
 		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
 
 		frm.call({
 			doc:frm.doc,

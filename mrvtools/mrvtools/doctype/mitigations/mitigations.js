@@ -2,35 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Mitigations', {
-	workflow_state:function(frm){
-		console.log("Ready..");
-		
-			$(document).ready(function() {
-				// Select the node that will be observed for mutations
-				var targetNode = document.querySelector('.indicator-pill');
-			
-				// Options for the observer (which mutations to observe)
-				var config = { attributes: true, attributeFilter: ['class'] };
-			
-				// Callback function to execute when mutations are observed
-				var callback = function(mutationsList, observer) {
-					for(var mutation of mutationsList) {
-						if (mutation.type === 'attributes') {
-							if (targetNode.classList.contains('orange')) {
-								frm.clear_custom_buttons();
-							}
-						}
-					}
-				};
-			
-				// Create an observer instance linked to the callback function
-				var observer = new MutationObserver(callback);
-			
-				// Start observing the target node for configured mutations
-				observer.observe(targetNode, config);
-			});
-		
-	},
+	
 	project_id: function(frm) {
 		if(!frm.doc.included_in && frm.doc.project_id){
 			frm.call({
@@ -70,20 +42,8 @@ frappe.ui.form.on('Mitigations', {
 			frm.refresh_field("performance_indicator")
 		}
 	},
-
-	
-	refresh: function(frm){
-
-
-		$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
-		setTimeout(function() {
-			$('[id="mitigations-tab1-tab"]').click()
-			$('[id="mitigations-tab1"]').addClass("active show")
-		})
-		///////////////////////////////////
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
+	observeDoc(frm){
+		var targetNode = document.querySelector('.indicator-pill');
 		
 			// Options for the observer (which mutations to observe)
 			var config = { attributes: true, attributeFilter: ['class'] };
@@ -92,7 +52,8 @@ frappe.ui.form.on('Mitigations', {
 			var callback = function(mutationsList, observer) {
 				for(var mutation of mutationsList) {
 					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
+						if (targetNode.innerText == "Not Saved") {
+							console.log(targetNode.innerText);
 							frm.clear_custom_buttons();
 						}
 					}
@@ -104,7 +65,20 @@ frappe.ui.form.on('Mitigations', {
 		
 			// Start observing the target node for configured mutations
 			observer.observe(targetNode, config);
-		});
+	},
+	onload_post_render(frm){
+		frm.trigger("observeDoc")
+	},
+	
+	refresh: function(frm){
+
+
+		$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
+		setTimeout(function() {
+			$('[id="mitigations-tab1-tab"]').click()
+			$('[id="mitigations-tab1"]').addClass("active show")
+		})
+		///////////////////////////////////
 		
 
 		frm.call({
