@@ -3,62 +3,9 @@
 var dynamicTitleList = ['','','','']
 var tableFields = [];
 frappe.ui.form.on('GHG Inventory', {
-
-	workflow_state:function(frm){
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
-		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
-		
-	},
 	
 	refresh: function(frm) {
 
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
-		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
-		
 		var not_hidden_table_fields = []
 		
 		var data = frappe.get_meta('GHG Inventory');
@@ -73,66 +20,37 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 		}
 			
-		// frm.call({
-		// 	doc:frm.doc,
-		// 	method: 'custom_sql_query',
-		// 	args:{
-		// 		"tablefields":not_hidden_table_fields
-		// 	},
-		// 	async:false,
-		// 	callback: function(r) {
-		// 		// console.log(r.message)
-		// 	}
-		// 	});
-			// console.log(tableFields);
-		// if(frm.doc.sector == "1. Energy")	
-			// frappe.call({
-			// 	// method: 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation',
-			// 	method: frm.doc.sector === "1. Energy" ? 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation'
-        	// 		:'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation',
-			// 	args:{
-			// 		"tablefields":not_hidden_table_fields,
-			// 		"doc":frm.doc.doctype,
-			// 		"doc_name":frm.doc.name
-			// 	},
-			// 	async:true,
-			// 	callback: function(r) {
-			// 		console.log(r.message)				
-			// 	}
-
-			// });
-			if (frm.doc.workflow_state == "Approved"){
-				let method = '';
-				if (frm.doc.sector == "1. Energy") {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation';
-				} else if (frm.doc.sector == "2. Industrial processes and product use") {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation';
-				} else if (frm.doc.sector == "3. Agriculture") {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture.agri_calculation';
-				} else if (frm.doc.sector == "4. LAND USE, LAND-USE CHANGE AND FORESTRY") {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.land_use.land_calculation';
-				} else if (frm.doc.sector == "5. Waste") {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.waste.waste_calculation';
-				} else {
-					method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.other.other_calculation';
-				}
-				
-				
-				console.log(not_hidden_table_fields);				
-				frappe.call({
-					method: method,
-					args:{
-						"tablefields": not_hidden_table_fields,
-						"doc": frm.doc.doctype,
-						"doc_name": frm.doc.name
-					},
-					async: true	,
-					callback: function(r) {
-						console.log(r.message)
-					}
-				});
-
+		
+		if (frm.doc.workflow_state == "Approved"){
+			let method = '';
+			if (frm.doc.sector == "1. Energy") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.energy.energy_calculation';
+			} else if (frm.doc.sector == "2. Industrial processes and product use") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.ippu.ippu_calculation';
+			} else if (frm.doc.sector == "3. Agriculture") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.agriculture.agri_calculation';
+			} else if (frm.doc.sector == "4. LAND USE, LAND-USE CHANGE AND FORESTRY") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.land_use.land_calculation';
+			} else if (frm.doc.sector == "5. Waste") {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.waste.waste_calculation';
+			} else {
+				method = 'mrvtools.ghg_inventory.doctype.ghg_inventory.other.other_calculation';
 			}
+			
+							
+			frappe.call({
+				method: method,
+				args:{
+					"tablefields": not_hidden_table_fields,
+					"doc": frm.doc.doctype,
+					"doc_name": frm.doc.name
+				},
+				async: true	,
+				callback: function(r) {
+					console.log(r.message)
+				}
+			})
+		}
 			
 
 		
@@ -156,189 +74,90 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 		})
 		
-					if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-						$('[id="page-GHG Inventory"]').find('.actions-btn-group').hide();
-						
-					}else{
-						$('[id="page-GHG Inventory"]').find('.actions-btn-group').show();
-					}
+		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+			$('[id="page-GHG Inventory"]').find('.actions-btn-group').hide();
 			
-					if (frm.doc.work_state == "Approved"){
-						cur_frm.fields_dict.select_approver.df.read_only = 1
-					}
-					
-					if(frm.doc.work_state == "Rejected"){
-						if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-							console.log("Draft");
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-					}
+		}else{
+			$('[id="page-GHG Inventory"]').find('.actions-btn-group').show();
+		}
 
-					if(frm.doc.work_state == "Rejected"){
-						if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
-							frm.set_value("work_state","Rejected")
-							frm.save()
-						}
-					}
-					
-					
-					if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-						frm.add_custom_button('Approve',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									console.log("2 custom button ")
-									frm.set_value("workflow_state","Approved")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
-			
-							})
-			
-						},"Actions")
-			
-						frm.add_custom_button('Reject',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Rejected")
-									frm.refresh_field("workflow_state")
-									frm.save()
-								}, () => {
-			
-							})
-			
-						},"Actions")
-			
-						
-					}
-					else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
-						frm.add_custom_button('Edit',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Draft")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-				
-								})
-				
-							},"Actions")
-					}
-					else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
-						frm.add_custom_button('Send for Approval',()=>{
-							frappe.confirm('Are you sure you want to proceed?',
-								() => {
-									frm.set_value("workflow_state","Pending")
-									frm.refresh_field("workflow_state")
-									console.log(frm.doc.workflow_state);
-									frm.save()
-								}, () => {
-								
-							})
-							
-						},"Actions")
-					}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-
-	// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
-				
-	// 	$('[id="page-GHG Inventory"]').find('.actions-btn-group').hide();
-			
-	// 	}else{
-	// 		$('[id="page-GHG Inventory"]').find('.actions-btn-group').show();
-	// 	}
-
-	// 	if (frm.doc.work_state == "Approved"){
-	// 		// cur_frm.fields_dict.project_id.df.read_only = 1
-	// 		cur_frm.fields_dict.select_approver.df.read_only = 1
-	// 	}
+		if (frm.doc.work_state == "Approved"){
+			cur_frm.fields_dict.select_approver.df.read_only = 1
+		}
 		
-	// 	else if(frm.doc.work_state == "Pending"){
-	// 		console.log(frm.doc.work_state);
-	// 		if (frm.doc.workflow_state == "Rejected"){
-	// 			frm.set_value("work_state","Rejected")
-	// 			frm.save()
-	// 		}
-	// 		else if(frm.doc.workflow_state == "Approved"){
-	// 			frm.set_value("work_state","Approved")
-	// 			frm.save()
-	// 		}
-	// 	}
-	// 	else if(frm.doc.work_state == "Rejected"){
-	// 		if (frm.doc.workflow_state == "Draft"){
-	// 			frm.set_value("work_state","Rejected")
-	// 			frm.save()
-	// 		}
-	// 		else if(frm.doc.workflow_state == "Approved"){
-	// 			frm.set_value("work_state","Approved")
-	// 			frm.save()
-	// 		}
-	// 		else if(frm.doc.workflow_state == "Rejected"){
-	// 			frm.set_value("work_state","Rejected")
-	// 			frm.save()
-	// 		}
-	// 		else if(frm.doc.workflow_state == "Pending"){
-	// 			frm.set_value("work_state","Rejected")
-	// 			frm.save()
-	// 		}
-	// 	}
+		if(frm.doc.work_state == "Rejected"){
+			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+				console.log("Draft");
+				frm.set_value("work_state","Rejected")
+				frm.save()
+			}
+		}
 
-	// 	if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-	// 		frm.add_custom_button('Approve',()=>{
-	// 			frappe.confirm('Are you sure you want to proceed?',
-	// 				() => {
-	// 					frm.set_value("workflow_state","Approved")
-	// 					frm.refresh_field("workflow_state")
-	// 					frm.save()
-	// 				}, () => {
+		if(frm.doc.work_state == "Rejected"){
+			if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+				frm.set_value("work_state","Rejected")
+				frm.save()
+			}
+		}
+		
+		
+		if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+			frm.add_custom_button('Approve',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						console.log("2 custom button ")
+						frm.set_value("workflow_state","Approved")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
 
-	// 			})
+				})
 
-	// 		},"Actions")
+			},"Actions")
 
-	// 		frm.add_custom_button('Reject',()=>{
-	// 			frappe.confirm('Are you sure you want to proceed?',
-	// 				() => {
-	// 					frm.set_value("workflow_state","Rejected")
-	// 					frm.refresh_field("workflow_state")
-	// 					frm.save()
-	// 				}, () => {
+			frm.add_custom_button('Reject',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Rejected")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
 
-	// 			})
+				})
 
-	// 		},"Actions")
+			},"Actions")
 
 			
-	// 	}
-	// 	else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
-	// 		frm.add_custom_button('Edit',()=>{
-	// 			frappe.confirm('Are you sure you want to proceed?',
-	// 				() => {
-	// 					frm.set_value("workflow_state","Draft")
-	// 					frm.refresh_field("workflow_state")
-	// 					console.log(frm.doc.workflow_state);
-	// 					frm.save()
-	// 				}, () => {
+		}
+		else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
 	
-	// 				})
+					})
 	
-	// 			},"Actions")
-	// 	}
-	// 	else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
-	// 		frm.add_custom_button('Send for Approval',()=>{
-	// 			frappe.confirm('Are you sure you want to proceed?',
-	// 				() => {
-	// 					frm.set_value("workflow_state","Pending")
-	// 					frm.refresh_field("workflow_state")
-	// 					console.log(frm.doc.workflow_state);
-	// 					frm.save()
-	// 				}, () => {
+				},"Actions")
+		}
+		else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+			frm.add_custom_button('Send for Approval',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Pending")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
 					
-	// 			})
+				})
 				
-	// 		},"Actions")
-	// 	}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+			},"Actions")
+		}$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+
 
 
 		if(frm.is_new()){
@@ -372,10 +191,6 @@ frappe.ui.form.on('GHG Inventory', {
 		
 
 		if(frm.doc.workflow_state == "Approved"){
-			if (frm.doc.workflow_state == "Approved" || frm.doc.ghg_inventory_details.length != 0){
-
-			}
-			console.log("3")
 			frm.set_value('work_state','Approved')
 		}
 
@@ -407,14 +222,6 @@ frappe.ui.form.on('GHG Inventory', {
 						frm.fields_dict.edit_button.df.hidden = 1
 						frm.refresh_field("edit_button")
 					}
-					
-					// if (frm.doc.workflow_state == "Rejected"){
-					// 	frm.set_value(i,[])
-					// 	frm.save()
-					// }
-
-
-					
 				}
 			}
 		})
@@ -449,221 +256,285 @@ frappe.ui.form.on('GHG Inventory', {
 				}
 			})
 		}
+		for (let field of not_hidden_table_fields){
+			console.log("Field",field);
+
+			if(["reference_approach","electricity_generation","transport","manufacturing_industries","other_sectors","other_energy","international_bunkers"].includes(field) && frm.doc[field].length != 0){
+				
+				frappe.db.get_list('Energy Fuel Master List',{
+					fields : ['fuel_type'],
+					order_by : 'fuel_type asc',
+					group_by:'fuel_type',
+					pluck: 'fuel_type'
+				}).then(r =>{
+					var fuel_type_options = ""
+					for (var i of r){
+						fuel_type_options += ('\n'+ i)
+					}
+					let counter = 0
+					if(field == "reference_approach"){
+						counter = 0
+					}
+					else if(field == "electricity_generation"){
+						counter = 1
+					}
+					else if(field == "transport"){
+						counter = 2
+					}
+					else if(field == "manufacturing_industries"){
+						counter = 3
+					}
+					else if(field == "other_sectors"){
+						counter = 4
+					}
+					else if(field == "other_energy"){
+						counter = 5
+					}
+					else if(field == "international_bunkers"){
+						counter = 6
+					}
+					console.log("not_hidden_table_fields",not_hidden_table_fields);
+					console.log("Field",field);
+					for (let row =0; row < frm.doc[field].length;row++){
+						console.log(row);
+						console.log("Counter",counter);
+						console.log("Grid",cur_frm.grids[counter]);
+						cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						console.log("r.. ",cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options); 
+						frm.refresh_field(field)
+						
+						frappe.db.get_list('Energy Fuel Master List',{
+							fields : ['fuel'],
+							filters:{fuel_type:frm.doc[field][row].fuel_type},
+							pluck: 'fuel'
+						})
+						.then(r =>{
+							
+							var fuel_options = ""
 		
+							for (var i of r){
+								fuel_options += ('\n'+ i)
+							}
+							cur_frm.grids[counter].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+						
+						})
 
-
-		if(frm.doc.electricity_generation.length !=0 || frm.doc.manufacturing_industries.length !=0 || frm.doc.transport.length !=0 || frm.doc.other_sectors.length !=0 || frm.doc.other_energy.length !=0 || frm.doc.international_bunkers.length !=0){
-			
-			frappe.db.get_list('Energy Fuel Master List',{
-				fields : ['fuel_type'],
-				order_by : 'fuel_type asc',
-				group_by:'fuel_type',
-				pluck: 'fuel_type'
-			}).then(r =>{
-				var fuel_type_options = ""
-				for (var i of r){
-					fuel_type_options += ('\n'+ i)
-				}
-				for (let row =0; row < frm.doc.electricity_generation.length;row++){
-					
-					if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[1].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.electricity_generation[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[1].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('electricity_generation')
-
-
-				for (let row =0; row < frm.doc.manufacturing_industries.length;row++){
-					
-					if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[2].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.manufacturing_industries[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[2].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('manufacturing_industries')
-
-				for (let row =0; row < frm.doc.transport.length;row++){
-					
-					if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[3].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.transport[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[3].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('transport')
-
-				for (let row =0; row < frm.doc.other_sectors.length;row++){
-					
-					if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[4].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.other_sectors[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[4].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('other_sectors')
-
-				for (let row =0; row < frm.doc.other_energy.length;row++){
-					
-					if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[5].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.other_energy[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[5].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('other_energy')
-
-				for (let row =0; row < frm.doc.international_bunkers.length;row++){
-					
-					if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-						cur_frm.grids[6].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:frm.doc.international_bunkers[row].fuel_type},
-								pluck: 'fuel'
-							}).then(r =>{
-								
-									
-								var fuel_options = ""
-			
-								for (var i of r){
-									fuel_options += ('\n'+ i)
-								}
-								cur_frm.grids[6].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-							})
-					
-					}	
-				}
-				frm.refresh_field('international_bunkers')
-			});
-
-			
-			// if(.fuel_type){
-			// 	frappe.db.get_list('Energy Fuel Master List',{
-			// 		fields : ['fuel'],
-			// 		filters:{fuel_type:d.fuel_type},
-			// 		order_by : 'fuel asc',
-			// 		pluck: 'fuel'
-			// 	}).then(r =>{
-			// 		var fuel_options = ""
-			// 		for (var i of r){
-			// 			fuel_options += ('\n'+ i)
-			// 		}
-			// 		console.log(fuel_options);
-			// 		if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-			// 			cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('electricity_generation')
-			// 			}
-			// 		if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
-			// 			console.log(fuel_options);
-			// 			cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('manufacturing_industries')
-			// 			}
-			// 		if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.3. Transport"){
-			// 			cur_frm.grids[3].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('transport')
-			// 			}
-			// 		if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.4. Other sectors"){
-			// 			cur_frm.grids[4].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('other_sectors')
-			// 			}
-			// 		if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.5. Other"){
-			// 			cur_frm.grids[5].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('other_energy')
-			// 			}
-			// 		if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.D.1. International bunkers"){
-			// 			cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			// 			frm.refresh_field('international_bunkers')
-			// 			}
-			// 		console.log("fuel_options",fuel_options);
-			// 	});
-			// }
+					}
+					frm.refresh_field(field)
+				})
+			}
 		}
+
+		// if(frm.doc.electricity_generation.length !=0 || frm.doc.manufacturing_industries.length !=0 || frm.doc.transport.length !=0 || frm.doc.other_sectors.length !=0 || frm.doc.other_energy.length !=0 || frm.doc.international_bunkers.length !=0){
+			
+		// 	frappe.db.get_list('Energy Fuel Master List',{
+		// 		fields : ['fuel_type'],
+		// 		order_by : 'fuel_type asc',
+		// 		group_by:'fuel_type',
+		// 		pluck: 'fuel_type'
+		// 	}).then(r =>{
+		// 		var fuel_type_options = ""
+		// 		for (var i of r){
+		// 			fuel_type_options += ('\n'+ i)
+		// 		}
+		// 		for (let row =0; row < frm.doc.electricity_generation.length;row++){
+					
+		// 			if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[1].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.electricity_generation[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+								
+									
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[1].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('electricity_generation')
+
+
+		// 		for (let row =0; row < frm.doc.manufacturing_industries.length;row++){
+					
+		// 			if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[2].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.manufacturing_industries[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+								
+									
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[2].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('manufacturing_industries')
+
+		// 		for (let row =0; row < frm.doc.transport.length;row++){
+					
+		// 			if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[3].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.transport[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+								
+									
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[3].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('transport')
+
+		// 		for (let row =0; row < frm.doc.other_sectors.length;row++){
+					
+		// 			if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[4].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.other_sectors[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+								
+									
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[4].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('other_sectors')
+
+		// 		for (let row =0; row < frm.doc.other_energy.length;row++){
+					
+		// 			if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[5].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.other_energy[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+								
+									
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[5].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('other_energy')
+
+		// 		for (let row =0; row < frm.doc.international_bunkers.length;row++){
+					
+		// 			if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+						
+		// 				cur_frm.grids[6].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						
+		// 				frappe.db.get_list('Energy Fuel Master List',{
+		// 					fields : ['fuel'],
+		// 					filters:{fuel_type:frm.doc.international_bunkers[row].fuel_type},
+		// 						pluck: 'fuel'
+		// 					}).then(r =>{
+		// 						var fuel_options = ""
+			
+		// 						for (var i of r){
+		// 							fuel_options += ('\n'+ i)
+		// 						}
+		// 						cur_frm.grids[6].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							
+		// 					})
+					
+		// 			}	
+		// 		}
+		// 		frm.refresh_field('international_bunkers')
+		// 	});
+
+			
+		// 	// if(.fuel_type){
+		// 	// 	frappe.db.get_list('Energy Fuel Master List',{
+		// 	// 		fields : ['fuel'],
+		// 	// 		filters:{fuel_type:d.fuel_type},
+		// 	// 		order_by : 'fuel asc',
+		// 	// 		pluck: 'fuel'
+		// 	// 	}).then(r =>{
+		// 	// 		var fuel_options = ""
+		// 	// 		for (var i of r){
+		// 	// 			fuel_options += ('\n'+ i)
+		// 	// 		}
+		// 	// 		console.log(fuel_options);
+		// 	// 		if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
+		// 	// 			cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('electricity_generation')
+		// 	// 			}
+		// 	// 		if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
+		// 	// 			console.log(fuel_options);
+		// 	// 			cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('manufacturing_industries')
+		// 	// 			}
+		// 	// 		if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.3. Transport"){
+		// 	// 			cur_frm.grids[3].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('transport')
+		// 	// 			}
+		// 	// 		if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.4. Other sectors"){
+		// 	// 			cur_frm.grids[4].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('other_sectors')
+		// 	// 			}
+		// 	// 		if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.5. Other"){
+		// 	// 			cur_frm.grids[5].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('other_energy')
+		// 	// 			}
+		// 	// 		if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.D.1. International bunkers"){
+		// 	// 			cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
+		// 	// 			frm.refresh_field('international_bunkers')
+		// 	// 			}
+		// 	// 		console.log("fuel_options",fuel_options);
+		// 	// 	});
+		// 	// }
+		// }
 		// if(frm.doc.sub_sector == '3.C.6. Indirect N2O Emissions from manure management'){
 		// 	// frm.fields_dict.indirect_manure_management.df.hidden = 0
 		// 	frm.refresh_field('indirect_manure_management')
@@ -1875,84 +1746,6 @@ frappe.ui.form.on('Energy Reference ChildTable',{
 })
 
 frappe.ui.form.on('Energy Sector ChildTable', {
-	refresh:function(frm,cdt,cdn){
-		if(frm.doc.electricity_generation.length !=0 || frm.doc.manufacturing_industries.length !=0 || frm.doc.transport.length !=0 || frm.doc.other_sectors.length !=0 || frm.doc.other_energy.length !=0 || frm.doc.international_bunkers.length !=0){
-			
-			frappe.db.get_list('Energy Fuel Master List',{
-				fields : ['fuel_type'],
-				order_by : 'fuel_type asc',
-				group_by:'fuel_type',
-				pluck: 'fuel_type'
-			}).then(r =>{
-				var fuel_type_options = ""
-				for (var i of r){
-					fuel_type_options += ('\n'+ i)
-				}
-				for ( var row in frm.doc.electricity_generation){
-					cur_frm.grids[1].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-					if(row.fuel_type){
-						frappe.db.get_list('Energy Fuel Master List',{
-							fields : ['fuel'],
-							filters:{fuel_type:row.fuel_type},
-							order_by : 'fuel asc',
-							pluck: 'fuel'
-						}).then(r =>{
-							var fuel_options = ""
-							for (var i of r){
-								fuel_options += ('\n'+ i)
-							}
-							if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-								cur_frm.grids[1].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-								frm.refresh_field('electricity_generation')
-								}
-							})
-						}
-				}
-				frm.refresh_field('electricity_generation')
-				console.log(fuel_type_options);
-			});
-			if(d.fuel_type){
-				frappe.db.get_list('Energy Fuel Master List',{
-					fields : ['fuel'],
-					filters:{fuel_type:d.fuel_type},
-					order_by : 'fuel asc',
-					pluck: 'fuel'
-				}).then(r =>{
-					var fuel_options = ""
-					for (var i of r){
-						fuel_options += ('\n'+ i)
-					}
-					console.log(fuel_options);
-					if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('electricity_generation')
-						}
-					if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
-						console.log(fuel_options);
-						cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('manufacturing_industries')
-						}
-					if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.3. Transport"){
-						cur_frm.grids[3].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('transport')
-						}
-					if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.4. Other sectors"){
-						cur_frm.grids[4].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('other_sectors')
-						}
-					if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.5. Other"){
-						cur_frm.grids[5].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('other_energy')
-						}
-					if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.D.1. International bunkers"){
-						cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-						frm.refresh_field('international_bunkers')
-						}
-					console.log("fuel_options",fuel_options);
-				});
-			}
-		}
-	},
 	electricity_generation_add(frm, cdt, cdn) {
 		var d = locals[cdt][cdn]
 		frappe.db.get_list('Energy Fuel Master List',{
@@ -2188,7 +1981,7 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 				if (index > -1) { // only splice array when item is found
 					chemicalOptionsList.splice(index, 1); // 2nd parameter means remove one item only
 					}
-			}
+			} 
 		}
 		var chemicalOptions = ""
 		for(var i of chemicalOptionsList){

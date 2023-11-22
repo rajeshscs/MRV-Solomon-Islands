@@ -71,7 +71,7 @@ frappe.ui.form.on('Mitigations', {
 	},
 	
 	refresh: function(frm){
-
+		
 
 		$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
 		setTimeout(function() {

@@ -296,11 +296,7 @@ frappe.ui.form.on('Project', {
 
 	refresh: function(frm){
 		$('[id="page-Project"]').find('.actions-btn-group').hide();
-		// $.each(cur_frm.fields_dict, function(fieldname, field) {
-		// 	field.df.onchange = function() {
-		// 		frm.clear_custom_buttons()
-		// 	};
-		// })
+		
 
 		frm.call({
 			doc:frm.doc,
