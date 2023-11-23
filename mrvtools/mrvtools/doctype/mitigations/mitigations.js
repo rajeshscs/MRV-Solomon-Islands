@@ -42,38 +42,38 @@ frappe.ui.form.on('Mitigations', {
 			frm.refresh_field("performance_indicator")
 		}
 	},
-	observeDoc(frm){
-		var targetNode = document.querySelector('.indicator-pill');
+	// observeDoc(frm){
+	// 	var targetNode = document.querySelector('.indicator-pill');
 		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
+	// 		// Options for the observer (which mutations to observe)
+	// 		var config = { attributes: true, attributeFilter: ['class'] };
 		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.innerText == "Not Saved") {
-							console.log(targetNode.innerText);
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
+	// 		// Callback function to execute when mutations are observed
+	// 		var callback = function(mutationsList, observer) {
+	// 			for(var mutation of mutationsList) {
+	// 				if (mutation.type === 'attributes') {
+	// 					if (targetNode.innerText == "Not Saved") {
+	// 						console.log(targetNode.innerText);
+	// 						frm.clear_custom_buttons();
+	// 					}
+	// 				}
+	// 			}
+	// 		};
 		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
+	// 		// Create an observer instance linked to the callback function
+	// 		var observer = new MutationObserver(callback);
 		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-	},
-	onload_post_render(frm){
-		frm.trigger("observeDoc")
-	},
+	// 		// Start observing the target node for configured mutations
+	// 		observer.observe(targetNode, config);
+	// },
+	// onload_post_render(frm){
+	// 	frm.trigger("observeDoc")
+	// },
 	
 	refresh: function(frm){
 		
 
-		$('[id="page-Mitigations"]').find('.actions-btn-group').hide();
+		
 		setTimeout(function() {
 			$('[id="mitigations-tab1-tab"]').click()
 			$('[id="mitigations-tab1"]').addClass("active show")
@@ -81,24 +81,7 @@ frappe.ui.form.on('Mitigations', {
 		///////////////////////////////////
 		
 
-		frm.call({
-			doc:frm.doc,
-			method:"get_approvers",
-			async:false,
-			callback:function(r){
-				if(frm.doc.workflow_state == "Pending"){
-					for (let i of r.message){
-						if (frappe.session.user != "Administrator"){
-
-							if(frappe.user_roles.includes(i)){
-								$('[id="mitigations-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
-							}
-						}
-
-					}
-				}
-			}
-		})
+		
 		
 
 					// if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
@@ -439,9 +422,6 @@ frappe.ui.form.on('Mitigations', {
 
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				if(frm.doc.original_performance_indicator.length == 0){
-					// window.location.href = `${frm.doc.name}`
-				}
 
 				
 				if(frm.fields_dict.performance_indicator.df.read_only == 0){
@@ -627,6 +607,7 @@ frappe.ui.form.on('Mitigations', {
 				
 			}
 		}
+		
 		setTimeout(function() {
 			$('[id="mitigations-tab1-tab"]').click()
 			$('[id="mitigations-tab1"]').addClass("active show")

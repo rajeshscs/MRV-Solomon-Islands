@@ -296,28 +296,7 @@ frappe.ui.form.on('Project', {
 
 	refresh: function(frm){
 		$('[id="page-Project"]').find('.actions-btn-group').hide();
-		
-
-		frm.call({
-			doc:frm.doc,
-			method:"get_approvers",
-			async:false,
-			callback:function(r){
-				if(frm.doc.workflow_state == "Pending"){
-					for (let i of r.message){
-						if (frappe.session.user != "Administrator"){
-
-							if(frappe.user_roles.includes(i)){
-								$('[id="project-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
-							}
-						}
-
-					}
-				}
-			}
-		})
-
-		
+			
 
 		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.select_approver.df.read_only = 1

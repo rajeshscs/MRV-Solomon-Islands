@@ -2,35 +2,7 @@
 // For license information, please see license.txt
 var userList = []
 frappe.ui.form.on('SDG Monitoring Information', {
-	workflow_state:function(frm){
-		console.log("Ready..");
-		
-			$(document).ready(function() {
-				// Select the node that will be observed for mutations
-				var targetNode = document.querySelector('.indicator-pill');
-			
-				// Options for the observer (which mutations to observe)
-				var config = { attributes: true, attributeFilter: ['class'] };
-			
-				// Callback function to execute when mutations are observed
-				var callback = function(mutationsList, observer) {
-					for(var mutation of mutationsList) {
-						if (mutation.type === 'attributes') {
-							if (targetNode.classList.contains('orange')) {
-								frm.clear_custom_buttons();
-							}
-						}
-					}
-				};
-			
-				// Create an observer instance linked to the callback function
-				var observer = new MutationObserver(callback);
-			
-				// Start observing the target node for configured mutations
-				observer.observe(targetNode, config);
-			});
-		
-	},
+	
 	refresh: function(frm){
 		$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').hide();
 		setTimeout(function() {
@@ -38,52 +10,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			$('[id="sdg-monitoring-information-tab1"]').addClass("active show")
 
 		})
-		$(document).ready(function() {
-			// Select the node that will be observed for mutations
-			var targetNode = document.querySelector('.indicator-pill');
 		
-			// Options for the observer (which mutations to observe)
-			var config = { attributes: true, attributeFilter: ['class'] };
-		
-			// Callback function to execute when mutations are observed
-			var callback = function(mutationsList, observer) {
-				for(var mutation of mutationsList) {
-					if (mutation.type === 'attributes') {
-						if (targetNode.classList.contains('orange')) {
-							frm.clear_custom_buttons();
-						}
-					}
-				}
-			};
-		
-			// Create an observer instance linked to the callback function
-			var observer = new MutationObserver(callback);
-		
-			// Start observing the target node for configured mutations
-			observer.observe(targetNode, config);
-		});
-
-
-		frm.call({
-			doc:frm.doc,
-			method:"get_approvers",
-			async:false,
-			callback:function(r){
-				if(frm.doc.workflow_state == "Pending"){
-					console.log(r.message);
-					console.log(frappe.user_roles);
-					for (let i of r.message){
-						if (frappe.session.user != "Administrator"){
-
-							if(frappe.user_roles.includes(i)){
-								$('[id="sdg-monitoring-information-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
-							}
-						}
-
-					}
-				}
-			}
-		})
 		
 		// $(document).ready(function(){
 		// 	$('[data-fieldname]').on({
@@ -480,9 +407,9 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		}
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				if(frm.doc.actual_quantitative_impact.length == 0){
-					// window.location.href = `${frm.doc.name}`
-				}
+				// if(frm.doc.actual_quantitative_impact.length == 0){
+				// 	// window.location.href = `${frm.doc.name}`
+				// }
 
 				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
 					frm.call({

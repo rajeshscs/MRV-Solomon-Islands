@@ -17,6 +17,7 @@ class SDGAssessment(Document):
 	def categorylist(self):
 		category_list = frappe.db.get_list('SDG Category', pluck='name')
 
+
 		result_fields = []
 		temp = []
 		frappe.log_error('category',category_list)
@@ -40,11 +41,7 @@ class SDGAssessment(Document):
 		doc = frappe.db.sql(f""" SELECT parent FROM `tabHas Role` WHERE role = 'Approver SDG Tracking'""")
 		return doc
 
-	# @frappe.whitelist()
-	# def getFullCategoryList(self):
-	# 	categoryList = frappe.db.get_list('SDG Category', pluck='category')
 
-	# 	return categoryList
 
 	@frappe.whitelist()
 	def get_all_datas(self):
@@ -132,15 +129,4 @@ class SDGAssessment(Document):
 								new_field_dict["type"] = key
 								new_field_list.append(new_field_dict)
 		return [field_list,new_field_list]
-	
-	@frappe.whitelist()
-	def get_approvers(self):
-		doc= frappe.db.get_list("Role",
-			fields=['name'],
-			filters={
-				"name":["Like","%Approver%"]
-			},
-			pluck="name",
-			ignore_permissions=True)
-		return doc
 	

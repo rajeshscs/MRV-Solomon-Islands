@@ -5,171 +5,110 @@ var else_category=[]
 var json_code=[]
 var html_head =""
 
+
 html_head += "<head><style>table, th, tr, td {border: 1px solid;}</style></head>"
 html_head += "<table style='table-layout: fixed;width: 100%;' id=html_table class='table table-bordered'>"
 html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th scope=col style='width:30%;justify-content: center;'>Questions</th><th scope=col>Field Name</th><th scope=col style='width:15%;'>Old Values</th><th scope=col style='width:15%;'>New Values</th></tr>"
 frappe.ui.form.on('Adaptation', {
 
-
 	refresh: function(frm){
 
-		// $('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
-		frm.call({
-			doc:frm.doc,
-			method:"get_approvers",
-			async:false,
-			callback:function(r){
-				if(frm.doc.workflow_state == "Pending"){
-					console.log(r.message);
-					console.log(frappe.user_roles);
-					for (let i of r.message){
-						if (frappe.session.user != "Administrator"){
+		$('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
+		$('[class="input-area"]').css({"margin":"0px 0px 0px 10px"});
+		$('[class="checkbox"]').children().css("cursor","pointer")
+		$('[class="label-area"]').css({"width":"220px","padding":"8px","margin-left":"-14px","font-size": "14px"});
+		$('[class="help-box small text-muted"]').css("margin","0px");
 
-							if(frappe.user_roles.includes(i)){
-								$('[id="adaptation-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
-							}
-						}
-						
-					}
-				}
+		if (frm.doc.work_state == "Approved"){
+			cur_frm.fields_dict.project_id.df.read_only = 1
+			cur_frm.fields_dict.select_approver.df.read_only = 1
+		}
+		
+		if(frm.doc.work_state == "Rejected"){
+			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
+				console.log("Draft");
+				frm.set_value("work_state","Rejected")
+				frm.save()
 			}
-		})
+		}
 
-		if(frm.doc.workflow_state == "Approved" || frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending"){
+		if(frm.doc.work_state == "Rejected"){
+			if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
+				frm.set_value("work_state","Rejected")
+				frm.save()
+			}
+		}
+
+		if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+			frm.add_custom_button('Approve',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Approved")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
+			frm.add_custom_button('Reject',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Rejected")
+						frm.refresh_field("workflow_state")
+						frm.save()
+					}, () => {
+
+				})
+
+			},"Actions")
+
 			
-				$("#page-Adaptation").find('.actions-btn-group').hide();
-				
-			}else{
-				$("#page-Adaptation").find('.actions-btn-group').show()
-			}
-	
-	
-			if (frm.doc.work_state == "Approved"){
-				cur_frm.fields_dict.project_id.df.read_only = 1
-				cur_frm.fields_dict.select_approver.df.read_only = 1
-			}
-			
-			// if (frm.doc.work_state == '' && !frm.doc.__islocal){
-			// 	if (frm.doc.workflow_state == "Pending") {
-			// 		frm.set_value("work_state","Pending")
-			// 		frm.save()
-			// 	}
-			// }
-			// else if(frm.doc.work_state == "Pending"){
-			// 	console.log(frm.doc.work_state);
-			// 	if (frm.doc.workflow_state == "Rejected"){
-			// 		frm.set_value("work_state","Rejected")
-			// 		frm.save()
-			// 	}
-			// 	else if(frm.doc.workflow_state == "Approved"){
-			// 		frm.set_value("work_state","Approved")
-			// 	}
-			// }
-			// else if(frm.doc.work_state == "Rejected"){
-			// 	if (frm.doc.workflow_state == "Draft"){
-			// 		frm.set_value("work_state","Rejected")
-			// 		frm.save()
-			// 	}
-			// 	else if(frm.doc.workflow_state == "Approved"){
-			// 		// $('[id="mitigations-tab1"]').attr("style","pointer-events:auto;")
-			// 		frm.set_value("work_state","Approved")
-			// 		frm.save()
-			// 	}
-			// 	else if(frm.doc.workflow_state == "Rejected"){
-			// 		// $('[id="mitigations-tab1"]').attr("style","pointer-events:none;color: #999; opacity: 0.7;")
-			// 		frm.set_value("work_state","Rejected")
-			// 		frm.save()
-			// 	}
-			// 	else if(frm.doc.workflow_state == "Pending"){
-			// 		frm.set_value("work_state","Rejected")
-			// 		frm.save()
-			// 	}
-			// }
-			if(frm.doc.work_state == "Rejected"){
-				if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-					console.log("Draft");
-					frm.set_value("work_state","Rejected")
-					frm.save()
-				}
-			}
-
-			if(frm.doc.work_state == "Rejected"){
-				if(frm.doc.workflow_state == "Pending" && frm.doc.__unsaved == 1){
-					frm.set_value("work_state","Rejected")
-					frm.save()
-				}
-			}
-	
-			if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-				frm.add_custom_button('Approve',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Approved")
-							frm.refresh_field("workflow_state")
-							frm.save()
-						}, () => {
+		}
+		else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
 	
 					})
 	
 				},"Actions")
-	
-				frm.add_custom_button('Reject',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Rejected")
-							frm.refresh_field("workflow_state")
-							frm.save()
-						}, () => {
-	
-					})
-	
-				},"Actions")
-	
-				
-			}
-			else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
-				frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Draft")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
-		
-						})
-		
-					},"Actions")
-			}
-			else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
-				frm.add_custom_button('Send for Approval',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Pending")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
-						
-					})
+		}
+		else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
+			frm.add_custom_button('Send for Approval',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Pending")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
 					
+				})
+				
+			},"Actions")
+		}
+		else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
+			frm.add_custom_button('Edit',()=>{
+				frappe.confirm('Are you sure you want to proceed?',
+					() => {
+						frm.set_value("workflow_state","Draft")
+						frm.refresh_field("workflow_state")
+						console.log(frm.doc.workflow_state);
+						frm.save()
+					}, () => {
+	
+					})
+	
 				},"Actions")
-			}
-			else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
-				frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Draft")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
-		
-						})
-		
-					},"Actions")
-			}
-			$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+		}
+		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 
@@ -178,12 +117,6 @@ frappe.ui.form.on('Adaptation', {
 		// 	cur_frm.fields_dict.select_approver.df.read_only = 1
 		// }
 
-
-		$('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
-		$('[class="input-area"]').css({"margin":"0px 0px 0px 10px"});
-		$('[class="checkbox"]').children().css("cursor","pointer")
-		$('[class="label-area"]').css({"width":"220px","padding":"8px","margin-left":"-14px","font-size": "14px"});
-		$('[class="help-box small text-muted"]').css("margin","0px");
 
 		// frm.fields_dict.html_table.$wrapper.html(html_output)
 		if(!frm.doc.json){
@@ -276,21 +209,22 @@ frappe.ui.form.on('Adaptation', {
 		  }
 		});
 
-		// if (frm.doc.workflow_state == "Rejected"){
-		// 	frm.set_value("edited_project_details",[])
-		// 	frm.fields_dict.html_table.$wrapper.html("")
-		// 	frm.refresh_field("html_table")
-		// 	// frm.set_value('work_state','Approved')
-		// 	// frm.set_value("workflow_state","Approved")
-		// }
-		
+		if (frm.doc.workflow_state == "Rejected" && frm.doc.work_state == "Approved"){
+			frm.set_value("edited_project_details",[])
+			frm.fields_dict.html_table.$wrapper.html("")
+			frm.refresh_field("html_table")
+		}
+		// setTimeout(function() {
+		// 	$('[id="adaptation-tab1-tab"]').click()
+		// 	$('[id="adaptation-tab1"]').addClass("active show")
+		// })
 
-		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal && frm.doc.work_state != "Approved"){
+		if (frm.doc.workflow_state == "Approved" || frm.doc.workflow_state =="Rejected" || frm.doc.__islocal && frm.doc.work_state != "Approved"){
 			$('[id="adaptation-tab1"]').addClass("active")
 			$('[id="adaptation-tab1-tab"]').hide()
 			$('[id="adaptation-tab2-tab"]').hide()
 		}
-		else if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && (cur_frm.fields_dict.html_table.$wrapper[0].innerHTML != '' || frm.doc.edited_project_details.length != 0)){
+		else if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending") && (cur_frm.fields_dict.html_table.$wrapper[0].innerHTML != '' || frm.doc.edited_project_details.length != 0)){
 			$('[id="adaptation-tab1-tab"]').addClass("active")
 			$('[id="adaptation-tab1-tab"]').attr('aria-selected', 'true');
 			$('[id="adaptation-tab2-tab"]').removeClass("active")
@@ -301,6 +235,7 @@ frappe.ui.form.on('Adaptation', {
 		}
 		
 	},
+
 	project_id: function(frm) {
 		if(!frm.doc.included_in && frm.doc.project_id){
 			frm.call({
@@ -459,6 +394,29 @@ frappe.ui.form.on('Adaptation', {
 		frm.set_value("json", JSON.stringify(existing_json))
 		frm.refresh_field("json")
 		
+		if (frm.doc.work_state == ''){
+			if (frm.doc.workflow_state == "Pending") {
+				frm.set_value("work_state","Pending")
+			}
+		}
+
+		else if(frm.doc.work_state == "Pending"){
+			console.log(frm.doc.work_state);
+			if (frm.doc.workflow_state == "Rejected"){
+				frm.set_value("work_state","Rejected")
+			}
+			else if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
+		else if(frm.doc.work_state == "Rejected"){
+				
+			if(frm.doc.workflow_state == "Approved"){
+				frm.set_value("work_state","Approved")
+			}
+		}
+
 		if (frm.doc.workflow_state == "Approved"){
 			for (var i of frm.doc.edited_project_details){
 
@@ -721,7 +679,7 @@ frappe.ui.form.on('Adaptation', {
 
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved" && !frm.doc.__islocal){
-				// window.location.href = `${frm.doc.name}`
+				
 				var checkedList1 = []
 				var result=frm.call({
 					doc:frm.doc,

@@ -13,26 +13,7 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 		})
 		
 
-		frm.call({
-			doc:frm.doc,
-			method:"get_approvers",
-			async:false,
-			callback:function(r){
-				if(frm.doc.workflow_state == "Pending"){
-					console.log(r.message);
-					console.log(frappe.user_roles);
-					for (let i of r.message){
-						if (frappe.session.user != "Administrator"){
 
-							if(frappe.user_roles.includes(i)){
-								$('[id="adaptation-monitoring-information-tab1"]').attr("style","pointer-events:none;--text-color: var(--disabled-text-color); opacity: 0.8;")
-							}
-						}
-
-					}
-				}
-			}
-		})
 		// $(document).ready(function(){
 		// 	$('[data-fieldname]').on({
 		// 		keyup:function(){
@@ -470,9 +451,6 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 		}
 		if(frm.doc.work_state == "Approved"){
 			if (frm.doc.workflow_state != "Approved"  && !frm.doc.__islocal){
-				if(frm.doc.actual_performance_indicator.length == 0){
-					// window.location.href = `${frm.doc.name}`
-				}
 				if(frm.fields_dict.quantitative_impact.df.read_only == 0){
 					frm.call({
 						doc:frm.doc,

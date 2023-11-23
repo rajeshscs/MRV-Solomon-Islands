@@ -61,17 +61,6 @@ class Project(Document):
 					if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 						field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
 		return field_list
-	
-	@frappe.whitelist()
-	def get_approvers(self):
-		doc= frappe.db.get_list("Role",
-			fields=['name'],
-			filters={
-				"name":["Like","%Approver%"]
-			},
-			pluck="name",
-			ignore_permissions=True)
-		return doc
-	
+
 		
 	
