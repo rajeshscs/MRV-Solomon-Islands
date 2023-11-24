@@ -20,14 +20,12 @@
                <div class="media">
                   <p v-if="item.email"><i class="bi bi-envelope mr-3" ></i>{{ item.email }}</p>
                </div>
+               <div class="media"   v-if="item.contact_number1 &&  item.contact_number2 && item.contact_number3">
+                  <p><i class="bi bi-telephone mr-3"></i>{{ item.contact_number1 }}, {{ item.contact_number2 }},</p>
+                  <p style="margin-left: 22px;">{{ item.contact_number3 }}</p>
+               </div>
             </div>
               <br>
-            </div>
-            <div  v-for="item in data.message.parent_data.contact_number" :key="item.contact_number" >
-               <div class="media">
-                  <p><i class="bi bi-telephone mr-3" v-if="item.contact_number"></i>{{ item.contact_number }}</p>
-               </div>
-               <br>
             </div>
 
            <div class="col-lg-3 col-md-3 col-sm-6">

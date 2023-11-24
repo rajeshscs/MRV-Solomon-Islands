@@ -40,7 +40,9 @@
   "column_break_e0uvm",
   "email",
   "section_break_gducx",
-  "cotact_number",
+  "contact_number1",
+  "contact_number2",
+  "contact_number3",
   "add_your_partner_logo_here_section",
   "partner1",
   "partner2",
@@ -252,24 +254,33 @@
    "options": "email"
   },
   {
-   "fieldname": "cotact_number",
-   "fieldtype": "Table",
-   "label": "Cotact Number",
-   "options": "Mobile Number Footer"
-  },
-  {
    "fieldname": "column_break_e0uvm",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_gducx",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "contact_number2",
+   "fieldtype": "Data",
+   "label": "Contact Number2"
+  },
+  {
+   "fieldname": "contact_number3",
+   "fieldtype": "Data",
+   "label": "Contact Number3"
+  },
+  {
+   "fieldname": "contact_number1",
+   "fieldtype": "Data",
+   "label": "Contact Number1"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-11-18 10:39:12.663562",
+ "modified": "2023-11-24 10:47:23.921646",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",
