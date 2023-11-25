@@ -49,11 +49,16 @@ $(document).on("form-refresh", function(frm) {
 	}
 })
 
-$(window).ready(function(){
-	$('[class="flex col page-actions justify-content-end"]').hide()
+
+$(document).ready(function(){
+	// $('[id="page-Workspaces"] [class="flex col page-actions justify-content-end"]').hide()
+	// $('[id="page-Workspaces"] [class="standard-actions flex"]').hide()
 	$('[class="nav-item dropdown dropdown-help dropdown-mobile d-none d-lg-block"]').attr("style","display:none !important")
-	$('[class="standard-actions flex"]').hide()
+	console.log("HEEEi");	
+
+	$("head").append('<style>#page-Workspaces [class="flex col page-actions justify-content-end"]{display:none}</style>');
 })
+
 	// $('[data-fieldtype="Table"]').on("click",function(){
 	// 	console.log("Click..");
 	// 	$('[data-fieldtype = "Select"]').on("change",function(){

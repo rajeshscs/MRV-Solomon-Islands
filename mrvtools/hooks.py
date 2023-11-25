@@ -12,7 +12,7 @@ app_license = "MIT"
 
 website_redirects = [
     {"source": "/", "target": "/frontend/home"},
-]
+]  
 
 # website_route_rules = routes
 

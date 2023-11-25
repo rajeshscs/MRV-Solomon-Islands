@@ -1023,7 +1023,119 @@ frappe.ui.form.on('GHG Inventory', {
 		dynamicTitleList[3] = ''
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
 		frm.refresh_field('dynamic_title')
+		if(frm.doc.year){
+			var tableList = {
+				'3.A. Enteric fermentation':'enteric_fermentation',
+				'3.B.b. Direct N2O emissions per MMS (kt N2O)':'direct_emissions_mms'
+			}
+			for (var j of Object.keys(tableList)){
+				if(frm.doc.category == j || frm.doc.sub_sector == j){
+					frm.call({
+						doc:frm.doc,
+						method:"get_livestock_details",
+						async:false,
+						callback:function(r){
+							frm.doc[`${tableList[j]}`] = []
+							for (var i of r.message){
+								console.log(tableList[j])
+								var child = frm.add_child(`${tableList[j]}`)
+								child.category = i.category,
+								child.heads = i.heads
+							}
+							frm.refresh_field(`${tableList[j]}`)
+						}
+					})
+				}
+			}
+			
 
+			if (frm.doc.category == '5.A. Solid waste disposal'){
+				frappe.db.exists('Waste Population Master List',frm.doc.year).then(exists =>{
+					if (exists){
+					frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
+						doc => {
+							frm.doc.solid_waste = []
+							console.log(frm.doc.year);
+							console.log(doc.rural_population);
+							let row = frm.add_child('solid_waste')
+							row.urban_population = doc.urban_population
+							frm.refresh_field('solid_waste')
+							console.log(doc);
+						}
+					)
+					}
+					else{
+						frappe.show_alert({
+							message:__('No Data'),
+							// indicator:'orange'
+						}, 2);
+						frm.doc.solid_waste = []
+						frm.refresh_field('solid_waste')
+					}
+				})
+			}
+
+			if (frm.doc.category == '5.D. Wastewater treatment and discharge'){
+				frappe.db.exists('Waste Population Master List',frm.doc.year).then(exists =>{
+					if (exists){
+					frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
+						doc => {
+							frm.doc.ch4_wastewater_treatment = []
+							frm.doc.n2o_wastewater_treatment = []
+							console.log(frm.doc.year);
+							console.log(doc.rural_population);
+							frm.add_child('ch4_wastewater_treatment',{
+								population : doc.total_population
+							})
+							frm.refresh_field('ch4_wastewater_treatment')
+							frm.add_child('n2o_wastewater_treatment',{
+								population : doc.total_population
+							})
+							frm.refresh_field('n2o_wastewater_treatment')
+						}
+					)
+					}
+					else{
+						frappe.show_alert({
+							message:__('No Data'),
+							// indicator:'orange'
+						}, 2);
+						frm.doc.ch4_wastewater_treatment = []
+						frm.doc.n2o_wastewater_treatment = []
+						frm.refresh_field('ch4_wastewater_treatment')
+						frm.refresh_field('n2o_wastewater_treatment')
+					}
+				})
+			}
+			if (frm.doc.category == '5.C. Incineration and open burning of waste'){
+				frappe.db.exists('Waste Population Master List',frm.doc.year).then(exists =>{
+					if (exists){
+					frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
+						doc => {
+							frm.doc.open_burning_of_waste = []
+							console.log(frm.doc.year);
+							console.log(doc.rural_population);
+							frm.add_child('open_burning_of_waste',{
+								urban_population : doc.total_population
+							})
+							frm.refresh_field('open_burning_of_waste')
+						}
+					)
+					}
+					else{
+						frappe.show_alert({
+							message:__('No Data'),
+							// indicator:'orange'
+						}, 2);
+						frm.doc.ch4_wastewater_treatment = []
+						frm.doc.n2o_wastewater_treatment = []
+						frm.refresh_field('ch4_wastewater_treatment')
+						frm.refresh_field('n2o_wastewater_treatment')
+					}
+				})
+			}
+		}
+		
 		frappe.db.get_list('GHG Sub Sector',{
 			filters : {category:frm.doc.category},
 			order_by : 'name asc',
@@ -1209,7 +1321,30 @@ frappe.ui.form.on('GHG Inventory', {
 		dynamicTitleList[3] = ''
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
 		frm.refresh_field('dynamic_title')
-
+		if(frm.doc.year){
+			var tableList = {
+				'3.B.5. Indirect N2O emissions':'indirect_manure_management'
+			}
+			for (var j of Object.keys(tableList)){
+				if(frm.doc.category == j || frm.doc.sub_sector == j){
+					frm.call({
+						doc:frm.doc,
+						method:"get_livestock_details",
+						async:false,
+						callback:function(r){
+							frm.doc[`${tableList[j]}`] = []
+							for (var i of r.message){
+								console.log(tableList[j])
+								var child = frm.add_child(`${tableList[j]}`)
+								child.category = i.category,
+								child.heads = i.heads
+							}
+							frm.refresh_field(`${tableList[j]}`)
+						}
+					})
+				}
+			}
+		}
 		frappe.db.get_list('GHG Sub Category',{
 			filters : {sub_sector:frm.doc.sub_sector},
 			order_by : 'name asc',
@@ -1341,7 +1476,7 @@ frappe.ui.form.on('GHG Inventory', {
 		// }
 
 		//Direct N2O Emissions from managed soils//
-		if(frm.doc.sub_sector == '3.D.1.  Direct N2O emissions from managed soils'){
+		if(frm.doc.sub_sector == '3.D.1. Direct N2O emissions from managed soils'){
 			var table_name_list = {
 				'direct_managed_soils': 'Managed Soils',
 			}
@@ -1518,7 +1653,7 @@ frappe.ui.form.on('GHG Inventory', {
 	year:function(frm){
 		var tableList = {
 			'3.A. Enteric fermentation':'enteric_fermentation',
-			'3.B.5. Indirect N2O emissions':'indirect_manure_management' 
+			'3.B.5. Indirect N2O emissions':'indirect_manure_management'
 		}
 		for (var j of Object.keys(tableList)){
 			if(frm.doc.category == j || frm.doc.sub_sector == j){
