@@ -26,7 +26,6 @@ frappe.ui.form.on('Adaptation', {
 		
 		if(frm.doc.work_state == "Rejected"){
 			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-				console.log("Draft");
 				frm.set_value("work_state","Rejected")
 				frm.save()
 			}
@@ -72,7 +71,6 @@ frappe.ui.form.on('Adaptation', {
 					() => {
 						frm.set_value("workflow_state","Draft")
 						frm.refresh_field("workflow_state")
-						console.log(frm.doc.workflow_state);
 						frm.save()
 					}, () => {
 	
@@ -86,7 +84,6 @@ frappe.ui.form.on('Adaptation', {
 					() => {
 						frm.set_value("workflow_state","Pending")
 						frm.refresh_field("workflow_state")
-						console.log(frm.doc.workflow_state);
 						frm.save()
 					}, () => {
 					
@@ -100,7 +97,6 @@ frappe.ui.form.on('Adaptation', {
 					() => {
 						frm.set_value("workflow_state","Draft")
 						frm.refresh_field("workflow_state")
-						console.log(frm.doc.workflow_state);
 						frm.save()
 					}, () => {
 	
@@ -401,7 +397,6 @@ frappe.ui.form.on('Adaptation', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}
@@ -871,7 +866,7 @@ frappe.ui.form.on('Adaptation', {
 
 									frm.clear_table("ndp_cov")
 									for(var value of list2){
-										var row = frm.add_child("ndp_cov")
+										var row = frm.add_child("ndp_cov")``
 
 										row.ndp_coverage_tags = value      
 									}
@@ -891,7 +886,6 @@ frappe.ui.form.on('Adaptation', {
 					method:"get_jsons",
 					async: false,
 					callback:function(r){
-						console.log(r.message);
 						if (r.message[0].length != 0){
 
 

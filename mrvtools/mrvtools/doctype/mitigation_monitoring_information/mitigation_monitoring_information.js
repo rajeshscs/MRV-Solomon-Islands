@@ -4,7 +4,6 @@
 frappe.ui.form.on('Mitigation Monitoring Information', {
 	
 	refresh: function(frm){
-		console.log(frm.doc.ghg_estimation_methodology);
 
 		$('[id="page-Mitigation Monitoring Information"]').find('.actions-btn-group').hide();
 		setTimeout(function() {
@@ -121,7 +120,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 				
 				if(frm.doc.work_state == "Rejected"){
 					if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-						console.log("Draft");
 						frm.set_value("work_state","Rejected")
 						frm.save()
 					}
@@ -168,7 +166,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 							() => {
 								frm.set_value("workflow_state","Draft")
 								frm.refresh_field("workflow_state")
-								console.log(frm.doc.workflow_state);
 								frm.save()
 							}, () => {
 			
@@ -182,7 +179,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 							() => {
 								frm.set_value("workflow_state","Pending")
 								frm.refresh_field("workflow_state")
-								console.log(frm.doc.workflow_state);
 								frm.save()
 							}, () => {
 							
@@ -196,7 +192,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 							() => {
 								frm.set_value("workflow_state","Draft")
 								frm.refresh_field("workflow_state")
-								console.log(frm.doc.workflow_state);
 								frm.save()
 							}, () => {
 			
@@ -293,7 +288,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 
 		
 		// if(frm.is_dirty()){
-		// 	console.log("Hiii");
 		// 	// $('[id="mitigation-monitoring-information-tab1"]').addClass("active")
 		// 	$('[id="mitigation-monitoring-information-tab1-tab"]').addClass("active")
 		// 	// $('[id="mitigation-monitoring-information-tab1-tab"]').attr('aria-selected', 'true');
@@ -334,7 +328,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}
@@ -356,15 +349,10 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 		}
 		if(frm.doc.workflow_state == "Approved"){
 			if (frm.doc.work_state == "Approved" && (frm.doc.edited_performance_indicator.length != 0 || frm.doc.edited_project_details.length != 0)){
-				console.log("Entered..");
 				for (var i of frm.doc.edited_project_details){
 						frm.set_value(i.field_name,i.new_values)
-						console.log("i.field_name",i.field_name);
-						console.log(frm.doc.ghg_estimation_methodology);
-						console.log("i.new_values",i.new_values);
 					}
 					
-					console.log(frm.doc.ghg_estimation_methodology);
 					if(frm.doc.edited_performance_indicator.length != 0){
 						frm.set_value("performance_indicator",[])
 					for(var i of frm.doc.edited_performance_indicator){
@@ -377,7 +365,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 					}
 					frm.refresh_field("performance_indicator")
 				}
-				console.log(frm.doc.ghg_estimation_methodology);
 				
 				frm.refresh_field("edited_performance_indicator")
 			}
@@ -386,7 +373,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 			frm.set_value("actual_performance_indicator",[])
 			frm.set_value('work_state','Approved')
 			// frm.save()
-			console.log(frm.doc.ghg_estimation_methodology);
 		}     
 
 
@@ -559,7 +545,6 @@ frappe.ui.form.on('Mitigation Monitoring Information', {
 					name:frm.doc.project_id
 				},
 				callback: function(r){
-					console.log("R = ",r.message);
 					var year_options=""
 					for (var i of r.message){
 						year_options += ('\n'+ i)

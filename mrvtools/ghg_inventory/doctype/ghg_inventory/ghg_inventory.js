@@ -153,8 +153,43 @@ frappe.ui.form.on('GHG Inventory', {
 			}).then(r =>{
 				var sector_options = ""
 				for (var i of r){
-					sector_options += ('\n'+ i)
+					
+					var user_obj = {
+						"Energy Tracking" : "1. Energy",
+						"IPPU Tracking":"2. Industrial processes and product use",
+						"Agriculture Tracking":"3. Agriculture",
+						"Land Use Tracking":"4. LAND USE, LAND-USE CHANGE AND FORESTRY",
+						"Waste Tracking":"5. Waste",
+						"Other Tracking":"6. Other"
+					}
+					if(!frappe.user_roles.includes("Administrator") && !frappe.user_roles.includes("MRV Admin")){
+						console.log("Not a Admin...");
+						if(frappe.user_roles.includes("Energy Tracking") && i == user_obj["Energy Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+						if(frappe.user_roles.includes("IPPU Tracking") && i == user_obj["IPPU Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+						if(frappe.user_roles.includes("Agriculture Tracking") && i == user_obj["Agriculture Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+						if(frappe.user_roles.includes("Land Use Tracking") && i == user_obj["Land Use Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+						if(frappe.user_roles.includes("Waste Tracking") && i == user_obj["Waste Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+						if(frappe.user_roles.includes("Other Tracking") && i == user_obj["Other Tracking"]){
+							sector_options += ('\n'+ i)
+						}
+					}
+					else{
+						console.log("Admin...");
+						sector_options += ('\n'+ i)
+					}
+					
 				}
+
 				cur_frm.fields_dict.sector.df.options = sector_options
 				frm.refresh_field('sector')
 			})
@@ -173,6 +208,7 @@ frappe.ui.form.on('GHG Inventory', {
 			frm.refresh_field('sub_category')
 		}
 		
+
 
 		if(frm.doc.workflow_state == "Approved"){
 			frm.set_value('work_state','Approved')
@@ -308,173 +344,6 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 		}
 
-		// if(frm.doc.electricity_generation.length !=0 || frm.doc.manufacturing_industries.length !=0 || frm.doc.transport.length !=0 || frm.doc.other_sectors.length !=0 || frm.doc.other_energy.length !=0 || frm.doc.international_bunkers.length !=0){
-			
-		// 	frappe.db.get_list('Energy Fuel Master List',{
-		// 		fields : ['fuel_type'],
-		// 		order_by : 'fuel_type asc',
-		// 		group_by:'fuel_type',
-		// 		pluck: 'fuel_type'
-		// 	}).then(r =>{
-		// 		var fuel_type_options = ""
-		// 		for (var i of r){
-		// 			fuel_type_options += ('\n'+ i)
-		// 		}
-		// 		for (let row =0; row < frm.doc.electricity_generation.length;row++){
-					
-		// 			if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[1].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.electricity_generation[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-								
-									
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[1].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('electricity_generation')
-
-
-		// 		for (let row =0; row < frm.doc.manufacturing_industries.length;row++){
-					
-		// 			if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[2].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.manufacturing_industries[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-								
-									
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[2].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('manufacturing_industries')
-
-		// 		for (let row =0; row < frm.doc.transport.length;row++){
-					
-		// 			if(cur_frm.doc.transport.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[3].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.transport[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-								
-									
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[3].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('transport')
-
-		// 		for (let row =0; row < frm.doc.other_sectors.length;row++){
-					
-		// 			if(cur_frm.doc.other_sectors.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[4].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.other_sectors[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-								
-									
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[4].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('other_sectors')
-
-		// 		for (let row =0; row < frm.doc.other_energy.length;row++){
-					
-		// 			if(cur_frm.doc.other_energy.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[5].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.other_energy[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-								
-									
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[5].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('other_energy')
-
-		// 		for (let row =0; row < frm.doc.international_bunkers.length;row++){
-					
-		// 			if(cur_frm.doc.international_bunkers.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
-						
-		// 				cur_frm.grids[6].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						
-		// 				frappe.db.get_list('Energy Fuel Master List',{
-		// 					fields : ['fuel'],
-		// 					filters:{fuel_type:frm.doc.international_bunkers[row].fuel_type},
-		// 						pluck: 'fuel'
-		// 					}).then(r =>{
-		// 						var fuel_options = ""
-			
-		// 						for (var i of r){
-		// 							fuel_options += ('\n'+ i)
-		// 						}
-		// 						cur_frm.grids[6].grid.grid_rows[row].columns.fuel.df.options = fuel_options
-							
-		// 					})
-					
-		// 			}	
-		// 		}
-		// 		frm.refresh_field('international_bunkers')
-		// 	});
 
 			
 		// 	// if(.fuel_type){
@@ -535,7 +404,7 @@ frappe.ui.form.on('GHG Inventory', {
 		// frm.refresh_field('sub_sector')
 
 		// cur_frm.fields_dict.sub_category.df.options = ''
-		// frm.refresh_field('sub_category')
+		// frm.refresh_field('sub_category')	
 		if (frm.doc.workflow_state == "Approved" || frm.doc.__islocal){
 			$('[id="ghg-inventory-tab1"]').addClass("active")
 		}
@@ -678,79 +547,6 @@ frappe.ui.form.on('GHG Inventory', {
 				}
 			}
 		})
-
-		
-		// //energy cumulative calculation
-		// var cumulativeCo2 = 0;
-		// var cumulativeCh4 = 0;
-		// var cumulativeN2o = 0;
-		
-		// // var categoryName = frm.doc.tableFields;
-		// // console.log(categoryName)
-	
-		// tableFields.forEach(function (row) {
-		// 	if(frm.doc[row].length != 0){
-		// 		console.log(row)
-		// 		for(let i of frm.doc[row]){
-		// 			console.log(i);
-		// 			cumulativeCo2 += i.calculated_co2;
-		// 			console.log(i.calculated_co2);
-		// 			cumulativeCh4 += i.calculated_ch4;
-		// 			console.log(i.calculated_ch4);
-		// 			cumulativeN2o += i.calculated_n2o;
-		// 			console.log(i.calculated_n2o);
-		// 		}
-				
-		// 	}
-			
-			
-
-		// });
-		// frappe.db.get_list('IPPU GWP Master List', {
-		// 	fields: ["name","gwp"],
-		// 	filters: {
-		// 		gas_name: ["in",["Methane ","Nitrous oxide"]],
-		// 	}
-
-		// }).then(r => {
-			
-		// 	console.log("yes",r)
-		// 	var methane = 0;
-		// 	var n2o =0;	
-		// 	for(var i in r){
-		// 		if(r[i].name == "Nitrous oxide"){
-		// 			n2o +=parseFloat( r[i].gwp)
-		// 		}
-		// 		else{
-		// 			methane += parseFloat(r[i].gwp)
-		// 		}
-		// 	}
-		// 	// var t=	cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)
-		// 	// console.log(t)
-
-		// var formula =	"cumulativeCo2 +(cumulativeCh4 * methane )+(cumulativeN2o * n2o)"
-		// var total = 0
-		// total = eval(formula)
-		// // console.log(cumulativeCo2);
-		
-		// console.log(cumulativeCh4);
-		// console.log(methane);
-		// console.log(cumulativeN2o);
-		// console.log(n2o);
-		// console.log(formula);
-		// console.log(total);
-		// frm.set_value("total_co2",total)
-		// });
-		// frm.set_value('cumulative_co2', cumulativeCo2);
-		// frm.set_value('cumulative_ch4', cumulativeCh4);
-		// frm.set_value('cumulative_n2o', cumulativeN2o);
-		// frm.refresh_field('cumulative_co2')
-		// frm.refresh_field('cumulative_ch4')
-		// frm.refresh_field('cumulative_n2o')
-		// frm.refresh_field('total_co2')
-		// Lime calculation
-    
-		
 
 	},
 
@@ -1024,30 +820,8 @@ frappe.ui.form.on('GHG Inventory', {
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
 		frm.refresh_field('dynamic_title')
 		if(frm.doc.year){
-			var tableList = {
-				'3.A. Enteric fermentation':'enteric_fermentation',
-				'3.B.b. Direct N2O emissions per MMS (kt N2O)':'direct_emissions_mms'
-			}
-			for (var j of Object.keys(tableList)){
-				if(frm.doc.category == j || frm.doc.sub_sector == j){
-					frm.call({
-						doc:frm.doc,
-						method:"get_livestock_details",
-						async:false,
-						callback:function(r){
-							frm.doc[`${tableList[j]}`] = []
-							for (var i of r.message){
-								console.log(tableList[j])
-								var child = frm.add_child(`${tableList[j]}`)
-								child.category = i.category,
-								child.heads = i.heads
-							}
-							frm.refresh_field(`${tableList[j]}`)
-						}
-					})
-				}
-			}
 			
+			population_calculation(frm)
 
 			if (frm.doc.category == '5.A. Solid waste disposal'){
 				frappe.db.exists('Waste Population Master List',frm.doc.year).then(exists =>{
@@ -1322,28 +1096,7 @@ frappe.ui.form.on('GHG Inventory', {
 		frm.set_value('dynamic_title',dynamicTitleList.join(''))
 		frm.refresh_field('dynamic_title')
 		if(frm.doc.year){
-			var tableList = {
-				'3.B.5. Indirect N2O emissions':'indirect_manure_management'
-			}
-			for (var j of Object.keys(tableList)){
-				if(frm.doc.category == j || frm.doc.sub_sector == j){
-					frm.call({
-						doc:frm.doc,
-						method:"get_livestock_details",
-						async:false,
-						callback:function(r){
-							frm.doc[`${tableList[j]}`] = []
-							for (var i of r.message){
-								console.log(tableList[j])
-								var child = frm.add_child(`${tableList[j]}`)
-								child.category = i.category,
-								child.heads = i.heads
-							}
-							frm.refresh_field(`${tableList[j]}`)
-						}
-					})
-				}
-			}
+			population_calculation(frm)
 		}
 		frappe.db.get_list('GHG Sub Category',{
 			filters : {sub_sector:frm.doc.sub_sector},
@@ -1650,31 +1403,9 @@ frappe.ui.form.on('GHG Inventory', {
 	},
 
 
-	year:function(frm){
-		var tableList = {
-			'3.A. Enteric fermentation':'enteric_fermentation',
-			'3.B.5. Indirect N2O emissions':'indirect_manure_management'
-		}
-		for (var j of Object.keys(tableList)){
-			if(frm.doc.category == j || frm.doc.sub_sector == j){
-				frm.call({
-					doc:frm.doc,
-					method:"get_livestock_details",
-					async:false,
-					callback:function(r){
-						frm.doc[`${tableList[j]}`] = []
-						for (var i of r.message){
-							console.log(tableList[j])
-							var child = frm.add_child(`${tableList[j]}`)
-							child.category = i.category,
-							child.heads = i.heads
-						}
-						frm.refresh_field(`${tableList[j]}`)
-					}
-				})
-			}
-		}
-		
+	year: async function(frm){
+
+		population_calculation(frm)
 
 		if (frm.doc.category == '5.A. Solid waste disposal'){
 			frappe.db.exists('Waste Population Master List',frm.doc.year).then(exists =>{
@@ -2222,8 +1953,6 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 	}
 
 	
-
-	
 })
 
 frappe.ui.form.on('IPPU Ozone ChildTable',{
@@ -2288,6 +2017,74 @@ frappe.ui.form.on('IPPU Ozone ChildTable',{
 
 })
 
+async function population_calculation(frm){
+	var tableList = {
+		'3.A. Enteric fermentation':'enteric_fermentation',
+		'3.B.b. Direct N2O emissions per MMS (kt N2O)':'direct_emissions_mms',
+		'3.B.5. Indirect N2O emissions':'indirect_manure_management'
+	}
+	var formulaList = {
+		'3.A. Enteric fermentation':'Enteric Fermentation',
+		'3.B.b. Direct N2O emissions per MMS (kt N2O)':'Direct N2O Emissions',
+		'3.B.5. Indirect N2O emissions':'Indirect N2O Emissions'
+	}
+	for (var j of Object.keys(tableList)){
+		if(frm.doc.category == j || frm.doc.sub_sector == j){
+			for(var k of Object.keys(formulaList)){
+				if(j == k){
+					var table_key_j = `${tableList[j]}`
+					frm.doc[table_key_j] = []
+					var table_key_k = k
+					var res =  await frappe.db.get_list("GHG Inventory Report Formulas",{
+						fields:[ "co2", "ch4","n2o","cumulative_ch4","cumulative_co2","cumulative_n2o","total_co2"],
+						filters:{
+							"name": formulaList[table_key_k]
+						}
+					})
+					
+					frm.call({
+						doc:frm.doc,
+						method:"get_livestock_details",
+						async:false,
+						callback:async function(r){
+							for (var i of r.message){
+								var table_key_i = i
+								var child = frm.add_child(table_key_j)
+								child.category = table_key_i.category,
+								child.heads = table_key_i.heads
+								var result = await frappe.db.get_list("Livestock Emission Factor Master List",{
+									fields:["category","enteric_fermentation","manure_management", "excretion_rate", "typical_animal_mass","nitrogen_excretion","direct_n2o_n_emissions","managed_manure","managed_ivestock_manure","atmospheric_deposition"],
+									filters:{
+										"category" : table_key_i.category
+									}
+								})
+								// .then(function(result){
+									let head = parseFloat(table_key_i.heads)
+									let enteric_fermentation = parseFloat(result[0].enteric_fermentation)
+									let nitrogen_excretion_rate = parseFloat(result[0].excretion_rate  )
+									let animal_mass = parseFloat(result[0].typical_animal_mass)
+									let nitrogen_excretion_managed = parseFloat(result[0].nitrogen_excretion)
+									let emission_factor_n2o = parseFloat(result[0].atmospheric_deposition)
+									let managed_livestock_manure_n2o = parseFloat(result[0].managed_ivestock_manure)
+									let direct_n2o_n_emissions = parseFloat(result[0].direct_n2o_n_emissions)
+									if(table_key_k == "3.A. Enteric fermentation"){
+										child.ghg_emissions_tco2e = eval(res[0].ch4)
+									}
+									else{
+										child.ghg_emissions_tco2e = eval(res[0].n2o)
+									}
+									frm.refresh_field(table_key_j)
+								// })
+							}
+						}
+					})
+				}
+				
+			}
+			
+		}
+	}
+}
 
 function toTitleCase(str) {
 	return str.replace(
