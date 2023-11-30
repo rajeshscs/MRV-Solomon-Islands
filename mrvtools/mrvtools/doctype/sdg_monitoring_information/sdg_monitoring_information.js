@@ -6,7 +6,7 @@ frappe.ui.form.on('SDG Monitoring Information', {
 	refresh: function(frm){
 		$('[id="page-SDG Monitoring Information"]').find('.actions-btn-group').hide();
 		setTimeout(function() {
-			$('[id="sdg-monitoring-information-tab1-tab"]').click()
+			// $('[id="sdg-monitoring-information-tab1-tab"]').click()
 			$('[id="sdg-monitoring-information-tab1"]').addClass("active show")
 
 		})
@@ -172,76 +172,76 @@ frappe.ui.form.on('SDG Monitoring Information', {
 					frm.save()
 				}
 			}
-			if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-				frm.add_custom_button('Approve',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Approved")
-							frm.refresh_field("workflow_state")
-							frm.save()
-						}, () => {
+			// if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
+			// 	frm.add_custom_button('Approve',()=>{
+			// 		frappe.confirm('Are you sure you want to proceed?',
+			// 			() => {
+			// 				frm.set_value("workflow_state","Approved")
+			// 				frm.refresh_field("workflow_state")
+			// 				frm.save()
+			// 			}, () => {
 	
-					})
+			// 		})
 	
-				},"Actions")
+			// 	},"Actions")
 	
-				frm.add_custom_button('Reject',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Rejected")
-							frm.refresh_field("workflow_state")
-							frm.save()
-						}, () => {
+			// 	frm.add_custom_button('Reject',()=>{
+			// 		frappe.confirm('Are you sure you want to proceed?',
+			// 			() => {
+			// 				frm.set_value("workflow_state","Rejected")
+			// 				frm.refresh_field("workflow_state")
+			// 				frm.save()
+			// 			}, () => {
 	
-					})
+			// 		})
 	
-				},"Actions")
+			// 	},"Actions")
 	
 				
-			}
-			else if(frm.doc.workflow_state == "Approved"  && !frm.doc.__islocal){
-				frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Draft")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
+			// }
+			// else if(frm.doc.workflow_state == "Approved"  && !frm.doc.__islocal){
+			// 	frm.add_custom_button('Edit',()=>{
+			// 		frappe.confirm('Are you sure you want to proceed?',
+			// 			() => {
+			// 				frm.set_value("workflow_state","Draft")
+			// 				frm.refresh_field("workflow_state")
+			// 				console.log(frm.doc.workflow_state);
+			// 				frm.save()
+			// 			}, () => {
 		
-						})
+			// 			})
 		
-					},"Actions")
-			}
-			else if(frm.doc.workflow_state == "Draft"  && !frm.doc.__islocal){
-				frm.add_custom_button('Send for Approval',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Pending")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
+			// 		},"Actions")
+			// }
+			// else if(frm.doc.workflow_state == "Draft"  && !frm.doc.__islocal){
+			// 	frm.add_custom_button('Send for Approval',()=>{
+			// 		frappe.confirm('Are you sure you want to proceed?',
+			// 			() => {
+			// 				frm.set_value("workflow_state","Pending")
+			// 				frm.refresh_field("workflow_state")
+			// 				console.log(frm.doc.workflow_state);
+			// 				frm.save()
+			// 			}, () => {
 						
-					})
+			// 		})
 					
-				},"Actions")
-			}
-			else if(frm.doc.workflow_state == "Rejected"  && !frm.doc.__islocal){
-				frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							frm.set_value("workflow_state","Draft")
-							frm.refresh_field("workflow_state")
-							console.log(frm.doc.workflow_state);
-							frm.save()
-						}, () => {
+			// 	},"Actions")
+			// }
+			// else if(frm.doc.workflow_state == "Rejected"  && !frm.doc.__islocal){
+			// 	frm.add_custom_button('Edit',()=>{
+			// 		frappe.confirm('Are you sure you want to proceed?',
+			// 			() => {
+			// 				frm.set_value("workflow_state","Draft")
+			// 				frm.refresh_field("workflow_state")
+			// 				console.log(frm.doc.workflow_state);
+			// 				frm.save()
+			// 			}, () => {
 		
-						})
+			// 			})
 		
-					},"Actions")
-			}
-			$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
+			// 		},"Actions")
+			// }
+			// $('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 
 
 		if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc.edited_quantitative_impact.length != 0){

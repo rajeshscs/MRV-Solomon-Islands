@@ -88,6 +88,22 @@ frappe.ui.form.on('Project', {
 		$('[id="project-tab1-tab"]').click()
 		$('[id="project-tab1"]').addClass("active show")
 
+		if(frm.doc.objective == "Mitigation"){
+			frm.set_value("naming_series","SI-01-.####")
+		}
+		if(frm.doc.objective == "Adaptation"){
+			frm.set_value("naming_series","SI-02-.####")
+		}
+		if(frm.doc.objective == "Cross-Cutting"){
+			frm.set_value("naming_series","SI-03-.####")
+		}
+		if(frm.doc.objective == "Enablers"){
+			frm.set_value("naming_series","SI-04-.####")
+		}
+		if(frm.doc.objective == "Transparency"){
+			frm.set_value("naming_series","SI-05-.####")
+		}
+		frm.refresh_field("naming_series")
 		if (frm.doc.work_state == ''){
 			if (frm.doc.workflow_state == "Pending") {
 				frm.set_value("work_state","Pending")
@@ -316,83 +332,7 @@ frappe.ui.form.on('Project', {
 				frm.save()
 			}
 		}
-		
-		
-		if(frm.doc.workflow_state == "Pending" && !frm.doc.__islocal){
-			frm.add_custom_button('Approve',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Approved")
-						frm.refresh_field("workflow_state")
-						frm.save()
-					}, () => {
-
-				})
-
-			},"Actions")
-
-			frm.add_custom_button('Reject',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Rejected")
-						frm.refresh_field("workflow_state")
-						frm.save()
-					}, () => {
-
-				})
-
-			},"Actions")
-
-			
-		}
-		else if(frm.doc.workflow_state == "Approved" && !frm.doc.__islocal){
-			frm.add_custom_button('Edit',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Draft")
-						frm.refresh_field("workflow_state")
-						
-						frm.save()
-					}, () => {
 	
-					})
-	
-				},"Actions")
-		}
-		else if(frm.doc.workflow_state == "Draft" && !frm.doc.__islocal){
-			frm.add_custom_button('Send for Approval',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Pending")
-						frm.refresh_field("workflow_state")
-						
-						frm.save()
-					}, () => {
-					
-				})
-				
-			},"Actions")
-		}
-		else if(frm.doc.workflow_state == "Rejected" && !frm.doc.__islocal){
-			frm.add_custom_button('Edit',()=>{
-				frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						frm.set_value("workflow_state","Draft")
-						frm.refresh_field("workflow_state")
-						
-						frm.save()
-					}, () => {
-	
-					})
-	
-				},"Actions")
-		}
-		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-
-
-		
-		
-		
 		
 
 		frm.call({

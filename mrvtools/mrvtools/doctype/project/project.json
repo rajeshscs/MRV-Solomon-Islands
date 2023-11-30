@@ -206,7 +206,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "options": "PRO-.###"
+   "options": "SI-01-.####\nSI-02-.####\nSI-03-.####\nSI-04-.####\nSI-05-.####"
   },
   {
    "fieldname": "tab1",
@@ -275,7 +275,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-11-25 16:48:17.588204",
+ "modified": "2023-11-30 13:31:05.310950",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

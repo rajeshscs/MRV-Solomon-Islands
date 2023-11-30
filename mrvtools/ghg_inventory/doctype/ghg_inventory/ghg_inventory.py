@@ -148,8 +148,8 @@ class GHGInventory(Document):
 									row = self.get(new_field_name)[idx]
 									row.set(i["fieldname"], j.get(i["fieldname"]))
 
-					self.set(field["fieldname"],[])
-		self.save()
+					
+		
 		return "YES"
 
 

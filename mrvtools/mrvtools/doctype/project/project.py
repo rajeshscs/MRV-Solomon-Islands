@@ -24,7 +24,7 @@ class Project(Document):
 		for field in fields:
 			if frappe.db.exists("Project",self.name):
 				if field["fieldtype"] != "Date" and field["fieldtype"] != "Table MultiSelect" and field["fieldtype"] != "Table" and field["fieldtype"] != "Geolocation":
-					if field["fieldname"] not in ["workflow_state","work_state"]:
+					if field["fieldname"] not in ["workflow_state","work_state","coordinates"]:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = old_doc.get(field["fieldname"])
 

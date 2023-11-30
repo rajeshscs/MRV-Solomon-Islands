@@ -66,6 +66,7 @@
   "other_use",
   "section_break_7vpnb",
   "activity_data",
+  "section_break_7r62q",
   "enteric_fermentation",
   "indirect_manure_management",
   "direct_emissions_mms",
@@ -699,8 +700,7 @@
   },
   {
    "fieldname": "section_break_cfvgj",
-   "fieldtype": "Section Break",
-   "hidden": 1
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "tab2",
@@ -1118,11 +1118,15 @@
   {
    "fieldname": "section_break_hitsj",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_7r62q",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-24 20:23:40.047469",
+ "modified": "2023-11-30 12:53:37.510951",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

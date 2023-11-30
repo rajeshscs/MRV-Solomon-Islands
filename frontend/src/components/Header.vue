@@ -38,7 +38,7 @@
         </ul>
       </div>
       <div>
-        <a href="https://mrvtools.go1cms.com/login#login">
+        <a href="/login#login">
         <button class="btn custom-btn btn-md">Login</button>
         </a>
       </div>
