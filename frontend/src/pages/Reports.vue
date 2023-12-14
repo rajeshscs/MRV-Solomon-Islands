@@ -12,17 +12,33 @@
            National <span style="color: green; font-weight: 700;">GHG</span> Inventory
         </h1>
         <div class="container-fluid">
-           <div class="row">
-              <div class="img p-1">
-                 <div class="pattern-background">
-                    <img src="../assets/images/pattern.png" style="height: 100%;">
-                 </div>
-                 <div v-for="item in data.message" :key="item.name">
-                    <div v-if="item.report_image">
-                       <img :src="item.report_image" class="p-5 report-image">
-                    </div>
-                 </div>
+           <div class="row" v-for="item in data.message" :key="item.name">
+            <div class="img p-1"  v-if="item.report_image">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
               </div>
+              <div>
+                  <img :src="item.report_image" class="report-image">
+              </div>
+            </div>
+
+            <div class="img p-1"  v-if="item.report_image1">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
+              </div>
+              <div>
+                  <img :src="item.report_image1" class="report-image1">
+              </div>
+            </div>
+
+            <div class="img p-1" v-if="item.report_image2">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
+              </div>
+              <div>
+                  <img :src="item.report_image2" class="report-image2">
+              </div>
+            </div>  
            </div>
         </div>
      </div>
@@ -37,8 +53,9 @@
   
   const data = ref([]);
   const partnerLogos = ref([]); // To store partner logos
-  
+  console.log(data)
   const fetchData = async () => {
+    
     try {
       const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
       
@@ -52,6 +69,9 @@
     }
     var values = data._rawValue.message.parent_data.contact_number
     var childField = data._rawValue.message.child_table_data
+    // const {report_image,report_image1,report_image2} = data._rawValue.message.parent_data
+    var values = data._rawValue.message.parent_data
+
     // var contactField = data._rawValue.message.parent_data.contact_number
     // for (number of contactField){
     //   if(number.contact_number){
@@ -99,11 +119,12 @@
   position: absolute;
   z-index: -1;
   }
-  .report-image {
+  .report-image, .report-image1, .report-image2 {
   width: 80% !important;
   height: 493px !important;
   margin: auto;
   position: relative;
+  padding: 38px 0px !important;
   }
   @media(max-width: 768px) {
   .img {

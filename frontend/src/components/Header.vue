@@ -14,14 +14,14 @@
       
         <span><i class="bi bi-list" style="color: rgb(39, 39, 39) !important;"></i></span>
       </button>
-      <div class="site-logo ml-auto mr-4 "> <!-- Display only on lg and smaller screens -->
+      <div class="site-logo ml-auto mr-4 ">
         <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 mr-2">
           <li class="nav-item mr-2">
-            <router-link to='/home' class="custom-link text-lg " style="margin-right:20px;">Home</router-link>
+            <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }" style="margin-right:20px;">Home</router-link>
           </li>
           <li class="nav-item mr-2">
             <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="margin-right:20px;">About MRV Tool</router-link>

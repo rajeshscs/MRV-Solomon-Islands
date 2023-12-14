@@ -36,95 +36,95 @@ $(document).on("form-refresh", function(frm) {
 			cur_frm.clear_custom_buttons()
 		})
 	}
+	if (cur_frm.doc.doctype != "User Registration"){
+		if(cur_frm.doc.workflow_state == "Pending" && !cur_frm.doc.__islocal){
+			if((frappe.user_roles).some(role => role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
+				if(frappe.session.user == cur_frm.doc.select_approver || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
+					cur_frm.add_custom_button('Approve',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								cur_frm.set_value("workflow_state","Approved")
+								cur_frm.refresh_field("workflow_state")
+								cur_frm.save()
+							}, () => {
 
-	if(cur_frm.doc.workflow_state == "Pending" && !cur_frm.doc.__islocal){
-		if((frappe.user_roles).some(role => role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
-			if(frappe.session.user == cur_frm.doc.select_approver || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
-				cur_frm.add_custom_button('Approve',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
+						})
+
+					},"Actions")
+					
+					cur_frm.add_custom_button('Reject',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
 						() => {
-							cur_frm.set_value("workflow_state","Approved")
+							cur_frm.set_value("workflow_state","Rejected")
 							cur_frm.refresh_field("workflow_state")
 							cur_frm.save()
 						}, () => {
-
-					})
-
-				},"Actions")
-				
-				cur_frm.add_custom_button('Reject',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-					() => {
-						cur_frm.set_value("workflow_state","Rejected")
-						cur_frm.refresh_field("workflow_state")
-						cur_frm.save()
-					}, () => {
+							
+						})
 						
-					})
-					
-				},"Actions")
+					},"Actions")
+				}
 			}
-		}
-		
+			
 
+			
+		}
+		else if(cur_frm.doc.workflow_state == "Approved" && !cur_frm.doc.__islocal){
+			if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
+				if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
+					cur_frm.add_custom_button('Edit',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								cur_frm.set_value("workflow_state","Draft")
+								cur_frm.refresh_field("workflow_state")
+								
+								cur_frm.save()
+							}, () => {
+			
+						})
 		
-	}
-	else if(cur_frm.doc.workflow_state == "Approved" && !cur_frm.doc.__islocal){
-		if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
-			if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
-				cur_frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							cur_frm.set_value("workflow_state","Draft")
-							cur_frm.refresh_field("workflow_state")
+					},"Actions")
+				}
+			}  
+		}
+		else if(cur_frm.doc.workflow_state == "Draft" && !cur_frm.doc.__islocal){
+			if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
+				if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
+					cur_frm.add_custom_button('Send for Approval',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								cur_frm.set_value("workflow_state","Pending")
+								cur_frm.refresh_field("workflow_state")
+								
+								cur_frm.save()
+							}, () => {
 							
-							cur_frm.save()
-						}, () => {
-		
-					})
-	
-				},"Actions")
-			}
-		}  
-	}
-	else if(cur_frm.doc.workflow_state == "Draft" && !cur_frm.doc.__islocal){
-		if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
-			if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
-				cur_frm.add_custom_button('Send for Approval',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							cur_frm.set_value("workflow_state","Pending")
-							cur_frm.refresh_field("workflow_state")
-							
-							cur_frm.save()
-						}, () => {
+						})
 						
-					})
-					
-				},"Actions")
+					},"Actions")
+				}
 			}
 		}
-	}
-	else if(cur_frm.doc.workflow_state == "Rejected" && !cur_frm.doc.__islocal){
-		if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
-			if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
-				cur_frm.add_custom_button('Edit',()=>{
-					frappe.confirm('Are you sure you want to proceed?',
-						() => {
-							cur_frm.set_value("workflow_state","Draft")
-							cur_frm.refresh_field("workflow_state")
-							
-							cur_frm.save()
-						}, () => {
-							
-					})
-					
-				},"Actions")
+		else if(cur_frm.doc.workflow_state == "Rejected" && !cur_frm.doc.__islocal){
+			if((frappe.user_roles).some(role => !role.startsWith("Approver") || role === "System Manager" || role === "MRV Admin")){
+				if(frappe.session.user == cur_frm.doc.owner || (frappe.user_roles).some(role => role === "System Manager" || role === "MRV Admin")){
+					cur_frm.add_custom_button('Edit',()=>{
+						frappe.confirm('Are you sure you want to proceed?',
+							() => {
+								cur_frm.set_value("workflow_state","Draft")
+								cur_frm.refresh_field("workflow_state")
+								
+								cur_frm.save()
+							}, () => {
+								
+						})
+						
+					},"Actions")
+				}
 			}
 		}
+		$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
 	}
-	$('.inner-group-button button').removeClass("btn-default").addClass("btn-primary")
-	
 	$.ajax({
 		success:function(){
 			$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")

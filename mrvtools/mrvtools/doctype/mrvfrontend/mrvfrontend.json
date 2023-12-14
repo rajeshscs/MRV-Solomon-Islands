@@ -29,6 +29,10 @@
   "report_section_section",
   "add_report_image_here_section",
   "report_image",
+  "column_break_o9cjd",
+  "report_image1",
+  "column_break_ieonz",
+  "report_image2",
   "knowledge_resource_section_section",
   "multi_carousel_1_section",
   "knowledge_resource_details",
@@ -275,12 +279,30 @@
    "fieldname": "contact_number1",
    "fieldtype": "Data",
    "label": "Contact Number1"
+  },
+  {
+   "fieldname": "report_image1",
+   "fieldtype": "Attach Image",
+   "label": "Report Image1"
+  },
+  {
+   "fieldname": "report_image2",
+   "fieldtype": "Attach Image",
+   "label": "Report Image2"
+  },
+  {
+   "fieldname": "column_break_ieonz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_o9cjd",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-11-24 10:47:23.921646",
+ "modified": "2023-12-07 11:26:41.896958",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

@@ -10,10 +10,10 @@
               <div class="row" style="width: 98%; margin-left: 5px;">
                 <div v-for="item in data.message.child_table_data" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
-                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;" target="_blank">
+                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style=" border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert; align-items: unset;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>
@@ -26,10 +26,10 @@
               <div class="row" style="width: 98%; margin-left: 5px;">
                 <div v-for="item in data.message.child_table_data2" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
-                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;" target="_blank">
+                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style="position:relative; border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert; align-items: unset;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>
@@ -42,10 +42,10 @@
               <div class="row" style="width: 98%; margin-left: 5px;">
                 <div v-for="item in data.message.child_table_data2" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
-                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;" target="_blank">
+                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style="position:relative; border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert; align-items: unset;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>

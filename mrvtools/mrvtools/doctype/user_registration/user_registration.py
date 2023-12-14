@@ -3,6 +3,8 @@
 
 import frappe , json
 from frappe.model.document import Document
+from frappe.utils.password import update_password
+from frappe.utils.password import get_decrypted_password
 
 class UserRegistration(Document):
 	@frappe.whitelist()
@@ -51,18 +53,24 @@ class UserRegistration(Document):
 		# user.send_welcome_email = 1,
 		# user.roles = roles
 		# user.save(ignore_permissions=True)
-		
-		frappe.get_doc({
+		user = self.email_id
+		doc = frappe.get_doc({
 			"doctype": "User",
 			"name": self.email_id,
 			"email": self.email_id,
 			"first_name": self.user_name,
+			"enabled" :1,
 			"mobile_no": self.contact_number,
 			"send_welcome_email": 1,
 			"roles":roles
-		}).insert(ignore_permissions=True)
+		})
+		doc.insert(ignore_permissions=True)
+		decrypted_password = get_decrypted_password(doctype = "User Registration", name = self.name, fieldname="password", raise_exception=True)
+		update_password(user,pwd = decrypted_password, logout_all_sessions=0)
+		doc.save(ignore_permissions=True)
+		frappe.db.commit()
 	
-@frappe.whitelist()
+@frappe.whitelist(allow_guest = True)
 def createUser(formData):
 	formData = json.loads(formData)
 
