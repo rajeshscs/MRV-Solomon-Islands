@@ -143,7 +143,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.526), rgba(0, 0, 0, 0.082));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.312), rgba(0, 0, 0, 0.082));
   z-index: 1;
 }
 /* NAvbar */

@@ -2,21 +2,23 @@
   <HomeHeader />
   <div  id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
      <div v-for="item in data.message" :key="item.name" class="carousel-inner">
-        <div v-if="item.carousel1" class="carousel-item active">
-           <div class="card mx-0 image-overlay cus-card">
-              <img :src="item.carousel1" class="d-block w-100 h-100" alt="...">
-           </div>
-        </div>
-        <div v-if="item.carousel2" class="carousel-item">
-           <div class="card mx-0 image-overlay cus-card">
-              <img :src="item.carousel2"  class="d-block w-100 h-100" alt="...">
-           </div>
-        </div>
-        <div v-if="item.carousel2" class="carousel-item">
-           <div class="card mx-0 image-overlay cus-card">
-              <img :src="item.carousel2"  class="d-block w-100 h-100" alt="...">
-           </div>
-        </div>
+      <div v-if="item.carousel1 || item.carousel2 || item.carousel3">
+         <div v-if="item.carousel1" class="carousel-item active">
+            <div class="card mx-0 image-overlay cus-card">
+               <img :src="item.carousel1" class="d-block w-100 h-100" alt="...">
+            </div>
+         </div>
+         <div v-if="item.carousel2" class="carousel-item">
+            <div class="card mx-0 image-overlay cus-card">
+               <img :src="item.carousel2"  class="d-block w-100 h-100" alt="...">
+            </div>
+         </div>
+         <div v-if="item.carousel3" class="carousel-item">
+            <div class="card mx-0 image-overlay cus-card">
+               <img :src="item.carousel3"  class="d-block w-100 h-100" alt="...">
+            </div>
+         </div>
+      </div>
      </div>
      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
      <i style="font-size: 35px;" class="bi bi-chevron-left bi-2x"></i>
