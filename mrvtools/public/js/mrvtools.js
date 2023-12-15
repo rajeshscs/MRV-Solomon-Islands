@@ -145,7 +145,7 @@ $(document).on("form-refresh", function(frm) {
 			if (frappe.session.user != "Administrator"){
 				console.log("User roles = ",frappe.user_roles);
 				for (var i of r.message){
-					if(cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Approved"){
+					if(cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Approved"|| cur_frm.doc.workflow_state == "Rejected"){
 						if(frappe.user_roles.includes(i)){
 							$(`[id="page-${cur_frm.doc.doctype}"] [class="tab-pane fade show active"]`).attr("style","pointer-events:none !important;--text-color: var(--disabled-text-color); opacity: 0.9;")
 						}

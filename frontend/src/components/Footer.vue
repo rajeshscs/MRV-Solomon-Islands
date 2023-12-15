@@ -20,7 +20,7 @@
                <div class="media">
                   <p v-if="item.email"><i class="bi bi-envelope mr-3" ></i>{{ item.email }}</p>
                </div>
-               <div class="media"   v-if="item.contact_number1 &&  item.contact_number2 && item.contact_number3">
+               <div class="media" v-if="item.contact_number1 ||  item.contact_number2 || item.contact_number3">
                   <p><i class="bi bi-telephone mr-3"></i>{{ item.contact_number1 }}, {{ item.contact_number2 }},</p>
                   <p style="margin-left: 22px;">{{ item.contact_number3 }}</p>
                </div>

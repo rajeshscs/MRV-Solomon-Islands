@@ -5,6 +5,8 @@
     <div class="counter-area fix area-padding" id="about">
       <div class="container-fluid" data-aos="fade-right" data-aos-delay="100">
         <div class="row" data-aos="fade-right" data-aos-delay="100">
+          <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center"> About<span style="color: green; font-weight: 700;"> MRV Tools</span></h2>
+
           <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
             <div v-for="item in data.message" :key="item.name">
               <div v-if="item.about_heading_1">
