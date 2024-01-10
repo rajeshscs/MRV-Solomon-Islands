@@ -14,14 +14,17 @@ website_redirects = [
     {"source": "/", "target": "/frontend/home"},
 ]  
 
+
 # website_route_rules = routes
 
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/mrvtools/css/custom_page_design.css"
+app_include_css = "/assets/mrvtools/css/custom_page_design.css"
 app_include_js = "/assets/mrvtools/js/mrvtools.js"
+# app_include_js = "/assets/mrvtools/js/adaptationreport.js"
+
 
 # include js, css files in header of web template
 # web_include_css = "/assets/mrvtools/css/mrvtools.css"
@@ -35,7 +38,7 @@ app_include_js = "/assets/mrvtools/js/mrvtools.js"
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+# page_js = {"page" : "templates/pages/adaptationreport.js"}
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}

@@ -3,18 +3,18 @@
  "creation": "2023-11-04 13:06:47.157631",
  "docstatus": 0,
  "doctype": "Page",
- "icon": "fa fa-car",
+ "icon": "fa fa-list",
  "idx": 0,
- "modified": "2023-11-04 13:06:47.157631",
+ "modified": "2023-12-28 15:53:03.310539",
  "modified_by": "Administrator",
  "module": "Mrvtools",
- "name": "test",
+ "name": "adaptation-report",
  "owner": "Administrator",
- "page_name": "test",
+ "page_name": "adaptation-report",
  "roles": [],
  "script": null,
  "standard": "Yes",
  "style": null,
  "system_page": 0,
- "title": "test"
+ "title": "Adaptation Report"
 }

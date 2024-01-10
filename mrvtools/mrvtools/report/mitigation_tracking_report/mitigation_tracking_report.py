@@ -147,16 +147,18 @@ def getData(filters):
 	frappe.log_error("dataqqq",data)
 	global chartData 
 	chartData = []
+	frappe.log_error("Year",filters.get('monitoring_year'))
+
 	for i in data:
 		actualAnnualValue = frappe.db.get_value('Mitigation Monitoring Information',
 				{'monitoring_year':f"{filters.get('monitoring_year')}","project_id":i.name},
 				["actual_annual_ghg"], as_dict=1)
+		frappe.log_error("Data",actualAnnualValue)
 		startDate = frappe.db.get_value('Mitigation Monitoring Information',
 				{"project_id":i.name},"YEAR('start_date') as start_date")
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
 					filters={"project_id":f"{i.name}"},
 					fields = "sum(actual_annual_ghg) as till_date_actual_ghg")
-		frappe.log_error("Data",tillDateActual)
 		i['actual_annual_ghg'] = actualAnnualValue.actual_annual_ghg if actualAnnualValue else 0
 		if i.expected_annual_ghg == None or startDate == None:
 			startDate = 0
@@ -165,8 +167,8 @@ def getData(filters):
 			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
 		i['till_date_actual_ghg'] = tillDateActual[0].till_date_actual_ghg
 		chartData.append(tillDateActual[0].till_date_actual_ghg)
-		frappe.log_error("Datum",chartData)
-		frappe.log_error("test",tillDateActual)
+		# frappe.log_error("Datum",chartData)
+		# frappe.log_error("test",tillDateActual)
 		
 	return data
 

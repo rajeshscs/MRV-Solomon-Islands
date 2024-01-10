@@ -5,7 +5,7 @@ frappe.ui.form.on('GHG Inventory Master Report', {
 	refresh: function(frm) {
 		if(frm.doc.report == undefined){
 			frappe.db.get_list('GHG Inventory Report Categories', {
-				fields: ['category_name','display_order','parent1','parent2'],
+				fields: ['category_name', 'indent','display_order','parent1','parent2'],
 				limit:500,
 				order_by:'display_order asc'
 			}).then(records => {
@@ -13,6 +13,7 @@ frappe.ui.form.on('GHG Inventory Master Report', {
 				for (var record of records){
 					let row = frm.add_child('report')
 					row.categories= record.category_name
+					row.indent= record.indent
 					row.parent_categories= record.parent1
 					row.parent_2_categories= record.parent2
 				}

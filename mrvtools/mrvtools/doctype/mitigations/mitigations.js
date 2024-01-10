@@ -53,7 +53,6 @@ frappe.ui.form.on('Mitigations', {
 	// 			for(var mutation of mutationsList) {
 	// 				if (mutation.type === 'attributes') {
 	// 					if (targetNode.innerText == "Not Saved") {
-	// 						console.log(targetNode.innerText);
 	// 						frm.clear_custom_buttons();
 	// 					}
 	// 				}
@@ -98,7 +97,6 @@ frappe.ui.form.on('Mitigations', {
 					
 					if(frm.doc.work_state == "Rejected"){
 						if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-							console.log("Draft");
 							frm.set_value("work_state","Rejected")
 							frm.save()
 						}
@@ -145,7 +143,6 @@ frappe.ui.form.on('Mitigations', {
 					// 			() => {
 					// 				frm.set_value("workflow_state","Draft")
 					// 				frm.refresh_field("workflow_state")
-					// 				console.log(frm.doc.workflow_state);
 					// 				frm.save()
 					// 			}, () => {
 				
@@ -159,7 +156,6 @@ frappe.ui.form.on('Mitigations', {
 					// 			() => {
 					// 				frm.set_value("workflow_state","Pending")
 					// 				frm.refresh_field("workflow_state")
-					// 				console.log(frm.doc.workflow_state);
 					// 				frm.save()
 					// 			}, () => {
 								
@@ -173,7 +169,6 @@ frappe.ui.form.on('Mitigations', {
 					// 			() => {
 					// 				frm.set_value("workflow_state","Draft")
 					// 				frm.refresh_field("workflow_state")
-					// 				console.log(frm.doc.workflow_state);
 					// 				frm.save()
 					// 			}, () => {
 				
@@ -304,7 +299,6 @@ frappe.ui.form.on('Mitigations', {
 		// 	frm.set_value("original_performance_indicator",[])
 		// 	frm.set_value('work_state','Approved')
 		// 	if(frm.is_dirty()){
-		// 		console.log("Unsaved.....");
 		// 		frm.save()
 		// 	}
 		// 	// frm.save()
@@ -331,7 +325,6 @@ frappe.ui.form.on('Mitigations', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}
@@ -411,7 +404,6 @@ frappe.ui.form.on('Mitigations', {
 			frm.set_value("original_performance_indicator",[])
 			frm.set_value('work_state','Approved')
 			// if(frm.is_dirty()){
-			// 	console.log("Unsaved.....");
 			// 	frm.save()
 			// }
 			// frm.save()

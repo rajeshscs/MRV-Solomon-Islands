@@ -1,4 +1,5 @@
 $(document).on("form-refresh", function(frm) {
+	
 	if(cur_frm.doc.doctype != "User Registration"){	
 		$(`[id="page-${cur_frm.doc.doctype}"]`).find('.actions-btn-group').hide();
 	}
@@ -128,8 +129,6 @@ $(document).on("form-refresh", function(frm) {
 	$.ajax({
 		success:function(){
 			$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
-
-			console.log("InnerText = ",$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText"));
 			$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
 				
 				$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")

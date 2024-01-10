@@ -12,6 +12,7 @@
   "category_name",
   "display_order",
   "is_parent",
+  "indent",
   "parent1",
   "parent2"
  ],
@@ -44,11 +45,16 @@
    "fieldname": "parent2",
    "fieldtype": "Data",
    "label": "Parent 2"
+  },
+  {
+   "fieldname": "indent",
+   "fieldtype": "Int",
+   "label": "Indent"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-09 16:24:57.862566",
+ "modified": "2024-01-03 15:07:24.595691",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory Report Categories",
