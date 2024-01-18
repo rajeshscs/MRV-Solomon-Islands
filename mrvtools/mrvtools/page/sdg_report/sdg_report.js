@@ -19,11 +19,11 @@ class Analytics {
 		this.$sidebar_list = this.page.sidebar.find("ul");
 		// alert(frappe.defaults.get_user_default("Order"))
 		this.datatable=null;
-		this.make()
 		// this.add_card_button_to_toolbar();
 		this.set_default_secondary_action();
 		this.sdg_filter_fields()
 		this.render_datatable()
+		this.make()
 		// this.create_date_range_field();
 	}
 	set_default_secondary_action() {
@@ -31,6 +31,7 @@ class Analytics {
 		this.refresh_button = this.page.add_action_icon("refresh", () => {
 			this.$container.empty()
 			this.$report.empty()
+			this.$heading.empty()
 			$('[class="sdg_report page-main-content"]:first').remove()
 			this.make()
 			this.render_datatable()
@@ -102,6 +103,7 @@ class Analytics {
 		this.year_select.on("change",(r) => {
 			this.render_datatable()
 			this.get_total_sdg_report();
+			this.$heading.empty()
 			
 		})
 		// this.key_link = this.page.add_data	(
@@ -196,7 +198,12 @@ class Analytics {
 	}
 	
 	get_total_sdg_report() {
-		frappe.call('mrvtools.mrvtools.page.sdg_report.sdg_report.get_total_sdg_report_data')
+		frappe.call('mrvtools.mrvtools.page.sdg_report.sdg_report.get_total_sdg_report_data',{
+			year:this.year_select[0].value,
+			key_sector:this.key_sector,
+			key_sub_sector : this.key_sub_sector,
+			impact_area : this.impact_area[0].value
+		})
 			.then((r) => {
 				$("#categories_chart").html("No of Projects based on Categories")
 				
@@ -236,7 +243,8 @@ class Analytics {
 				let columns = r.message[0]
 				let data = r.message[1]
 				console.log(r.message);
-
+				$('.headline:first').remove();
+				this.$heading = $('<b class="headline" style="margin-left: 30px;">SDG Report</b>').insertBefore(this.$report);
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
 			})
 			

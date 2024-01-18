@@ -105,14 +105,12 @@
 .title{
 	size: 40px;
 }
-/* #page-sales-analytics .layout-side-section{
-	display: none !important;
-} */
 
 
 .number-widget-box {
     width: 100%;
 }
+
 
 .total_card{
 	flex:calc(33.3% - 5px); 
@@ -122,7 +120,24 @@
 	background-color:rgb(255, 255, 255);
 }
 
+
 .total_card_div{
 	display:flex; 
 	gap: 5px;
 }
+
+.finance_report.page-main-content{
+	padding: 0px 15px;
+}
+.layout-main-section .report-wrapper {
+    padding:  0px !important;
+    margin: 11px 30px 1px 30px;
+    border: 1px solid #dbdbdb;
+}
+
+.dt-scrollable{
+	width: 1079.67px;
+}
+/* :root, [data-theme=light] {
+	--padding-xs: 0px;
+} */

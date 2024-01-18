@@ -1,8 +1,9 @@
 
 import frappe,json
-
 import pandas as pd
-
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.styles import Font
 from frappe.utils import get_site_base_path,now
 
 
@@ -107,7 +108,7 @@ def get_finance_columns(project = None):
 			order_by = 'financial_year')
 		for i in totalMonitoringYearsFinance:
 			col.append(f"{i.financial_year}" + ":Data")
-			frappe.log_error('Test',i.financial_year)
+			
 	keys_only = [item.split(':')[0] for item in col]
 	return keys_only
 
@@ -190,7 +191,7 @@ def get_mitigation_datas(project = None):
 				value = frappe.db.sql(query,as_dict =1)
 
 				
-				frappe.log_error('value',value)	
+				
 
 				each[f'{i.monitoring_year}'] = value[0].actual_monitored_value if value and value[0].actual_monitored_value else 0
 		output.extend(result)
@@ -219,12 +220,12 @@ def get_adaptation_datas(project = None):
 				{conditions}
 			"""
 		result = frappe.db.sql(query, as_dict=1)
-		frappe.log_error("Result",result)
+		
 		monitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
 					filters={'proj_id':project},
 					fields = ['monitoring_year'],
 					order_by = 'monitoring_year asc')
-		frappe.log_error("Monitor",monitoringYearsAdaptation)
+		
 		for each in result:
 			for i in monitoringYearsAdaptation:
 				query = f"""
@@ -336,7 +337,7 @@ def get_chart(project=None):
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc',
 							pluck="monitoring_year")
-		frappe.log_error("expectedValue",expectedValue)
+		
 		for i in monitoringYears:
 			currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"proj_id":f'{project}',"monitoring_year":i},'actual_annual_ghg')
 			# output[0][f'{i.monitoring_year}'] = currentValue if currentValue else 0
@@ -361,17 +362,17 @@ def get_chart2(project=None):
 		amountExpected = []
 		amountSpent = []
 		expectedDoc = frappe.get_doc('Climate Finance',{'project_id': project})
-		frappe.log_error("ExpectedDoc",expectedDoc)
+		
 		expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
-		frappe.log_error("Expected",expectedDocList)
+		
 		for i in expectedDocList:
 			amountExpected.append(i.amount)
-			frappe.log_error("i",i.amount)
+			
 		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
 		spentDocList = spentDoc.as_dict().total_budget_disbursement
 		for i in spentDocList:
 			amountSpent.append(i.total_disbursement_usd)
-			frappe.log_error("s",i.total_disbursement_usd)
+			
 
 
 		name = frappe.db.get_value('Climate Finance', {'project_id': f'{project}'}, 'name')
@@ -387,8 +388,8 @@ def get_chart2(project=None):
 		
 
 
-
 @frappe.whitelist()
+
 def download_excel(project):
 	df1 = get_project_details(project)
 	df2 = get_mitigation_details(project)
@@ -396,19 +397,17 @@ def download_excel(project):
 	df4 =  get_sdg_details(project)
 	df5 =  get_finance_details(project)
 	
-	frappe.log_error("df1",df1)
-	frappe.log_error("df2",df2)
-	frappe.log_error("df3",df3)
-	frappe.log_error("df4",df4)
-	frappe.log_error("df5",df5)
+	# frappe.log_error("df1",df1)
+	# frappe.log_error("df2",df2)
+	# frappe.log_error("df3",df3)
+	# frappe.log_error("df4",df4)
+	# frappe.log_error("df5",df5)
 	
-
 	data_dict1 = {df1[0][i]: [row[i] for row in df1[1]] for i in range(len(df1[0]))}
 	data_dict2 = {df2[0][i]: [row[i] for row in df2[1]] for i in range(len(df2[0]))}
 	data_dict3 = {df3[0][i]: [row[i] for row in df3[1]] for i in range(len(df3[0]))}
 	data_dict4 = {df4[0][i]: [row[i] for row in df4[1]] for i in range(len(df4[0]))}
 	data_dict5 = {key: [d.get(key) for d in df5[1]] for key in df5[0]}
-
 
 	export_data1 = pd.DataFrame(data_dict1)
 	export_data2 = pd.DataFrame(data_dict2)
@@ -417,12 +416,70 @@ def download_excel(project):
 	export_data5 = pd.DataFrame(data_dict5)
 	
 	
-	frames = [export_data1,export_data2,export_data3,export_data4,export_data5]
-	combined_data = pd.concat(frames,ignore_index=True)
 	site_name = get_site_base_path()
 	nowTime = now()[:-7]
 	nowTime = nowTime.replace(" ","")
 	nowTime = nowTime.replace("-","")
 	nowTime = nowTime.replace(":","")
-	combined_data.to_excel(f"{site_name}/public/files/MRV-Report-{nowTime}.xlsx")
+	
+	# Initialize the Excel Writer
+	wb = Workbook()
+	ws = wb.active
+	ws.title = 'Sheet1'
+	
+	# Create a bold font
+	bold_font = Font(bold=True)
+	
+	# Write each dataframe to a different worksheet.
+	export_data_list = [export_data1, export_data2, export_data3, export_data4, export_data5]
+	for df in range(0,len(export_data_list)):
+		rows = dataframe_to_rows(export_data_list[df], index=False, header=True)
+		header = next(rows)
+		if df == 0:
+			project_id = ["Project ID :",project ]
+			table_heading = ["Project Details :"]
+			ws.append(project_id)
+			ws.append([])
+			for cell in ws[ws.max_row]:
+				cell.font = bold_font
+		if df == 1:
+			table_heading = ["Mitigation Summary :"]
+		if df == 2:
+			table_heading = ["Adaptation Summary :"]
+		if df == 3:
+			table_heading = ["SDG Summary :"]
+		if df == 4:
+			table_heading = ["Finance Summary :"]
+
+
+		
+
+		ws.append(table_heading)
+		for cell in ws[ws.max_row]:
+			cell.font = bold_font
+
+		ws.append(header)
+		for cell in ws[ws.max_row]:
+			cell.font = bold_font
+		
+		for row in rows:
+			ws.append(row)
+		
+		ws.append([])
+		ws.append([])
+		ws.append([])
+	
+	# Adjust the width of the columns and remove border
+	for column_cells in ws.columns:
+		length = max(len(str(cell.value)) for cell in column_cells)
+		ws.column_dimensions[column_cells[0].column_letter].width = length
+		for cell in column_cells:
+			cell.border = None
+	
+	# Save the workbook
+	wb.save(f"{site_name}/public/files/MRV-Report-{nowTime}.xlsx")
 	return f"../files/MRV-Report-{nowTime}.xlsx"
+
+
+
+

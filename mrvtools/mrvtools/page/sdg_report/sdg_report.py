@@ -5,8 +5,10 @@ from frappe.utils import get_site_base_path,now
 
 
 @frappe.whitelist()
-def get_total_sdg_report_data():
+def get_total_sdg_report_data(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
+		data = getData(year,key_sector,key_sub_sector,impact_area)
+		# frappe.log_error("data",data)
 		field_list = []
 		get_counts = []
 		meta = frappe.get_meta("SDG Assessment")
@@ -15,15 +17,23 @@ def get_total_sdg_report_data():
 		for field in fields:
 			if field["fieldtype"] == "Check":
 				field_list.append(field["fieldname"])
+
+		first_elements = [sublist[0] for sublist in data]
 		for field in field_list:
-			count=0
-			values=frappe.db.get_all("SDG Assessment",field)
+			count =0
+			values=frappe.db.get_all("SDG Assessment",[field],{'project_id':["in",first_elements]})
+			
 			for i in values:
+				
+				frappe.log_error("i",i)
 				for key,value in i.items():
 					if value ==1:
 						count= count+1
 			get_counts.append(count)
+		
+		
 			
+	
 		categories = ['Poverty Reduction', 'Inequality', 'Gender', 'Industry', 'Environment', 'Employment', 'Education', 'Water', 'Food','Health']
 		
 		return {"data":get_counts,"categories":categories}
@@ -60,23 +70,22 @@ def getColumn():
 def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = None):
 	
 	conditions = ""
+	# frappe.log_error("year",year)
 	if year:
-		
 		conditions += f" AND  YEAR(P.financial_closure_date) <= '{year}'"
-	if year == None:
+	elif year == None:
 		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
+	elif year == '':
+		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
+		# frappe.log_error("Cond",conditions)
 	if key_sector:
 		conditions += f" AND P.key_sector like '{key_sector}'"
 	if key_sub_sector:
 		conditions += f" AND P.key_sub_sector like '{key_sub_sector}'"
 	if impact_area:
-		frappe.log_error("In",impact_area)
 		cur_ele = impact_area.lower()
-		frappe.log_error("cur_ele",cur_ele)
 		cur_word = cur_ele.split(" ")
-		frappe.log_error("cur_word",cur_word)
 		resWord = "_".join(cur_word)
-		frappe.log_error("resWord",resWord)
 		conditions += f" AND SDG.{resWord} = 1"
 
 	query= f"""
@@ -106,6 +115,7 @@ def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = No
 			ORDER BY
 				SDG.project_id
 	"""
+	# frappe.log_error("Condifds",conditions)
 	result = frappe.db.sql(query, as_dict=1)
 	field_list = []
 	meta = frappe.get_meta("SDG Assessment")
@@ -126,6 +136,7 @@ def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = No
 		resString = ",".join(get_list)
 		each["impact_summaries"] = resString
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]
+	# frappe.log_error('values only',values_only)
 	return values_only
 
 

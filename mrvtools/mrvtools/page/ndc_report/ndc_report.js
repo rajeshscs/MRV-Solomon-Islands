@@ -23,6 +23,7 @@ class NdcReport {
 		
 		this.render_datatable()
 		
+		
 	}
 
 	set_default_secondary_action() {
@@ -33,6 +34,7 @@ class NdcReport {
 			this.$report.empty()
 			$('[class = "ndc_report page-main-content"]').slice(0, 2).remove()
 			this.render_datatable()
+			this.$heading.empty()
 			this.make()
 		});
 		this.download_button = this.page.set_secondary_action('Download', () => {
@@ -116,6 +118,7 @@ class NdcReport {
 			this.render_datatable()
 			$('[class = "ndc_report page-main-content"]').slice(0, 2).remove()
 			this.make();
+			this.$heading.empty()
 			
 		})
 		
@@ -193,13 +196,13 @@ class NdcReport {
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
-				
 				let data = r.message[1]
-				
+				$('.headline:first').remove();
+				if(this.monitoring_year[0].value){
+					this.$heading = $('<b class="headline" style="margin-left: 30px;">NDC Report</b>').insertBefore(this.$report);
+				}
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
 			})
-			
 	}
-
 
 }

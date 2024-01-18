@@ -37,6 +37,7 @@ class Mitigation {
 		this.refresh_button = this.page.add_action_icon("refresh", () => {
 			this.$container1.empty()
 			this.$container2.empty()
+			this.$heading.empty()
 			this.$report.empty()
 			$('[class = "mitigation_report page-main-content"]').slice(0, 2).remove()
 			this.render_datatable()
@@ -73,6 +74,8 @@ class Mitigation {
 			this.render_datatable()
 			this.get_total_mitigation_report1();
 			this.get_total_mitigation_report2();
+			this.$heading.empty()
+
 		})
 		let year_field = $(this.parent).find(
 			`.frappe-control[data-original-title="${__("Monitoring Year")}"]`
@@ -309,6 +312,8 @@ class Mitigation {
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
 				let data = r.message[1]
+				$('.headline:first').remove();
+				this.$heading = $('<b class="headline" style="margin-left: 30px;">Mitigation Report</b>').insertBefore(this.$report);
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
 			})
 			

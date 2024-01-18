@@ -32,6 +32,7 @@ class Analytics {
 			this.$container.empty()
 			this.$container2.empty()
 			this.$report.empty()
+			this.$heading.empty()
 			$('[class = "finance_report page-main-content"]').slice(0, 2).remove()
 			this.make()
 			this.render_datatable()
@@ -118,7 +119,8 @@ class Analytics {
 			this.render_datatable()
 			this.get_total_finance_report();
 			this.get_total_finance_report2()
-			
+			this.$heading.empty()
+		
 		})
 
 		this.objective = this.page.add_select(
@@ -289,6 +291,9 @@ class Analytics {
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
 				let data = r.message[1]
+				// his.$heading.empty()
+				$('.headline:first').remove();
+				this.$heading = $('<b class="headline" style="margin-left: 30px;">Finance Report</b>').insertBefore(this.$report);
 
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
 			})

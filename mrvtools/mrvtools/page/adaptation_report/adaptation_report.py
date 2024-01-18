@@ -6,8 +6,10 @@ import pandas as pd
 from frappe.utils import get_site_base_path,now
 
 @frappe.whitelist()
-def get_total_adaptation_report_data1():
+def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
+		data = get_datas(year,key_sector,key_sub_sector,impact_area)
+		frappe.log_error("data",data)
 		field_list = []
 		get_counts = []
 		meta = frappe.get_meta("Adaptation")
@@ -16,10 +18,14 @@ def get_total_adaptation_report_data1():
 		for field in fields:
 			if field["fieldtype"] == "Check":
 				field_list.append(field["fieldname"])
+		first_elements = [sublist[0] for sublist in data]
 		for field in field_list:
-			count=0
-			values=frappe.db.get_all("Adaptation",field)
+			count =0
+			values=frappe.db.get_all("Adaptation",[field],{'project_id':["in",first_elements]})
+		
 			for i in values:
+				
+				frappe.log_error("i",i)
 				for key,value in i.items():
 					if value ==1:
 						count= count+1
@@ -32,13 +38,13 @@ def get_total_adaptation_report_data1():
 		frappe.log_error(title = "get_total_adaptation_report_data failed", message = frappe.get_traceback())
 
 @frappe.whitelist()
-def get_total_adaptation_report_data2():
+def get_total_adaptation_report_data2(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
-
+		data = get_datas(year,key_sector,key_sub_sector,impact_area)
 		doc = frappe.db.get_all("Adaptation",pluck="key_sector")
 		counts = {}
-
-		for item in doc:
+		first_elements = [sublist[3] for sublist in data]
+		for item in first_elements:
 			if item in counts:
 				counts[item] += 1
 			else:
@@ -75,7 +81,6 @@ def get_columns():
 def get_datas(year = None,key_sector = None,key_sub_sector = None,impact_area = None):
 	conditions = ""
 	if year:
-		frappe.log_error("Not Empty","Not Empty")
 		conditions += f" AND  YEAR(P.financial_closure_date) <= '{year}'"
 	if year == None:
 		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
@@ -148,6 +153,7 @@ def download_excel(columns,data):
 	data_list = json.loads(data)
 	column_list = json.loads(columns)
 	data_dict = {column_list[i]: [row[i] for row in data_list] for i in range(len(column_list))}
+	
 	export_data = pd.DataFrame(data_dict)
 
 	site_name = get_site_base_path()
@@ -155,5 +161,5 @@ def download_excel(columns,data):
 	nowTime = nowTime.replace(" ","")
 	nowTime = nowTime.replace("-","")
 	nowTime = nowTime.replace(":","")
-	export_data.to_excel(f"{site_name}/public/files/Adaptation-Report-{nowTime}.xlsx")
+	export_data.to_excel(f"{site_name}/public/files/Adaptation-Report-{nowTime}.xlsx",index=False)
 	return f"../files/Adaptation-Report-{nowTime}.xlsx"

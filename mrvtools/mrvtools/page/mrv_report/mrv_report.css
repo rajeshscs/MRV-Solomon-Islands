@@ -59,12 +59,22 @@
 .dt-cell--col-0 {
     width: 32px;
 }
+.dt-instance-103 .dt-cell{
+	border-bottom: #ebeef0;
+}
 .dt-instance-10 .dt-cell--col-2{
 	text-align: left;
 }
 .dt-instance-10 .dt-cell--col-3{
 	text-align: left;
 }
+
+
+.report-wrapper1, .report-wrapper2,.report-wrapper3,.report-wrapper4{
+	margin: 11px 1px 25px 1px;
+    /* width: 1187px; */
+}
+
 /* custom end */
 
 

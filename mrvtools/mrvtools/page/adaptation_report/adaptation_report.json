@@ -5,13 +5,17 @@
  "doctype": "Page",
  "icon": "fa fa-list",
  "idx": 0,
- "modified": "2023-12-28 15:53:03.310539",
+ "modified": "2024-01-18 15:04:31.510597",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "adaptation-report",
  "owner": "Administrator",
  "page_name": "adaptation-report",
- "roles": [],
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
  "script": null,
  "standard": "Yes",
  "style": null,

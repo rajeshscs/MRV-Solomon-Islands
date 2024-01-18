@@ -48,7 +48,9 @@
 	cursor: pointer;
 	white-space: nowrap;
 }
-
+.adaptation_report.page-main-content{
+	padding: 0px 15px !important;
+}
 .header-btn-round {
 	border-radius: 4px;
 }
@@ -108,7 +110,6 @@
 	display: none !important;
 } */
 
-
 .number-widget-box {
     width: 100%;
 }
@@ -124,4 +125,10 @@
 .total_card_div{
 	display:flex; 
 	gap: 5px;
+}
+
+.layout-main-section .report-wrapper {
+    padding: 0px !important; 
+    margin: 11px 30px 1px 30px;
+    border: 1px solid #dbdbdb;
 }

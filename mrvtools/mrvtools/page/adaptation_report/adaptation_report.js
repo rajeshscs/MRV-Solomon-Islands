@@ -18,10 +18,10 @@ class Adaptation {
 		);
 		this.$sidebar_list = this.page.sidebar.find("ul");	
 		this.datatable=null;
-		this.make();
 		this.set_default_secondary_action();
 		this.adaptation_filter_fields()
 		this.render_datatable()
+		this.make();
 	}
 	adaptation_filter_fields() {
 		this.year_select = this.page.add_select(
@@ -127,6 +127,7 @@ class Adaptation {
 		this.refresh_button = this.page.add_action_icon("refresh", () => {
 			this.$container1.empty()
 			this.$container2.empty()
+			this.$heading.empty()
 			this.$report.empty()
 			$('[class = "adaptation_report page-main-content"]').slice(0, 2).remove()
 			this.make()
@@ -200,7 +201,12 @@ class Adaptation {
 	}
 	
 	get_total_adaptation_report1() {
-		frappe.call('mrvtools.mrvtools.page.adaptation_report.adaptation_report.get_total_adaptation_report_data1')
+		frappe.call('mrvtools.mrvtools.page.adaptation_report.adaptation_report.get_total_adaptation_report_data1',{
+			year:this.year_select[0].value,
+			key_sector:this.key_sector,
+			key_sub_sector : this.key_sub_sector,
+			impact_area : this.impact_area[0].value
+		})
 			.then((r) => {
 				$("#categories_chart").html("No of Projects based on Categories")
 				
@@ -227,7 +233,12 @@ class Adaptation {
 	}
 
 	get_total_adaptation_report2() {
-		frappe.call('mrvtools.mrvtools.page.adaptation_report.adaptation_report.get_total_adaptation_report_data2')
+		frappe.call('mrvtools.mrvtools.page.adaptation_report.adaptation_report.get_total_adaptation_report_data2',{
+			year:this.year_select[0].value,
+			key_sector:this.key_sector,
+			key_sub_sector : this.key_sub_sector,
+			impact_area : this.impact_area[0].value
+		})
 			.then((r) => {
 				$("#sector_chart").html("No of Projects based on Sector")
 				
@@ -235,7 +246,7 @@ class Adaptation {
 				let keys = Object.keys(r.message);
 				let values = Object.values(r.message);				
 				const custom_options = {
-					type: "line",
+					type: "bar",
 					colors: ["#03a9f4"],
 					height: 240,
 					axisOptions: {
@@ -262,15 +273,19 @@ class Adaptation {
 			key_sub_sector : this.key_sub_sector,
 			impact_area : this.impact_area[0].value
 		})
-			.then((r) => {
-				$('.report-wrapper:first').remove();
-				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
-				let columns = r.message[0]
-				console.log(r.message[0]);
-				let data = r.message[1]
-				console.log(r.message[1]);
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
-			})
+		.then((r) => {
+
+			$('.report-wrapper:first').remove();
+
+			this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
+			let columns = r.message[0];
+			console.log(r.message[0]);
+			let data = r.message[1];
+			console.log(r.message[1]);
+			$('.headline:first').remove();
+			this.$heading = $('<b class="headline" style="margin-left: 30px;">Adaptation Report</b>').insertBefore(this.$report);
+			this.datatable = new DataTable(this.$report[0], { columns: columns, data: data });
+		})
 			
 	}
 

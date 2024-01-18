@@ -24,7 +24,7 @@ class GHGInventory {
 		this.ghg_year_filter();
 		this.ghg_unit_filter();
 		this.render_datatable();
-		this.make();
+		// this.make();
 
 		// this.create_date_range_field();
 	}
@@ -34,6 +34,10 @@ class GHGInventory {
 			this.$container.empty()
 			this.$container2.empty()
 			this.$report.empty()
+			this.$heading.empty()
+			this.wrapper1();
+			this.wrapper2();
+	
 			$('[class="ghg_inventory_report page-main-content"]:first').remove()
 			this.make()
 			this.render_datatable()
@@ -62,19 +66,19 @@ class GHGInventory {
 		});
 	  }
 
-	make() {
-		this.$container = $(`
+	wrapper1(){
+		$("#ghg_chart").html(`
 		<div class="ghg_inventory_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-			<b id="categories_chart"></b>
-			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn" class="btn btn-sm">show chart</button>
-		</div>
+			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+				<b id="categories_chart"></b>
+				<button id="hide_btn" class="btn btn-sm">Hide chart</button>
+				<button id="show_btn" class="btn btn-sm">show chart</button>
+			</div>
 			<div class="totalghg_inventory_report-graph"></div>
-		</div>`
-		).appendTo(this.page.main);
-		this.$graph_area = this.$container.find(".totalghg_inventory_report-graph");
-		this.$container2 = $(`
+		</div>`)
+	}
+	wrapper2(){
+		$("#ghg_chart2").html(`
 		<div class="ghg_inventory_report page-main-content">
 		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 			<b id="categories_chart"></b>
@@ -82,10 +86,26 @@ class GHGInventory {
 			<button id="show_btn2" class="btn btn-sm">show chart</button>
 		</div>
 			<div class="totalghg_inventory_report-graph2"></div>
-		</div>`
-		).appendTo(this.page.main);
+		</div>`)
+	}
+
+	make() {
+		this.$container = $(`
+		<body class = "all_html"  style="margin:0;">
+			<div id="ghg_chart"></div>
+		</body>
+		`).appendTo(this.page.main);
+		this.$graph_area = this.$container.find(".totalghg_inventory_report-graph");
+		this.$container2 = $(`
+		<body class = "all_html"  style="margin:0;">
+			<span id="ghg_chart2"></span>
+		</body>
+		`).appendTo(this.page.main);
 		this.$graph_area2 = this.$container2.find(".totalghg_inventory_report-graph2");
 		this.hide_btn();
+		this.wrapper1();
+		this.wrapper2();
+
 		if(this.inventory_unit[0].value){
 			this.get_chart_report();
 		}
@@ -108,7 +128,7 @@ class GHGInventory {
 				console.log(results);
 				const custom_options = {
 					type: "bar",	
-					colors: ["#b9d5b2"],
+					colors: ["#568f8b"],
 					height: 220,
 					axisOptions: {
 						xIsSeries: 0,
@@ -132,7 +152,7 @@ class GHGInventory {
 			inventory_unit:this.inventory_unit[0].value
 		})
 			.then((r) => {
-				$("#categories_chart2").html("Based on total emissions for each sector")
+				 
 				console.log("message",r.message);
 				let results = r.message || [];
 				console.log("results",results.data);
@@ -165,9 +185,10 @@ class GHGInventory {
 		)
 		this.inventory_year.on("change",(r) => {
 			this.render_datatable()
+			this.make()
 			this.get_chart_report();
 			this.get_chart_report2();
-			
+			this.$heading.empty();
 			
 		})
 	}
@@ -197,6 +218,10 @@ class GHGInventory {
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
 				let data = r.message[1]
+				$('.headline:first').remove();
+				if(this.inventory_year[0].value){
+					this.$heading = $('<b style="margin-left: 30px;">GHG Inventory Report - Gas wise</b>').insertBefore(this.$report);
+				}
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true});
 			})
 			

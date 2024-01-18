@@ -4,13 +4,17 @@
  "docstatus": 0,
  "doctype": "Page",
  "idx": 0,
- "modified": "2024-01-04 12:32:38.651148",
+ "modified": "2024-01-18 15:05:42.786511",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "finance-report",
  "owner": "Administrator",
  "page_name": "finance-report",
- "roles": [],
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
  "script": null,
  "standard": "Yes",
  "style": null,

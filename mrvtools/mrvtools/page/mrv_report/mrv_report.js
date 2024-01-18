@@ -25,9 +25,9 @@ class MRVReport {
 			`<ul class="standard-sidebar mrv_report-sidebar overlay-sidebar"></ul>`
 		);
 		this.$sidebar_list = this.page.sidebar.find("ul");
-		// alert(frappe.defaults.get_user_default("Order"))
+
 		this.datatable=null;
-		this.make()
+		// this.make()
 		this.set_default_secondary_action();
 		this.mrv_filter_fields()
 		this.render_datatable()
@@ -40,6 +40,7 @@ class MRVReport {
 			this.$container.empty()
 			this.$container2.empty()
 			this.make()
+			this.render_datatable();
 		});
 		this.download_button = this.page.set_secondary_action('Download', () => {
 
@@ -71,39 +72,56 @@ class MRVReport {
 		};
 	  
 		$(document).ready(() => {
-		  toggleButtons("#hide_btn", "#show_btn", "totalmrv_report-graph");
-		  toggleButtons("#hide_btn2", "#show_btn2", "totalmrv_report2-graph");
+			toggleButtons("#hide_btn", "#show_btn", "totalmrv_report-graph");
+			toggleButtons("#hide_btn2", "#show_btn2", "totalmrv_report2-graph");
 		});
 	  }
 
+	wrapper1(){
+		$("#mrv_chart").html(`
+		<div class="mrv_report page-main-content">
+			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+				<b id="categories_chart"></b>
+				<button id="hide_btn" class="btn btn-sm">Hide chart</button>
+				<button id="show_btn" class="btn btn-sm">show chart</button>
+			</div>
+			<div class="totalmrv_report-graph"></div>
+		</div>`)
+	}
+	wrapper2(){
+		$("#mrv_chart2").html(`
+		<div class="mrv_report page-main-content">
+			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+				<b id="categories_chart"></b>
+				<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
+				<button id="show_btn2" class="btn btn-sm">show chart</button>
+			</div>
+			<div class="totalmrv_report2-graph"></div>
+		</div>`)
+
+	}
 	make() {
 		this.$container = $(`
-		<div class="mrv_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-			<b id="categories_chart"></b>
-			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn" class="btn btn-sm">show chart</button>
-		</div>
-			<div class="totalmrv_report-graph"></div>
-		</div>`
-		).appendTo(this.page.main);
+		<body class = "all_html"  style="margin:0;">
+			<span id="mrv_chart"></span>
+		</body>
+		`).appendTo(this.page.main);
 		this.$graph_area = this.$container.find(".totalmrv_report-graph");
-		this.$container2 = $(`
-		<div class="mrv_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-			<b id="categories_chart"></b>
-			<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn2" class="btn btn-sm">show chart</button>
-		</div>
-			<div class="totalmrv_report2-graph"></div>
-		</div>`
-		).appendTo(this.page.main);
-		this.$graph_area = this.$container2.find(".totalmrv_report2-graph");
-		this.hide_btn()
-		this.get_total_mrv_report();
-		this.get_total_mrv_report2()
-		
 
+
+		this.$container2 = $(`
+		<body class = "all_html"  style="margin:0;">
+			<div id="mrv_chart2"></div>
+		</body>
+		`).appendTo(this.page.main);
+		this.$graph_area = this.$container2.find(".totalmrv_report2-graph");
+
+		this.hide_btn()
+		this.wrapper1();
+		this.wrapper2();
+		this.get_total_mrv_report();
+		this.get_total_mrv_report2();
+	
 	}
 	mrv_filter_fields() {
 		this.report_select = this.page.add_select(
@@ -129,6 +147,7 @@ class MRVReport {
 			change:()=>{
 				this.project = project.get_value()
 				if (this.project) {
+					this.make()
 					this.get_total_mrv_report()
 					this.get_total_mrv_report2()
 					this.render_datatable()
@@ -210,8 +229,13 @@ class MRVReport {
 				$('.report-wrapper1:first').remove();
 				
 				this.$report1 = $('<div class="report-wrapper1">').appendTo(this.page.main).insertAfter($('.totalmrv_report2-graph'));
+				
 				let columns = r.message[0]
 				let data = r.message[1]
+				$('.headline:first').remove();
+				if(this.project){
+					this.$heading = $('<b class="headline">Project Details</b>').insertBefore(this.$report1);
+				}
 
 				this.datatable = new DataTable(this.$report1[0], {columns:columns,data:data});
 			})
@@ -225,6 +249,10 @@ class MRVReport {
 				this.$report2 = $('<div class="report-wrapper2">').appendTo(this.page.main).insertAfter($('.report-wrapper1'));
 				let columns = r.message[0]
 				let data = r.message[1]
+				$('.headline:first').remove();
+				if(this.project){
+					this.$heading = $('<b class="headline">Mitigation Summary</b>').insertBefore(this.$report2);
+				}
 
 				this.datatable = new DataTable(this.$report2[0], {columns:columns,data:data});
 			})
@@ -238,6 +266,9 @@ class MRVReport {
 				this.$report3 = $('<div class="report-wrapper3">').appendTo(this.page.main).insertAfter($('.report-wrapper2'));
 				let columns = r.message[0]
 				let data = r.message[1]
+				if(this.project){
+					this.$heading = $('<b class="headline">Adaptation Summary</b>').insertBefore(this.$report3);
+				}
 
 				this.datatable = new DataTable(this.$report3[0], {columns:columns,data:data});
 			})
@@ -251,7 +282,10 @@ class MRVReport {
 				this.$report4 = $('<div class="report-wrapper4">').appendTo(this.page.main).insertAfter($('.report-wrapper3'));
 				let columns = r.message[0]
 				let data = r.message[1]
-
+				$('.headline:first').remove();
+				if(this.project){
+					this.$heading = $('<b class="headline">SDG Summary</b>').insertBefore(this.$report4);
+				}
 				this.datatable = new DataTable(this.$report4[0], {columns:columns,data:data});
 			})
 			
@@ -264,6 +298,10 @@ class MRVReport {
 				this.$report5 = $('<div class="report-wrapper5">').appendTo(this.page.main).insertAfter($('.report-wrapper4'));
 				let columns = r.message[0]
 				let data = r.message[1]
+				$('.headline:first').remove();
+				if(this.project){
+					this.$heading = $('<b class="headline">Finance Summary</b>').insertBefore(this.$report5);
+				}
 
 				this.datatable = new DataTable(this.$report5[0], {columns:columns,data:data});
 			})

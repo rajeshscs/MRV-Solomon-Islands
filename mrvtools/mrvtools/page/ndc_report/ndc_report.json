@@ -4,13 +4,17 @@
  "docstatus": 0,
  "doctype": "Page",
  "idx": 0,
- "modified": "2024-01-02 20:09:19.280708",
+ "modified": "2024-01-18 15:06:49.342970",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "ndc-report",
  "owner": "Administrator",
  "page_name": "ndc-report",
- "roles": [],
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
  "script": null,
  "standard": "Yes",
  "style": null,

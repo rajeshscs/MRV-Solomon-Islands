@@ -302,5 +302,5 @@ def download_excel(columns,data):
 	nowTime = nowTime.replace(" ","")
 	nowTime = nowTime.replace("-","")
 	nowTime = nowTime.replace(":","")
-	export_data.to_excel(f"{site_name}/public/files/Finance-Report-{nowTime}.xlsx")
+	export_data.to_excel(f"{site_name}/public/files/Finance-Report-{nowTime}.xlsx",index=False)
 	return f"../files/Finance-Report-{nowTime}.xlsx"
