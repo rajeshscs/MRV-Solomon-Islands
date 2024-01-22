@@ -86,7 +86,7 @@ def get_sdg_columns(project = None):
 		col.append("Category" + ":Data")
 		col.append("Question" + ":Data")
 		col.append("Expected Value" + ":Float")
-		totalMonitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
+		totalMonitoringYearsAdaptation = frappe.db.get_all('SDG Monitoring Information',
 						filters={'proj_id':project},
 						fields = ['monitoring_year'],
 						order_by = 'monitoring_year asc' )

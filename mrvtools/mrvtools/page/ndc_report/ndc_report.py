@@ -223,3 +223,5 @@ def download_excel(columns,data):
 	nowTime = nowTime.replace(":","")
 	export_data.to_excel(f"{site_name}/public/files/NDC-Report-{nowTime}.xlsx")
 	return f"../files/NDC-Report-{nowTime}.xlsx"
+
+
