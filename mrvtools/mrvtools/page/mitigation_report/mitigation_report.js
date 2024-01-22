@@ -314,7 +314,7 @@ class Mitigation {
 				let data = r.message[1]
 				$('.headline:first').remove();
 				this.$heading = $('<b class="headline" style="margin-left: 30px;">Mitigation Report</b>').insertBefore(this.$report);
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1});
 			})
 			
 	}

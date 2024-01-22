@@ -116,6 +116,7 @@ class NdcReport {
 		this.monitoring_year.on("change",(r) => {
 			$('.report-wrapper:first').remove();
 			this.render_datatable()
+			$('.layout-main-section .report-wrapper').css("border", "1px solid #dbdbdb;")
 			$('[class = "ndc_report page-main-content"]').slice(0, 2).remove()
 			this.make();
 			this.$heading.empty()
@@ -201,7 +202,7 @@ class NdcReport {
 				if(this.monitoring_year[0].value){
 					this.$heading = $('<b class="headline" style="margin-left: 30px;">NDC Report</b>').insertBefore(this.$report);
 				}
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1});
 			})
 	}
 

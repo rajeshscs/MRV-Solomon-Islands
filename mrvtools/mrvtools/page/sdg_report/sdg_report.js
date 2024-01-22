@@ -245,7 +245,7 @@ class Analytics {
 				console.log(r.message);
 				$('.headline:first').remove();
 				this.$heading = $('<b class="headline" style="margin-left: 30px;">SDG Report</b>').insertBefore(this.$report);
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1});
 			})
 			
 	}
