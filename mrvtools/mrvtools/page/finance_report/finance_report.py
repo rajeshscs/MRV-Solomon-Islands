@@ -98,7 +98,7 @@ def get_datas(year = None,objective = None,key_sector = None,key_sub_sector = No
 			P.name;
 	"""
 	result = frappe.db.sql(query, as_dict=1)
-	frappe.log_error("result",result)
+	# frappe.log_error("result",result)
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]
 	return values_only
 
@@ -175,9 +175,9 @@ def get_chart(year = None,objective = None,key_sector = None,key_sub_sector = No
 				till_sum_actual_budget_spent += total_disbursement_usd
 				
 			
-		total_expected_spend = frappe.db.get_list("Climate Finance Disbursement Schedule ChildTable",fields=["amount"],filters = {"parent":i.name,"financial_year":["<=",frappe.utils.today()[0:4]]})
+		total_expected_spend = frappe.db.get_all("Climate Finance Disbursement Schedule ChildTable",fields=["amount"],filters = {"parent":i.name,"financial_year":["<=",frappe.utils.today()[0:4]]})
 		for amount in total_expected_spend:
-			frappe.log_error("amount",amount)
+			# frappe.log_error("amount",amount)
 			
 			till_sum_expected_budget_spend_in_usd += amount.amount
 					

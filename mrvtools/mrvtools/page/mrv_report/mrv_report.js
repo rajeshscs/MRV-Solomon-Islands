@@ -92,7 +92,7 @@ class MRVReport {
 		$("#mrv_chart2").html(`
 		<div class="mrv_report page-main-content">
 			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-				<b id="categories_chart"></b>
+				<b id="categories_chart1"></b>
 				<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
 				<button id="show_btn2" class="btn btn-sm">show chart</button>
 			</div>
@@ -166,7 +166,7 @@ class MRVReport {
 			project : this.project
 		})
 			.then((r) => {
-				$("#categories_chart").html("No of Projects based on Categories")
+				$("#categories_chart").html(" GHG Emissions redcutions actual year wise")
 				console.log('r.message', r.message);
 				let results = r.message || [];
 				const custom_options = {
@@ -195,7 +195,7 @@ class MRVReport {
 			project : this.project
 		})
 			.then((r) => {
-				$("#categories_chart1").html("No of Projects based on Categories")
+				$("#categories_chart1").html("Finance disbursement actual year wise")
 				console.log('r.message', r.message);
 				let results = r.message || [];
 				const custom_options = {

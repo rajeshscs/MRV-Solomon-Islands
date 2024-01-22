@@ -188,3 +188,16 @@
 	display:flex; 
 	gap: 5px;
 }
+
+.layout-main-section .report-wrapper1 .report-wrapper2 .report-wrapper3 .report-wrapper4 .report-wrapper5 {
+    padding:  0px !important;
+    margin: 11px 30px 1px 30px;
+    border: 1px solid #dbdbdb;
+}
+.dt-scrollable{
+	width: 100% !important;
+}
+
+.report-wrapper1 .datatable{
+	width: 100% !important ;
+}

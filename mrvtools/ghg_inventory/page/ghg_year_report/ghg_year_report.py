@@ -72,7 +72,7 @@ def getData(inventory_unit, from_year, to_year):
 						idx
 					"""
 			data = frappe.db.sql(query,as_dict =1)
-			frappe.log_error("data",data)
+			# frappe.log_error("data",data)
 
 			val = f"""
 					SELECT 
@@ -92,7 +92,7 @@ def getData(inventory_unit, from_year, to_year):
 
 			for i in value:
 				chart_label.append(i.name)
-			frappe.log_error("chart_label", chart_label)
+			# frappe.log_error("chart_label", chart_label)
 
 			for each in data:
 				for i in value:
@@ -205,10 +205,7 @@ def getData(inventory_unit, from_year, to_year):
 		return data
 @frappe.whitelist()
 def get_chart():
-	frappe.log_error("chart_label2", chart_label)
-	frappe.log_error("co2_value2", co2_value)
-	frappe.log_error("ch4_value2", ch4_value)
-	frappe.log_error("n2o_value2", n2o_value)
+
 
 	chart = {
 		"data": {

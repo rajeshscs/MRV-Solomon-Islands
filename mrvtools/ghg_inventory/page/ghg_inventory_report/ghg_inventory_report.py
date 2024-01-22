@@ -154,7 +154,7 @@ def get_pie_chart(inventory_year=None, inventory_unit=None):
 					"""
 			labels= categories
 			data = frappe.db.sql(query)
-			frappe.log_error("query",data)
+			# frappe.log_error("query",data)
 			if data != ():
 				return {"data":data,"labels":labels}
 		if inventory_unit == 'GgCO2e':

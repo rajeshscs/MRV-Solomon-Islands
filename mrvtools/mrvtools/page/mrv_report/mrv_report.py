@@ -101,7 +101,7 @@ def get_finance_columns(project = None):
 		
 		col.append("Finance Data" + ":Data")
 		name = frappe.db.get_value('Climate Finance', {'project_id': f'{project}'}, 'name')
-		totalMonitoringYearsFinance = frappe.db.get_list(
+		totalMonitoringYearsFinance = frappe.db.get_all(
 			"Climate Finance Disbursement Schedule ChildTable",
 			fields=['financial_year'],
 			filters = {"parent" : name},
@@ -311,18 +311,19 @@ def get_finance_datas(project = None):
 		# 	fields=['financial_year'],
 		# 	filters = {"parent" : name},
 		# 	order_by = 'financial_year')
-		expectedDoc = frappe.get_doc('Climate Finance',{'project_id': project})
-		expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
-		for i in expectedDocList:
-			amountExpected[f'{i.financial_year}'] = i.amount
-		
-		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
-		spentDocList = spentDoc.as_dict().total_budget_disbursement
-		for i in spentDocList:
-			amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
-		
-		
-		return [amountSpent,amountExpected]
+		if frappe.db.exists('Climate Finance',{'project_id': project}):
+			expectedDoc = frappe.get_doc('Climate Finance',{'project_id': project})
+			expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
+			for i in expectedDocList:
+				amountExpected[f'{i.financial_year}'] = i.amount
+			
+			spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
+			spentDocList = spentDoc.as_dict().total_budget_disbursement
+			for i in spentDocList:
+				amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
+			
+			
+			return [amountSpent,amountExpected]
 
 
 
@@ -376,7 +377,7 @@ def get_chart2(project=None):
 
 
 		name = frappe.db.get_value('Climate Finance', {'project_id': f'{project}'}, 'name')
-		totalMonitoringYearsFinance = frappe.db.get_list(
+		totalMonitoringYearsFinance = frappe.db.get_all(
 			"Climate Finance Disbursement Schedule ChildTable",
 			fields=['financial_year'],
 			filters = {"parent" : name},

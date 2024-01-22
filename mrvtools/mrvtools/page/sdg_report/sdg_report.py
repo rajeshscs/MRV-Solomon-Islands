@@ -25,7 +25,7 @@ def get_total_sdg_report_data(year,impact_area,key_sector = None,key_sub_sector 
 			
 			for i in values:
 				
-				frappe.log_error("i",i)
+				# frappe.log_error("i",i)
 				for key,value in i.items():
 					if value ==1:
 						count= count+1
