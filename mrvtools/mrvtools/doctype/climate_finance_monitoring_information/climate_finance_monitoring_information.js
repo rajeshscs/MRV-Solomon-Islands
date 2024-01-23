@@ -12,9 +12,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 
 		})
 		
-
-		
-	
 			if (frm.doc.work_state == "Approved"){
 				cur_frm.fields_dict.project_id.df.read_only = 1
 				cur_frm.fields_dict.select_approver.df.read_only = 1
@@ -107,7 +104,7 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				doc:frm.doc,
 				method:'get_rows',
 				callback: function(r){
-					
+					console.log("RR = ",r.message);
 					frm.set_value("total_budget_disbursement",[])
 					for(var i of r.message){
 						var child = frm.add_child("total_budget_disbursement")
@@ -122,8 +119,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				}
 			})
 		
-
-
 			frm.call({
 				doc:cur_frm.doc,
 				method:"get_years",

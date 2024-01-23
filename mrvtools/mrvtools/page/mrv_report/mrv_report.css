@@ -29,22 +29,44 @@
 .dt-scrollable{
 	height: 8vw;
 }
-.dt-instance-10 .dt-cell{
+
+.dt-instance-6 .dt-cell,.dt-instance-7 .dt-cell,.dt-instance-8 .dt-cell,.dt-instance-9 .dt-cell,.dt-instance-10 .dt-cell,
+.dt-instance-11 .dt-cell,.dt-instance-12 .dt-cell,.dt-instance-13 .dt-cell,.dt-instance-14 .dt-cell,.dt-instance-15 .dt-cell,
+.dt-instance-16 .dt-cell,.dt-instance-17 .dt-cell,.dt-instance-18 .dt-cell,.dt-instance-19 .dt-cell,.dt-instance-20 .dt-cell,
+.dt-instance-21 .dt-cell,.dt-instance-22 .dt-cell,.dt-instance-23 .dt-cell,.dt-instance-24 .dt-cell,.dt-instance-25 .dt-cell,
+.dt-instance-26 .dt-cell,.dt-instance-27 .dt-cell,.dt-instance-28 .dt-cell,.dt-instance-29 .dt-cell,.dt-instance-30 .dt-cell 
+{
+	height: 40px;
+	border-bottom: 1px solid #ebeef0;
+}
+
+
+/* .dt-instance-6 .dt-cell,.dt-instance-7 .dt-cell,.dt-instance-8 .dt-cell,.dt-instance-9 .dt-cell,.dt-instance-10 .dt-cell{
 	height: 40px;
     border-bottom: 1px solid #ebeef0;
 
 }
-.dt-instance-9 .dt-cell{
+.dt-instance-11 .dt-cell,.dt-instance-12 .dt-cell,.dt-instance-13 .dt-cell,.dt-instance-14 .dt-cell,.dt-instance-15 .dt-cell{
 	height: 40px;
     border-bottom: 1px solid #ebeef0;
 
 }
-.dt-instance-8 .dt-cell{
+.dt-instance-16 .dt-cell,.dt-instance-17 .dt-cell,.dt-instance-18 .dt-cell,.dt-instance-19 .dt-cell,.dt-instance-20 .dt-cell{
 	height: 40px;
-    border-bottom: 1px solid #ebeef0;
+	border-bottom: 1px solid #ebeef0;
 
 }
-.dt-instance-7 .dt-cell{
+.dt-instance-21 .dt-cell,.dt-instance-22 .dt-cell,.dt-instance-23 .dt-cell,.dt-instance-25 .dt-cell,.dt-instance-25 .dt-cell{
+	height: 40px;
+	border-bottom: 1px solid #ebeef0;
+
+}
+.dt-instance-26 .dt-cell,.dt-instance-27 .dt-cell,.dt-instance-28 .dt-cell,.dt-instance-29 .dt-cell,.dt-instance-30 .dt-cell{
+	height: 40px;
+	border-bottom: 1px solid #ebeef0;
+
+} */
+/* .dt-instance-7 .dt-cell{
 	height: 40px;
     border-bottom: 1px solid #ebeef0;
 
@@ -52,7 +74,7 @@
 .dt-instance-6 .dt-cell {
     height: 40px;
     border-bottom: 1px solid #ebeef0;
-}
+} */
 .datatable *{
 	width: 100%;
 }
@@ -189,15 +211,24 @@
 	gap: 5px;
 }
 
-.layout-main-section .report-wrapper1 .report-wrapper2 .report-wrapper3 .report-wrapper4 .report-wrapper5 {
+.report-wrapper1, .report-wrapper2, .report-wrapper3, .report-wrapper5, .headline1, .headline2, .headline3, .headline4, .headline5 {
     padding:  0px !important;
     margin: 11px 30px 1px 30px;
-    border: 1px solid #dbdbdb;
+	height :100% !important;
+   
 }
 .dt-scrollable{
 	width: 100% !important;
 }
-
-.report-wrapper1 .datatable{
-	width: 100% !important ;
+.report-wrapper4{
+	padding:  0px !important;
+    margin: 11px 30px 1px 30px;
+	height :220px !important;
 }
+.report-wrapper4 .datatable .dt-scrollable{
+	height :160px !important;
+}
+
+/* .report-wrapper1 .datatable{
+	width: 100% !important ;
+} */

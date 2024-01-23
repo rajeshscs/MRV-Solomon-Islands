@@ -106,9 +106,19 @@ def get_finance_columns(project = None):
 			fields=['financial_year'],
 			filters = {"parent" : name},
 			order_by = 'financial_year')
+		frappe.log_error("datataa",totalMonitoringYearsFinance)
 		for i in totalMonitoringYearsFinance:
-			col.append(f"{i.financial_year}" + ":Data")
-			
+			col.append(f"{i.financial_year}" + ":Int")
+		last_doc = frappe.get_last_doc("Climate Finance Monitoring Information",{'project_id': f'{name}'})
+		totalMonitoringYears = frappe.db.get_all(
+			"Climate Finance Total Budget Disbursement ChildTable",
+			fields=['financial_year'],
+			filters = {"parent" : last_doc.name},
+			group_by = 'financial_year' )
+		frappe.log_error("dataFinance",totalMonitoringYears)
+		for i in totalMonitoringYears:
+			if f"{i.financial_year}" + ":Int" not in col:
+				col.append(f"{i.financial_year}" + ":Int")
 	keys_only = [item.split(':')[0] for item in col]
 	return keys_only
 
@@ -322,6 +332,8 @@ def get_finance_datas(project = None):
 			for i in spentDocList:
 				amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
 			
+			frappe.log_error("amountExpected",amountExpected)
+			frappe.log_error("amountSpent",amountSpent)
 			
 			return [amountSpent,amountExpected]
 
@@ -373,17 +385,18 @@ def get_chart2(project=None):
 		spentDocList = spentDoc.as_dict().total_budget_disbursement
 		for i in spentDocList:
 			amountSpent.append(i.total_disbursement_usd)
+			year_list.append(f"{i.financial_year}")
 			
 
 
-		name = frappe.db.get_value('Climate Finance', {'project_id': f'{project}'}, 'name')
-		totalMonitoringYearsFinance = frappe.db.get_all(
-			"Climate Finance Disbursement Schedule ChildTable",
-			fields=['financial_year'],
-			filters = {"parent" : name},
-			order_by = 'financial_year')
-		for i in totalMonitoringYearsFinance:
-			year_list.append(f"{i.financial_year}")
+		# name = frappe.db.get_value('Climate Finance', {'project_id': f'{project}'}, 'name')
+		# totalMonitoringYearsFinance = frappe.db.get_all(
+		# 	"Climate Finance Disbursement Schedule ChildTable",
+		# 	fields=['financial_year'],
+		# 	filters = {"parent" : name},
+		# 	order_by = 'financial_year')
+		# for i in totalMonitoringYearsFinance:
+		# 	year_list.append(f"{i.financial_year}")
 				
 		return {"data":amountSpent,"labels":year_list}
 		

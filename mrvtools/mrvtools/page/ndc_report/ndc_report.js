@@ -132,7 +132,14 @@ class NdcReport {
 			year:this.monitoring_year[0].value
 		})
 			.then((r) => {
-				$("#categories_chart").html("No of Projects based on Categories")
+				if (this.monitoring_year[0].value != ''){
+
+					$("#categories_chart").html("No of Projects based on Categories")
+				}
+				else{
+					
+					$(".chart_hide").html("")
+				}
 				
 				let results = r.message || [];
 				console.log("rrrrr",results);

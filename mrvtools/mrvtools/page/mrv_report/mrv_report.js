@@ -27,7 +27,8 @@ class MRVReport {
 		this.$sidebar_list = this.page.sidebar.find("ul");
 
 		this.datatable=null;
-		// this.make()
+		this.make()
+		
 		this.set_default_secondary_action();
 		this.mrv_filter_fields()
 		this.render_datatable()
@@ -36,9 +37,8 @@ class MRVReport {
 	set_default_secondary_action() {
 		this.refresh_button && this.refresh_button.remove();
 		this.refresh_button = this.page.add_action_icon("refresh", () => {
-			this.$report1.empty()
 			this.$container.empty()
-			this.$container2.empty()
+			// this.$container2.empty()
 			this.make()
 			this.render_datatable();
 		});
@@ -101,20 +101,36 @@ class MRVReport {
 
 	}
 	make() {
-		this.$container = $(`
-		<body class = "all_html"  style="margin:0;">
-			<span id="mrv_chart"></span>
-		</body>
-		`).appendTo(this.page.main);
-		this.$graph_area = this.$container.find(".totalmrv_report-graph");
+		
+		$('.all_html').remove();
+		if (this.project){
+			this.$container = $(`
+			<div class = "all_html"  style="margin:0;">
+				<div id="mrv_chart"></div>
+				<div id="mrv_chart2"></div>
+				<b class="headline1">Project Details</b>
+				<div class="report-wrapper1"></div>
+				<b class="headline2">Mitigation Summary</b>
+				<div class="report-wrapper2"></div>
+				<b class="headline3">Adaptation Summary</b>
+				<div class="report-wrapper3"></div>
+				<b class="headline4">SDG Summary</b>
+				<div class="report-wrapper4"></div>
+				<b class="headline5">Finance Summary</b>
+				<div class="report-wrapper5"></div>
+			</div>
+			`).appendTo(this.page.main);
+			this.$graph_area = this.$container.find(".totalmrv_report-graph");
+		}
+		
 
 
-		this.$container2 = $(`
-		<body class = "all_html"  style="margin:0;">
-			<div id="mrv_chart2"></div>
-		</body>
-		`).appendTo(this.page.main);
-		this.$graph_area = this.$container2.find(".totalmrv_report2-graph");
+		// this.$container2 = $(`
+		// <body class = "all_html"  style="margin:0;">
+		// 	<div id="mrv_chart2"></div>
+		// </body>
+		// `).appendTo(this.page.main).insertAfter($('#mrv_chart'));
+		// this.$graph_area = this.$container2.find(".totalmrv_report2-graph");
 
 		this.hide_btn()
 		this.wrapper1();
@@ -151,6 +167,14 @@ class MRVReport {
 					this.get_total_mrv_report()
 					this.get_total_mrv_report2()
 					this.render_datatable()
+					$('[class="page-form row"]').attr("style","height:50px !important;")
+				}
+				if (this.project == ''){
+					this.make()
+					this.get_total_mrv_report()
+					this.get_total_mrv_report2()
+					this.render_datatable()
+					$('[class="page-form row"]').attr("style","height:350px !important;")
 				}
 			},
 			
@@ -158,6 +182,7 @@ class MRVReport {
 			render_input: 1,
 		});
 		$('[class="from-project-field"]').find('.clearfix').remove()
+		$('[class="page-form row"]').attr("style","height:350px !important;")
 		project.refresh(); 
 	}
 	
@@ -225,87 +250,95 @@ class MRVReport {
 		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_project_details',{
 			project : this.project
 		})
-			.then((r) => {
-				$('.report-wrapper1:first').remove();
-				
-				this.$report1 = $('<div class="report-wrapper1">').appendTo(this.page.main).insertAfter($('.totalmrv_report2-graph'));
-				
-				let columns = r.message[0]
-				let data = r.message[1]
-				$('.headline:first').remove();
-				if(this.project){
-					this.$heading = $('<b class="headline">Project Details</b>').insertBefore(this.$report1);
-				}
+		.then((r) => {
+			// $('.report-wrapper1:first').remove();
+			
+			// this.$report1 = $('<div class="report-wrapper1">').appendTo(this.page.main).insertAfter($('#mrv_chart2'));
+			
+			let columns = r.message[0]
+			let data = r.message[1]
+			// $('.headline1:last').remove();
+			// if(this.project){
+			// 	this.$heading = $('<b class="headline">Project Details</b>').insertBefore('.report-wrapper1');
+			// }
 
-				this.datatable = new DataTable(this.$report1[0], {columns:columns,data:data});
-			})
+			this.datatable = new DataTable(".report-wrapper1", {columns:columns,data:data});
+		})
 			
 		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_mitigation_details',{
 			project : this.project
 		})
 			.then((r) => {
-				$('.report-wrapper2:first').remove();
+				// $('.report-wrapper2:first').remove();
 				console.log(r.message);
-				this.$report2 = $('<div class="report-wrapper2">').appendTo(this.page.main).insertAfter($('.report-wrapper1'));
+				// this.$report2 = $('<div class="report-wrapper2">').appendTo(this.page.main).insertAfter($('.report-wrapper1'));
 				let columns = r.message[0]
 				let data = r.message[1]
-				$('.headline:first').remove();
-				if(this.project){
-					this.$heading = $('<b class="headline">Mitigation Summary</b>').insertBefore(this.$report2);
-				}
+				// $('.headline2:last').remove();
+				// if(this.project){
+				// 	this.$heading = $('<b class="headline">Mitigation Summary</b>').insertBefore(this.$report2);
+				// }
 
-				this.datatable = new DataTable(this.$report2[0], {columns:columns,data:data});
+				this.datatable = new DataTable(".report-wrapper2", {columns:columns,data:data});
 			})
 			
 		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_adaptation_details',{
 			project : this.project
 		})
 			.then((r) => {
-				$('.report-wrapper3:first').remove();
+				// $('.report-wrapper3:first').remove();
 				
-				this.$report3 = $('<div class="report-wrapper3">').appendTo(this.page.main).insertAfter($('.report-wrapper2'));
+				// this.$report3 = $('<div class="report-wrapper3">').appendTo(this.page.main).insertAfter($('.report-wrapper2'));
 				let columns = r.message[0]
 				let data = r.message[1]
-				if(this.project){
-					this.$heading = $('<b class="headline">Adaptation Summary</b>').insertBefore(this.$report3);
-				}
+				// $('.headline3:last').remove();
+				// if(this.project){
+				// 	this.$heading = $('<b class="headline">Adaptation Summary</b>').insertBefore(this.$report3);
+				// }
 
-				this.datatable = new DataTable(this.$report3[0], {columns:columns,data:data});
+				this.datatable = new DataTable(".report-wrapper3", {columns:columns,data:data});
 			})
-			
-		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_sdg_details',{
-			project : this.project
-		})
-			.then((r) => {
-				$('.report-wrapper4:first').remove();
-				
-				this.$report4 = $('<div class="report-wrapper4">').appendTo(this.page.main).insertAfter($('.report-wrapper3'));
-				let columns = r.message[0]
-				let data = r.message[1]
-				$('.headline:first').remove();
-				if(this.project){
-					this.$heading = $('<b class="headline">SDG Summary</b>').insertBefore(this.$report4);
-				}
-				this.datatable = new DataTable(this.$report4[0], {columns:columns,data:data});
+
+
+			frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_sdg_details',{
+				project : this.project
 			})
-			
+				.then((r) => {
+					// $('.report-wrapper4:first').remove();
+					
+					// this.$report4 = $('<div class="report-wrapper4">').appendTo(this.page.main).insertAfter($('.report-wrapper3'));
+					let columns = r.message[0]
+					let data = r.message[1]
+					// $('.headline4:last').remove();
+					// if(this.project){
+					// 	this.$heading = $('<b class="headline">SDG Summary</b>').insertBefore(this.$report4);
+					// }
+					this.datatable = new DataTable(".report-wrapper4", {columns:columns,data:data});
+				})
+
 		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_finance_details',{
 			project : this.project
 		})
 			.then((r) => {
-				$('.report-wrapper5:first').remove();
+				// $('.report-wrapper5:first').remove();
 				console.log(r.message);
-				this.$report5 = $('<div class="report-wrapper5">').appendTo(this.page.main).insertAfter($('.report-wrapper4'));
+				// this.$report5 = $('<div class="report-wrapper5">').appendTo(this.page.main).insertAfter($('.report-wrapper4'));
 				let columns = r.message[0]
 				let data = r.message[1]
-				$('.headline:first').remove();
-				if(this.project){
-					this.$heading = $('<b class="headline">Finance Summary</b>').insertBefore(this.$report5);
-				}
+				console.log("columns",columns);
+				console.log("data",data);
+				// $('.headline5:last').remove();
+				// if(this.project){
+				// 	this.$heading = $('<b class="headline">Finance Summary</b>').insertBefore(this.$report5);
+				// }
 
-				this.datatable = new DataTable(this.$report5[0], {columns:columns,data:data});
+				this.datatable = new DataTable(".report-wrapper5", {columns:columns,data:data});
 			})
+				
 			
+		
+			
+		
 	}
 
 
