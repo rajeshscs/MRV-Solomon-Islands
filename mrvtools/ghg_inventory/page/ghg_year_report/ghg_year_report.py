@@ -63,13 +63,11 @@ def getData(inventory_unit, from_year, to_year):
 		if from_year:
 			query = f"""
 					Select
-						categories as Categories
+						category_name as categories
 					from
-						`tabGHG Inventory Master Report ChildTable`
-					where
-						parent = {from_year}
+						`tabGHG Inventory Report Categories`
 					order by
-						idx
+						display_order asc
 					"""
 			data = frappe.db.sql(query,as_dict =1)
 			# frappe.log_error("data",data)
@@ -135,13 +133,11 @@ def getData(inventory_unit, from_year, to_year):
 	if inventory_unit == 'GgCO2e':
 		query = f"""
 				Select
-					categories as Categories
+					category_name as categories
 				from
-					`tabGHG Inventory Master Report ChildTable`
-				where
-					parent = {from_year}
+					`tabGHG Inventory Report Categories`
 				order by
-					idx
+					display_order asc
 				"""
 		data = frappe.db.sql(query,as_dict =1)
 		val = f"""

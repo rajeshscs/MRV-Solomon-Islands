@@ -26,7 +26,6 @@ def getColumns(filters):
 
 		"""
 	data = frappe.db.sql(val,as_dict =1)
-	frappe.log_error("Datas",data)
 	for i in data:
 		columns.append(f'{i.name}'+":Float:160")
 	return columns
@@ -44,15 +43,14 @@ def getData(filters):
 		if(filters.get('from_year')):
 			query = f"""
 					Select
-						categories
+						category_name as categories
 					from
-						`tabGHG Inventory Master Report ChildTable`
-					where
-						parent = {filters.get("from_year")}
+						`tabGHG Inventory Report Categories`
 					order by
-						idx
+						display_order asc
 					"""
 			data = frappe.db.sql(query,as_dict =1)
+			
 			val = f"""
 					SELECT 
 						name 
@@ -71,6 +69,7 @@ def getData(filters):
 			frappe.log_error("value",value)
 
 			for i in value:
+				frappe.log_error("i",i.name)
 				chart_label.append(i.name)
 			
 			# frappe.log_error("chart_label",chart_label)
@@ -119,13 +118,11 @@ def getData(filters):
 	if filters.get("inventory_unit") == 'GgCO2e':
 		query = f"""
 				Select
-					categories
+					category_name as categories
 				from
-					`tabGHG Inventory Master Report ChildTable`
-				where
-					parent = {filters.get("from_year")}
+					`tabGHG Inventory Report Categories`
 				order by
-					idx
+					display_order asc
 				"""
 		data = frappe.db.sql(query,as_dict =1)
 		val = f"""

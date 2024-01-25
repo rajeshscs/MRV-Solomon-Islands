@@ -165,7 +165,7 @@ def get_chart(year = None,objective = None,key_sector = None,key_sub_sector = No
 		sum_expected_budget_spend_in_usd += i.expected_budget_spend_in_usd if i.expected_budget_spend_in_usd else 0
 	
 		
-		cfmi_id = frappe.db.get_list("Climate Finance Monitoring Information",filters={"project_id":i.name},pluck="name")
+		cfmi_id = frappe.db.get_all("Climate Finance Monitoring Information",filters={"project_id":i.name},pluck="name")
 		
 		for id in cfmi_id:
 			
