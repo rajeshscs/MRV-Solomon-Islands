@@ -144,10 +144,6 @@
 	font-size: 15px;
 }
 
-#page-sales-executive-dash .col-lg-2.layout-side-section {
-    display: none;
-}
-
 .logo_style{
     margin-top: 40px;
 
@@ -351,9 +347,7 @@ span.ellipsis b {
 	font-size: 15px;
 }
 
-#page-sales-executive-dash .col-lg-2.layout-side-section {
-    display: none;
-}
+
 
 .logo_style{
     margin-top: 40px;
@@ -417,9 +411,9 @@ span.ellipsis b {
 span.ellipse{
     color: #ffffff;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 18.197px;
 
 }
@@ -570,46 +564,63 @@ div#grand_list {
 
 .total_card_1 .number-widget-box{
     background-color: #8ac53e;
-    width: 359px;
+    display: flex;
+    width: 33.333%;
     
 }
 
 .total_card_2 .number-widget-box{
     background-color: #ff993a;
+    display: flex;
+    width: 33.333%;
 
 }
 
 .total_card_3 .number-widget-box{
     background-color: #369fff;
+    display: flex;
+    width: 33.333%;
 
 }
 
 .total_card_4 .number-widget-box{
     background-color: #bd50da;
+    display: flex;
+    width: 33.333%;
 
 }
 
 .total_card_5 .number-widget-box{
     background-color: #a389ec;
+    display: flex;
+    width: 33.333%;
     
 }
 
 .total_card_6 .number-widget-box{
     background-color: #ef5b5b;
+    display: flex;
+    width: 33.333%;
 
 }
 
 .total_card_7 .number-widget-box{
     background-color: #5f9fff;
+    display: flex;
+    width: 33.333%;
 
 }
 
 .total_card_8 .number-widget-box{
     background-color: #ff993a;
+    display: flex;
+    width: 33.333%;
 
 }
 .total_card_9 .number-widget-box{
     background-color: #fefefe;
+    display: flex;
+    width: 33.333%;
 
 }
 
@@ -628,19 +639,23 @@ div#grand_list {
 .total_card_2{
 	flex: calc(30% - 1px);
     border: 1px;
-
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #ff993a;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 .total_card_3{
 	flex: calc(30% - 1px);
     border: 1px;
-
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #369fff;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 .total_card_4{
@@ -649,33 +664,42 @@ div#grand_list {
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #bd50da;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 .total_card_5{
 	flex: calc(30% - 1px);
     border: 1px;
-
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #a389ec;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 
 }
 
 .total_card_6{
 	flex: calc(30% - 1px);
     border: 1px;
-
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #ef5b5b;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 .total_card_7{
 	flex: calc(30% - 1px);
     border: 1px;
-
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #5f9fff;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 .total_card_8{
@@ -684,12 +708,20 @@ div#grand_list {
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
     background-color: #ff993a;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 .total_card_9{
 	flex: calc(30% - 1px);
-   
+    border: 1px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
     background-color: #fdfdfd;
+    position: absolute;
+    display: contents;
+    width: 59px !important;
 }
 
 #value-cards{
@@ -698,12 +730,13 @@ div#grand_list {
     font-weight: 700;
     font-size: 25px; */
     color: #ffffff;
-    margin-left: 160px;
+    margin-right: 30px;
     font-weight: 600;
     font-size: 18px;
-    float: right;
-    position: relative;
-    display: flex;
+    text-align: right;
+    /* float: right; */
+    /* position: relative; */
+    /* display: flex; */
 }
 
 .dt-cell__content {
@@ -719,12 +752,12 @@ div#page-main-dashboard {
     margin-top: 15px;
 }
 
-[data-route="main-dashboard"] header.navbar.navbar-expand.sticky-top {
+/* [data-route="main-dashboard"] header.navbar.navbar-expand.sticky-top {
     display: none;
     height: 0;
-}
+} */
 
-.page-head .flex{
+[data-route^="main-dashboard"] .page-head .flex{
     display: none;
 }
 

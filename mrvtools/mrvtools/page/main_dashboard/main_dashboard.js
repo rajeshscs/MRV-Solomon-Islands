@@ -64,14 +64,16 @@ class Analytics {
 							<div class="widget number-widget-box" data-widget-name="Total GHG Emissions">
 								<div class="widget-head">
 									<div class="widget-label">
-									<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<img src="/files/GHG Inventory-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
-									</a>
-									<span class="ellipse"  title="Total GHG Emissions">Total GHG Emissions</span>
+										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<img src="/files/GHG Inventory-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
+										</a>
+										<span class="ellipse"  title="Total GHG Emissions">Total GHG Emissions</span>
+										
+									</div>
+									<br>
+									</div>
 									<div class="number_e" id="value-cards">`+total_ghg_emmission+` tCO2e</div>
-								</div>
-							</div>
-							<div class="widget-footer"></div>
+								<div class="widget-footer"></div>
 							</div>
 				</div>
 				<div class="total_card_2" >
@@ -82,11 +84,12 @@ class Analytics {
 								<img src="/files/Projects-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 								</a>
 								<span class="ellipse" title="Total Projects">Total Projects</span>
-								<div class="number_e" id="value-cards">`+total_projects+`</div>
-			
+								
 								</div>
+								<br>
 								</div>
 								
+								<div class="number_e" id="value-cards">`+total_projects+`</div>
 								<div class="widget-footer"></div>
 							</div>
 				</div>
@@ -99,10 +102,12 @@ class Analytics {
 							<img src="/files/Mitigation Actions-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 							</a>
 							<span class="ellipse" title="Mitigation Projects">Mitigation Projects</span>
-							<div class="number_e" id="value-cards">`+total_mitigation_projects+`</div>
-			
-							</div></div>
 							
+							</div>
+							<br>
+							</div>
+							
+							<div class="number_e" id="value-cards">`+total_mitigation_projects+`</div>
 								<div class="widget-footer"></div>
 							</div>
 				</div>
@@ -118,9 +123,10 @@ class Analytics {
 								<img src="/files/Adaptation Actions-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 							</a>
 							<span class="ellipse"  title="Adaptation Projects">Adaptation Projects</span>
+							</div>
+							<br>
+							</div>
 							<div class="number_e" id="value-cards">`+total_adaptation_projects+`</div>
-						</div>
-					</div>
 					<div class="widget-footer"></div>
 					</div>
 				</div>
@@ -132,10 +138,11 @@ class Analytics {
 								<img src="/files/Climate Finance-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 								</a>
 								<span class="ellipse" title="Cross Cutting Projects">Cross Cutting Projects</span>
+								
+								</div>
+								<br>
+								</div>
 								<div class="number_e" id="value-cards">`+total_cross_cutting_projects+`</div>
-
-								</div>
-								</div>
 								
 								<div class="widget-footer"></div>
 							</div>
@@ -149,10 +156,10 @@ class Analytics {
 										<img src="/files/SDGs ASSESSMENTS-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 									</a>
 									<span class="ellipse" title="Enabler Projects">Enabler Projects</span>
+									
+									</div>
+									</div>
 									<div class="number_e" id="value-cards">`+total_enabler_projects+`</div>
-
-								</div>
-							</div>
 							
 							<div class="widget-footer"></div>
 						</div>
@@ -169,24 +176,26 @@ class Analytics {
 									<img src="/files/Mitigation Actions-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
 								</a>
 								<span class="ellipse"  title="Climate finance disbursed till date">Climate finance disbursed till date</span>
+								</div>
+								<br>
+								</div>
 								<div class="number_e" id="value-cards">USD `+till_date_finance_disbursed+`</div>
-							</div>
-						</div>
-						<div class="widget-footer"></div>
+								<div class="widget-footer"></div>
 					</div>
 				</div>
 				<div class="total_card_8" >
 							<div class="widget number-widget-box" data-widget-name="GHG Reductions Actual till date">
 								<div class="widget-head">
-								<div class="widget-label">
-								<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img src="/files/Projects-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
-								</a>
-								<span class="ellipse" title="GHG Reductions Actual till date">GHG Reductions Actual till date</span>
-								<div class="number_e" id="value-cards">`+till_date_ghg_reduction+` tCO2e</div>
-
-								</div>
-								</div>
+									<div class="widget-label">
+										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<img src="/files/Projects-01.svg" alt="Assemble_logo" width="60" height="60" class="logo_style1">
+										</a>
+										<span class="ellipse" title="GHG Reductions Actual till date">GHG Reductions Actual till date</span>
+										
+										</div>
+										<br>
+										</div>
+										<div class="number_e" id="value-cards">`+till_date_ghg_reduction+` tCO2e</div>
 								
 								<div class="widget-footer"></div>
 							</div>
