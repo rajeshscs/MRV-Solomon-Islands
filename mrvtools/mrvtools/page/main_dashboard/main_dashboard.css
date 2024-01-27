@@ -356,6 +356,7 @@ span.ellipsis b {
 .logo_style1{
     margin-top: 0px;
     width: 33px;
+    cursor: context-menu;
 
 }
 
@@ -787,3 +788,14 @@ b.title_names3 {
     height: 20px;
 }
 
+.widget.number-widget-box{
+    cursor: context-menu;
+    height: 115px;
+    padding: var(--padding-sm) var(--padding-md);
+}
+
+a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+    cursor: context-menu;
+}
