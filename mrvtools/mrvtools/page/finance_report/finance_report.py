@@ -273,7 +273,7 @@ def get_pie_chart(year = None,objective = None,key_sector = None,key_sub_sector 
 		for id in project_id:
 			if frappe.db.exists("Climate Finance",{"project_id":["in",[id]]}):
 				finance_id = frappe.db.get_list("Climate Finance",filters={"project_id":id},pluck="name")
-			cfmi_id = frappe.db.get_list("Climate Finance Monitoring Information",filters={"project_id":finance_id[0]},pluck="name")
+				cfmi_id = frappe.db.get_list("Climate Finance Monitoring Information",filters={"project_id":finance_id[0]},pluck="name")
 			for j in cfmi_id:
 				if frappe.db.exists("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]}):
 						total_spent = frappe.get_doc("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]})
