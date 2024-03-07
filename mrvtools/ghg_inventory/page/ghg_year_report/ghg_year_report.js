@@ -64,7 +64,7 @@ class GHGInventory {
 	make() {
 		this.$container = $(`
 		<div class="ghg_year_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center;justify-content: space-between;">
 			<b id="categories_chart"></b>
 			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
 			<button id="show_btn" class="btn btn-sm">show chart</button>
@@ -155,7 +155,6 @@ class GHGInventory {
 			inventory_unit:this.inventory_unit[0].value
 		})
 			.then((r) => {
-				console.log(r.message[0]);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]

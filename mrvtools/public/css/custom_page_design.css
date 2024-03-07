@@ -1,7 +1,10 @@
 .form-control{
     border:1px solid #cfcfcfa1 !important;
 }
+ul.sidebar-menu::-webkit-scrollbar-track {
+    right: -2rem !important;
 
+}
 .control-value{
     border:1px solid #efefef9e !important;
 }
@@ -31,6 +34,7 @@
     max-width: 3900px;
     margin: auto;
 }
+
 
 .row.flex.align-center.page-head-content.justify-between{
     max-width: 1230px;

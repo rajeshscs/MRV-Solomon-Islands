@@ -13,28 +13,23 @@ def getColumns():
 	columns = [
 		{
 			"name": "categories",
-			"id": "Categories",
-			"width": 485
+			"id": "categories",
 		},
 		{
 			"name": "co2",
 			"id": "CO2 Emission",
-			"width": 170 
 		},
 		{
 			"name": "ch4",
-			"id": "CH4 Emission",
-			"width": 170 
+			"id": "CH4 Emission"
 		},
 		{
 			"name": "n2o",
-			"id": "N2O Emission",
-			"width": 170 
+			"id": "N2O Emission"
 		},
 		{
 			"name": "total_co2_eq",
-			"id": "Total CO2 Emission",
-			"width": 170 
+			"id": "Total CO2 Emission"
 		}
 		
 	]
@@ -50,7 +45,7 @@ def getData(inventory_year, inventory_unit):
 
 			query = f"""
 					SELECT
-						categories as Categories, 
+						categories as categories, 
 						co2 as 'CO2 Emission',
 						ch4 as 'CH4 Emission',
 						n2o as 'N2O Emission', 

@@ -1,8 +1,8 @@
 frappe.pages["sdg-report"].on_page_load = (wrapper) => {
-	frappe.sdg_report = new Analytics(wrapper);
+	frappe.sdg_report = new SDG(wrapper);
 };
 
-class Analytics {
+class SDG {
 	constructor(parent) {
 		frappe.ui.make_app_page({
 			parent: parent,

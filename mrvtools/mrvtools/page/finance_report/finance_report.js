@@ -1,8 +1,8 @@
 frappe.pages["finance-report"].on_page_load = (wrapper) => {
-	frappe.finance_report = new Analytics(wrapper);
+	frappe.finance_report = new Finance(wrapper);
 };
 
-class Analytics {
+class Finance {
 	constructor(parent) {
 		frappe.ui.make_app_page({
 			parent: parent,

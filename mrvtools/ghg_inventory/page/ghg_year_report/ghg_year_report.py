@@ -16,7 +16,7 @@ def getColumns(to_year, from_year):
 	columns = [
 				{
 			"name": "categories",
-			"id": "Categories",
+			"id": "categories",
 			"width": 485
 		}
 
@@ -63,14 +63,14 @@ def getData(inventory_unit, from_year, to_year):
 		if from_year:
 			query = f"""
 					Select
-						category_name as categories
+						category_name as categories,indent
 					from
 						`tabGHG Inventory Report Categories`
 					order by
 						display_order asc
 					"""
 			data = frappe.db.sql(query,as_dict =1)
-			# frappe.log_error("data",data)
+			frappe.log_error("data",data)
 
 			val = f"""
 					SELECT 

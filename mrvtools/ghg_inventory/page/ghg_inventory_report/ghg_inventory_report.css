@@ -8,14 +8,32 @@
 .dt-cell--header{
 	background-color: #f4f5f6 !important;
     color: #6b7278;
+	height: 35px !important;
 }
-
+.layout-main-section .report-wrapper {
+    padding: 0px !important; 
+    margin: 11px 30px 1px 30px;
+    border: 1px solid #dbdbdb;
+}
+.dt-scrollable{
+	width:100% !important
+	/* overflow-x: hidden !important; */
+}
+.dt-row {
+    display: flex;
+    width: 98% !important;
+}
 .list-filter-item {
 	min-width: 150px;
 	float: left;
 	margin: 5px;
 }
-
+.dt-cell--header-1,.dt-cell--col-1{
+	width:50% !important;
+}
+.dt-cell--header-2, .dt-cell--header-3, .dt-cell--header-4, .dt-cell--header-5, .dt-cell--col-2, .dt-cell--col-3, .dt-cell--col-4, .dt-cell--col-5{
+	width:12% !important;
+}
 .list-item_content {
 	flex: 1;
 	padding-right: 15px;

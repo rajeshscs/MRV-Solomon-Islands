@@ -7,10 +7,10 @@ frappe.pages['main-dashboard'].on_page_load = function(wrapper) {
 }
 
 frappe.pages["main-dashboard"].on_page_load = (wrapper) => {
-	frappe.main_dashboard = new Analytics(wrapper);
+	frappe.main_dashboard = new Dashboard(wrapper);
 };
 
-class Analytics {
+class Dashboard {
 	constructor(parent) {
 		frappe.ui.make_app_page({
 			parent: parent,

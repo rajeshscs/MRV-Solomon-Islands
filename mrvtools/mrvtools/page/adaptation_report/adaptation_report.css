@@ -127,6 +127,10 @@
 	gap: 5px;
 }
 
+.dt-instance-1 .dt-cell {
+    height: 35px !important;
+}
+
 .layout-main-section .report-wrapper {
     padding: 0px !important; 
     margin: 11px 30px 1px 30px;

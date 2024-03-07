@@ -1,8 +1,8 @@
 frappe.pages["ghg-inventory-report"].on_page_load = (wrapper) => {
-	frappe.ghg_inventory_report = new GHGInventory(wrapper);
+	frappe.ghg_inventory_report = new GHGInventoryGasWise(wrapper);
 };
 
-class GHGInventory {
+class GHGInventoryGasWise {
 	constructor(parent) {
 		frappe.ui.make_app_page({
 			parent: parent,
@@ -70,7 +70,7 @@ class GHGInventory {
 		$("#ghg_chart").html(`
 		<div class="ghg_inventory_report page-main-content">
 			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-				<b id="categories_chart"></b>
+				<b id="categories_chart1"></b>
 				<button id="hide_btn" class="btn btn-sm">Hide chart</button>
 				<button id="show_btn" class="btn btn-sm">show chart</button>
 			</div>
@@ -81,7 +81,7 @@ class GHGInventory {
 		$("#ghg_chart2").html(`
 		<div class="ghg_inventory_report page-main-content">
 		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-			<b id="categories_chart"></b>
+			<b id="categories_chart2"></b>
 			<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
 			<button id="show_btn2" class="btn btn-sm">show chart</button>
 		</div>
@@ -122,7 +122,7 @@ class GHGInventory {
 			inventory_unit:this.inventory_unit[0].value
 		})
 			.then((r) => {
-				$("#categories_chart").html("No of Projects based on Categories")
+				$("#categories_chart1").html("Total National Emission of all Gases")
 				console.log(r.message);
 				let results = r.message || [];
 				console.log(results);
@@ -152,7 +152,7 @@ class GHGInventory {
 			inventory_unit:this.inventory_unit[0].value
 		})
 			.then((r) => {
-				 
+				$("#categories_chart2").html("Total National Emission of all Gases")
 				console.log("message",r.message);
 				let results = r.message || [];
 				console.log("results",results.data);
@@ -213,7 +213,6 @@ class GHGInventory {
 			inventory_unit:this.inventory_unit[0].value
 		})
 			.then((r) => {
-				console.log(r.message[0]);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
