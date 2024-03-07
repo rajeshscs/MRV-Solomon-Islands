@@ -1,4 +1,5 @@
 import frappe,json
+from datetime import datetime
 
 @frappe.whitelist(allow_guest=True)
 def get_cards_data():
@@ -19,28 +20,7 @@ def get_cards_data():
 	value = frappe.db.sql(chart_value,as_dict = 1)
 	total_ghg_emmission += value[0]["total_co2_eq"]
 	
-	total_projects = frappe.db.sql("""
-		SELECT COUNT(name) as count from tabProject
-	""",as_dict=1)
-	total_mitigation_projects = frappe.db.sql("""
-		SELECT COUNT(name) as count from tabProject WHERE objective = 'Mitigation'
-	""",as_dict=1)
-	total_adaptation_projects = frappe.db.sql("""
-		SELECT COUNT(name) as count from tabProject WHERE objective = 'Adaptation'
-	""",as_dict=1)
-	total_cross_cutting_projects = frappe.db.sql("""
-		SELECT COUNT(name) as count from tabProject WHERE objective = 'Cross-Cutting'
-	""",as_dict=1)
-	total_enabler_projects = frappe.db.sql("""
-		SELECT COUNT(name) as count from tabProject WHERE objective = 'Enablers'
-	""",as_dict=1)
-
-	data_counts["total_ghg_emmission"]=total_ghg_emmission
-	data_counts["total_projects"]=total_projects[0]['count']
-	data_counts["total_mitigation_projects"]=total_mitigation_projects[0]['count']
-	data_counts["total_adaptation_projects"]=total_adaptation_projects[0]['count']
-	data_counts["total_cross_cutting_projects"]=total_cross_cutting_projects[0]['count']
-	data_counts["total_enabler_projects"]=total_enabler_projects[0]['count']
+	
 
 
 	till_date_finance_disbursed = 0 
@@ -156,3 +136,274 @@ def ghg_emissions_data():
 	# 	"colors":["pink","blue","green"]
 	# }
 	# return chart
+@frappe.whitelist()
+def get_document_count():
+	data_counts = {}
+	total_mitigation_projects = frappe.db.sql("""
+		SELECT COUNT(name) as count from tabProject WHERE objective = 'Mitigation'
+	""",as_dict=1)
+	total_adaptation_projects = frappe.db.sql("""
+		SELECT COUNT(name) as count from tabProject WHERE objective = 'Adaptation'
+	""",as_dict=1)
+	total_cross_cutting_projects = frappe.db.sql("""
+		SELECT COUNT(name) as count from tabProject WHERE objective = 'Cross-Cutting'
+	""",as_dict=1)
+	total_enabler_projects = frappe.db.sql("""
+		SELECT COUNT(name) as count from tabProject WHERE objective = 'Enablers'
+	""",as_dict=1)
+	total_transparency_projects = frappe.db.sql("""
+		SELECT COUNT(name) as count from tabProject WHERE objective = 'Transparency'
+	""",as_dict=1)
+
+	data_counts["Mitigation"]=total_mitigation_projects[0]['count']
+	data_counts["Adaptation"]=total_adaptation_projects[0]['count']
+	data_counts["Cross-Cutting"]=total_cross_cutting_projects[0]['count']
+	data_counts["Enablers"]=total_enabler_projects[0]['count']
+	data_counts["Transparency"]=total_transparency_projects[0]['count']
+
+
+	miti_keySector = frappe.db.sql(f'''SELECT name from `tabProject Key Sector` WHERE objective in ("Mitigation","Cross-Cutting")''',as_dict=1)
+	miti_count_list=[]
+	for i in miti_keySector:
+		if frappe.db.exists("Mitigations",{"key_sector":i.name}):
+			miti_count = frappe.db.get_all("Mitigations",fields=["key_sector","COUNT(name) count"],filters={'key_sector':i.name})
+			miti_count_list.append(miti_count[0])
+			
+	adapt_keySector = frappe.db.sql(f'''SELECT name from `tabProject Key Sector` WHERE objective in ("Adaptation","Cross-Cutting")''',as_dict=1)
+	adapt_count_list=[]
+	for i in adapt_keySector:
+		if frappe.db.exists("Adaptation",{"key_sector":i.name}):
+			adapt_count = frappe.db.get_all("Adaptation",fields=["key_sector","COUNT(name) count"],filters={'key_sector':i.name})
+			adapt_count_list.append(adapt_count[0])
+			
+	project_planned = frappe.db.count("Project",{"status":"Planned"})
+	project_ongoing = frappe.db.count("Project",{"status":["in",["Adopted","Under Implementation","Implemented","Operational"]]})
+	project_completed = frappe.db.count("Project",{"status":"Completed"})
+	project_status=[{"status":"Planned","count":project_planned},{"status":"Completed","count":project_completed},
+				 	{"status":"Ongoing","count":project_ongoing,
+					}]
+
+	return {"project_count":[data_counts],"mitigation":miti_count_list,"adaptation":adapt_count_list,
+		 	"project_status":project_status}
+
+
+@frappe.whitelist()
+def get_commulative_mitigation_till_date():
+	query = f"""
+	SELECT
+		MT.key_sector
+	FROM
+		`tabMitigations` MT
+	WHERE 
+		MT.docstatus != 2 
+	ORDER BY
+		MT.project_id
+		"""
+	data = frappe.db.sql(query,as_dict=1)
+	
+	result = list(dict((json.dumps(d, sort_keys=True), d) for d in data).values())
+	sector_label_list=[]
+	actual_reduction_list=[]
+	for i in result:
+		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
+			filters={"key_sector":f"{i.key_sector}"},
+			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
+		if tillDateActual[0].till_date_actual_ghg != None and tillDateActual[0].till_date_actual_ghg != 0.0:
+			actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
+			sector_label_list.append(i.key_sector)
+   
+	return {"data":actual_reduction_list,"labels":sector_label_list}
+
+@frappe.whitelist()
+def get_commulative_mitigation_last_year():
+	query = f"""
+	SELECT
+		MT.key_sector
+	FROM
+		`tabMitigations` MT
+	WHERE 
+		MT.docstatus != 2 
+	ORDER BY
+		MT.project_id
+		"""
+	data = frappe.db.sql(query,as_dict=1)
+	
+	result = list(dict((json.dumps(d, sort_keys=True), d) for d in data).values())
+	sector_label_list=[]
+	actual_reduction_list=[]
+	today = frappe.utils.today()
+	today_date = datetime.strptime(today, '%Y-%m-%d')
+	if today_date.month == 2 and today_date.day == 29:
+		last_year_date = datetime(today_date.year, today_date.month, today_date.day - 1)
+		last_year_date = datetime(last_year_date.year - 1, last_year_date.month, last_year_date.day)
+	else:
+		last_year_date = datetime(today_date.year - 1, today_date.month, today_date.day)
+	last_year_date_str = last_year_date.strftime('%Y-%m-%d')
+	for i in result:
+		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
+			filters={"key_sector":f"{i.key_sector}","start_date":["between",[f"{last_year_date_str}",f"{today}"]]},
+			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
+		if tillDateActual[0].till_date_actual_ghg != None and tillDateActual[0].till_date_actual_ghg != 0.0:
+			actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
+			sector_label_list.append(i.key_sector)
+   
+	return {"data":actual_reduction_list,"labels":sector_label_list}
+
+@frappe.whitelist()
+def total_co2_emission_latest():
+	labels = ['1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other']
+
+	query = f"""
+			SELECT
+				total_co2_eq as 'Total CO2 Emission'
+			FROM
+				`tabGHG Inventory Master Report ChildTable`
+			WHERE 
+				docstatus != 2
+			AND
+				categories IN ('1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other')
+			AND parent = {frappe.utils.today()[0:4]}
+			ORDER BY
+				categories
+			"""
+	data = frappe.db.sql(query)
+	return {"data":data,"labels":labels}
+
+@frappe.whitelist()
+def get_total_project_ndp():
+	doc = frappe.db.get_all("Adaptation",pluck="ndp_coverage")
+	counts = {}
+	for item in doc:
+		if item in counts:
+			counts[item] += 1
+		else:
+			counts[item] = 1
+	return counts
+
+@frappe.whitelist()
+def get_total_sdg_category_wise():
+	field_list = []
+	get_counts = []
+	meta = frappe.get_meta("SDG Assessment")
+	meta_dict = meta.as_dict()
+	fields = meta_dict["fields"]
+	for field in fields:
+		if field["fieldtype"] == "Check":
+			field_list.append(field["fieldname"])
+	for field in field_list:
+		count =0
+		values=frappe.db.get_all("SDG Assessment",[field])
+		for i in values:
+			for key,value in i.items():
+				if value ==1:
+					count= count+1
+		get_counts.append(count)
+	frappe.log_error("qqqqqq",field_list)
+	categories = ['Poverty Reduction', 'Inequality', 'Gender', 'Industry', 'Environment', 'Employment', 'Education', 'Water', 'Food','Health']
+	
+	return {"data":get_counts,"categories":categories}
+
+@frappe.whitelist()
+def total_co2_emission_last_five_years():
+	current_year = datetime.now().year
+	last_five_years = list(range(current_year - 4, current_year + 1))
+	val = f"""
+			SELECT 
+				name 
+			FROM 
+				`tabGHG Inventory Master Report` 
+			WHERE 
+				name >= '2011' 
+			AND 
+				name <= '{current_year}' 
+			ORDER BY 
+				year ASC;
+
+		"""
+
+	value = frappe.db.sql(val,as_dict = 1)
+	categories = ['1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other']
+	energy = []
+	ippu = []
+	agriculture = []
+	land = []
+	waste = []
+	other = []
+	all = []
+	for j in categories:
+		for i in last_five_years:
+			if frappe.db.exists('GHG Inventory Master Report',{'name':i}):
+				query = f"""
+					SELECT 
+						categories as name, total_co2_eq as 'values' 
+					FROM 
+						`tabGHG Inventory Master Report ChildTable` 
+					WHERE 
+						parent = '{i}' 
+					AND 
+						categories = '{j}'
+					ORDER BY 
+						categories
+				"""
+				result = frappe.db.sql(query,as_dict=1)
+				if result[0]['name'] == "1. Energy":
+					energy.append(result[0]['values'])
+				if result[0]['name'] == '2. Industrial processes and product use':
+					ippu.append(result[0]['values'])
+				if result[0]['name'] == '3. Agriculture':
+					agriculture.append(result[0]['values'])
+				if result[0]['name'] == '4. LAND USE, LAND-USE CHANGE AND FORESTRY':
+					land.append(result[0]['values'])
+				if result[0]['name'] == '5. Waste':
+					waste.append(result[0]['values'])
+				if result[0]['name'] == '6. Other':
+					other.append(result[0]['values'])
+			else:
+				if j == "1. Energy":
+					energy.append(0)
+				if j == "2. Industrial processes and product use":
+					ippu.append(0)
+				if j == "3. Agriculture":
+					agriculture.append(0)
+				if j == "4. LAND USE, LAND-USE CHANGE AND FORESTRY":
+					land.append(0)
+				if j == "5. Waste":
+					waste.append(0)
+				if j == "6. Other":
+					other.append(0)
+	data = {
+		"labels": last_five_years,
+			"datasets": [
+				{
+					"name": "1. Energy",
+					"values": energy,
+					"chartType": "bar",
+				},
+				{
+					"name": "2. Industrial processes and product use",
+					"values": ippu,
+					"chartType": "bar"
+				},
+				{
+					"name": "3. Agriculture",
+					"values": agriculture,
+					"chartType": "bar"
+				},
+				{
+					"name": "4. LAND USE, LAND-USE CHANGE AND FORESTRY",
+					"values": land,
+					"chartType": "bar"
+				},
+				{
+					"name": "5. Waste",
+					"values": waste,
+					"chartType": "bar"
+				},
+				{
+					"name": "6. Other",
+					"values": other,
+					"chartType": "bar"
+				}
+			]
+		}
+	return data

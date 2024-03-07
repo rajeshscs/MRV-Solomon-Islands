@@ -15,6 +15,7 @@
   "type_of_instrument",
   "key_sector",
   "status",
+  "action",
   "location",
   "coordinates",
   "get_location",
@@ -25,6 +26,7 @@
   "objective",
   "key_sub_sector",
   "included_in",
+  "programme",
   "please_specify_location",
   "implementing_entity",
   "start_date",
@@ -258,6 +260,18 @@
   {
    "fieldname": "section_break_m3lhf",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Link",
+   "label": "Action",
+   "options": "Project Actions"
+  },
+  {
+   "fieldname": "programme",
+   "fieldtype": "Link",
+   "label": "Programme",
+   "options": "Project Actions Programme"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -275,7 +289,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2023-11-30 13:31:05.310950",
+ "modified": "2024-03-01 19:49:07.585054",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

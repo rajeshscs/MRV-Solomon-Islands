@@ -70,6 +70,17 @@ frappe.ui.form.on('Project', {
 		}
 	},
 
+	action:function(frm){
+		if(!frm.doc.action){
+			frm.set_df_property('programme','hidden',1)
+			frm.refresh_field('programme')
+		}
+		else{
+			frm.set_df_property('programme','hidden',0)
+			frm.refresh_field('programme')
+		}
+	},
+
 	
 	key_sector:function(frm){
 		if(!frm.doc.key_sector){
@@ -367,6 +378,15 @@ frappe.ui.form.on('Project', {
 		frm.refresh_field('key_sub_sector')
 		}
 
+		if(!frm.doc.action){
+			frm.set_df_property('programme','hidden',1)
+			frm.refresh_field('programme')
+		}
+		else{
+			frm.set_df_property('programme','hidden',0)
+			frm.refresh_field('programme')
+		}
+
 		frm.set_query("key_sector", function(){
 			return {
 				filters: {
@@ -378,6 +398,13 @@ frappe.ui.form.on('Project', {
 			return {
 				filters: {
 					key_sector : frm.doc.key_sector
+				}
+			}
+		});
+		frm.set_query("programme", function(){
+			return {
+				filters: {
+					action : frm.doc.action
 				}
 			}
 		});

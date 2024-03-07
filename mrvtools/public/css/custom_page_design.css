@@ -5,6 +5,12 @@
 .control-value{
     border:1px solid #efefef9e !important;
 }
+*{
+    --scrollbar-thumb-color: #016a4230 !important;
+    scrollbar-width: thin !important;
+    --scrollbar-track-color: transparent !important;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
 
 /* .layout-main-section.frappe-card{
     max-width: 1200px;

@@ -7,8 +7,8 @@ n2o_value = []
 import frappe
 @frappe.whitelist()
 def execute(inventory_unit, to_year, from_year):
-	columns, data, chart = getColumns(to_year, from_year),getData(inventory_unit, from_year, to_year), get_chart()
-	return columns, data , None, chart
+	columns, data = getColumns(to_year, from_year),getData(inventory_unit, from_year, to_year)
+	return columns, data
 
 
 @frappe.whitelist()

@@ -264,6 +264,8 @@ def get_pie_chart(monitoring_year = None,key_sector = None,key_sub_sector = None
 			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
 		actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
 		sector_label_list.append(i.key_sector)
+	
+	frappe.log_error("bbbbbbb",{"data":actual_reduction_list,"labels":sector_label_list})
    
 	return {"data":actual_reduction_list,"labels":sector_label_list}
 	
