@@ -204,15 +204,18 @@ def get_commulative_mitigation_till_date():
 	result = list(dict((json.dumps(d, sort_keys=True), d) for d in data).values())
 	sector_label_list=[]
 	actual_reduction_list=[]
+	expected_annual_ghg_list=[]
 	for i in result:
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
 			filters={"key_sector":f"{i.key_sector}"},
-			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
+			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg","expected_annual_ghg"])
 		if tillDateActual[0].till_date_actual_ghg != None and tillDateActual[0].till_date_actual_ghg != 0.0:
 			actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
 			sector_label_list.append(i.key_sector)
+			if tillDateActual[0].expected_annual_ghg != None and tillDateActual[0].expected_annual_ghg != 0.0:
+				expected_annual_ghg_list.append(tillDateActual[0].expected_annual_ghg)
    
-	return {"data":actual_reduction_list,"labels":sector_label_list}
+	return {"data":actual_reduction_list,"labels":sector_label_list,"expected":expected_annual_ghg_list}
 
 @frappe.whitelist()
 def get_commulative_mitigation_last_year():
@@ -231,6 +234,7 @@ def get_commulative_mitigation_last_year():
 	result = list(dict((json.dumps(d, sort_keys=True), d) for d in data).values())
 	sector_label_list=[]
 	actual_reduction_list=[]
+	expected_annual_ghg_list = []
 	today = frappe.utils.today()
 	today_date = datetime.strptime(today, '%Y-%m-%d')
 	if today_date.month == 2 and today_date.day == 29:
@@ -242,12 +246,14 @@ def get_commulative_mitigation_last_year():
 	for i in result:
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
 			filters={"key_sector":f"{i.key_sector}","start_date":["between",[f"{last_year_date_str}",f"{today}"]]},
-			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
+			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg","expected_annual_ghg"])
 		if tillDateActual[0].till_date_actual_ghg != None and tillDateActual[0].till_date_actual_ghg != 0.0:
 			actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
 			sector_label_list.append(i.key_sector)
+			if tillDateActual[0].expected_annual_ghg != None and tillDateActual[0].expected_annual_ghg != 0.0:
+				expected_annual_ghg_list.append(tillDateActual[0].expected_annual_ghg)
    
-	return {"data":actual_reduction_list,"labels":sector_label_list}
+	return {"data":actual_reduction_list,"labels":sector_label_list,"expected":expected_annual_ghg_list}
 
 @frappe.whitelist()
 def total_co2_emission_latest():

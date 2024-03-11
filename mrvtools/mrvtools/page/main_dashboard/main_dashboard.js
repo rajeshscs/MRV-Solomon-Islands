@@ -58,6 +58,9 @@ class Dashboard {
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="status-title"></span></div>
 						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="status-total"></span></div>
+						</div>
 					</div>
 					<div id='project_status' class="widget-body"></div>
 					<div class="chart-legend" id="chart-legend-2"></div>
@@ -72,6 +75,9 @@ class Dashboard {
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="mitigation-title"></span></div>
 						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="mitigation-total"></span></div>
+						</div>
 					</div>
 					<div id='mitigation-sector' class="widget-body"></div>
 					<div class="chart-legend" id="chart-legend-3"></div>
@@ -81,6 +87,9 @@ class Dashboard {
 					<div class="widget-head">
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="adaptation-title"></span></div>
+						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="adaptation-total"></span></div>
 						</div>
 					</div>
 					<div id='adaptation-sector' class="widget-body"></div>
@@ -94,7 +103,16 @@ class Dashboard {
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-title"></span></div>
 						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-total"></span></div>
+						</div>
 					</div>
+					<div class="widget-head" style="justify-content: end;">
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-expected"></span></div>
+						</div>
+					</div>
+					
 					<div id='mitigation_till-date' class="widget-body"></div>
 					<div class="chart-legend" id="chart-legend-5"></div>
 				</div>
@@ -103,6 +121,14 @@ class Dashboard {
 					<div class="widget-head">
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-title"></span></div>
+						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-total"></span></div>
+						</div>
+					</div>
+					<div class="widget-head" style="justify-content: end;">
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-expected"></span></div>
 						</div>
 					</div>
 					<div id='mitigation_last-year' class="widget-body"></div>
@@ -128,6 +154,9 @@ class Dashboard {
 					<div class="widget-head">
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="co2_emission_latest-title"></span></div>
+						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="co2_emission_latest-total"></span></div>
 						</div>
 					</div>
 					<div id='co2_emission_latest' class="widget-body"></div>
@@ -197,7 +226,7 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emissions_data')
 			.then((r) => {
 				console.log(r.message);
-				$('.title_names1').html("GHG Emissions")
+				// $('.title_names1').html("GHG Emissions")
 				let results = r.message || [];
 				const custom_options = {
 					type: "line",
@@ -208,14 +237,14 @@ class Dashboard {
 						isNavigable :1,
 						shortenYAxisNumbers: 0,
 						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
+						numberFormatter: frappe.utils.format_chart_axis_number
 					},
 					data: {
 						datasets: [{values: results.data}],
 						labels: results.labels
 					},
 				};
-				frappe.utils.make_chart("#ghg_emissions", custom_options);
+				// frappe.utils.make_chart("#ghg_emissions", custom_options);
 			});
 	}
 
@@ -282,7 +311,7 @@ class Dashboard {
 				}
 				
 				$('#project-count-title').html("No of Projects - Objective wise")
-				$('#project-count-total').html(`Total : ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}`)
+				$('#project-count-total').html(`Total :<span style="font-weight:800 !important;"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				let colors_1 = ['#c6a7fe', '#ff8183', '#7feabf', '#cdcdcd','#70bcff']
 				const custom_options = {
 					type: "donut",
@@ -320,6 +349,7 @@ class Dashboard {
 
 				
 				$('#adaptation-title').html("No of Adaptation Projects - Sector wise")
+				
 				// ['#c6a7fe', '#ff8183', '#7feabf', '#d6d6d6','#70bcff', "#f29b69", '#8c88f7','#ff92e0']
 				// let colors_3 = ["#adebad","#99e699","#5cd65c","#47d147","#29a329","#248f24","#1f7a1f","#196619","#145214","#0f3d0f","#0a290a","#051405"]
 				let colors_4 = ["#ffd6cc","#ffad99","#ff8566","#ff5c33","#ff3300","#cc2900","#991f00","#661400","#4d0f00"]
@@ -329,6 +359,8 @@ class Dashboard {
 					adaptation_key_list.push(i['key_sector'])
 					adaptation_value_list.push(i['count'])
 				}
+				$('#adaptation-total').html(`Total :<span style="font-weight:800 !important;"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+
 				const adaptation_option = {
 					type: "donut",
 					colors: colors_4,
@@ -372,6 +404,7 @@ class Dashboard {
 					mitigation_key_list.push(i['key_sector'])
 					mitigation_value_list.push(i['count'])
 				}
+				$('#mitigation-total').html(`Total :<span style="font-weight:800 !important;"> ${mitigation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				// colors: ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"],
 				const mitigation_option = {
 					type: "donut",
@@ -415,6 +448,7 @@ class Dashboard {
 					project_status_key_list.push(i['status'])
 					project_status_value_list.push(i['count'])
 				}
+				$('#status-total').html(`Total :<span style="font-weight:800 !important;"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				let colors_2 = ['#9a97ff', '#63e293', '#9eccee']
 				const project_status_option = {
 					type: "donut",
@@ -457,6 +491,8 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_till_date')
 			.then((r) => {
 				$('#mitigation_till-date-title').html("GHG Emission Acheived - Till Today")
+				$('#mitigation_till-date-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation_till-date-expected').html(`Expected :<span style="font-weight:800 !important;"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
 				const mitigation_ghg_till_data = {
@@ -497,9 +533,11 @@ class Dashboard {
 	mitigation_ghg_last_year(){
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_last_year')
 			.then((r) => {
+				console.log("------>>>>>>>>>>>",r.message);
 				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${frappe.datetime.now_date()}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
-				
+				$('#mitigation_last-year-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation_last-year-expected').html(`Expected :<span style="font-weight:800 !important;"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				const mitigation_ghg_last_year = {
 					type: "donut",
 					colors: colors_6,
@@ -539,9 +577,26 @@ class Dashboard {
 	}
 	
 	total_co2_emission_latest() {
+		let today = new Date();
+		let lastYearDate;
+
+		if (today.getUTCMonth() === 1 && today.getUTCDate() === 29) {
+			lastYearDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - 1));
+			lastYearDate = new Date(Date.UTC(lastYearDate.getUTCFullYear() - 1, lastYearDate.getUTCMonth(), lastYearDate.getUTCDate()));
+		} else {
+			lastYearDate = new Date(Date.UTC(today.getUTCFullYear() - 1, today.getUTCMonth(), today.getUTCDate()));
+		}
+
+		let lastYearDateStr = lastYearDate.toISOString().split('T')[0];
+		let dateParts = lastYearDateStr.split("-");
+		let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+		let today_date = frappe.datetime.nowdate()
+		let dateParts1 = today_date.split("-");
+		let formattedDate1 = `${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.total_co2_emission_latest')
 			.then((r) => {
-				$('#co2_emission_latest-title').html(` Total CO2 emmissions - ${frappe.datetime.now_date()} Sector Wise`)
+				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedDate} to ${formattedDate1} Sector Wise`)
+				$('#co2_emission_latest-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
 				let colors_7 = ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"]
 				let results = r.message || [];
 				console.log("results",results.data);

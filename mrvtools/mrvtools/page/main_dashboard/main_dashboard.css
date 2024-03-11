@@ -251,7 +251,9 @@ span.ellipsis b {
 .widget-title{
 	font-weight: 600 !important;
 }
-
+.widget-head{
+    padding:0px 5px
+}
 #number_v{
 	color:#000000; 
 	margin-top:20px;
