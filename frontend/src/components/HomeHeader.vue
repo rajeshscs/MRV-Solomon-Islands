@@ -29,6 +29,9 @@
           <li class="nav-item mr-2">
             <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s; margin-right:20px;">Project</router-link>
           </li>
+          <!-- <li>
+            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }" style="margin-right:20px;">Climate Change Division</router-link>
+          </li> -->
           <li>
             <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s; margin-right:20px;">Reports</router-link>
           </li>
@@ -61,7 +64,6 @@
   export default {
     data() {
       return {
-        // Define separate keys for each route
         aboutRefreshKey: 0,
       };
     },

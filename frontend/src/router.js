@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { session } from './data/session'
-// import { userResource } from '@/data/user'
-
 
 const routes = [
   {
@@ -32,14 +30,7 @@ const routes = [
       title: 'Login'
     }
   },
-  // {
-  //   name: 'Landing',
-  //   path: '/landing',
-  //   component: () => import('@/pages/Landing.vue'),
-  //   meta: {
-  //     title: 'Landing'
-  //   }
-  // },
+
   {
     name: 'About',
     path: '/about',
@@ -61,6 +52,14 @@ const routes = [
       title: 'MRV Project'
     }
   },
+  // {
+  //   name: 'Climate',
+  //   path: '/climate-change-division',
+  //   component: () => import('@/pages/ClimateChange.vue'),
+  //   meta: {
+  //     title: 'Climate Change Division'
+  //   }
+  // },
   {
     name: 'Reports',
     path: '/reports',

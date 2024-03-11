@@ -45,6 +45,9 @@ class Dashboard {
 						<div class="widget-label">
 							<div class="widget-title"><span class="ellipsis" id="project-count-title"></span></div>
 						</div>
+						<div class="widget-label">
+							<div class="widget-title"><span class="ellipsis" id="project-count-total"></span></div>
+						</div>
 					</div>
 					<div id='project-count' class="widget-body"></div>
 					<div class="chart-legend" id="chart-legend-1"></div>
@@ -279,6 +282,7 @@ class Dashboard {
 				}
 				
 				$('#project-count-title').html("No of Projects - Objective wise")
+				$('#project-count-total').html(`Total : ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}`)
 				let colors_1 = ['#c6a7fe', '#ff8183', '#7feabf', '#cdcdcd','#70bcff']
 				const custom_options = {
 					type: "donut",

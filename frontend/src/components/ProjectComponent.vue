@@ -8,15 +8,15 @@
             <ul v-for="item in data.message" :key="item.name" class="pr-blw-img-list" style="list-style: none; display:flex">
             <li v-if="item.project_image1" style="position: relative; margin-right: 10px; margin-left:10px;">
                <img :src="item.project_image1" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;">Vertical Farming</h5></div>
-            </li>
-            <li v-if="item.project_image3" style="position: relative; margin-right: 10px; margin-left:10px;">
-               <img :src="item.project_image3" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;">Soil Fertility Management</h5></div>
+               <div class="overlay"><h5 style="margin-top: 30%;">Adaptation</h5></div>
             </li>
             <li v-if="item.project_image2" style="position: relative; margin-right: 10px; margin-left:10px;">
                <img :src="item.project_image2" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;">Art of Permaculture</h5></div>
+               <div class="overlay"><h5 style="margin-top: 30%;"></h5>Mitigation</div>
+            </li>
+            <li v-if="item.project_image3" style="position: relative; margin-right: 10px; margin-left:10px;">
+               <img :src="item.project_image3" style="width: 100%; height: auto;">
+               <div class="overlay"><h5 style="margin-top: 30%;">Capacity Building</h5></div>
             </li>
             </ul>
            <br>

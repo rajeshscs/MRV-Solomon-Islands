@@ -120,11 +120,11 @@
   z-index: -1;
   }
   .report-image, .report-image1, .report-image2 {
-  width: 80% !important;
+  /* width: 80% !important; */
   height: 493px !important;
   margin: auto;
   position: relative;
-  padding: 38px 0px !important;
+  padding: 20px 0px !important;
   }
   @media(max-width: 768px) {
   .img {
