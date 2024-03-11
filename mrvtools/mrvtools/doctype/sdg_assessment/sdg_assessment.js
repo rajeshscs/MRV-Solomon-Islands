@@ -540,7 +540,6 @@ frappe.ui.form.on('SDG Assessment', {
 				frm.fields_dict.html_table.$wrapper.html("")
 				frm.refresh_field("html_table")
 			}
-			frm.save()
 			
 		}
 
