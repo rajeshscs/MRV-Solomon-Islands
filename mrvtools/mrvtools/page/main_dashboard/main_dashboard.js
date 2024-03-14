@@ -26,7 +26,7 @@ class Dashboard {
 		);
 		this.$sidebar_list = this.page.sidebar.find("ul");
 		// alert(frappe.defaults.get_user_default("Order"))
-		this.datatable=null;
+		// this.datatable=null;
 		// this.add_card_button_to_toolbar();
 		this.make()
 		// this.create_date_range_field();
@@ -42,11 +42,11 @@ class Dashboard {
 			<div class="inner-container">
 				<div class="widget dashboard-widget-box" style="width:48%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="project-count-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="project-count-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><div class="ellipsis" style="width: 100%;display: flex;" id="project-count-total"></div></div>
 						</div>
 					</div>
 					<div id='project-count' class="widget-body"></div>
@@ -55,11 +55,11 @@ class Dashboard {
 
 				<div class="widget dashboard-widget-box" style="width:48%;float:right;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="status-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="status-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="status-total"></span></div>
 						</div>
 					</div>
 					<div id='project_status' class="widget-body"></div>
@@ -72,11 +72,11 @@ class Dashboard {
 			<div class="inner-container">
 				<div class="widget dashboard-widget-box" style="width:48%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="mitigation-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="mitigation-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="mitigation-total"></span></div>
 						</div>
 					</div>
 					<div id='mitigation-sector' class="widget-body"></div>
@@ -85,11 +85,11 @@ class Dashboard {
 
 				<div class="widget dashboard-widget-box" style="width:48%;float:right;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="adaptation-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="adaptation-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="adaptation-total"></span></div>
 						</div>
 					</div>
 					<div id='adaptation-sector' class="widget-body"></div>
@@ -100,16 +100,19 @@ class Dashboard {
 			<div class="inner-container">
 				<div class="widget dashboard-widget-box" style="width:48%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title">
+								<span class="ellipsis" style="width: auto;display: flex;flex-direction: column;" id="mitigation_till-date-label"></span>
+								<span class="ellipsis" style="width: 54%;display: flex;flex-direction: column;" id="mitigation_till-date-value"></span>
+							</div>
 						</div>
 					</div>
 					<div class="widget-head" style="justify-content: end;">
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="mitigation_till-date-expected"></span></div>
+						<div class="widget-label label-2">
+							
 						</div>
 					</div>
 					
@@ -119,16 +122,19 @@ class Dashboard {
 
 				<div class="widget dashboard-widget-box" style="width:48%;float:right;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title">
+							<span class="ellipsis" style="width: auto;display: flex;flex-direction: column;" id="mitigation_last-year-label"></span>
+							<span class="ellipsis" style="width: 54%;display: flex;flex-direction: column;" flex;" id="mitigation_last-year-value">
+							</div>
 						</div>
 					</div>
 					<div class="widget-head" style="justify-content: end;">
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-expected"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"></span></div>
 						</div>
 					</div>
 					<div id='mitigation_last-year' class="widget-body"></div>
@@ -152,11 +158,11 @@ class Dashboard {
 			<div class="inner-container">
 				<div class="widget dashboard-widget-box" style="width:98%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
-						<div class="widget-label">
+						<div class="widget-label label-1">
 							<div class="widget-title"><span class="ellipsis" id="co2_emission_latest-title"></span></div>
 						</div>
-						<div class="widget-label">
-							<div class="widget-title"><span class="ellipsis" id="co2_emission_latest-total"></span></div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="co2_emission_latest-total"></span></div>
 						</div>
 					</div>
 					<div id='co2_emission_latest' class="widget-body"></div>
@@ -311,7 +317,7 @@ class Dashboard {
 				}
 				
 				$('#project-count-title').html("No of Projects - Objective wise")
-				$('#project-count-total').html(`Total :<span style="font-weight:800 !important;"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#project-count-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				let colors_1 = ['#c6a7fe', '#ff8183', '#7feabf', '#cdcdcd','#70bcff']
 				const custom_options = {
 					type: "donut",
@@ -359,7 +365,7 @@ class Dashboard {
 					adaptation_key_list.push(i['key_sector'])
 					adaptation_value_list.push(i['count'])
 				}
-				$('#adaptation-total').html(`Total :<span style="font-weight:800 !important;"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#adaptation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 
 				const adaptation_option = {
 					type: "donut",
@@ -404,7 +410,7 @@ class Dashboard {
 					mitigation_key_list.push(i['key_sector'])
 					mitigation_value_list.push(i['count'])
 				}
-				$('#mitigation-total').html(`Total :<span style="font-weight:800 !important;"> ${mitigation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${mitigation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				// colors: ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"],
 				const mitigation_option = {
 					type: "donut",
@@ -448,7 +454,7 @@ class Dashboard {
 					project_status_key_list.push(i['status'])
 					project_status_value_list.push(i['count'])
 				}
-				$('#status-total').html(`Total :<span style="font-weight:800 !important;"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				let colors_2 = ['#9a97ff', '#63e293', '#9eccee']
 				const project_status_option = {
 					type: "donut",
@@ -491,8 +497,8 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_till_date')
 			.then((r) => {
 				$('#mitigation_till-date-title').html("GHG Emission Acheived - Till Today")
-				$('#mitigation_till-date-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-				$('#mitigation_till-date-expected').html(`Expected :<span style="font-weight:800 !important;"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+				$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
 				const mitigation_ghg_till_data = {
@@ -531,13 +537,29 @@ class Dashboard {
 			})
 	}
 	mitigation_ghg_last_year(){
+		let today = new Date();
+		let lastYearDate;
+
+		if (today.getUTCMonth() === 1 && today.getUTCDate() === 29) {
+			lastYearDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - 1));
+			lastYearDate = new Date(Date.UTC(lastYearDate.getUTCFullYear() - 1, lastYearDate.getUTCMonth(), lastYearDate.getUTCDate()));
+		} else {
+			lastYearDate = new Date(Date.UTC(today.getUTCFullYear() - 1, today.getUTCMonth(), today.getUTCDate()));
+		}
+
+		let lastYearDateStr = lastYearDate.toISOString().split('T')[0];
+		let dateParts = lastYearDateStr.split("-");
+		let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+		let today_date = frappe.datetime.nowdate()
+		let dateParts1 = today_date.split("-");
+		let formattedDate1 = `${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_last_year')
 			.then((r) => {
 				console.log("------>>>>>>>>>>>",r.message);
-				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${frappe.datetime.now_date()}`)
+				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedDate} to ${formattedDate1}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
-				$('#mitigation_last-year-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-				$('#mitigation_last-year-expected').html(`Expected :<span style="font-weight:800 !important;"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+				$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				const mitigation_ghg_last_year = {
 					type: "donut",
 					colors: colors_6,
@@ -596,7 +618,7 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.total_co2_emission_latest')
 			.then((r) => {
 				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedDate} to ${formattedDate1} Sector Wise`)
-				$('#co2_emission_latest-total').html(`Total :<span style="font-weight:800 !important;"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
+				$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
 				let colors_7 = ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"]
 				let results = r.message || [];
 				console.log("results",results.data);

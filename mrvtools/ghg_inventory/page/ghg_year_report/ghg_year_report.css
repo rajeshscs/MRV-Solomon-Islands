@@ -100,9 +100,6 @@
 	display: flex;
 }
 
-/* .ghg_year_report-graph{
-	width: 100%;
-} */
 
 .totalghg_year_report-graph, .totalorder_analytics-graph, .avgorder_analytics-graph {
     margin-bottom: 15px;
@@ -114,9 +111,6 @@
 .title{
 	size: 40px;
 }
-/* #page-sales-analytics .layout-side-section{
-	display: none !important;
-} */
 
 
 .number-widget-box {

@@ -1,4 +1,17 @@
 <template>
+    <div style="
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    background-color: #fff;">
+    <div class="site-logo ml-auto mr-4 ">
+        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
+      </div>
+    <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center"> About<span style="color: green; font-weight: 700;"> MRV Tools</span></h2>
+
+  </div>
+
   <header class="header">
     <nav class="navbar cus-navbar navbar-expand-lg navbar-fixed-top bg navbar-light p-0">
       <button
@@ -29,11 +42,14 @@
           <li class="nav-item mr-2">
             <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="transition:.3s; margin-right:20px;">Project</router-link>
           </li>
-          <!-- <li>
+          <li>
             <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }" style="margin-right:20px;">Climate Change Division</router-link>
-          </li> -->
+          </li>
           <li>
             <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="transition:.3s; margin-right:20px;">Reports</router-link>
+          </li>
+          <li>
+            <router-link to='/support' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/support' }" style="margin-right:20px;">Support</router-link>
           </li>
           <li class="nav-item mr-2">
             <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="transition:.3s; margin-right:20px;">Knowledge Resource</router-link>
@@ -184,9 +200,14 @@ li {
     color: #fff;
   }
 
-.cus-navbar {
+  .cus-navbar {
   margin-bottom: 0 !important;
   border-radius: 0 !important;
+  display: flex;
+  /* position: sticky; */
+  top: 93px;
+  z-index: 1101;
+  background-color: #6c6c6c;
 }
 
 
@@ -228,9 +249,9 @@ li {
       outline: 0;
       box-shadow:none !important;
     }
-    .mr-4 {
+    /* .mr-4 {
     margin-left: -10px;
-    }
+    } */
     .ml-auto {
         margin-right: 203px;
         margin-top: 4px;

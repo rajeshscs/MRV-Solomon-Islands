@@ -26,11 +26,16 @@ def get_all():
     child_table_data2 = []
     for child_record in parent_doc.get('knowledge_resource_details2'):
         child_table_data2.append(child_record.as_dict())
+    CCDImages = []
+    for child_record in parent_doc.get('climate_change_division_images'):
+        CCDImages.append(child_record.as_dict())
 
     result = {
         'parent_data': parent_data,
         'child_table_data': child_table_data,
-        'child_table_data2': child_table_data2
+        'child_table_data2': child_table_data2,
+        'CCDImages': CCDImages,
+
     }
     frappe.log_error("Error log", result)
 

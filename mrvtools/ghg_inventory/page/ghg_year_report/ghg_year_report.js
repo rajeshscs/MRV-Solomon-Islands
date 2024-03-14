@@ -1,3 +1,4 @@
+var option
 frappe.pages["ghg-year-report"].on_page_load = (wrapper) => {
 	frappe.ghg_year_report = new GHGInventory(wrapper);
 };
@@ -24,8 +25,8 @@ class GHGInventory {
 		this.ghg_from_year();
 		this.ghg_to_year();
 		this.ghg_unit_filter();
-		this.render_datatable();
-		this.make();
+		// this.render_datatable();
+		// this.make();
 
 		// this.create_date_range_field();
 	}
@@ -119,18 +120,38 @@ class GHGInventory {
 			
 		)
 		this.from_year.on("change",(r) => {
-			this.$heading.empty();
+			// this.render_datatable()
+			this.get_chart_report();
+			// this.$heading.empty();
+			if(this.from_year[0].value ==''){
+				$('.report-heading').attr('style',"display:none !important")
+				$('.all_html').attr('style',"display:none !important")
+			}
+			else{
+				$('.report-heading').attr('style',"display:block !important")
+				$('.all_html').attr('style',"display:block !important")
+			}
+			if(this.from_year[0].value){
+				var option = []
+				for(let i = parseInt(this.from_year[0].value);i<=(parseInt(this.from_year[0].value)+10);i++){
+					option.push(i)
+				}
+				console.log("OOOOOOO",option);
+				// this.ghg_to_year(option)
+			}
 		})
 	}
 	ghg_to_year() {
+		console.log("AAAAAA",option);	
+
 		this.to_year = this.page.add_select(
 			__("Year"),[" ","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050"]
-			
 		)
 		this.to_year.on("change",(r) => {
 			this.render_datatable()
 			this.get_chart_report();
-			this.$heading.empty();
+			this.make()
+			// this.$heading.empty();
 
 		})
 	}
@@ -142,7 +163,7 @@ class GHGInventory {
 		this.inventory_unit.on("change",(r) => {
 			this.render_datatable()
 			this.get_chart_report();
-			this.$heading.empty();
+			// this.$heading.empty();
 
 		})
 	}
@@ -160,7 +181,7 @@ class GHGInventory {
 				let columns = r.message[0]
 				let data = r.message[1]
 				$('.headline:first').remove();
-				this.$heading = $('<b style="margin-left: 30px;">GHG Inventory Report - Year wise</b>').insertBefore(this.$report);
+				this.$heading = $('<b class="report-heading" style="margin-left: 30px;">GHG Inventory Report - Year wise</b>').insertBefore(this.$report);
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true});
 			})
 			

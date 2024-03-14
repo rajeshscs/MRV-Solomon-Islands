@@ -9,9 +9,7 @@
  "field_order": [
   "carousel_section_section",
   "add_home_page_carousel_here_section",
-  "carousel1",
-  "carousel2",
-  "carousel3",
+  "carousel_image",
   "about_section_tab",
   "about_section_section",
   "about_heading_1",
@@ -23,9 +21,36 @@
   "description_2",
   "project_section_section",
   "add_project_image_here_section",
+  "project_image1_title",
+  "project_image2_title",
+  "project_image3_title",
+  "column_break_4hwxk",
   "project_image1",
   "project_image2",
   "project_image3",
+  "section_break_itdu0",
+  "adaptation_table",
+  "mitigation_table",
+  "cross_cutting_table",
+  "enablers_table",
+  "transparency_table",
+  "support_table",
+  "climate_change_section_tab",
+  "climate_image1",
+  "column_break_mwwwa",
+  "climate_image2",
+  "column_break_mbfnu",
+  "climate_image3",
+  "column_break_svw8y",
+  "section_break_ttbxu",
+  "climate_change_title",
+  "climate_change_division_content1",
+  "column_break_lb44h",
+  "climate_change_title2",
+  "climate_change_division_content2",
+  "content_image",
+  "add_multiple_images_section",
+  "climate_change_division_images",
   "report_section_section",
   "add_report_image_here_section",
   "report_image",
@@ -33,7 +58,32 @@
   "report_image1",
   "column_break_ieonz",
   "report_image2",
+  "support_tab",
+  "support_main_heading",
+  "column_break_n9vco",
+  "main_paragraph",
+  "section_break_1j9dh",
+  "bulletin_heading1",
+  "bulletin_content1",
+  "column_break_rjxr6",
+  "support_image1",
+  "section_break_gxphr",
+  "bulletin_heading2",
+  "bulletin_content2",
+  "column_break_wceoj",
+  "support_image2",
+  "section_break_uz3l7",
+  "bulletin_heading3",
+  "bulletin_content3",
+  "column_break_7idsi",
+  "support_image3",
+  "section_break_tkfwq",
+  "bulletin_heading4",
+  "bulletin_content4",
+  "column_break_aw9fk",
+  "support_image4",
   "knowledge_resource_section_section",
+  "kr_content",
   "multi_carousel_1_section",
   "knowledge_resource_details",
   "multi_carousel_2_section",
@@ -55,33 +105,21 @@
   "partner4",
   "column_break_3xyl8",
   "partner5",
-  "partner6"
+  "partner6",
+  "test",
+  "other_tab",
+  "breadcrumb_image"
  ],
  "fields": [
   {
    "fieldname": "carousel_section_section",
    "fieldtype": "Tab Break",
-   "label": "Home Carousel Section"
-  },
-  {
-   "fieldname": "carousel1",
-   "fieldtype": "Attach Image",
-   "label": "Carousel1"
-  },
-  {
-   "fieldname": "carousel2",
-   "fieldtype": "Attach",
-   "label": "Carousel2"
-  },
-  {
-   "fieldname": "carousel3",
-   "fieldtype": "Attach Image",
-   "label": "Carousel3"
+   "label": "Home Section"
   },
   {
    "fieldname": "project_section_section",
    "fieldtype": "Tab Break",
-   "label": "Project Section"
+   "label": "Project "
   },
   {
    "fieldname": "project_image1",
@@ -101,7 +139,7 @@
   {
    "fieldname": "report_section_section",
    "fieldtype": "Tab Break",
-   "label": "Report Section"
+   "label": "Report "
   },
   {
    "fieldname": "report_image",
@@ -166,7 +204,7 @@
   {
    "fieldname": "about_section_tab",
    "fieldtype": "Tab Break",
-   "label": "About Section"
+   "label": "About "
   },
   {
    "fieldname": "about_2_section",
@@ -239,7 +277,7 @@
   {
    "fieldname": "footer_section",
    "fieldtype": "Tab Break",
-   "label": "Footer Section"
+   "label": "Footer"
   },
   {
    "fieldname": "contact_details_section",
@@ -255,7 +293,7 @@
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email",
-   "options": "email"
+   "options": "Email"
   },
   {
    "fieldname": "column_break_e0uvm",
@@ -297,12 +335,289 @@
   {
    "fieldname": "column_break_o9cjd",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_image1_title",
+   "fieldtype": "Data",
+   "label": "Project Image1 Title"
+  },
+  {
+   "fieldname": "project_image2_title",
+   "fieldtype": "Data",
+   "label": "Project Image2 Title"
+  },
+  {
+   "fieldname": "project_image3_title",
+   "fieldtype": "Data",
+   "label": "Project Image3 Title"
+  },
+  {
+   "fieldname": "climate_change_section_tab",
+   "fieldtype": "Tab Break",
+   "label": "Climate Change Division"
+  },
+  {
+   "fieldname": "climate_image1",
+   "fieldtype": "Attach Image",
+   "label": "Climate Image1"
+  },
+  {
+   "fieldname": "column_break_mwwwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "climate_image2",
+   "fieldtype": "Attach Image",
+   "label": "Climate Image2"
+  },
+  {
+   "fieldname": "column_break_mbfnu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "climate_image3",
+   "fieldtype": "Attach Image",
+   "label": "Climate Image3"
+  },
+  {
+   "fieldname": "column_break_svw8y",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ttbxu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "content_image",
+   "fieldtype": "Attach Image",
+   "label": "Content Image"
+  },
+  {
+   "fieldname": "add_multiple_images_section",
+   "fieldtype": "Section Break",
+   "label": "Add Multiple Images"
+  },
+  {
+   "fieldname": "climate_change_title",
+   "fieldtype": "Data",
+   "label": "Climate Change Title1"
+  },
+  {
+   "fieldname": "column_break_lb44h",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "climate_change_title2",
+   "fieldtype": "Data",
+   "label": "Climate Change Title2"
+  },
+  {
+   "fieldname": "climate_change_division_content2",
+   "fieldtype": "Text",
+   "label": "Climate Change Division Content2"
+  },
+  {
+   "fieldname": "climate_change_division_content1",
+   "fieldtype": "Text",
+   "label": "Climate Change Division Content1"
+  },
+  {
+   "fieldname": "climate_change_division_images",
+   "fieldtype": "Table",
+   "label": "Climate Change Division Images",
+   "options": "Climate Change Division Images"
+  },
+  {
+   "fieldname": "support_tab",
+   "fieldtype": "Tab Break",
+   "label": "Support"
+  },
+  {
+   "fieldname": "support_main_heading",
+   "fieldtype": "Data",
+   "label": "Support Main Heading"
+  },
+  {
+   "fieldname": "main_paragraph",
+   "fieldtype": "Small Text",
+   "label": "Main Paragraph"
+  },
+  {
+   "fieldname": "bulletin_heading1",
+   "fieldtype": "Data",
+   "label": "Bulletin Heading1"
+  },
+  {
+   "fieldname": "bulletin_content1",
+   "fieldtype": "Table",
+   "label": "Bulletin Content1",
+   "options": "Support Points ChildTable"
+  },
+  {
+   "fieldname": "support_image1",
+   "fieldtype": "Attach Image",
+   "label": "Support Image1"
+  },
+  {
+   "fieldname": "section_break_gxphr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bulletin_heading2",
+   "fieldtype": "Data",
+   "label": "Bulletin Heading2"
+  },
+  {
+   "fieldname": "bulletin_content2",
+   "fieldtype": "Table",
+   "label": "Bulletin Content2",
+   "options": "Support Points ChildTable"
+  },
+  {
+   "fieldname": "support_image2",
+   "fieldtype": "Attach Image",
+   "label": "Support Image2"
+  },
+  {
+   "fieldname": "section_break_uz3l7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bulletin_heading3",
+   "fieldtype": "Data",
+   "label": "Bulletin Heading3"
+  },
+  {
+   "fieldname": "bulletin_content3",
+   "fieldtype": "Table",
+   "label": "Bulletin Content3",
+   "options": "Support Points ChildTable"
+  },
+  {
+   "fieldname": "support_image3",
+   "fieldtype": "Attach Image",
+   "label": "Support Image3"
+  },
+  {
+   "fieldname": "section_break_tkfwq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bulletin_heading4",
+   "fieldtype": "Data",
+   "label": "Bulletin Heading4"
+  },
+  {
+   "fieldname": "bulletin_content4",
+   "fieldtype": "Table",
+   "label": "Bulletin Content4",
+   "options": "Support Points ChildTable"
+  },
+  {
+   "fieldname": "support_image4",
+   "fieldtype": "Attach Image",
+   "label": "Support Image4"
+  },
+  {
+   "fieldname": "column_break_wceoj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_7idsi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_aw9fk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rjxr6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_1j9dh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_n9vco",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_4hwxk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "kr_content",
+   "fieldtype": "Text",
+   "label": "Knowledge Resource content"
+  },
+  {
+   "fieldname": "section_break_itdu0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "adaptation_table",
+   "fieldtype": "Table",
+   "label": "Adaptation Table",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "mitigation_table",
+   "fieldtype": "Table",
+   "label": "Mitigation Table",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "cross_cutting_table",
+   "fieldtype": "Table",
+   "label": "Cross Cutting Table ",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "enablers_table",
+   "fieldtype": "Table",
+   "label": "Enablers Table",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Data",
+   "label": "Test"
+  },
+  {
+   "fieldname": "other_tab",
+   "fieldtype": "Tab Break",
+   "label": "Other"
+  },
+  {
+   "description": "To add breadcrumb image",
+   "fieldname": "breadcrumb_image",
+   "fieldtype": "Attach Image",
+   "label": "Other Pages Top Image"
+  },
+  {
+   "fieldname": "transparency_table",
+   "fieldtype": "Table",
+   "label": "Transparency Table",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "support_table",
+   "fieldtype": "Table",
+   "label": "Support Table",
+   "options": "Frontend Projects ChildTable"
+  },
+  {
+   "fieldname": "carousel_image",
+   "fieldtype": "Table",
+   "label": "Carousel Image",
+   "options": "Climate Change Division Images"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-12-15 10:12:56.045997",
+ "modified": "2024-03-14 15:13:37.060440",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

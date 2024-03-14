@@ -1,6 +1,27 @@
 <template>
-  <header class="header">
-    <nav class="navbar cus-navbar navbar-expand-lg navbar-fixed-top bg navbar-light p-0">
+  <div style="display: flex;position: sticky;top: 0px;height: 88px;justify-content: space-between;
+              z-index: 99999;gap: 6;background-color: rgb(255, 255, 255); padding: 0 5px;">
+
+    <div style="display: flex; gap: 8px;">
+      <div class="site-logo">
+        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
+      </div>
+        <h2 style="
+          color: rgb(0, 0, 0);
+          font-weight: 700;
+          font-size: 20px;
+          font-family: Inter;
+          display: flex;
+          line-height: 1.5;
+          align-items: center;
+          justify-content: center;
+          text-transform: uppercase;
+          flex-direction: column;"
+          class="tex t-center"> Solomon Islands iMRV Tool <span style="color: green; margin-left: 7px;" >for Climate Action</span></h2>
+      </div>
+
+      <div style="display: flex;">
+        <nav class="navbar cus-navbar navbar-expand-lg bg navbar-light p-0">
       <button
       style="border: none !important;"
         class="navbar-toggler"
@@ -11,42 +32,93 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-      
-        <span><i class="bi bi-list" style="color: rgb(39, 39, 39) !important;"></i></span>
+      <span><i class="bi bi-list toggle-btn" style="color: rgb(39, 39, 39) !important;"></i></span>
       </button>
-      <div class="site-logo ml-auto mr-4 ">
-        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
-      </div>
+      
+
+    <!-- <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav w-100 mr-2">
+        <li class="nav-item dropdown">
+          <a style="text-decoration: none;" class="nav-link dropdown-toggle text-lg" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-list" style="font-size: 20px; display: flex;"><p style="font-size: 16px;text-transform: uppercase;font-style: normal;margin: 0px 5px;">Menu
+          </p><i class="bi bi-caret-down-fill" style="font-size: 13px; margin-top: 2px;"></i></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+            <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }">Home</router-link>
+          </li>
+          <li>
+            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }">About MRV Tool</router-link>
+          </li>
+          <li>
+            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }">Project</router-link>
+          </li>
+          <li>
+            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">Climate Change Division</router-link>
+          </li>
+          <li>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">Reports</router-link>
+          </li>
+          <li>
+            <router-link to='/support' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/support' }">Support</router-link>
+          </li>
+          <li>
+            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }">Knowledge Resource</router-link>
+          </li>
+          </ul>
+        </li>
+      </ul>
+    </div> -->
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 mr-2">
-          <li class="nav-item mr-2">
-            <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }" style="margin-right:20px;">Home</router-link>
+        <ul class="navbar-nav w-100">
+          <li class="nav-item">
+            <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }">Home</router-link>
           </li>
-          <li class="nav-item mr-2">
-            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }" style="margin-right:20px;">About MRV Tool</router-link>
+          <li class="nav-item">
+            <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }">About MRV Tool</router-link>
           </li>
-          <li class="nav-item mr-2">
-            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }" style="margin-right:20px;">Project</router-link>
+          <li class="nav-item">
+            <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }">Project</router-link>
           </li>
-          <!-- <li>
-            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }" style="margin-right:20px;">Climate Change Division</router-link>
-          </li> -->
           <li>
-            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }" style="margin-right:20px;">Reports</router-link>
+            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">Climate Change Division</router-link>
           </li>
-          <li class="nav-item mr-2">
-            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }" style="margin-right:20px;">Knowledge Resource</router-link>
+          <li>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">Reports</router-link>
+          </li>
+          <li>
+            <router-link to='/support' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/support' }">Support</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }">Knowledge Resource</router-link>
           </li>
         </ul>
       </div>
-      <div>
+    </nav>
+      <div style="display: flex; align-items: center;">
         <a href="/login#login">
         <button class="btn custom-btn btn-md">Login</button>
         </a>
       </div>
-    </nav>
-    <section class="breadcrumb-area with-overlay"></section> <!-- Hide on small (sm) screens and below -->
+      </div>
+
+
+      
+
+  </div>
+  <header class="header">
+    <!-- <section class="">
+      <div v-for="item in data.message" :key="item.name">
+        <div v-if="item.breadcrumb_image">
+          <img :src="item.breadcrumb_image">
+        </div>
+      </div>
+    </section> -->
+
+
+    <!-- <div><img src="/files/Screenshot 2024-03-13 185349.png" class="report-image"></div> -->
+    <section class="breadcrumb-area with-overlay"></section>
     <router-view />
   </header>
 </template>
@@ -120,12 +192,12 @@ onUnmounted(() => {
   $(function () {
     $(document).scroll(function () {
       var $nav = $(".navbar-fixed-top");
-      var $banner = $(".breadcrumb-area");
+      // var $banner = $(".breadcrumb-area");
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
     $(document).scroll(function () {
       var $nav = $(".custom-link");
-      var $banner = $(".breadcrumb-area");
+      // var $banner = $(".breadcrumb-area");
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
   });
@@ -134,7 +206,15 @@ onUnmounted(() => {
 
 <style scoped>
 
-/* Overlay */
+.dropdown-menu{
+  left: -36px;
+    padding: 0px;
+    border: none;
+    box-shadow: 0 0px 3px -2px #000;
+    border-radius: 4px;
+} 
+
+
 .breadcrumb-area {
   position: relative;
 }
@@ -151,13 +231,15 @@ onUnmounted(() => {
 }
 /* NAvbar */
 .active-link {
-  color: rgb(0, 174, 0) !important;
+  color: green !important;
   text-decoration: none;
-  font-size: 17px !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
 
 }
-
+.dropdown-toggle::after{
+display: none !important;
+}
 
 .bg {
   background-image: none;
@@ -178,13 +260,18 @@ onUnmounted(() => {
   /* transition: 1s; */
   color: rgb(0, 0, 0);
 }
+.site-logo {
+  display: flex;
+}
+.site-logo a {
+  align-items: center;
+  display: flex;
+}
+
 
 /* Reduce the logo size */
 .site-logo img {
-  margin-left: 10px;
-  height: 91px;
-  margin-right: 36px;
-  padding: 12px !important;
+  height: 70px;
 }li {
   font-size: 18px;
   font-weight: 500;
@@ -200,15 +287,15 @@ onUnmounted(() => {
 /* Router-link */
 
 .custom-link {
-  color: rgb(255, 255, 255);
-  margin-left: 10px;
-  font-size: 15px;
-  border: none !important;
-  font-weight: 500;
-  font-family: 'Inter';
-  text-decoration: none;
-  position: relative;
-}
+  color: #000;
+    font-size: 14px;
+    border: none !important;
+    font-weight: 500;
+    width: auto;
+    font-family: Inter;
+    text-decoration: none;
+    position: relative;
+  }
 
 .custom-link::after {
   content: '';
@@ -217,7 +304,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: rgb(0, 174, 0);
+  background-color: green;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -225,11 +312,11 @@ onUnmounted(() => {
   content: '';
 }
 
-.custom-link:hover::after {
+/* .custom-link:hover::after {
   transform: scaleX(1);
   height: 2px; 
   font-weight: 500;
-}
+} */
 
 /* Router-link end */
 
@@ -240,9 +327,9 @@ onUnmounted(() => {
     text-decoration: none;
     border: none;
     margin-right: 34px;
-    width: 92px;
+    width: 70px;
+    height: 30px;
     border-radius: 4px;
-    position: absolute;
     top: 19px !important;
     right: 0;
     margin: 10px;
@@ -255,7 +342,11 @@ onUnmounted(() => {
 
 .cus-navbar {
   margin-bottom: 0 !important;
-  border-radius: 0 !important;
+  /* border-radius: 0 !important;
+  display: flex;
+  top: 70px;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 35%), rgb(0 0 0 / 4%));
+  z-index: 1101; */
 }
 
 
@@ -267,14 +358,30 @@ onUnmounted(() => {
   border: none;
     background-size: 93%;
 }
-
-.bi-list:hover {
+.navbar-collapse {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+/* .bi-list:hover {
     text-decoration: none;
     height: 30px;
     width: 45px;
-}
+} */
+.navbar-nav{
+    gap:12px;
+  }
 
 @media (max-width: 576px) {
+  .navbar-collapse{
+    width: 100%;
+    height: auto;
+    top: 0;
+    /* display: flex; */
+  }
+  .navbar-nav{
+    /* background-color: #0006; */
+    margin: none !important;
+  }
   .custom-btn{
     top:0 !important;
   }
@@ -287,9 +394,12 @@ onUnmounted(() => {
       outline: 0;
       box-shadow:none !important;
   }
+  .navbar{
+    background-color: #0006;
+  }
 
 .ml-auto {
-    margin-right: 232px;
+    margin-right: 200px;
     margin-top: 4px;
 
 }

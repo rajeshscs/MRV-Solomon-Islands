@@ -1,8 +1,6 @@
 <template>
     <div>
-      <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
-        Knowledge <span style="color: green; font-weight: 700;">Resources</span>
-      </h1>
+
       <div data-aos="fade-right" data-aos-delay="100" id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item pt-4 pb-3 active">
@@ -13,7 +11,7 @@
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style=" border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center; display: flex; place-items: center; align-items: center; font-family: serif; margin-top: 50%; text-align: center;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>
@@ -29,7 +27,7 @@
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style="position:relative; border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center; display: flex; place-items: center; align-items: center; font-family: serif; margin-top: 50%; text-align: center;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>
@@ -45,7 +43,7 @@
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
                       <img :src="item.image" class="card-img-top" style="position:relative; border-radius: 6px;" alt="..." />
                       <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center;    place-items: center; font-family: serif; padding: inherit; margin: revert;">{{ item.link_name }}</h5>
+                        <h5 style="justify-content: center; display: flex; place-items: center; align-items: center; font-family: serif; margin-top: 50%; text-align: center;">{{ item.link_name }}</h5>
                       </div>
                     </a>
                   </div>

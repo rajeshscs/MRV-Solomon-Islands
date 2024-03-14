@@ -1,33 +1,23 @@
 <template >
-  <HomeHeader />
-  <div  id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-     <div v-for="item in data.message" :key="item.name" class="carousel-inner">
-      <div v-if="item.carousel1 || item.carousel2 || item.carousel3">
-         <div v-if="item.carousel1" class="carousel-item active">
-            <div class="card mx-0 image-overlay cus-card">
-               <img :src="item.carousel1" class="d-block w-100 h-100" alt="...">
-            </div>
-         </div>
-         <div v-if="item.carousel2" class="carousel-item">
-            <div class="card mx-0 image-overlay cus-card">
-               <img :src="item.carousel2"  class="d-block w-100 h-100" alt="...">
-            </div>
-         </div>
-         <div v-if="item.carousel3" class="carousel-item">
-            <div class="card mx-0 image-overlay cus-card">
-               <img :src="item.carousel3"  class="d-block w-100 h-100" alt="...">
-            </div>
-         </div>
+  <Header />
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div v-for="(item, index) in data.message.parent_data.carousel_image" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+      <div class="card mx-0 image-overlay cus-card" style="height: 50rem;">
+        <img v-if="item.image" :src="item.image" class="d-block w-100 h-100 carousel_image" alt="...">
       </div>
-     </div>
-     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-     <i style="font-size: 35px;" class="bi bi-chevron-left bi-2x"></i>
-     <span class="visually-hidden">Previous</span>
-     </button>
-     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-     <i style="font-size: 35px;" class="bi bi-chevron-right bi-2x"></i>
-     <span class="visually-hidden">Next</span>
-     </button>
+   </div>
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+   <i style="font-size: 35px;" class="bi bi-chevron-left bi-2x"></i>
+   <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+   <i style="font-size: 35px;" class="bi bi-chevron-right bi-2x"></i>
+   <span class="visually-hidden">Next</span>
+</button>
+<!-- <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div> -->
+
   </div>
   <div>
      <ProjectComponent :data="data" />
@@ -61,6 +51,9 @@
      </div>
      <!-- Knowledge Resource Carousel -->
      <div>
+         <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
+            Knowledge <span style="color: green; font-weight: 700;">Resources</span>
+         </h1>
         <knowledgeResource  :data="data" />
         <br>
      </div>
@@ -69,7 +62,7 @@
 </template>
 <script setup>
   import Footer from '@/components/Footer.vue'
-  import HomeHeader from '@/components/HomeHeader.vue'
+  import Header from '@/components/Header.vue'
   import knowledgeResource from '@/components/KnowledgeResource.vue'
   import ProjectComponent from '@/components/ProjectComponent.vue'
   import { ref, onMounted } from 'vue';
@@ -107,21 +100,29 @@
   
   onMounted(() => {
     fetchData();
-  });
-      
-   
+  });  
+//   $.ajax({
+//    success:function(){
+//       $('.breadcrumb-area').attr('style', "display:none !important;")
+//    }
+//   }) 
+  setTimeout(() => {
+   $('.breadcrumb-area').attr('style', "display:none !important;")
+  }, 1000);
 </script>
 <style >
-  /* .right.carousel-control:hover{
-  border-radius: 20px;
-  border-width: 20% red;
-  border:navy;
-  color: red;
-  } */
+ .breadcrumb-area{
+   display: none !important;
+ }
   .card-link:hover .card {
   transition: .2s;
-  box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.098); /* Customize the shadow style as needed */
+  box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.098); 
   }
+  .carousel_image{
+   border-radius:0 !important;
+   object-fit: cover;
+  }
+
   .cus-card{
   transition: .2s;
   box-shadow: 0px 0px 10px #0000002e;
@@ -131,8 +132,7 @@
   .cus-card:hover{
   transition: .2s;
   box-shadow: 0 0 10px #00000056;
-  }       /* Media Queries for responsiveness */
-  /* Report view css */
+  }     
   .img {
   position: relative;
   background-color: #00220012;
@@ -165,7 +165,6 @@
   .cus-card {
   text-overflow: hidden;
   width: 100%;
-  /* width: 48%;  */
   margin-right: 10px;
   }
   .text-center{
@@ -178,16 +177,10 @@
   .container{
   width: 90%;
   }
-  /* .carousel-control-prev-icon{
-  margin-right: 34px;
-  }
-  .carousel-control-next-icon{
-  margin-left: 34px;
-  } */
   }
   @media only screen and (max-width: 600px) {
   .custom-col {
-  flex: 0 0 calc(50% - 20px); /* Adjust width as needed */
+  flex: 0 0 calc(50% - 20px); 
   margin: 10px;
   }
   }

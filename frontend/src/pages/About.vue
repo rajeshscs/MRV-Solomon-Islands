@@ -43,6 +43,11 @@
 // import { createListResource } from 'frappe-ui';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+$.ajax({
+   success:function(){
+      $('.breadcrumb-area').attr('style', "display:block !important;")
+   }
+  }) 
 
 const data = ref([]);
 

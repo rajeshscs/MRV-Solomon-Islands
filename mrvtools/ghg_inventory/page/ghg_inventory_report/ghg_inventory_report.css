@@ -6,34 +6,47 @@
 	font-weight: 600;
 }
 .dt-cell--header{
-	background-color: #f4f5f6 !important;
-    color: #6b7278;
+	background-color: #c4ddd3 !important;
+    color: #016a42;
 	height: 35px !important;
+}
+.datatable{
+	margin: auto;
 }
 .layout-main-section .report-wrapper {
     padding: 0px !important; 
-    margin: 11px 30px 1px 30px;
-    border: 1px solid #dbdbdb;
+    margin: 15px 30px 20px 30px;
+    
+}
+/* .dt-instance-1 .dt-cell__content--col-2,.dt-instance-1 .dt-cell__content--col-3,.dt-instance-1 .dt-cell__content--col-4,.dt-instance-1 .dt-cell__content--col-5 {
+	width:auto !important;
+} */
+.report-wrapper {
+	border: 1px solid #dbdbdb;
 }
 .dt-scrollable{
-	width:100% !important
+	width:100% !important;
+	height:62vh !important
 	/* overflow-x: hidden !important; */
 }
 .dt-row {
     display: flex;
-    width: 98% !important;
+    width: 100% !important;
 }
 .list-filter-item {
 	min-width: 150px;
 	float: left;
 	margin: 5px;
 }
-.dt-cell--header-1,.dt-cell--col-1{
-	width:50% !important;
+/* .dt-cell--header-1,.dt-cell--col-1{
+	width:56% !important;
+}
+.dt-cell--header-0{
+	width:4% !important;
 }
 .dt-cell--header-2, .dt-cell--header-3, .dt-cell--header-4, .dt-cell--header-5, .dt-cell--col-2, .dt-cell--col-3, .dt-cell--col-4, .dt-cell--col-5{
 	width:12% !important;
-}
+} */
 .list-item_content {
 	flex: 1;
 	padding-right: 15px;
@@ -109,9 +122,6 @@
 	display: flex;
 }
 
-/* .ghg_inventory_report-graph{
-	width: 100%;
-} */
 
 .totalghg_inventory_report-graph, .totalorder_analytics-graph, .avgorder_analytics-graph {
     margin-bottom: 15px;
@@ -123,9 +133,6 @@
 .title{
 	size: 40px;
 }
-/* #page-sales-analytics .layout-side-section{
-	display: none !important;
-} */
 
 
 .number-widget-box {

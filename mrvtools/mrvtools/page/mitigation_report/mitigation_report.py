@@ -15,7 +15,7 @@ sum_expected_annual_ghg = 0
 @frappe.whitelist()
 def execute(monitoring_year = None,key_sector = None,key_sub_sector = None,location = None,ndc = None,market_mechanism = None):
 	columns, data = getColumns(),getData(monitoring_year,key_sector,key_sub_sector,location,ndc,market_mechanism)
-	return columns, data
+	return columns, data[0]
 
 
 def getColumns():
@@ -108,7 +108,7 @@ def getColumns():
 	]
 	keys = [item['label'] for item in columns]
 	return keys
-
+@frappe.whitelist(allow_guest=True)
 def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,location = None,ndc = None,market_mechanism = None):
 	conditions = ""
 	if monitoring_year:
@@ -153,10 +153,10 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 				MT.project_id
 				"""
 	data = frappe.db.sql(query,as_dict =1)
-	global till_sum_actual_annual_ghg
-	global till_sum_expected_annual_ghg
-	global sum_actual_annual_ghg
-	global sum_expected_annual_ghg
+	# global till_sum_actual_annual_ghg
+	# global till_sum_expected_annual_ghg
+	# global sum_actual_annual_ghg
+	# global sum_expected_annual_ghg
 	till_sum_actual_annual_ghg = 0
 	till_sum_expected_annual_ghg = 0
 	sum_actual_annual_ghg = 0
@@ -191,15 +191,20 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 		else:
 			till_sum_actual_annual_ghg += 0
 			i['till_date_actual_ghg'] = 0
+	chart_data = get_chart(monitoring_year,sum_expected_annual_ghg,till_sum_expected_annual_ghg,sum_actual_annual_ghg,till_sum_actual_annual_ghg)
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in data]
-	return values_only
+	return [values_only,chart_data]
 
 
 
 
 
-@frappe.whitelist()
-def get_chart(monitoring_year,ndc):
+@frappe.whitelist(allow_guest=True)
+def get_chart(monitoring_year,sum_expected_annual_ghg,till_sum_expected_annual_ghg,sum_actual_annual_ghg,till_sum_actual_annual_ghg):
+	frappe.log_error("sum_expected_annual_ghg",sum_expected_annual_ghg)
+	frappe.log_error("sum_actual_annual_ghg",sum_actual_annual_ghg)
+	frappe.log_error("till_sum_expected_annual_ghg",till_sum_expected_annual_ghg)
+	frappe.log_error("till_sum_actual_annual_ghg1111",till_sum_actual_annual_ghg)
 	if monitoring_year:	
 		labels = [monitoring_year,"Till Date"]
 		return {"datasets": [
@@ -264,8 +269,6 @@ def get_pie_chart(monitoring_year = None,key_sector = None,key_sub_sector = None
 			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg"])
 		actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
 		sector_label_list.append(i.key_sector)
-	
-	frappe.log_error("bbbbbbb",{"data":actual_reduction_list,"labels":sector_label_list})
    
 	return {"data":actual_reduction_list,"labels":sector_label_list}
 	
@@ -278,7 +281,10 @@ def download_excel(columns,data):
 
 	data_list = json.loads(data)
 	column_list = json.loads(columns)
-	data_dict = {column_list[i]: [row[i] for row in data_list] for i in range(len(column_list))}
+	new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission']] for item in data_list]
+	new_column_list = [[item['id']] for item in column_list]
+
+	data_dict = {new_column_list[i]: [row[i] for row in new_data_list] for i in range(len(column_list))}
 	export_data = pd.DataFrame(data_dict)
 
 	site_name = get_site_base_path()

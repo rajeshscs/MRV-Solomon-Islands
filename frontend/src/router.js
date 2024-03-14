@@ -52,18 +52,26 @@ const routes = [
       title: 'MRV Project'
     }
   },
-  // {
-  //   name: 'Climate',
-  //   path: '/climate-change-division',
-  //   component: () => import('@/pages/ClimateChange.vue'),
-  //   meta: {
-  //     title: 'Climate Change Division'
-  //   }
-  // },
+  {
+    name: 'Climate',
+    path: '/climate-change-division',
+    component: () => import('@/pages/ClimateChange.vue'),
+    meta: {
+      title: 'Climate Change Division'
+    }
+  },
   {
     name: 'Reports',
     path: '/reports',
     component: () => import('@/pages/Reports.vue'),
+    meta: {
+      title: 'MRV Report'
+    }
+  },
+  {
+    name: 'Support',
+    path: '/support',
+    component: () => import('@/pages/Support.vue'),
     meta: {
       title: 'MRV Report'
     }

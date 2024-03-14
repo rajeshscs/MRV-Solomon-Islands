@@ -1,3 +1,11 @@
+
+.datatable {
+	margin: auto;
+}
+.dt-scrollable {
+	width: 100% !important;
+}
+
 .list-filters {
 	overflow-y: hidden;
 	padding: 5px

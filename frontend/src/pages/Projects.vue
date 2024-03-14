@@ -10,7 +10,11 @@ import ProjectComponent from '@/components/ProjectComponent.vue'
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-
+$.ajax({
+   success:function(){
+      $('.breadcrumb-area').attr('style', "display:block !important;")
+   }
+  }) 
 const data = ref([]);
 
 const fetchData = async () => {

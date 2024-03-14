@@ -8,15 +8,19 @@
 .breadcrumb-area {
   /* position: relative; */
   /* background: url('../assets/images/footer.png');  */
-  background: url('../src/assets/images/hero-banner.png'); /* no-repeat center center fixed; */
+  background: url('../src/assets/images/hero-banner.png'); 
   background-size:cover;
   /* background-attachment: fixed; */
-  height: 500px; 
+  height: 400px;
+  /* margin-top: 26px;  */
 }
 
 a, p{
   font-family: 'Inter', sans-serif;
   font-family: 'Poppins', sans-serif;
+}
+h2{
+  color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;
 }
 
 h3{
@@ -24,6 +28,9 @@ h3{
     font-weight: 60px;
     padding: 20px;
     color: #fff;
+}
+img{
+  border-radius: 7px;
 }
 .card-link:hover .card {
     transition: .2s;

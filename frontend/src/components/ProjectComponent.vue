@@ -1,4 +1,5 @@
 <template>
+   <!-- <section class="breadcrumb-area with-overlay"></section> -->
 <div>
     <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right " data-aos-delay="100" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
@@ -6,17 +7,17 @@
             <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
            </div>
             <ul v-for="item in data.message" :key="item.name" class="pr-blw-img-list" style="list-style: none; display:flex">
-            <li v-if="item.project_image1" style="position: relative; margin-right: 10px; margin-left:10px;">
-               <img :src="item.project_image1" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;">Adaptation</h5></div>
+            <li v-if="item.project_image1" class="list_image">
+               <img :src="item.project_image1" class="pro_image">
+               <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image1_title}}</h5></div>
             </li>
-            <li v-if="item.project_image2" style="position: relative; margin-right: 10px; margin-left:10px;">
-               <img :src="item.project_image2" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;"></h5>Mitigation</div>
+            <li v-if="item.project_image2" class="list_image">
+               <img :src="item.project_image2" class="pro_image">
+               <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div>
             </li>
-            <li v-if="item.project_image3" style="position: relative; margin-right: 10px; margin-left:10px;">
-               <img :src="item.project_image3" style="width: 100%; height: auto;">
-               <div class="overlay"><h5 style="margin-top: 30%;">Capacity Building</h5></div>
+            <li v-if="item.project_image3" class="list_image">
+               <img :src="item.project_image3" class="pro_image">
+               <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image3_title}}</h5></div>
             </li>
             </ul>
            <br>
@@ -39,6 +40,12 @@
                <li class="nav-item tab_child">
                   <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
                </li>
+               <li class="nav-item tab_child">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Transparency</a>
+               </li>
+               <li class="nav-item tab_child">
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Support</a>
+               </li>
             </ul>
          </div>
          <!-- </div> -->
@@ -50,49 +57,29 @@
                   <!-- Start Tab Content -->
                   <div class="tab-pane active" id="p-view-2" >
                   <div class="tab-inner" >
-                     <div class="table-responsive" data-aos="fade-right " data-aos-delay="100">
+                     <div class="table-responsive" data-aos="fade-right " style="height: 50rem;" data-aos-delay="100">
                      <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th scope="col">Sno</th>
-                           <th scope="col">Intervention</th>
-                           <th scope="col">Sector</th>
-                           <th scope="col">Subsector</th>
-                           <th scope="col">Project Title</th>
-                           <th scope="col">Implementing Agency</th>
-                           <th scope="col">Area Name</th>
-                           <th scope="col">Project Cost (USD)</th>
-                           <th scope="col">Sources of Funding</th>
-                           <th scope="col">Start Date</th>
-                           <th scope="col">End Date</th>
+                           <th scope="col">Sno</th><th scope="col">Intervention</th><th scope="col">Sector</th>
+                           <th scope="col">Subsector</th><th scope="col">Project Title</th><th scope="col">Implementing Agency</th>
+                           <th scope="col">Area Name</th><th scope="col">Project Cost (USD)</th><th scope="col">Sources of Funding</th>
+                           <th scope="col">Start Date</th><th scope="col">End Date</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color"  style="overflow: auto;">
-                        <tr>
-                           <th style="padding: 10px;" scope="row">1</th>
-                           <td>Adaptation Actions</td>
-                           <td>Agriculture, Food and Nutrition Security</td>
-                           <td>Crops</td>
-                           <td>Improve crop productivity through the roll out of the Climate Smart Agriculture interventions</td>
-                           <td>County Governments</td>
-                           <td>County</td>
-                           <td>17920</td>
-                           <td>Gov, Grant or Loan</td>
-                           <td>03-06-2022</td>
-                           <td>01-06-2022</td>
-                        </tr>
-                        <tr>
-                           <th style="padding: 20px;" scope="row">2</th>
-                           <td>Adaptation Actions</td>
-                           <td>Drought and Epidemic Risk Management /Ending Drought Emergencies</td>
-                           <td>Droughts</td>
-                           <td>Emergency Agricultural Livelihoods and Climate Resilience Project</td>
-                           <td>Ministry of Blue and Green Economy, Agriculture, and National Food Security</td>
-                           <td>National</td>
-                           <td>250000</td>
-                           <td>Broad Source of funding</td>
-                           <td>04-06-2022</td>
-                           <td>11-06-2022</td>
+                        <tr v-for="table_item in data.message.parent_data.adaptation_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -105,45 +92,27 @@
                      <table class="table table-striped table-bordered table-hover">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th>
-                           <th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th>
-                           <th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th>
-                           <th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th>
-                           <th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th>
-                           <th style="padding: 20px;" scope="col">Start Date</th>
+                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
+                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
+                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
+                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
+                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
                            <th style="padding: 20px;" scope="col">End Date</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
-                        <tr>
-                           <th style="padding: 20px;" scope="row">1</th>
-                           <td>Mitigation Actions</td>
-                           <td>test</td>
-                           <td>test</td>
-                           <td>test</td>
-                           <td>test</td>
-                           <td>test</td>
-                           <td>2500</td>
-                           <td>test</td>
-                           <td>17-06-2022</td>
-                           <td>03-06-2022</td>
-                        </tr>
-                        <tr>
-                           <th style="padding: 20px;" scope="row">2</th>
-                           <td>Mitigation Actions</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>1000</td>
-                           <td>test1</td>
-                           <td>04-06-2022</td>
-                           <td>04-06-2023</td>
+                        <tr v-for="table_item in data.message.parent_data.mitigation_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -156,32 +125,27 @@
                      <table class="table table-striped table-bordered table-hover">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th>
-                           <th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th>
-                           <th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th>
-                           <th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th>
-                           <th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th>
-                           <th style="padding: 20px;" scope="col">Start Date</th>
+                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
+                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
+                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
+                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
+                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
                            <th style="padding: 20px;" scope="col">End Date</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
-                        <tr>
-                           <th style="padding: 20px;" scope="row">1</th>
-                           <td>Cross Cutting</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>test1</td>
-                           <td>100</td>
-                           <td>test1</td>
-                           <td>04-06-2022</td>
-                           <td>04-06-2023</td>
+                        <tr v-for="table_item in data.message.parent_data.cross_cutting_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -194,32 +158,93 @@
                      <table class="table table-striped table-bordered table-hover">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th>
-                           <th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th>
-                           <th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th>
-                           <th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th>
-                           <th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th>
-                           <th style="padding: 20px;" scope="col">Start Date</th>
+                           <th style="padding: 20px;" scope="col">Sno</th> <th style="padding: 20px;" scope="col">Intervention</th>
+                           <th style="padding: 20px;" scope="col">Sector</th> <th style="padding: 20px;" scope="col">Subsector</th>
+                           <th style="padding: 20px;" scope="col">Project Title</th> <th style="padding: 20px;" scope="col">Implementing Agency</th>
+                           <th style="padding: 20px;" scope="col">Area Name</th> <th style="padding: 20px;" scope="col">Project Cost (USD)</th>
+                           <th style="padding: 20px;" scope="col">Sources of Funding</th> <th style="padding: 20px;" scope="col">Start Date</th>
                            <th style="padding: 20px;" scope="col">End Date</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
+                           <tr v-for="table_item in data.message.parent_data.enablers_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
+                        </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="tab-pane" id="p-view-6">
+                  <div class="tab-inner">
+                     <div class="table-responsive">
+                     <table class="table table-striped table-bordered table-hover">
+             <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="row">1</th>
-                           <td>Enabler</td>
-                           <td>test3</td>
-                           <td>test3</td>
-                           <td>test3</td>
-                           <td>test3</td>
-                           <td>test3</td>
-                           <td>1200</td>
-                           <td>test3</td>
-                           <td>05-06-2022</td>
-                           <td>05-06-2023</td>
+                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
+                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
+                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
+                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
+                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
+                           <th style="padding: 20px;" scope="col">End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider table-divider-color">
+                        <tr v-for="table_item in data.message.parent_data.transparency_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
+                        </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="tab-pane" id="p-view-6">
+                  <div class="tab-inner">
+                     <div class="table-responsive">
+                     <table class="table table-striped table-bordered table-hover">
+             <thead style="background-color: #006600; color:white; padding: 20px">
+                        <tr>
+                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
+                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
+                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
+                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
+                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
+                           <th style="padding: 20px;" scope="col">End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider table-divider-color">
+                        <tr v-for="table_item in data.message.parent_data.support_table" :key="table_item.name" >
+                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
+                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
+                           <td v-if="table_item.sector">{{table_item.sector}}</td>
+                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
+                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
+                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
+                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
+                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
+                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
+                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
+                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -252,7 +277,6 @@ export default {
 <style scoped>
 
 
-
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: #fff !important;
     background-color: green;
@@ -270,7 +294,17 @@ export default {
   color: red !important;
   font-weight: 700;
 }
-
+.pro_image{
+   width: 100%; height: auto; object-fit: cover;
+}
+.list_image{
+   position: relative;
+   margin-right: 10px;
+   display:flex;
+   margin-left:10px;
+   box-shadow: 0 0 4px #000;
+   border-radius: 8px;
+}
 .style-class {
     color: rgb(0, 0, 0) !important;
     background-color:none !important;

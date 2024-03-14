@@ -283,28 +283,7 @@ frappe.ui.form.on('GHG Inventory', {
 					for (var i of r){
 						fuel_type_options += ('\n'+ i)
 					}
-					let counter = 0
-					if(field == "reference_approach"){
-						counter = 0
-					}
-					else if(field == "electricity_generation"){
-						counter = 1
-					}
-					else if(field == "transport"){
-						counter = 2
-					}
-					else if(field == "manufacturing_industries"){
-						counter = 3
-					}
-					else if(field == "other_sectors"){
-						counter = 4
-					}
-					else if(field == "other_energy"){
-						counter = 5
-					}
-					else if(field == "international_bunkers"){
-						counter = 6
-					}
+					
 					for (let row =0; row < frm.doc[field].length;row++){
 						cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
 						frm.refresh_field(field)
@@ -1299,7 +1278,7 @@ frappe.ui.form.on('GHG Inventory', {
 						table_name: table_name_list[table]
 					},
 					callback:function(r){
-						console.log(r.message); 
+						console.log("2222222222222",r.message); 
 							frm.doc[`${table}`] = []
 							for(var i of r.message){
 								var child = frm.add_child(`${table}`)
@@ -1818,28 +1797,7 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 			pluck: 'fuel'
 		}).then(r =>{
 			for (let field of not_hidden_table_fields){
-				let counter = 0
-				if(field == "reference_approach"){
-					counter = 0
-				}
-				else if(field == "electricity_generation"){
-					counter = 1
-				}
-				else if(field == "transport"){
-					counter = 2
-				}
-				else if(field == "manufacturing_industries"){
-					counter = 3
-				}
-				else if(field == "other_sectors"){
-					counter = 4
-				}
-				else if(field == "other_energy"){
-					counter = 5
-				}
-				else if(field == "international_bunkers"){
-					counter = 6
-				}
+				
 				for(let i of frm.doc[field]){
 					if(r.includes(i.fuel)){
 						const index = r.indexOf(i.fuel);
@@ -1854,9 +1812,7 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				for (let i of r){
 					fuel_options += ('\n'+ i)
 				}
-				cur_frm.grids[counter].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
-			
-			
+				cur_frm.fields_dict[field].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				frm.refresh_field(field)
 			}
 				

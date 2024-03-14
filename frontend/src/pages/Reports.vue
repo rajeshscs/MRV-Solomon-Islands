@@ -50,7 +50,11 @@
   import Header from '@/components/Header.vue'
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
-  
+  $.ajax({
+   success:function(){
+      $('.breadcrumb-area').attr('style', "display:block !important;")
+   }
+  }) 
   const data = ref([]);
   const partnerLogos = ref([]); // To store partner logos
   console.log(data)
@@ -110,9 +114,13 @@
 </script>
 <style scoped>
   .img {
-  position: relative;
-  background-color: #00220012;
-  height: 50rem;
+    position: relative;
+    display: flex;
+    background-color: #00220012;
+    height: auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0;
   }
   .pattern-background {
   height: 100%;
@@ -121,10 +129,11 @@
   }
   .report-image, .report-image1, .report-image2 {
   /* width: 80% !important; */
-  height: 493px !important;
+  /* height: 493px !important; */
   margin: auto;
   position: relative;
   padding: 20px 0px !important;
+  width: 65%;
   }
   @media(max-width: 768px) {
   .img {
@@ -134,7 +143,7 @@
   }
   .report-image {
   width: 100%;
-  height: 223px !important;
+  height: auto !important;
   margin: auto;
   position: relative;
   }

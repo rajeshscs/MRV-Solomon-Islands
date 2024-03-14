@@ -4,8 +4,40 @@
 .layout-main-section.frappe-card {
     display: inline;
 }
-
-
+.widget .widget-head .widget-label .widget-title{
+    font-size: 14px;
+}
+.widget.dashboard-widget-box .widget-head {
+    gap: 0px;
+}
+.label-1{
+    width:72%
+}
+.label-2{
+    width:28%
+}
+.span-1{
+    width: 70%;
+    text-align: end;
+    font-size: 13px;
+}
+.span-2{
+    font-weight: 800 !important;
+    width: 30%;
+    text-align: end;
+    font-size: 13px;
+}
+.span-3{
+    width: auto;
+    text-align: end;
+    font-size: 13px;
+}
+.span-4{
+    font-weight: 800 !important;
+    width: auto;
+    text-align: end;
+    font-size: 13px;
+}
 
 @-webkit-keyframes spin {
 	0% { -webkit-transform: rotate(0deg); }
