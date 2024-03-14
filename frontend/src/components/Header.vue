@@ -15,12 +15,11 @@
           line-height: 1.5;
           align-items: center;
           justify-content: center;
-          text-transform: uppercase;
           flex-direction: column;"
-          class="tex t-center"> Solomon Islands iMRV Tool <span style="color: green; margin-left: 7px;" >for Climate Action</span></h2>
+          class="tex t-center"> SOLOMON ISLANDS iMRV TOOL <span style="color: green; margin:0 0 0 7px;" >FOR CLIMATE ACTIONS</span></h2>
       </div>
 
-      <div style="display: flex;">
+      <div style="display: flex; gap: 15px;">
         <nav class="navbar cus-navbar navbar-expand-lg bg navbar-light p-0">
       <button
       style="border: none !important;"
