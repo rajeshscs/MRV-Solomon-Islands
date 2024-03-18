@@ -319,7 +319,7 @@ class Dashboard {
 				
 				$('#project-count-title').html("Projects - Objective wise")
 				let colors_1 = ['#c6a7fe', '#ff8183', '#7feabf', '#cdcdcd','#70bcff']
-				if (project_count_value.length != 0){
+				if (project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 					$('#project-count-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 					const custom_options = {
 						type: "donut",
@@ -379,7 +379,7 @@ class Dashboard {
 
 				$('#status-title').html("Projects - Status wise")
 				let colors_2 = ['#9a97ff', '#63e293', '#9eccee']
-				if(project_status_value_list.length != 0){
+				if(project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 					$('#status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 					const project_status_option = {
 						type: "donut",
@@ -428,7 +428,7 @@ class Dashboard {
 					$("#project_status").append(no_image)
 				}
 				
-				let colors_3 = ['#98ceff','#7ac0ff','#5aaffb','#3899f1','#1984e5','#0a6ac1','#03539c']
+				let colors_3 = ["#cce6ff","#b3d9ff","#99ccff","#80bfff","#66b3ff","#4da6ff","#3399ff","#1a8cff","#0080ff","#0073e6","#0066cc","#0059b3","#004d99","#004080","#003366","#00264d","#001a33","#000d1a","#000000"]
 				let mitigation_key_list = []
 				let mitigation_value_list = []
 				for (let i of r.message.mitigation){
@@ -497,7 +497,7 @@ class Dashboard {
 					adaptation_value_list.push(i['count'])
 				}
 				$('#adaptation-title').html("Adaptation Projects - Sector wise")
-				let colors_4 = ["#ffd6cc","#ffad99","#ff8566","#ff5c33","#ff3300","#cc2900","#991f00","#661400","#4d0f00"]
+				let colors_4 = ["#ffcccc","#ffb3b3","#ff9999","#ff8080","#ff6666","#ff4d4d","#ff3333","#ff1a1a","#ff0000","#e60000","#cc0000","#b30000","#990000","#800000","#660000","#4d0000","#330000","#1a0000","#000000"]
 				if(adaptation_value_list.length != 0){
 					$('#adaptation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 					const adaptation_option = {
@@ -556,7 +556,7 @@ class Dashboard {
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
 				if(r.message != 0){
-					if(r.message.data.length != 0){
+					if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 						$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
 						$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 						const mitigation_ghg_till_data = {
@@ -643,7 +643,7 @@ class Dashboard {
 				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedDate} to ${formattedDate1}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
 				if(r.message != 0){
-					if(r.message.data.length != 0){
+					if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 						$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
 						$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 						const mitigation_ghg_last_year = {
@@ -711,7 +711,7 @@ class Dashboard {
 				let results = r.message || [];
 				console.log("results......--->>>>>>",results);
 				if (results != []){
-					if (results.data.length != 0){
+					if (r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 						$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
 						
 						const custom_options = {
@@ -783,10 +783,10 @@ class Dashboard {
 				$("#adaptation_ndp-title").html("No of Adaptation Projects - NDP Coverage wise")
 				
 				let results = r.message || [];
+				let keys = Object.keys(r.message);
+				let values = Object.values(r.message);		
 				if (results != []){
-					if (results.data.length != 0){
-						let keys = Object.keys(r.message);
-						let values = Object.values(r.message);				
+					if (values.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 						const custom_options = {
 							type: "bar",
 							colors: ["#03a9f4"],
@@ -839,7 +839,7 @@ class Dashboard {
 				$("#sdg_category-title").html("No of SDG Projects - SDG Categories")
 				let results = r.message || [];
 				if (results != []){
-					if(results.data.length != 0){
+					if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 						const custom_options = {
 							type: "bar",
 							colors: ["#48bb74"],
@@ -895,6 +895,8 @@ class Dashboard {
 				$("#co2_emission_last_five_years-title").html("Historic GHG Inventory - Last Five Years")
 				let colors_10 = ["#b1518f","#d95b5f","#da6d44","#b99b1b","#cf842b","#6ac34d"]
 				let results = r.message || [];
+				console.log("ddddddddddddddddddddddddddd",results);		
+
 				if(results != 0){
 					if(results.datasets.length != 0){
 						const custom_options = {
