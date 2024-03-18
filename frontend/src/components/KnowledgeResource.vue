@@ -5,7 +5,7 @@
         <div class="carousel-inner">
           <div class="carousel-item pt-4 pb-3 active">
             <div class="container">
-              <div class="row" style="width: 98%; margin-left: 5px;">
+              <div class="row" style="width: 98%; margin-left: 5px; display: flex; justify-content: center;">
                 <div v-for="item in data.message.child_table_data" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
@@ -21,7 +21,7 @@
           </div>
           <div class="carousel-item pt-4 pb-3">
             <div class="container">
-              <div class="row" style="width: 98%; margin-left: 5px;">
+              <div class="row" style="width: 98%; margin-left: 5px; display: flex; justify-content: center;">
                 <div v-for="item in data.message.child_table_data2" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
@@ -37,7 +37,7 @@
           </div>
           <!-- <div class="carousel-item pt-4 pb-3">
             <div class="container">
-              <div class="row" style="width: 98%; margin-left: 5px;">
+              <div class="row" style="width: 98%; margin-left: 5px; display: flex; justify-content: center;">
                 <div v-for="item in data.message.child_table_data2" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
                   <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
                     <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">

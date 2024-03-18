@@ -171,7 +171,7 @@
    "fieldname": "knowledge_resource_details2",
    "fieldtype": "Table",
    "label": "Knowledge Resource Carousel Details2",
-   "options": "Knowledge Resource ChildTableTwo"
+   "options": "Knowledge Resource ChildTable"
   },
   {
    "fieldname": "description_1",
@@ -617,7 +617,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-03-14 15:13:37.060440",
+ "modified": "2024-03-18 16:01:21.900212",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

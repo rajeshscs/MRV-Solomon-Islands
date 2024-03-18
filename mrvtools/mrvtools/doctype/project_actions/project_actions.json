@@ -35,18 +35,21 @@
   },
   {
    "fieldname": "cause",
-   "fieldtype": "Data",
-   "label": "Cause"
+   "fieldtype": "Select",
+   "label": "Cause",
+   "options": "Climate Change\nNot Defined"
   },
   {
    "fieldname": "focus",
-   "fieldtype": "Data",
-   "label": "Focus"
+   "fieldtype": "Select",
+   "label": "Focus",
+   "options": "Adaptation\nMitigation\nCross-cutting\nEnabler\nTransparency\nOthers"
   },
   {
    "fieldname": "area",
-   "fieldtype": "Data",
-   "label": "Area"
+   "fieldtype": "Select",
+   "label": "Area",
+   "options": "National\nSub-national"
   },
   {
    "fieldname": "action_description",
@@ -65,8 +68,9 @@
   },
   {
    "fieldname": "action_status",
-   "fieldtype": "Data",
-   "label": "Action Status"
+   "fieldtype": "Select",
+   "label": "Action Status",
+   "options": "Proposed\nPlanned\nOngoing\nImplemented\nCompleted"
   },
   {
    "fieldname": "start_date",
@@ -100,8 +104,9 @@
   },
   {
    "fieldname": "national_strategy",
-   "fieldtype": "Data",
-   "label": "Anchored in a national strategy"
+   "fieldtype": "Select",
+   "label": "Anchored in a national strategy",
+   "options": "Yes\nNo\nNDC\nNAPA\nOthers"
   },
   {
    "fieldname": "estimated_investment",
@@ -116,7 +121,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-15 16:51:08.306473",
+ "modified": "2024-03-18 12:34:02.883324",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Actions",

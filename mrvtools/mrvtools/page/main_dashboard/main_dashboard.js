@@ -200,25 +200,25 @@ class Dashboard {
 	}
 
 	get_cards_data(){
-		frappe.call("mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_cards_data").then((r) =>{
-			// let total_ghg_emmission = r.message.total_ghg_emmission
-			// let total_projects = r.message.total_projects
-			// let total_mitigation_projects = r.message.Mitigation
-			// let total_adaptation_projects = r.message.Adaptation
-			// let total_cross_cutting_projects = r.message.Cross-Cutting
-			// let total_enabler_projects = r.message.Enablers
-			// let total_transparency_projects = r.message.Transparency
-			// let till_date_finance_disbursed = r.message.till_date_finance_disbursed
-			// let till_date_ghg_reduction = r.message.till_date_ghg_reduction
+		// frappe.call("mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_cards_data").then((r) =>{
+		// 	// let total_ghg_emmission = r.message.total_ghg_emmission
+		// 	// let total_projects = r.message.total_projects
+		// 	// let total_mitigation_projects = r.message.Mitigation
+		// 	// let total_adaptation_projects = r.message.Adaptation
+		// 	// let total_cross_cutting_projects = r.message.Cross-Cutting
+		// 	// let total_enabler_projects = r.message.Enablers
+		// 	// let total_transparency_projects = r.message.Transparency
+		// 	// let till_date_finance_disbursed = r.message.till_date_finance_disbursed
+		// 	// let till_date_ghg_reduction = r.message.till_date_ghg_reduction
 
-			$('#cur_page_data').html(`
+		// 	$('#cur_page_data').html(`
 			
 			
-			`)
-		})
-		this.ghg_emission_reduction_chart()
-		this.finace_dibursment_chart()
-		this.ghg_emissions_chart()
+		// 	`)
+		// })
+		// this.ghg_emission_reduction_chart()
+		// this.finace_dibursment_chart()
+		// this.ghg_emissions_chart()
 		this.project_count_chart()
 		this.mitigation_ghg_till_date()
 		this.mitigation_ghg_last_year()
@@ -228,87 +228,88 @@ class Dashboard {
 		this.co2_emission_last_five_years()
 	}
 	
-	ghg_emissions_chart(){
-		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emissions_data')
-			.then((r) => {
-				console.log(r.message);
-				// $('.title_names1').html("GHG Emissions")
-				let results = r.message || [];
-				const custom_options = {
-					type: "line",
-					colors: ["#369fff"],
-					height: 240,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number
-					},
-					data: {
-						datasets: [{values: results.data}],
-						labels: results.labels
-					},
-				};
-				// frappe.utils.make_chart("#ghg_emissions", custom_options);
-			});
-	}
+	// ghg_emissions_chart(){
+	// 	frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emissions_data')
+	// 		.then((r) => {
+	// 			console.log(r.message);
+	// 			// $('.title_names1').html("GHG Emissions")
+	// 			let results = r.message || [];
+	// 			const custom_options = {
+	// 				type: "line",
+	// 				colors: ["#369fff"],
+	// 				height: 240,
+	// 				axisOptions: {
+	// 					xIsSeries: 0,
+	// 					isNavigable :1,
+	// 					shortenYAxisNumbers: 0,
+	// 					xAxisMode: "tick",
+	// 					numberFormatter: frappe.utils.format_chart_axis_number
+	// 				},
+	// 				data: {
+	// 					datasets: [{values: results.data}],
+	// 					labels: results.labels
+	// 				},
+	// 			};
+	// 			// frappe.utils.make_chart("#ghg_emissions", custom_options);
+	// 		});
+	// }
 
-	ghg_emission_reduction_chart(){
-		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emission_reduction_data')
-			.then((r) => {
-				console.log(r.message);
-				// $('.title_names2').html("GHG Emission Reduction")
-				let results = r.message || [];
-				const custom_options = {
-					type: "line",
-					colors: ["#369fff"],
-					height: 240,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: results.data}],
-						labels: results.labels
-					},
-				};
-				// frappe.utils.make_chart("#ghg_emission_reduction", custom_options);
-			});
-	}
+	// ghg_emission_reduction_chart(){
+	// 	frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emission_reduction_data')
+	// 		.then((r) => {
+	// 			console.log(r.message);
+	// 			// $('.title_names2').html("GHG Emission Reduction")
+	// 			let results = r.message || [];
+	// 			const custom_options = {
+	// 				type: "line",
+	// 				colors: ["#369fff"],
+	// 				height: 240,
+	// 				axisOptions: {
+	// 					xIsSeries: 0,
+	// 					isNavigable :1,
+	// 					shortenYAxisNumbers: 0,
+	// 					xAxisMode: "tick",
+	// 					numberFormatter: frappe.utils.format_chart_axis_number,
+	// 				},
+	// 				data: {
+	// 					datasets: [{values: results.data}],
+	// 					labels: results.labels
+	// 				},
+	// 			};
+	// 			// frappe.utils.make_chart("#ghg_emission_reduction", custom_options);
+	// 		});
+	// }
 
-	finace_dibursment_chart(){
-		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_finance_data')
-			.then((r) => {
-				// $('.title_names3').html("Finance Disbursement")
-				let results = r.message || [];
-				const custom_options = {
-					type: "line",
-					colors: ["#369fff"],
-					height: 240,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: results.data}],
-						labels: results.labels
-					},
-				};
-				// frappe.utils.make_chart("#finance_disbursement", custom_options);
-			});
+	// finace_dibursment_chart(){
+	// 	frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_finance_data')
+	// 		.then((r) => {
+	// 			// $('.title_names3').html("Finance Disbursement")
+	// 			let results = r.message || [];
+	// 			const custom_options = {
+	// 				type: "line",
+	// 				colors: ["#369fff"],
+	// 				height: 240,
+	// 				axisOptions: {
+	// 					xIsSeries: 0,
+	// 					isNavigable :1,
+	// 					shortenYAxisNumbers: 0,
+	// 					xAxisMode: "tick",
+	// 					numberFormatter: frappe.utils.format_chart_axis_number,
+	// 				},
+	// 				data: {
+	// 					datasets: [{values: results.data}],
+	// 					labels: results.labels
+	// 				},
+	// 			};
+	// 			// frappe.utils.make_chart("#finance_disbursement", custom_options);
+	// 		});
 			
-	}
+	// }
 
 	project_count_chart(){
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_document_count')
 			.then((r) => {
+				console.log("r.message 111",r.message);
 				let project_count_label = []
 				let project_count_value = []
 				for(let [key, value] of Object.entries(r.message.project_count[0])){
@@ -316,93 +317,117 @@ class Dashboard {
 					project_count_value.push(value);
 				}
 				
-				$('#project-count-title').html("No of Projects - Objective wise")
-				$('#project-count-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#project-count-title').html("Projects - Objective wise")
 				let colors_1 = ['#c6a7fe', '#ff8183', '#7feabf', '#cdcdcd','#70bcff']
-				const custom_options = {
-					type: "donut",
-					colors: colors_1,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: project_count_value}],
-						labels: project_count_label
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
-				
-				var legend_html_1 = '';
-				for(let i=0;i<project_count_label.length;i++){
-					legend_html_1+= `<div class="chart-legend-item">
-										<div class="fill-box" style="background-color:${colors_1[i]}"></div>
-										<div class="chart-legend-item-label">${project_count_label[i]}<br>
-											<span class="chart-values-style" >${project_count_value[i]}</span>
-										</div>
-									</div>`;
-				}
-				frappe.utils.make_chart("#project-count", custom_options);
-				$('[id="project-count"] [class="chart-container"]').addClass('inner-chart')
-				 $("#chart-legend-1").append(legend_html_1);
-
-				
-				$('#adaptation-title').html("No of Adaptation Projects - Sector wise")
-				
-				// ['#c6a7fe', '#ff8183', '#7feabf', '#d6d6d6','#70bcff', "#f29b69", '#8c88f7','#ff92e0']
-				// let colors_3 = ["#adebad","#99e699","#5cd65c","#47d147","#29a329","#248f24","#1f7a1f","#196619","#145214","#0f3d0f","#0a290a","#051405"]
-				let colors_4 = ["#ffd6cc","#ffad99","#ff8566","#ff5c33","#ff3300","#cc2900","#991f00","#661400","#4d0f00"]
-				let adaptation_key_list = []
-				let adaptation_value_list = []
-				for (let i of r.message.adaptation){
-					adaptation_key_list.push(i['key_sector'])
-					adaptation_value_list.push(i['count'])
-				}
-				$('#adaptation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-
-				const adaptation_option = {
-					type: "donut",
-					colors: colors_4,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: adaptation_value_list}],
-						labels: adaptation_key_list
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
-				var legend_html_4 = '';
-				for(let i=0;i<adaptation_key_list.length;i++){
-					legend_html_4 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_4[i]}"></div>
-											<div class="chart-legend-item-label">${adaptation_key_list[i]}<br>
-												<span class="chart-values-style" >${adaptation_value_list[i]}</span>
+				if (project_count_value.length != 0){
+					$('#project-count-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_count_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+					const custom_options = {
+						type: "donut",
+						colors: colors_1,
+						height: 250,
+						axisOptions: {
+							xIsSeries: 0,
+							isNavigable :1,
+							shortenYAxisNumbers: 0,
+							xAxisMode: "tick",
+							numberFormatter: frappe.utils.format_chart_axis_number,
+						},
+						data: {
+							datasets: [{values: project_count_value}],
+							labels: project_count_label
+						},
+						axisOptions: {
+							xAxisMode: "tick",
+							xIsSeries: true,
+						}
+					};
+					
+					var legend_html_1 = '';
+					for(let i=0;i<project_count_label.length;i++){
+						legend_html_1+= `<div class="chart-legend-item">
+											<div class="fill-box" style="background-color:${colors_1[i]}"></div>
+											<div class="chart-legend-item-label">${project_count_label[i]}<br>
+												<span class="chart-values-style" >${project_count_value[i]}</span>
 											</div>
-										</div>
-									`;
+										</div>`;
+					}
+					frappe.utils.make_chart("#project-count", custom_options);
+					$('[id="project-count"] [class="chart-container"]').addClass('inner-chart')
+					$("#chart-legend-1").append(legend_html_1);
+
 				}
-				frappe.utils.make_chart("#adaptation-sector", adaptation_option);
-				$('[id="adaptation-sector"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-4").append(legend_html_4);
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#project-count").append(no_image)
+				}
 
 
-				$('#mitigation-title').html("No of Mitigation Projects - Sector wise")
+				let project_status_key_list = []
+				let project_status_value_list = []
+				for (let i of r.message.project_status){
+					project_status_key_list.push(i['status'])
+					project_status_value_list.push(i['count'])
+				}
+
+
+				$('#status-title').html("Projects - Status wise")
+				let colors_2 = ['#9a97ff', '#63e293', '#9eccee']
+				if(project_status_value_list.length != 0){
+					$('#status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+					const project_status_option = {
+						type: "donut",
+						colors: colors_2,
+						height: 250,
+						axisOptions: {
+							xIsSeries: 0,
+							isNavigable :1,
+							shortenYAxisNumbers: 0,
+							xAxisMode: "tick",
+							numberFormatter: frappe.utils.format_chart_axis_number,
+						},
+						data: {
+							datasets: [{values: project_status_value_list}],
+							labels: project_status_key_list
+						},
+						axisOptions: {
+							xAxisMode: "tick",
+							xIsSeries: true,
+						}
+					};
+					
+					var legend_html_2 = '';
+					for(let i=0;i<project_status_key_list.length;i++){
+						legend_html_2 += `	<div class="chart-legend-item">
+												<div class="fill-box" style="background-color:${colors_2[i]}"></div>
+												<div class="chart-legend-item-label">${project_status_key_list[i]}<br>
+													<span class="chart-values-style" >${project_status_value_list[i]}</span>
+												</div>
+											</div>
+										`;
+					}
+					frappe.utils.make_chart("#project_status", project_status_option);
+					$('[id="project_status"] [class="chart-container"]').addClass('inner-chart')
+					$("#chart-legend-2").append(legend_html_2);
+				}
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#project_status").append(no_image)
+				}
+				
 				let colors_3 = ['#98ceff','#7ac0ff','#5aaffb','#3899f1','#1984e5','#0a6ac1','#03539c']
 				let mitigation_key_list = []
 				let mitigation_value_list = []
@@ -410,86 +435,117 @@ class Dashboard {
 					mitigation_key_list.push(i['key_sector'])
 					mitigation_value_list.push(i['count'])
 				}
-				$('#mitigation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${mitigation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				$('#mitigation-title').html("Mitigation Projects - Sector wise")
 				// colors: ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"],
-				const mitigation_option = {
-					type: "donut",
-					colors: colors_3,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: mitigation_value_list}],
-						labels: mitigation_key_list
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
-				var legend_html_3 = '';
-				for(let i=0;i<mitigation_key_list.length;i++){
-					legend_html_3 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_3[i]}"></div>
-											<div class="chart-legend-item-label">${mitigation_key_list[i]}<br>
-												<span class="chart-values-style" >${mitigation_value_list[i]}</span>
+				if(mitigation_value_list.length != 0){
+					$('#mitigation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${mitigation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+					const mitigation_option = {
+						type: "donut",
+						colors: colors_3,
+						height: 250,
+						axisOptions: {
+							xIsSeries: 0,
+							isNavigable :1,
+							shortenYAxisNumbers: 0,
+							xAxisMode: "tick",
+							numberFormatter: frappe.utils.format_chart_axis_number,
+						},
+						data: {
+							datasets: [{values: mitigation_value_list}],
+							labels: mitigation_key_list
+						},
+						axisOptions: {
+							xAxisMode: "tick",
+							xIsSeries: true,
+						}
+					};
+					var legend_html_3 = '';
+					for(let i=0;i<mitigation_key_list.length;i++){
+						legend_html_3 += `	<div class="chart-legend-item">
+												<div class="fill-box" style="background-color:${colors_3[i]}"></div>
+												<div class="chart-legend-item-label">${mitigation_key_list[i]}<br>
+													<span class="chart-values-style" >${mitigation_value_list[i]}</span>
+												</div>
 											</div>
-										</div>
-									`;
+										`;
+					}
+					frappe.utils.make_chart("#mitigation-sector", mitigation_option);
+					$('[id="mitigation-sector"] [class="chart-container"]').addClass('inner-chart')
+					$("#chart-legend-3").append(legend_html_3);
+					
 				}
-				frappe.utils.make_chart("#mitigation-sector", mitigation_option);
-				$('[id="mitigation-sector"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-3").append(legend_html_3);
-
-
-				$('#status-title').html("Project Status")
-				let project_status_key_list = []
-				let project_status_value_list = []
-				for (let i of r.message.project_status){
-					project_status_key_list.push(i['status'])
-					project_status_value_list.push(i['count'])
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#mitigation-sector").append(no_image)
 				}
-				$('#status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_status_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-				let colors_2 = ['#9a97ff', '#63e293', '#9eccee']
-				const project_status_option = {
-					type: "donut",
-					colors: colors_2,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: project_status_value_list}],
-						labels: project_status_key_list
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
 				
-				var legend_html_2 = '';
-				for(let i=0;i<project_status_key_list.length;i++){
-					legend_html_2 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_2[i]}"></div>
-											<div class="chart-legend-item-label">${project_status_key_list[i]}<br>
-												<span class="chart-values-style" >${project_status_value_list[i]}</span>
-											</div>
-										</div>
-									`;
+				
+				
+				// ['#c6a7fe', '#ff8183', '#7feabf', '#d6d6d6','#70bcff', "#f29b69", '#8c88f7','#ff92e0']
+				// let colors_3 = ["#adebad","#99e699","#5cd65c","#47d147","#29a329","#248f24","#1f7a1f","#196619","#145214","#0f3d0f","#0a290a","#051405"]
+				let adaptation_key_list = []
+				let adaptation_value_list = []
+				for (let i of r.message.adaptation){
+					adaptation_key_list.push(i['key_sector'])
+					adaptation_value_list.push(i['count'])
 				}
-				frappe.utils.make_chart("#project_status", project_status_option);
-				$('[id="project_status"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-2").append(legend_html_2);
+				$('#adaptation-title').html("Adaptation Projects - Sector wise")
+				let colors_4 = ["#ffd6cc","#ffad99","#ff8566","#ff5c33","#ff3300","#cc2900","#991f00","#661400","#4d0f00"]
+				if(adaptation_value_list.length != 0){
+					$('#adaptation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+					const adaptation_option = {
+						type: "donut",
+						colors: colors_4,
+						height: 250,
+						axisOptions: {
+							xIsSeries: 0,
+							isNavigable :1,
+							shortenYAxisNumbers: 0,
+							xAxisMode: "tick",
+							numberFormatter: frappe.utils.format_chart_axis_number,
+						},
+						data: {
+							datasets: [{values: adaptation_value_list}],
+							labels: adaptation_key_list
+						},
+						axisOptions: {
+							xAxisMode: "tick",
+							xIsSeries: true,
+						}
+					};
+					var legend_html_4 = '';
+					for(let i=0;i<adaptation_key_list.length;i++){
+						legend_html_4 += `	<div class="chart-legend-item">
+												<div class="fill-box" style="background-color:${colors_4[i]}"></div>
+												<div class="chart-legend-item-label">${adaptation_key_list[i]}<br>
+													<span class="chart-values-style" >${adaptation_value_list[i]}</span>
+												</div>
+											</div>
+										`;
+					}
+					frappe.utils.make_chart("#adaptation-sector", adaptation_option);
+					$('[id="adaptation-sector"] [class="chart-container"]').addClass('inner-chart')
+					$("#chart-legend-4").append(legend_html_4);
+
+				}
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#adaptation-sector").append(no_image)
+				}
 			});
 			
 	}
@@ -497,43 +553,71 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_till_date')
 			.then((r) => {
 				$('#mitigation_till-date-title').html("GHG Emission Acheived - Till Today")
-				$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-				$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
-				const mitigation_ghg_till_data = {
-					type: "donut",
-					colors: colors_5,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: r.message.data}],
-						labels: r.message.labels
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
-				var legend_html_5 = '';
-				for(let i=0;i<r.message.data.length;i++){
-					legend_html_5 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_5[i]}"></div>
-											<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-												<span class="chart-values-style" >${r.message.data[i]}</span>
-											</div>
+				if(r.message != 0){
+					if(r.message.data.length != 0){
+						$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+						$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+						const mitigation_ghg_till_data = {
+							type: "donut",
+							colors: colors_5,
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1,
+								shortenYAxisNumbers: 0,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+							},
+							data: {
+								datasets: [{values: r.message.data}],
+								labels: r.message.labels
+							},
+							axisOptions: {
+								xAxisMode: "tick",
+								xIsSeries: true,
+							}
+						};
+						var legend_html_5 = '';
+						for(let i=0;i<r.message.data.length;i++){
+							legend_html_5 += `	<div class="chart-legend-item">
+													<div class="fill-box" style="background-color:${colors_5[i]}"></div>
+													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+														<span class="chart-values-style" >${r.message.data[i]}</span>
+													</div>
+												</div>
+											`;
+						}
+						frappe.utils.make_chart("#mitigation_till-date", mitigation_ghg_till_data)
+						$('[id="mitigation_till-date"] [class="chart-container"]').addClass('inner-chart')
+						$("#chart-legend-5").append(legend_html_5);
+					}
+					else{
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
 										</div>
-									`;
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#mitigation_till-date").append(no_image)
+					}
 				}
-				frappe.utils.make_chart("#mitigation_till-date", mitigation_ghg_till_data)
-				$('[id="mitigation_till-date"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-5").append(legend_html_5);
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#mitigation_till-date").append(no_image)
+				}
+				
+				
 			})
 	}
 	mitigation_ghg_last_year(){
@@ -558,42 +642,47 @@ class Dashboard {
 				console.log("------>>>>>>>>>>>",r.message);
 				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedDate} to ${formattedDate1}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
-				$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-				$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-				const mitigation_ghg_last_year = {
-					type: "donut",
-					colors: colors_6,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: r.message.data}],
-						labels: r.message.labels
-					},
-					axisOptions: {
-						xAxisMode: "tick",
-						xIsSeries: true,
-					  }
-				};
-				
-				var legend_html_6 = '';
-				for(let i=0;i<r.message.data.length;i++){
-					legend_html_6 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_6[i]}"></div>
-											<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-												<span class="chart-values-style" >${r.message.data[i]}</span>
-											</div>
-										</div>
-									`;
+				if(r.message != 0){
+					if(r.message.data.length != 0){
+						$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+						$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+						const mitigation_ghg_last_year = {
+							type: "donut",
+							colors: colors_6,
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1,
+								shortenYAxisNumbers: 0,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+							},
+							data: {
+								datasets: [{values: r.message.data}],
+								labels: r.message.labels
+							},
+							axisOptions: {
+								xAxisMode: "tick",
+								xIsSeries: true,
+							}
+						};
+						
+						var legend_html_6 = '';
+						for(let i=0;i<r.message.data.length;i++){
+							legend_html_6 += `	<div class="chart-legend-item">
+													<div class="fill-box" style="background-color:${colors_6[i]}"></div>
+													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+														<span class="chart-values-style" >${r.message.data[i]}</span>
+													</div>
+												</div>
+											`;
+						}
+						frappe.utils.make_chart("#mitigation_last-year", mitigation_ghg_last_year);
+						$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
+						$("#chart-legend-6").append(legend_html_6);
+					}
 				}
-				frappe.utils.make_chart("#mitigation_last-year", mitigation_ghg_last_year);
-				$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-6").append(legend_html_6);
+				
 				
 			})
 	}
@@ -618,41 +707,72 @@ class Dashboard {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.total_co2_emission_latest')
 			.then((r) => {
 				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedDate} to ${formattedDate1} Sector Wise`)
-				$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
 				let colors_7 = ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"]
 				let results = r.message || [];
-				console.log("results",results.data);
-				const custom_options = {
-					type: "donut",	
-					colors: colors_7,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1 ,
-						shortenYAxisNumbers: 1,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-						maxSlices: 6
-					},
-					data: {
-						datasets: [{values: results.data}],
-						labels: results.labels
+				console.log("results......--->>>>>>",results);
+				if (results != []){
+					if (results.data.length != 0){
+						$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
+						
+						const custom_options = {
+							type: "donut",	
+							colors: colors_7,
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1 ,
+								shortenYAxisNumbers: 1,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+								maxSlices: 6
+							},
+							data: {
+								datasets: [{values: results.data}],
+								labels: results.labels
+							}
+						};
+						
+						var legend_html_7 = '';
+						for(let i=0;i<r.message.data.length;i++){
+							legend_html_7 += `	<div class="chart-legend-item">
+													<div class="fill-box" style="background-color:${colors_7[i]}"></div>
+													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+														<span class="chart-values-style" >${r.message.data[i]}</span>
+													</div>
+												</div>
+											`;
+						}
+						frappe.utils.make_chart("#co2_emission_latest", custom_options);
+						$('[id="co2_emission_latest"] [class="chart-container"]').addClass('inner-chart')
+						$("#chart-legend-7").append(legend_html_7);
 					}
-				};
-				
-				var legend_html_7 = '';
-				for(let i=0;i<r.message.data.length;i++){
-					legend_html_7 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_7[i]}"></div>
-											<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-												<span class="chart-values-style" >${r.message.data[i]}</span>
-											</div>
+					else{
+						
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
 										</div>
-									`;
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#co2_emission_latest").append(no_image)
+					}
+					
 				}
-				frappe.utils.make_chart("#co2_emission_latest", custom_options);
-				$('[id="co2_emission_latest"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-7").append(legend_html_7);
+				else{
+					
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#co2_emission_latest").append(no_image)
+				}
+				
 			});
 			
 	}
@@ -663,25 +783,52 @@ class Dashboard {
 				$("#adaptation_ndp-title").html("No of Adaptation Projects - NDP Coverage wise")
 				
 				let results = r.message || [];
-				let keys = Object.keys(r.message);
-				let values = Object.values(r.message);				
-				const custom_options = {
-					type: "bar",
-					colors: ["#03a9f4"],
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1 ,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: values}],
-						labels: keys
+				if (results != []){
+					if (results.data.length != 0){
+						let keys = Object.keys(r.message);
+						let values = Object.values(r.message);				
+						const custom_options = {
+							type: "bar",
+							colors: ["#03a9f4"],
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1,
+								shortenYAxisNumbers: 0,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+							},
+							data: {
+								datasets: [{values: values}],
+								labels: keys
+							}
+						};
+						frappe.utils.make_chart("#adaptation_ndp", custom_options);
 					}
-				};
-				frappe.utils.make_chart("#adaptation_ndp", custom_options);
+					else{
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+										</div>
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#adaptation_ndp").append(no_image)
+					}
+					
+				}
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#adaptation_ndp").append(no_image)
+				}
 			});
 			
 	}
@@ -691,23 +838,51 @@ class Dashboard {
 			.then((r) => {
 				$("#sdg_category-title").html("No of SDG Projects - SDG Categories")
 				let results = r.message || [];
-				const custom_options = {
-					type: "bar",
-					colors: ["#48bb74"],
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1 ,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: [{values: results.data}],
-						labels: results.categories
+				if (results != []){
+					if(results.data.length != 0){
+						const custom_options = {
+							type: "bar",
+							colors: ["#48bb74"],
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1 ,
+								shortenYAxisNumbers: 0,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+							},
+							data: {
+								datasets: [{values: results.data}],
+								labels: results.categories
+							}
+						};
+						frappe.utils.make_chart("#sdg_category", custom_options);
 					}
-				};
-				frappe.utils.make_chart("#sdg_category", custom_options);
+					else{
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+										</div>
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#sdg_category").append(no_image)
+					}
+					
+				}
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#sdg_category").append(no_image)
+				}
+				
 				
 			});
 			
@@ -720,36 +895,63 @@ class Dashboard {
 				$("#co2_emission_last_five_years-title").html("Historic GHG Inventory - Last Five Years")
 				let colors_10 = ["#b1518f","#d95b5f","#da6d44","#b99b1b","#cf842b","#6ac34d"]
 				let results = r.message || [];
-				const custom_options = {
-					type: "bar",
-					colors: colors_10,
-					height: 250,
-					axisOptions: {
-						xIsSeries: 0,
-						isNavigable :1 ,
-						shortenYAxisNumbers: 0,
-						xAxisMode: "tick",
-						numberFormatter: frappe.utils.format_chart_axis_number,
-					},
-					data: {
-						datasets: results.datasets,
-						labels: results.labels
-					},
-					barOptions: {
-						"stacked": 1
-					},
-				};
-				frappe.utils.make_chart("#co2_emission_last_five_years", custom_options);
-				let legend_html_10 = ''
-				for(let i=0;i<results.datasets.length;i++){
-					legend_html_10 += `	<div class="chart-legend-item">
-											<div class="fill-box" style="background-color:${colors_10[i]}"></div>
-											<div class="chart-legend-item-label">${results.datasets[i]["name"]}</div>
+				if(results != 0){
+					if(results.datasets.length != 0){
+						const custom_options = {
+							type: "bar",
+							colors: colors_10,
+							height: 250,
+							axisOptions: {
+								xIsSeries: 0,
+								isNavigable :1 ,
+								shortenYAxisNumbers: 0,
+								xAxisMode: "tick",
+								numberFormatter: frappe.utils.format_chart_axis_number,
+							},
+							data: {
+								datasets: results.datasets,
+								labels: results.labels
+							},
+							barOptions: {
+								"stacked": 1
+							},
+						};
+						frappe.utils.make_chart("#co2_emission_last_five_years", custom_options);
+						let legend_html_10 = ''
+						for(let i=0;i<results.datasets.length;i++){
+							legend_html_10 += `	<div class="chart-legend-item">
+													<div class="fill-box" style="background-color:${colors_10[i]}"></div>
+													<div class="chart-legend-item-label">${results.datasets[i]["name"]}</div>
+												</div>
+											`;
+						}
+						$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
+						$("#chart-legend-10").append(legend_html_10);
+					}
+					else{
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
 										</div>
-									`;
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#co2_emission_last_five_years").append(no_image)
+					}
 				}
-				$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
-				$("#chart-legend-10").append(legend_html_10);
+				else{
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#co2_emission_last_five_years").append(no_image)
+				}
+				
 			});
 			
 	}

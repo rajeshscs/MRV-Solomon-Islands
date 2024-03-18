@@ -90,6 +90,7 @@ onMounted(() => {
   opacity: 0;
   color: #fff;
   font-size: 20px;
+  border-radius: 4px;
   padding: 20px;
   text-align: center;
   height: 100%;

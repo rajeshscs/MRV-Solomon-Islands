@@ -57,7 +57,7 @@
                   <!-- Start Tab Content -->
                   <div class="tab-pane active" id="p-view-2" >
                   <div class="tab-inner" >
-                     <div class="table-responsive" data-aos="fade-right " style="height: 50rem;" data-aos-delay="100">
+                     <div class="table-responsive" data-aos="" style="height: 50rem;" data-aos-delay="100">
                      <table class="table table-striped table-bordered table-hover">
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
@@ -200,18 +200,18 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
-                        <tr v-for="table_item in data.message.parent_data.transparency_table" :key="table_item.name" >
-                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
-                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
-                           <td v-if="table_item.sector">{{table_item.sector}}</td>
-                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
-                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
-                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
-                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
-                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
-                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
-                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
-                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
+                        <tr v-for="trans_item in data.message.parent_data.transparency_table" :key="trans_item.name" >
+                           <th style="padding: 10px;" scope="row">{{trans_item.idx}}</th>
+                           <td v-if="trans_item.intervention">{{trans_item.intervention}}</td>
+                           <td v-if="trans_item.sector">{{trans_item.sector}}</td>
+                           <td v-if="trans_item.subsector">{{trans_item.subsector}}</td>
+                           <td v-if="trans_item.project_title">{{trans_item.project_title}}</td>
+                           <td v-if="trans_item.implementing_agency">{{trans_item.implementing_agency}}</td>
+                           <td v-if="trans_item.area_name">{{trans_item.area_name}}</td>
+                           <td v-if="trans_item.project_costusd">{{trans_item.project_costusd}}</td>
+                           <td v-if="trans_item.source_of_funding">{{trans_item.source_of_funding}}</td>
+                           <td v-if="trans_item.start_date">{{trans_item.start_date}}</td>
+                           <td v-if="trans_item.end_date">{{trans_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -233,18 +233,18 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
-                        <tr v-for="table_item in data.message.parent_data.support_table" :key="table_item.name" >
-                           <th style="padding: 10px;" scope="row">{{table_item.idx}}</th>
-                           <td v-if="table_item.intervention">{{table_item.intervention}}</td>
-                           <td v-if="table_item.sector">{{table_item.sector}}</td>
-                           <td v-if="table_item.subsector">{{table_item.subsector}}</td>
-                           <td v-if="table_item.project_title">{{table_item.project_title}}</td>
-                           <td v-if="table_item.implementing_agency">{{table_item.implementing_agency}}</td>
-                           <td v-if="table_item.area_name">{{table_item.area_name}}</td>
-                           <td v-if="table_item.project_costusd">{{table_item.project_costusd}}</td>
-                           <td v-if="table_item.source_of_funding">{{table_item.source_of_funding}}</td>
-                           <td v-if="table_item.start_date">{{table_item.start_date}}</td>
-                           <td v-if="table_item.end_date">{{table_item.end_date}}</td>
+                        <tr v-for="support_item in data.message.parent_data.support_table" :key="support_item.name" >
+                           <th style="padding: 10px;" scope="row">{{support_item.idx}}</th>
+                           <td v-if="support_item.intervention">{{support_item.intervention}}</td>
+                           <td v-if="support_item.sector">{{support_item.sector}}</td>
+                           <td v-if="support_item.subsector">{{support_item.subsector}}</td>
+                           <td v-if="support_item.project_title">{{support_item.project_title}}</td>
+                           <td v-if="support_item.implementing_agency">{{support_item.implementing_agency}}</td>
+                           <td v-if="support_item.area_name">{{support_item.area_name}}</td>
+                           <td v-if="support_item.project_costusd">{{support_item.project_costusd}}</td>
+                           <td v-if="support_item.source_of_funding">{{support_item.source_of_funding}}</td>
+                           <td v-if="support_item.start_date">{{support_item.start_date}}</td>
+                           <td v-if="support_item.end_date">{{support_item.end_date}}</td>
                         </tr>
                         </tbody>
                      </table>
@@ -286,7 +286,7 @@ export default {
 }
 
 .tab-area .nav-pills .nav-link:not(.active):hover {
-    color: #000000 !important;
+    color: #ffffff !important;
     background-color: green !important;
 }
 

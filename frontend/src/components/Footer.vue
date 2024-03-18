@@ -1,6 +1,6 @@
 <template>
   <br>
-  <footer data-aos="fade" data-aos-delay="50" class="footer p-0 bg" style=" color: aliceblue; background-color: #001000 !important;">
+  <footer data-aos="" data-aos-delay="50" class="footer p-0 bg" style=" color: aliceblue; background-color: #001000 !important;">
    <div class="container-fluid px-5 text-start">
     <div class="row column-both">
         <div class="inner-row">
@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6" style="width: auto;">
               <h3 class="" >Contact Information</h3>
               <div  v-for="item in data.message" :key="item.name" style="padding: 1rem 2rem;">
-                  <div class="media">
+                  <div class="media" style="max-width: 256px;">
                      <p  v-if="item.address"> <i class="mr-3 bi bi-geo-alt  b text-start" ></i>{{ item.address }}</p>
                   </div>
                   <div class="media">
@@ -28,14 +28,22 @@
                   </div>
                </div>
             </div>
-
-
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <h3 class="">Present Pages</h3>
                     <ul class="list-unstyled mx-4">
-                        <li v-for="item in ['home', 'about', 'project', 'climate change division', 'reports', 'support', 'knowledgeresource']" :key="item">
-                            <router-link :to="'/' + item" class="custom-link text-start"><i class="mr-3 bi bi-chevron-right" style="font-weight: 900 !important;"></i> {{ item.charAt(0).toUpperCase() + item.slice(1) }}</router-link>
-                        </li>
+                      <li v-for="(routeKey, displayText) in {
+                          'Home': 'home',
+                          'About': 'about',
+                          'Project': 'project',
+                          'Climate Change Division': 'climate-change-division' ,
+                          'Reports': 'reports',
+                          'Support': 'support',
+                          'Knowledge Resource': 'knowledgeresource'
+                        }" :key="routeKey">
+                          <router-link :to="'/' + routeKey" class="custom-link text-start">
+                              <i class="mr-3 bi bi-chevron-right  " style="font-weight: 900 !important;"></i> {{ displayText }}
+                          </router-link>
+                      </li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
