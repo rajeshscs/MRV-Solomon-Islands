@@ -7,20 +7,20 @@
            <div class="section-headline text-center">
             <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">About <span style="color: green; font-weight: 700;">Climate Change Division</span></h2>
            </div>
-            <ul v-for="item in data.message" :key="item.name" class="pr-blw-img-list image-list" style="list-style: none; display:flex">
+            <ul class="pr-blw-img-list image-list" style="list-style: none; display:flex">
             <div class="par_image">
-              <li class="CCDImages" v-if="item.climate_image1">
-                 <img :src="item.climate_image1" style="width: 100%; height: auto;">
+              <li class="CCDImages" v-if="data.message.parent_data.climate_image1">
+                 <img :src="data.message.parent_data.climate_image1" style="width: 100%; height: auto;">
               </li>
             </div>
             <div class="par_image">
-              <li class="CCDImages" v-if="item.climate_image2">
-                 <img :src="item.climate_image2" style="width: 100%; height: auto;">
+              <li class="CCDImages" v-if="data.message.parent_data.climate_image2">
+                 <img :src="data.message.parent_data.climate_image2" style="width: 100%; height: auto;">
               </li>
             </div>
             <div class="par_image">
-              <li class="CCDImages" v-if="item.climate_image3">
-                 <img :src="item.climate_image3" style="width: 100%; height: auto;">
+              <li class="CCDImages" v-if="data.message.parent_data.climate_image3">
+                 <img :src="data.message.parent_data.climate_image3" style="width: 100%; height: auto;">
               </li>
             </div>
             </ul>
@@ -33,8 +33,8 @@
                 </p>  
 
               <div class="clearfix">
-                <li class="side-image" v-if="data.message.parent_data.content_image" style="list-style: none; position: relative;">
-                  <img :src="data.message.parent_data.content_image" class="col-md-5 float-md-end mb-3 ms-md-3" alt="..." 
+                <li class="side-image" v-if="data.message.parent_data.content_image" style="list-style: none; display: contents; position: relative;">
+                  <img :src="data.message.parent_data.content_image" class="col-md-5 float-md-end mb-3 ms-md-3 inner-side-image" alt="..." 
                   style="border-radius: 7px; width: 29%; height: 28rem; padding: 0px !important; object-fit: cover; margin: 0px 0px 37px 22px !important; box-shadow: rgba(0, 0, 0, 0.41) 0px 0px 6px;">
                 </li>
                 <p class="CCDContent" v-if="data.message.parent_data.climate_change_division_content2">
@@ -43,9 +43,9 @@
               </div>
               <hr style="height: 30px; color: #000; border-top: 1px solid #000;">
             <div class="climate_image">
-              <ul v-for="item in data.message.parent_data.climate_change_division_images" :key="item.image" class="climate-image-list" style="list-style: none; display:flex">
-                <li v-if="item.image" style="position: relative; margin-right: 10px; margin-left:10px; height: 25rem;" class="ccd_list">
-                  <img :src="item.image" style="width: 100%; height: auto;" class="ccd_image">
+              <ul v-for="ccd_image in data.message.parent_data.climate_change_division_images" :key="ccd_image.image" class="climate-image-list" style="list-style: none; display:flex">
+                <li v-if="ccd_image.image" style="position: relative; margin-right: 10px; margin-left:10px; height: 25rem;" class="ccd_list">
+                  <img :src="ccd_image.image" style="width: 100%; height: auto;" class="ccd_image">
                   <!-- <div class="overlay"><h5 style="margin-top: 30%;">{{item.ccd_image_title}}</h5></div> -->
                 </li>
               </ul>
@@ -190,6 +190,9 @@
     margin-left: 32px;
     display: inline-flex;
     width: 1000px;
+  }
+  .inner-side-image{
+      width: auto !important;
   }
 }
 </style>

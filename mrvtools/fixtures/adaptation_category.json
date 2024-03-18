@@ -1,0 +1,65 @@
+[
+ {
+  "category": "Forest Health",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:02:32.501257",
+  "name": "Forest Health"
+ },
+ {
+  "category": "Watershed Health",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:02:43.652151",
+  "name": "Watershed Health"
+ },
+ {
+  "category": "Coastal Health",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:03:18.537195",
+  "name": "Coastal Health"
+ },
+ {
+  "category": "Water Security",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:03:29.461408",
+  "name": "Water Security"
+ },
+ {
+  "category": "Security of place",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:03:41.830382",
+  "name": "Security of place"
+ },
+ {
+  "category": "Energy Security",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:04:16.815656",
+  "name": "Energy Security"
+ },
+ {
+  "category": "Income Security",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:05:29.812646",
+  "name": "Income Security"
+ },
+ {
+  "category": "Community Health",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:05:46.477322",
+  "name": "Community Health"
+ },
+ {
+  "category": "Food Security",
+  "docstatus": 0,
+  "doctype": "Adaptation Category",
+  "modified": "2023-07-25 12:05:53.748424",
+  "name": "Food Security"
+ }
+]

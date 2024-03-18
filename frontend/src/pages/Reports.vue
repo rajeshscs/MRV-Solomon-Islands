@@ -56,7 +56,7 @@
    }
   }) 
   const data = ref([]);
-  const partnerLogos = ref([]); // To store partner logos
+  const partnerLogos = ref([]);
   console.log(data)
   const fetchData = async () => {
     
@@ -73,15 +73,7 @@
     }
     var values = data._rawValue.message.parent_data.contact_number
     var childField = data._rawValue.message.child_table_data
-    // const {report_image,report_image1,report_image2} = data._rawValue.message.parent_data
     var values = data._rawValue.message.parent_data
-
-    // var contactField = data._rawValue.message.parent_data.contact_number
-    // for (number of contactField){
-    //   if(number.contact_number){
-    //     console.log("contact_number", contact_number);
-    //   }
-    // }
     for (var item of childField){
       if (item.image){
         console.log("item",item.image);
@@ -93,19 +85,6 @@
   
     console.log("responsee", values);
   };
-  
-  // const fetchPartnerLogos = async () => {
-  //   try {
-  //     const response = await axios.get('http://your-api-url-for-partner-logos');
-  //     if (response.status === 200) {
-  //       partnerLogos.value = response.data; // Assuming your API returns an array of partner logos
-  //     } else {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
   
   onMounted(() => {
     fetchData();
@@ -123,29 +102,29 @@
     gap: 0;
   }
   .pattern-background {
-  height: 100%;
-  position: absolute;
-  z-index: -1;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
   }
   .report-image, .report-image1, .report-image2 {
-  /* width: 80% !important; */
-  /* height: 493px !important; */
-  margin: auto;
-  position: relative;
-  padding: 20px 0px !important;
-  width: 65%;
+    width: 80% !important;
+    height: auto !important;
+    margin: auto;
+    position: relative;
+    padding: 20px 0px !important;
+    width: 80cap;
   }
   @media(max-width: 768px) {
   .img {
-  position: relative;
-  background-color: #00220012;
-  height: 24rem;
+    position: relative;
+    background-color: #00220012;
+    height: 24rem;
   }
   .report-image {
-  width: 100%;
-  height: auto !important;
-  margin: auto;
-  position: relative;
-  }
+    width: 80%;
+    height: auto !important;
+    margin: auto;
+    position: relative;
+    }
   }
 </style>

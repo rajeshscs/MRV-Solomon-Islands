@@ -1,4 +1,4 @@
-var option
+// var options
 frappe.pages["ghg-year-report"].on_page_load = (wrapper) => {
 	frappe.ghg_year_report = new GHGInventory(wrapper);
 };
@@ -116,12 +116,12 @@ class GHGInventory {
 	}
 	ghg_from_year() {
 		this.from_year = this.page.add_select(
-			__("Year"),[" ","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050"]
+			__("From Year"),[" ","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050"]
 			
 		)
 		this.from_year.on("change",(r) => {
 			// this.render_datatable()
-			this.get_chart_report();
+			// this.get_chart_report();
 			// this.$heading.empty();
 			if(this.from_year[0].value ==''){
 				$('.report-heading').attr('style',"display:none !important")
@@ -132,26 +132,30 @@ class GHGInventory {
 				$('.all_html').attr('style',"display:block !important")
 			}
 			if(this.from_year[0].value){
-				var option = []
+				var options = []
 				for(let i = parseInt(this.from_year[0].value);i<=(parseInt(this.from_year[0].value)+10);i++){
-					option.push(i)
+					options.push(i)
 				}
-				console.log("OOOOOOO",option);
-				// this.ghg_to_year(option)
+				let year_field = $(this.parent).find(
+					`.frappe-control[data-original-title="${__("From Year")}"]`
+				);
+				$('[data-original-title="To Year"]:first').remove();
+				this.ghg_to_year(options)
+
 			}
 		})
+		
 	}
-	ghg_to_year() {
-		console.log("AAAAAA",option);	
 
+	ghg_to_year(options) {
+		console.log("AAAAAA",options);
 		this.to_year = this.page.add_select(
-			__("Year"),[" ","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050"]
+			__("To Year"),options
 		)
 		this.to_year.on("change",(r) => {
 			this.render_datatable()
 			this.get_chart_report();
 			this.make()
-			// this.$heading.empty();
 
 		})
 	}
@@ -163,7 +167,6 @@ class GHGInventory {
 		this.inventory_unit.on("change",(r) => {
 			this.render_datatable()
 			this.get_chart_report();
-			// this.$heading.empty();
 
 		})
 	}

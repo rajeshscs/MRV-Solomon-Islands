@@ -324,6 +324,15 @@ export default {
    box-shadow: none !important;
 }
 @media only screen and (max-width: 600px) {
+   .list_image{
+      display:flex;
+      height: 200px !important;
+   }
+   .pr-blw-img-list{
+      flex-direction: column;
+      gap: 24px;
+   }
+
    .tab_parent{
        display: flex!important;
        gap: 5px!important;

@@ -1,0 +1,72 @@
+[
+ {
+  "category": "Health",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:37:42.143013",
+  "name": "Health"
+ },
+ {
+  "category": "Water",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:38:03.863536",
+  "name": "Water"
+ },
+ {
+  "category": "Food",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:38:13.609783",
+  "name": "Food"
+ },
+ {
+  "category": "Education",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:38:30.712417",
+  "name": "Education"
+ },
+ {
+  "category": "Employment",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:38:44.459023",
+  "name": "Employment"
+ },
+ {
+  "category": "Environment",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:38:53.637566",
+  "name": "Environment"
+ },
+ {
+  "category": "Industry",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:39:06.701757",
+  "name": "Industry"
+ },
+ {
+  "category": "Gender",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:39:14.996407",
+  "name": "Gender"
+ },
+ {
+  "category": "Inequality",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:39:36.201328",
+  "name": "Inequality"
+ },
+ {
+  "category": "Poverty Reduction",
+  "docstatus": 0,
+  "doctype": "SDG Category",
+  "modified": "2023-07-21 13:39:54.863675",
+  "name": "Poverty Reduction"
+ }
+]

@@ -2,35 +2,48 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2024-03-01 19:43:57.931646",
+ "creation": "2024-03-15 17:05:03.458094",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "action_id",
   "action_name",
+  "programme_name",
   "cause",
   "focus",
   "area",
-  "action_description",
+  "programme_discription",
   "objectives",
-  "instrument_type",
-  "action_status",
+  "programme_status",
   "start_date",
   "duration",
   "ghg_affected",
   "sector_affected",
   "sub_sector_affected",
-  "national_implementing_entitys",
-  "national_strategy",
-  "estimated_investment",
+  "recipient_entity",
+  "national_implementing_entity",
+  "international_implementing_entity",
+  "estimated_investment_needs",
   "naming_series"
  ],
  "fields": [
   {
+   "fieldname": "action_id",
+   "fieldtype": "Link",
+   "label": "Action ID",
+   "options": "Project Actions"
+  },
+  {
    "fieldname": "action_name",
    "fieldtype": "Data",
-   "label": "Name of Action",
+   "label": "Name of Action"
+  },
+  {
+   "fieldname": "programme_name",
+   "fieldtype": "Data",
+   "label": "Name of Programme",
    "unique": 1
   },
   {
@@ -49,9 +62,9 @@
    "label": "Area"
   },
   {
-   "fieldname": "action_description",
+   "fieldname": "programme_discription",
    "fieldtype": "Data",
-   "label": "Action Description"
+   "label": "Programme Discription"
   },
   {
    "fieldname": "objectives",
@@ -59,14 +72,9 @@
    "label": "Objectives"
   },
   {
-   "fieldname": "instrument_type",
+   "fieldname": "programme_status",
    "fieldtype": "Data",
-   "label": "Type of Instrument(s)"
-  },
-  {
-   "fieldname": "action_status",
-   "fieldtype": "Data",
-   "label": "Action Status"
+   "label": "Programme Status"
   },
   {
    "fieldname": "start_date",
@@ -79,11 +87,6 @@
    "label": "Duration"
   },
   {
-   "fieldname": "ghg_affected",
-   "fieldtype": "Data",
-   "label": "GHG(s) affected"
-  },
-  {
    "fieldname": "sector_affected",
    "fieldtype": "Data",
    "label": "Sector Affected"
@@ -94,19 +97,29 @@
    "label": "Sub-Sector(s) affected"
   },
   {
-   "fieldname": "national_implementing_entitys",
+   "fieldname": "ghg_affected",
+   "fieldtype": "Data",
+   "label": "GHG(s) affected"
+  },
+  {
+   "fieldname": "recipient_entity",
+   "fieldtype": "Data",
+   "label": "Recipient Entity(s)"
+  },
+  {
+   "fieldname": "national_implementing_entity",
    "fieldtype": "Data",
    "label": "National Implementing Entity(s)"
   },
   {
-   "fieldname": "national_strategy",
+   "fieldname": "international_implementing_entity",
    "fieldtype": "Data",
-   "label": "Anchored in a national strategy"
+   "label": "International Implementing Entity(s)"
   },
   {
-   "fieldname": "estimated_investment",
+   "fieldname": "estimated_investment_needs",
    "fieldtype": "Data",
-   "label": "Estimated investment (USD)"
+   "label": "Estimated investment needs (USD)"
   },
   {
    "fieldname": "naming_series",
@@ -116,10 +129,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-15 16:51:08.306473",
+ "modified": "2024-03-15 17:06:19.701778",
  "modified_by": "Administrator",
  "module": "Mrvtools",
- "name": "Project Actions",
+ "name": "Project Programme",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [

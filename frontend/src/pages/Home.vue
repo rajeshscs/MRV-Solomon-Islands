@@ -16,42 +16,58 @@
    <i style="font-size: 35px;" class="bi bi-chevron-right bi-2x"></i>
    <span class="visually-hidden">Next</span>
 </button>
-<!-- <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div> -->
 
   </div>
   <div>
      <ProjectComponent :data="data" />
-     <!-- Report  -->
      <div>
-        <div
-           data-aos="fade-right"
-           data-aos-delay="50"
-           class="about-area report-section about-2 fix wow fadeInUp"
-           data-wow-delay="0.3s"
-           id="reports"
-           >
-           <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
-              National <span style="color: green; font-weight: 700;">GHG</span> Inventory
-           </h1>
-           <div class="container-fluid">
-              <div class="row">
-                 <div class="img p-1">
-                    <div class="pattern-background">
-                       <img src="../assets/images/pattern.png" style="height: 100%;">
-                    </div>
-                    <div v-for="item in data.message" :key="item.name">
-                       <div v-if="item.report_image">
-                          <img :src="item.report_image" class="p-5 report-image">
-                       </div>
-                    </div>
-                 </div>
+      <div
+        data-aos="fade-right"
+        data-aos-delay="50"
+        class="about-area report-section about-2 fix wow fadeInUp"
+        data-wow-delay="0.3s"
+        id="reports"
+        >
+        <hr style="border-color: #8f8f8f;">
+        <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
+           National <span style="color: green; font-weight: 700;">GHG</span> Inventory
+        </h1>
+        <div class="container-fluid">
+           <div class="row" v-for="item in data.message" :key="item.name">
+            <div class="img p-1"  v-if="item.report_image">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
               </div>
+              <div>
+                  <img :src="item.report_image" class="report-image">
+              </div>
+            </div>
+
+            <div class="img p-1"  v-if="item.report_image1">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
+              </div>
+              <div>
+                  <img :src="item.report_image1" class="report-image report-image1">
+              </div>
+            </div>
+
+            <div class="img p-1" v-if="item.report_image2">
+              <div class="pattern-background">
+                  <img src="../assets/images/pattern.png" style="height: 100%;">
+              </div>
+              <div>
+                  <img :src="item.report_image2" class="report-image report-image2">
+              </div>
+            </div>  
            </div>
         </div>
      </div>
+     </div>
      <!-- Knowledge Resource Carousel -->
      <div>
-         <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
+      <hr style="border-color: 1px #8f8f8f;">   
+      <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
             Knowledge <span style="color: green; font-weight: 700;">Resources</span>
          </h1>
         <knowledgeResource  :data="data" />
@@ -101,11 +117,6 @@
   onMounted(() => {
     fetchData();
   });  
-//   $.ajax({
-//    success:function(){
-//       $('.breadcrumb-area').attr('style', "display:none !important;")
-//    }
-//   }) 
   setTimeout(() => {
    $('.breadcrumb-area').attr('style', "display:none !important;")
   }, 1000);
@@ -136,7 +147,7 @@
   .img {
   position: relative;
   background-color: #00220012;
-  height: 50rem;
+  height: auto;
   }
   .pattern-background {
   height: 100%;
@@ -145,9 +156,10 @@
   }
   .report-image {
   width: 80%;
-  height: 493px !important;
+  height: auto !important;
   margin: auto;
   position: relative;
+  padding: 25px 0;
   }
   /* Table */
   @media (max-width: 768px) {

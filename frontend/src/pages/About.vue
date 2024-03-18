@@ -8,23 +8,23 @@
           <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center"> About<span style="color: green; font-weight: 700;"> MRV Tools</span></h2>
 
           <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
-            <div v-for="item in data.message" :key="item.name">
-              <div v-if="item.about_heading_1">
-                <h3 style="color: #000; font-weight: 700;" class="text-start">{{ item.about_heading_1 }}</h3>
+            <!-- <div v-for="item in data.message" :key="item.name"> -->
+              <div v-if="data.message.parent_data.about_heading_1">
+                <h3 style="color: #000; font-weight: 700;" class="text-start">{{ data.message.parent_data.about_heading_1 }}</h3>
               </div>
-              <p v-if="item.description_1">
-                {{ item.description_1 }}
+              <p v-if="data.message.parent_data.description_1">
+                {{ data.message.parent_data.description_1 }}
               </p>
               <br>
 
-              <div v-if="item.about_heading_2">
-                <h3 style="color: #000; font-weight: 700;" class="text-start">{{ item.about_heading_2 }}</h3>
+              <div v-if="data.message.parent_data.about_heading_2">
+                <h3 style="color: #000; font-weight: 700;" class="text-start">{{ data.message.parent_data.about_heading_2 }}</h3>
               </div>
-              <p v-if="item.description_2">
-                {{ item.description_2 }}
+              <p v-if="data.message.parent_data.description_2">
+                {{ data.message.parent_data.description_2 }}
               </p>
               <br>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </div>

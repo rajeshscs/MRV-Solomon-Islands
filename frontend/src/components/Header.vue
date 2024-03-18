@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex;position: sticky;top: 0px;height: 88px;justify-content: space-between;
-              z-index: 99999;gap: 6;background-color: rgb(255, 255, 255); padding: 0 5px;">
+              z-index: 99999;gap: 6;background-color: rgb(255, 255, 255); padding: 0 10px;">
 
     <div style="display: flex; gap: 8px;">
       <div class="site-logo">
@@ -15,12 +15,13 @@
           line-height: 1.5;
           align-items: center;
           justify-content: center;
-          flex-direction: column;"
-          class="tex t-center"> SOLOMON ISLANDS iMRV TOOL <span style="color: green; margin:0 0 0 7px;" >FOR CLIMATE ACTIONS</span></h2>
+          margin-left: 12px;
+          /* flex-direction: column; */"
+          class="heading"> SOLOMON ISLANDS iMRV TOOL <span style="color: green; margin:0 0 0 7px;" >FOR CLIMATE ACTIONS</span></h2>
       </div>
 
-      <div style="display: flex; gap: 15px;">
-        <nav class="navbar cus-navbar navbar-expand-lg bg navbar-light p-0">
+      <div class="mob-parent-nav">
+        <nav class="navbar cus-navbar desk-nav navbar-expand-lg bg navbar-light p-0">
       <button
       style="border: none !important;"
         class="navbar-toggler"
@@ -35,7 +36,7 @@
       </button>
       
 
-    <!-- <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100 mr-2">
         <li class="nav-item dropdown">
           <a style="text-decoration: none;" class="nav-link dropdown-toggle text-lg" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,9 +68,26 @@
           </ul>
         </li>
       </ul>
-    </div> -->
+    </div>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+     
+    </nav>
+        <nav class="navbar cus-navbar mobile-nav navbar-expand-lg bg navbar-light p-0">
+      <button
+      style="border: none !important;"
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#mobileNav"
+        aria-controls="mobileNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+      <span><i class="bi bi-list toggle-btn" style="color: rgb(39, 39, 39) !important;"></i></span>
+      </button>
+      
+
+      <div class="collapse navbar-collapse" id="mobileNav">
         <ul class="navbar-nav w-100">
           <li class="nav-item">
             <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }">Home</router-link>
@@ -212,7 +230,9 @@ onUnmounted(() => {
     box-shadow: 0 0px 3px -2px #000;
     border-radius: 4px;
 } 
-
+.dropdown-menu li a{
+  padding: 8px 20px;
+}
 
 .breadcrumb-area {
   position: relative;
@@ -267,7 +287,9 @@ display: none !important;
   display: flex;
 }
 
-
+.mobile-nav{
+  display: none;
+}
 /* Reduce the logo size */
 .site-logo img {
   height: 70px;
@@ -366,11 +388,27 @@ display: none !important;
     height: 30px;
     width: 45px;
 } */
-.navbar-nav{
-    gap:12px;
+.mob-parent-nav{
+    display: flex;
   }
+.navbar-nav{
+    gap: 12px;
+    background-color: #fff;
+    padding: 15px;  }
 
 @media (max-width: 576px) {
+  .mob-parent-nav{
+    display: flex;
+    /* gap: 15px; */
+    align-items: flex-start;
+    margin-top: 5%;
+  }
+  .mobile-nav{
+      display: flex !important;
+    }
+    .desk-nav{
+      display: none !important;
+    }
   .navbar-collapse{
     width: 100%;
     height: auto;
@@ -379,7 +417,7 @@ display: none !important;
   }
   .navbar-nav{
     /* background-color: #0006; */
-    margin: none !important;
+    margin: 0px !important;
   }
   .custom-btn{
     top:0 !important;
@@ -394,7 +432,7 @@ display: none !important;
       box-shadow:none !important;
   }
   .navbar{
-    background-color: #0006;
+    background-color: #fff;
   }
 
 .ml-auto {
@@ -410,10 +448,12 @@ display: none !important;
     color: #ffffff41;
 }
 
-
+h2.heading{
+  display: none !important;
+}
 .custom-link.scrolled {
   /* transition: 10s; */
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .breadcrumb-area {

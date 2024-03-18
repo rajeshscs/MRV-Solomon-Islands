@@ -1,96 +1,67 @@
 <template>
+  <br>
   <footer data-aos="fade" data-aos-delay="50" class="footer p-0 bg" style=" color: aliceblue; background-color: #001000 !important;">
-     <div class="container-fluid px-5 text-start">
-        <div class="row column-both">
-         <div class="inner-row">
+   <div class="container-fluid px-5 text-start">
+    <div class="row column-both">
+        <div class="inner-row">
             <div class="column-one">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-              <div class="site-logo" style="padding: 12px;">
-                 <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid"  />
-              </div>
-              <p class="text-left text-start"></p>
-           </div>
-         </div>
-           <div class="column-two">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="site-logo" style="padding: 12px;">
+                        <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid" />
+                    </div>
+                    <p class="text-left text-start"></p>
+                </div>
+            </div>
+            <div class="column-two">
             <div class="col-lg-3 col-md-3 col-sm-6" style="width: auto;">
-              <h3 class="mr-3" >Contact Information</h3>
-              <div v-for="item in data.message" :key="item.name" style="padding: 1rem 2rem;">
-
-               <div class="media">
-                  <p  v-if="item.address"> <i class="bi bi-geo-alt mr-3 b text-start" ></i>{{ item.address }}</p>
-               </div>
-               <div class="media">
-                  <p v-if="item.email"><i class="bi bi-envelope mr-3" ></i>{{ item.email }}</p>
-               </div>
-               <div class="media" v-if="item.contact_number1 ||  item.contact_number2 || item.contact_number3">
-                  <p><i class="bi bi-telephone mr-3"></i>{{ item.contact_number1 }}, {{ item.contact_number2 }},</p>
-                  <p style="margin-left: 22px;">{{ item.contact_number3 }}</p>
+              <h3 class="" >Contact Information</h3>
+              <div  v-for="item in data.message" :key="item.name" style="padding: 1rem 2rem;">
+                  <div class="media">
+                     <p  v-if="item.address"> <i class="mr-3 bi bi-geo-alt  b text-start" ></i>{{ item.address }}</p>
+                  </div>
+                  <div class="media">
+                     <p v-if="item.email"><i class="mr-3 bi bi-envelope" ></i>{{ item.email }}</p>
+                  </div>
+                  <div class="media" v-if="item.contact_number1 ||  item.contact_number2 || item.contact_number3">
+                     <p><i class="mr-3 bi bi-telephone "></i>{{ item.contact_number1 }}, {{ item.contact_number2 }},</p>
+                     <p style="margin-left: 22px;">{{ item.contact_number3 }}</p>
+                  </div>
                </div>
             </div>
-            </div>
 
-           <div class="col-lg-3 col-md-3 col-sm-6">
-              <h3 class="mr-3 text-start" >Present Pages</h3>
-              <ul class="list-unstyled mx-4">
-                 <li>
-                    <router-link to="/home" class="custom-link text-start"><i class="bi bi-chevron-right" style="font-weight: 900 !important;"></i> Home</router-link>
-                 </li>
-                 <li>
-                    <router-link to="/about" class="custom-link text-start"><i class="bi bi-chevron-right" style="font-weight: 900 !important;"></i> About MRV Tool</router-link>
-                 </li>
-                 <li>
-                    <router-link to="/project" class="custom-link text-start"><i class="bi bi-chevron-right" style="font-weight: 900 !important;"></i> Projects</router-link>
-                 </li>
-                 <li>
-                    <router-link to="/reports" class="custom-link text-start"><i class="bi bi-chevron-right" style="font-weight: 900 !important;"></i> Reports</router-link>
-                 </li>
-                 <li>
-                    <router-link to="/knowledgeresource" class="custom-link text-start"><i class="bi bi-chevron-right" style="font-weight: 900 !important;"></i> Knowledge Resources</router-link>
-                 </li>
-              </ul>
-           </div>
-           <div class="col-lg-3 col-md-3 col-sm-6">
-              <h3 class="mr-3"> Our Partners</h3>
-              <div class="row">
-                 <div v-for="item in data.message" :key="item.name">
-                    <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner1">
-                          <img  :src="item.partner1" alt="" class="img-fluid partner-logo">
-                       </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3 class="">Present Pages</h3>
+                    <ul class="list-unstyled mx-4">
+                        <li v-for="item in ['home', 'about', 'project', 'climate change division', 'reports', 'support', 'knowledgeresource']" :key="item">
+                            <router-link :to="'/' + item" class="custom-link text-start"><i class="mr-3 bi bi-chevron-right" style="font-weight: 900 !important;"></i> {{ item.charAt(0).toUpperCase() + item.slice(1) }}</router-link>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3 class="">Our Partners</h3>
+                    <div class="row m-0">
+                        <div v-for="(item, index) in data.message" :key="index" class="partners">
+                            <div class="col-6 col-sm-5 mb-4 partner-img" v-if="item.partner1">
+                                <img :src="item.partner1" alt="" class="img-fluid partner-logo">
+                            </div>
+                            <div class="col-6 col-sm-5 mb-4 partner-img" v-if="item.partner2">
+                                <img :src="item.partner2" alt="" class="bg-white img-fluid partner-logo">
+                            </div>
+                            <div class="col-6 col-sm-5 mb-4 partner-img" v-if="item.partner3">
+                                <img :src="item.partner3" alt="" class="img-fluid partner-logo">
+                            </div>
+                            <div class="col-6 col-sm-5 mb-4 partner-img" v-if="item.partner4">
+                                <img :src="item.partner4" alt="" class="bg-white img-fluid partner-logo">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner2">
-                          <img :src="item.partner2" alt=""  class="bg-white img-fluid partner-logo">
-                       </div>
-                    </div>
-                    <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner3">
-                          <img  :src="item.partner3" alt="" class="img-fluid partner-logo">
-                       </div>
-                    </div>
-                    <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner4">
-                          <img :src="item.partner4" alt=""  class="bg-white img-fluid partner-logo">
-                       </div>
-                    </div>
-                    <!-- <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner5">
-                         <img  :src="item.partner5" alt="" class="img-fluid ">
-                       </div>
-                       </div>
-                       <div class="col-6 col-sm-5 mb-4">
-                       <div v-if="item.partner6">
-                         <img :src="item.partner6" alt=""  class="bg-white img-fluid ">
-                       </div>
-                       </div> -->
-                 </div>
-              </div>
-           </div>
-           </div>
-         </div>
-         
+                </div>
+            </div>
         </div>
-     </div>
+    </div>
+</div>
+
      <hr>
      <div class="copyright text-center pt-4">
         Copyright © 2022 <a href="#" class="text-light"><strong>mrvtools.com</strong></a> All Rights Reserved
@@ -116,6 +87,9 @@
   line-height: 40px;
   transition: .2s;
   }
+  .partner-img{
+   width: 50% !important;
+  }
   .partner-logo{
    max-width: 100%;
     height: auto;
@@ -134,8 +108,10 @@
     justify-content: space-between;
     gap: 70px;
     width: 100%;
-    height: 316px;
+    height: auto;
+    height: aotu !important;
   }
+  
   .column-two {
     display: flex;
     justify-content: space-around;
@@ -167,5 +143,28 @@
   }
   img{
   background-color: none !important;
+  }
+
+  @media (max-width: 576px) {
+   .inner-row {
+      display: flex;
+      gap: 7px;
+      width: 100%;
+      height: auto !important;
+      flex-direction: column;
+   }  
+   .column-one {
+    display: flex;
+    flex-direction: column;
+
+   }
+   .partners{
+      display: contents;
+   }
+  .column-two {
+    display: flex;
+    flex-direction: column;
+
+   }
   }
 </style>
