@@ -41,10 +41,10 @@
                   <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Enablers</a>
                </li>
                <li class="nav-item tab_child">
-                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Transparency</a>
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-8" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Transparency</a>
                </li>
                <li class="nav-item tab_child">
-                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-7" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Support</a>
+                  <a class="nav-link style-class" id="pills-contact-tab" href="#p-view-9" role="tab" data-toggle="tab" aria-controls="pills-contact" aria-selected="false">Support</a>
                </li>
             </ul>
          </div>
@@ -185,7 +185,7 @@
                   </div>
                   </div>
                   </div>
-                  <div class="tab-pane" id="p-view-6">
+                  <div class="tab-pane" id="p-view-8">
                   <div class="tab-inner">
                      <div class="table-responsive">
                      <table class="table table-striped table-bordered table-hover">
@@ -218,7 +218,7 @@
                   </div>
                   </div>
                   </div>
-                  <div class="tab-pane" id="p-view-6">
+                  <div class="tab-pane" id="p-view-9">
                   <div class="tab-inner">
                      <div class="table-responsive">
                      <table class="table table-striped table-bordered table-hover">
