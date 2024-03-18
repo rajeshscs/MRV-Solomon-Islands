@@ -5,7 +5,8 @@ import frappe
 from frappe.model.document import Document
 
 class MasterDataTest(Document):
-	docs = frappe.db.get_all("Master Data Test",
-			  fields = ["module","table","impact_area","indicator"])
+	pass
+	# docs = frappe.db.get_all("Master Data Test",
+	# 		  fields = ["module","table","impact_area","indicator"])
 	
-	frappe.log_error("Master Values", docs)
+	# frappe.log_error("Master Values", docs)
