@@ -183,6 +183,11 @@ $(document).on("form-refresh", function(frm) {
 // 		}
 // 	})
 // })
+$.ajax({
+	success:function(){
+			$('<h2 class="heading-main" data-v-2dd66c2c="" style="color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: Inter;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-left: 195px;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></h2>').insertBefore($('[class="form-inline fill-width justify-content-end"]'))
+	}
+})
 $(document).ready(function(){
 	// $('[id="page-Workspaces"] [class="flex col page-actions justify-content-end"]').hide()
 	// $('[id="page-Workspaces"] [class="standard-actions flex"]').hide()

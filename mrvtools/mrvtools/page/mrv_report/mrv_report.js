@@ -54,54 +54,68 @@ class MRVReport {
 		
 
 	}
-	hide_btn() {
-		const toggleButtons = (hideBtn, showBtn, targetClass) => {
-		  $(hideBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// hide_btn() {
+	// 	const toggleButtons = (hideBtn, showBtn, targetClass) => {
+	// 	  $(hideBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 	
-		  $(showBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// 	  $(showBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 		  
-		  $(showBtn).toggle();
-		};
+	// 	  $(showBtn).toggle();
+	// 	};
 	  
-		$(document).ready(() => {
-			toggleButtons("#hide_btn", "#show_btn", "totalmrv_report-graph");
-			toggleButtons("#hide_btn2", "#show_btn2", "totalmrv_report2-graph");
-		});
-	  }
+	// 	$(document).ready(() => {
+	// 		toggleButtons("#hide_btn", "#show_btn", "totalmrv_report-graph");
+	// 		toggleButtons("#hide_btn2", "#show_btn2", "totalmrv_report2-graph");
+	// 	});
+	//   }
 
 	wrapper1(){
 		$("#mrv_chart").html(`
 		<div class="mrv_report page-main-content">
 			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 				<b id="categories_chart"></b>
-				<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-				<button id="show_btn" class="btn btn-sm">show chart</button>
+				<button id="hide_btn" onclick="toggle_chart1()" class="btn btn-sm">Hide chart</button>
 			</div>
-			<div class="totalmrv_report-graph"></div>
-		</div>`)
-	}
-	wrapper2(){
-		$("#mrv_chart2").html(`
-		<div class="mrv_report page-main-content">
+			<script>
+				function toggle_chart1() {
+					var x = document.getElementById("chart-1");
+					if (x.style.display === "none") {
+					x.style.display = "block";
+					document.getElementById("hide_btn").innerText = "Hide Chart"
+					} else {
+					x.style.display = "none";
+					document.getElementById("hide_btn").innerText = "Show Chart"
+					}
+					
+				}
+				function toggle_chart2(){
+					var y = document.getElementById("chart-2");
+					if (y.style.display === "none") {
+					y.style.display = "block";
+					document.getElementById("hide_btn2").innerText = "Hide Chart"
+					} else {
+					y.style.display = "none";
+					document.getElementById("hide_btn2").innerText = "Show Chart"
+					}
+				}
+			</script>
+			<div id="chart-1" class="totalmrv_report-graph"></div>
 			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 				<b id="categories_chart1"></b>
-				<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
-				<button id="show_btn2" class="btn btn-sm">show chart</button>
+				<button id="hide_btn2" onclick="toggle_chart2()" class="btn btn-sm">Hide chart</button>
 			</div>
-			<div class="totalmrv_report2-graph"></div>
+			<div id="chart-2" class="totalmrv_report2-graph"></div>
 		</div>`)
-
 	}
 	make() {
-		
 		$('.all_html').remove();
 		if (this.project){
 			this.$container = $(`
@@ -132,9 +146,8 @@ class MRVReport {
 		// `).appendTo(this.page.main).insertAfter($('#mrv_chart'));
 		// this.$graph_area = this.$container2.find(".totalmrv_report2-graph");
 
-		this.hide_btn()
+		// this.hide_btn()
 		this.wrapper1();
-		this.wrapper2();
 		this.get_total_mrv_report();
 		this.get_total_mrv_report2();
 	

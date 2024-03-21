@@ -21,8 +21,6 @@ class NdcReport {
 		this.set_default_secondary_action();
 		this.ndc_filter_fields();
 		
-		this.render_datatable()
-		
 		
 	}
 
@@ -30,7 +28,6 @@ class NdcReport {
 		this.refresh_button && this.refresh_button.remove();
 		this.refresh_button = this.page.add_action_icon("refresh", () => {
 			this.$container1.empty()
-			this.$container2.empty()
 			this.$report.empty()
 			$('[class = "ndc_report page-main-content"]').slice(0, 2).remove()
 			this.render_datatable()
@@ -53,56 +50,72 @@ class NdcReport {
 				})
 		})
 	}
-	hide_btn() {
-		const toggleButtons = (hideBtn, showBtn, targetClass) => {
-		  $(hideBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// hide_btn() {
+	// 	const toggleButtons = (hideBtn, showBtn, targetClass) => {
+	// 	  $(hideBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 	  
-		  $(showBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// 	  $(showBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 		  
-		  $(showBtn).toggle();
-		};
+	// 	  $(showBtn).toggle();
+	// 	};
 	  
-		$(document).ready(() => {
-		  toggleButtons("#hide_btn", "#show_btn", "totalndc_report-graph");
-		  toggleButtons("#hide_btn2", "#show_btn2", "totalndc_report-chart");
+	// 	$(document).ready(() => {
+	// 	  toggleButtons("#hide_btn", "#show_btn", "totalndc_report-graph");
+	// 	  toggleButtons("#hide_btn2", "#show_btn2", "totalndc_report-chart");
 
-		});
-	  }
+	// 	});
+	//   }
 
 	make() {
 		this.$container1 = $(`
 		<div class="ndc_report page-main-content">
 		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 			<b id="categories_chart"></b>
-			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn" class="btn btn-sm">show chart</button>
+			<button id="hide_btn" onclick="toggle_chart1()" class="btn btn-sm">Hide chart</button>
 		</div>
-			<div class="totalndc_report-graph"></div>
+		<script>
+				function toggle_chart1() {
+					var x = document.getElementById("chart-1");
+					if (x.style.display === "none") {
+					x.style.display = "block";
+					document.getElementById("hide_btn").innerText = "Hide Chart"
+					} else {
+					x.style.display = "none";
+					document.getElementById("hide_btn").innerText = "Show Chart"
+					}
+					
+				}
+				function toggle_chart2(){
+					var y = document.getElementById("chart-2");
+					if (y.style.display === "none") {
+					y.style.display = "block";
+					document.getElementById("hide_btn2").innerText = "Hide Chart"
+					} else {
+					y.style.display = "none";
+					document.getElementById("hide_btn2").innerText = "Show Chart"
+					}
+				}
+			</script>
+			<div id="chart-1" class="totalndc_report-graph"></div>
+		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+			<b id="sector_chart"></b>
+			<button id="hide_btn2" onclick="toggle_chart2()" class="btn btn-sm">Hide chart</button>
+		</div>
+			<div id="chart-2" class="totalndc_report-chart"></div>
 		</div>`
 		).appendTo(this.page.main);
 		this.$graph_area = this.$container1.find(".totalndc_report-graph");
 		
-		this.$container2 = $(`
-		<div class="ndc_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-			<b id="sector_chart"></b>
-			<button id="hide_btn2" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn2" class="btn btn-sm">show chart</button>
-		</div>
-			<div class="totalndc_report-chart"></div>
-		</div>`
-		).appendTo(this.page.main);
-		this.$graph_area = this.$container2.find(".totalndc_report-chart");
+		
 
-		this.hide_btn();
 		this.get_total_ndc_report1();
 		this.get_total_ndc_report2();
 

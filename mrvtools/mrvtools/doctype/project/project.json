@@ -271,7 +271,7 @@
    "fieldname": "programme",
    "fieldtype": "Link",
    "label": "Programme",
-   "options": "Project Actions Programme"
+   "options": "Project Programme"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -289,7 +289,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2024-03-01 19:49:07.585054",
+ "modified": "2024-03-18 20:44:42.798539",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

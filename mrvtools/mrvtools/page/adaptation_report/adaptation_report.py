@@ -63,6 +63,8 @@ def get_columns():
 	col = []
 	col.append("Project ID" + ":Link/Project")
 	col.append("Project Name" + ":Data")
+	col.append("Action" + ":Data")
+	col.append("Programme" + ":Data")
 	col.append("Objective" + ":Data")
 	col.append("Key Sector" + ":Data")
 	col.append("Key Sub-sector" + ":Data")
@@ -99,6 +101,8 @@ def get_datas(year = None,key_sector = None,key_sub_sector = None,impact_area = 
 			SELECT
 				P.name as project_id, 
 				P.project_name,
+				P.action,
+				P.programme,
 				P.objective,
 				P.key_sector,
 				P.key_sub_sector,

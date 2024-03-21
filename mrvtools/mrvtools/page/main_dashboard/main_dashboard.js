@@ -97,6 +97,36 @@ class Dashboard {
 				</div>
 			</div>
 
+
+			<div class="inner-container">
+				<div class="widget dashboard-widget-box" style="width:48%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
+					<div class="widget-head">
+						<div class="widget-label label-1">
+							<div class="widget-title"><span class="ellipsis" id="project_support_status-title"></span></div>
+						</div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="project_support_status-total"></span></div>
+						</div>
+					</div>
+					<div id='project_support_status' class="widget-body"></div>
+					<div class="chart-legend" id="chart-legend-8"></div>
+				</div>
+
+				<div class="widget dashboard-widget-box" style="width:48%;float:right;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
+					<div class="widget-head">
+						<div class="widget-label label-1">
+							<div class="widget-title"><span class="ellipsis" id="usd_support_status-title"></span></div>
+						</div>
+						<div class="widget-label label-2">
+							<div class="widget-title"><span class="ellipsis" style="width: 100%;display: flex;" id="usd_support_status-total"></span></div>
+						</div>
+					</div>
+					<div id='usd_support_status' class="widget-body"></div>
+					<div class="chart-legend" id="chart-legend-9"></div>
+				</div>
+			</div>
+
+
 			<div class="inner-container">
 				<div class="widget dashboard-widget-box" style="width:48%;float:left;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
 					<div class="widget-head">
@@ -226,6 +256,7 @@ class Dashboard {
 		this.get_total_project_ndp()
 		this.get_total_sdg_report()
 		this.co2_emission_last_five_years()
+		this.get_finance_support()
 	}
 	
 	// ghg_emissions_chart(){
@@ -549,6 +580,138 @@ class Dashboard {
 			});
 			
 	}
+	
+	get_finance_support(){
+		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_finance_support')
+		.then((r) => {
+			let project_support_status_label = []
+			let project_support_status_value = []
+			for(let [key, value] of Object.entries(r.message[0])){
+				project_support_status_label.push(key);
+				project_support_status_value.push(value);
+			}
+			for(let [key, value] of Object.entries(r.message[1])){
+				project_support_status_label.push(key);
+				project_support_status_value.push(value);
+			}
+			let usd_support_status_label = []
+			let usd_support_status_value = []
+			for(let [key, value] of Object.entries(r.message[2])){
+				usd_support_status_label.push(key);
+				usd_support_status_value.push(value);
+			}
+			for(let [key, value] of Object.entries(r.message[3])){
+				usd_support_status_label.push(key);
+				usd_support_status_value.push(value);
+			}
+			let colors_8 = ["#ed7d31","#4472c4"]
+			
+			$('#project_support_status-title').html("Support Status - Project wise")
+			// colors: ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"],
+			if(project_support_status_value.length != 0){
+				$('#project_support_status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${project_support_status_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				const options = {
+					type: "donut",
+					colors: colors_8,
+					height: 250,
+					axisOptions: {
+						xIsSeries: 0,
+						isNavigable :1,
+						shortenYAxisNumbers: 0,
+						xAxisMode: "tick",
+						numberFormatter: frappe.utils.format_chart_axis_number,
+					},
+					data: {
+						datasets: [{values: project_support_status_value}],
+						labels: project_support_status_label
+					},
+					axisOptions: {
+						xAxisMode: "tick",
+						xIsSeries: true,
+					}
+				};
+				var legend_html_8 = '';
+				for(let i=0;i<project_support_status_label.length;i++){
+					legend_html_8 += `	<div class="chart-legend-item">
+											<div class="fill-box" style="background-color:${colors_8[i]}"></div>
+											<div class="chart-legend-item-label">${project_support_status_label[i]}<br>
+												<span class="chart-values-style" >${project_support_status_value[i]}</span>
+											</div>
+										</div>
+									`;
+				}
+				frappe.utils.make_chart("#project_support_status", options);
+				$('[id="project_support_status"] [class="chart-container"]').addClass('inner-chart')
+				$("#chart-legend-8").append(legend_html_8);
+				
+			}
+			else{
+				var no_image = ''
+				no_image=`	<div class="msg-box no-border">
+								<div>
+									<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+								</div>
+								<p>Nothing to show</p>
+							</div>
+						`
+				$("#project_support_status").append(no_image)
+			}
+
+			$('#usd_support_status-title').html("Support Status - USD")
+			if(usd_support_status_value.length != 0){
+				$('#usd_support_status-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${usd_support_status_value.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+				const options = {
+					type: "donut",
+					colors: colors_8,
+					height: 250,
+					axisOptions: {
+						xIsSeries: 0,
+						isNavigable :1,
+						shortenYAxisNumbers: 0,
+						xAxisMode: "tick",
+						numberFormatter: frappe.utils.format_chart_axis_number,
+					},
+					data: {
+						datasets: [{values: usd_support_status_value}],
+						labels: usd_support_status_label
+					},
+					axisOptions: {
+						xAxisMode: "tick",
+						xIsSeries: true,
+					}
+				};
+				var legend_html_9 = '';
+				for(let i=0;i<usd_support_status_label.length;i++){
+					legend_html_9 += `	<div class="chart-legend-item">
+											<div class="fill-box" style="background-color:${colors_8[i]}"></div>
+											<div class="chart-legend-item-label">${usd_support_status_label[i]}<br>
+												<span class="chart-values-style" >${usd_support_status_value[i]}</span>
+											</div>
+										</div>
+									`;
+				}
+				frappe.utils.make_chart("#usd_support_status", options);
+				$('[id="usd_support_status"] [class="chart-container"]').addClass('inner-chart')
+				$("#chart-legend-9").append(legend_html_9);
+				
+			}
+			else{
+				var no_image = ''
+				no_image=`	<div class="msg-box no-border">
+								<div>
+									<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+								</div>
+								<p>Nothing to show</p>
+							</div>
+						`
+				$("#usd_support_status").append(no_image)
+			}
+			
+			
+			
+		})
+	}
+
 	mitigation_ghg_till_date(){
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_till_date')
 			.then((r) => {
@@ -556,42 +719,55 @@ class Dashboard {
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
 				if(r.message != 0){
-					if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
-						$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-						$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-						const mitigation_ghg_till_data = {
-							type: "donut",
-							colors: colors_5,
-							height: 250,
-							axisOptions: {
-								xIsSeries: 0,
-								isNavigable :1,
-								shortenYAxisNumbers: 0,
-								xAxisMode: "tick",
-								numberFormatter: frappe.utils.format_chart_axis_number,
-							},
-							data: {
-								datasets: [{values: r.message.data}],
-								labels: r.message.labels
-							},
-							axisOptions: {
-								xAxisMode: "tick",
-								xIsSeries: true,
-							}
-						};
-						var legend_html_5 = '';
-						for(let i=0;i<r.message.data.length;i++){
-							legend_html_5 += `	<div class="chart-legend-item">
-													<div class="fill-box" style="background-color:${colors_5[i]}"></div>
-													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-														<span class="chart-values-style" >${r.message.data[i]}</span>
+					if (r.message.data.length != 0){
+						if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
+							$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+							$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+							const mitigation_ghg_till_data = {
+								type: "donut",
+								colors: colors_5,
+								height: 250,
+								axisOptions: {
+									xIsSeries: 0,
+									isNavigable :1,
+									shortenYAxisNumbers: 0,
+									xAxisMode: "tick",
+									numberFormatter: frappe.utils.format_chart_axis_number,
+								},
+								data: {
+									datasets: [{values: r.message.data}],
+									labels: r.message.labels
+								},
+								axisOptions: {
+									xAxisMode: "tick",
+									xIsSeries: true,
+								}
+							};
+							var legend_html_5 = '';
+							for(let i=0;i<r.message.data.length;i++){
+								legend_html_5 += `	<div class="chart-legend-item">
+														<div class="fill-box" style="background-color:${colors_5[i]}"></div>
+														<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+															<span class="chart-values-style" >${r.message.data[i]}</span>
+														</div>
 													</div>
-												</div>
-											`;
+												`;
+							}
+							frappe.utils.make_chart("#mitigation_till-date", mitigation_ghg_till_data)
+							$('[id="mitigation_till-date"] [class="chart-container"]').addClass('inner-chart')
+							$("#chart-legend-5").append(legend_html_5);
 						}
-						frappe.utils.make_chart("#mitigation_till-date", mitigation_ghg_till_data)
-						$('[id="mitigation_till-date"] [class="chart-container"]').addClass('inner-chart')
-						$("#chart-legend-5").append(legend_html_5);
+						else{
+							var no_image = ''
+							no_image=`	<div class="msg-box no-border">
+											<div>
+												<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+											</div>
+											<p>Nothing to show</p>
+										</div>
+									`
+							$("#mitigation_till-date").append(no_image)
+						}
 					}
 					else{
 						var no_image = ''
@@ -604,6 +780,7 @@ class Dashboard {
 								`
 						$("#mitigation_till-date").append(no_image)
 					}
+					
 				}
 				else{
 					var no_image = ''
@@ -620,67 +797,104 @@ class Dashboard {
 				
 			})
 	}
+
+
 	mitigation_ghg_last_year(){
 		let today = new Date();
-		let lastYearDate;
+		let lastYearFromDate;
+		let lastYearToDate;
 
-		if (today.getUTCMonth() === 1 && today.getUTCDate() === 29) {
-			lastYearDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - 1));
-			lastYearDate = new Date(Date.UTC(lastYearDate.getUTCFullYear() - 1, lastYearDate.getUTCMonth(), lastYearDate.getUTCDate()));
-		} else {
-			lastYearDate = new Date(Date.UTC(today.getUTCFullYear() - 1, today.getUTCMonth(), today.getUTCDate()));
-		}
-
-		let lastYearDateStr = lastYearDate.toISOString().split('T')[0];
-		let dateParts = lastYearDateStr.split("-");
-		let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
-		let today_date = frappe.datetime.nowdate()
-		let dateParts1 = today_date.split("-");
-		let formattedDate1 = `${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`
+		lastYearFromDate = new Date(Date.UTC(today.getUTCFullYear() -1, 0, 1));
+		lastYearToDate = new Date(Date.UTC(today.getUTCFullYear() -1, 11, 31));
+		let lastYearFromDateStr = lastYearFromDate.toISOString().split('T')[0];
+		let lastYearToDateStr = lastYearToDate.toISOString().split('T')[0];
+		let fromDateParts = lastYearFromDateStr.split("-");
+		let toDateParts = lastYearToDateStr.split("-");
+		let formattedFromDate = `${fromDateParts[2]}-${fromDateParts[1]}-${fromDateParts[0]}`
+		let formattedToDate = `${toDateParts[2]}-${toDateParts[1]}-${toDateParts[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_last_year')
 			.then((r) => {
 				console.log("------>>>>>>>>>>>",r.message);
-				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedDate} to ${formattedDate1}`)
+				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedFromDate} to ${formattedToDate}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
 				if(r.message != 0){
-					if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
-						$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-						$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
-						const mitigation_ghg_last_year = {
-							type: "donut",
-							colors: colors_6,
-							height: 250,
-							axisOptions: {
-								xIsSeries: 0,
-								isNavigable :1,
-								shortenYAxisNumbers: 0,
-								xAxisMode: "tick",
-								numberFormatter: frappe.utils.format_chart_axis_number,
-							},
-							data: {
-								datasets: [{values: r.message.data}],
-								labels: r.message.labels
-							},
-							axisOptions: {
-								xAxisMode: "tick",
-								xIsSeries: true,
-							}
-						};
-						
-						var legend_html_6 = '';
-						for(let i=0;i<r.message.data.length;i++){
-							legend_html_6 += `	<div class="chart-legend-item">
-													<div class="fill-box" style="background-color:${colors_6[i]}"></div>
-													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-														<span class="chart-values-style" >${r.message.data[i]}</span>
+					if(r.message.data.length != 0){
+						if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
+							$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
+							$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+							const mitigation_ghg_last_year = {
+								type: "donut",
+								colors: colors_6,
+								height: 250,
+								axisOptions: {
+									xIsSeries: 0,
+									isNavigable :1,
+									shortenYAxisNumbers: 0,
+									xAxisMode: "tick",
+									numberFormatter: frappe.utils.format_chart_axis_number,
+								},
+								data: {
+									datasets: [{values: r.message.data}],
+									labels: r.message.labels
+								},
+								axisOptions: {
+									xAxisMode: "tick",
+									xIsSeries: true,
+								}
+							};
+							
+							var legend_html_6 = '';
+							for(let i=0;i<r.message.data.length;i++){
+								legend_html_6 += `	<div class="chart-legend-item">
+														<div class="fill-box" style="background-color:${colors_6[i]}"></div>
+														<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+															<span class="chart-values-style" >${r.message.data[i]}</span>
+														</div>
 													</div>
-												</div>
-											`;
+												`;
+							}
+							frappe.utils.make_chart("#mitigation_last-year", mitigation_ghg_last_year);
+							$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
+							$("#chart-legend-6").append(legend_html_6);
 						}
-						frappe.utils.make_chart("#mitigation_last-year", mitigation_ghg_last_year);
-						$('[id="mitigation_last-year"] [class="chart-container"]').addClass('inner-chart')
-						$("#chart-legend-6").append(legend_html_6);
+						else{
+							
+							var no_image = ''
+							no_image=`	<div class="msg-box no-border">
+											<div>
+												<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+											</div>
+											<p>Nothing to show</p>
+										</div>
+									`
+							$("#mitigation_last-year").append(no_image)
+						}
 					}
+					else{
+							
+						var no_image = ''
+						no_image=`	<div class="msg-box no-border">
+										<div>
+											<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+										</div>
+										<p>Nothing to show</p>
+									</div>
+								`
+						$("#mitigation_last-year").append(no_image)
+					}
+					
+				}
+				else{
+							
+					var no_image = ''
+					no_image=`	<div class="msg-box no-border">
+									<div>
+										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+									</div>
+									<p>Nothing to show</p>
+								</div>
+							`
+					$("#mitigation_last-year").append(no_image)
 				}
 				
 				
@@ -689,65 +903,75 @@ class Dashboard {
 	
 	total_co2_emission_latest() {
 		let today = new Date();
-		let lastYearDate;
+		let lastYearFromDate;
+		let lastYearToDate;
 
-		if (today.getUTCMonth() === 1 && today.getUTCDate() === 29) {
-			lastYearDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - 1));
-			lastYearDate = new Date(Date.UTC(lastYearDate.getUTCFullYear() - 1, lastYearDate.getUTCMonth(), lastYearDate.getUTCDate()));
-		} else {
-			lastYearDate = new Date(Date.UTC(today.getUTCFullYear() - 1, today.getUTCMonth(), today.getUTCDate()));
-		}
-
-		let lastYearDateStr = lastYearDate.toISOString().split('T')[0];
-		let dateParts = lastYearDateStr.split("-");
-		let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
-		let today_date = frappe.datetime.nowdate()
-		let dateParts1 = today_date.split("-");
-		let formattedDate1 = `${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`
+		lastYearFromDate = new Date(Date.UTC(today.getUTCFullYear() -1, 0, 1));
+		lastYearToDate = new Date(Date.UTC(today.getUTCFullYear() -1, 11, 31));
+		let lastYearFromDateStr = lastYearFromDate.toISOString().split('T')[0];
+		let lastYearToDateStr = lastYearToDate.toISOString().split('T')[0];
+		let fromDateParts = lastYearFromDateStr.split("-");
+		let toDateParts = lastYearToDateStr.split("-");
+		let formattedFromDate = `${fromDateParts[2]}-${fromDateParts[1]}-${fromDateParts[0]}`
+		let formattedToDate = `${toDateParts[2]}-${toDateParts[1]}-${toDateParts[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.total_co2_emission_latest')
 			.then((r) => {
-				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedDate} to ${formattedDate1} Sector Wise`)
+				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedFromDate} to ${formattedToDate} Sector Wise`)
 				let colors_7 = ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"]
 				let results = r.message || [];
-				console.log("results......--->>>>>>",results);
+				console.log("results......--->>>>>>",r.message.data.length);
 				if (results != []){
-					if (r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
-						$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
-						
-						const custom_options = {
-							type: "donut",	
-							colors: colors_7,
-							height: 250,
-							axisOptions: {
-								xIsSeries: 0,
-								isNavigable :1 ,
-								shortenYAxisNumbers: 1,
-								xAxisMode: "tick",
-								numberFormatter: frappe.utils.format_chart_axis_number,
-								maxSlices: 6
-							},
-							data: {
-								datasets: [{values: results.data}],
-								labels: results.labels
-							}
-						};
-						
-						var legend_html_7 = '';
-						for(let i=0;i<r.message.data.length;i++){
-							legend_html_7 += `	<div class="chart-legend-item">
-													<div class="fill-box" style="background-color:${colors_7[i]}"></div>
-													<div class="chart-legend-item-label">${r.message.labels[i]}<br>
-														<span class="chart-values-style" >${r.message.data[i]}</span>
+					if (results.data.length != 0){
+						if (r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
+							$('#co2_emission_latest-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue[0], 0)}</span>`)
+							
+							const custom_options = {
+								type: "donut",	
+								colors: colors_7,
+								height: 250,
+								axisOptions: {
+									xIsSeries: 0,
+									isNavigable :1 ,
+									shortenYAxisNumbers: 1,
+									xAxisMode: "tick",
+									numberFormatter: frappe.utils.format_chart_axis_number,
+									maxSlices: 6
+								},
+								data: {
+									datasets: [{values: results.data}],
+									labels: results.labels
+								}
+							};
+							
+							var legend_html_7 = '';
+							for(let i=0;i<r.message.data.length;i++){
+								legend_html_7 += `	<div class="chart-legend-item">
+														<div class="fill-box" style="background-color:${colors_7[i]}"></div>
+														<div class="chart-legend-item-label">${r.message.labels[i]}<br>
+															<span class="chart-values-style" >${r.message.data[i]}</span>
+														</div>
 													</div>
-												</div>
-											`;
+												`;
+							}
+							frappe.utils.make_chart("#co2_emission_latest", custom_options);
+							$('[id="co2_emission_latest"] [class="chart-container"]').addClass('inner-chart')
+							$("#chart-legend-7").append(legend_html_7);
 						}
-						frappe.utils.make_chart("#co2_emission_latest", custom_options);
-						$('[id="co2_emission_latest"] [class="chart-container"]').addClass('inner-chart')
-						$("#chart-legend-7").append(legend_html_7);
+						else{
+							
+							var no_image = ''
+							no_image=`	<div class="msg-box no-border">
+											<div>
+												<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+											</div>
+											<p>Nothing to show</p>
+										</div>
+									`
+							$("#co2_emission_latest").append(no_image)
+						}
 					}
 					else{
-						
+					
 						var no_image = ''
 						no_image=`	<div class="msg-box no-border">
 										<div>
@@ -758,6 +982,7 @@ class Dashboard {
 								`
 						$("#co2_emission_latest").append(no_image)
 					}
+					
 					
 				}
 				else{
@@ -784,26 +1009,40 @@ class Dashboard {
 				
 				let results = r.message || [];
 				let keys = Object.keys(r.message);
-				let values = Object.values(r.message);		
+				let values = Object.values(r.message);
+				console.log("resultsresults",values);		
 				if (results != []){
-					if (values.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
-						const custom_options = {
-							type: "bar",
-							colors: ["#03a9f4"],
-							height: 250,
-							axisOptions: {
-								xIsSeries: 0,
-								isNavigable :1,
-								shortenYAxisNumbers: 0,
-								xAxisMode: "tick",
-								numberFormatter: frappe.utils.format_chart_axis_number,
-							},
-							data: {
-								datasets: [{values: values}],
-								labels: keys
-							}
-						};
-						frappe.utils.make_chart("#adaptation_ndp", custom_options);
+					if (values.length != 0){
+						if (values.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
+							const custom_options = {
+								type: "bar",
+								colors: ["#03a9f4"],
+								height: 250,
+								axisOptions: {
+									xIsSeries: 0,
+									isNavigable :1,
+									shortenYAxisNumbers: 0,
+									xAxisMode: "tick",
+									numberFormatter: frappe.utils.format_chart_axis_number,
+								},
+								data: {
+									datasets: [{values: values}],
+									labels: keys
+								}
+							};
+							frappe.utils.make_chart("#adaptation_ndp", custom_options);
+						}
+						else{
+							var no_image = ''
+							no_image=`	<div class="msg-box no-border">
+											<div>
+												<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
+											</div>
+											<p>Nothing to show</p>
+										</div>
+									`
+							$("#adaptation_ndp").append(no_image)
+						}
 					}
 					else{
 						var no_image = ''
@@ -816,6 +1055,7 @@ class Dashboard {
 								`
 						$("#adaptation_ndp").append(no_image)
 					}
+					
 					
 				}
 				else{
@@ -892,13 +1132,18 @@ class Dashboard {
 	co2_emission_last_five_years() {
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.total_co2_emission_last_five_years')
 			.then((r) => {
+				let value_list = []
 				$("#co2_emission_last_five_years-title").html("Historic GHG Inventory - Last Five Years")
 				let colors_10 = ["#b1518f","#d95b5f","#da6d44","#b99b1b","#cf842b","#6ac34d"]
 				let results = r.message || [];
-				console.log("ddddddddddddddddddddddddddd",results);		
+				for(let i of results.datasets){
+					let a = i["values"].reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+					value_list.push(a)
+				}
+
 
 				if(results != 0){
-					if(results.datasets.length != 0){
+					if(value_list.reduce((accumulator, currentValue) => accumulator + currentValue, 0) != 0){
 						const custom_options = {
 							type: "bar",
 							colors: colors_10,

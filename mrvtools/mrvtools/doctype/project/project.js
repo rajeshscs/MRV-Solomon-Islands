@@ -401,10 +401,17 @@ frappe.ui.form.on('Project', {
 				}
 			}
 		});
+		frm.set_query("action", function(){
+			return {
+				filters: {
+					focus : frm.doc.objective
+				}
+			}
+		});
 		frm.set_query("programme", function(){
 			return {
 				filters: {
-					action : frm.doc.action
+					action_id : frm.doc.action
 				}
 			}
 		});

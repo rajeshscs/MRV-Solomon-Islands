@@ -31,6 +31,16 @@ def getColumns():
 			"fieldtype": 'Data',
 		},
 		{
+			"fieldname": "action",
+			"label": "Action",
+			"fieldtype": 'Data',
+		},
+		{
+			"fieldname": "programme",
+			"label": "Programme",
+			"fieldtype": 'Data',
+		},
+		{
 			"fieldname": "objective",
 			"label": "Objective",
 			"fieldtype": 'Data',
@@ -131,7 +141,9 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 			SELECT
 				MT.name,
 				MT.project_id,
-				MT.project_name, 
+				MT.project_name,
+				P.action,
+				P.programme, 
 				MT.objective, 
 				MT.key_sector, 
 				MT.key_sub_sector,
@@ -146,6 +158,10 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 				MT.expected_annual_ghg
 			FROM
 				`tabMitigations` MT
+			INNER JOIN 
+				`tabProject` P
+			ON
+				P.name = MT.project_id
 			WHERE 
 				MT.docstatus != 2 
 				{conditions}

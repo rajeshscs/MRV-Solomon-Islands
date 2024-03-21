@@ -27,6 +27,7 @@
   "project_size_million",
   "total_project_cost",
   "national_budget",
+  "total_sources_of_finance",
   "column_break_efcnu",
   "sub_national_budget",
   "green_bonds",
@@ -34,7 +35,6 @@
   "section_break_ancd0",
   "sources_of_finance",
   "edit_button1",
-  "total_sources_of_finance",
   "detailed_budget_tab",
   "cost_breakdown",
   "edit_button2",
@@ -175,7 +175,7 @@
   {
    "fieldname": "others",
    "fieldtype": "Float",
-   "label": "Others (USD)",
+   "label": "Support Needed (USD)",
    "precision": "2"
   },
   {
@@ -221,7 +221,7 @@
   {
    "fieldname": "total_sources_of_finance",
    "fieldtype": "Float",
-   "label": "Total Amount of Sources of Finance",
+   "label": "Support Received (USD)",
    "precision": "2"
   },
   {
@@ -368,7 +368,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 15:56:39.836609",
+ "modified": "2024-03-19 19:03:33.034312",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Climate Finance",

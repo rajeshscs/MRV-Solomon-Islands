@@ -1,7 +1,6 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:",
  "creation": "2024-03-01 19:43:57.931646",
  "default_view": "List",
  "doctype": "DocType",
@@ -10,21 +9,21 @@
  "field_order": [
   "action_name",
   "cause",
-  "focus",
   "area",
-  "action_description",
   "objectives",
-  "instrument_type",
-  "action_status",
   "start_date",
-  "duration",
-  "ghg_affected",
   "sector_affected",
   "sub_sector_affected",
-  "national_implementing_entitys",
   "national_strategy",
-  "estimated_investment",
-  "naming_series"
+  "column_break_tdmdb",
+  "action_description",
+  "focus",
+  "action_status",
+  "duration",
+  "instrument_type",
+  "ghg_affected",
+  "national_implementing_entitys",
+  "estimated_investment"
  ],
  "fields": [
   {
@@ -37,19 +36,19 @@
    "fieldname": "cause",
    "fieldtype": "Select",
    "label": "Cause",
-   "options": "Climate Change\nNot Defined"
+   "options": "\nClimate Change\nNot Defined"
   },
   {
    "fieldname": "focus",
    "fieldtype": "Select",
    "label": "Focus",
-   "options": "Adaptation\nMitigation\nCross-cutting\nEnabler\nTransparency\nOthers"
+   "options": "\nAdaptation\nMitigation\nCross-Cutting\nEnablers\nTransparency\nOthers"
   },
   {
    "fieldname": "area",
    "fieldtype": "Select",
    "label": "Area",
-   "options": "National\nSub-national"
+   "options": "\nNational\nSub-national"
   },
   {
    "fieldname": "action_description",
@@ -63,14 +62,15 @@
   },
   {
    "fieldname": "instrument_type",
-   "fieldtype": "Data",
-   "label": "Type of Instrument(s)"
+   "fieldtype": "Table MultiSelect",
+   "label": "Type of Instrument(s)",
+   "options": "Project Action Instrument ChildTable"
   },
   {
    "fieldname": "action_status",
    "fieldtype": "Select",
    "label": "Action Status",
-   "options": "Proposed\nPlanned\nOngoing\nImplemented\nCompleted"
+   "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted"
   },
   {
    "fieldname": "start_date",
@@ -84,18 +84,21 @@
   },
   {
    "fieldname": "ghg_affected",
-   "fieldtype": "Data",
-   "label": "GHG(s) affected"
+   "fieldtype": "Table MultiSelect",
+   "label": "GHG(s) affected",
+   "options": "Mitigation Target GHGs in  ChildTable"
   },
   {
    "fieldname": "sector_affected",
-   "fieldtype": "Data",
-   "label": "Sector Affected"
+   "fieldtype": "Table MultiSelect",
+   "label": "Sector Affected",
+   "options": "Project Actions Sector ChildTable"
   },
   {
    "fieldname": "sub_sector_affected",
-   "fieldtype": "Data",
-   "label": "Sub-Sector(s) affected"
+   "fieldtype": "Table MultiSelect",
+   "label": "Sub-Sector(s) affected",
+   "options": "Project Actions Sub Sector ChildTable"
   },
   {
    "fieldname": "national_implementing_entitys",
@@ -106,7 +109,7 @@
    "fieldname": "national_strategy",
    "fieldtype": "Select",
    "label": "Anchored in a national strategy",
-   "options": "Yes\nNo\nNDC\nNAPA\nOthers"
+   "options": "\nYes\nNo\nNDC\nNAPA\nOthers"
   },
   {
    "fieldname": "estimated_investment",
@@ -114,18 +117,16 @@
    "label": "Estimated investment (USD)"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Data",
-   "hidden": 1
+   "fieldname": "column_break_tdmdb",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-18 12:34:02.883324",
+ "modified": "2024-03-19 18:13:14.544725",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Actions",
- "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -141,6 +142,7 @@
    "write": 1
   }
  ],
+ "search_fields": "action_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

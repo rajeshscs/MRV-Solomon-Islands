@@ -1,23 +1,41 @@
 // Copyright (c) 2024, tridotstech and contributors
 // For license information, please see license.txt
-
+var sector_list = []
 frappe.ui.form.on('Project Actions', {
-	before_save: function(frm) {
-		if(frm.doc.objective == "Mitigation"){
-			frm.set_value("naming_series","SI-01-.####")
+	focus: function(frm){
+		frm.set_value("sector_affected",[])
+		frm.refresh_field("sector_affected")
+		frm.set_value("sub_sector_affected",[])
+		frm.refresh_field("sub_sector_affected")
+		if(frm.doc.focus != "Others"){
+			console.log("frm.doc.focus ======= ",frm.doc.focus);
+			cur_frm.fields_dict.sector_affected.get_query = function (frm) {
+				return {
+					filters: {
+						objective: cur_frm.doc.focus,
+					},
+				}
+			}
 		}
-		if(frm.doc.objective == "Adaptation"){
-			frm.set_value("naming_series","SI-02-.####")
+		else{
+			cur_frm.fields_dict.sector_affected.get_query = null
 		}
-		if(frm.doc.objective == "Cross-Cutting"){
-			frm.set_value("naming_series","SI-03-.####")
+		
+	},
+	sector_affected: function(frm) {
+		sector_list = []
+		for(let i of frm.doc.sector_affected){
+			sector_list.push(i.sector)
 		}
-		if(frm.doc.objective == "Enablers"){
-			frm.set_value("naming_series","SI-04-.####")
+		cur_frm.fields_dict.sub_sector_affected.get_query = function (frm) {
+			return {
+				filters: {
+					key_sector: ['in', sector_list],
+				},
+			}
 		}
-		if(frm.doc.objective == "Transparency"){
-			frm.set_value("naming_series","SI-05-.####")
-		}
-		frm.refresh_field("naming_series")
+		frm.set_value("sub_sector_affected",[])
+		frm.refresh_field("sub_sector_affected")
 	}
+	
 });

@@ -237,16 +237,15 @@ def get_commulative_mitigation_last_year():
 	expected_annual_ghg_list = []
 	today = frappe.utils.today()
 	today_date = datetime.strptime(today, '%Y-%m-%d')
-	if today_date.month == 2 and today_date.day == 29:
-		last_year_date = datetime(today_date.year, today_date.month, today_date.day - 1)
-		last_year_date = datetime(last_year_date.year - 1, last_year_date.month, last_year_date.day)
-	else:
-		last_year_date = datetime(today_date.year - 1, today_date.month, today_date.day)
-	last_year_date_str = last_year_date.strftime('%Y-%m-%d')
+	last_from_year_date = datetime(today_date.year -1, 1, 1)
+	last_to_year_date = datetime(today_date.year -1, 12, 31)
+	last_from_year_date_str = last_from_year_date.strftime('%Y-%m-%d')
+	last_to_year_date_str = last_to_year_date.strftime('%Y-%m-%d')
 	for i in result:
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
-			filters={"key_sector":f"{i.key_sector}","start_date":["between",[f"{last_year_date_str}",f"{today}"]]},
+			filters={"key_sector":f"{i.key_sector}","start_date":["between",[f"{last_from_year_date_str}",f"{last_to_year_date_str}"]]},
 			fields = ["sum(actual_annual_ghg) as till_date_actual_ghg","expected_annual_ghg"])
+		
 		if tillDateActual[0].till_date_actual_ghg != None and tillDateActual[0].till_date_actual_ghg != 0.0:
 			actual_reduction_list.append(tillDateActual[0].till_date_actual_ghg)
 			sector_label_list.append(i.key_sector)
@@ -304,7 +303,6 @@ def get_total_sdg_category_wise():
 				if value ==1:
 					count= count+1
 		get_counts.append(count)
-	frappe.log_error("qqqqqq",field_list)
 	categories = ['Poverty Reduction', 'Inequality', 'Gender', 'Industry', 'Environment', 'Employment', 'Education', 'Water', 'Food','Health']
 	
 	return {"data":get_counts,"categories":categories}
@@ -413,3 +411,13 @@ def total_co2_emission_last_five_years():
 			]
 		}
 	return data
+
+
+@frappe.whitelist()
+def get_finance_support():
+	support_needed_sum=frappe.db.get_all("Climate Finance",fields=["SUM(others) as 'Support Needed'"],filters={"others":[">",0]})
+	support_received_sum=frappe.db.get_all("Climate Finance",fields=["SUM(total_sources_of_finance) as 'Support Received'"],filters={"total_sources_of_finance":[">",0]})
+	support_needed_count=frappe.db.get_all("Climate Finance",fields=["COUNT(name) as 'Support Needed'"],filters={"others":[">",0]})
+	support_received_count=frappe.db.get_all("Climate Finance",fields=["COUNT(name) as 'Support Received'"],filters={"total_sources_of_finance":[">",0]})
+	
+	return [support_needed_count[0],support_received_count[0],support_needed_sum[0],support_received_sum[0]]

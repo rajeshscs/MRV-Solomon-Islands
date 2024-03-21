@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-18 20:39:49.259425",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "instrument_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "instrument_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Types of Instruments",
+   "options": "Project Action Instrument Types"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-18 20:40:18.503551",
+ "modified_by": "Administrator",
+ "module": "Mrvtools",
+ "name": "Project Action Instrument ChildTable",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

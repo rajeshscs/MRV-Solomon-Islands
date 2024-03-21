@@ -5,6 +5,9 @@ ul.sidebar-menu::-webkit-scrollbar-track {
     right: -2rem !important;
 
 }
+.main-section .navbar.navbar-expand.sticky-top .container #navbar-breadcrumbs {
+    display: none !important;
+}
 .control-value{
     border:1px solid #efefef9e !important;
 }

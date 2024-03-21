@@ -37,6 +37,8 @@ def get_project_columns(project = None):
 	if project:	
 		
 		col.append("Project Title" + ":Link/Project")
+		col.append("Action" + ":Link/Project")
+		col.append("Programme" + ":Link/Project")
 		col.append("Cost in USD" + ":Float")
 		col.append("Location" + ":Data")
 		col.append("Implementing entity or entities" + ":Data")
@@ -130,6 +132,8 @@ def get_project_datas(project = None):
 		query= f"""
 			SELECT
 				P.project_name as project_title,
+				P.action,
+				P.programme,
 				P.costusd as cost_in_usd,
 				P.location,
 				P.implementing_entity as implementing_entity_or_entities,

@@ -17,13 +17,17 @@
     width:28%
 }
 .span-1{
-    width: 70%;
+    width: auto;
+    max-width: 30%;
+    min-width: 38%;
     text-align: end;
     font-size: 13px;
 }
 .span-2{
     font-weight: 800 !important;
-    width: 30%;
+    width: auto;
+    min-width: 50%;
+    max-width: 60%;
     text-align: end;
     font-size: 13px;
 }

@@ -5,30 +5,32 @@
     <div class="row column-both">
         <div class="inner-row">
             <div class="column-one">
-                <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6 column">
                     <div class="site-logo" style="padding: 12px;">
+                      <router-link to='/home'>
                         <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid" />
+                      </router-link>
                     </div>
                     <p class="text-left text-start"></p>
                 </div>
             </div>
             <div class="column-two">
-            <div class="col-lg-3 col-md-3 col-sm-6" style="width: auto;">
+            <div class="col-lg-3 col-md-3 col-sm-6" style="width: auto; column">
               <h3 class="" >Contact Information</h3>
-              <div  v-for="item in data.message" :key="item.name" style="padding: 1rem 2rem;">
-                  <div class="media" style="max-width: 256px;">
-                     <p  v-if="item.address"> <i class="mr-3 bi bi-geo-alt  b text-start" ></i>{{ item.address }}</p>
+              <!-- <div  v-for="item in data.message" :key="item.name" style="padding: 1rem 2rem;"> -->
+                  <div class="media" style="max-width:256px;">
+                     <p  v-if="data.message.parent_data.address"> <i class="mr-3 bi bi-geo-alt  b text-start" ></i>{{ data.message.parent_data.address }}</p>
                   </div>
                   <div class="media">
-                     <p v-if="item.email"><i class="mr-3 bi bi-envelope" ></i>{{ item.email }}</p>
+                     <p v-if="data.message.parent_data.email"><i class="mr-3 bi bi-envelope" ></i>{{ data.message.parent_data.email }}</p>
                   </div>
-                  <div class="media" v-if="item.contact_number1 ||  item.contact_number2 || item.contact_number3">
-                     <p><i class="mr-3 bi bi-telephone "></i>{{ item.contact_number1 }}, {{ item.contact_number2 }},</p>
-                     <p style="margin-left: 22px;">{{ item.contact_number3 }}</p>
+                  <div class="media" v-if="data.message.parent_data.contact_number1 ||  data.message.parent_data.contact_number2 || data.message.parent_data.contact_number3">
+                     <p><i class="mr-3 bi bi-telephone "></i>{{ data.message.parent_data.contact_number1 }}, {{ data.message.parent_data.contact_number2 }},</p>
+                     <p style="margin-left: 22px;">{{ data.message.parent_data.contact_number3 }}</p>
                   </div>
-               </div>
+               <!-- </div> -->
             </div>
-                <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6 column">
                     <h3 class="">Present Pages</h3>
                     <ul class="list-unstyled mx-4">
                       <li v-for="(routeKey, displayText) in {
@@ -46,7 +48,7 @@
                       </li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6 column">
                     <h3 class="">Our Partners</h3>
                     <div class="row m-0">
                         <div v-for="(item, index) in data.message" :key="index" class="partners">
@@ -69,7 +71,7 @@
         </div>
     </div>
 </div>
-
+<br>
      <hr>
      <div class="copyright text-center pt-4">
         Copyright © 2022 <a href="#" class="text-light"><strong>mrvtools.com</strong></a> All Rights Reserved
@@ -93,6 +95,7 @@
   color: aliceblue;
   margin-right: 4px;
   line-height: 40px;
+  font-size: 14px !important;
   transition: .2s;
   }
   .partner-img{
@@ -101,7 +104,7 @@
   .partner-logo{
    max-width: 100%;
     height: auto;
-    aspect-ratio: 4 / 4;
+    aspect-ratio: 4 / 4.5;
     object-fit: contain;
     background-color: #fff;
   }
@@ -109,6 +112,7 @@
   color: red !important;
   text-decoration: none;
   transition: .2s;
+  font-size: 12px !important;
   font-weight: 600;
   }
   .inner-row {
@@ -123,6 +127,9 @@
   .column-two {
     display: flex;
     justify-content: space-around;
+  }
+  .column{
+    width: 27% !important;
   }
   p,
   li {
