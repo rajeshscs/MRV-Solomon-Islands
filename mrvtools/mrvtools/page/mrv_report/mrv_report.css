@@ -5,9 +5,15 @@
 .datatable .dt-header .dt-cell--header .dt-cell__content{
 	font-weight: 600;
 }
+
+.datatable .dt-row {
+    height: 34px;
+}
+
 .dt-cell--header{
-	background-color: #f4f5f6 !important;
-    color: #6b7278;
+	background-color: #c4ddd3 !important;
+    color: #016a42;
+	height: 34px !important;
 }
 
 .list-filter-item {
@@ -38,6 +44,7 @@
 {
 	height: 40px;
 	border-bottom: 1px solid #ebeef0;
+	
 }
 
 
@@ -77,6 +84,7 @@
 } */
 .datatable *{
 	width: 100%;
+	margin: auto;
 }
 .dt-cell--col-0 {
     width: 32px;
@@ -92,10 +100,10 @@
 }
 
 
-.report-wrapper1, .report-wrapper2,.report-wrapper3,.report-wrapper4{
-	margin: 11px 1px 25px 1px;
+/* .report-wrapper1, .report-wrapper2,.report-wrapper3,.report-wrapper4{ */
+	/* margin: 11px 1px 25px 1px; */
     /* width: 1187px; */
-}
+/* } */
 
 /* custom end */
 
@@ -183,7 +191,7 @@
     margin-bottom: 15px;
 }
 .mrv_report.page-main-content {
-    padding: 15px;
+    padding: 0px 15px;
 }
 
 .title{
@@ -211,22 +219,41 @@
 	gap: 5px;
 }
 
-.report-wrapper1, .report-wrapper2, .report-wrapper3, .report-wrapper5, .headline1, .headline2, .headline3, .headline4, .headline5 {
+.report-wrapper1, .report-wrapper2, .report-wrapper3, .report-wrapper4, .report-wrapper5{
+	border: 1px solid #dbdbdb;
+}
+
+.report-wrapper1, .report-wrapper2, .report-wrapper3, .report-wrapper4, .report-wrapper5, .headline1, .headline2, .headline3, .headline4, .headline5 {
     padding:  0px !important;
-    margin: 11px 30px 1px 30px;
+    margin: 12px 30px 30px 30px;
 	height :100% !important;
    
 }
+/* .layout-main-section {
+    padding:  0px !important;
+    border: 1px solid #dbdbdb;
+} */
+
 .dt-scrollable{
 	width: 100% !important;
 }
-.report-wrapper4{
+/* .report-wrapper4{
 	padding:  0px !important;
     margin: 11px 30px 1px 30px;
 	height :220px !important;
-}
+} */
 .report-wrapper4 .datatable .dt-scrollable{
 	height :160px !important;
+}
+.datatable .dt-scrollable{
+	max-height: calc(100vh - 250px);
+    min-height: 90px;
+}
+
+.datatable{
+	padding: 0px !important;
+    margin: 0px 0px 0px 0px;
+    height: 100% !important;
 }
 
 /* .report-wrapper1 .datatable{

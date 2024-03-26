@@ -9,7 +9,7 @@ from frappe.utils import get_site_base_path,now
 def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
 		data = get_datas(year,key_sector,key_sub_sector,impact_area)
-		# frappe.log_error("data",data)
+		frappe.log_error("data11111",data)
 		field_list = []
 		get_counts = []
 		meta = frappe.get_meta("Adaptation")
@@ -18,7 +18,7 @@ def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub
 		for field in fields:
 			if field["fieldtype"] == "Check":
 				field_list.append(field["fieldname"])
-		first_elements = [sublist[0] for sublist in data]
+		first_elements = [sublist[2] for sublist in data]
 		for field in field_list:
 			count =0
 			values=frappe.db.get_all("Adaptation",[field],{'project_id':["in",first_elements]})
@@ -43,7 +43,7 @@ def get_total_adaptation_report_data2(year,impact_area,key_sector = None,key_sub
 		data = get_datas(year,key_sector,key_sub_sector,impact_area)
 		doc = frappe.db.get_all("Adaptation",pluck="key_sector")
 		counts = {}
-		first_elements = [sublist[3] for sublist in data]
+		first_elements = [sublist[5] for sublist in data]
 		for item in first_elements:
 			if item in counts:
 				counts[item] += 1
@@ -61,10 +61,10 @@ def execute(year = None,impact_area = None,key_sector = None,key_sub_sector = No
 
 def get_columns():
 	col = []
-	col.append("Project ID" + ":Link/Project")
-	col.append("Project Name" + ":Data")
 	col.append("Action" + ":Data")
 	col.append("Programme" + ":Data")
+	col.append("Project ID" + ":Link/Project")
+	col.append("Project Name" + ":Data")
 	col.append("Objective" + ":Data")
 	col.append("Key Sector" + ":Data")
 	col.append("Key Sub-sector" + ":Data")
@@ -99,10 +99,10 @@ def get_datas(year = None,key_sector = None,key_sub_sector = None,impact_area = 
 
 	query= f"""
 			SELECT
+				CONCAT(P.action,' | ',P.action_name) as action,
+				CONCAT(P.programme,' | ',P.programme_name) as programme,
 				P.name as project_id, 
 				P.project_name,
-				P.action,
-				P.programme,
 				P.objective,
 				P.key_sector,
 				P.key_sub_sector,

@@ -334,6 +334,7 @@ class Mitigation {
 			market_mechanism:this.market_mechanism[0].value
 		})
 			.then((r) => {
+				console.log("11111111111111111111",r.message);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]

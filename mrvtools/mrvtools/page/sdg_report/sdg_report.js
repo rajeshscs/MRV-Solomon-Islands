@@ -56,41 +56,53 @@ class SDG {
 				})
 		})
 	}
-	hide_btn() {
-		const toggleButtons = (hideBtn, showBtn, targetClass) => {
-		  $(hideBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// hide_btn() {
+	// 	const toggleButtons = (hideBtn, showBtn, targetClass) => {
+	// 	  $(hideBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 	  
-		  $(showBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
+	// 	  $(showBtn).click(() => {
+	// 		$('[class="'+targetClass+'"]').toggle();
+	// 		$(hideBtn).toggle();
+	// 		$(showBtn).toggle();
+	// 	  });
 		  
-		  $(showBtn).toggle();
-		};
+	// 	  $(showBtn).toggle();
+	// 	};
 	  
-		$(document).ready(() => {
-		  toggleButtons("#hide_btn", "#show_btn", "totalsdg_report-graph");
+	// 	$(document).ready(() => {
+	// 	  toggleButtons("#hide_btn", "#show_btn", "totalsdg_report-graph");
 
-		});
-	  }
+	// 	});
+	//   }
 	make() {
 		this.$container = $(`
 		<div class="sdg_report page-main-content">
 		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 			<b id="categories_chart"></b>
-			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn" class="btn btn-sm">show chart</button>
+			<button id="hide_btn" onclick="toggle_chart()" class="btn btn-sm">Hide chart</button>
 		</div>
-			<div class="totalsdg_report-graph"></div>
+			<div id="chart-1" class="totalsdg_report-graph"></div>
+			<script>
+				function toggle_chart() {
+					var x = document.getElementById("chart-1");
+					if (x.style.display === "none") {
+					x.style.display = "block";
+					document.getElementById("hide_btn").innerText = "Hide Chart"
+					} else {
+					x.style.display = "none";
+					document.getElementById("hide_btn").innerText = "Show Chart"
+					}
+					
+				}
+			</script>
 		</div>`
 		).appendTo(this.page.main);
 		this.$graph_area = this.$container.find(".totalsdg_report-graph");
-		this.hide_btn();
+		// this.hide_btn();
 		this.get_total_sdg_report();
 		
 
@@ -208,6 +220,7 @@ class SDG {
 				$("#categories_chart").html("No of Projects based on Categories")
 				
 				let results = r.message || [];
+				
 				const custom_options = {
 					type: "bar",
 					colors: ["#48bb74"],
@@ -238,6 +251,7 @@ class SDG {
 			impact_area : this.impact_area[0].value
 		})
 			.then((r) => {
+				console.log("22222222222222222222",r.message);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]

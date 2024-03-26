@@ -21,16 +21,6 @@ def execute(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 def getColumns():
 	columns = [
 		{
-			"fieldname": "project_id",
-			"label": "Project ID",
-			"fieldtype": 'Data',
-		},
-		{
-			"fieldname": "project_name",
-			"label": "Project Name",
-			"fieldtype": 'Data',
-		},
-		{
 			"fieldname": "action",
 			"label": "Action",
 			"fieldtype": 'Data',
@@ -38,6 +28,16 @@ def getColumns():
 		{
 			"fieldname": "programme",
 			"label": "Programme",
+			"fieldtype": 'Data',
+		},
+		{
+			"fieldname": "project_id",
+			"label": "Project ID",
+			"fieldtype": 'Data',
+		},
+		{
+			"fieldname": "project_name",
+			"label": "Project Name",
 			"fieldtype": 'Data',
 		},
 		{
@@ -140,10 +140,10 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 	query = f"""
 			SELECT
 				MT.name,
+				CONCAT(P.action,' | ',P.action_name) as action,
+				CONCAT(P.programme,' | ',P.programme_name) as programme,
 				MT.project_id,
 				MT.project_name,
-				P.action,
-				P.programme, 
 				MT.objective, 
 				MT.key_sector, 
 				MT.key_sub_sector,

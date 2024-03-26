@@ -80,7 +80,7 @@ class MRVReport {
 	wrapper1(){
 		$("#mrv_chart").html(`
 		<div class="mrv_report page-main-content">
-			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+			<div class="chart_hide1" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
 				<b id="categories_chart"></b>
 				<button id="hide_btn" onclick="toggle_chart1()" class="btn btn-sm">Hide chart</button>
 			</div>
@@ -108,30 +108,57 @@ class MRVReport {
 				}
 			</script>
 			<div id="chart-1" class="totalmrv_report-graph"></div>
-			<div class="chart_hide" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
-				<b id="categories_chart1"></b>
-				<button id="hide_btn2" onclick="toggle_chart2()" class="btn btn-sm">Hide chart</button>
-			</div>
-			<div id="chart-2" class="totalmrv_report2-graph"></div>
+			
+		</div>`)
+		$("#mrv_chart2").html(`
+		<div class="mrv_report page-main-content">
+		<div class="chart_hide2" style="margin: 14px; display: flex; align-items: center; justify-content: space-between;">
+			<b id="categories_chart1"></b>
+			<button id="hide_btn2" onclick="toggle_chart2()" class="btn btn-sm">Hide chart</button>
+		</div>
+		<div id="chart-2" class="totalmrv_report2-graph"></div>
+			<script>
+				function toggle_chart1() {
+					var x = document.getElementById("chart-1");
+					if (x.style.display === "none") {
+					x.style.display = "block";
+					document.getElementById("hide_btn").innerText = "Hide Chart"
+					} else {
+					x.style.display = "none";
+					document.getElementById("hide_btn").innerText = "Show Chart"
+					}
+					
+				}
+				function toggle_chart2(){
+					var y = document.getElementById("chart-2");
+					if (y.style.display === "none") {
+					y.style.display = "block";
+					document.getElementById("hide_btn2").innerText = "Hide Chart"
+					} else {
+					y.style.display = "none";
+					document.getElementById("hide_btn2").innerText = "Show Chart"
+					}
+				}
+			</script>
 		</div>`)
 	}
 	make() {
 		$('.all_html').remove();
 		if (this.project){
 			this.$container = $(`
-			<div class = "all_html"  style="margin:0;">
-				<div id="mrv_chart"></div>
-				<div id="mrv_chart2"></div>
+			<div class = "all_html" style="margin:0;">
 				<b class="headline1">Project Details</b>
 				<div class="report-wrapper1"></div>
+				<div id="mrv_chart"></div>
 				<b class="headline2">Mitigation Summary</b>
 				<div class="report-wrapper2"></div>
 				<b class="headline3">Adaptation Summary</b>
 				<div class="report-wrapper3"></div>
-				<b class="headline4">SDG Summary</b>
-				<div class="report-wrapper4"></div>
+				<div id="mrv_chart2"></div>
 				<b class="headline5">Finance Summary</b>
 				<div class="report-wrapper5"></div>
+				<b class="headline4">SDG Summary</b>
+				<div class="report-wrapper4"></div>
 			</div>
 			`).appendTo(this.page.main);
 			this.$graph_area = this.$container.find(".totalmrv_report-graph");
@@ -148,8 +175,6 @@ class MRVReport {
 
 		// this.hide_btn()
 		this.wrapper1();
-		this.get_total_mrv_report();
-		this.get_total_mrv_report2();
 	
 	}
 	mrv_filter_fields() {
@@ -177,8 +202,6 @@ class MRVReport {
 				this.project = project.get_value()
 				if (this.project) {
 					this.make()
-					this.get_total_mrv_report()
-					this.get_total_mrv_report2()
 					this.render_datatable()
 					$('[class="page-form row"]').attr("style","height:50px !important;")
 				}
@@ -234,7 +257,7 @@ class MRVReport {
 		})
 			.then((r) => {
 				$("#categories_chart1").html("Finance disbursement actual year wise")
-				console.log('r.message', r.message);
+				console.log('--------r.message', r.message);
 				let results = r.message || [];
 				const custom_options = {
 					type: "bar",
@@ -283,15 +306,23 @@ class MRVReport {
 		})
 			.then((r) => {
 				// $('.report-wrapper2:first').remove();
-				console.log(r.message);
+				console.log("____----------",r.message);
 				// this.$report2 = $('<div class="report-wrapper2">').appendTo(this.page.main).insertAfter($('.report-wrapper1'));
 				let columns = r.message[0]
 				let data = r.message[1]
+				if (data[0][2] == null){
+					console.log("1112222222222")
+					$('.chart_hide1').attr('style','display:none !important')
+				}
+				else{
+					this.get_total_mrv_report()
+					console.log("1111111")
+					$('.chart_hide1').attr('style','margin: 14px; display: flex; align-items: center; justify-content: space-between;')
+				}
 				// $('.headline2:last').remove();
 				// if(this.project){
 				// 	this.$heading = $('<b class="headline">Mitigation Summary</b>').insertBefore(this.$report2);
 				// }
-
 				this.datatable = new DataTable(".report-wrapper2", {columns:columns,data:data});
 			})
 			
@@ -334,10 +365,17 @@ class MRVReport {
 		})
 			.then((r) => {
 				// $('.report-wrapper5:first').remove();
-				console.log(r.message);
+				console.log("2222222222222222222",r.message);
 				// this.$report5 = $('<div class="report-wrapper5">').appendTo(this.page.main).insertAfter($('.report-wrapper4'));
 				let columns = r.message[0]
 				let data = r.message[1]
+				if (data.length == 0){
+					$('.chart_hide2').attr('style','display:none !important')
+				}
+				else{
+					this.get_total_mrv_report2()
+					$('.chart_hide2').attr('style','margin: 14px; display: flex; align-items: center; justify-content: space-between;')
+				}
 				console.log("columns",columns);
 				console.log("data",data);
 				// $('.headline5:last').remove();

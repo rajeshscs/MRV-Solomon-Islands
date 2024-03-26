@@ -131,9 +131,25 @@
 
 .layout-main-section .report-wrapper {
     padding:  0px !important;
-    margin: 11px 30px 1px 30px;
+    margin: 15px 30px 20px 30px;
     border: 1px solid #dbdbdb;
 }
 .dt-scrollable{
 	width: 1079.67px;
+}
+
+.dt-cell--header{
+	background-color: #c4ddd3 !important;
+    color: #016a42;
+	height: 34px !important;
+}
+
+.datatable {
+	margin: auto;
+}
+.dt-scrollable {
+	width: 100% !important;
+}
+.datatable .dt-row {
+    height: 34px;
 }

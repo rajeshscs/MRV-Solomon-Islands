@@ -17,7 +17,18 @@ ul.sidebar-menu::-webkit-scrollbar-track {
     --scrollbar-track-color: transparent !important;
     scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
 }
-
+.page-icon-group {
+    /* display: none !important; */
+}
+.menu-btn-group {
+    /* display: none !important; */
+}
+.page-actions .custom-actions{
+    display: none !important;
+}
+span.row-actions {
+    display: none !important;
+}
 /* .layout-main-section.frappe-card{
     max-width: 1200px;
     margin: auto;

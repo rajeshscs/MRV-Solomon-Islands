@@ -36,9 +36,9 @@ def get_project_columns(project = None):
 	col = []
 	if project:	
 		
+		col.append("Action" + ":Data")
+		col.append("Programme" + ":Data")
 		col.append("Project Title" + ":Link/Project")
-		col.append("Action" + ":Link/Project")
-		col.append("Programme" + ":Link/Project")
 		col.append("Cost in USD" + ":Float")
 		col.append("Location" + ":Data")
 		col.append("Implementing entity or entities" + ":Data")
@@ -109,20 +109,23 @@ def get_finance_columns(project = None):
 			filters = {"parent" : name},
 			order_by = 'financial_year')
 		frappe.log_error("datataa",totalMonitoringYearsFinance)
-		for i in totalMonitoringYearsFinance:
-			col.append(f"{i.financial_year}" + ":Int")
-		last_doc = frappe.get_last_doc("Climate Finance Monitoring Information",{'project_id': f'{name}'})
-		totalMonitoringYears = frappe.db.get_all(
-			"Climate Finance Total Budget Disbursement ChildTable",
-			fields=['financial_year'],
-			filters = {"parent" : last_doc.name},
-			group_by = 'financial_year' )
-		frappe.log_error("dataFinance",totalMonitoringYears)
-		for i in totalMonitoringYears:
-			if f"{i.financial_year}" + ":Int" not in col:
+		if frappe.db.exists("Climate Finance Monitoring Information",{'project_id': f'{name}'}):
+			for i in totalMonitoringYearsFinance:
 				col.append(f"{i.financial_year}" + ":Int")
-	keys_only = [item.split(':')[0] for item in col]
-	return keys_only
+			frappe.log_error("NAmee",name)
+			last_doc = frappe.get_last_doc("Climate Finance Monitoring Information",{'project_id': f'{name}'})
+			frappe.log_error("Get_last_doccc",last_doc)
+			totalMonitoringYears = frappe.db.get_all(
+				"Climate Finance Total Budget Disbursement ChildTable",
+				fields=['financial_year'],
+				filters = {"parent" : last_doc.name},
+				group_by = 'financial_year' )
+			frappe.log_error("dataFinance",totalMonitoringYears)
+			for i in totalMonitoringYears:
+				if f"{i.financial_year}" + ":Int" not in col:
+					col.append(f"{i.financial_year}" + ":Int")
+		keys_only = [item.split(':')[0] for item in col]
+		return keys_only
 
 def get_project_datas(project = None):
 	conditions = ""
@@ -131,9 +134,9 @@ def get_project_datas(project = None):
 		conditions += f" AND P.name like '{project}'"
 		query= f"""
 			SELECT
+				CONCAT(P.action,' | ',P.action_name) as action,
+				CONCAT(P.programme,' | ',P.programme_name) as programme,
 				P.project_name as project_title,
-				P.action,
-				P.programme,
 				P.costusd as cost_in_usd,
 				P.location,
 				P.implementing_entity as implementing_entity_or_entities,
@@ -184,6 +187,7 @@ def get_mitigation_datas(project = None):
 				{conditions}
 			"""
 		result = frappe.db.sql(query, as_dict=1)
+		frappe.log_error("Dataa",result)
 		for each in result:
 			for i in monitoringYears:
 				query = f"""
@@ -330,16 +334,19 @@ def get_finance_datas(project = None):
 			expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
 			for i in expectedDocList:
 				amountExpected[f'{i.financial_year}'] = i.amount
-			
-			spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
-			spentDocList = spentDoc.as_dict().total_budget_disbursement
-			for i in spentDocList:
-				amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
-			
-			frappe.log_error("amountExpected",amountExpected)
-			frappe.log_error("amountSpent",amountSpent)
-			
-			return [amountSpent,amountExpected]
+			if frappe.db.exists('Climate Finance Monitoring Information', {'proj_id': project}):
+				spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
+				spentDocList = spentDoc.as_dict().total_budget_disbursement
+				for i in spentDocList:
+					amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
+				
+				frappe.log_error("amountExpected",amountExpected)
+				frappe.log_error("amountSpent",amountSpent)
+				
+				return [amountSpent,amountExpected]
+			else:
+				frappe.log_error("CCCCC","hi..")
+				return []
 
 
 
@@ -384,12 +391,12 @@ def get_chart2(project=None):
 		
 		for i in expectedDocList:
 			amountExpected.append(i.amount)
-			
-		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
-		spentDocList = spentDoc.as_dict().total_budget_disbursement
-		for i in spentDocList:
-			amountSpent.append(i.total_disbursement_usd)
-			year_list.append(f"{i.financial_year}")
+		if frappe.db.exists('Climate Finance Monitoring Information', {'proj_id': project})	:
+			spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': project})
+			spentDocList = spentDoc.as_dict().total_budget_disbursement
+			for i in spentDocList:
+				amountSpent.append(i.total_disbursement_usd)
+				year_list.append(f"{i.financial_year}")
 			
 
 

@@ -13,10 +13,10 @@ def execute(year = None,objective =None,key_sector = None,key_sub_sector = None)
 
 def get_columns():
 	col = []
-	col.append("Project ID" + ":Link/Project")
-	col.append("Project Title" + ":Data")
 	col.append("Action" + ":Data")
 	col.append("Programme" + ":Data")
+	col.append("Project ID" + ":Link/Project")
+	col.append("Project Title" + ":Data")
 	col.append("Objective" + ":Data")
 	col.append("Key Sector" + ":Data")
 	col.append("Key Sub-sector" + ":Data")
@@ -52,10 +52,10 @@ def get_datas(year = None,objective = None,key_sector = None,key_sub_sector = No
 
 	query= f"""
 			SELECT
+				CONCAT(P.action,' | ',P.action_name) as action,
+				CONCAT(P.programme,' | ',P.programme_name) as programme,
 				P.name as project_id,
 				P.project_name as project_title,
-				P.action,
-				P.programme,
 				P.objective,
 				P.key_sector,
 				P.key_sub_sector,
@@ -103,8 +103,25 @@ def get_datas(year = None,objective = None,key_sector = None,key_sub_sector = No
 	"""
 	result = frappe.db.sql(query, as_dict=1)
 	# frappe.log_error("result",result)
+	# values_only = list(map(lambda x : str(x),result))
+	# values_only = list(map(k,result))
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]
 	return values_only
+
+# def k(x):
+# 	if x.action and x.action_name:
+# 		x.action = f"{x.action} | {x.action_name}"
+# 	else:
+# 		x.action = "s"
+# 	if x.programme and x.programme_name:
+# 		x.programme = f"{x.programme} | {x.programme_name}"
+# 	else:
+# 		x.programme = "s"
+# 	del x.action_name
+# 	del x.programme_name
+# 	return x
+	# CONCAT(P.action,' : ',P.action_name) as action,
+				# CONCAT(P.programme,' : ',P.programme_name) as programme,
 
 @frappe.whitelist()
 def get_chart(year = None,objective = None,key_sector = None,key_sub_sector = None):

@@ -18,7 +18,7 @@ def get_total_sdg_report_data(year,impact_area,key_sector = None,key_sub_sector 
 			if field["fieldtype"] == "Check":
 				field_list.append(field["fieldname"])
 
-		first_elements = [sublist[0] for sublist in data]
+		first_elements = [sublist[2] for sublist in data]
 		for field in field_list:
 			count =0
 			values=frappe.db.get_all("SDG Assessment",[field],{'project_id':["in",first_elements]})
@@ -51,10 +51,10 @@ def execute(year,impact_area,key_sector = None,key_sub_sector = None):
 
 def getColumn():
 	columns = []
-	columns.append("Project ID" + ":Link/Project")
-	columns.append("Project Title" + ":Data")
 	columns.append("Action" + ":Data")
 	columns.append("Programme" + ":Data")
+	columns.append("Project ID" + ":Link/Project")
+	columns.append("Project Title" + ":Data")
 	columns.append("Objective" + ":Data")
 	columns.append("Key Sector" + ":Data")
 	columns.append("Key Sub-sector" + ":Data")
@@ -92,10 +92,10 @@ def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = No
 
 	query= f"""
 			SELECT
+				CONCAT(P.action,' | ',P.action_name) as action,
+				CONCAT(P.programme,' | ',P.programme_name) as programme,
 				P.name as project_id,
 				P.project_name as project_title,
-				P.action,
-				P.programme,
 				P.objective,
 				P.key_sector,
 				P.key_sub_sector,
