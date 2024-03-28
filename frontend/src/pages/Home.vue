@@ -20,50 +20,51 @@
   </div>
   <div>
      <ProjectComponent :data="data" />
+     <!-- <hr style="border-color: #8f8f8f;"> -->
+
      <div>
-      <div
+     <div
         data-aos="fade-right"
         data-aos-delay="50"
         class="about-area report-section about-2 fix wow fadeInUp"
         data-wow-delay="0.3s"
         id="reports"
         >
-        <hr style="border-color: #8f8f8f;">
-        <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
-           National <span style="color: green; font-weight: 700;">GHG</span> Inventory
-        </h1>
-        <div class="container-fluid">
-           <div class="row" v-for="item in data.message" :key="item.name">
-            <div class="img p-1"  v-if="item.report_image">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image" class="report-image">
-              </div>
+        <div class="container-fluid report-top-ground">
+          <div class="pattern-background">
+              <img src="../assets/images/pattern.png" style="height: 100%; width: 100%;">
+          </div>
+
+
+          <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
+             National <span style="color: green; font-weight: 700;">GHG</span> Inventory
+          </h1>
+
+          <div class="container-fluid" style="padding-bottom: 25px;">
+            <div class="parent_pops">
+              <a class="pop" @click="openModal(data.message.parent_data.report_image)">
+                <img :src="data.message.parent_data.report_image" id="myImg" class="rep_image">
+                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+
+              </a>
+              <a class="pop" @click="openModal(data.message.parent_data.report_image1)">
+                <img :src="data.message.parent_data.report_image1" id="myImg" class="rep_image">
+                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+
+              </a>
+              <a class="pop" @click="openModal(data.message.parent_data.report_image2)">
+                <img :src="data.message.parent_data.report_image2" id="myImg" class="rep_image">
+                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+
+              </a>
             </div>
 
-            <div class="img p-1"  v-if="item.report_image1">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image1" class="report-image report-image1">
-              </div>
-            </div>
+          </div>
+        </div>
 
-            <div class="img p-1" v-if="item.report_image2">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image2" class="report-image report-image2">
-              </div>
-            </div>  
-           </div>
         </div>
      </div>
-     </div>
+
      <!-- Knowledge Resource Carousel -->
      <div>
       <hr style="border-color: 1px #8f8f8f;">   
@@ -74,17 +75,23 @@
         <br>
      </div>
   </div>
+  <div id="myModal" :class="{ 'full-page-modal': isModalOpen }" @click="closeModal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
   <Footer  :data="data" />
 </template>
 <script setup>
   import Footer from '@/components/Footer.vue'
   import Header from '@/components/Header.vue'
+  import Report from '@/components/Report.vue'
   import knowledgeResource from '@/components/KnowledgeResource.vue'
   import ProjectComponent from '@/components/ProjectComponent.vue'
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
   
   const data = ref([]);
+const isModalOpen = ref(false);
   
   const fetchData = async () => {
     try {
@@ -113,18 +120,33 @@
     console.log("response", values);
     console.log("response", field);
   };
-  
-  onMounted(() => {
-    fetchData();
-  });  
-  setTimeout(() => {
-   $('.breadcrumb-area').attr('style', "display:none !important;")
-  }, 1000);
+
+  const openModal = (src) => {
+    const modal = document.getElementById("myModal");
+  const modalImg = document.getElementById("img01");
+  modal.style.display = "block";
+  $('.modal-content').attr("style","display:block;");
+  modalImg.src = src;
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "none";
+  isModalOpen.value = false;
+};
+
+onMounted(() => {
+  fetchData();
+});  
+$.ajax({success: ()=> {
+ $('.breadcrumb-area').attr('style', "display:none !important;")
+}})
 </script>
-<style >
+<style>
  .breadcrumb-area{
    display: none !important;
- }
+  }
   .card-link:hover .card {
   transition: .2s;
   box-shadow: 4px 8px 14px 4px rgba(0, 0, 0, 0.098); 
@@ -133,7 +155,7 @@
    border-radius:0 !important;
    object-fit: cover;
   }
-
+  
   .cus-card{
   transition: .2s;
   box-shadow: 0px 0px 10px #0000002e;
@@ -149,19 +171,7 @@
   background-color: #00220012;
   height: auto;
   }
-  .pattern-background {
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-  }
-  .report-image {
-  width: 80%;
-  height: auto !important;
-  margin: auto;
-  position: relative;
-  padding: 25px 0;
-  }
-  /* Table */
+
   @media (max-width: 768px) {
   .img{
   position: relative;

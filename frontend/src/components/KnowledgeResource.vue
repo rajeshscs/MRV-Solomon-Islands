@@ -35,22 +35,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="carousel-item pt-4 pb-3">
-            <div class="container">
-              <div class="row" style="width: 98%; margin-left: 5px; display: flex; justify-content: center;">
-                <div v-for="item in data.message.child_table_data2" :key="item.name" class="col col-md-3 col-sm-3 col-xs-12 custom-col">
-                  <div v-if="item.image" class="card mx-0 image-overlay cus-card" style="border-radius: none;">
-                    <a :href="item.document" class="cus-text mobile-hidden" style="text-decoration: none; color: #000; font-weight: 900;">
-                      <img :src="item.image" class="card-img-top" style="position:relative; border-radius: 6px;" alt="..." />
-                      <div v-if="item.link_name" class="overlay">
-                        <h5 style="justify-content: center; display: flex; place-items: center; align-items: center; font-family: serif; margin-top: 50%; text-align: center;">{{ item.link_name }}</h5>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-right: 70px!important;"></span>

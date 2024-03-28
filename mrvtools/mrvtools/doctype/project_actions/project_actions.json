@@ -29,30 +29,38 @@
   {
    "fieldname": "action_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Name of Action",
+   "reqd": 1,
    "unique": 1
   },
   {
    "fieldname": "cause",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Cause",
-   "options": "\nClimate Change\nNot Defined"
+   "options": "\nClimate Change\nNot Defined",
+   "reqd": 1
   },
   {
    "fieldname": "focus",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Focus",
-   "options": "\nAdaptation\nMitigation\nCross-Cutting\nEnablers\nTransparency\nOthers"
+   "options": "\nAdaptation\nMitigation\nCross-Cutting\nEnablers\nTransparency\nOthers",
+   "reqd": 1
   },
   {
    "fieldname": "area",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Area",
-   "options": "\nNational\nSub-national"
+   "options": "\nNational\nSub-national",
+   "reqd": 1
   },
   {
    "fieldname": "action_description",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Action Description"
   },
   {
@@ -70,7 +78,8 @@
    "fieldname": "action_status",
    "fieldtype": "Select",
    "label": "Action Status",
-   "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted"
+   "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted",
+   "reqd": 1
   },
   {
    "fieldname": "start_date",
@@ -103,7 +112,8 @@
   {
    "fieldname": "national_implementing_entitys",
    "fieldtype": "Data",
-   "label": "National Implementing Entity(s)"
+   "label": "National Implementing Entity(s)",
+   "reqd": 1
   },
   {
    "fieldname": "national_strategy",
@@ -114,7 +124,8 @@
   {
    "fieldname": "estimated_investment",
    "fieldtype": "Data",
-   "label": "Estimated investment (USD)"
+   "label": "Estimated investment (USD)",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_tdmdb",
@@ -123,7 +134,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-19 18:13:14.544725",
+ "modified": "2024-03-28 12:10:53.713799",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Actions",

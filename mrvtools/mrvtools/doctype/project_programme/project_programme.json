@@ -31,8 +31,10 @@
   {
    "fieldname": "action_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Action ID",
-   "options": "Project Actions"
+   "options": "Project Actions",
+   "reqd": 1
   },
   {
    "fetch_from": "action_id.action_name",
@@ -44,13 +46,16 @@
   {
    "fieldname": "programme_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Name of Programme",
+   "reqd": 1,
    "unique": 1
   },
   {
    "fetch_from": "action_id.cause",
    "fieldname": "cause",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Cause",
    "read_only": 1
   },
@@ -58,6 +63,7 @@
    "fetch_from": "action_id.focus",
    "fieldname": "focus",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Focus",
    "read_only": 1
   },
@@ -69,7 +75,7 @@
   },
   {
    "fieldname": "programme_discription",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Programme Discription"
   },
   {
@@ -81,7 +87,8 @@
    "fieldname": "programme_status",
    "fieldtype": "Select",
    "label": "Programme Status",
-   "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted"
+   "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted",
+   "reqd": 1
   },
   {
    "fieldname": "start_date",
@@ -114,7 +121,8 @@
   {
    "fieldname": "recipient_entity",
    "fieldtype": "Data",
-   "label": "Recipient Entity(s)"
+   "label": "Recipient Entity(s)",
+   "reqd": 1
   },
   {
    "fieldname": "national_implementing_entity",
@@ -129,7 +137,8 @@
   {
    "fieldname": "estimated_investment_needs",
    "fieldtype": "Data",
-   "label": "Estimated investment needs (USD)"
+   "label": "Estimated investment needs (USD)",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_vxobi",
@@ -138,7 +147,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-19 18:14:38.876300",
+ "modified": "2024-03-28 12:11:23.635466",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Programme",

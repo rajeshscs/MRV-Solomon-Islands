@@ -1,5 +1,7 @@
 <template >
    <Header />
+   <section class="breadcrumb-area with-overlay"></section>
+
    <ProjectComponent :data="data" />
    <Footer :data="data" />
 </template>

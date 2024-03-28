@@ -135,7 +135,7 @@
 
 
     <!-- <div><img src="/files/Screenshot 2024-03-13 185349.png" class="report-image"></div> -->
-    <section class="breadcrumb-area with-overlay"></section>
+    
     <router-view />
   </header>
 </template>
@@ -236,6 +236,7 @@ onUnmounted(() => {
 
 .breadcrumb-area {
   position: relative;
+  display: block !important;
 }
 
 .with-overlay::before {

@@ -1,6 +1,7 @@
 <template>
   <div>
      <Header />
+     <section class="breadcrumb-area with-overlay"></section>
      <div
         data-aos="fade-right"
         data-aos-delay="50"
@@ -8,123 +9,94 @@
         data-wow-delay="0.3s"
         id="reports"
         >
-        <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
-           National <span style="color: green; font-weight: 700;">GHG</span> Inventory
-        </h1>
-        <div class="container-fluid">
-           <div class="row" v-for="item in data.message" :key="item.name">
-            <div class="img p-1"  v-if="item.report_image">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image" class="report-image">
-              </div>
+        <div class="container-fluid report-top-ground">
+          <div class="pattern-background">
+              <img src="../assets/images/pattern.png" style="height: 100%; width: 100%;">
+          </div>
+
+
+          <h1 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">
+             National <span style="color: green; font-weight: 700;">GHG</span> Inventory
+          </h1>
+
+          <div class="container-fluid" style="padding-bottom: 25px;">
+            <div class="parent_pops">
+              <a class="pop" @click="openModal(data.message.parent_data.report_image)">
+                <img :src="data.message.parent_data.report_image" id="myImg" class="rep_image">
+              </a>
+              <a class="pop" @click="openModal(data.message.parent_data.report_image1)">
+                <img :src="data.message.parent_data.report_image1" id="myImg" class="rep_image">
+              </a>
+              <a class="pop" @click="openModal(data.message.parent_data.report_image2)">
+                <img :src="data.message.parent_data.report_image2" id="myImg" class="rep_image">
+              </a>
             </div>
 
-            <div class="img p-1"  v-if="item.report_image1">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image1" class="report-image1">
-              </div>
-            </div>
+            <!-- <div id="myModal" :class="{ 'full-page-modal': isModalOpen }" @click="closeModal">
+              <span class="close">&times;</span>
+              <img class="modal-content" id="img01">
+            </div> -->
+          </div>
+        </div>
 
-            <div class="img p-1" v-if="item.report_image2">
-              <div class="pattern-background">
-                  <img src="../assets/images/pattern.png" style="height: 100%;">
-              </div>
-              <div>
-                  <img :src="item.report_image2" class="report-image2">
-              </div>
-            </div>  
-           </div>
         </div>
      </div>
+     <div id="myModal" :class="{ 'full-page-modal': isModalOpen }" @click="closeModal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+    </div>
      <Footer :data="data" />
-  </div>
 </template>
 <script setup>
   import Footer from '@/components/Footer.vue'
   import Header from '@/components/Header.vue'
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
-  $.ajax({
-   success:function(){
-      $('.breadcrumb-area').attr('style', "display:block !important;")
-   }
-  }) 
-  const data = ref([]);
-  const partnerLogos = ref([]);
-  console.log(data)
-  const fetchData = async () => {
-    
-    try {
-      const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
-      
-      if (response.status === 200) {
-        data.value = response.data;
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch (error) {
-      console.error('Error:', error);
+  // $.ajax({
+  //  success:function(){
+  //     $('.breadcrumb-area').attr('style', "display:block !important;")
+  //  }
+  // })
+  setTimeout(()=>{
+    $('.breadcrumb-area').attr('style', "display:block !important;")
+  }, 600)
+const data = ref([]);
+const isModalOpen = ref(false);
+
+const fetchData = async () => {
+  try { 
+    const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
+    if (response.status === 200) {
+      data.value = response.data;
+    } else {
+      throw new Error('Network response was not ok');
     }
-    var values = data._rawValue.message.parent_data.contact_number
-    var childField = data._rawValue.message.child_table_data
-    var values = data._rawValue.message.parent_data
-    for (var item of childField){
-      if (item.image){
-        console.log("item",item.image);
-      }
-      else{
-        console.log("no item found");
-      }
-    }
-  
-    console.log("responsee", values);
-  };
-  
-  onMounted(() => {
-    fetchData();
-    fetchPartnerLogos();
-  });
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+const openModal = (src) => {
+  const modal = document.getElementById("myModal");
+  const modalImg = document.getElementById("img01");
+  modal.style.display = "block";
+  $('.modal-content').attr("style","display:block;");
+  console.log("kishore")
+  modalImg.src = src;
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "none";
+  isModalOpen.value = false;
+};
+
+onMounted(() => {
+  fetchData();
+});
 </script>
 <style scoped>
-  .img {
-    position: relative;
-    display: flex;
-    background-color: #00220012;
-    height: auto;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 0;
-  }
-  .pattern-background {
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-  }
-  .report-image, .report-image1, .report-image2 {
-    width: 80% !important;
-    height: auto !important;
-    margin: auto;
-    position: relative;
-    padding: 20px 0px !important;
-    width: 80cap;
-  }
-  @media(max-width: 768px) {
-  .img {
-    position: relative;
-    background-color: #00220012;
-    height: 24rem;
-  }
-  .report-image {
-    width: 80%;
-    height: auto !important;
-    margin: auto;
-    position: relative;
-    }
-  }
+
+
 </style>

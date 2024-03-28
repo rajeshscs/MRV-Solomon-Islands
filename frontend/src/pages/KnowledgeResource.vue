@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <section class="breadcrumb-area with-overlay"></section>
     <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
         Knowledge <span style="color: green; font-weight: 700;">Resources</span>
     </h1>
@@ -21,11 +22,13 @@ import knowledgeResource from '@/components/KnowledgeResource.vue'
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-$.ajax({
-   success:function(){
-      $('.breadcrumb-area').attr('style', "display:block !important;")
-   }
-  }) 
+// $.ajax({
+//    success:function(){
+//   }
+// }) 
+  setTimeout(()=>{
+    $('.breadcrumb-area').attr('style', "display:block !important;") 
+  }, 200)
 const data = ref([]);
 
 const fetchData = async () => {

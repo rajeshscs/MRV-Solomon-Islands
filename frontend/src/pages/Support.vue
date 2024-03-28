@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-
+    <section class="breadcrumb-area with-overlay"></section>
     <div class="counter-area fix area-padding" id="about">
       <div class="container-fluid" data-aos="fade-right" data-aos-delay="100">
         <div class="row" data-aos="fade-right" style="padding: 0 10px;" data-aos-delay="100">
@@ -168,11 +168,7 @@
 
  }
 
- .breadcrumb-area {
-   background: url('../src/assets/images/edited.jpeg');
-   background-size:cover;
-   height: 500px; 
- }
+
  
  p{
  /* margin-left: 20px; */

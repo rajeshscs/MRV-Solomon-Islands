@@ -718,11 +718,17 @@ class Dashboard {
 				$('#mitigation_till-date-title').html("GHG Emission Acheived - Till Today")
 				// '#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"
 				let colors_5 = ["#ffa600","#ff7c43","#f95d6a","#d45087","#a05195","#665191","#2f4b7c","#003f5c","#00545c","#005e7b","#006598","#4f67ad","#8d62b2","#c358a4","#eb5186","#ff5d5d"]
-				if(r.message != 0){
 					if (r.message.data.length != 0){
+						let expected = 0
+						if(r.message.expected.length != 0){
+							expected = r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)
+						}
+						else{
+							expected = 0
+						}
 						if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 							$('#mitigation_till-date-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-							$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+							$('#mitigation_till-date-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${expected}</span>`)
 							const mitigation_ghg_till_data = {
 								type: "donut",
 								colors: colors_5,
@@ -781,18 +787,6 @@ class Dashboard {
 						$("#mitigation_till-date").append(no_image)
 					}
 					
-				}
-				else{
-					var no_image = ''
-					no_image=`	<div class="msg-box no-border">
-									<div>
-										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
-									</div>
-									<p>Nothing to show</p>
-								</div>
-							`
-					$("#mitigation_till-date").append(no_image)
-				}
 				
 				
 			})
@@ -814,14 +808,20 @@ class Dashboard {
 		let formattedToDate = `${toDateParts[2]}-${toDateParts[1]}-${toDateParts[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_last_year')
 			.then((r) => {
-				console.log("------>>>>>>>>>>>",r.message);
+				console.log("------>>>>>>>>>>>",r.message.data.length);
 				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedFromDate} to ${formattedToDate}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
-				if(r.message != 0){
 					if(r.message.data.length != 0){
+						let expected = 0
+						if(r.message.expected.length != 0){
+							expected = r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)
+						}
+						else{
+							expected = 0
+						}
 						if(r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
 							$('#mitigation_last-year-label').html(`<span class="span-3">Total :</span><span class="span-3">Expected :</span>`)
-							$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${r.message.expected.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
+							$('#mitigation_last-year-value').html(`<span class="span-4"> ${r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue)}</span><span class="span-4"> ${expected}</span>`)
 							const mitigation_ghg_last_year = {
 								type: "donut",
 								colors: colors_6,
@@ -883,21 +883,6 @@ class Dashboard {
 						$("#mitigation_last-year").append(no_image)
 					}
 					
-				}
-				else{
-							
-					var no_image = ''
-					no_image=`	<div class="msg-box no-border">
-									<div>
-										<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
-									</div>
-									<p>Nothing to show</p>
-								</div>
-							`
-					$("#mitigation_last-year").append(no_image)
-				}
-				
-				
 			})
 	}
 	

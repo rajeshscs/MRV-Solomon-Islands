@@ -4,21 +4,21 @@
     <div class="tab-area fix area-padding bg-color wow fadeInUp" data-aos="fade-right " data-aos-delay="100" data-wow-delay="0.3s" id="projects">
        <div class="container-fluid">
            <div class="section-headline text-center">
-            <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
+               <h2 style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="p-5 text-center">Our <span style="color: green; font-weight: 700;">Projects</span></h2>
            </div>
             <ul v-for="item in data.message" :key="item.name" class="pr-blw-img-list" style="list-style: none; display:flex">
-            <li v-if="item.project_image1" class="list_image">
-               <img :src="item.project_image1" class="pro_image">
-               <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image1_title}}</h5></div>
-            </li>
-            <li v-if="item.project_image2" class="list_image">
-               <img :src="item.project_image2" class="pro_image">
-               <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div>
-            </li>
-            <li v-if="item.project_image3" class="list_image">
-               <img :src="item.project_image3" class="pro_image">
-               <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image3_title}}</h5></div>
-            </li>
+               <li v-if="item.project_image1" class="list_image">
+                  <img :src="item.project_image1" class="pro_image">
+                  <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image1_title}}</h5></div>
+               </li>
+               <li v-if="item.project_image2" class="list_image">
+                  <img :src="item.project_image2" class="pro_image">
+                  <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div>
+               </li>
+               <li v-if="item.project_image3" class="list_image">
+                  <img :src="item.project_image3" class="pro_image">
+                  <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image3_title}}</h5></div>
+               </li>
             </ul>
            <br>
            <br>

@@ -267,7 +267,8 @@
    "fieldname": "action",
    "fieldtype": "Link",
    "label": "Action",
-   "options": "Project Actions"
+   "options": "Project Actions",
+   "reqd": 1
   },
   {
    "fieldname": "programme",
@@ -305,7 +306,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2024-03-25 16:33:52.535950",
+ "modified": "2024-03-28 12:11:35.071604",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

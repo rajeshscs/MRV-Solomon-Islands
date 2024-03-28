@@ -1,7 +1,8 @@
 <template>
    <div>
      <Header />
- 
+     <section class="breadcrumb-area with-overlay"></section>
+
      <div class="counter-area fix area-padding" id="about">
       <div class="container-fluid" style="padding:0 15px;">
            <div class="section-headline text-center">
@@ -108,12 +109,7 @@
  
  
  <style scoped>
- .breadcrumb-area {
-   background: url('../src/assets/images/edited.jpeg');
-   background-size:cover;
-   height: 500px; 
-   display: block;
- }
+
  
  p{
  margin-left: 20px;

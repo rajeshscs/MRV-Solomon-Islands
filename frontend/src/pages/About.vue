@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-
+    <section class="breadcrumb-area with-overlay"></section>
     <div class="counter-area fix area-padding" id="about">
       <div class="container-fluid" data-aos="fade-right" data-aos-delay="100">
         <div class="row" data-aos="fade-right" data-aos-delay="100">
@@ -113,14 +113,6 @@ onMounted(() => {
 
 
 <style scoped>
-.breadcrumb-area {
-  /* position: relative; */
-  /* background: url('../assets/images/footer.png');  */
-  background: url('../src/assets/images/edited.jpeg'); /* no-repeat center center fixed; */
-  background-size:cover;
-  /* background-attachment: fixed; */
-  height: 500px; 
-}
 
 p{
 margin-left: 20px;
