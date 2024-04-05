@@ -6,7 +6,6 @@ import json
 def energy_calculation(doc,doc_name,tablefields):
 
 	document = frappe.get_doc(doc,doc_name)
-	frappe.log_error(document.year,document.name)
 	tables_lst = tablefields
 	if type(tablefields)==str:
 		tables_lst = json.loads(tablefields)

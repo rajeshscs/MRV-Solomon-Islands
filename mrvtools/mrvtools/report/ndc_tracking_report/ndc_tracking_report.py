@@ -18,7 +18,6 @@ def getColumns(filters):
 	# 			fields = 'monitoring_year',
 	# 			group_by = 'monitoring_year',
 	# 			order_by = 'financial_closure_date asc')
-	# frappe.log_error("Date",financial_closure_date)
 
 	# for i in financial_closure_date:
 	# 	col.append(f"{i.financial_closure_date[0:4]}" + ":Data")
@@ -61,7 +60,6 @@ def getData(filters):
 		"""
 
 		data = frappe.db.sql(query,as_dict=1)
-		frappe.log_error("Each",data)
 		# actualValues = frappe.db.get_all('Mitigation Monitoring Information',
 		# 			  fields = ['project_name1','monitoring_year','actual_annual_ghg'],
 		# 			  filters = {"included_in":["like","%NDC%"]},
@@ -97,7 +95,6 @@ def getData(filters):
 		# 		value = frappe.db.sql(query,as_dict =1)
 
 				
-		# 		frappe.log_error('value',value)	
 
 		# 		each[f'{i.monitoring_year}'] = value[0].actual_monitored_value if value and value[0].actual_monitored_value else 0
 		# output.extend(result)

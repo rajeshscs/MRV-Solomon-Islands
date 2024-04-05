@@ -42,7 +42,6 @@ def get_datas(filters):
 			conditions += f" AND P.key_sector like '{filters.get('key_sector')}'"
 	if filters.get("key_sub_sector"):
 		conditions += f" AND P.key_sub_sector like '{filters.get('key_sub_sector')}'"
-	frappe.log_error("Year",filters.get("year"))
 
 	query= f"""
 			SELECT
@@ -95,5 +94,4 @@ def get_datas(filters):
 	"""
 
 	result = frappe.db.sql(query, as_dict=1)
-	frappe.log_error("Resss",result)
 	return result

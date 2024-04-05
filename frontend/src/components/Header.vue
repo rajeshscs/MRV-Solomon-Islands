@@ -48,13 +48,13 @@
             <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }">Home</router-link>
           </li>
           <li>
+            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">About Climate Change Division</router-link>
+          </li>
+          <li>
             <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }">About MRV Tool</router-link>
           </li>
           <li>
             <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }">Project</router-link>
-          </li>
-          <li>
-            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">Climate Change Division</router-link>
           </li>
           <li>
             <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">Reports</router-link>
@@ -92,14 +92,14 @@
           <li class="nav-item">
             <router-link to='/home' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/home' }">Home</router-link>
           </li>
+          <li>
+            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">About Climate Change Division</router-link>
+          </li>
           <li class="nav-item">
             <router-link to='/about' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/about' }">About MRV Tool</router-link>
           </li>
           <li class="nav-item">
             <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }">Project</router-link>
-          </li>
-          <li>
-            <router-link to='/climate-change-division' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/climate-change-division' }">Climate Change Division</router-link>
           </li>
           <li>
             <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">Reports</router-link>
@@ -224,7 +224,7 @@ onUnmounted(() => {
 <style scoped>
 
 .dropdown-menu{
-  left: -36px;
+  left: -68px;
     padding: 0px;
     border: none;
     box-shadow: 0 0px 3px -2px #000;

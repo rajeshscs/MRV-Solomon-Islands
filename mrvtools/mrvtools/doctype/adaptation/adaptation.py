@@ -16,7 +16,6 @@ class Adaptation(Document):
 		docs = frappe.db.get_all("Master Data ChildTable",
 			  fields = ["module","table","impact_area","indicator"], 
 			  filters = {"module" : "Adaptation"})
-		frappe.log_error("adaptation",docs)
 		return docs
 	
 	@frappe.whitelist()
@@ -32,7 +31,6 @@ class Adaptation(Document):
 
 		result_fields = []
 		temp = []
-		frappe.log_error('category',category_list)
 		for category in reversed(category_list):
 			
 			# column = {
@@ -44,7 +42,6 @@ class Adaptation(Document):
 			# if len(temp) % 5  == 0 and not len(category_list)==len(temp):
 			# 	result_fields.append(column)
 		
-		frappe.log_error("Doc",result_fields)
 		return result_fields
 	
 
@@ -92,8 +89,6 @@ class Adaptation(Document):
 						new_list.sort()
 						
 						if old_list != new_list:
-							frappe.log_error("old",old_list)
-							frappe.log_error("new",new_list)
 							if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 								field_list[field["fieldname"]] = ",".join(old_list)
 
@@ -110,7 +105,6 @@ class Adaptation(Document):
 		meta = frappe.get_meta(self.doctype)
 		meta_dict = meta.as_dict()
 		fields = meta_dict["fields"]
-		# frappe.log_error("Fields",fields)
 		for field in fields:
 			if field["fieldtype"] == "JSON":
 				if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
@@ -165,6 +159,4 @@ class Adaptation(Document):
 		# 	for each_child_doc in self.qualitative_impact:
 		# 		child_doc=frappe.get_doc("Adaptation Qualitative ChildTable",each_child_doc.name)
 		# 		if child_doc.get(field["fieldname"]) != each_child_doc.get(field["fieldname"]):
-		# 			frappe.log_error(field["fieldname"],child_doc.get(field["fieldname"]))
-		# 			frappe.log_error(field["fieldname"],each_child_doc.get(field["fieldname"]))
 		

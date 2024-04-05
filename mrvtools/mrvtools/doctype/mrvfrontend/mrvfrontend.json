@@ -13,11 +13,9 @@
   "about_section_tab",
   "about_section_section",
   "about_heading_1",
-  "column_break_r8fjx",
   "description_1",
   "about_2_section",
   "about_heading_2",
-  "column_break_gsewa",
   "description_2",
   "project_section_section",
   "add_project_image_here_section",
@@ -51,6 +49,7 @@
   "content_image",
   "add_multiple_images_section",
   "climate_change_division_images",
+  "climate_change_division_content3",
   "report_section_section",
   "add_report_image_here_section",
   "report_image",
@@ -175,7 +174,7 @@
   },
   {
    "fieldname": "description_1",
-   "fieldtype": "HTML Editor",
+   "fieldtype": "Text Editor",
    "label": "Description 1"
   },
   {
@@ -185,21 +184,13 @@
   },
   {
    "fieldname": "description_2",
-   "fieldtype": "HTML Editor",
+   "fieldtype": "Text Editor",
    "label": "Description 2"
   },
   {
    "fieldname": "about_section_section",
    "fieldtype": "Section Break",
    "label": "About 1"
-  },
-  {
-   "fieldname": "column_break_r8fjx",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_gsewa",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "about_section_tab",
@@ -413,7 +404,7 @@
   },
   {
    "fieldname": "climate_change_division_content2",
-   "fieldtype": "Text",
+   "fieldtype": "Text Editor",
    "label": "Climate Change Division Content2"
   },
   {
@@ -612,12 +603,17 @@
    "fieldtype": "Table",
    "label": "Carousel Image",
    "options": "Climate Change Division Images"
+  },
+  {
+   "fieldname": "climate_change_division_content3",
+   "fieldtype": "Text Editor",
+   "label": "Climate Change Division Content3"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-03-18 16:01:21.900212",
+ "modified": "2024-04-05 19:57:23.527508",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

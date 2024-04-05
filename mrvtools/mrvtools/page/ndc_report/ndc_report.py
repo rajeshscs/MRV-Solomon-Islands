@@ -31,7 +31,6 @@ def getColumns(year):
 					pluck='monitoring_year')
 		for i in val:
 			col.append(f'{i}'+":Data")
-		# frappe.log_error("col",col)
 		keys_only = [item.split(':')[0] for item in col]
 		return keys_only
 
@@ -192,8 +191,6 @@ def get_pie_chart(year = None):
 			MT.project_id
 			"""
 		data = frappe.db.sql(query,as_dict=1)
-		# frappe.log_error("query",query)
-		# frappe.log_error("data",data)
 		result = list(dict((json.dumps(d, sort_keys=True), d) for d in data).values())
 		sector_label_list=[]
 		actual_reduction_list=[]

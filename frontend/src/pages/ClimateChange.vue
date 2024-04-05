@@ -38,19 +38,24 @@
                   <img :src="data.message.parent_data.content_image" class="col-md-5 float-md-end mb-3 ms-md-3 inner-side-image" alt="..." 
                   style="border-radius: 7px; width: 29%; height: 28rem; padding: 0px !important; object-fit: cover; margin: 0px 0px 37px 22px !important; box-shadow: rgba(0, 0, 0, 0.41) 0px 0px 6px;">
                 </li>
-                <p class="CCDContent" v-if="data.message.parent_data.climate_change_division_content2">
+                <p class="CCDContent content2" v-if="data.message.parent_data.climate_change_division_content2">
                   {{ data.message.parent_data.climate_change_division_content2 }}
                 </p>  
               </div>
               <hr style="height: 30px; color: #000; border-top: 1px solid #000;">
             <div class="climate_image">
               <ul v-for="ccd_image in data.message.parent_data.climate_change_division_images" :key="ccd_image.image" class="climate-image-list" style="list-style: none; display:flex">
-                <li v-if="ccd_image.image" style="position: relative; margin-right: 10px; margin-left:10px; height: 25rem;" class="ccd_list">
+                <li v-if="ccd_image.image" style="position: relative; height: 25rem;" class="ccd_list">
                   <img :src="ccd_image.image" style="width: 100%; height: auto;" class="ccd_image">
                   <!-- <div class="overlay"><h5 style="margin-top: 30%;">{{item.ccd_image_title}}</h5></div> -->
                 </li>
               </ul>
             </div>
+            <br>
+
+            <p class="CCDContent content3" v-if="data.message.parent_data.climate_change_division_content3">
+                  {{ data.message.parent_data.climate_change_division_content3 }}
+                </p>  
           </div>
      </div>
  
@@ -80,7 +85,30 @@
    } catch (error) {
      console.error('Error:', error);
    }
-  //  var values = data
+   setTimeout(()=>{
+			var description_1 = $('.content2');
+			var description_2 = $('.content3');
+      if (description_2.length) {
+				var descriptionHTML = description_2.html();
+				if (descriptionHTML) {
+					var extractedValue = descriptionHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, '');
+					description_2.html(extractedValue);
+				} else {
+					console.error('No HTML content found in #desctiption-1 element.');
+				}
+			}
+
+			if (description_1.length) {
+				var descriptionHTML = description_1.html();
+				if (descriptionHTML) {
+					var extractedValue = descriptionHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, '');
+					description_1.html(extractedValue);
+				} else {
+					console.error('No HTML content found in #desctiption-1 element.');
+				}
+			}
+			
+		}, 100)
   var childField = data._rawValue.message.CCDImages
   for (var item of childField){
     if (item.image){
@@ -124,13 +152,13 @@
 }
  
  .climate_image{
-    padding: 15px;
+    padding: 0px;
     display: flex;
     height: auto;
     width: 100%;
     flex-wrap: wrap;
-    gap: 0px 11px;
-    justify-content: start;
+    gap: 0px 0px;
+    justify-content: space-between;
 }
 .image-list{
     display: flex;

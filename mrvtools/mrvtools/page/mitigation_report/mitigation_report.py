@@ -217,10 +217,7 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 
 @frappe.whitelist(allow_guest=True)
 def get_chart(monitoring_year,sum_expected_annual_ghg,till_sum_expected_annual_ghg,sum_actual_annual_ghg,till_sum_actual_annual_ghg):
-	frappe.log_error("sum_expected_annual_ghg",sum_expected_annual_ghg)
-	frappe.log_error("sum_actual_annual_ghg",sum_actual_annual_ghg)
-	frappe.log_error("till_sum_expected_annual_ghg",till_sum_expected_annual_ghg)
-	frappe.log_error("till_sum_actual_annual_ghg1111",till_sum_actual_annual_ghg)
+	
 	if monitoring_year:	
 		labels = [monitoring_year,"Till Date"]
 		return {"datasets": [

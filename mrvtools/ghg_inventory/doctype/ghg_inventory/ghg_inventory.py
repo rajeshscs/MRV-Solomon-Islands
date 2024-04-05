@@ -31,7 +31,6 @@ class GHGInventory(Document):
 
 	@frappe.whitelist()
 	def get_data(self,table_name):
-		frappe.log_error('doc',table_name)
 		get_doc = frappe.db.sql(f"""SELECT * FROM `tabDirect and Indirect Managed Soils Master List` WHERE table_name = '{table_name}' """,as_dict=1,)
 		return get_doc
 	
@@ -59,7 +58,6 @@ class GHGInventory(Document):
 					if field["fieldname"] in repeated_list:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
-		frappe.log_error("List 2",field_list)
 		return field_list
 	
 

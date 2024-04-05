@@ -20,7 +20,6 @@ class SDGAssessment(Document):
 
 		result_fields = []
 		temp = []
-		frappe.log_error('category',category_list)
 		for category in category_list:
 			
 			# column = {
@@ -31,8 +30,6 @@ class SDGAssessment(Document):
 			# temp.append(category)
 			# if len(temp) % 5  == 0 and not len(category_list)==len(temp):
 			# 	result_fields.append(column)
-		
-		frappe.log_error("Doc",result_fields)
 		return result_fields
 	
 	
@@ -82,8 +79,6 @@ class SDGAssessment(Document):
 					# 	new_list.sort()
 						
 					# 	if old_list != new_list:
-					# 		frappe.log_error("old",old_list)
-					# 		frappe.log_error("new",new_list)
 					# 		if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 					# 			field_list[field["fieldname"]] = ",".join(old_list)
 
@@ -101,7 +96,6 @@ class SDGAssessment(Document):
 		meta = frappe.get_meta(self.doctype)
 		meta_dict = meta.as_dict()
 		fields = meta_dict["fields"]
-		# frappe.log_error("Fields",fields)
 		for field in fields:
 			if field["fieldtype"] == "JSON":
 				if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):

@@ -65,14 +65,9 @@ def getData(filters):
 
 				"""
 			value = frappe.db.sql(val,as_dict = 1)
-			frappe.log_error("data",data)
-			frappe.log_error("value",value)
 
 			for i in value:
-				frappe.log_error("i",i.name)
 				chart_label.append(i.name)
-			
-			# frappe.log_error("chart_label",chart_label)
 
 			for each in data:
 				for i in value:
@@ -90,8 +85,6 @@ def getData(filters):
 								"""
 					
 					total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
-
-					# frappe.log_error("Total",total_co2)
 					each[f'{i.name}'] = total_co2[0].total_co2_eq if total_co2 and total_co2[0].total_co2_eq else 0
 					if each.categories == 'Total National Emissions and Removals':
 
@@ -109,9 +102,6 @@ def getData(filters):
 						co2_value.append(chart_data[0].co2)
 						ch4_value.append(chart_data[0].ch4)
 						n2o_value.append(chart_data[0].n2o)
-			frappe.log_error("co2_value2", co2_value)
-			frappe.log_error("ch4_value2", ch4_value)
-			frappe.log_error("n2o_value2", n2o_value)
 
 			return data
 
@@ -141,8 +131,6 @@ def getData(filters):
 		value = frappe.db.sql(val,as_dict = 1)
 		for i in value:
 			chart_label.append(i.name)
-		# frappe.log_error("dataG", data)
-		# frappe.log_error("valG", value)
 		for each in data:
 			for i in value:
 				get_total_co2 = f"""
@@ -160,8 +148,6 @@ def getData(filters):
 							"""
 				
 				total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
-
-				# frappe.log_error("Total",total_co2)
 				each[f'{i.name}'] = total_co2[0].total_co2_eq if total_co2 and total_co2[0].total_co2_eq else 0
 
 				chart_value = f"""

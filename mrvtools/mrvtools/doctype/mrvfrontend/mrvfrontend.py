@@ -37,7 +37,6 @@ def get_all():
         'CCDImages': CCDImages,
 
     }
-    frappe.log_error("Error log", result)
 
     return result
 

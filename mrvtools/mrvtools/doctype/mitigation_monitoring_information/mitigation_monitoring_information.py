@@ -63,7 +63,6 @@ class MitigationMonitoringInformation(Document):
 					if field["fieldname"] not in repeated_list:
 						if old_doc.get(field["fieldname"]) != self.get(field["fieldname"]):
 							field_list[field["fieldname"]] = str(old_doc.get(field["fieldname"]))
-		frappe.log_error("List 2",field_list)
 		return field_list
 	
 

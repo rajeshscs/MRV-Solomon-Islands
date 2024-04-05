@@ -70,7 +70,6 @@ def getData(inventory_unit, from_year, to_year):
 						display_order asc
 					"""
 			data = frappe.db.sql(query,as_dict =1)
-			frappe.log_error("data",data)
 
 			val = f"""
 					SELECT 
@@ -86,11 +85,9 @@ def getData(inventory_unit, from_year, to_year):
 
 				"""
 			value = frappe.db.sql(val,as_dict = 1)
-			# frappe.log_error("dataE", data)
 
 			for i in value:
 				chart_label.append(i.name)
-			# frappe.log_error("chart_label", chart_label)
 
 			for each in data:
 				for i in value:
@@ -108,7 +105,6 @@ def getData(inventory_unit, from_year, to_year):
 								"""
 					
 					total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
-					# frappe.log_error("get_total_co2",total_co2)
 
 					each[f'{i.name}'] = total_co2[0].total_co2_eq if total_co2 and total_co2[0].total_co2_eq else 0
 
@@ -153,8 +149,6 @@ def getData(inventory_unit, from_year, to_year):
 					year ASC;
 
 			"""
-		# frappe.log_error("dataG", data)
-		# frappe.log_error("valG", val)
 
 		value = frappe.db.sql(val,as_dict = 1)
 		for i in value:
@@ -178,7 +172,6 @@ def getData(inventory_unit, from_year, to_year):
 				
 				total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
 
-				# frappe.log_error("Total",total_co2)
 				each[f'{i.name}'] = total_co2[0].total_co2_eq if total_co2 and total_co2[0].total_co2_eq else 0
 
 				chart_value = f"""

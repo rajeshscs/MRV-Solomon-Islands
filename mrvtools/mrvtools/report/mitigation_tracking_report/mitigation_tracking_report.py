@@ -144,16 +144,13 @@ def getData(filters):
 				MT.project_id
 				"""
 	data = frappe.db.sql(query,as_dict =1)
-	frappe.log_error("dataqqq",data)
 	global chartData 
 	chartData = []
-	frappe.log_error("Year",filters.get('monitoring_year'))
 
 	for i in data:
 		actualAnnualValue = frappe.db.get_value('Mitigation Monitoring Information',
 				{'monitoring_year':f"{filters.get('monitoring_year')}","project_id":i.name},
 				["actual_annual_ghg"], as_dict=1)
-		frappe.log_error("Data",actualAnnualValue)
 		startDate = frappe.db.get_value('Mitigation Monitoring Information',
 				{"project_id":i.name},"YEAR('start_date') as start_date")
 		tillDateActual = frappe.db.get_all('Mitigation Monitoring Information',
@@ -167,8 +164,6 @@ def getData(filters):
 			i['till_date_expected_ghg'] = int((i.expected_annual_ghg) * (datetime.now().year - (startDate)))
 		i['till_date_actual_ghg'] = tillDateActual[0].till_date_actual_ghg
 		chartData.append(tillDateActual[0].till_date_actual_ghg)
-		# frappe.log_error("Datum",chartData)
-		# frappe.log_error("test",tillDateActual)
 		
 	return data
 
@@ -198,7 +193,6 @@ def get_chart(filters):
 	
 
 	actual_annual_ghg = chartData
-	frappe.log_error("qqw",chartData)
 	chart = {
 		"data": {
 			"labels": project_names,

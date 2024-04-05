@@ -29,7 +29,6 @@ class IPPUGWPMasterList(Document):
 		for i in document_name:
 			doc_name = i.name
 			if i.sector == '1. Energy':
-				frappe.log_error("doc_name", doc_name)
 				frappe.enqueue(energy_calculation, doc=doc, doc_name=doc_name, tablefields=tablefields)
 
 			elif i.sector == '2. Industrial processes and product use':

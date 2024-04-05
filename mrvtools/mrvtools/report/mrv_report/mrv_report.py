@@ -55,7 +55,6 @@ def get_columns(filters):
 				order_by = 'financial_year')
 			for i in totalMonitoringYearsFinance:
 				col.append(f"{i.financial_year}" + ":Data")
-				frappe.log_error('Test',i.financial_year)
 
 		if filters.get("report") == "SDG Summary":
 			col.append("Category" + ":Data")
@@ -145,7 +144,6 @@ def get_datas(filters):
 						value = frappe.db.sql(query,as_dict =1)
 
 						
-						frappe.log_error('value',value)	
 
 						each[f'{i.monitoring_year}'] = value[0].actual_monitored_value if value and value[0].actual_monitored_value else 0
 				output.extend(result)
@@ -171,12 +169,10 @@ def get_datas(filters):
 						{conditions}
 					"""
 				result = frappe.db.sql(query, as_dict=1)
-				frappe.log_error("Result",result)
 				monitoringYearsAdaptation = frappe.db.get_all('Adaptation Monitoring Information',
 							filters={'proj_id':filters.get("project")},
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc')
-				frappe.log_error("Monitor",monitoringYearsAdaptation)
 				for each in result:
 					for i in monitoringYearsAdaptation:
 						query = f"""
@@ -281,7 +277,6 @@ def get_chart(filters):
 							fields = ['monitoring_year'],
 							order_by = 'monitoring_year asc',
 							pluck="monitoring_year")
-		frappe.log_error("expectedValue",expectedValue)
 		for i in monitoringYears:
 			currentValue = frappe.db.get_value('Mitigation Monitoring Information',{"proj_id":f'{filters.get("project")}',"monitoring_year":i},'actual_annual_ghg')
 			# output[0][f'{i.monitoring_year}'] = currentValue if currentValue else 0
@@ -309,17 +304,13 @@ def get_chart(filters):
 		# 	filters = {"parent" : name},
 		# 	order_by = 'financial_year')
 		expectedDoc = frappe.get_doc('Climate Finance',{'project_id': filters.get('project')})
-		frappe.log_error("ExpectedDoc",expectedDoc)
 		expectedDocList = expectedDoc.as_dict().budget_disbursement_schedule
-		frappe.log_error("Expected",expectedDocList)
 		for i in expectedDocList:
 			amountExpected.append(i.amount)
-			frappe.log_error("i",i.amount)
 		spentDoc = frappe.get_last_doc('Climate Finance Monitoring Information', {'proj_id': filters.get('project')})
 		spentDocList = spentDoc.as_dict().total_budget_disbursement
 		for i in spentDocList:
 			amountSpent.append(i.total_disbursement_usd)
-			frappe.log_error("s",i.total_disbursement_usd)
 
 
 		name = frappe.db.get_value('Climate Finance', {'project_id': f'{filters.get("project")}'}, 'name')

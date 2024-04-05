@@ -105,8 +105,7 @@ def get_chart(filters):
 					{conditions}
 				"""
 		
-		data = frappe.db.sql(query)	
-		frappe.log_error("data",data)
+		data = frappe.db.sql(query)
 		if data != ():
 			chart = {
 				"data": {
@@ -138,8 +137,7 @@ def get_chart(filters):
 					{conditions}
 				"""
 		
-		data = frappe.db.sql(query)	
-		frappe.log_error("data",data)
+		data = frappe.db.sql(query)
 		chart = {
 			"data": {
 				"labels": ["CO2","CH4","N2O"],
@@ -159,4 +157,3 @@ def get_chart(filters):
 
 
 # actual_annual_ghg = chartData
-# frappe.log_error("qqw",chartData)

@@ -9,7 +9,6 @@ from frappe.utils import get_site_base_path,now
 def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
 		data = get_datas(year,key_sector,key_sub_sector,impact_area)
-		frappe.log_error("data11111",data)
 		field_list = []
 		get_counts = []
 		meta = frappe.get_meta("Adaptation")
@@ -25,7 +24,6 @@ def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub
 		
 			for i in values:
 				
-				# frappe.log_error("i",i)
 				for key,value in i.items():
 					if value ==1:
 						count= count+1

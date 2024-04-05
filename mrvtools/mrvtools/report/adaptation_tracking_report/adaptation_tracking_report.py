@@ -30,7 +30,6 @@ def get_columns():
 def get_datas(filters):
 	conditions = ""
 	if filters.get("year"):
-		frappe.log_error("Not Empty","Not Empty")
 		conditions += f" AND  YEAR(P.financial_closure_date) <= '{filters.get('year')}'"
 	if filters.get("year") == None:
 		conditions += f"AND YEAR(P.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"

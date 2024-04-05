@@ -42,13 +42,11 @@ def get_datas(year = None,objective = None,key_sector = None,key_sub_sector = No
 	if year:
 		conditions += f" AND BDS.financial_year = '{year}' AND  CFTB.financial_year = '{year}'"
 	if year == '':
-		conditions += f" AND YEAR(C.financial_closure_date) <= '{frappe.utils.today()[0:4]}'" 
-		# frappe.log_error("conditions",conditions)
+		conditions += f" AND YEAR(C.financial_closure_date) <= '{frappe.utils.today()[0:4]}'"
 	if key_sector:
 			conditions += f" AND P.key_sector like '{key_sector}'"
 	if key_sub_sector:
 		conditions += f" AND P.key_sub_sector like '{key_sub_sector}'"
-	# frappe.log_error("Year",year)
 
 	query= f"""
 			SELECT
@@ -102,7 +100,6 @@ def get_datas(year = None,objective = None,key_sector = None,key_sub_sector = No
 			P.name;
 	"""
 	result = frappe.db.sql(query, as_dict=1)
-	# frappe.log_error("result",result)
 	# values_only = list(map(lambda x : str(x),result))
 	# values_only = list(map(k,result))
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]
@@ -198,8 +195,6 @@ def get_chart(year = None,objective = None,key_sector = None,key_sub_sector = No
 			
 		total_expected_spend = frappe.db.get_all("Climate Finance Disbursement Schedule ChildTable",fields=["amount"],filters = {"parent":i.name,"financial_year":["<=",frappe.utils.today()[0:4]]})
 		for amount in total_expected_spend:
-			# frappe.log_error("amount",amount)
-			
 			till_sum_expected_budget_spend_in_usd += amount.amount
 					
 	if year:	

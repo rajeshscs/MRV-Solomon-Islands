@@ -157,7 +157,6 @@ def get_pie_chart(inventory_year=None, inventory_unit=None):
 					"""
 			labels= categories
 			data = frappe.db.sql(query)
-			# frappe.log_error("query",data)
 			if data != ():
 				return {"data":data,"labels":labels}
 		if inventory_unit == 'GgCO2e':
@@ -192,8 +191,6 @@ def download_excel(columns,data):
 			del item['name']
 	new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission'], item["Total CO2 Emission"]] for item in data_list]
 	new_column_list = [item['id'] for item in column_list]
-	frappe.log_error("Dataaa",new_data_list)
-	frappe.log_error("colll",new_column_list)
 
 	data_dict = {new_column_list[i]: [row[i] for row in new_data_list] for i in range(len(column_list))}
 	export_data = pd.DataFrame(data_dict)

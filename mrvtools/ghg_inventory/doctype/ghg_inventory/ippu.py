@@ -40,7 +40,6 @@ def ippu_calculation(doc,doc_name,tablefields):
 
 def calculation_part(tablefields,document,report_doc):
 	if(tablefields != ""):
-		# frappe.log_error(tablefields,type(tablefields))
 		solvents_sum_co2 = 0; solvents_cumulative_co2 = 0
 		refrigeration_sum_co2 = 0; refrigeration_cumulative_co2 = 0
 		other_applications_sum_co2 = 0; other_applications_cumulative_co2 = 0

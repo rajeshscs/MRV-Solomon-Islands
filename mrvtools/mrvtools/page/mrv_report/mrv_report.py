@@ -108,19 +108,15 @@ def get_finance_columns(project = None):
 			fields=['financial_year'],
 			filters = {"parent" : name},
 			order_by = 'financial_year')
-		frappe.log_error("datataa",totalMonitoringYearsFinance)
 		if frappe.db.exists("Climate Finance Monitoring Information",{'project_id': f'{name}'}):
 			for i in totalMonitoringYearsFinance:
 				col.append(f"{i.financial_year}" + ":Int")
-			frappe.log_error("NAmee",name)
 			last_doc = frappe.get_last_doc("Climate Finance Monitoring Information",{'project_id': f'{name}'})
-			frappe.log_error("Get_last_doccc",last_doc)
 			totalMonitoringYears = frappe.db.get_all(
 				"Climate Finance Total Budget Disbursement ChildTable",
 				fields=['financial_year'],
 				filters = {"parent" : last_doc.name},
 				group_by = 'financial_year' )
-			frappe.log_error("dataFinance",totalMonitoringYears)
 			for i in totalMonitoringYears:
 				if f"{i.financial_year}" + ":Int" not in col:
 					col.append(f"{i.financial_year}" + ":Int")
@@ -187,7 +183,6 @@ def get_mitigation_datas(project = None):
 				{conditions}
 			"""
 		result = frappe.db.sql(query, as_dict=1)
-		frappe.log_error("Dataa",result)
 		for each in result:
 			for i in monitoringYears:
 				query = f"""
@@ -340,12 +335,8 @@ def get_finance_datas(project = None):
 				for i in spentDocList:
 					amountSpent[f'{i.financial_year}']=i.total_disbursement_usd
 				
-				frappe.log_error("amountExpected",amountExpected)
-				frappe.log_error("amountSpent",amountSpent)
-				
 				return [amountSpent,amountExpected]
 			else:
-				frappe.log_error("CCCCC","hi..")
 				return []
 
 
@@ -421,12 +412,6 @@ def download_excel(project):
 	df3 =  get_adaptation_details(project)
 	df4 =  get_sdg_details(project)
 	df5 =  get_finance_details(project)
-	
-	# frappe.log_error("df1",df1)
-	# frappe.log_error("df2",df2)
-	# frappe.log_error("df3",df3)
-	# frappe.log_error("df4",df4)
-	# frappe.log_error("df5",df5)
 	
 	data_dict1 = {df1[0][i]: [row[i] for row in df1[1]] for i in range(len(df1[0]))}
 	data_dict2 = {df2[0][i]: [row[i] for row in df2[1]] for i in range(len(df2[0]))}

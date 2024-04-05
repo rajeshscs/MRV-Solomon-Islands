@@ -52,8 +52,6 @@ class Project(Document):
 						new_list.sort()
 						
 						if old_list != new_list:
-							frappe.log_error("old",old_list)
-							frappe.log_error("new",new_list)
 							if self.get(field["fieldname"]) != old_doc.get(field["fieldname"]):
 								field_list[field["fieldname"]] = ",".join(old_list)
 

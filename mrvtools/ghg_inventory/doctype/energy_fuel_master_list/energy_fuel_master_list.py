@@ -26,7 +26,6 @@ class EnergyFuelMasterList(Document):
 							docu= frappe.get_doc("GHG Inventory",i.name)
 							frappe.enqueue(energy_calculation, doc=doc, doc_name=doc_name, tablefields=tablefields)
 
-		# frappe.log_error("Table",tablefields)
 				
 			
 				
