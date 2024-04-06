@@ -112,7 +112,7 @@
   color: red !important;
   text-decoration: none;
   transition: .2s;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 600;
   }
   .inner-row {

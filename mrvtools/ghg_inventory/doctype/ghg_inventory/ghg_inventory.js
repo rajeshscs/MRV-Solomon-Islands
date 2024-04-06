@@ -48,7 +48,6 @@ frappe.ui.form.on('GHG Inventory', {
 				},
 				async: false,
 				callback: function(r) {
-					// console.log(r.message)
 				}
 			})
 		}
@@ -66,7 +65,6 @@ frappe.ui.form.on('GHG Inventory', {
 		
 		if(frm.doc.work_state == "Rejected"){
 			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-				console.log("Draft");
 				frm.set_value("work_state","Rejected")
 				frm.save()
 			}
@@ -84,7 +82,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	frm.add_custom_button('Approve',()=>{
 		// 		frappe.confirm('Are you sure you want to proceed?',
 		// 			() => {
-		// 				console.log("2 custom button ")
 		// 				frm.set_value("workflow_state","Approved")
 		// 				frm.refresh_field("workflow_state")
 		// 				frm.save()
@@ -114,7 +111,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 			() => {
 		// 				frm.set_value("workflow_state","Draft")
 		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
 		// 				frm.save()
 		// 			}, () => {
 	
@@ -128,7 +124,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 			() => {
 		// 				frm.set_value("workflow_state","Pending")
 		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
 		// 				frm.save()
 		// 			}, () => {
 					
@@ -178,7 +173,6 @@ frappe.ui.form.on('GHG Inventory', {
 						}
 					}
 					else{
-						console.log("Admin...");
 						sector_options += ('\n'+ i)
 					}
 					
@@ -217,12 +211,10 @@ frappe.ui.form.on('GHG Inventory', {
 			async:false,
 			callback: function(r){
 				for (var i of r.message){
-					console.log(i)
 					var table_name = ""
 					var parts = i.split("_");
 					parts.shift();
 					table_name = parts.join("_");
-					console.log("i.....",i);
 					if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected") && frm.doc[i].length != 0){
 						frm.fields_dict[table_name].df.read_only = 1
 						frm.refresh_field(table_name)
@@ -323,13 +315,11 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	// 		for (var i of r){
 		// 	// 			fuel_options += ('\n'+ i)
 		// 	// 		}
-		// 	// 		console.log(fuel_options);
 		// 	// 		if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
 		// 	// 			cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 		// 	// 			frm.refresh_field('electricity_generation')
 		// 	// 			}
 		// 	// 		if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
-		// 	// 			console.log(fuel_options);
 		// 	// 			cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 		// 	// 			frm.refresh_field('manufacturing_industries')
 		// 	// 			}
@@ -349,7 +339,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	// 			cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 		// 	// 			frm.refresh_field('international_bunkers')
 		// 	// 			}
-		// 	// 		console.log("fuel_options",fuel_options);
 		// 	// 	});
 		// 	// }
 		// }
@@ -385,7 +374,6 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 		}
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}
@@ -410,8 +398,6 @@ frappe.ui.form.on('GHG Inventory', {
 				for (var i of r.message){
 
 					if (frm.doc.workflow_state == "Rejected"){
-						
-						console.log("i = ",i);
 						frm.set_value(i,[])
 						frm.save()
 					}
@@ -431,7 +417,6 @@ frappe.ui.form.on('GHG Inventory', {
 									method:"after_saving_table",
 									async:false,
 									callback:function(res){
-										console.log("Working.......");
 									}
 								})
 								
@@ -441,7 +426,6 @@ frappe.ui.form.on('GHG Inventory', {
 							
 							
 						}
-						console.log("HIII......:)");
 						frm.set_value("ghg_inventory_details",[])
 						frm.set_value('work_state','Approved')
 					}
@@ -463,7 +447,6 @@ frappe.ui.form.on('GHG Inventory', {
 									method:"before_saving_table",
 									async:false,
 									callback:function(r){
-										console.log("Mudinchhh!");
 									}
 								})
 							}
@@ -533,12 +516,10 @@ frappe.ui.form.on('GHG Inventory', {
 						var counter1=0
 						frm.set_value(table_name,[])
 						for (var i of value){
-							console.log(i);
 							if (counter1 == 0){
 								counter1 = 1
 								for(var row of frm.doc[key]){
 									var child = frm.add_child(table_name)
-									console.log(i,row[i]);
 									child[i] = row[i]
 								}
 							}
@@ -599,14 +580,8 @@ frappe.ui.form.on('GHG Inventory', {
 					else if(field == "international_bunkers"){
 						counter = 6
 					}
-					console.log("not_hidden_table_fields",not_hidden_table_fields);
-					console.log("Field",field);
 					for (let row =0; row < frm.doc[field].length;row++){
-						console.log(row);
-						console.log("Counter",counter);
-						console.log("Grid",cur_frm.grids[counter]);
 						cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
-						console.log("r.. ",cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options); 
 						frm.refresh_field(field)
 						
 						frappe.db.get_list('Energy Fuel Master List',{
@@ -635,7 +610,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 	method:'edit_table',
 		// 	async:false,
 		// 	callback: function(r){
-		// 		console.log(r.message);
 		// 		for (var i of r.message){
 		// 			if(frm.doc.work_state =="Approved" && (frm.doc.workflow_state == "Draft" || frm.doc.workflow_state == "Pending" || frm.doc.workflow_state =="Rejected")){
 		// 				frm.call({
@@ -643,7 +617,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// 					method:"after_saving_table",
 		// 					async:false,
 		// 					callback:function(res){
-		// 						console.log("Working.......");
 		// 					}
 		// 				})
 		// 				frm.set_value(i,[])
@@ -757,7 +730,6 @@ frappe.ui.form.on('GHG Inventory', {
 				for (var i of r.message){
 					userList.push(i[0])
 				}
-				console.log(userList);
 				frm.set_query("select_approver",function(){
 				return {
 					filters:{
@@ -816,7 +788,6 @@ frappe.ui.form.on('GHG Inventory', {
 					}
 				}
 			}
-			console.log("hidden",not_hidden_table_fields);
 			
 
 			frm.set_value('category','')
@@ -863,12 +834,9 @@ frappe.ui.form.on('GHG Inventory', {
 					frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
 						doc => {
 							frm.doc.solid_waste = []
-							console.log(frm.doc.year);
-							console.log(doc.rural_population);
 							let row = frm.add_child('solid_waste')
 							row.urban_population = doc.urban_population
 							frm.refresh_field('solid_waste')
-							console.log(doc);
 						}
 					)
 					}
@@ -890,8 +858,6 @@ frappe.ui.form.on('GHG Inventory', {
 						doc => {
 							frm.doc.ch4_wastewater_treatment = []
 							frm.doc.n2o_wastewater_treatment = []
-							console.log(frm.doc.year);
-							console.log(doc.rural_population);
 							frm.add_child('ch4_wastewater_treatment',{
 								population : doc.total_population
 							})
@@ -921,8 +887,6 @@ frappe.ui.form.on('GHG Inventory', {
 					frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
 						doc => {
 							frm.doc.open_burning_of_waste = []
-							console.log(frm.doc.year);
-							console.log(doc.rural_population);
 							frm.add_child('open_burning_of_waste',{
 								urban_population : doc.total_population
 							})
@@ -966,7 +930,6 @@ frappe.ui.form.on('GHG Inventory', {
 				order_by:'category'
 			}).then(records => {
 				for(var i in records){
-					console.log(records[i].category);
 					var child = frm.add_child(`forest_land`)
 					child.forest_category = records[i].category
 					frm.refresh_field(`forest_land`)
@@ -1160,7 +1123,6 @@ frappe.ui.form.on('GHG Inventory', {
 					}
 				}
 			}
-			console.log(not_hidden_table_fields);
 		}
 
 		if(frm.doc.sub_sector=='2.A.1. Cement production'){
@@ -1269,7 +1231,6 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 				// 'direct_managed_soils':,'direct_flooded_rice','direct_managed_organic_soils','direct_grazed_soils']
 			for (let table in table_name_list){
-				console.log(table_name_list[table]);
 				frm.call({
 					doc:cur_frm.doc,
 					method:"get_data",
@@ -1278,7 +1239,6 @@ frappe.ui.form.on('GHG Inventory', {
 						table_name: table_name_list[table]
 					},
 					callback:function(r){
-						console.log("2222222222222",r.message); 
 							frm.doc[`${table}`] = []
 							for(var i of r.message){
 								var child = frm.add_child(`${table}`)
@@ -1327,7 +1287,6 @@ frappe.ui.form.on('GHG Inventory', {
 				
 			}
 			for (let table in table_name_list){
-				console.log(table_name_list[table]);
 				frm.call({
 					doc:cur_frm.doc,
 					method:"get_data",
@@ -1336,7 +1295,6 @@ frappe.ui.form.on('GHG Inventory', {
 						table_name: table_name_list[table]
 					},
 					callback:function(r){
-						console.log(r.message); 
 							frm.doc[`${table}`] = []
 							for(var i of r.message){
 								var child = frm.add_child(`${table}`)
@@ -1447,12 +1405,9 @@ frappe.ui.form.on('GHG Inventory', {
 				frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
 					doc => {
 						frm.doc.solid_waste = []
-						console.log(frm.doc.year);
-						console.log(doc.rural_population);
 						let row = frm.add_child('solid_waste')
 						row.urban_population = doc.urban_population
 						frm.refresh_field('solid_waste')
-						console.log(doc);
 					}
 				)
 				}
@@ -1474,8 +1429,6 @@ frappe.ui.form.on('GHG Inventory', {
 					doc => {
 						frm.doc.ch4_wastewater_treatment = []
 						frm.doc.n2o_wastewater_treatment = []
-						console.log(frm.doc.year);
-						console.log(doc.rural_population);
 						frm.add_child('ch4_wastewater_treatment',{
 							population : doc.total_population
 						})
@@ -1505,8 +1458,6 @@ frappe.ui.form.on('GHG Inventory', {
 				frappe.db.get_doc('Waste Population Master List',frm.doc.year).then(
 					doc => {
 						frm.doc.open_burning_of_waste = []
-						console.log(frm.doc.year);
-						console.log(doc.rural_population);
 						frm.add_child('open_burning_of_waste',{
 							urban_population : doc.total_population
 						})
@@ -1571,7 +1522,6 @@ frappe.ui.form.on('GHG Inventory', {
 	// 	// table_name_values.unshift('direct')
 	// 	// table = table_name_values.join("_")
 	// 	// table = table.toLowerCase()
-	// 	// console.log(table);
 
 	// 	let table_name_list = ['direct_managed_soils','direct_flooded_rice','direct_managed_organic_soils','direct_grazed_soils']
 	// 	frm.call({
@@ -1582,7 +1532,6 @@ frappe.ui.form.on('GHG Inventory', {
 	// 			table_name:frm.doc.table_type
 	// 		},
 	// 		callback:function(r){
-	// 			console.log(r.message);
 	// 			for (var table of table_name_list){ 
 	// 				frm.doc[`${table}`] = []
 	// 				for(var i of r.message){
@@ -1653,7 +1602,6 @@ frappe.ui.form.on('Energy Reference ChildTable',{
 			}
 			cur_frm.grids[0].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 			frm.refresh_field('reference_approach')
-			console.log(fuel_type_options);
 		});
 	},
 	fuel_type:function(frm,cdt,cdn){
@@ -1699,7 +1647,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 			}
 			cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 			frm.refresh_field('electricity_generation')
-			console.log(fuel_type_options);
 		});
 	},
 	manufacturing_industries_add(frm, cdt, cdn) {
@@ -1716,7 +1663,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 			}
 			cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 			frm.refresh_field('manufacturing_industries')
-			console.log(fuel_type_options);
 		});
 	},
     transport_add(frm, cdt, cdn) {
@@ -1733,7 +1679,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				}
 				cur_frm.grids[3].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 				frm.refresh_field('transport')
-				console.log(fuel_type_options);
 			});
     },
 	other_sectors_add(frm, cdt, cdn) {
@@ -1750,7 +1695,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				}
 				cur_frm.grids[4].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 				frm.refresh_field('other_sectors')
-				console.log(fuel_type_options);
 		});
 	},
 	other_energy_add(frm, cdt, cdn) {
@@ -1767,7 +1711,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				}
 				cur_frm.grids[5].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 				frm.refresh_field('other_energy')
-				console.log(fuel_type_options);
 		});
 	},
 	international_bunkers_add(frm, cdt, cdn) {
@@ -1784,7 +1727,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				}
 				cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel_type.df.options = fuel_type_options
 				frm.refresh_field('international_bunkers')
-				console.log(fuel_type_options);
 		});
 	},
 	
@@ -1829,13 +1771,11 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				// for (var i of r){
 				// 	fuel_options += ('\n'+ i)
 				// }
-				// console.log(fuel_options);
 				// if(cur_frm.doc.electricity_generation.length != 0 && frm.doc.sub_sector=="1.A.1. Energy industries"){
 				// 	cur_frm.grids[1].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				// 	frm.refresh_field('electricity_generation')
 				// 	}
 				// if(cur_frm.doc.manufacturing_industries.length != 0 && frm.doc.sub_sector=="1.A.2 Manufacturing industries and construction"){
-				// 	console.log(fuel_options);
 				// 	cur_frm.grids[2].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				// 	frm.refresh_field('manufacturing_industries')
 				// 	}
@@ -1855,7 +1795,6 @@ frappe.ui.form.on('Energy Sector ChildTable', {
 				// 	cur_frm.grids[6].grid.grid_rows[d.idx-1].columns.fuel.df.options = fuel_options
 				// 	frm.refresh_field('international_bunkers')
 				// 	}
-				// console.log("fuel_options",fuel_options);
 			})
 		}
 });
@@ -1927,7 +1866,6 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 	},
 	// Calculate emissions when the "amount" field changes
 	amt_of_chemical_tonnes: function (frm, cdt, cdn) {
-		console.log("Helloo");
 		var d = locals[cdt][cdn];
 		var quantity = d.amt_of_chemical_tonnes;
 		var co2 = d.emission_factor_co2;
@@ -1935,7 +1873,6 @@ frappe.ui.form.on('IPPU Chemical ChildTable',{
 		var n2o = d.emission_factor_n2o;
 
 		if (co2 != 0) {
-			console.log("co2 = ",co2);
 			var co2Emission = (quantity * co2) /((10)**3); 
 			frappe.model.set_value(cdt, cdn, "calculated_co2", co2Emission);
 			frm.refresh_field("calculated_co2");
@@ -1975,14 +1912,12 @@ frappe.ui.form.on('IPPU Ozone ChildTable',{
 			order_by : 'name asc',
 			pluck: 'gas_name'
 		}).then(r =>{
-			console.log(r);
 			var gas_name_list = ["Sulfur hexafluoride"]
 
 			for (let i of r){
 				gas_name_list.push(i)
 			}
 
-			console.log(gas_name_list);
 			frm.set_query("gas_consumed", "electrical_equipment", function() {
 				return {
 					filters: {
@@ -2004,14 +1939,12 @@ frappe.ui.form.on('IPPU Ozone ChildTable',{
 			order_by : 'name asc',
 			pluck: 'gas_name'
 		}).then(r =>{
-			console.log(r);
 			var gas_name_list = ["Sulfur hexafluoride"]
 
 			for (let i of r){
 				gas_name_list.push(i)
 			}
 
-			console.log(gas_name_list);
 			frm.set_query("gas_consumed", "electrical_equipment", function() {
 				return {
 					filters: {
@@ -2119,7 +2052,6 @@ function toTitleCase(str) {
 // 				table_name:frm.doc.table_type
 // 			},
 // 			callback:function(r){
-// 				console.log(r.message);
 // 				for (var table of table_name_list){ 
 // 					frm.doc[`${table}`] = []
 // 					for(var i of r.message){

@@ -270,7 +270,6 @@ class Mitigation {
 				$("#categories_chart").html("No of Projects based on Categories")
 				
 				let results = r.message[1] || [];
-				console.log("rrrr-------r",results);
 				const custom_options = {
 					type: "bar",
 					colors: ["#48bb74"],
@@ -300,7 +299,6 @@ class Mitigation {
 		})
 			.then((r) => {
 				$("#sector_chart").html("GHG emissions reductions actual sector wise")
-				console.log("message---------",r.message);
 				let results = r.message || [];
 				const custom_options = {
 					type: "pie",	
@@ -334,7 +332,6 @@ class Mitigation {
 			market_mechanism:this.market_mechanism[0].value
 		})
 			.then((r) => {
-				console.log("11111111111111111111",r.message);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]

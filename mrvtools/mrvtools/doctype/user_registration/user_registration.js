@@ -24,7 +24,6 @@ frappe.ui.form.on('User Registration', {
                 method:"check_user_exists",
                 async:false,
                 callback:function(r){
-                    console.log(r.message);
                 }
             })
         }
@@ -71,7 +70,6 @@ frappe.ui.form.on('User Registration', {
         //         formData:
         //     },
         //     callback:function(r){
-        //         console.log(r.message);
         //     }
         // })
 	},

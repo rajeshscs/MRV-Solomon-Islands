@@ -262,7 +262,6 @@ class Dashboard {
 	// ghg_emissions_chart(){
 	// 	frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emissions_data')
 	// 		.then((r) => {
-	// 			console.log(r.message);
 	// 			// $('.title_names1').html("GHG Emissions")
 	// 			let results = r.message || [];
 	// 			const custom_options = {
@@ -288,7 +287,6 @@ class Dashboard {
 	// ghg_emission_reduction_chart(){
 	// 	frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.ghg_emission_reduction_data')
 	// 		.then((r) => {
-	// 			console.log(r.message);
 	// 			// $('.title_names2').html("GHG Emission Reduction")
 	// 			let results = r.message || [];
 	// 			const custom_options = {
@@ -340,7 +338,6 @@ class Dashboard {
 	project_count_chart(){
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_document_count')
 			.then((r) => {
-				console.log("r.message 111",r.message);
 				let project_count_label = []
 				let project_count_value = []
 				for(let [key, value] of Object.entries(r.message.project_count[0])){
@@ -808,7 +805,6 @@ class Dashboard {
 		let formattedToDate = `${toDateParts[2]}-${toDateParts[1]}-${toDateParts[0]}`
 		frappe.call('mrvtools.mrvtools.page.main_dashboard.main_dashboard.get_commulative_mitigation_last_year')
 			.then((r) => {
-				console.log("------>>>>>>>>>>>",r.message.data.length);
 				$('#mitigation_last-year-title').html(`GHG Emission Acheived - ${formattedFromDate} to ${formattedToDate}`)
 				let colors_6 = ['#6fdf96', '#ff8183', '#c6a7fe', '#e8e565',"#ff92e0","#77cce2","#f29b69","#8c88f7"]
 					if(r.message.data.length != 0){
@@ -904,7 +900,6 @@ class Dashboard {
 				$('#co2_emission_latest-title').html(` Total CO2 emmissions : ${formattedFromDate} to ${formattedToDate} Sector Wise`)
 				let colors_7 = ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"]
 				let results = r.message || [];
-				console.log("results......--->>>>>>",r.message.data.length);
 				if (results != []){
 					if (results.data.length != 0){
 						if (r.message.data.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){
@@ -995,7 +990,6 @@ class Dashboard {
 				let results = r.message || [];
 				let keys = Object.keys(r.message);
 				let values = Object.values(r.message);
-				console.log("resultsresults",values);		
 				if (results != []){
 					if (values.length != 0){
 						if (values.reduce((accumulator, currentValue) => accumulator + currentValue) != 0){

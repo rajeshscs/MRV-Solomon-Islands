@@ -221,8 +221,6 @@ class Finance {
 			year:this.monitoring_year[0].value
 		})
 			.then((r) => {
-				console.log(this.monitoring_year[0].value);
-				console.log(r.message);
 				$("#categories_chart").html("No of Projects based on Categories")
 				
 				let results = r.message || [];
@@ -252,9 +250,7 @@ class Finance {
 		})
 			.then((r) => {
 				$("#sector_chart").html("GHG emissions reductions actual sector wise")
-				console.log("messagemessagemessage = ",r.message);
 				let results = r.message || [];
-				console.log("results",results.data);
 				const custom_options = {
 					type: "pie",	
 					
@@ -287,7 +283,6 @@ class Finance {
 		})
 			.then((r) => {
 				$('.report-wrapper:first').remove();
-				console.log(r.message);
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
 				let data = r.message[1]

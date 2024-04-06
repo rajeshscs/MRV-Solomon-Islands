@@ -20,7 +20,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 			
 			if(frm.doc.work_state == "Rejected"){
 				if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-					console.log("Draft");
 					frm.set_value("work_state","Rejected")
 					frm.save()
 				}
@@ -104,7 +103,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 				doc:frm.doc,
 				method:'get_rows',
 				callback: function(r){
-					console.log("RR = ",r.message);
 					frm.set_value("total_budget_disbursement",[])
 					for(var i of r.message){
 						var child = frm.add_child("total_budget_disbursement")
@@ -257,7 +255,6 @@ frappe.ui.form.on('Climate Finance Monitoring Information', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}

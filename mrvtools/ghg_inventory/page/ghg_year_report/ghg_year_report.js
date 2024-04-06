@@ -89,7 +89,6 @@ class GHGInventory {
 				$("#categories_chart").html("No of Projects based on Categories")
 				
 				let results = r.message || [];
-				console.log(results);
 				const custom_options = {
 					type: "bar",	
 					colors: ["#48bb74"],
@@ -148,7 +147,6 @@ class GHGInventory {
 	}
 
 	ghg_to_year(options) {
-		console.log("AAAAAA",options);
 		this.to_year = this.page.add_select(
 			__("To Year"),options
 		)

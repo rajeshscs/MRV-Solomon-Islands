@@ -51,7 +51,7 @@ img{
  border-radius: 8px;
 }
 .parent_pops{display: flex;justify-content: center;gap: 15px;}
-.pop{display: flex;flex: 0 0 33.33%;}
+.pop{display: flex;flex: 0 0 33.33%;position:relative;}
 
 
 #myImg:hover {opacity: 0.7;}
@@ -110,7 +110,11 @@ to {-webkit-transform:scale(1)}
 from {transform:scale(0)} 
 to {transform:scale(1)}
 }
-
+.overlay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .close:hover,
 .close:focus {
 color: #bbb;

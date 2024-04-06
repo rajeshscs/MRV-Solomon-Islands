@@ -174,9 +174,7 @@ class GHGInventoryGasWise {
 		})
 			.then((r) => {
 				$("#categories_chart1").html("Total National Emission of all Gases")
-				console.log(r.message);
 				let results = r.message || [];
-				console.log(results);
 				const custom_options = {
 					type: "bar",	
 					colors: ["#568f8b"],
@@ -204,9 +202,7 @@ class GHGInventoryGasWise {
 		})
 			.then((r) => {
 				$("#categories_chart2").html("Total National Emission of all Gases")
-				console.log("message",r.message);
 				let results = r.message || [];
-				console.log("results",results.data);
 				const custom_options = {
 					type: "pie",	
 					colors: ["#b9d5b2", "#84b29e", "#568f8b", "#326b77", "#1b485e", "#122740"],

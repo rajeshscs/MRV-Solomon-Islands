@@ -293,9 +293,7 @@ class Adaptation {
 
 			this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 			let columns = r.message[0];
-			console.log(r.message[0]);
 			let data = r.message[1];
-			console.log(r.message[1]);
 			$('.headline:first').remove();
 			this.$heading = $('<b class="headline" style="margin-left: 30px;">Adaptation Report</b>').insertBefore(this.$report);
 			this.datatable = new DataTable(this.$report[0], { columns: columns, data: data ,showTotalRow:1});

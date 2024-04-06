@@ -9,15 +9,15 @@
             <ul v-for="item in data.message" :key="item.name" class="pr-blw-img-list" style="list-style: none; display:flex">
                <li v-if="item.project_image1" class="list_image">
                   <img :src="item.project_image1" class="pro_image">
-                  <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image1_title}}</h5></div>
+                  <div class="overlay"><h5>{{item.project_image1_title}}</h5></div>
                </li>
                <li v-if="item.project_image2" class="list_image">
                   <img :src="item.project_image2" class="pro_image">
-                  <div class="overlay"><h5 style="margin-top: 30%;"></h5>{{item.project_image2_title}}</div>
+                  <div class="overlay"><h5></h5>{{item.project_image2_title}}</div>
                </li>
                <li v-if="item.project_image3" class="list_image">
                   <img :src="item.project_image3" class="pro_image">
-                  <div class="overlay"><h5 style="margin-top: 30%;">{{item.project_image3_title}}</h5></div>
+                  <div class="overlay"><h5>{{item.project_image3_title}}</h5></div>
                </li>
             </ul>
            <br>

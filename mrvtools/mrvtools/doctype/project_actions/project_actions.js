@@ -8,7 +8,6 @@ frappe.ui.form.on('Project Actions', {
 		frm.set_value("sub_sector_affected",[])
 		frm.refresh_field("sub_sector_affected")
 		if(frm.doc.focus != "Others"){
-			console.log("frm.doc.focus ======= ",frm.doc.focus);
 			cur_frm.fields_dict.sector_affected.get_query = function (frm) {
 				return {
 					filters: {

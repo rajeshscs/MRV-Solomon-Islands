@@ -155,7 +155,6 @@ class NdcReport {
 				}
 				
 				let results = r.message || [];
-				console.log("rrrrr",results);
 				const custom_options = {
 					type: "bar",
 					colors: ["#48bb74"],
@@ -185,7 +184,6 @@ class NdcReport {
 		})
 			.then((r) => {
 				$("#sector_chart").html("GHG emissions reductions actual sector wise")
-				console.log("message",r.message);
 				let results = r.message || [];
 				const custom_options = {
 					type: "pie",	

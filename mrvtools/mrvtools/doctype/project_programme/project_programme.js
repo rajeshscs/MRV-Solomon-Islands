@@ -8,7 +8,6 @@ frappe.ui.form.on('Project Programme', {
 		frm.set_value("sub_sector_affected",[])
 		frm.refresh_field("sub_sector_affected")
 		// frappe.form.link_formatters['Project Programme'] = function(value, doc) {
-		// 	console.log("FOrmat",value);
 		// 	if(doc && doc.action_name && doc.action_name !== value) {
 		// 		return value + ': ' + doc.action_name;
 		// 	} else {

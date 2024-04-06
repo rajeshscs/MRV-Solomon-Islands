@@ -304,7 +304,6 @@ frappe.ui.form.on('Project', {
 	// 			for(var mutation of mutationsList) {
 	// 				if (mutation.type === 'attributes') {
 	// 					if (targetNode.innerText == "Not Saved") {
-	// 						console.log(targetNode.innerText);
 	// 						frm.clear_custom_buttons();
 	// 					}
 	// 				}

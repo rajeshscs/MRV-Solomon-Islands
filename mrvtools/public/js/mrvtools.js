@@ -140,9 +140,7 @@ $(document).on("form-refresh", function(frm) {
 		method:"mrvtools.api.get_approvers",
 		asyc:true,	
 		callback:function(r){
-			// console.log("curFrm",cur_frm.doc.doctype);
 			if (frappe.session.user != "Administrator"){
-				console.log("User roles = ",frappe.user_roles);
 				for (var i of r.message){
 					if(cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Approved"|| cur_frm.doc.workflow_state == "Rejected"){
 						if(frappe.user_roles.includes(i)){
@@ -163,15 +161,11 @@ $(document).on("form-refresh", function(frm) {
 // 		method:"mrvtools.api.get_approvers",
 // 		async:false,
 // 		callback:function(r){
-// 			// console.log("curFrm",cur_frm.doc.doctype);
 // 			if (frappe.session.user != "Administrator"){
-// 				console.log("User roles = ",frappe.user_roles);
 // 				for (let i of r.message){
 // 					if(cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Approved"){
 						
 // 						if(frappe.user_roles.includes(i)){
-// 							console.log("i",i);
-// 							console.log("H-----I");
 // 							$(`[id="page-${cur_frm.doc.doctype}"] [class="tab-pane fade show active"]`).attr("style","pointer-events:none !important;--text-color: var(--disabled-text-color); opacity: 0.9;")
 // 						}
 // 					}
@@ -192,32 +186,25 @@ $(document).ready(function(){
 	// $('[id="page-Workspaces"] [class="flex col page-actions justify-content-end"]').hide()
 	// $('[id="page-Workspaces"] [class="standard-actions flex"]').hide()
 	$('[class="nav-item dropdown dropdown-help dropdown-mobile d-none d-lg-block"]').attr("style","display:none !important")
-	// console.log("HEEEi");	
 	$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
 	$("head").append('<style>#page-Workspaces [class="flex col page-actions justify-content-end"]{display:none}</style>');
 	
 })
 
 	// $('[data-fieldtype="Table"]').on("click",function(){
-	// 	console.log("Click..");
 	// 	$('[data-fieldtype = "Select"]').on("change",function(){
-	// 		console.log("Select");
 	// 		cur_frm.clear_custom_buttons()
 	// 	})
 	// });
 	
 	// $('[data-fieldtype="Table"]').on("keyup",function(){
-	// 	console.log("keyup");
 	// });
-	// console.log(`[data-route='Form/Project/${cur_frm.doc.name}']`);
-	// console.log(document.querySelector(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}']`));
 	// var targetNode = document.querySelector('.indicator-pill');
 	// var config = { childList: true, subtree: true, characterData: true };
 
 	// var callback = function(mutationsList, observer) {
 	// 	for(var mutation of mutationsList) {
 	// 		if (mutation.type == 'childList' || mutation.type == 'characterData') {
-	// 			console.log("Pill text changed to: " + targetNode.innerText);
 	// 		}
 	// 	}
 	// };
@@ -227,17 +214,14 @@ $(document).ready(function(){
 
 	
 	// $('[data-fieldtype="Table"]').on("change",function(){
-	// 	console.log("ss",($(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}'] .indicator-pill`)).text())
 		
 	// 	if(($(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}'] .indicator-pill`)).text() == "Not Saved"){
-	// 		console.log("Onchange");	
 	// 		cur_frm.clear_custom_buttons();
 	// 	}
 	// });
 	
 	// $('[data-fieldtype="Table"').on("focusout",function(){
 	// 	if(($(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}'] .indicator-pill`)).text() == "Not Saved"){
-	// 		console.log("Focusout");
 	// 		cur_frm.clear_custom_buttons();
 	// 	}
 		
@@ -245,7 +229,6 @@ $(document).ready(function(){
 
 	// frappe.listview_settings["User"] = {
 	// 	refresh:function(){
-	// 		console.log(" User in...");
 	// 		// for( var i=0;i<=10;i++){
 	// 		// 	if( $('.list-row-col').eq(i).prop("innerText") == "Status"){
 	// 		// 		$('.list-row-col').eq(i).prop("innerText","Updation Status")

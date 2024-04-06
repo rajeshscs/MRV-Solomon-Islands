@@ -9,7 +9,6 @@ frappe.ui.form.on('GHG Inventory Master Report', {
 				limit:500,
 				order_by:'display_order asc'
 			}).then(records => {
-				console.log(records);
 				for (var record of records){
 					let row = frm.add_child('report')
 					row.categories= record.category_name

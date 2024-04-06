@@ -81,13 +81,11 @@ frappe.ui.form.on('SDG Monitoring Information', {
 	// 	$('head').append('<style>[class="btn ellipsis btn-primary"] {display:inline-block !important;}</style>')
 
 	// 	$('.control-input').on("keyup",function(){
-	// 		console.log("Successs...");
 	// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 			
 	// 	})
 		
 	// 	$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
-	// 		console.log("Successs child...");
 	// 		$('head').append('<style>[class="btn ellipsis btn-primary"] {display:none !important;}</style>')
 	// 	})
 		
@@ -128,7 +126,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// 	}
 			// }
 			// else if(frm.doc.work_state == "Pending"){
-			// 	console.log(frm.doc.work_state);
 			// 	if (frm.doc.workflow_state == "Rejected"){
 			// 		frm.set_value("work_state","Rejected")
 			// 		frm.save()
@@ -160,7 +157,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// }
 			if(frm.doc.work_state == "Rejected"){
 				if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-					console.log("Draft");
 					frm.set_value("work_state","Rejected")
 					frm.save()
 				}
@@ -205,7 +201,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// 			() => {
 			// 				frm.set_value("workflow_state","Draft")
 			// 				frm.refresh_field("workflow_state")
-			// 				console.log(frm.doc.workflow_state);
 			// 				frm.save()
 			// 			}, () => {
 		
@@ -219,7 +214,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// 			() => {
 			// 				frm.set_value("workflow_state","Pending")
 			// 				frm.refresh_field("workflow_state")
-			// 				console.log(frm.doc.workflow_state);
 			// 				frm.save()
 			// 			}, () => {
 						
@@ -233,7 +227,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 			// 			() => {
 			// 				frm.set_value("workflow_state","Draft")
 			// 				frm.refresh_field("workflow_state")
-			// 				console.log(frm.doc.workflow_state);
 			// 				frm.save()
 			// 			}, () => {
 		
@@ -350,7 +343,6 @@ frappe.ui.form.on('SDG Monitoring Information', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}

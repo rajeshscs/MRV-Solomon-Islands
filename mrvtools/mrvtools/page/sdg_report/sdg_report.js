@@ -50,7 +50,6 @@ class SDG {
 						columns:r.message[0],
 						data:r.message[1]
 					}).then((i) =>{
-						console.log("i message = ",i.message);
 						window.open(i.message)
 					})
 				})
@@ -251,12 +250,10 @@ class SDG {
 			impact_area : this.impact_area[0].value
 		})
 			.then((r) => {
-				console.log("22222222222222222222",r.message);
 				$('.report-wrapper:first').remove();
 				this.$report = $('<div class="report-wrapper">').appendTo(this.page.main);
 				let columns = r.message[0]
 				let data = r.message[1]
-				console.log(r.message);
 				$('.headline:first').remove();
 				this.$heading = $('<b class="headline" style="margin-left: 30px;">SDG Report</b>').insertBefore(this.$report);
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1});

@@ -47,7 +47,6 @@ class MRVReport {
 			frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.download_excel',{
 				project:this.project
 			}).then((i) =>{
-				console.log("i message = ",i.message);
 				window.open(i.message)
 			})
 		})
@@ -228,7 +227,6 @@ class MRVReport {
 		})
 			.then((r) => {
 				$("#categories_chart").html(" GHG Emissions redcutions actual year wise")
-				console.log('r.message', r.message);
 				let results = r.message || [];
 				const custom_options = {
 					type: "bar",
@@ -257,7 +255,6 @@ class MRVReport {
 		})
 			.then((r) => {
 				$("#categories_chart1").html("Finance disbursement actual year wise")
-				console.log('--------r.message', r.message);
 				let results = r.message || [];
 				const custom_options = {
 					type: "bar",
@@ -306,17 +303,14 @@ class MRVReport {
 		})
 			.then((r) => {
 				// $('.report-wrapper2:first').remove();
-				console.log("____----------",r.message);
 				// this.$report2 = $('<div class="report-wrapper2">').appendTo(this.page.main).insertAfter($('.report-wrapper1'));
 				let columns = r.message[0]
 				let data = r.message[1]
 				if (data[0][2] == null){
-					console.log("1112222222222")
 					$('.chart_hide1').attr('style','display:none !important')
 				}
 				else{
 					this.get_total_mrv_report()
-					console.log("1111111")
 					$('.chart_hide1').attr('style','margin: 14px; display: flex; align-items: center; justify-content: space-between;')
 				}
 				// $('.headline2:last').remove();
@@ -365,7 +359,6 @@ class MRVReport {
 		})
 			.then((r) => {
 				// $('.report-wrapper5:first').remove();
-				console.log("2222222222222222222",r.message);
 				// this.$report5 = $('<div class="report-wrapper5">').appendTo(this.page.main).insertAfter($('.report-wrapper4'));
 				let columns = r.message[0]
 				let data = r.message[1]
@@ -376,8 +369,6 @@ class MRVReport {
 					this.get_total_mrv_report2()
 					$('.chart_hide2').attr('style','margin: 14px; display: flex; align-items: center; justify-content: space-between;')
 				}
-				console.log("columns",columns);
-				console.log("data",data);
 				// $('.headline5:last').remove();
 				// if(this.project){
 				// 	this.$heading = $('<b class="headline">Finance Summary</b>').insertBefore(this.$report5);

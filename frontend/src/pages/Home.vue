@@ -30,7 +30,7 @@
         data-wow-delay="0.3s"
         id="reports"
         >
-        <div class="container-fluid report-top-ground">
+        <div class="container-fluid report-top-ground" style="border-bottom: 1px solid #f0f0f0;">
           <div class="pattern-background">
               <img src="../assets/images/pattern.png" style="height: 100%; width: 100%;">
           </div>
@@ -44,17 +44,17 @@
             <div class="parent_pops">
               <a class="pop" @click="openModal(data.message.parent_data.report_image)">
                 <img :src="data.message.parent_data.report_image" id="myImg" class="rep_image">
-                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+                <div class="overlay"></div>
 
               </a>
               <a class="pop" @click="openModal(data.message.parent_data.report_image1)">
                 <img :src="data.message.parent_data.report_image1" id="myImg" class="rep_image">
-                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+                <div class="overlay"></div>
 
               </a>
               <a class="pop" @click="openModal(data.message.parent_data.report_image2)">
                 <img :src="data.message.parent_data.report_image2" id="myImg" class="rep_image">
-                <!-- <div class="overlay">{{item.project_image2_title}}</div> -->
+                <div class="overlay"></div>
 
               </a>
             </div>

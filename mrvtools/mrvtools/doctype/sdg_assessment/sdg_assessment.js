@@ -24,7 +24,6 @@ frappe.ui.form.on('SDG Assessment', {
 		
 		if(frm.doc.work_state == "Rejected"){
 			if (frm.doc.workflow_state == "Draft" && frm.doc.__unsaved == 1){
-				console.log("Draft");
 				frm.set_value("work_state","Rejected")
 				frm.save()
 			}
@@ -70,7 +69,6 @@ frappe.ui.form.on('SDG Assessment', {
 		// 			() => {
 		// 				frm.set_value("workflow_state","Draft")
 		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
 		// 				frm.save()
 		// 			}, () => {
 	
@@ -84,7 +82,6 @@ frappe.ui.form.on('SDG Assessment', {
 		// 			() => {
 		// 				frm.set_value("workflow_state","Pending")
 		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
 		// 				frm.save()
 		// 			}, () => {
 					
@@ -98,7 +95,6 @@ frappe.ui.form.on('SDG Assessment', {
 		// 			() => {
 		// 				frm.set_value("workflow_state","Draft")
 		// 				frm.refresh_field("workflow_state")
-		// 				console.log(frm.doc.workflow_state);
 		// 				frm.save()
 		// 			}, () => {
 	
@@ -375,7 +371,6 @@ frappe.ui.form.on('SDG Assessment', {
 		}
 
 		else if(frm.doc.work_state == "Pending"){
-			console.log(frm.doc.work_state);
 			if (frm.doc.workflow_state == "Rejected"){
 				frm.set_value("work_state","Rejected")
 			}
