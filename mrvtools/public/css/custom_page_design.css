@@ -17,6 +17,12 @@ ul.sidebar-menu::-webkit-scrollbar-track {
     --scrollbar-track-color: transparent !important;
     scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
 }
+.sidebar-menu{
+    scrollbar-width: none !important;
+}
+.main-sidebar .sidebar-menu > li > a span{
+    letter-spacing: 0.5px !important;
+}
 
 /* div[id^=page-List] .custom-actions {display: none;}
 div[id^=page-List] .menu-btn-group{   display: none;} */
