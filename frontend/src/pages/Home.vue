@@ -144,6 +144,9 @@ $.ajax({success: ()=> {
 }})
 </script>
 <style>
+.pop{
+  cursor: pointer;
+}
  .breadcrumb-area{
    display: none !important;
   }
