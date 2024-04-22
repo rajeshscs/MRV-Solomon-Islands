@@ -131,7 +131,7 @@
 //   }) 
 
   setTimeout(() =>{
-    $('.breadcrumb-area').attr('style', "display:block !important;")
+    $('.breadcrumb-area').attr('style', `display:block !important; background:url(${data.value.message.parent_data.breadcrumb_image});`)
   }, 1000)
  </script> 
  

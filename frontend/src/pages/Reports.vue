@@ -60,9 +60,7 @@
   //     $('.breadcrumb-area').attr('style', "display:block !important;")
   //  }
   // })
-  setTimeout(()=>{
-    $('.breadcrumb-area').attr('style', "display:block !important;")
-  }, 600)
+ 
 const data = ref([]);
 const isModalOpen = ref(false);
 
@@ -77,6 +75,11 @@ const fetchData = async () => {
   } catch (error) {
     console.error('Error:', error);
   }
+  $.ajax({
+			success:function(){
+				$('.breadcrumb-area').attr('style', `display:block !important; background:url(${data.value.message.parent_data.breadcrumb_image});`)
+			}
+		})
 };
 
 const openModal = (src) => {

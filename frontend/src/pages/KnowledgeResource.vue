@@ -26,9 +26,6 @@ import axios from 'axios';
 //    success:function(){
 //   }
 // }) 
-  setTimeout(()=>{
-    $('.breadcrumb-area').attr('style', "display:block !important;") 
-  }, 200)
 const data = ref([]);
 
 const fetchData = async () => {
@@ -43,6 +40,11 @@ const fetchData = async () => {
   } catch (error) {
     console.error('Error:', error);
   }
+  $.ajax({
+   success:function(){
+    $('.breadcrumb-area').attr('style', `display:block !important; background:url(${data.value.message.parent_data.breadcrumb_image});`)
+   }
+  })
 };
 
 onMounted(() => {

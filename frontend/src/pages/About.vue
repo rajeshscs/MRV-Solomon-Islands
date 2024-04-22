@@ -43,11 +43,7 @@
 	// import { createListResource } from 'frappe-ui';
 	import { ref, onMounted } from 'vue';
 	import axios from 'axios';
-	$.ajax({
-	success:function(){
-		$('.breadcrumb-area').attr('style', "display:block !important;")
-	}
-	}) 
+	
 	
 
 	const data = ref([]);
@@ -76,7 +72,11 @@
 			}
 			
 		}, 100)
-
+		$.ajax({
+			success:function(){
+				$('.breadcrumb-area').attr('style', `display:block !important; background:url(${data.value.message.parent_data.breadcrumb_image});`)
+			}
+		})
 		console.log("extractedValue ------- ",extractedValue);
 	} catch (error) {
 		console.error('Error:', error);

@@ -6,8 +6,8 @@
 
 
 .breadcrumb-area {
-  background: url('../src/assets/images/hero-banner.png'); 
-  background-size:cover;
+  /* background: url('../src/assets/images/hero-banner.png');  */
+  background-size:cover !important;
   height: 400px;
 }
 

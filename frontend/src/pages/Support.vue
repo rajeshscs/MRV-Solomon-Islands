@@ -66,13 +66,15 @@
               <div v-if="item.bulletin_heading4">
                 <h3 class="bulletin_heading">{{ item.bulletin_heading4 }}</h3>
               </div>
-              <div v-for="bulletinItem in item.bulletin_content4" :key="item.name">
-                <div v-if="bulletinItem.content">
-                  <h3 style="color: #000; font-weight: 500; font-size: 14px; line-height: 1.8;" class="content">{{ bulletinItem.content }}</h3>
+              <div v-if="data.message.parent_data.bulletin_content4">
+                <div v-for="bulletinItem in item.bulletin_content4" :key="item.name">
+                  <li v-if="bulletinItem.content" style="position: relative" class="listItem">
+                    {{ bulletinItem.content }}
+                  </li>
                 </div>
               </div>
               <li v-if="item.support_image4" class="support_image" >
-                <img :src="item.support_image4" style="width: 70%; height: auto;" class="supp_image">
+                <img :src="item.support_image3" style="width: 70%; height: auto;" class="supp_image">
               </li>
               
 
@@ -93,11 +95,6 @@
  // import { createListResource } from 'frappe-ui';
  import { ref, onMounted } from 'vue';
  import axios from 'axios';
- $.ajax({
-   success:function(){
-      $('.breadcrumb-area').attr('style', "display:block !important;")
-   }
-  }) 
  const data = ref([]);
  
  const fetchData = async () => {
@@ -123,6 +120,12 @@
       console.log("no item found");
     }
   }
+   $.ajax({
+   success:function(){
+    $('.breadcrumb-area').attr('style', `display:block !important; background:url(${data.value.message.parent_data.breadcrumb_image});`)
+   }
+  }) 
+
  
  };
  
