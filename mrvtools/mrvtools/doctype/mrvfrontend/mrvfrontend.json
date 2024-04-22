@@ -180,11 +180,13 @@
   {
    "fieldname": "about_heading_2",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "About Heading 2"
   },
   {
    "fieldname": "description_2",
    "fieldtype": "Text Editor",
+   "hidden": 1,
    "label": "Description 2"
   },
   {
@@ -220,6 +222,7 @@
   {
    "fieldname": "about_heading_1",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "About Heading1"
   },
   {
@@ -400,6 +403,7 @@
   {
    "fieldname": "climate_change_title2",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Climate Change Title2"
   },
   {
@@ -581,10 +585,10 @@
    "label": "Other"
   },
   {
-   "description": "To add breadcrumb image",
+   "description": "Attach top image for all other pages except home page.",
    "fieldname": "breadcrumb_image",
    "fieldtype": "Attach Image",
-   "label": "Other Pages Top Image"
+   "label": "Top Image"
   },
   {
    "fieldname": "transparency_table",
@@ -613,7 +617,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-04-05 19:57:23.527508",
+ "modified": "2024-04-22 13:10:40.814623",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",
