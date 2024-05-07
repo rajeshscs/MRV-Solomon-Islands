@@ -263,7 +263,7 @@ class GHGInventoryGasWise {
 				$('.all_html').attr('style',"display:none !important")
 			}
 			else{
-				$('.report-heading').attr('style',"display:block !important")
+				$('.report-heading').attr('style',"display:block !important;margin-left: 30px")
 				$('.all_html').attr('style',"display:block !important")
 			}
 		})

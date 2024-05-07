@@ -122,19 +122,21 @@ def getColumns():
 def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,location = None,ndc = None,market_mechanism = None):
 	conditions = ""
 	if monitoring_year:
-		conditions += f"AND YEAR(start_date) <= '{monitoring_year}'"
+		conditions += f" AND YEAR(P.start_date) <= '{monitoring_year}'"
+		
 	if key_sector:
-		conditions += f" AND key_sector like '{key_sector}'"
+		conditions += f" AND P.key_sector like '{key_sector}'"
 	if key_sub_sector:
-		conditions += f" AND key_sub_sector like '{key_sub_sector}'"
+		conditions += f" AND P.key_sub_sector like '{key_sub_sector}'"
 	if location:
-		conditions += f" AND location = '{location}'"
+		conditions += f" AND P.location = '{location}'"
 	if ndc == 'Yes':
 		conditions += f" AND MT.included_in like '%NDC%' "
 	if ndc == 'No':
 		conditions += f" AND MT.included_in not like '%NDC%' "
 	if market_mechanism:
 		conditions += f" AND MT.market_based_mechanism = '{market_mechanism}'"
+	
 	
 
 	query = f"""
@@ -168,6 +170,7 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 			ORDER BY
 				MT.project_id
 				"""
+	frappe.log_error("QUERR",query)
 	data = frappe.db.sql(query,as_dict =1)
 	# global till_sum_actual_annual_ghg
 	# global till_sum_expected_annual_ghg

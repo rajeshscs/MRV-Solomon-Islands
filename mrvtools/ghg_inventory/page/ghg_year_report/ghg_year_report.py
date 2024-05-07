@@ -4,7 +4,10 @@ chart_label = []
 co2_value = []
 ch4_value = []
 n2o_value = []
-import frappe
+import frappe,json
+import pandas as pd
+
+from frappe.utils import get_site_base_path,now
 @frappe.whitelist()
 def execute(inventory_unit, to_year, from_year):
 	columns, data = getColumns(to_year, from_year),getData(inventory_unit, from_year, to_year)
@@ -15,7 +18,7 @@ def execute(inventory_unit, to_year, from_year):
 def getColumns(to_year, from_year):
 	columns = [
 				{
-			"name": "categories",
+			"name": "Categories",
 			"id": "categories",
 			"width": 485
 		}
@@ -99,7 +102,7 @@ def getData(inventory_unit, from_year, to_year):
 									WHERE 
 										parent = '{i.name}' 
 									AND
-										categories = '{each.Categories}'
+										categories = '{each.categories}'
 									ORDER BY 
 										idx
 								"""
@@ -242,3 +245,27 @@ def get_chart():
 				}
 			]
 		}
+
+@frappe.whitelist()
+def download_excel(columns,data):
+	data_list = json.loads(data)
+	for item in data_list:
+		if 'indent' in item:
+			del item['indent']
+	column_list = json.loads(columns)
+	for item in column_list:
+		if 'name' in item:
+			del item['name']
+	new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission'], item["Total CO2 Emission"]] for item in data_list]
+	new_column_list = [item['id'] for item in column_list]
+
+	data_dict = {new_column_list[i]: [row[i] for row in new_data_list] for i in range(len(column_list))}
+	export_data = pd.DataFrame(data_dict)
+
+	site_name = get_site_base_path()
+	nowTime = now()[:-7]
+	nowTime = nowTime.replace(" ","")
+	nowTime = nowTime.replace("-","")
+	nowTime = nowTime.replace(":","")
+	export_data.to_excel(f"{site_name}/public/files/GHGInventory-Year-Wise-Report-{nowTime}.xlsx")
+	return f"../files/GHGInventory-Year-Wise-Report-{nowTime}.xlsx"

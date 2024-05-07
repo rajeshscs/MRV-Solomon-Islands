@@ -36,49 +36,46 @@ class GHGInventory {
 			this.$container.empty()
 			this.$report.empty()
 			$('[class="ghg_year_report page-main-content"]:first').remove()
+			$('[class="all_html"]:first').remove()
 			this.make()
 			this.render_datatable()
 		});
 	}
-	hide_btn() {
-		const toggleButtons = (hideBtn, showBtn, targetClass) => {
-		  $(hideBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
-	  
-		  $(showBtn).click(() => {
-			$('[class="'+targetClass+'"]').toggle();
-			$(hideBtn).toggle();
-			$(showBtn).toggle();
-		  });
-		  
-		  $(showBtn).toggle();
-		};
-	  
-		$(document).ready(() => {
-		  toggleButtons("#hide_btn", "#show_btn", "totalghg_year_report-graph");
-		});
-	  }
+	
 
 	make() {
 		this.$container = $(`
-		<div class="ghg_year_report page-main-content">
-		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center;justify-content: space-between;">
-			<b id="categories_chart"></b>
-			<button id="hide_btn" class="btn btn-sm">Hide chart</button>
-			<button id="show_btn" class="btn btn-sm">show chart</button>
-		</div>
-			<div class="totalghg_year_report-graph"></div>
+		<div class = "all_html"  style="margin:0;">
+			<div id="ghg_chart1"></div>
+			
 		</div>`
 		).appendTo(this.page.main);
-		this.$graph_area = this.$container.find(".totalghg_year_report-graph");
-		this.hide_btn();
-		
+		this.wrapper1()
+		this.get_chart_report()
 	
 	}
-
+	wrapper1(){
+		$('#ghg_chart1').html(`<div class="ghg_year_report page-main-content">
+		<div class="chart_hide" style="margin: 14px; display: flex; align-items: center;justify-content: space-between;">
+			<b id="categories_chart"></b>
+			<button id="hide_btn" onclick="toggle_chart1()" class="btn btn-sm">Hide chart</button>
+		</div>
+		<script>
+			function toggle_chart1() {
+				var x = document.getElementById("chart-1");
+				if (x.style.display === "none") {
+				x.style.display = "block";
+				document.getElementById("hide_btn").innerText = "Hide Chart"
+				} else {
+				x.style.display = "none";
+				document.getElementById("hide_btn").innerText = "Show Chart"
+				}
+				
+			}
+		</script>
+			<div id="chart-1" class="totalghg_year_report-graph"></div>
+		</div>`)
+	}
 	get_chart_report() {
 		frappe.call('mrvtools.ghg_inventory.page.ghg_year_report.ghg_year_report.get_chart',{
 			from_year:this.from_year[0].value,
@@ -127,7 +124,8 @@ class GHGInventory {
 				$('.all_html').attr('style',"display:none !important")
 			}
 			else{
-				$('.report-heading').attr('style',"display:block !important")
+				$('[class="report-heading"]:first').remove()
+				$('.report-heading').attr('style',"display:block !important;margin-left: 30px")
 				$('.all_html').attr('style',"display:block !important")
 			}
 			if(this.from_year[0].value){
@@ -151,9 +149,11 @@ class GHGInventory {
 			__("To Year"),options
 		)
 		this.to_year.on("change",(r) => {
+			$('[class="all_html"]:first').remove()
 			this.render_datatable()
-			this.get_chart_report();
 			this.make()
+			this.get_chart_report();
+			this.$heading.empty();
 
 		})
 	}
@@ -182,7 +182,10 @@ class GHGInventory {
 				let columns = r.message[0]
 				let data = r.message[1]
 				$('.headline:first').remove();
-				this.$heading = $('<b class="report-heading" style="margin-left: 30px;">GHG Inventory Report - Year wise</b>').insertBefore(this.$report);
+				if(this.to_year[0].value){
+					this.$heading = $('<b class="report-heading" style="margin-left: 30px;">GHG Inventory Report - Year wise</b>').insertBefore(this.$report);
+				}
+				
 				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true});
 			})
 			

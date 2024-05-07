@@ -92,7 +92,7 @@ def get_datas(year = None,key_sector = None,key_sub_sector = None,impact_area = 
 		cur_ele = impact_area.lower()
 		cur_word = cur_ele.split(" ")
 		resWord = "_".join(cur_word)
-		conditions += f" AND A.{resWord} = 1"
+		conditions += f" AND A.{resWord} = 1"	
 
 
 	query= f"""

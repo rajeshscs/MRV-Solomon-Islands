@@ -15,27 +15,27 @@ def execute(inventory_year, inventory_unit, filters=None):
 def getColumns():
 	columns = [
 		{
-			"name": "categories",
+			"name": "Categories",
 			"id": "categories",
 			# "width":510
 		},
 		{
-			"name": "co2",
+			"name": "CO2",
 			"id": "CO2 Emission",
 			# "width":126
 		},
 		{
-			"name": "ch4",
+			"name": "CH4",
 			"id": "CH4 Emission",
 			# "width":126
 		},
 		{
-			"name": "n2o",
+			"name": "N2O",
 			"id": "N2O Emission",
 			# "width":126
 		},
 		{
-			"name": "total_co2_eq",
+			"name": "tCO2e",
 			"id": "Total CO2 Emission",
 			# "width":126
 		}
