@@ -170,7 +170,6 @@ def getData(monitoring_year = None,key_sector = None,key_sub_sector = None,locat
 			ORDER BY
 				MT.project_id
 				"""
-	frappe.log_error("QUERR",query)
 	data = frappe.db.sql(query,as_dict =1)
 	# global till_sum_actual_annual_ghg
 	# global till_sum_expected_annual_ghg
@@ -297,10 +296,10 @@ def download_excel(columns,data):
 
 	data_list = json.loads(data)
 	column_list = json.loads(columns)
-	new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission']] for item in data_list]
-	new_column_list = [[item['id']] for item in column_list]
+	# new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission']] for item in data_list]
+	# new_column_list = [[item['id']] for item in column_list]
 
-	data_dict = {new_column_list[i]: [row[i] for row in new_data_list] for i in range(len(column_list))}
+	data_dict = data_dict = {column_list[i]: [row[i] for row in data_list] for i in range(len(column_list))}
 	export_data = pd.DataFrame(data_dict)
 
 	site_name = get_site_base_path()

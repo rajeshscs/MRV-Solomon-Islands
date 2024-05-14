@@ -290,11 +290,11 @@ def get_pie_chart(year = None,objective = None,key_sector = None,key_sub_sector 
 			if frappe.db.exists("Climate Finance",{"project_id":["in",[id]]}):
 				finance_id = frappe.db.get_list("Climate Finance",filters={"project_id":id},pluck="name")
 				cfmi_id = frappe.db.get_list("Climate Finance Monitoring Information",filters={"project_id":finance_id[0]},pluck="name")
-			for j in cfmi_id:
-				if frappe.db.exists("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]}):
-						total_spent = frappe.get_doc("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]})
-						total_disbursement_usd = total_spent.total_budget_disbursement[len(total_spent.total_budget_disbursement)-1].total_disbursement_usd
-						till_sum_actual_budget_spent = till_sum_actual_budget_spent + total_disbursement_usd
+				for j in cfmi_id:
+					if frappe.db.exists("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]}):
+							total_spent = frappe.get_doc("Climate Finance Monitoring Information",{"name":j,"monitoring_year":["<=",frappe.utils.today()[0:4]]})
+							total_disbursement_usd = total_spent.total_budget_disbursement[len(total_spent.total_budget_disbursement)-1].total_disbursement_usd
+							till_sum_actual_budget_spent = till_sum_actual_budget_spent + total_disbursement_usd
 		till_sum_actual_budget_spent_list.append(till_sum_actual_budget_spent)
 
 	return {"data":till_sum_actual_budget_spent_list,"labels":sector_label_list}

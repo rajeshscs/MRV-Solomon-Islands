@@ -254,10 +254,15 @@ def download_excel(columns,data):
 			del item['indent']
 	column_list = json.loads(columns)
 	for item in column_list:
-		if 'name' in item:
-			del item['name']
-	new_data_list = [[item['categories'], item['CO2 Emission'], item['CH4 Emission'], item['N2O Emission'], item["Total CO2 Emission"]] for item in data_list]
-	new_column_list = [item['id'] for item in column_list]
+		if 'id' in item:
+			del item['id']
+		if 'width' in item:
+			del item['width']
+	keys = list(data_list[0].keys())
+	keys.remove('categories')
+	keys.sort()
+	new_data_list = [[item["categories"]] + [item.get(key, 0) for key in keys] for item in data_list]
+	new_column_list = [item['name'] for item in column_list]
 
 	data_dict = {new_column_list[i]: [row[i] for row in new_data_list] for i in range(len(column_list))}
 	export_data = pd.DataFrame(data_dict)

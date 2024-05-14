@@ -338,6 +338,8 @@ def get_finance_datas(project = None):
 				return [amountSpent,amountExpected]
 			else:
 				return []
+		else:
+			return []
 
 
 

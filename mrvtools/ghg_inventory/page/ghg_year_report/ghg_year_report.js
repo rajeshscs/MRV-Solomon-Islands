@@ -23,7 +23,6 @@ class GHGInventory {
 		// this.add_card_button_to_toolbar();
 		this.set_default_secondary_action();
 		this.ghg_from_year();
-		this.ghg_to_year();
 		this.ghg_unit_filter();
 		// this.render_datatable();
 		// this.make();
@@ -40,6 +39,22 @@ class GHGInventory {
 			this.make()
 			this.render_datatable()
 		});
+		this.download_button = this.page.set_secondary_action('Download', () => {
+
+			frappe.call('mrvtools.ghg_inventory.page.ghg_year_report.ghg_year_report.execute',{
+				from_year:this.from_year[0].value,
+				to_year:this.to_year[0].value,
+				inventory_unit:this.inventory_unit[0].value
+			})
+				.then((r) => {
+					frappe.call('mrvtools.ghg_inventory.page.ghg_year_report.ghg_year_report.download_excel',{
+						columns:r.message[0],
+						data:r.message[1]
+					}).then((i) =>{
+						window.open(i.message)
+					})
+				})
+		})
 	}
 	
 
@@ -152,7 +167,9 @@ class GHGInventory {
 			$('[class="all_html"]:first').remove()
 			this.render_datatable()
 			this.make()
-			this.get_chart_report();
+			setTimeout(() => {
+				this.get_chart_report();
+			}, 300);
 			this.$heading.empty();
 
 		})

@@ -145,7 +145,6 @@ class Adaptation {
 						columns:r.message[0],
 						data:r.message[1]
 					}).then((i) =>{
-						console.log("i message = ",i.message);
 						window.open(i.message)
 					})
 				})
