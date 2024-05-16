@@ -124,6 +124,14 @@ class Mitigation {
 				"placeholder": __("Key Sector"),
 				"options": "Project Key Sector",
 				"input_class": "input-xs",
+				get_query: function () {
+					return {
+						"filters": {
+							"objective": "Mitigation"
+						}
+						
+					}
+				},
 				change:() =>{
 					this.key_sector = key_sector.get_value()
 					if (this.key_sector){

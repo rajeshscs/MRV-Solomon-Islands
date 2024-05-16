@@ -84,10 +84,12 @@ frappe.ui.form.on('Project', {
 	
 	key_sector:function(frm){
 		if(!frm.doc.key_sector){
+			frm.set_value("key_sub_sector","")
 			frm.set_df_property('key_sub_sector','hidden',1)
 			frm.refresh_field('key_sub_sector')
 		}
 		else{
+			frm.set_value("key_sub_sector","")
 			frm.set_df_property('key_sub_sector','hidden',0)
 			frm.refresh_field('key_sub_sector')
 		}

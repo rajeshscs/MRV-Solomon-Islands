@@ -151,7 +151,7 @@ class GHGInventory {
 				let year_field = $(this.parent).find(
 					`.frappe-control[data-original-title="${__("From Year")}"]`
 				);
-				$('[data-original-title="To Year"]:first').remove();
+				
 				this.ghg_to_year(options)
 
 			}
@@ -180,9 +180,13 @@ class GHGInventory {
 			
 		)
 		this.inventory_unit.on("change",(r) => {
+			$('[class="all_html"]:first').remove()
 			this.render_datatable()
-			this.get_chart_report();
-
+			this.make()
+			setTimeout(() => {
+				this.get_chart_report();
+			}, 300);
+			this.$heading.empty();
 		})
 	}
 

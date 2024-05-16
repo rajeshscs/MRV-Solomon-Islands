@@ -278,8 +278,7 @@ class GHGInventoryGasWise {
 			this.render_datatable()
 			this.get_chart_report();
 			this.get_chart_report2();
-			
-			
+			this.$heading.empty();
 		})
 	}
 

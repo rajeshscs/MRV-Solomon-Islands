@@ -132,7 +132,7 @@ def getData(inventory_unit, from_year, to_year):
 	if inventory_unit == 'GgCO2e':
 		query = f"""
 				Select
-					category_name as categories
+					category_name as categories,indent
 				from
 					`tabGHG Inventory Report Categories`
 				order by
@@ -161,7 +161,7 @@ def getData(inventory_unit, from_year, to_year):
 			for i in value:
 				get_total_co2 = f"""
 								SELECT 
-									total_co2_eq * 1000',
+									total_co2_eq * 1000,
 									parent
 								FROM 
 									`tabGHG Inventory Master Report ChildTable` 
@@ -179,9 +179,9 @@ def getData(inventory_unit, from_year, to_year):
 
 				chart_value = f"""
 						SELECT 
-									co2 * 1000,
-									ch4 * 1000,
-									n2o * 1000
+									co2 * 1000 as co2,
+									ch4 * 1000 as ch4,
+									n2o * 1000 as n2o
 								FROM 
 									`tabGHG Inventory Master Report ChildTable` 
 								WHERE 
@@ -189,6 +189,7 @@ def getData(inventory_unit, from_year, to_year):
 								AND
 									categories = 'Total National Emissions and Removals'
 					"""
+				
 				chart_data = frappe.db.sql(chart_value,as_dict =1)
 				co2_value.append(chart_data[0].co2 if chart_data and chart_data[0].co2 else 0)
 				ch4_value.append(chart_data[0].ch4 if chart_data and chart_data[0].ch4 else 0)

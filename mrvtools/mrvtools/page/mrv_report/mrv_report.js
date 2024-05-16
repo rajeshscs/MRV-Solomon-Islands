@@ -195,22 +195,22 @@ class MRVReport {
 				"fieldname": "project",	
 				"placeholder": __("Project ID"),
 				"options": "Project",
-				"input_class": "input-xs"
-			},
-			change:()=>{
-				this.project = project.get_value()
-				if (this.project) {
-					this.make()
-					this.render_datatable()
-					$('[class="page-form row"]').attr("style","height:50px !important;")
-				}
-				if (this.project == ''){
-					this.make()
-					this.get_total_mrv_report()
-					this.get_total_mrv_report2()
-					this.render_datatable()
-					$('[class="page-form row"]').attr("style","height:350px !important;")
-				}
+				"input_class": "input-xs", 
+				change:()=>{
+					this.project = project.get_value()
+					if (this.project) {
+						this.make()
+						this.render_datatable()
+						$('[class="page-form row"]').attr("style","height:50px !important;")
+					}
+					if (this.project == ''){
+						this.make()
+						this.get_total_mrv_report()
+						this.get_total_mrv_report2()
+						this.render_datatable()
+						$('[class="page-form row"]').attr("style","height:350px !important;")
+					}
+				},
 			},
 			
 			parent: $(this.parent).find(".from-project-field"),
