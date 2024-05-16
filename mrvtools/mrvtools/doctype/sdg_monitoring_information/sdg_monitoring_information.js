@@ -429,10 +429,9 @@ frappe.ui.form.on('SDG Monitoring Information', {
 				method:"get_json",
 				async:false,
 				callback:function(r){
-
-					var json_field=JSON.parse(r.message).quantitative
-
 					
+					var json_field=JSON.parse(r.message).quantitative
+					console.log("Json = ",json_field);
 					frm.set_value("json",JSON.stringify(json_field))
 					frm.refresh_field("json")
 					frm.set_value("quantitative_impact",[])
