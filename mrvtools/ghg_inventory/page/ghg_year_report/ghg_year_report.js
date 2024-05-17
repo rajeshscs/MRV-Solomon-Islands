@@ -148,10 +148,7 @@ class GHGInventory {
 				for(let i = parseInt(this.from_year[0].value);i<=(parseInt(this.from_year[0].value)+10);i++){
 					options.push(i)
 				}
-				let year_field = $(this.parent).find(
-					`.frappe-control[data-original-title="${__("From Year")}"]`
-				);
-				
+				$('[data-original-title="To Year"]:first').remove();
 				this.ghg_to_year(options)
 
 			}

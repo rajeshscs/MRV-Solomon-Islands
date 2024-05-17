@@ -91,7 +91,6 @@ def getData(inventory_unit, from_year, to_year):
 					total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
 					
 					each[f'{i.name}'] = f'{float(total_co2[0].total_co2_eq):,.3f}' if total_co2 and total_co2[0].total_co2_eq else 0
-					frappe.errprint(each[f'{i.name}'])
 			return data
 
 	if inventory_unit == 'GgCO2e':
