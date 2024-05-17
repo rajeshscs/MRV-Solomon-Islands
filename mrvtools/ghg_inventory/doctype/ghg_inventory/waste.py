@@ -27,13 +27,13 @@ def waste_calculation(doc,doc_name,tablefields):
 				"year": document.year
 			})
 			category_list = frappe.db.get_list('GHG Inventory Report Categories', 
-					fields= ['category_name','display_order'],
+					fields= ['category_name','display_order',"indent","parent1","parent2"],
 					limit = 500,
 					order_by ='display_order asc'
 				)
 			for i in category_list:
-				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2})
-			report_doc.insert()
+				report_doc.append("report",{"categories":i.category_name,"parent_categories":i.parent1,"parent_2_categories":i.parent2,"indent":i.indent})
+			report_doc.insert(ignore_permissions = True)
 			calculation_part(tab_fields,document,report_doc)
 
 

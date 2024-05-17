@@ -177,7 +177,6 @@ class GHGInventory {
 	ghg_unit_filter() {
 		this.inventory_unit = this.page.add_select(
 			__("Unit"),[" ", "tCO2e","GgCO2e"]
-			
 		)
 		this.inventory_unit.on("change",(r) => {
 			$('[class="all_html"]:first').remove()

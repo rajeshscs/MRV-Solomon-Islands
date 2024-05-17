@@ -277,7 +277,7 @@ frappe.ui.form.on('GHG Inventory', {
 					}
 					
 					for (let row =0; row < frm.doc[field].length;row++){
-						cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						cur_frm.fields_dict[field].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
 						frm.refresh_field(field)
 						
 						frappe.db.get_list('Energy Fuel Master List',{
@@ -292,7 +292,7 @@ frappe.ui.form.on('GHG Inventory', {
 							for (var i of r){
 								fuel_options += ('\n'+ i)
 							}
-							cur_frm.grids[counter].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							cur_frm.fields_dict[field].grid.grid_rows[row].columns.fuel.df.options = fuel_options
 						
 						})
 
@@ -558,30 +558,8 @@ frappe.ui.form.on('GHG Inventory', {
 					for (var i of r){
 						fuel_type_options += ('\n'+ i)
 					}
-					let counter = 0
-					if(field == "reference_approach"){
-						counter = 0
-					}
-					else if(field == "electricity_generation"){
-						counter = 1
-					}
-					else if(field == "transport"){
-						counter = 2
-					}
-					else if(field == "manufacturing_industries"){
-						counter = 3
-					}
-					else if(field == "other_sectors"){
-						counter = 4
-					}
-					else if(field == "other_energy"){
-						counter = 5
-					}
-					else if(field == "international_bunkers"){
-						counter = 6
-					}
 					for (let row =0; row < frm.doc[field].length;row++){
-						cur_frm.grids[counter].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
+						cur_frm.fields_dict[field].grid.grid_rows[row].columns.fuel_type.df.options = fuel_type_options
 						frm.refresh_field(field)
 						
 						frappe.db.get_list('Energy Fuel Master List',{
@@ -596,7 +574,7 @@ frappe.ui.form.on('GHG Inventory', {
 							for (var i of r){
 								fuel_options += ('\n'+ i)
 							}
-							cur_frm.grids[counter].grid.grid_rows[row].columns.fuel.df.options = fuel_options
+							cur_frm.fields_dict[field].grid.grid_rows[row].columns.fuel.df.options = fuel_options
 						
 						})
 
@@ -1038,53 +1016,6 @@ frappe.ui.form.on('GHG Inventory', {
 			}
 
 		
-
-		/////////////////////////////////////////////////////////////////////
-		/////////// Conditions to Show/Hide Respective Table Fields /////////
-		/////////////////////////////CATEGORY////////////////////////////////
-		/////////////////////////////////////////////////////////////////////
-
-		//Solid Waste Disposal//
-		// if(frm.doc.category == '4.A. Solid Waste Disposal'){
-			
-		// 	// frm.fields_dict.solid_waste.df.hidden = 0
-		// 	frm.refresh_field('solid_waste')
-
-		// }
-		// else{
-
-		// 	frm.doc.solid_waste = []
-		// 	// frm.fields_dict.solid_waste.df.hidden = 1
-		// 	frm.refresh_field('solid_waste')
-			
-		// }
-		
-		// //Wastewater Treatment and Discharge//
-		// if(frm.doc.category == '4.D. Wastewater Treatment and Discharge'){
-
-		// 	// frm.fields_dict.ch4_wastewater_treatment.df.hidden = 0
-		// 	frm.refresh_field('ch4_wastewater_treatment')
-
-		// 	// frm.fields_dict.n2o_wastewater_treatment.df.hidden = 0
-		// 	frm.refresh_field('n2o_wastewater_treatment')
-
-		// 	// frm.fields_dict.industrial_wastewater_treatment.df.hidden = 0
-		// 	frm.refresh_field('industrial_wastewater_treatment')
-		// }
-		// else{
-		// 	frm.doc.ch4_wastewater_treatment = []
-		// 	// frm.fields_dict.ch4_wastewater_treatment.df.hidden = 1
-		// 	frm.refresh_field('ch4_wastewater_treatment')
-
-		// 	frm.doc.n2o_wastewater_treatment = []
-		// 	// frm.fields_dict.n2o_wastewater_treatment.df.hidden = 1
-		// 	frm.refresh_field('n2o_wastewater_treatment')
-
-		// 	frm.doc.industrial_wastewater_treatment = []
-		// 	// frm.fields_dict.industrial_wastewater_treatment.df.hidden = 1
-		// 	frm.refresh_field('industrial_wastewater_treatment')
-		// }
-		
 	},
 	sub_sector: function(frm){
 		if (frm.doc.sub_sector){
@@ -1141,88 +1072,6 @@ frappe.ui.form.on('GHG Inventory', {
 		// frm.fields_dict['clinker_data'].$wrapper.find('.row-check sortable-handle col').hide()
 		$('[data-fieldname="clinker_data"] [class="small form-clickable-section grid-footer"]').remove()
 		frm.refresh_field('clinker_data')
-
-		/////////////////////////////////////////////////////////////////////
-		/////////// Conditions to Show/Hide Respective Table Fields /////////
-		////////////////////////////SUB-SECTOR///////////////////////////////
-		/////////////////////////////////////////////////////////////////////
-
-		//Other Sector//
-		// if(frm.doc.sub_sector != '1.A.1. Energy industries'){
-		// 	// frm.fields_dict.electricity_generation.df.hidden = 1
-		// 	frm.refresh_field('electricity_generation')
-		// }
-		// else{
-		// 	frm.set_value("sub_category","")
-		// 	frm.refresh_field('sub_category')
-		// }
-
-		// if(frm.doc.sub_sector == '1.A.4. Other sectors'){
-		// 	// frm.fields_dict.other_sectors.df.hidden = 0
-		// 	frm.refresh_field('others')
-		// }
-		// else{
-		// 	frm.doc.others = []
-		// 	// frm.fields_dict.others.df.hidden = 1
-		// 	frm.refresh_field('others')
-		// }
-
-		// //Transport//
-		// if(frm.doc.sub_sector == '1.A.3. Transport'){
-		// 	// frm.fields_dict.transport.df.hidden = 0
-		// 	frm.refresh_field('transport')
-		// }
-		// else{
-		// 	frm.doc.transport = []
-		// 	// frm.fields_dict.transport.df.hidden = 1
-		// 	frm.refresh_field('transport')
-		// }
-
-		// //Lubricant Use//
-		// if(frm.doc.sub_sector == '2.D.1. Lubricant use'){
-		// 	// frm.fields_dict.lubricant_use.df.hidden = 0
-		// 	frm.refresh_field('lubricant_use')
-		// }
-		// else{
-		// 	frm.doc.lubricant_use = []
-		// 	// frm.fields_dict.lubricant_use.df.hidden = 1
-		// 	frm.refresh_field('lubricant_use')
-		// }
-
-		// //Enteric Fermentation//
-		// if(frm.doc.sub_sector == '3.A.1. Enteric Fermentation'){
-		// 	// frm.fields_dict.enteric_fermentation.df.hidden = 0
-		// 	frm.refresh_field('enteric_fermentation')
-		// }
-		// else{
-		// 	frm.doc.enteric_fermentation = []
-		// 	// frm.fields_dict.enteric_fermentation.df.hidden = 1
-		// 	frm.refresh_field('enteric_fermentation')
-		// }
-
-		// //Manure Management//
-		// if(frm.doc.sub_sector == '3.A.2. Manure Management'){
-		// 	// frm.fields_dict.manure_management.df.hidden = 0
-		// 	frm.refresh_field('manure_management')
-		// }
-		// else{
-		// 	frm.doc.manure_management = []
-		// 	// frm.fields_dict.manure_management.df.hidden = 1
-		// 	frm.refresh_field('manure_management')
-		// }
-
-		//Forest Land//
-		
-		// //Urea Application//
-		// if(frm.doc.sub_sector == '3.C.3. Urea Application'){
-		// 	// frm.fields_dict.urea_application.df.hidden = 0
-		// 	frm.refresh_field('urea_application')
-		// }
-		// else{
-		// 	frm.doc.urea_application = []
-		// 	// frm.fields_dict.urea_application.df.hidden = 1
-		// 	frm.refresh_field('urea_application')
-		// }
 
 		//Direct N2O Emissions from managed soils//
 		if(frm.doc.sub_sector == '3.D.1. Direct N2O emissions from managed soils'){

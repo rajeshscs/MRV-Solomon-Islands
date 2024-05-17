@@ -147,8 +147,10 @@ def calculation_part(tablefields,document,report_doc):
 				cumulative_ch4=eval(i.cumulative_ch4)
 				cumulative_n2o=eval(i.cumulative_n2o)
 				total_co2=eval(i.total_co2)
-				# report_doc =frappe.get_doc("GHG Inventory Master Report",document.year)
-				# report_doc.report
+				
+				a_co2=0;a_ch4=0;a_n2o=0;a_total=0
+				b_co2=0;b_ch4=0;b_n2o=0;b_total=0
+				energy_co2=0;energy_ch4=0;energy_n2o=0;energy_total=0
 				for row in report_doc.report:
 					if row.categories == document.sub_category:	
 						# return row.categories, document.sub_category
@@ -156,6 +158,40 @@ def calculation_part(tablefields,document,report_doc):
 						row.set("ch4",cumulative_ch4)
 						row.set("n2o",cumulative_n2o)
 						row.set("total_co2_eq",total_co2)
+					if(row.parent_categories =="1.A.1.a. Public electricity and heat production"):
+						energy_co2 += row.co2
+						energy_ch4 += row.ch4
+						energy_n2o += row.n2o
+						energy_total += row.total_co2_eq
+
+					if(row.parent_categories == "1.A.4.a. Commercial/institutional"):
+						a_co2 += row.co2
+						a_ch4 += row.ch4
+						a_n2o += row.n2o
+						a_total += row.total_co2_eq
+					if(row.parent_categories == "1.A.4.b. Residential" ):
+						b_co2 += row.co2
+						b_ch4 += row.ch4
+						b_n2o += row.n2o
+						b_total += row.total_co2_eq
+
+				for row in report_doc.report:
+					if(row.categories == "1.A.1.a. Public electricity and heat production"):
+						row.set("co2",energy_co2)
+						row.set("ch4",energy_ch4)
+						row.set("n2o",energy_n2o)
+						row.set("total_co2_eq",energy_total)
+
+					if(row.categories == "1.A.4.a. Commercial/institutional"):
+						row.set("co2",a_co2)
+						row.set("ch4",a_ch4)
+						row.set("n2o",a_n2o)
+						row.set("total_co2_eq",a_total)
+					if(row.categories == "1.A.4.b. Residential"):
+						row.set("co2",b_co2)
+						row.set("ch4",b_ch4)
+						row.set("n2o",b_n2o)
+						row.set("total_co2_eq",b_total)
 				# sub sector
 				subsector_co2 =0
 				subsector_ch4 =0
@@ -194,9 +230,6 @@ def calculation_part(tablefields,document,report_doc):
 							category_n2o += row.n2o
 							category_total += row.total_co2_eq
 				
-				a_co2=0;a_ch4=0;a_n2o=0;a_total=0
-				b_co2=0;b_ch4=0;b_n2o=0;b_total=0
-				energy_co2=0;energy_ch4=0;energy_n2o=0;energy_total=0
 
 				for row in report_doc.report:
 					if row.categories != '1.D.1. International bunkers' and  document.sub_sector != '1.D.1. International bunkers':
@@ -211,39 +244,6 @@ def calculation_part(tablefields,document,report_doc):
 							row.set("ch4",category_ch4)
 							row.set("n2o",category_n2o)
 							row.set("total_co2_eq",category_total)
-
-					if(row.parent_categories == "1.A.4.a. Commercial/institutional"):
-						a_co2 += row.co2
-						a_ch4 += row.ch4
-						a_n2o += row.n2o
-						a_total += row.total_co2_eq
-					if(row.parent_categories == "1.A.4.b. Residential" ):
-						b_co2 += row.co2
-						b_ch4 += row.ch4
-						b_n2o += row.n2o
-						b_total += row.total_co2_eq
-					if(row.parent_categories =="1.A.1.a. Public electricity and heat production"):
-						energy_co2 += row.co2
-						energy_ch4 += row.ch4
-						energy_n2o += row.n2o
-						energy_total += row.total_co2_eq
-						
-				for row in report_doc.report:
-					if(row.categories == "1.A.4.a. Commercial/institutional"):
-						row.set("co2",a_co2)
-						row.set("ch4",a_ch4)
-						row.set("n2o",a_n2o)
-						row.set("total_co2_eq",a_total)
-					if(row.categories == "1.A.4.b. Residential"):
-						row.set("co2",b_co2)
-						row.set("ch4",b_ch4)
-						row.set("n2o",b_n2o)
-						row.set("total_co2_eq",b_total)
-					if(row.categories == "1.A.1.a. Public electricity and heat production"):
-						row.set("co2",energy_co2)
-						row.set("ch4",energy_ch4)
-						row.set("n2o",energy_n2o)
-						row.set("total_co2_eq",energy_total)
 
 				for row in report_doc.report:
 					if row.parent_categories == 'Total National Emissions and Removals':
