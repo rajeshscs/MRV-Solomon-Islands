@@ -66,36 +66,40 @@ class UserRegistration(Document):
 @frappe.whitelist(allow_guest = True)
 def createUser(formData):
 	formData = json.loads(formData)
+	frappe.log_error("2222222222222",formData['email_id'])
+	if not frappe.db.exists("User Registration",{"email_id":formData['email_id']}):
 
-	doc = frappe.new_doc("User Registration")
+		doc = frappe.new_doc("User Registration")
 
-	doc.user_name = formData['user_name']
-	doc.contact_number = formData['contact_number']
-	doc.email_id = formData['email_id']
-	doc.password = formData['password']
-	doc.confirm_password = formData['confirm_password']
-	doc.role = formData['role']
+		doc.user_name = formData['user_name']
+		doc.contact_number = formData['contact_number']
+		doc.email_id = formData['email_id']
+		doc.password = formData['password']
+		doc.confirm_password = formData['confirm_password']
+		doc.role = formData['role']
 
-	ghgData = formData['GHG']
-	for i in ghgData:
-		row = doc.append('ghg',{})
-		row.project_tracking = i
+		ghgData = formData['GHG']
+		for i in ghgData:
+			row = doc.append('ghg',{})
+			row.project_tracking = i
 
-	projectTrackingData = formData['Project Tracking']
-	for i in projectTrackingData:
-		row = doc.append('project_tracking',{})
-		row.project_tracking = i
+		projectTrackingData = formData['Project Tracking']
+		for i in projectTrackingData:
+			row = doc.append('project_tracking',{})
+			row.project_tracking = i
 
-	# projectTrackingString = ",".join(projectTrackingData)
-	# doc.project_tracking = projectTrackingString
+		# projectTrackingString = ",".join(projectTrackingData)
+		# doc.project_tracking = projectTrackingString
 
-	reportsData = formData['Reports']
-	for i in reportsData:
-		row = doc.append('reports',{})
-		row.project_tracking = i
-	# reportsString = ",".join(reportsData)
-	# doc.reports = reportsString
+		reportsData = formData['Reports']
+		for i in reportsData:
+			row = doc.append('reports',{})
+			row.project_tracking = i
+		# reportsString = ",".join(reportsData)
+		# doc.reports = reportsString
 
-	
-	doc.insert(ignore_permissions = True)
-	return({"message":"User Registration Successful! Waiting for Approval.","data":[ghgData,projectTrackingData,reportsData]})
+		
+		doc.insert(ignore_permissions = True)
+		return({"message":"User Registration Successful! Waiting for Approval.","data":[ghgData,projectTrackingData,reportsData]})
+	else:
+		frappe.throw("Email Id Already Registred")

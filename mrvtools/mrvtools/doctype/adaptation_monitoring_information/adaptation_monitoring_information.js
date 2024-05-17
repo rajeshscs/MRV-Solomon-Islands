@@ -299,7 +299,8 @@ frappe.ui.form.on('Adaptation Monitoring Information', {
 			frm.set_query("select_approver",function(){
 			  return {
 				filters:{
-				  email:['in',userList]
+				  email:['in',userList],
+				  enabled:1
 				}
 			  }
 			})

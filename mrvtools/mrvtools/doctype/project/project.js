@@ -360,7 +360,8 @@ frappe.ui.form.on('Project', {
 			frm.set_query("select_approver",function(){
 			return {
 				filters:{
-				email:['in',userList]
+				email:['in',userList],
+				enabled:1
 				}
 			}
 			})

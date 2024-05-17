@@ -206,7 +206,8 @@ frappe.ui.form.on('Mitigations', {
 				frm.set_query("select_approver",function(){
 				return {
 					filters:{
-					email:['in',userList]
+					email:['in',userList],
+					enabled:1
 					}
 				}
 				})

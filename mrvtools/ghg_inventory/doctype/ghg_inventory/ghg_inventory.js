@@ -711,7 +711,8 @@ frappe.ui.form.on('GHG Inventory', {
 				frm.set_query("select_approver",function(){
 				return {
 					filters:{
-						email:['in',userList]
+						email:['in',userList],
+						enabled:1
 					}
 				}
 				})
