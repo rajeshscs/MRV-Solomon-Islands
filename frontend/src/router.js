@@ -23,6 +23,14 @@ const routes = [
     }
   },
   {
+    path: '/new',
+    name: 'WhataNew',
+    component: () => import('@/pages/WhatsNew.vue'),
+    meta: {
+      title: "What's new"
+    }
+  },
+  {
     name: 'Login',
     path: '/account/login',
     component: () => import('@/pages/Login.vue'),

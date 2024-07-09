@@ -173,7 +173,7 @@ class GHGInventory {
 	}
 	ghg_unit_filter() {
 		this.inventory_unit = this.page.add_select(
-			__("Unit"),[" ", "tCO2e","GgCO2e"]
+			__("Unit"),["tCO2e","GgCO2e"]
 		)
 		this.inventory_unit.on("change",(r) => {
 			$('[class="all_html"]:first').remove()
@@ -203,7 +203,7 @@ class GHGInventory {
 					this.$heading = $('<b class="report-heading" style="margin-left: 30px;">GHG Inventory Report - Year wise</b>').insertBefore(this.$report);
 				}
 				
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true,inlineFilters: true});
 			})
 			
 	}

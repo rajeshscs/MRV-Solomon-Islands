@@ -50,21 +50,64 @@
          </div>
          <!-- </div> -->
 
-
-               <div class="container-fluid">
+         <div style="display: flex;justify-content: center;width: 100%;">
+            <div style="border-top: .1px solid #0000006c;width: 94%;"></div>
+         </div>
+         <div class="container-fluid">
             <div class="col-md-12 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.7s">
                <div class="tab-content p-4" >
                   <!-- Start Tab Content -->
+                  <v-data-table :items="data.message.parent_data.adaptation_table" class = "datatable"></v-data-table>
                   <div class="tab-pane active" id="p-view-2" >
                   <div class="tab-inner" >
                      <div class="table-responsive" data-aos="" style="max-height: 50rem;" data-aos-delay="100">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-2"> 
                         <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th scope="col">Sno</th><th scope="col">Intervention</th><th scope="col">Sector</th>
-                           <th scope="col">Subsector</th><th scope="col">Project Title</th><th scope="col">Implementing Agency</th>
-                           <th scope="col">Area Name</th><th scope="col">Project Cost (USD)</th><th scope="col">Sources of Funding</th>
-                           <th scope="col">Start Date</th><th scope="col">End Date</th>
+                           <th scope="col">S.No</th>
+                           <th scope="col" @click="sortList1('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList1('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th></th>
+                           <th>
+                              <input type="text" id="myInput-1" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-2" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-3" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-4" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-5" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-6" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-7" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-8" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-9" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th>
+                              <input type="text" id="myInput-10" placeholder="Search" v-on:keyup="filterRows1" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color"  style="overflow: auto;">
@@ -101,15 +144,53 @@
                   <div class="tab-pane" id="p-view-5">
                   <div class="tab-inner">
                      <div class="table-responsive" style="max-height: 50rem;">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-5">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
-                           <th style="padding: 20px;" scope="col">End Date</th>
+                           <th style="padding: 20px;" scope="col">S.No</th>
+                           <th scope="col" @click="sortList2('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList2('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th scope="col"></th>
+                           <th scope="col">
+                              <input type="text" id="myInput-11" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-12" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-13" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-14" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-15" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-16" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-17" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-18" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-19" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-20" placeholder="Search" v-on:keyup="filterRows2" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
@@ -145,15 +226,53 @@
                   <div class="tab-pane" id="p-view-6">
                   <div class="tab-inner">
                      <div class="table-responsive" style="max-height: 50rem;">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-6">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
-                           <th style="padding: 20px;" scope="col">End Date</th>
+                           <th style="padding: 20px;" scope="col">S.No</th>
+                           <th scope="col" @click="sortList3('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList3('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th scope="col"></th>
+                           <th scope="col">
+                              <input type="text" id="myInput-21" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-22" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-23" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-24" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-25" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-26" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-27" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-28" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-29" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-30" placeholder="Search" v-on:keyup="filterRows3" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
@@ -189,15 +308,53 @@
                   <div class="tab-pane" id="p-view-7">
                   <div class="tab-inner">
                      <div class="table-responsive" style="max-height: 50rem;">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-7">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th> <th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th> <th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th> <th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th> <th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th> <th style="padding: 20px;" scope="col">Start Date</th>
-                           <th style="padding: 20px;" scope="col">End Date</th>
+                           <th style="padding: 20px;" scope="col">S.No</th>
+                           <th scope="col" @click="sortList4('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList4('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th scope="col"></th>
+                           <th scope="col">
+                              <input type="text" id="myInput-31" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-32" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-33" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-34" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-35" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-36" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-37" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-38" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-39" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-40" placeholder="Search" v-on:keyup="filterRows4" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
@@ -233,15 +390,53 @@
                   <div class="tab-pane" id="p-view-8">
                   <div class="tab-inner">
                      <div class="table-responsive" style="max-height: 50rem;">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-8">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
-                           <th style="padding: 20px;" scope="col">End Date</th>
+                           <th style="padding: 20px;" scope="col">S.No</th>
+                           <th scope="col" @click="sortList5('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList5('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th scope="col"></th>
+                           <th scope="col">
+                              <input type="text" id="myInput-41" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-42" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-43" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-44" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-45" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-46" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-47" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-48" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-49" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-50" placeholder="Search" v-on:keyup="filterRows5" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
@@ -286,15 +481,53 @@
                   <div class="tab-pane" id="p-view-9">
                   <div class="tab-inner">
                      <div class="table-responsive" style="max-height: 50rem;">
-                     <table class="table table-striped table-bordered table-hover">
+                     <table class="table table-striped table-bordered table-hover" id="tab-view-9">
              <thead style="background-color: #006600; color:white; padding: 20px">
                         <tr>
-                           <th style="padding: 20px;" scope="col">Sno</th><th style="padding: 20px;" scope="col">Intervention</th>
-                           <th style="padding: 20px;" scope="col">Sector</th><th style="padding: 20px;" scope="col">Subsector</th>
-                           <th style="padding: 20px;" scope="col">Project Title</th><th style="padding: 20px;" scope="col">Implementing Agency</th>
-                           <th style="padding: 20px;" scope="col">Area Name</th><th style="padding: 20px;" scope="col">Project Cost (USD)</th>
-                           <th style="padding: 20px;" scope="col">Sources of Funding</th><th style="padding: 20px;" scope="col">Start Date</th>
-                           <th style="padding: 20px;" scope="col">End Date</th>
+                           <th style="padding: 20px;" scope="col">S.No</th>
+                           <th scope="col" @click="sortList6('intervention')">Intervention <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('sector')">Sector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('subsector')">Subsector <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('project_title')">Project Title <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('implementing_agency')">Implementing Agency <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('area_name')">Area Name <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('project_costusd')">Project Cost (USD) <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('source_of_funding')">Sources of Funding <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('start_date')">Start Date <span style='float: right;'>&#8597;</span></th>
+                           <th scope="col" @click="sortList6('end_date')">End Date <span style='float: right;'>&#8597;</span> </th>
+                        </tr>
+                        <tr style="background-color: #f6f6f6;">
+                           <th scope="col"></th>
+                           <th scope="col">
+                              <input type="text" id="myInput-51" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-52" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-53" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-54" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-55" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-56" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-57" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-58" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-59" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
+                           <th scope="col">
+                              <input type="text" id="myInput-60" placeholder="Search" v-on:keyup="filterRows6" style="border-radius: 4px;background: #ececec;color: #403f3f;padding: 0px 0px 0px 4px;font-size: 12px;font-weight: 200;width: 100%;border: none;height: 22px;">
+                           </th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider table-divider-color">
@@ -349,13 +582,386 @@
 
 <script>
 export default {
-  props: {
-    data: {
-      type: Array,
-      required: true,
-    },
+   props: {
+      data: {
+         type: Array,
+         required: true,
+      }
+   },
+
+  data() {
+   
+    return {
+      sortedData: [],
+      sortedbyASC1: true,
+      sortedbyASC2: true,
+      sortedbyASC3: true,
+      sortedbyASC4: true,
+      sortedbyASC5: true,
+      sortedbyASC6: true,
+    };
   },
-};
+  mounted() {
+   
+   this.sortedData1 = this.data.message.parent_data.adaptation_table;
+   this.sortedData2 = this.data.message.parent_data.mitigation_table;
+   this.sortedData3 = this.data.message.parent_data.cross_cutting_table;
+   this.sortedData4 = this.data.message.parent_data.enablers_table;
+   this.sortedData5 = this.data.message.parent_data.transparency_table;
+   this.sortedData6 = this.data.message.parent_data.support_table;
+    
+  },
+   methods: {
+      sortList1(sortBy) {
+         if (this.sortedbyASC1) {
+            // Sort in ascending order
+            if(sortBy == "project_costusd"){
+               this.sortedData1.sort((a, b) => (a[sortBy]? a[sortBy] :0).localeCompare(b[sortBy]? b[sortBy] :0,undefined, {numeric: true}));
+            }
+            else{
+               this.sortedData1.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+            }
+         } else {
+            // Sort in descending order
+            if(sortBy == "project_costusd"){
+               this.sortedData1.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :"",undefined, {numeric: true}));
+            }
+            else{
+            this.sortedData1.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+            }
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC1 = !this.sortedbyASC1;
+      },
+
+      filterRows1(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-1').val().toUpperCase();
+         let search2 = $('#myInput-2').val().toUpperCase();
+         let search3 = $('#myInput-3').val().toUpperCase();
+         let search4 = $('#myInput-4').val().toUpperCase();
+         let search5 = $('#myInput-5').val().toUpperCase();
+         let search6 = $('#myInput-6').val().toUpperCase();
+         let search7 = $('#myInput-7').val().toUpperCase();
+         let search8 = $('#myInput-8').val().toUpperCase();
+         let search9 = $('#myInput-9').val().toUpperCase();
+         let search10 = $('#myInput-10').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=1 && idx <= 10){
+            idx = idx - 1;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+      sortList2(sortBy) {
+         if (this.sortedbyASC2) {
+            // Sort in ascending order
+            this.sortedData2.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+         } else {
+            // Sort in descending order
+            this.sortedData2.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC2 = !this.sortedbyASC2;
+      },
+      filterRows2(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-11').val().toUpperCase();
+         let search2 = $('#myInput-12').val().toUpperCase();
+         let search3 = $('#myInput-13').val().toUpperCase();
+         let search4 = $('#myInput-14').val().toUpperCase();
+         let search5 = $('#myInput-15').val().toUpperCase();
+         let search6 = $('#myInput-16').val().toUpperCase();
+         let search7 = $('#myInput-17').val().toUpperCase();
+         let search8 = $('#myInput-18').val().toUpperCase();
+         let search9 = $('#myInput-19').val().toUpperCase();
+         let search10 = $('#myInput-20').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=11 && idx <= 20){
+            idx = idx - 11;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+      sortList3(sortBy) {
+         if (this.sortedbyASC3) {
+            // Sort in ascending order
+            this.sortedData3.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+         } else {
+            // Sort in descending order
+            this.sortedData3.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC3 = !this.sortedbyASC3;
+      },
+      filterRows3(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-21').val().toUpperCase();
+         let search2 = $('#myInput-22').val().toUpperCase();
+         let search3 = $('#myInput-23').val().toUpperCase();
+         let search4 = $('#myInput-24').val().toUpperCase();
+         let search5 = $('#myInput-25').val().toUpperCase();
+         let search6 = $('#myInput-26').val().toUpperCase();
+         let search7 = $('#myInput-27').val().toUpperCase();
+         let search8 = $('#myInput-28').val().toUpperCase();
+         let search9 = $('#myInput-29').val().toUpperCase();
+         let search10 = $('#myInput-30').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=21 && idx <= 30){
+            idx = idx - 21;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+      sortList4(sortBy) {
+         if (this.sortedbyASC4) {
+            // Sort in ascending order
+            this.sortedData4.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+         } else {
+            // Sort in descending order
+            this.sortedData4.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC4 = !this.sortedbyASC4;
+      },
+      filterRows4(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-31').val().toUpperCase();
+         let search2 = $('#myInput-32').val().toUpperCase();
+         let search3 = $('#myInput-33').val().toUpperCase();
+         let search4 = $('#myInput-34').val().toUpperCase();
+         let search5 = $('#myInput-35').val().toUpperCase();
+         let search6 = $('#myInput-36').val().toUpperCase();
+         let search7 = $('#myInput-37').val().toUpperCase();
+         let search8 = $('#myInput-38').val().toUpperCase();
+         let search9 = $('#myInput-39').val().toUpperCase();
+         let search10 = $('#myInput-40').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=31 && idx <= 40){
+            idx = idx - 31;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+      sortList5(sortBy) {
+         if (this.sortedbyASC5) {
+            // Sort in ascending order
+            this.sortedData5.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+         } else {
+            // Sort in descending order
+            this.sortedData5.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC5 = !this.sortedbyASC5;
+      },
+      filterRows5(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-41').val().toUpperCase();
+         let search2 = $('#myInput-42').val().toUpperCase();
+         let search3 = $('#myInput-43').val().toUpperCase();
+         let search4 = $('#myInput-44').val().toUpperCase();
+         let search5 = $('#myInput-45').val().toUpperCase();
+         let search6 = $('#myInput-46').val().toUpperCase();
+         let search7 = $('#myInput-47').val().toUpperCase();
+         let search8 = $('#myInput-48').val().toUpperCase();
+         let search9 = $('#myInput-49').val().toUpperCase();
+         let search10 = $('#myInput-50').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=41 && idx <= 50){
+            idx = idx - 41;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+      sortList6(sortBy) {
+         if (this.sortedbyASC6) {
+            // Sort in ascending order
+            this.sortedData6.sort((a, b) => (a[sortBy]? a[sortBy] :"").localeCompare(b[sortBy]? b[sortBy] :""));
+         } else {
+            // Sort in descending order
+            this.sortedData6.sort((a, b) => (b[sortBy]? b[sortBy] :"").localeCompare(a[sortBy]? a[sortBy] :""));
+         }
+         // Toggle the flag for next click
+         this.sortedbyASC6 = !this.sortedbyASC6;
+      },
+      filterRows6(event) {
+         var inputField, parent, table, tr, td, i, txtValue,idx;
+         let search1 = $('#myInput-51').val().toUpperCase();
+         let search2 = $('#myInput-52').val().toUpperCase();
+         let search3 = $('#myInput-53').val().toUpperCase();
+         let search4 = $('#myInput-54').val().toUpperCase();
+         let search5 = $('#myInput-55').val().toUpperCase();
+         let search6 = $('#myInput-56').val().toUpperCase();
+         let search7 = $('#myInput-57').val().toUpperCase();
+         let search8 = $('#myInput-58').val().toUpperCase();
+         let search9 = $('#myInput-59').val().toUpperCase();
+         let search10 = $('#myInput-60').val().toUpperCase();
+         
+         inputField = $(`#${event.target.id}`)
+         parent = inputField.closest('table').attr('id');
+
+         table = document.getElementById(parent);
+         tr = table.getElementsByTagName("tr");
+         idx = parseInt(event.target.id.replace(/\D/g,''))
+         if(idx >=51 && idx <= 60){
+            idx = idx - 51;
+         }
+         for (i = 0; i < tr.length; i++) {
+               td = tr[i].getElementsByTagName("td")[idx];
+               if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (
+                     tr[i].getElementsByTagName("td")[0].textContent.toUpperCase().includes(search1) &&
+                     tr[i].getElementsByTagName("td")[1].textContent.toUpperCase().includes(search2) &&
+                     tr[i].getElementsByTagName("td")[2].textContent.toUpperCase().includes(search3) &&
+                     tr[i].getElementsByTagName("td")[3].textContent.toUpperCase().includes(search4) &&
+                     tr[i].getElementsByTagName("td")[4].textContent.toUpperCase().includes(search5) &&
+                     tr[i].getElementsByTagName("td")[5].textContent.toUpperCase().includes(search6) &&
+                     tr[i].getElementsByTagName("td")[6].textContent.toUpperCase().includes(search7) &&
+                     tr[i].getElementsByTagName("td")[7].textContent.toUpperCase().includes(search8) &&
+                     tr[i].getElementsByTagName("td")[8].textContent.toUpperCase().includes(search9) &&
+                     tr[i].getElementsByTagName("td")[9].textContent.toUpperCase().includes(search10)
+                  ) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }  
+         }
+      },
+
+   }
+}; 
 
 </script>
 
@@ -377,7 +983,7 @@ export default {
 
 .style-class:hover {
   color: red !important;
-  font-weight: 700;
+  font-weight: 600;
 }
 .pro_image{
    width: 100%; height: auto; object-fit: cover;
@@ -389,6 +995,9 @@ export default {
    margin-left:10px;
    box-shadow: 0 0 4px #000;
    border-radius: 8px;
+}
+[type=text]:focus{
+   --tw-ring-color: #c7c7c7 !important;
 }
 .style-class {
     color: rgb(0, 0, 0) !important;

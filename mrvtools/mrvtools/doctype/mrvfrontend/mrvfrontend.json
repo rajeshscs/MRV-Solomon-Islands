@@ -106,7 +106,9 @@
   "partner5",
   "partner6",
   "other_tab",
-  "breadcrumb_image"
+  "breadcrumb_image",
+  "whats_new_section_section",
+  "add_new_content"
  ],
  "fields": [
   {
@@ -606,12 +608,23 @@
    "fieldname": "climate_change_division_content3",
    "fieldtype": "Text Editor",
    "label": "Climate Change Division Content3"
+  },
+  {
+   "fieldname": "whats_new_section_section",
+   "fieldtype": "Section Break",
+   "label": "What's New Section"
+  },
+  {
+   "fieldname": "add_new_content",
+   "fieldtype": "Table",
+   "label": "Add New Content",
+   "options": "Whats New"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-05-07 14:40:16.912801",
+ "modified": "2024-06-17 17:21:36.145237",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

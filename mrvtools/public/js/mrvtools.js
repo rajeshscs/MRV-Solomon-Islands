@@ -3,15 +3,14 @@ $(document).on("form-refresh", function(frm) {
 	if(cur_frm.doc.doctype != "User Registration"){	
 		$(`[id="page-${cur_frm.doc.doctype}"]`).find('.actions-btn-group').hide();
 	}
-	if(cur_frm.doc.doctype == "User"){	
-		$(`[class="col-lg-2 layout-side-section"]`).css({"display":"block","margin-left":"95px"});
-		$(`[class="col layout-main-section-wrapper"]`).css("margin-left","0px");
-		$(`[class="page-title"]`).css({"margin-left":"95px !important"});
-	}
+	
 
 	$.each(cur_frm.fields_dict, function(fieldname, field) {
 		field.df.onchange = function() {
 			cur_frm.clear_custom_buttons()
+			if(cur_frm.doc.workflow_state == "Draft"){
+				$('[data-label="Save"]').prop('textContent','Save as Draft')
+			}
 		};
 
 	})
@@ -19,23 +18,37 @@ $(document).on("form-refresh", function(frm) {
 	$('[data-fieldtype="Table"]').on("change",function(){
 		if(($(`[id='page-${cur_frm.doc.doctype}'] .indicator-pill`)).text() == "Not Saved"){
 			cur_frm.clear_custom_buttons();
+			if(cur_frm.doc.workflow_state == "Draft"){
+				$('[data-label="Save"]').prop('textContent','Save as Draft')
+			}
 		}
 	});
 	
 	$('[data-fieldtype="Table"').on("focusout",function(){
 		if(($(`[id='page-${cur_frm.doc.doctype}'] .indicator-pill`)).text() == "Not Saved"){
 			cur_frm.clear_custom_buttons();
+			if(cur_frm.doc.workflow_state == "Draft"){
+				$('[data-label="Save"]').prop('textContent','Save as Draft')
+			}
 		}
 	});
 	
 	$('[data-fieldtype="Button"]').on("click",function(){
 		cur_frm.clear_custom_buttons()
+		if(cur_frm.doc.workflow_state == "Draft"){
+			$('[data-label="Save"]').prop('textContent','Save as Draft')
+		}
 	})
 	
 	if(cur_frm.doc.__unsaved == 1){
 		setTimeout(function() {
 			cur_frm.clear_custom_buttons()
-		})
+			if(cur_frm.doc.workflow_state == "Draft"){
+				$('[data-label="Save"]').prop('textContent','Save as Draft')
+			}
+		},1000)
+		
+		
 	}
 	if (cur_frm.doc.doctype != "User Registration"){
 		if(cur_frm.doc.workflow_state == "Pending" && !cur_frm.doc.__islocal){
@@ -128,6 +141,7 @@ $(document).on("form-refresh", function(frm) {
 	}
 	$.ajax({
 		success:function(){
+			$('[data-fieldtype="Link"]').attr("placeholder","Select")
 			$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
 			$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
 				
@@ -156,88 +170,36 @@ $(document).on("form-refresh", function(frm) {
 	})
 })
 
-// $(document).on("load", function(frm) {
-// 	frappe.call({
-// 		method:"mrvtools.api.get_approvers",
-// 		async:false,
-// 		callback:function(r){
-// 			if (frappe.session.user != "Administrator"){
-// 				for (let i of r.message){
-// 					if(cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Approved"){
-						
-// 						if(frappe.user_roles.includes(i)){
-// 							$(`[id="page-${cur_frm.doc.doctype}"] [class="tab-pane fade show active"]`).attr("style","pointer-events:none !important;--text-color: var(--disabled-text-color); opacity: 0.9;")
-// 						}
-// 					}
-// 					else{
-// 						$('[class="tab-pane fade show active"]').attr("style","pointer-events:inherit !important;")
-// 					}
-// 				}
-// 			}
-// 		}
-// 	})
-// })
+frappe.router.on("change", page_changed)
+ 
+function page_changed(event) {
+    frappe.after_ajax(function () {
+        var route = frappe.get_route();
+		console.log("Route",route);
+        if (route[0] == "List") {
+			
+			setTimeout(() => {
+				
+				$("[class='actions-btn-group'] [class='user-action']").closest('li').css({"display":"none"});
+				$("[class='dropdown-divider user-action']").closest('li').css({"display":"none"});
+				$("span.menu-item-label[data-label='Edit']").closest('li').css({"display":"none"});
+				$("span.menu-item-label[data-label='Assign%20To']").closest('li').css({"display":"none"});
+				$("span.menu-item-label[data-label='Apply%20Assignment%20Rule']").closest('li').css({"display":"none"});
+				$("span.menu-item-label[data-label='Add%20Tags']").closest('li').css({"display":"none"});
+				$("span.menu-item-label[data-label='Print']").closest('li').css({"display":"none"});
+			}, 1000);
+        }
+    })
+}
+
 $.ajax({
 	success:function(){
 			$('<h2 class="heading-main" data-v-2dd66c2c="" style="color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: sans-serif;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-left: 195px;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></h2>').insertBefore($('[class="form-inline fill-width justify-content-end"]'))
 	}
 })
 $(document).ready(function(){
-	// $('[id="page-Workspaces"] [class="flex col page-actions justify-content-end"]').hide()
-	// $('[id="page-Workspaces"] [class="standard-actions flex"]').hide()
 	$('[class="nav-item dropdown dropdown-help dropdown-mobile d-none d-lg-block"]').attr("style","display:none !important")
 	$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
 	$("head").append('<style>#page-Workspaces [class="flex col page-actions justify-content-end"]{display:none}</style>');
 	
 })
-
-	// $('[data-fieldtype="Table"]').on("click",function(){
-	// 	$('[data-fieldtype = "Select"]').on("change",function(){
-	// 		cur_frm.clear_custom_buttons()
-	// 	})
-	// });
-	
-	// $('[data-fieldtype="Table"]').on("keyup",function(){
-	// });
-	// var targetNode = document.querySelector('.indicator-pill');
-	// var config = { childList: true, subtree: true, characterData: true };
-
-	// var callback = function(mutationsList, observer) {
-	// 	for(var mutation of mutationsList) {
-	// 		if (mutation.type == 'childList' || mutation.type == 'characterData') {
-	// 		}
-	// 	}
-	// };
-
-	// var observer = new MutationObserver(callback);
-	// observer.observe(targetNode, config);
-
-	
-	// $('[data-fieldtype="Table"]').on("change",function(){
-		
-	// 	if(($(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}'] .indicator-pill`)).text() == "Not Saved"){
-	// 		cur_frm.clear_custom_buttons();
-	// 	}
-	// });
-	
-	// $('[data-fieldtype="Table"').on("focusout",function(){
-	// 	if(($(`[data-route='Form/${cur_frm.doc.doctype}/${cur_frm.doc.name}'] .indicator-pill`)).text() == "Not Saved"){
-	// 		cur_frm.clear_custom_buttons();
-	// 	}
-		
-	// });
-
-	// frappe.listview_settings["User"] = {
-	// 	refresh:function(){
-	// 		// for( var i=0;i<=10;i++){
-	// 		// 	if( $('.list-row-col').eq(i).prop("innerText") == "Status"){
-	// 		// 		$('.list-row-col').eq(i).prop("innerText","Updation Status")
-					
-	// 		// 	}
-	// 		// 	if( $('.list-row -col').eq(i).prop("innerText") == "Work State"){
-	// 		// 		$('.list-row-col').eq(i).prop("innerText","Status")
-	// 		// 	}
-	
-	// 		// }
-	// 	}
-	// }

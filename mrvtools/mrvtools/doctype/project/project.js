@@ -80,7 +80,41 @@ frappe.ui.form.on('Project', {
 			frm.refresh_field('programme')
 		}
 	},
-
+	start_date: function(frm){
+		if (frm.doc.end_date){
+			let start_date = new Date(frm.doc.start_date)
+			let end_date = new Date(frm.doc.end_date)
+			
+			const differenceMs = end_date - start_date;
+			const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
+			const years = differenceMs / millisecondsInYear;
+			frm.set_value("lifetime",`${years.toFixed(1)}`)
+			frm.refresh_field("lifetime")
+			
+		}
+	},
+	end_date: function(frm){
+		if (frm.doc.start_date){
+			let start_date = new Date(frm.doc.start_date)
+			let end_date = new Date(frm.doc.end_date)
+			
+			const differenceMs = end_date - start_date;
+			const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
+			const years = differenceMs / millisecondsInYear;
+			frm.set_value("lifetime",`${years.toFixed(1)}`)
+			frm.refresh_field("lifetime")
+			// const diffInMilliseconds = end_date - start_date;
+			// const millisecondsInDay = 1000 * 60 * 60 * 24;
+			// const days = Math.floor(diffInMilliseconds / millisecondsInDay);
+		
+			// const years = Math.floor(days / 365);
+			// const remainingDays = days % 365;
+			// const months = Math.floor(remainingDays / 30);
+			// const finalDays = remainingDays % 30;
+			// const result = years + months / finalDays;
+			
+		}
+	},
 	
 	key_sector:function(frm){
 		if(!frm.doc.key_sector){
@@ -324,6 +358,7 @@ frappe.ui.form.on('Project', {
 
 	refresh: function(frm){
 		$('[id="page-Project"]').find('.actions-btn-group').hide();
+		$(`div[data-fieldname="project_name"]`).attr('style','max-width:100%;padding-right: 0px;');
 			
 
 		if (frm.doc.work_state == "Approved"){

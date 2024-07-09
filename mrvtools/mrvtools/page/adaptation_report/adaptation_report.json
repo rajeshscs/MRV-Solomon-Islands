@@ -5,7 +5,7 @@
  "doctype": "Page",
  "icon": "fa fa-list",
  "idx": 0,
- "modified": "2024-01-18 15:04:31.510597",
+ "modified": "2024-07-01 13:19:22.169229",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "adaptation-report",
@@ -14,6 +14,15 @@
  "roles": [
   {
    "role": "Administrator"
+  },
+  {
+   "role": "Adaptation Report"
+  },
+  {
+   "role": "Observer Adaptation Report"
+  },
+  {
+   "role": "Approver Adaptation Report"
   }
  ],
  "script": null,

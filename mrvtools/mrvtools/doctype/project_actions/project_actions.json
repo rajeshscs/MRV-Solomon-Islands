@@ -77,18 +77,21 @@
   {
    "fieldname": "action_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Action Status",
    "options": "\nProposed\nPlanned\nOngoing\nImplemented\nCompleted",
    "reqd": 1
   },
   {
    "fieldname": "start_date",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Start Date"
   },
   {
    "fieldname": "duration",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Duration"
   },
   {
@@ -112,6 +115,7 @@
   {
    "fieldname": "national_implementing_entitys",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "National Implementing Entity(s)",
    "reqd": 1
   },
@@ -124,6 +128,7 @@
   {
    "fieldname": "estimated_investment",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Estimated investment (USD)",
    "reqd": 1
   },
@@ -134,7 +139,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-28 12:10:53.713799",
+ "modified": "2024-07-04 12:52:08.739399",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Actions",

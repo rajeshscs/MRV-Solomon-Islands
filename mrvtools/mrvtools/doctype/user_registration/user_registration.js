@@ -6,26 +6,26 @@ frappe.ui.form.on('User Registration', {
         if (frm.doc.workflow_state == 'Approved'){
  
             
-            var ghg = frm.doc.ghg;
+            // var ghg = frm.doc.ghg;
      
-            var project = frm.doc.project_tracking;
+            // var project = frm.doc.project_tracking;
         
-            var reports = frm.doc.reports;
+            // var reports = frm.doc.reports;
         
             
           
-            frappe.call({
-                doc:frm.doc,
-                args:{
-                    ghg: ghg,
-                    reports: reports,
-                    project:project
-                },
-                method:"check_user_exists",
-                async:false,
-                callback:function(r){
-                }
-            })
+            // frappe.call({
+            //     doc:frm.doc,
+            //     args:{
+            //         ghg: ghg,
+            //         reports: reports,
+            //         project:project
+            //     },
+            //     method:"check_user_exists",
+            //     async:false,
+            //     callback:function(r){
+            //     }
+            // })
         }
 		
 		frm.set_query("ghg", function(){
@@ -73,6 +73,27 @@ frappe.ui.form.on('User Registration', {
         //     }
         // })
 	},
+    before_save(frm){
+        // if(frm.doc.workflow_state == 'Approved'){
+        //     var ghg = frm.doc.ghg;
+     
+        //     var project = frm.doc.project_tracking;
+        
+        //     var reports = frm.doc.reports;
+        //     frappe.call({
+        //         doc:frm.doc,
+        //         args:{
+        //             ghg: ghg,
+        //             reports: reports,
+        //             project:project
+        //         },
+        //         method:"check_user_exists",
+        //         async:false,
+        //         callback:function(r){
+        //         }
+        //     })
+        // }
+    }
 	// role :function(frm){
 	// 	if (frm.doc.role == "Observer" ){
 	// 		frm.fields_dict["ghg"].df.hidden = 1

@@ -35,6 +35,22 @@ class Dashboard {
 	}
 
 	make(){
+		if(frappe.user_roles.includes("Dashboard Observer") && (!frappe.user_roles.includes("Administrator") || !frappe.user_roles.includes("System Manager"))){
+			$('[class="page-content"]').append(`
+				<style> 
+					.search-bar,.dropdown-notifications,.vertical-bar {
+						display: none !important;
+					}
+					.sidebar .sidebar-menu{
+						background:#f9fafa !important;
+						box-shadow: #f9fafa 0px 0px 0px 0px !important;
+					}
+					li.treeview.drop-down{
+						display: none !important;
+					}
+				</style>
+				`)
+		}
 		this.$container = $(`
 		<div class = "all_html"  style="margin:0;">
 		<div class="main-container" style="width:100%"><div><h2 style = "margin:0px 0px 0px 20px">Dashboard</h2></div></div>

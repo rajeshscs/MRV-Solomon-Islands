@@ -14,31 +14,31 @@
   "section_break_rbstb",
   "type_of_instrument",
   "key_sector",
-  "status",
   "action",
   "action_name",
-  "location",
-  "coordinates",
-  "get_location",
-  "geographical_co_ordinate",
-  "other_agency",
-  "lifetime",
-  "column_break_prrqs",
-  "objective",
-  "key_sub_sector",
-  "included_in",
-  "programme",
-  "programme_name",
-  "please_specify_location",
+  "status",
   "implementing_entity",
   "start_date",
   "financial_closure_date",
   "costusd",
   "source_of_funding",
+  "location",
+  "coordinates",
+  "get_location",
   "upload_document",
+  "column_break_prrqs",
+  "objective",
+  "key_sub_sector",
+  "programme",
+  "programme_name",
+  "included_in",
+  "other_agency",
   "end_date",
+  "lifetime",
   "cost",
   "select_approver",
+  "please_specify_location",
+  "geographical_co_ordinate",
   "naming_series",
   "work_state",
   "section_break_m3lhf",
@@ -101,7 +101,7 @@
   {
    "fieldname": "coordinates",
    "fieldtype": "Data",
-   "label": "Co-Ordinates"
+   "label": "Coordinates"
   },
   {
    "fieldname": "get_location",
@@ -111,7 +111,7 @@
   {
    "fieldname": "geographical_co_ordinate",
    "fieldtype": "Geolocation",
-   "label": "Geographical Co Ordinate"
+   "label": "Geographical Coordinates"
   },
   {
    "fieldname": "other_agency",
@@ -121,12 +121,14 @@
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date"
+   "label": "End Date",
+   "reqd": 1
   },
   {
    "fieldname": "lifetime",
-   "fieldtype": "Int",
-   "label": "Lifetime(Years)"
+   "fieldtype": "Data",
+   "label": "Lifetime(Years)",
+   "read_only": 1
   },
   {
    "fieldname": "cost",
@@ -176,7 +178,7 @@
   {
    "fieldname": "financial_closure_date",
    "fieldtype": "Date",
-   "label": "Financial Closure Date"
+   "label": "First Spending Date"
   },
   {
    "fieldname": "costusd",
@@ -280,15 +282,15 @@
    "fetch_from": "action.action_name",
    "fieldname": "action_name",
    "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Action Name"
+   "label": "Action Name",
+   "read_only": 1
   },
   {
    "fetch_from": "programme.programme_name",
    "fieldname": "programme_name",
    "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Programme Name"
+   "label": "Programme Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -306,7 +308,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2024-03-28 12:11:35.071604",
+ "modified": "2024-07-04 12:23:16.943535",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",
@@ -323,50 +325,6 @@
    "report": 1,
    "role": "System Manager",
    "select": 1,
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Approver Project",
-   "share": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 2,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Approver Project",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Projects",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Projects",
    "share": 1,
    "write": 1
   }

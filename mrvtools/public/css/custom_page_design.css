@@ -33,6 +33,18 @@ body[data-route^=Form] .menu-btn-group,
 body[data-route^=Form] button[data-original-title="Print"] {
     display: none;
 }
+/* .actions-btn-group li{
+    display : none
+} */
+.actions-btn-group span.menu-item-label[data-label='Edit'],
+.actions-btn-group span.menu-item-label[data-label='Assign%20To'],
+.actions-btn-group span.menu-item-label[data-label='Apply%20Assignment%20Rule'],
+.actions-btn-group span.menu-item-label[data-label='Add%20Tags'],
+.actions-btn-group span.menu-item-label[data-label='Print'] {
+    display: none !important;
+}    
+
+
 
 span.row-actions {
     display: none !important;

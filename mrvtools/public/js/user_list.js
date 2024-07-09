@@ -1,7 +1,10 @@
-frappe.listview_settings["User"] = {
+frappe.listview_settings["Mitigations"] = {
 	refresh:function(){
-        $(`[class="col-lg-2 layout-side-section"]`).css({"display":"none","margin-left":"0px"});
-		$(`[class="col layout-main-section-wrapper"]`).css("margin-left","95px");
-		// $(`[class="page-title"]`).css({"margin-left":"95px !important"});
+        $("[class='user-action']").closest('li').css({"display":"none"});
+        $("span.menu-item-label[data-label='Edit']").closest('li').css({"display":"none"});
+        $("span.menu-item-label[data-label='Assign%20To']").closest('li').css({"display":"none"});
+        $("span.menu-item-label[data-label='Apply%20Assignment%20Rule']").closest('li').css({"display":"none"});
+        $("span.menu-item-label[data-label='Add%20Tags']").closest('li').css({"display":"none"});
+        $("span.menu-item-label[data-label='Print']").closest('li').css({"display":"none"});
 	}
 }

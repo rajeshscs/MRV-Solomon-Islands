@@ -57,7 +57,7 @@
             <router-link to='/project' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/project' }">Project</router-link>
           </li>
           <li>
-            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">Reports</router-link>
+            <router-link to='/reports' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/reports' }">GHG Summary</router-link>
           </li>
           <li>
             <router-link to='/support' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/support' }">Support</router-link>

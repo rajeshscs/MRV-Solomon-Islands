@@ -2,6 +2,11 @@
 // For license information, please see license.txt
 var sector_list = []
 frappe.ui.form.on('Project Actions', {
+	refresh:function(frm){
+		if(frm.doc.__islocal){
+			$('[title="New Project Actions"]').prop('innerText','New Action')
+		}
+	},
 	focus: function(frm){
 		frm.set_value("sector_affected",[])
 		frm.refresh_field("sector_affected")

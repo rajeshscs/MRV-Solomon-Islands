@@ -12,7 +12,8 @@ html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th sc
 frappe.ui.form.on('Adaptation', {
 
 	refresh: function(frm){
-
+		$(`div[data-fieldname="ndp_cov"]`).attr('style','max-width:100%;padding-right: 0px;');
+		$(`div[data-fieldname="ndp_coverage"]`).attr('style','max-width:100%;padding-right: 0px;');
 		$('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
 		$('[class="input-area"]').css({"margin":"0px 0px 0px 10px"});
 		$('[class="checkbox"]').children().css("cursor","pointer")

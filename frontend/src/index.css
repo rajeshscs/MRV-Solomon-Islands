@@ -18,6 +18,32 @@ a, p{
 h2{
   color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;
 }
+.table>thead {
+  position: sticky;
+  top: -0.1px;
+  z-index: 10;
+}
+.table>thead>tr{
+  margin:0px;
+  border:0px;
+}
+.table>thead>tr>th{
+  margin:0px;
+}
+.table>thead>tr>th[scope=col]{
+  cursor: pointer;
+}
+.table-bordered>thead>tr>th{
+      border-bottom-width: 0px;
+      border: 1px solid #ddd;
+}
+.table-group-divider {
+  border-top: 0px;
+}
+.table{
+  max-width:150% !important;
+  width: 150% !important;;
+}
 
 h3{
     font-size: 30px;

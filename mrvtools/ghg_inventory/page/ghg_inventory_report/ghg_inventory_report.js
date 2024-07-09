@@ -238,7 +238,7 @@ class GHGInventoryGasWise {
 				if(this.inventory_year[0].value){
 					this.$heading = $('<b class="report-heading" style="margin-left: 30px;">GHG Inventory Report - Gas wise</b>').insertBefore(this.$report);
 				}
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,treeView:true,inlineFilters: true});
 				if(this.inventory_year[0].value ==''){
 					$('.report-wrapper').attr('style',"display:none !important;border:none !important")
 				}
@@ -253,6 +253,7 @@ class GHGInventoryGasWise {
 		)
 		
 		this.inventory_year.on("change",(r) => {
+			$('[class="report-heading"]:first').remove()
 			this.render_datatable()
 			this.make()
 			this.get_chart_report();
@@ -271,10 +272,11 @@ class GHGInventoryGasWise {
 	}
 	ghg_unit_filter() {
 		this.inventory_unit = this.page.add_select(
-			__("Unit"),[" ", "tCO2e","GgCO2e"]
+			__("Unit"),["tCO2e","GgCO2e"]
 			
 		)
 		this.inventory_unit.on("change",(r) => {
+			$('[class="report-heading"]:first').remove()
 			this.render_datatable()
 			this.get_chart_report();
 			this.get_chart_report2();

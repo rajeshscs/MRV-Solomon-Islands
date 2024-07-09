@@ -90,7 +90,7 @@ def getData(inventory_unit, from_year, to_year):
 					
 					total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
 					
-					each[f'{i.name}'] = f'{float(total_co2[0].total_co2_eq):,.3f}' if total_co2 and total_co2[0].total_co2_eq else 0
+					each[f'{i.name}'] = f'{float(total_co2[0].total_co2_eq):.3f}' if total_co2 and total_co2[0].total_co2_eq else 0
 			return data
 
 	if inventory_unit == 'GgCO2e':
@@ -99,12 +99,12 @@ def getData(inventory_unit, from_year, to_year):
 				for each in data:
 					get_total_co2 = f"""
 									SELECT 
-										total_co2_eq * 1000 as total_co2_eq,
+										total_co2_eq * 0.000000001 as total_co2_eq,
 										parent
 									FROM 
 										`tabGHG Inventory Master Report ChildTable` 
 									WHERE 
-										parent = '{i.name}' 
+										parent = '{i.name}'
 									AND
 										categories = '{each.categories}'
 									ORDER BY 
@@ -113,7 +113,7 @@ def getData(inventory_unit, from_year, to_year):
 					
 					total_co2 = frappe.db.sql(get_total_co2,as_dict =1)
 
-					each[f'{i.name}'] = f'{float(total_co2[0].total_co2_eq):,.3f}' if total_co2 and total_co2[0].total_co2_eq else 0
+					each[f'{i.name}'] = f'{float(total_co2[0].total_co2_eq):.5f}' if total_co2 and total_co2[0].total_co2_eq else 0
 			return data
 @frappe.whitelist()
 def get_chart(inventory_unit, from_year, to_year):
@@ -161,9 +161,9 @@ def get_chart(inventory_unit, from_year, to_year):
 		for i in value:
 			chart_value = f"""
 					SELECT 
-								co2 * 1000 as co2,
-								ch4 * 1000 as ch4,
-								n2o * 1000 as n2o
+								co2 * 0.000000001 as co2,
+								ch4 * 0.000000001 as ch4,
+								n2o * 0.000000001 as n2o
 							FROM 
 								`tabGHG Inventory Master Report ChildTable` 
 							WHERE 

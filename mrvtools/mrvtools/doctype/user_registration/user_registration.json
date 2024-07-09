@@ -9,6 +9,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "enabled",
+  "section_break_grkbn",
   "user_name",
   "contact_number",
   "email_id",
@@ -66,7 +68,7 @@
    "fieldname": "role",
    "fieldtype": "Select",
    "label": "Role",
-   "options": "\nUser\nApprover\nObserver",
+   "options": "\nUser\nApprover\nObserver\nExternal Observer",
    "reqd": 1
   },
   {
@@ -75,18 +77,21 @@
    "label": "Permissions Required"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "ghg",
    "fieldtype": "Table MultiSelect",
    "label": "GHG",
    "options": "Project Tracking ChildTable"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "project_tracking",
    "fieldtype": "Table MultiSelect",
    "label": "Project Tracking",
    "options": "Project Tracking ChildTable"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "reports",
    "fieldtype": "Table MultiSelect",
    "label": "Reports",
@@ -112,12 +117,23 @@
    "options": "User Registration",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "section_break_grkbn",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-17 17:27:13.924072",
+ "modified": "2024-06-28 20:24:18.294712",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Registration",

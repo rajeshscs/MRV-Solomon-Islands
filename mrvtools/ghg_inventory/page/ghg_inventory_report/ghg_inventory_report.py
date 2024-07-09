@@ -74,10 +74,10 @@ def getData(inventory_year, inventory_unit):
 			query = f"""
 					SELECT
 						categories as categories, 
-						co2 * 1000 as 'CO2 Emission',
-						ch4 * 1000 as 'CH4 Emission',
-						n2o * 1000 as 'N2O Emission', 
-						total_co2_eq * 1000 as 'Total CO2 Emission',
+						co2 * 0.000000001 as 'CO2 Emission',
+						ch4 * 0.000000001 as 'CH4 Emission',
+						n2o * 0.000000001 as 'N2O Emission', 
+						total_co2_eq * 0.000000001 as 'Total CO2 Emission',
 						indent
 					FROM
 						`tabGHG Inventory Master Report ChildTable`
@@ -119,9 +119,9 @@ def get_chart(inventory_year=None, inventory_unit=None):
 			
 			query = f"""
 					SELECT
-						co2 * 1000 as co2,
-						ch4 * 1000 as ch4,
-						n2o * 1000 as n2o	
+						co2 * 0.000000001 as co2,
+						ch4 * 0.000000001 as ch4,
+						n2o * 0.000000001 as n2o	
 					FROM
 						`tabGHG Inventory Master Report ChildTable`
 					WHERE 
@@ -165,17 +165,18 @@ def get_pie_chart(inventory_year=None, inventory_unit=None):
 			labels=  ['1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other']
 			query = f"""
 					SELECT
-						total_co2_eq * 1000 as 'Total CO2 Emission' 
+						format(total_co2_eq * 0.000000001,5) AS 'Total CO2 Emission'
 					FROM
 						`tabGHG Inventory Master Report ChildTable`
-					WHERE 
+					WHERE
 						docstatus != 2
-					AND
-						categories IN ('1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other')
+						AND categories IN ('1. Energy', '2. Industrial processes and product use', '3. Agriculture', '4. LAND USE, LAND-USE CHANGE AND FORESTRY', '5. Waste', '6. Other')
+
+
 						{conditions}
 					"""
 			data = frappe.db.sql(query)
-
+			frappe.log_error("Data == ",data)
 			return {"data":data,"labels":labels}
 
 

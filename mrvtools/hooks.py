@@ -22,7 +22,7 @@ website_redirects = [
 
 # include js, css files in header of desk.html
 app_include_css = "/assets/mrvtools/css/custom_page_design.css"
-app_include_js = "/assets/mrvtools/js/mrvtools.js"
+app_include_js = ["/assets/mrvtools/js/mrvtools.js","/assets/mrvtools/js/map_defaults.js"]
 # app_include_js = "/assets/mrvtools/js/adaptationreport.js"
 
 
@@ -42,6 +42,7 @@ app_include_js = "/assets/mrvtools/js/mrvtools.js"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"User" : "public/js/user.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 doctype_list_js = {"User" : "public/js/user_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

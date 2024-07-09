@@ -334,7 +334,7 @@ class MRVReport {
 				// 	this.$heading = $('<b class="headline">Adaptation Summary</b>').insertBefore(this.$report3);
 				// }
 
-				this.datatable = new DataTable(".report-wrapper3", {columns:columns,data:data});
+				this.datatable = new DataTable(".report-wrapper3", {columns:columns,data:data,inlineFilters: true});
 			})
 
 
@@ -351,7 +351,7 @@ class MRVReport {
 					// if(this.project){
 					// 	this.$heading = $('<b class="headline">SDG Summary</b>').insertBefore(this.$report4);
 					// }
-					this.datatable = new DataTable(".report-wrapper4", {columns:columns,data:data});
+					this.datatable = new DataTable(".report-wrapper4", {columns:columns,data:data,inlineFilters: true});
 				})
 
 		frappe.call('mrvtools.mrvtools.page.mrv_report.mrv_report.get_finance_details',{

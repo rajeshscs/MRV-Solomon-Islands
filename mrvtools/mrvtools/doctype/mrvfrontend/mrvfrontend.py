@@ -29,12 +29,16 @@ def get_all():
     CCDImages = []
     for child_record in parent_doc.get('climate_change_division_images'):
         CCDImages.append(child_record.as_dict())
+    whatsNew = []
+    for child_record in parent_doc.get('add_new_content'):
+        whatsNew.append(child_record.as_dict())
 
     result = {
         'parent_data': parent_data,
         'child_table_data': child_table_data,
         'child_table_data2': child_table_data2,
         'CCDImages': CCDImages,
+        'add_new_content': whatsNew,
 
     }
 

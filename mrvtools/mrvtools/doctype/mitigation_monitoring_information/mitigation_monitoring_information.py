@@ -1,9 +1,12 @@
 # Copyright (c) 2023, tridotstech and contributors
 # For license information, please see license.txt
 
-import frappe
+import frappe,json
 from frappe.model.document import Document
-
+from frappe.model.utils import is_virtual_doctype
+from frappe.model.base_document import get_controller
+from frappe.desk.reportview import compress,execute
+from frappe.model.utils.user_settings import save
 class MitigationMonitoringInformation(Document):
 	
 # _____________________________________________________________________________________________________________________
@@ -72,7 +75,7 @@ class MitigationMonitoringInformation(Document):
 
 
 
-	@frappe.whitelist()
+	# @frappe.whitelist()
 	# def get_data(self):
 	# 	get_doc=frappe.db.sql(f"""SELECT included_in FROM `tabProject Included In ChildTable` WHERE parent ='{self.project_name}'""")
 	# 	return get_doc
@@ -107,6 +110,20 @@ class MitigationMonitoringInformation(Document):
 			return [str(year) for year in range(int(start_year), 2051)]
 		else:
 			return [str(year) for year in range(1990, 2051)]
-		
-	
-	
+
+
+@frappe.whitelist()
+def get(args):
+	args = json.loads(args)
+	args = frappe._dict(args)
+	frappe.log_error("ARS",args.doctype)
+	if is_virtual_doctype(args.doctype):
+		controller = get_controller(args.doctype)
+		data = compress(controller.get_list(args))
+	else:
+		data = compress(execute(**args), args=args)
+	return data
+
+@frappe.whitelist()
+def save_settings(doctype, user_settings):
+	return save(doctype,user_settings)

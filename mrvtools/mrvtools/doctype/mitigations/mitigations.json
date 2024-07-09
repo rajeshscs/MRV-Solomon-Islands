@@ -141,7 +141,7 @@
   {
    "fetch_from": "project_name.costusd",
    "fieldname": "costusd",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "label": "Cost(USD)",
    "read_only": 1
   },
@@ -177,7 +177,7 @@
   },
   {
    "fieldname": "lifetime",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Lifetime(years)",
    "reqd": 1
@@ -359,7 +359,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-30 17:29:11.314336",
+ "modified": "2024-07-04 13:58:13.555030",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigations",

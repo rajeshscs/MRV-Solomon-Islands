@@ -58,7 +58,7 @@ def getColumns():
 		{
 			"fieldname": "costusd",
 			"label": "Cost (USD)",
-			"fieldtype": 'Data',
+			"fieldtype": 'Int',
 		},
 		{
 			"fieldname": "location",

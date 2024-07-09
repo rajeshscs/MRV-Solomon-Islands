@@ -7,38 +7,47 @@ from frappe.utils.password import update_password
 from frappe.utils.password import get_decrypted_password
 
 class UserRegistration(Document):
+	def on_submit(self):
+		self.check_user_exists(self.ghg,self.reports,self.project_tracking)
+
+	def on_update_after_submit(self):
+		self.check_user_exists(self.ghg,self.reports,self.project_tracking)
 	@frappe.whitelist()
 	def check_user_exists(self,ghg,reports,project):
+		
 		role=[]
-		if not frappe.db.exists("User", self.email_id):
-			if(self.role == "User"):
-				for g in ghg:
-					role.append({"role": g['project_tracking']+" "+"Tracking"})
-				# role.append(g['project_tracking'])
-				for proj in project:
-					role.append({"role": "Projects"})
-					role.append({"role": proj['project_tracking']})
-				for report in reports:
-					role.append({"role": report['project_tracking']})
-				self.insert_user(role)
-			elif(self.role == "Approver"):
-				for g in ghg:
-					role.append({"role": "Approver"+ " " + g['project_tracking']})
-				# role.append(g['project_tracking'])
-				for proj in project:
-					role.append({"role": "Approver Project"})
-					role.append({"role": "Approver"+ " " + proj['project_tracking']})
-				for report in reports:
-					role.append({"role":"Approver"+ " " + report['project_tracking']})
-				self.insert_user(role)
-			else:
-				for report in reports:
-					role.append({"role":"Observer"+ " " + report['project_tracking']})
-				self.insert_user(role)
+		if(self.role == "User"):
+			for g in ghg:
+				role.append({"role": g.project_tracking+" "+"Tracking"})
+			for proj in project:
+				role.append({"role": "Projects"})
+				role.append({"role": proj.project_tracking})
+			for report in reports:
+				role.append({"role": report.project_tracking})
+			
+			self.insert_user(role)
+		elif(self.role == "External Observer"):
+			role.append({"role": "Dashboard Observer"})
+			self.insert_user(role)
+		elif(self.role == "Approver"):
+			for g in ghg:
+				role.append({"role": "Approver"+ " " + g.project_tracking})
+			# role.append(g.project_tracking)
+			for proj in project:
+				role.append({"role": "Approver Project"})
+				role.append({"role": "Approver"+ " " + proj.project_tracking})
+			for report in reports:
+				role.append({"role":"Approver"+ " " + report.project_tracking})
+			self.insert_user(role)
+		else:
+			for report in reports:
+				role.append({"role":"Observer"+ " " + report.project_tracking})
+			self.insert_user(role)
 		# 	role_list = [{"role":"Adaptation Tracking"},{"role":"Mitigation Tracking"}]
 		
 
 	def insert_user(self, roles):
+		frappe.log_error("ROLES",roles)
 		# user = frappe.new_doc("User")
 		# user.email = self.email_id,
 		# user.first_name = self.user_name,
@@ -46,27 +55,41 @@ class UserRegistration(Document):
 		# user.send_welcome_email = 1,
 		# user.roles = roles
 		# user.save(ignore_permissions=True)
-		user = self.email_id
-		doc = frappe.get_doc({
-			"doctype": "User",
-			"name": self.email_id,
-			"email": self.email_id,
-			"first_name": self.user_name,
-			"enabled" :1,
-			"mobile_no": self.contact_number,
-			"send_welcome_email": 1,
-			"roles":roles
-		})
-		doc.insert(ignore_permissions=True)
-		decrypted_password = get_decrypted_password(doctype = "User Registration", name = self.name, fieldname="password", raise_exception=True)
-		update_password(user,pwd = decrypted_password, logout_all_sessions=0)
-		doc.save(ignore_permissions=True)
-		frappe.db.commit()
+		
+		if frappe.db.exists("User",self.email_id):
+			user = self.email_id
+			doc = frappe.get_doc("User",self.email_id)
+			
+			doc.update({"enabled" :self.enabled,
+				"roles":roles
+			})
+			decrypted_password = get_decrypted_password(doctype = "User Registration", name = self.name, fieldname="password", raise_exception=True)
+			frappe.log_error("decrypted_password",decrypted_password) 
+			update_password(user,pwd = decrypted_password, logout_all_sessions=0)
+			doc.save(ignore_permissions=True)
+			frappe.db.commit()
+		else:
+			user = self.email_id
+			doc = frappe.get_doc({
+				"doctype": "User",
+				"name": self.email_id,
+				"email": self.email_id,
+				"first_name": self.user_name,
+				"enabled" :self.enabled,
+				"mobile_no": self.contact_number,
+				"send_welcome_email": 1,
+				"roles":roles
+			})
+			doc.insert(ignore_permissions=True)
+			decrypted_password = get_decrypted_password(doctype = "User Registration", name = self.name, fieldname="password", raise_exception=True)
+			frappe.log_error("decrypted_password",decrypted_password)
+			update_password(user,pwd = decrypted_password, logout_all_sessions=0)
+			doc.save(ignore_permissions=True)
+			frappe.db.commit()
 	
 @frappe.whitelist(allow_guest = True)
 def createUser(formData):
 	formData = json.loads(formData)
-	frappe.log_error("2222222222222",formData['email_id'])
 	if not frappe.db.exists("User Registration",{"email_id":formData['email_id']}):
 
 		doc = frappe.new_doc("User Registration")

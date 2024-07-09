@@ -220,7 +220,7 @@ class NdcReport {
 				if(this.monitoring_year[0].value){
 					this.$heading = $('<b class="headline" style="margin-left: 30px;">NDC Report</b>').insertBefore(this.$report);
 				}
-				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1});
+				this.datatable = new DataTable(this.$report[0], {columns:columns,data:data,showTotalRow:1,inlineFilters: true});
 			})
 	}
 
