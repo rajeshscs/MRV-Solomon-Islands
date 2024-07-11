@@ -25,6 +25,41 @@ app_include_css = "/assets/mrvtools/css/custom_page_design.css"
 app_include_js = ["/assets/mrvtools/js/mrvtools.js","/assets/mrvtools/js/map_defaults.js"]
 # app_include_js = "/assets/mrvtools/js/adaptationreport.js"
 
+website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},]
+
+fixtures = [
+    {"doctype":"Project Objective"},
+    {"doctype":"Project Key Sector"},
+    {"doctype":"Project Key Sub Sector"},
+    {"doctype":"Project Included In"},
+    {"doctype":"Project Tracking Master"},
+    {"doctype":"Mitigation Target GHGs"},
+    {"doctype":"NDP Objective Coverage"},
+    {"doctype":"NDP Coverage"},
+    {"doctype":"User Permissions"},
+    {"doctype":"Mitigation Non GHG mitigation benefits"},
+    {"doctype":"Master Data Test"},
+    {"doctype":"SDG Category"},
+    {"doctype":"Adaptation Category"},
+    {"doctype":"Disbursement Category"},
+    {"doctype":"GHG Sector"},
+    {"doctype":"GHG Category"},
+    {"doctype":"GHG Sub Sector"},
+    {"doctype":"GHG Sub Category"},
+    {"doctype":"Energy Fuel Master List"},
+    {"doctype":"IPPU GWP Master List"},
+    {"doctype":"Livestock Emission Factor Master List"},
+    {"doctype":"Waste Population Master List"},
+    {"doctype":"Livestock Population Master List"},
+    {"doctype":"Direct and Indirect Managed Soils Master List"},
+    {"doctype":"Forest Category Master List"},
+    {"doctype":"IPPU Emission Factors Master List"},
+    {"doctype":"GHG Inventory Report Categories"},
+    {"doctype":"GHG Inventory Table Name Master List"},
+    {"doctype":"GHG Inventory Report Formulas"},
+    {"doctype":"Role"},
+    {"doctype":"Custom DocPerm"}
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/mrvtools/css/mrvtools.css"
@@ -214,38 +249,3 @@ doctype_list_js = {"User" : "public/js/user_list.js"}
 #	"mrvtools.auth.validate"
 # ]
 
-website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},]
-
-fixtures = [
-    {"doctype":"Project Objective"},
-    {"doctype":"Project Key Sector"},
-    {"doctype":"Project Key Sub Sector"},
-    {"doctype":"Project Included In"},
-    {"doctype":"Project Tracking Master"},
-    {"doctype":"Mitigation Target GHGs"},
-    {"doctype":"NDP Objective Coverage"},
-    {"doctype":"NDP Coverage"},
-    {"doctype":"User Permissions"},
-    {"doctype":"Mitigation Non GHG mitigation benefits"},
-    {"doctype":"Master Data Test"},
-    {"doctype":"SDG Category"},
-    {"doctype":"Adaptation Category"},
-    {"doctype":"Disbursement Category"},
-    {"doctype":"GHG Sector"},
-    {"doctype":"GHG Category"},
-    {"doctype":"GHG Sub Sector"},
-    {"doctype":"GHG Sub Category"},
-    {"doctype":"Energy Fuel Master List"},
-    {"doctype":"IPPU GWP Master List"},
-    {"doctype":"Livestock Emission Factor Master List"},
-    {"doctype":"Waste Population Master List"},
-    {"doctype":"Livestock Population Master List"},
-    {"doctype":"Direct and Indirect Managed Soils Master List"},
-    {"doctype":"Forest Category Master List"},
-    {"doctype":"IPPU Emission Factors Master List"},
-    {"doctype":"GHG Inventory Report Categories"},
-    {"doctype":"GHG Inventory Table Name Master List"},
-    {"doctype":"GHG Inventory Report Formulas"},
-    {"doctype":"Role"},
-    {"doctype":"Custom DocPerm"}
-]

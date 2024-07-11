@@ -29,6 +29,8 @@
   "water",
   "food",
   "health",
+  "section_break_i56fh",
+  "categories_html",
   "section_break_j9xm0",
   "load_categories",
   "qualitative_impact",
@@ -225,11 +227,19 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_i56fh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "categories_html",
+   "fieldtype": "HTML"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-21 15:57:59.391604",
+ "modified": "2024-07-10 16:33:31.970767",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",

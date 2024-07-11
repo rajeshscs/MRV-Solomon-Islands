@@ -99,6 +99,7 @@ const isModalOpen = ref(false);
   
       if (response.status === 200) {
         data.value = response.data;
+        console.log("Dta = ",data)
       } else {
         throw new Error('Network response was not ok');
       }
@@ -116,9 +117,6 @@ const isModalOpen = ref(false);
         console.log("no item found");
       }
     }
-  
-    console.log("response", values);
-    console.log("response", field);
   };
 
   const openModal = (src) => {

@@ -635,7 +635,7 @@ export default {
       },
 
       filterRows1(event) {
-         var inputField, parent, table, tr, td, i, txtValue,idx;
+         var inputField, parent, table, tr, td, i,idx;
          let search1 = $('#myInput-1').val().toUpperCase();
          let search2 = $('#myInput-2').val().toUpperCase();
          let search3 = $('#myInput-3').val().toUpperCase();

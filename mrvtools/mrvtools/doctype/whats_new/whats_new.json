@@ -16,12 +16,16 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
   },
   {
    "fieldname": "content",
-   "fieldtype": "Data",
-   "label": "Content"
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Content",
+   "reqd": 1
   },
   {
    "fieldname": "add_image",
@@ -37,7 +41,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-17 17:18:16.852989",
+ "modified": "2024-07-11 15:04:38.046206",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Whats New",

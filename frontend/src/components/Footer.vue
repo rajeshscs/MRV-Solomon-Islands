@@ -40,7 +40,8 @@
                           'Climate Change Division': 'climate-change-division' ,
                           'Reports': 'reports',
                           'Support': 'support',
-                          'Knowledge Resource': 'knowledgeresource'
+                          'Knowledge Resource': 'knowledgeresource',
+                          'What\'s New?': 'new'
                         }" :key="routeKey">
                           <router-link :to="'/' + routeKey" class="custom-link text-start">
                               <i class="mr-3 bi bi-chevron-right  " style="font-weight: 900 !important;"></i> {{ displayText }}

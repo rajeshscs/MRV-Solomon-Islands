@@ -65,6 +65,9 @@
           <li>
             <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }">Knowledge Resource</router-link>
           </li>
+          <li>
+            <router-link to='/new' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/new' }">What's New?</router-link>
+          </li>
           </ul>
         </li>
       </ul>

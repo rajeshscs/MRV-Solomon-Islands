@@ -8,7 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "category"
+  "category",
+  "sdg_logo"
  ],
  "fields": [
   {
@@ -17,11 +18,18 @@
    "in_list_view": 1,
    "label": "Category",
    "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "sdg_logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-21 13:34:53.988545",
+ "modified": "2024-07-11 12:27:43.034002",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Category",

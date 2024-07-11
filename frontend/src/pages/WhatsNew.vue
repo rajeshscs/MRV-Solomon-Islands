@@ -1,13 +1,23 @@
 <template>
-  <div class="template">
-    <div class="whats-new-section">
-      <h2>What's New</h2>
+  <Header />
+  <div class="content">
+    <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
+      What's <span style="color: green; font-weight: 700;">New</span>
+    </h1>
+    <div v-if="data.add_new_content.length != 0" class="whats-new-section">
       <div v-for="item in data.add_new_content" :key="item.title" class="news-item">
-        <img :src="item.add_image" alt="News Image" class="news-image">
-        <div class="news-content">
-          <h3 class="news-title">{{ item.title }}</h3>
-          <p class="news-description">{{ item.content }}</p>
-          <a href='${item.add_url}' class="read-more">Read More : {{ item.add_url }}</a>
+        <div class = "news-header">
+
+          <img v-if="item.add_image" :src="item.add_image" alt="News Image" class="news-image">
+          <img v-else src="../assets/images/no_image.png" alt="News Image" class="news-image">
+          <div class="news-content">
+            <h3 class="news-title">{{ item.title }}</h3>
+            <p class="news-description">{{ item.content }}</p>
+          </div>
+        </div>
+        <div class="news-footer">
+          <p class="posting-date" style= "color:#a8a8a8;">{{ item.creation }}  </p>
+          <a v-if="item.add_url" :href="item.add_url" class="read-more" Target="_blank">  Read More</a>
         </div>
       </div>
   
@@ -17,9 +27,60 @@
         <img class="modal-content" :src="modalImage" id="img01">
       </div>
     </div>
+    <div v-else>No data Found</div>
   </div>
+  <Footer  :data="footer_data" />
   </template>
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import axios from 'axios';
+  import Footer from '@/components/Footer.vue'
+  import Header from '@/components/Header.vue'
   
+  const data = ref([]);
+  const footer_data = ref([]);
+  const isModalOpen = ref(false);
+  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
+      if (response.status === 200) {
+        footer_data.value = response.data
+        data.value = response.data.message;
+        console.log("Dta == ",data.value.add_new_content);
+        let formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        for (let i = 0; i < data.value.add_new_content.length; i++) {
+            let creation = data.value.add_new_content[i].creation;
+            let date = new Date(creation);
+
+            // Use frappe.datetime to format the date
+            let formattedDate = formatter.format(date);
+
+            // Update the creation date in the  array
+            data.value.add_new_content[i].creation = formattedDate;
+        }
+        console.log("Dta222 == ",data.value.add_new_content);
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  const openModal = (src) => {
+
+    isModalOpen.value = true;
+  };
+  
+  const closeModal = () => {
+    isModalOpen.value = false;
+  };
+  
+  onMounted(() => {
+    fetchData();
+  });
+  </script>
   <style>
   /* Your existing styles */
   body {
@@ -28,7 +89,7 @@
     margin: 0;
     padding: 0;
   }
-  .template{
+  .content{
     /* box-shadow: 0 2px 4px #0000001a;  */
     display: flex;
     gap: 30px;
@@ -58,7 +119,12 @@
     display: flex;
     align-items: flex-start;
     border-bottom: 1px solid #ddd;
-    padding: 30px 30px;;
+    padding: 30px 30px;
+    flex-direction: column;
+  }
+  .news-header{
+    display: flex;
+    flex-direction: row;
   }
   
   .news-item:last-child {
@@ -77,15 +143,20 @@
   .news-content {
     flex: 1;
   }
+  .news-footer{
+    gap:10px;
+    display: flex;
+    min-width: 100%;
+    justify-content: flex-end
+  }
   
   .news-title {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin: 0;
-    color: #007BFF;
+    color: #188a18;
+    padding: 18px 0px !important;
   }
-  .news-title h3{
-    padding: 18px 0;
-  }
+ 
   
   .news-date {
     font-size: 0.9em;
@@ -94,19 +165,28 @@
   }
   
   .news-description {
-    font-size: 1em;
+    font-size: 1.1em;
     color: #333;
     margin: 10px 0;
+    text-wrap: wrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
   }
   
   .read-more {
     text-decoration: none;
-    color: #007BFF;
+    color: #5b975b;
     font-weight: bold;
   }
   
   .read-more:hover {
     text-decoration: underline;
+    color: #008000 !important;
+  }
+  .read-more:focus {
+    color: #008000 !important;
   }
   
   /* Modal styles */
@@ -155,39 +235,5 @@
 
   </style>
   
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import axios from 'axios';
   
-  const data = ref([]);
-  const isModalOpen = ref(false);
-  const modalImage = ref('');
-  
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
-      if (response.status === 200) {
-        data.value = response.data.message;
-        console.log("Dta == ",data);
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-  
-  const openModal = (src) => {
-    modalImage.value = src;
-    isModalOpen.value = true;
-  };
-  
-  const closeModal = () => {
-    isModalOpen.value = false;
-  };
-  
-  onMounted(() => {
-    fetchData();
-  });
-  </script>
   

@@ -105,10 +105,11 @@
   "column_break_3xyl8",
   "partner5",
   "partner6",
+  "whats_new_tab",
+  "whats_new_section",
+  "add_new_content",
   "other_tab",
-  "breadcrumb_image",
-  "whats_new_section_section",
-  "add_new_content"
+  "breadcrumb_image"
  ],
  "fields": [
   {
@@ -581,7 +582,6 @@
    "label": "Other"
   },
   {
-   "description": "Attach top image for all other pages except home page.",
    "fieldname": "breadcrumb_image",
    "fieldtype": "Attach Image",
    "label": "Top Image"
@@ -610,21 +610,26 @@
    "label": "Climate Change Division Content3"
   },
   {
-   "fieldname": "whats_new_section_section",
-   "fieldtype": "Section Break",
-   "label": "What's New Section"
-  },
-  {
    "fieldname": "add_new_content",
    "fieldtype": "Table",
    "label": "Add New Content",
    "options": "Whats New"
+  },
+  {
+   "fieldname": "whats_new_tab",
+   "fieldtype": "Tab Break",
+   "label": "What's New?"
+  },
+  {
+   "fieldname": "whats_new_section",
+   "fieldtype": "Section Break",
+   "label": "What's New?"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-06-17 17:21:36.145237",
+ "modified": "2024-07-11 15:03:30.047835",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "MrvFrontend",

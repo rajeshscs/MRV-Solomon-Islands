@@ -33,6 +33,7 @@ const fetchData = async () => {
     const response = await axios.get('/api/method/mrvtools.mrvtools.doctype.mrvfrontend.mrvfrontend.get_all');
 
     if (response.status === 200) {
+      console.log("Response ==== ",response.data);
       data.value = response.data;
     } else {
       throw Error('Network response was not ok');
