@@ -23,13 +23,12 @@
    "allow_in_quick_entry": 1,
    "fieldname": "sdg_logo",
    "fieldtype": "Attach Image",
-   "label": "Logo",
-   "reqd": 1
+   "label": "Logo"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-11 12:27:43.034002",
+ "modified": "2024-07-12 11:07:21.165518",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Category",
