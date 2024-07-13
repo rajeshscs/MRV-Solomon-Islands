@@ -50,7 +50,7 @@
         console.log("Dta == ",data.value.add_new_content);
         let formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         for (let i = 0; i < data.value.add_new_content.length; i++) {
-            let creation = data.value.add_new_content[i].creation;
+            let creation = data.value.add_new_content[i].date;
             let date = new Date(creation);
 
             // Use frappe.datetime to format the date

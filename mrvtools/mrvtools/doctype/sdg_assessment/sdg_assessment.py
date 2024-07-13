@@ -16,20 +16,17 @@ class SDGAssessment(Document):
 	@frappe.whitelist()
 	def categorylist(self):
 		category_list = frappe.db.get_list('SDG Category', pluck='name')
-
-
 		result_fields = []
-		temp = []
 		for category in category_list:
-			
-			# column = {
-			# 	'fieldtype' : 'Column Break',
-			# }
-			
 			result_fields.append(category)
-			# temp.append(category)
-			# if len(temp) % 5  == 0 and not len(category_list)==len(temp):
-			# 	result_fields.append(column)
+		return result_fields
+	
+	@frappe.whitelist()
+	def get_images(self):
+		category_list = frappe.db.get_list('SDG Category', fields = ["sdg_logo","name"],order_by="creation asc")
+		result_fields = []
+		for category in category_list:
+			result_fields.append(category)
 		return result_fields
 	
 	

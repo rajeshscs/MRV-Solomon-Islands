@@ -9,20 +9,23 @@
  "field_order": [
   "title",
   "content",
+  "column_break_g5ieq",
+  "date",
   "add_image",
-  "add_url"
+  "add_url",
+  "hide"
  ],
  "fields": [
   {
    "fieldname": "title",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Title",
    "reqd": 1
   },
   {
    "fieldname": "content",
-   "fieldtype": "Text",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Content",
    "reqd": 1
@@ -30,18 +33,38 @@
   {
    "fieldname": "add_image",
    "fieldtype": "Attach",
+   "in_list_view": 1,
    "label": "Add Image"
   },
   {
    "fieldname": "add_url",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
    "label": "Add URL"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_g5ieq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "hide",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Hide"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-07-11 15:04:38.046206",
+ "modified": "2024-07-12 13:37:04.314344",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Whats New",

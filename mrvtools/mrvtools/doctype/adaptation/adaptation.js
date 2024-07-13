@@ -12,6 +12,90 @@ html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th sc
 frappe.ui.form.on('Adaptation', {
 
 	refresh: function(frm){
+		frm.icon_html = ''
+		frm.icon_html += `<div style="display:flex;gap:29px;flex-wrap: wrap;">`
+		frappe.call({
+			doc:frm.doc,
+			method:'categorylist',
+			async:false,
+			callback:function(r){
+				for(let i of r.message){
+					frm.icon_html +=`<div id="${i.replaceAll(" ", "_")}" class= "adaptation-icon" onclick="check_categories(this)">
+										<button class="adaptation-btn">${i}</button>
+									</div>`
+				}
+			}
+		})
+		
+		frm.icon_html += `
+			</div>
+			<script>
+				function check_categories(event){
+					event['selectedItem'] = !event['selectedItem']
+					if(event['selectedItem']){
+						$('#'+event.id).find('.adaptation-btn').attr("style","background-color: rgba(0,0,0,0.2) !important;")
+					}else{
+						$('#'+event.id).find('.adaptation-btn').attr("style","background-color: #f2f2f2 !important;")
+					}
+				}
+			</script>
+			<style>
+				.adaptation-btn{
+					background-color: #f2f2f2 !important;
+					width: 131px;
+					border-radius: 5px;
+					font-size: 14px;
+					font-family: 'Source Sans Pro', sans-serif;
+					padding: 6px 9px;
+					border: unset;
+					box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px 0px;
+				}
+				.adaptation-btn:focus{
+					outline: none; !important;
+				}
+				.adaptation-icon{
+					position: relative;
+					border-radius:5px;
+					border: unset;
+					transition: transform .2s;
+				}
+				.adaptation-icon:hover {
+					-ms-transform: scale(1.5);
+					-webkit-transform: scale(1.5);
+					transform: scale(1.1); 
+					// box-shadow: 0px 0px 5px 0px #6c6c6c;
+					z-index:3;
+				}
+				.overlay {
+					position: absolute;
+					border-radius:5px;
+					display: none;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: rgba(0,0,0,0.2);
+					z-index: 2;
+					cursor: pointer;
+				}
+			</style>
+		`
+		$('[data-fieldname="category_html"]').html(frm.icon_html)
+		if(frm.doc.category_json){
+			for(let [key,value] of  Object.entries(JSON.parse(frm.doc.category_json)) ){
+				if(value == true){
+					
+					$('#'+key.replaceAll(" ", "_")).find('.adaptation-btn').attr("style","background-color: rgba(0,0,0,0.2) !important;")
+					$('#'+key.replaceAll(" ", "_")).prop("selectedItem",true)
+					
+				}
+			}
+		}
+		$('.adaptation-icon').on("click",function(){
+			frm.clear_custom_buttons()
+			frm.dirty()
+		})
+
 		$(`div[data-fieldname="ndp_cov"]`).attr('style','max-width:100%;padding-right: 0px;');
 		$(`div[data-fieldname="ndp_coverage"]`).attr('style','max-width:100%;padding-right: 0px;');
 		$('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
@@ -285,20 +369,32 @@ frappe.ui.form.on('Adaptation', {
 			{
 				frm.set_value("qualitative_impact",[]);
 				frm.set_value("quantitative_impact",[]);	
-				$("[type='checkbox']").each(function(){
-					var field_name = $(this).attr('data-fieldname');
-					var value = $(this).prop("checked");
-						if (Array.isArray(form_data[field_name])) {
-							form_data[field_name].push(value);
-						} 
-						else {
-							form_data[field_name] = value;
-						}
-				});
+				$(".adaptation-icon").each(function(){
+					var field_name = $(this).attr('id');
+					var value = $(this).prop("selectedItem");
+
+					value = value ? value : false
+					if (Array.isArray(form_data[field_name])) {
+						form_data[field_name].push(value);
+					} else {
+						form_data[field_name] = value;
+					}
+				})
+				// $("[type='checkbox']").each(function(){
+				// 	var field_name = $(this).attr('data-fieldname');
+				// 	var value = $(this).prop("checked");
+				// 		if (Array.isArray(form_data[field_name])) {
+				// 			form_data[field_name].push(value);
+				// 		} 
+				// 		else {
+				// 			form_data[field_name] = value;
+				// 		}
+				// });
+				console.log("form_dataform_data = ",form_data);
 				for(var i of JSON.parse(frm.doc.json).qualitative){
 					for(let [key,value] of Object.entries(form_data)){
 						if(value ==true){
-							if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+							if (key.replaceAll("_", " ") == i.category){
 									if (!checkedList.includes(i.category)){
 									checkedList.push(i.category)
 								}
@@ -312,7 +408,7 @@ frappe.ui.form.on('Adaptation', {
 
 						if(value ==true){
 							for(var i of JSON.parse(frm.doc.json).qualitative){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key.replaceAll("_", " ") == i.category){
 									if (i.table == "Qualitative"){
 										let row = frm.add_child('qualitative_impact')
 											row.category= i.category,
@@ -321,22 +417,24 @@ frappe.ui.form.on('Adaptation', {
 											row.impact = i.impact
 										
 										categories.push(i.category)
-										frm.refresh_field('qualitative_impact');
+										
 									}
 								}	
 							}
+							frm.refresh_field('qualitative_impact');
 							for(var i of JSON.parse(frm.doc.json).quantitative){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key.replaceAll("_", " ") == i.category){
 									if (i.table == "Quantitative"){
 										let row = frm.add_child('quantitative_impact')
 												row.category= i.category,
 												row.question= i.question,
 												row.expected_value = i.expected_value,
 												row.data_source = i.data_source
-										frm.refresh_field('quantitative_impact');
+										
 									}
 								}
 							}
+							frm.refresh_field('quantitative_impact');
 							categories=[...new Set(categories)]	
 						}
 					}
@@ -351,7 +449,7 @@ frappe.ui.form.on('Adaptation', {
 									row.question= i.question,
 									row.likelihood = i.likelihood,
 									row.impact = i.impact
-								frm.refresh_field('qualitative_impact');
+								
 							}
 							if (i.table == "Quantitative"){
 								let row = frm.add_child('quantitative_impact')
@@ -359,19 +457,21 @@ frappe.ui.form.on('Adaptation', {
 										row.question= i.question,
 										row.expected_value = i.expected_value,
 										row.data_source = i.data_source
-								frm.refresh_field('quantitative_impact');
+								
 							}
 						}
 					}
+					frm.refresh_field('qualitative_impact');
+					frm.refresh_field('quantitative_impact');
 					categories = categories.concat(else_category)
 					categories=[...new Set(categories)]
 				}	
-				frm.refresh_field('qualitative_impact');
 			}
 		});
 	},
 	
 	before_save:function(frm){
+		frm.set_value("category_json", "")
 		var existing_json = JSON.parse(frm.doc.json)
 		for (var row of cur_frm.doc.qualitative_impact){
 			for (var i of existing_json.qualitative){
@@ -391,7 +491,16 @@ frappe.ui.form.on('Adaptation', {
 		}
 		frm.set_value("json", JSON.stringify(existing_json))
 		frm.refresh_field("json")
-		
+		var json_={}
+		$(".adaptation-icon").each(function(){
+			let field_name = $(this).attr('id');
+			let value = $(this).prop("selectedItem");
+			value = value ? value : false
+			json_[field_name]=(value)
+			// json_.push(k)
+		})
+		frm.set_value("category_json", JSON.stringify(json_))
+		frm.refresh_field("category_json")
 		if (frm.doc.work_state == ''){
 			if (frm.doc.workflow_state == "Pending") {
 				frm.set_value("work_state","Pending")
@@ -473,16 +582,29 @@ frappe.ui.form.on('Adaptation', {
 					{
 
 						frm.set_value("qualitative_impact",[]);
-						frm.set_value("quantitative_impact",[]);	
-						$("[type='checkbox']").each(function(){
-							var field_name = $(this).attr('data-fieldname');
-							var value = $(this).prop("checked");
-								if (Array.isArray(form_data[field_name])) {
-									form_data[field_name].push(value);
-								} else {
-									form_data[field_name] = value;
-								}
-						});
+						frm.set_value("quantitative_impact",[]);
+
+						$(".adaptation-icon").each(function(){
+							var field_name = $(this).attr('id');
+							var value = $(this).prop("selectedItem");
+		
+							value = value ? value : false
+							if (Array.isArray(form_data[field_name])) {
+								form_data[field_name].push(value);
+							} else {
+								form_data[field_name] = value;
+							}
+						})
+
+						// $("[type='checkbox']").each(function(){
+						// 	var field_name = $(this).attr('data-fieldname');
+						// 	var value = $(this).prop("checked");
+						// 		if (Array.isArray(form_data[field_name])) {
+						// 			form_data[field_name].push(value);
+						// 		} else {
+						// 			form_data[field_name] = value;
+						// 		}
+						// });
 
 						for(var i of JSON.parse(frm.doc.json).qualitative){
 							
@@ -490,7 +612,7 @@ frappe.ui.form.on('Adaptation', {
 								
 								if(value ==true){
 									
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key.replaceAll("_", " ") == i.category){
 											if (!checkedList.includes(i.category)){
 											
 											checkedList.push(i.category)
@@ -505,7 +627,7 @@ frappe.ui.form.on('Adaptation', {
 
 								if(value ==true){
 									for(var i of JSON.parse(frm.doc.json).qualitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key.replaceAll("_", " ") == i.category){
 											if (i.table == "Qualitative"){
 												let row = frm.add_child('qualitative_impact')
 													row.category= i.category,
@@ -514,22 +636,24 @@ frappe.ui.form.on('Adaptation', {
 													row.impact = i.impact
 												
 												categories.push(i.category)
-												frm.refresh_field('qualitative_impact');
+												
 											}
 										}	
 									}
+									frm.refresh_field('qualitative_impact');
 									for(var i of JSON.parse(frm.doc.json).quantitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key.replaceAll("_", " ") == i.category){
 											if (i.table == "Quantitative"){
 												let row = frm.add_child('quantitative_impact')
 														row.category= i.category,
 														row.question= i.question,
 														row.expected_value = i.expected_value,
 														row.data_source = i.data_source
-												frm.refresh_field('quantitative_impact');
+												
 											}
 										}
 									}
+									frm.refresh_field('quantitative_impact');
 									categories=[...new Set(categories)]	
 								}
 							}
@@ -547,7 +671,7 @@ frappe.ui.form.on('Adaptation', {
 												row.impact = i.impact
 												
 											
-											frm.refresh_field('qualitative_impact');
+											
 										}
 										if (i.table == "Quantitative"){
 											let row = frm.add_child('quantitative_impact')
@@ -555,15 +679,15 @@ frappe.ui.form.on('Adaptation', {
 													row.question= i.question,
 													row.expected_value = i.expected_value,
 													row.data_source = i.data_source
-											frm.refresh_field('quantitative_impact');
+											
 										}
 									}
 							}
+							frm.refresh_field('qualitative_impact');
+							frm.refresh_field('quantitative_impact');
 							categories = categories.concat(else_category)
 							categories=[...new Set(categories)]
-						}	
-						frm.refresh_field('qualitative_impact');
-						frm.refresh_field('quantitative_impact');
+						}
 						
 					}
 				});
@@ -585,21 +709,34 @@ frappe.ui.form.on('Adaptation', {
 				callback: function(r)
 				{
 					frm.set_value("qualitative_impact",[]);
-					frm.set_value("quantitative_impact",[]);	
-					$("[type='checkbox']").each(function(){
-						var field_name = $(this).attr('data-fieldname');
-						var value = $(this).prop("checked");
-							if (Array.isArray(form_data[field_name])) {
-								form_data[field_name].push(value);
-							} 
-							else {
-								form_data[field_name] = value;
-							}
-					});
+					frm.set_value("quantitative_impact",[]);
+
+					$(".adaptation-icon").each(function(){
+						var field_name = $(this).attr('id');
+						var value = $(this).prop("selectedItem");
+	
+						value = value ? value : false
+						if (Array.isArray(form_data[field_name])) {
+							form_data[field_name].push(value);
+						} else {
+							form_data[field_name] = value;
+						}
+					})
+
+					// $("[type='checkbox']").each(function(){
+					// 	var field_name = $(this).attr('data-fieldname');
+					// 	var value = $(this).prop("checked");
+					// 		if (Array.isArray(form_data[field_name])) {
+					// 			form_data[field_name].push(value);
+					// 		} 
+					// 		else {
+					// 			form_data[field_name] = value;
+					// 		}
+					// });
 					for(var i of JSON.parse(frm.doc.json).qualitative){
 						for(let [key,value] of Object.entries(form_data)){
 							if(value ==true){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key.replaceAll("_", " ") == i.category){
 										if (!checkedList.includes(i.category)){
 										checkedList.push(i.category)
 									}
@@ -613,7 +750,7 @@ frappe.ui.form.on('Adaptation', {
 
 							if(value ==true){
 								for(var i of JSON.parse(frm.doc.json).qualitative){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key.replaceAll("_", " ") == i.category){
 										if (i.table == "Qualitative"){
 											let row = frm.add_child('qualitative_impact')
 												row.category= i.category,
@@ -622,23 +759,25 @@ frappe.ui.form.on('Adaptation', {
 												row.impact = i.impact
 											
 											categories.push(i.category)
-											frm.refresh_field('qualitative_impact');
+											
 										}
 									}	
 								}
+								frm.refresh_field('qualitative_impact');
 								for(var i of JSON.parse(frm.doc.json).quantitative){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key.replaceAll("_", " ") == i.category){
 										if (i.table == "Quantitative"){
 											let row = frm.add_child('quantitative_impact')
 													row.category= i.category,
 													row.question= i.question,
 													row.expected_value = i.expected_value,
 													row.data_source = i.data_source
-											frm.refresh_field('quantitative_impact');
+											
 										}
 									}
 								}
-								categories=[...new Set(categories)]	
+								frm.refresh_field('quantitative_impact');
+								categories=[...new Set(categories)]
 							}
 						}
 					}
@@ -652,7 +791,7 @@ frappe.ui.form.on('Adaptation', {
 										row.question= i.question,
 										row.likelihood = i.likelihood,
 										row.impact = i.impact
-									frm.refresh_field('qualitative_impact');
+									
 								}
 								if (i.table == "Quantitative"){
 									let row = frm.add_child('quantitative_impact')
@@ -660,14 +799,15 @@ frappe.ui.form.on('Adaptation', {
 											row.question= i.question,
 											row.expected_value = i.expected_value,
 											row.data_source = i.data_source
-									frm.refresh_field('quantitative_impact');
+									
 								}
 							}
 						}
+						frm.refresh_field('qualitative_impact');
+						frm.refresh_field('quantitative_impact');
 						categories = categories.concat(else_category)
 						categories=[...new Set(categories)]
-					}	
-					frm.refresh_field('qualitative_impact');
+					}
 				}
 			});
 		}
@@ -685,21 +825,34 @@ frappe.ui.form.on('Adaptation', {
 					callback: function(r)
 					{
 						frm.set_value("qualitative_impact",[]);
-						frm.set_value("quantitative_impact",[]);	
-						$("[type='checkbox']").each(function(){
-							var field_name = $(this).attr('data-fieldname');
-							var value = $(this).prop("checked");
-								if (Array.isArray(form_data[field_name])) {
-									form_data[field_name].push(value);
-								} 
-								else {
-									form_data[field_name] = value;
-								}
-						});
+						frm.set_value("quantitative_impact",[]);
+						
+						$(".adaptation-icon").each(function(){
+							var field_name = $(this).attr('id');
+							var value = $(this).prop("selectedItem");
+		
+							value = value ? value : false
+							if (Array.isArray(form_data[field_name])) {
+								form_data[field_name].push(value);
+							} else {
+								form_data[field_name] = value;
+							}
+						})
+
+						// $("[type='checkbox']").each(function(){
+						// 	var field_name = $(this).attr('data-fieldname');
+						// 	var value = $(this).prop("checked");
+						// 		if (Array.isArray(form_data[field_name])) {
+						// 			form_data[field_name].push(value);
+						// 		} 
+						// 		else {
+						// 			form_data[field_name] = value;
+						// 		}
+						// });
 						for(var i of JSON.parse(frm.doc.json).qualitative){
 							for(let [key,value] of Object.entries(form_data)){
 								if(value ==true){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key.replaceAll("_", " ") == i.category){
 											if (!checkedList1.includes(i.category)){
 											checkedList1.push(i.category)
 										}
@@ -713,7 +866,7 @@ frappe.ui.form.on('Adaptation', {
 
 								if(value ==true){
 									for(var i of JSON.parse(frm.doc.json).qualitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key.replaceAll("_", " ") == i.category){
 											if (i.table == "Qualitative"){
 												let row = frm.add_child('qualitative_impact')
 													row.category= i.category,
@@ -722,24 +875,26 @@ frappe.ui.form.on('Adaptation', {
 													row.impact = i.impact
 												
 												categories.push(i.category)
-												frm.refresh_field('qualitative_impact');
+												
 											}
 										}	
 									}
+									frm.refresh_field('qualitative_impact');
 
 									
 									for(var i of JSON.parse(frm.doc.json).quantitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key.replaceAll("_", " ") == i.category){
 											if (i.table == "Quantitative"){
 												let row = frm.add_child('quantitative_impact')
 														row.category= i.category,
 														row.question= i.question,
 														row.expected_value = i.expected_value,
 														row.data_source = i.data_source
-												frm.refresh_field('quantitative_impact');
+												
 											}
 										}
 									}
+									frm.refresh_field('quantitative_impact');
 									categories=[...new Set(categories)]	
 								}
 							}
@@ -754,18 +909,21 @@ frappe.ui.form.on('Adaptation', {
 											row.question= i.question,
 											row.likelihood = i.likelihood,
 											row.impact = i.impact
-										frm.refresh_field('qualitative_impact');
+										
 									}
+									
 									if (i.table == "Quantitative"){
 										let row = frm.add_child('quantitative_impact')
 												row.category= i.category,
 												row.question= i.question,
 												row.expected_value = i.expected_value,
 												row.data_source = i.data_source
-										frm.refresh_field('quantitative_impact');
+										
 									}
 								}
 							}
+							frm.refresh_field('qualitative_impact');
+							frm.refresh_field('quantitative_impact');
 							categories = categories.concat(else_category)
 							categories=[...new Set(categories)]
 						}	
@@ -997,16 +1155,29 @@ frappe.ui.form.on('Adaptation', {
 									{
 
 										frm.set_value("qualitative_impact",[]);
-										frm.set_value("quantitative_impact",[]);	
-										$("[type='checkbox']").each(function(){
-											var field_name = $(this).attr('data-fieldname');
-											var value = $(this).prop("checked");
-												if (Array.isArray(form_data[field_name])) {
-													form_data[field_name].push(value);
-												} else {
-													form_data[field_name] = value;
-												}
-										});
+										frm.set_value("quantitative_impact",[]);
+
+										$(".adaptation-icon").each(function(){
+											var field_name = $(this).attr('id');
+											var value = $(this).prop("selectedItem");
+						
+											value = value ? value : false
+											if (Array.isArray(form_data[field_name])) {
+												form_data[field_name].push(value);
+											} else {
+												form_data[field_name] = value;
+											}
+										})
+
+										// $("[type='checkbox']").each(function(){
+										// 	var field_name = $(this).attr('data-fieldname');
+										// 	var value = $(this).prop("checked");
+										// 		if (Array.isArray(form_data[field_name])) {
+										// 			form_data[field_name].push(value);
+										// 		} else {
+										// 			form_data[field_name] = value;
+										// 		}
+										// });
 
 										for(var i of JSON.parse(frm.doc.json).qualitative){
 											
@@ -1014,7 +1185,7 @@ frappe.ui.form.on('Adaptation', {
 												
 												if(value ==true){
 													
-													if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+													if (key.replaceAll("_", " ") == i.category){
 															if (!checkedList.includes(i.category)){
 															
 															checkedList.push(i.category)
@@ -1029,7 +1200,7 @@ frappe.ui.form.on('Adaptation', {
 
 												if(value ==true){
 													for(var i of JSON.parse(frm.doc.json).qualitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key.replaceAll("_", " ") == i.category){
 															if (i.table == "Qualitative"){
 																let row = frm.add_child('qualitative_impact')
 																	row.category= i.category,
@@ -1038,22 +1209,24 @@ frappe.ui.form.on('Adaptation', {
 																	row.impact = i.impact
 																
 																categories.push(i.category)
-																frm.refresh_field('qualitative_impact');
+																
 															}
 														}	
 													}
+													frm.refresh_field('qualitative_impact');
 													for(var i of JSON.parse(frm.doc.json).quantitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key.replaceAll("_", " ") == i.category){
 															if (i.table == "Quantitative"){
 																let row = frm.add_child('quantitative_impact')
 																		row.category= i.category,
 																		row.question= i.question,
 																		row.expected_value = i.expected_value,
 																		row.data_source = i.data_source
-																frm.refresh_field('quantitative_impact');
+																
 															}
 														}
 													}
+													frm.refresh_field('quantitative_impact');
 													categories=[...new Set(categories)]	
 												}
 											}
@@ -1071,7 +1244,7 @@ frappe.ui.form.on('Adaptation', {
 																row.impact = i.impact
 																
 															
-															frm.refresh_field('qualitative_impact');
+															
 														}
 														if (i.table == "Quantitative"){
 															let row = frm.add_child('quantitative_impact')
@@ -1079,10 +1252,12 @@ frappe.ui.form.on('Adaptation', {
 																	row.question= i.question,
 																	row.expected_value = i.expected_value,
 																	row.data_source = i.data_source
-															frm.refresh_field('quantitative_impact');
+															
 														}
 													}
 											}
+											frm.refresh_field('qualitative_impact');
+											frm.refresh_field('quantitative_impact');
 											categories = categories.concat(else_category)
 											categories=[...new Set(categories)]
 										}
@@ -1159,16 +1334,29 @@ frappe.ui.form.on('Adaptation', {
 									{
 
 										frm.set_value("qualitative_impact",[]);
-										frm.set_value("quantitative_impact",[]);	
-										$("[type='checkbox']").each(function(){
-											var field_name = $(this).attr('data-fieldname');
-											var value = $(this).prop("checked");
-												if (Array.isArray(form_data[field_name])) {
-													form_data[field_name].push(value);
-												} else {
-													form_data[field_name] = value;
-												}
-										});
+										frm.set_value("quantitative_impact",[]);
+
+										$(".adaptation-icon").each(function(){
+											var field_name = $(this).attr('id');
+											var value = $(this).prop("selectedItem");
+						
+											value = value ? value : false
+											if (Array.isArray(form_data[field_name])) {
+												form_data[field_name].push(value);
+											} else {
+												form_data[field_name] = value;
+											}
+										})
+
+										// $("[type='checkbox']").each(function(){
+										// 	var field_name = $(this).attr('data-fieldname');
+										// 	var value = $(this).prop("checked");
+										// 		if (Array.isArray(form_data[field_name])) {
+										// 			form_data[field_name].push(value);
+										// 		} else {
+										// 			form_data[field_name] = value;
+										// 		}
+										// });
 
 										for(var i of JSON.parse(frm.doc.json).qualitative){
 											
@@ -1176,7 +1364,7 @@ frappe.ui.form.on('Adaptation', {
 												
 												if(value ==true){
 													
-													if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+													if (key.replaceAll("_", " ") == i.category){
 															if (!checkedList.includes(i.category)){
 															
 															checkedList.push(i.category)
@@ -1191,7 +1379,7 @@ frappe.ui.form.on('Adaptation', {
 
 												if(value ==true){
 													for(var i of JSON.parse(frm.doc.json).qualitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key.replaceAll("_", " ") == i.category){
 															if (i.table == "Qualitative"){
 																let row = frm.add_child('qualitative_impact')
 																	row.category= i.category,
@@ -1200,22 +1388,24 @@ frappe.ui.form.on('Adaptation', {
 																	row.impact = i.impact
 																
 																categories.push(i.category)
-																frm.refresh_field('qualitative_impact');
+																
 															}
 														}	
 													}
+													frm.refresh_field('qualitative_impact');
 													for(var i of JSON.parse(frm.doc.json).quantitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key.replaceAll("_", " ") == i.category){
 															if (i.table == "Quantitative"){
 																let row = frm.add_child('quantitative_impact')
 																		row.category= i.category,
 																		row.question= i.question,
 																		row.expected_value = i.expected_value,
 																		row.data_source = i.data_source
-																frm.refresh_field('quantitative_impact');
+																
 															}
 														}
 													}
+													frm.refresh_field('quantitative_impact');
 													categories=[...new Set(categories)]	
 												}
 											}
@@ -1233,7 +1423,7 @@ frappe.ui.form.on('Adaptation', {
 																row.impact = i.impact
 																
 															
-															frm.refresh_field('qualitative_impact');
+															
 														}
 														if (i.table == "Quantitative"){
 															let row = frm.add_child('quantitative_impact')
@@ -1241,10 +1431,12 @@ frappe.ui.form.on('Adaptation', {
 																	row.question= i.question,
 																	row.expected_value = i.expected_value,
 																	row.data_source = i.data_source
-															frm.refresh_field('quantitative_impact');
+															
 														}
 													}
 											}
+											frm.refresh_field('qualitative_impact');
+											frm.refresh_field('quantitative_impact');
 											categories = categories.concat(else_category)
 											categories=[...new Set(categories)]
 										}

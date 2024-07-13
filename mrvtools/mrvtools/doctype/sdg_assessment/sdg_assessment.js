@@ -10,12 +10,88 @@ html_head += "<tr><th scope=col>Table Name</th><th scope=col>Category</th><th sc
 frappe.ui.form.on('SDG Assessment', {
 
 	refresh:function(frm){
+		frm.icon_html = ''
+		frm.icon_html += `<div style="display:flex;gap:29px;flex-wrap: wrap;">`
+		frappe.call({
+			doc:frm.doc,
+			method:'get_images',
+			async:false,
+			callback:function(r){
+				for(let i of r.message){
+					frm.icon_html +=`<div id="${i['name']}" class= "sdg-icon" width="90" height="90" onclick="check_categories(this)">
+										<img  class="sdg-logo" src = "${i['sdg_logo']}" width="90" height="90">
+										<div class="overlay" width="90" height="90"></div>
+									</div>`
+				}
+			}
+		})
 		
-		$('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
-		$('[class="input-area"]').css({"margin":"0px 0px 0px 10px"});
-		$('[class="checkbox"]').children().css("cursor","pointer")
-		$('[class="label-area"]').css({"width":"220px","padding":"8px","margin-left":"-14px","font-size": "14px"});
-		$('[class="help-box small text-muted"]').css("margin","0px");
+		frm.icon_html += `
+			</div>
+			<script>
+				function check_categories(event){
+					event['selectedItem'] = !event['selectedItem']
+					if(event['selectedItem']){
+						$('#'+event.id).attr("style","border:3px solid black;")
+						$('#'+event.id).find('.overlay').css("display","block")
+					}else{
+						$('#'+event.id).attr("style","border:3px solid white;")
+						$('#'+event.id).find('.overlay').css("display","none")
+					}
+				}
+			</script>
+			<style>
+				.sdg-logo{
+					cursor:pointer;border-radius:5px;
+				}
+				.sdg-icon{
+					position: relative;
+					border-radius:8px;
+					transition: transform .2s;
+					border:3px solid white;
+				}
+				.sdg-icon:hover {
+					-ms-transform: scale(1.5);
+					-webkit-transform: scale(1.5);
+					transform: scale(1.1); 
+					// box-shadow: 0px 0px 5px 0px #6c6c6c;
+					z-index:3;
+				}
+				.overlay {
+					position: absolute;
+					border-radius:5px;
+					display: none;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: rgba(0,0,0,0.2);
+					z-index: 2;
+					cursor: pointer;
+				}
+			</style>
+		`
+		$('[data-fieldname="categories_html"]').html(frm.icon_html)
+		if(frm.doc.categories_json){
+			for(let [key,value] of  Object.entries(JSON.parse(frm.doc.categories_json)) ){
+				if(value == true){
+					
+					$('#'+key).attr("style","border:3px solid black;")
+					$('#'+key).prop("selectedItem",true)
+					$('#'+key).find('.overlay').css("display","block")
+					
+				}
+			}
+		}
+		$('.sdg-icon').on("click",function(){
+			frm.clear_custom_buttons()
+			frm.dirty()
+		})
+		// $('[data-fieldtype="Check"]').children().css({"box-shadow":"rgba(0, 0, 0, 0.1) 0px 4px 4px 0px","border-radius":"5px","background": "#f2f2f2","color": "black","text-align": "center","width": "100%","display": "flex","justify-content": "center","cursor": "pointer","height": "35px","border-color": "#cabfb6","align-items": "center"});
+		// $('[class="input-area"]').css({"margin":"0px 0px 0px 10px"});
+		// $('[class="checkbox"]').children().css("cursor","pointer")
+		// $('[class="label-area"]').css({"width":"220px","padding":"8px","margin-left":"-14px","font-size": "14px"});
+		// $('[class="help-box small text-muted"]').css("margin","0px");
 			
 		if (frm.doc.work_state == "Approved"){
 			cur_frm.fields_dict.project_id.df.read_only = 1
@@ -121,7 +197,6 @@ frappe.ui.form.on('SDG Assessment', {
 					var valueList = r.message
 					var json_code={"qualitative":[],"quantitative":[]}
 					for(let i of valueList){
-						
 						if (i.table == "Qualitative"){
 							json_code["qualitative"].push({"category":i.impact_area,"question":i.indicator,"likelihood":"","impact":"","sdg_mapping":i.sdg_mapping,"table":i.table});
 						}
@@ -255,20 +330,31 @@ frappe.ui.form.on('SDG Assessment', {
 			async:false,
 			callback: function(r){	
 				frm.set_value("qualitative_impact",[]);
-				frm.set_value("quantitative_impact",[]);	
-				$("[type='checkbox']").each(function(){
-					var field_name = $(this).attr('data-fieldname');
-					var value = $(this).prop("checked");
-						if (Array.isArray(form_data[field_name])) {
-							form_data[field_name].push(value);
-						} else {
-							form_data[field_name] = value;
-						}
-				});
+				frm.set_value("quantitative_impact",[]);
+				$(".sdg-icon").each(function(){
+					var field_name = $(this).attr('id');
+					var value = $(this).prop("selectedItem");
+
+					value = value ? value : false
+					if (Array.isArray(form_data[field_name])) {
+						form_data[field_name].push(value);
+					} else {
+						form_data[field_name] = value;
+					}
+				})
+				// $("[type='checkbox']").each(function(){
+				// 	var field_name = $(this).attr('data-fieldname');
+				// 	var value = $(this).prop("checked");
+				// 		if (Array.isArray(form_data[field_name])) {
+				// 			form_data[field_name].push(value);
+				// 		} else {
+				// 			form_data[field_name] = value;
+				// 		}
+				// });
 				for(var i of JSON.parse(frm.doc.json).qualitative){
 					for(let [key,value] of Object.entries(form_data)){
 						if(value ==true){
-							if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+							if (key == i.category){
 								if (!checkedList.includes(i.category)){
 									checkedList.push(i.category)
 								}
@@ -281,7 +367,7 @@ frappe.ui.form.on('SDG Assessment', {
 					for(let [key,value] of  Object.entries(form_data)){	
 						if(value ==true){
 							for(var i of JSON.parse(frm.doc.json).qualitative){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key == i.category){
 									if (i.table == "Qualitative"){
 										let row = frm.add_child('qualitative_impact')
 										row.category= i.category,
@@ -290,23 +376,24 @@ frappe.ui.form.on('SDG Assessment', {
 										row.impact = i.impact,
 										row.sdg_mapping = i.sdg_mapping
 										categories.push(i.category)
-										frm.refresh_field('qualitative_impact');
 									}
 								}	
 							}
+							frm.refresh_field('qualitative_impact');
+							
 							for(var i of JSON.parse(frm.doc.json).quantitative){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key == i.category){
 									if (i.table == "Quantitative"){
 										let row = frm.add_child('quantitative_impact')
-												row.category= i.category,
-												row.question= i.question,
-												row.data = i.data,
-												row.data_source = i.data_source,
-												row.sdg_mapping = i.sdg_mapping
-										frm.refresh_field('quantitative_impact');
+										row.category= i.category,
+										row.question= i.question,
+										row.data = i.data,
+										row.data_source = i.data_source,
+										row.sdg_mapping = i.sdg_mapping
 									}
 								}
 							}
+							frm.refresh_field('quantitative_impact');
 							categories=[...new Set(categories)]
 						}
 					}
@@ -322,7 +409,7 @@ frappe.ui.form.on('SDG Assessment', {
 									row.likelihood = i.likelihood,
 									row.impact = i.impact,
 									row.sdg_mapping = i.sdg_mapping
-								frm.refresh_field('qualitative_impact');
+								
 							}
 							if (i.table == "Quantitative"){
 								let row = frm.add_child('quantitative_impact')
@@ -331,18 +418,20 @@ frappe.ui.form.on('SDG Assessment', {
 										row.data = i.data,
 										row.data_source = i.data_source,
 										row.sdg_mapping = i.sdg_mapping
-								frm.refresh_field('quantitative_impact');
+								
 							}
 						}
 					}
+					frm.refresh_field('qualitative_impact');
+					frm.refresh_field('quantitative_impact');
 					categories = categories.concat(else_category)
 					categories=[...new Set(categories)]
 				}
-				frm.refresh_field('qualitative_impact');	
 			}
 		});
 	},
 	before_save:function(frm){
+		frm.set_value("categories_json", "")
 		var existing_json = JSON.parse(frm.doc.json)
 		for (var row of cur_frm.doc.qualitative_impact){
 			for (var i of existing_json.qualitative){
@@ -364,7 +453,16 @@ frappe.ui.form.on('SDG Assessment', {
 		}
 		frm.set_value("json", JSON.stringify(existing_json))
 		frm.refresh_field("json")
-
+		var json_={}
+		$(".sdg-icon").each(function(){
+			let field_name = $(this).attr('id');
+			let value = $(this).prop("selectedItem");
+			value = value ? value : false
+			json_[field_name]=(value)
+			// json_.push(k)
+		})
+		frm.set_value("categories_json", JSON.stringify(json_))
+		frm.refresh_field("categories_json")
 		if (frm.doc.work_state == ''){
 			if (frm.doc.workflow_state == "Pending") {
 				frm.set_value("work_state","Pending")
@@ -438,15 +536,28 @@ frappe.ui.form.on('SDG Assessment', {
 
 						frm.set_value("qualitative_impact",[]);
 						frm.set_value("quantitative_impact",[]);	
-						$("[type='checkbox']").each(function(){
-							var field_name = $(this).attr('data-fieldname');
-							var value = $(this).prop("checked");
-								if (Array.isArray(form_data[field_name])) {
-									form_data[field_name].push(value);
-								} else {
-									form_data[field_name] = value;
-								}
-						});
+
+						$(".sdg-icon").each(function(){
+							var field_name = $(this).attr('id');
+							var value = $(this).prop("selectedItem");
+		
+							value = value ? value : false
+							if (Array.isArray(form_data[field_name])) {
+								form_data[field_name].push(value);
+							} else {
+								form_data[field_name] = value;
+							}
+						})
+
+						// $("[type='checkbox']").each(function(){
+						// 	var field_name = $(this).attr('data-fieldname');
+						// 	var value = $(this).prop("checked");
+						// 		if (Array.isArray(form_data[field_name])) {
+						// 			form_data[field_name].push(value);
+						// 		} else {
+						// 			form_data[field_name] = value;
+						// 		}
+						// });
 
 						for(var i of JSON.parse(frm.doc.json).qualitative){
 							
@@ -454,7 +565,7 @@ frappe.ui.form.on('SDG Assessment', {
 								
 								if(value ==true){
 									
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key == i.category){
 											if (!checkedList.includes(i.category)){
 											
 											checkedList.push(i.category)
@@ -469,7 +580,7 @@ frappe.ui.form.on('SDG Assessment', {
 
 								if(value ==true){
 									for(var i of JSON.parse(frm.doc.json).qualitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key == i.category){
 											if (i.table == "Qualitative"){
 												let row = frm.add_child('qualitative_impact')
 													row.category= i.category,
@@ -478,22 +589,23 @@ frappe.ui.form.on('SDG Assessment', {
 													row.impact = i.impact
 												
 												categories.push(i.category)
-												frm.refresh_field('qualitative_impact');
 											}
 										}	
 									}
+									frm.refresh_field('qualitative_impact');
 									for(var i of JSON.parse(frm.doc.json).quantitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key == i.category){
 											if (i.table == "Quantitative"){
 												let row = frm.add_child('quantitative_impact')
 														row.category= i.category,
 														row.question= i.question,
 														row.data = i.data,
 														row.data_source = i.data_source
-												frm.refresh_field('quantitative_impact');
+												
 											}
 										}
 									}
+									frm.refresh_field('quantitative_impact');
 									categories=[...new Set(categories)]	
 								}
 							}
@@ -509,9 +621,6 @@ frappe.ui.form.on('SDG Assessment', {
 												row.question= i.question,
 												row.likelihood = i.likelihood,
 												row.impact = i.impact
-												
-											
-											frm.refresh_field('qualitative_impact');
 										}
 										if (i.table == "Quantitative"){
 											let row = frm.add_child('quantitative_impact')
@@ -519,15 +628,15 @@ frappe.ui.form.on('SDG Assessment', {
 													row.question= i.question,
 													row.data = i.data,
 													row.data_source = i.data_source
-											frm.refresh_field('quantitative_impact');
+											
 										}
 									}
 							}
+							frm.refresh_field('qualitative_impact');
+							frm.refresh_field('quantitative_impact');
 							categories = categories.concat(else_category)
 							categories=[...new Set(categories)]
-						}	
-						frm.refresh_field('qualitative_impact');
-						frm.refresh_field('quantitative_impact');
+						}
 						
 					}
 				});
@@ -547,20 +656,33 @@ frappe.ui.form.on('SDG Assessment', {
 				async:false,
 				callback: function(r){	
 					frm.set_value("qualitative_impact",[]);
-					frm.set_value("quantitative_impact",[]);	
-					$("[type='checkbox']").each(function(){
-						var field_name = $(this).attr('data-fieldname');
-						var value = $(this).prop("checked");
-							if (Array.isArray(form_data[field_name])) {
-								form_data[field_name].push(value);
-							} else {
-								form_data[field_name] = value;
-							}
-					});
+					frm.set_value("quantitative_impact",[]);
+					
+					$(".sdg-icon").each(function(){
+						var field_name = $(this).attr('id');
+						var value = $(this).prop("selectedItem");
+	
+						value = value ? value : false
+						if (Array.isArray(form_data[field_name])) {
+							form_data[field_name].push(value);
+						} else {
+							form_data[field_name] = value;
+						}
+					})
+
+					// $("[type='checkbox']").each(function(){
+					// 	var field_name = $(this).attr('data-fieldname');
+					// 	var value = $(this).prop("checked");
+					// 		if (Array.isArray(form_data[field_name])) {
+					// 			form_data[field_name].push(value);
+					// 		} else {
+					// 			form_data[field_name] = value;
+					// 		}
+					// });
 					for(var i of JSON.parse(frm.doc.json).qualitative){
 						for(let [key,value] of Object.entries(form_data)){
 							if(value ==true){
-								if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+								if (key == i.category){
 									if (!checkedList.includes(i.category)){
 										checkedList.push(i.category)
 									}
@@ -573,7 +695,7 @@ frappe.ui.form.on('SDG Assessment', {
 						for(let [key,value] of  Object.entries(form_data)){	
 							if(value ==true){
 								for(var i of JSON.parse(frm.doc.json).qualitative){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key == i.category){
 										if (i.table == "Qualitative"){
 											let row = frm.add_child('qualitative_impact')
 											row.category= i.category,
@@ -582,12 +704,13 @@ frappe.ui.form.on('SDG Assessment', {
 											row.impact = i.impact,
 											row.sdg_mapping = i.sdg_mapping
 											categories.push(i.category)
-											frm.refresh_field('qualitative_impact');
+											
 										}
 									}	
 								}
+								frm.refresh_field('qualitative_impact');
 								for(var i of JSON.parse(frm.doc.json).quantitative){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key == i.category){
 										if (i.table == "Quantitative"){
 											let row = frm.add_child('quantitative_impact')
 													row.category= i.category,
@@ -595,10 +718,11 @@ frappe.ui.form.on('SDG Assessment', {
 													row.data = i.data,
 													row.data_source = i.data_source,
 													row.sdg_mapping = i.sdg_mapping
-											frm.refresh_field('quantitative_impact');
+											
 										}
 									}
 								}
+								frm.refresh_field('quantitative_impact');
 								categories=[...new Set(categories)]
 							}
 						}
@@ -614,7 +738,7 @@ frappe.ui.form.on('SDG Assessment', {
 										row.likelihood = i.likelihood,
 										row.impact = i.impact,
 										row.sdg_mapping = i.sdg_mapping
-									frm.refresh_field('qualitative_impact');
+									
 								}
 								if (i.table == "Quantitative"){
 									let row = frm.add_child('quantitative_impact')
@@ -623,14 +747,14 @@ frappe.ui.form.on('SDG Assessment', {
 											row.data = i.data,
 											row.data_source = i.data_source,
 											row.sdg_mapping = i.sdg_mapping
-									frm.refresh_field('quantitative_impact');
 								}
 							}
 						}
+						frm.refresh_field('qualitative_impact');
+						frm.refresh_field('quantitative_impact');
 						categories = categories.concat(else_category)
 						categories=[...new Set(categories)]
-					}
-					frm.refresh_field('qualitative_impact');	
+					}	
 				}
 			});
 		}
@@ -646,20 +770,33 @@ frappe.ui.form.on('SDG Assessment', {
 					async:false,
 					callback: function(r){	
 						frm.set_value("qualitative_impact",[]);
-						frm.set_value("quantitative_impact",[]);	
-						$("[type='checkbox']").each(function(){
-							var field_name = $(this).attr('data-fieldname');
-							var value = $(this).prop("checked");
-								if (Array.isArray(form_data[field_name])) {
-									form_data[field_name].push(value);
-								} else {
-									form_data[field_name] = value;
-								}
-						});
+						frm.set_value("quantitative_impact",[]);
+
+						$(".sdg-icon").each(function(){
+							var field_name = $(this).attr('id');
+							var value = $(this).prop("selectedItem");
+		
+							value = value ? value : false
+							if (Array.isArray(form_data[field_name])) {
+								form_data[field_name].push(value);
+							} else {
+								form_data[field_name] = value;
+							}
+						})
+
+						// $("[type='checkbox']").each(function(){
+						// 	var field_name = $(this).attr('data-fieldname');
+						// 	var value = $(this).prop("checked");
+						// 		if (Array.isArray(form_data[field_name])) {
+						// 			form_data[field_name].push(value);
+						// 		} else {
+						// 			form_data[field_name] = value;
+						// 		}
+						// });
 						for(var i of JSON.parse(frm.doc.json).qualitative){
 							for(let [key,value] of Object.entries(form_data)){
 								if(value ==true){
-									if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+									if (key == i.category){
 										if (!checkedList1.includes(i.category)){
 											checkedList1.push(i.category)
 										}
@@ -672,7 +809,7 @@ frappe.ui.form.on('SDG Assessment', {
 							for(let [key,value] of  Object.entries(form_data)){	
 								if(value ==true){
 									for(var i of JSON.parse(frm.doc.json).qualitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key == i.category){
 											if (i.table == "Qualitative"){
 												let row = frm.add_child('qualitative_impact')
 												row.category= i.category,
@@ -681,12 +818,13 @@ frappe.ui.form.on('SDG Assessment', {
 												row.impact = i.impact,
 												row.sdg_mapping = i.sdg_mapping
 												categories.push(i.category)
-												frm.refresh_field('qualitative_impact');
+												
 											}
 										}	
 									}
+									frm.refresh_field('qualitative_impact');
 									for(var i of JSON.parse(frm.doc.json).quantitative){
-										if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+										if (key == i.category){
 											if (i.table == "Quantitative"){
 												let row = frm.add_child('quantitative_impact')
 														row.category= i.category,
@@ -694,10 +832,11 @@ frappe.ui.form.on('SDG Assessment', {
 														row.data = i.data,
 														row.data_source = i.data_source,
 														row.sdg_mapping = i.sdg_mapping
-												frm.refresh_field('quantitative_impact');
+												
 											}
 										}
 									}
+									frm.refresh_field('quantitative_impact');
 									categories=[...new Set(categories)]
 								}
 							}
@@ -713,7 +852,7 @@ frappe.ui.form.on('SDG Assessment', {
 											row.likelihood = i.likelihood,
 											row.impact = i.impact,
 											row.sdg_mapping = i.sdg_mapping
-										frm.refresh_field('qualitative_impact');
+										
 									}
 									if (i.table == "Quantitative"){
 										let row = frm.add_child('quantitative_impact')
@@ -722,14 +861,14 @@ frappe.ui.form.on('SDG Assessment', {
 												row.data = i.data,
 												row.data_source = i.data_source,
 												row.sdg_mapping = i.sdg_mapping
-										frm.refresh_field('quantitative_impact');
 									}
 								}
 							}
+							frm.refresh_field('qualitative_impact');
+							frm.refresh_field('quantitative_impact');
 							categories = categories.concat(else_category)
 							categories=[...new Set(categories)]
 						}
-						frm.refresh_field('qualitative_impact');	
 					}
 				});
 				
@@ -889,20 +1028,33 @@ frappe.ui.form.on('SDG Assessment', {
 									async:false,
 									callback: function(r){	
 										frm.set_value("qualitative_impact",[]);
-										frm.set_value("quantitative_impact",[]);	
-										$("[type='checkbox']").each(function(){
-											var field_name = $(this).attr('data-fieldname');
-											var value = $(this).prop("checked");
-												if (Array.isArray(form_data[field_name])) {
-													form_data[field_name].push(value);
-												} else {
-													form_data[field_name] = value;
-												}
-										});
+										frm.set_value("quantitative_impact",[]);
+										
+										$(".sdg-icon").each(function(){
+											var field_name = $(this).attr('id');
+											var value = $(this).prop("selectedItem");
+						
+											value = value ? value : false
+											if (Array.isArray(form_data[field_name])) {
+												form_data[field_name].push(value);
+											} else {
+												form_data[field_name] = value;
+											}
+										})
+
+										// $("[type='checkbox']").each(function(){
+										// 	var field_name = $(this).attr('data-fieldname');
+										// 	var value = $(this).prop("checked");
+										// 		if (Array.isArray(form_data[field_name])) {
+										// 			form_data[field_name].push(value);
+										// 		} else {
+										// 			form_data[field_name] = value;
+										// 		}
+										// });
 										for(var i of JSON.parse(frm.doc.json).qualitative){
 											for(let [key,value] of Object.entries(form_data)){
 												if(value ==true){
-													if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+													if (key == i.category){
 														if (!checkedList.includes(i.category)){
 															checkedList.push(i.category)
 														}
@@ -915,7 +1067,7 @@ frappe.ui.form.on('SDG Assessment', {
 											for(let [key,value] of  Object.entries(form_data)){	
 												if(value ==true){
 													for(var i of JSON.parse(frm.doc.json).qualitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key == i.category){
 															if (i.table == "Qualitative"){
 																let row = frm.add_child('qualitative_impact')
 																row.category= i.category,
@@ -924,12 +1076,13 @@ frappe.ui.form.on('SDG Assessment', {
 																row.impact = i.impact,
 																row.sdg_mapping = i.sdg_mapping
 																categories.push(i.category)
-																frm.refresh_field('qualitative_impact');
+																
 															}
 														}	
 													}
+													frm.refresh_field('qualitative_impact');
 													for(var i of JSON.parse(frm.doc.json).quantitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key == i.category){
 															if (i.table == "Quantitative"){
 																let row = frm.add_child('quantitative_impact')
 																		row.category= i.category,
@@ -937,10 +1090,11 @@ frappe.ui.form.on('SDG Assessment', {
 																		row.data = i.data,
 																		row.data_source = i.data_source,
 																		row.sdg_mapping = i.sdg_mapping
-																frm.refresh_field('quantitative_impact');
+																
 															}
 														}
 													}
+													frm.refresh_field('quantitative_impact');
 													categories=[...new Set(categories)]
 												}
 											}
@@ -956,7 +1110,6 @@ frappe.ui.form.on('SDG Assessment', {
 															row.likelihood = i.likelihood,
 															row.impact = i.impact,
 															row.sdg_mapping = i.sdg_mapping
-														frm.refresh_field('qualitative_impact');
 													}
 													if (i.table == "Quantitative"){
 														let row = frm.add_child('quantitative_impact')
@@ -965,14 +1118,14 @@ frappe.ui.form.on('SDG Assessment', {
 																row.data = i.data,
 																row.data_source = i.data_source,
 																row.sdg_mapping = i.sdg_mapping
-														frm.refresh_field('quantitative_impact');
 													}
 												}
 											}
+											frm.refresh_field('qualitative_impact');
+											frm.refresh_field('quantitative_impact');
 											categories = categories.concat(else_category)
 											categories=[...new Set(categories)]
-										}
-										frm.refresh_field('qualitative_impact');	
+										}	
 									}
 								});
 							}
@@ -1045,19 +1198,30 @@ frappe.ui.form.on('SDG Assessment', {
 									callback: function(r){	
 										frm.set_value("qualitative_impact",[]);
 										frm.set_value("quantitative_impact",[]);	
-										$("[type='checkbox']").each(function(){
-											var field_name = $(this).attr('data-fieldname');
-											var value = $(this).prop("checked");
-												if (Array.isArray(form_data[field_name])) {
-													form_data[field_name].push(value);
-												} else {
-													form_data[field_name] = value;
-												}
-										});
+										$(".sdg-icon").each(function(){
+											var field_name = $(this).attr('id');
+											var value = $(this).prop("selectedItem");
+						
+											value = value ? value : false
+											if (Array.isArray(form_data[field_name])) {
+												form_data[field_name].push(value);
+											} else {
+												form_data[field_name] = value;
+											}
+										})
+										// $("[type='checkbox']").each(function(){
+										// 	var field_name = $(this).attr('data-fieldname');
+										// 	var value = $(this).prop("checked");
+										// 		if (Array.isArray(form_data[field_name])) {
+										// 			form_data[field_name].push(value);
+										// 		} else {
+										// 			form_data[field_name] = value;
+										// 		}
+										// });
 										for(var i of JSON.parse(frm.doc.json).qualitative){
 											for(let [key,value] of Object.entries(form_data)){
 												if(value ==true){
-													if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+													if (key == i.category){
 														if (!checkedList.includes(i.category)){
 															checkedList.push(i.category)
 														}
@@ -1070,7 +1234,7 @@ frappe.ui.form.on('SDG Assessment', {
 											for(let [key,value] of  Object.entries(form_data)){	
 												if(value ==true){
 													for(var i of JSON.parse(frm.doc.json).qualitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key == i.category){
 															if (i.table == "Qualitative"){
 																let row = frm.add_child('qualitative_impact')
 																row.category= i.category,
@@ -1079,12 +1243,12 @@ frappe.ui.form.on('SDG Assessment', {
 																row.impact = i.impact,
 																row.sdg_mapping = i.sdg_mapping
 																categories.push(i.category)
-																frm.refresh_field('qualitative_impact');
 															}
 														}	
 													}
+													frm.refresh_field('qualitative_impact');
 													for(var i of JSON.parse(frm.doc.json).quantitative){
-														if (key == (i.category.replaceAll(" ","_")).toLowerCase()){
+														if (key == i.category){
 															if (i.table == "Quantitative"){
 																let row = frm.add_child('quantitative_impact')
 																		row.category= i.category,
@@ -1092,10 +1256,10 @@ frappe.ui.form.on('SDG Assessment', {
 																		row.data = i.data,
 																		row.data_source = i.data_source,
 																		row.sdg_mapping = i.sdg_mapping
-																frm.refresh_field('quantitative_impact');
 															}
 														}
 													}
+													frm.refresh_field('quantitative_impact');
 													categories=[...new Set(categories)]
 												}
 											}
@@ -1111,7 +1275,6 @@ frappe.ui.form.on('SDG Assessment', {
 															row.likelihood = i.likelihood,
 															row.impact = i.impact,
 															row.sdg_mapping = i.sdg_mapping
-														frm.refresh_field('qualitative_impact');
 													}
 													if (i.table == "Quantitative"){
 														let row = frm.add_child('quantitative_impact')
@@ -1120,14 +1283,14 @@ frappe.ui.form.on('SDG Assessment', {
 																row.data = i.data,
 																row.data_source = i.data_source,
 																row.sdg_mapping = i.sdg_mapping
-														frm.refresh_field('quantitative_impact');
 													}
 												}
 											}
+											frm.refresh_field('qualitative_impact');
+											frm.refresh_field('quantitative_impact');
 											categories = categories.concat(else_category)
 											categories=[...new Set(categories)]
 										}
-										frm.refresh_field('qualitative_impact');	
 									}
 								});
 							}

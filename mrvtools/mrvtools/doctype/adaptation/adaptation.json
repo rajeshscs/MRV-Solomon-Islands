@@ -32,18 +32,9 @@
   "column_break_mdmpy",
   "select_approver",
   "section_break_62rin",
-  "forest_health",
-  "watershed_health",
-  "coastal_health",
-  "column_break_6oeye",
-  "water_security",
-  "security_of_place",
-  "energy_security",
-  "column_break_ywnxg",
-  "income_security",
-  "community_health",
-  "food_security",
-  "section_break_nnlur",
+  "category_json",
+  "category_html",
+  "section_break_vppam",
   "json",
   "load_categories",
   "qualitative_impact",
@@ -186,72 +177,6 @@
    "label": "JSON"
   },
   {
-   "fieldname": "section_break_nnlur",
-   "fieldtype": "Section Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "forest_health",
-   "fieldtype": "Check",
-   "label": "Forest Health"
-  },
-  {
-   "default": "0",
-   "fieldname": "watershed_health",
-   "fieldtype": "Check",
-   "label": "Watershed Health"
-  },
-  {
-   "default": "0",
-   "fieldname": "coastal_health",
-   "fieldtype": "Check",
-   "label": "Coastal Health"
-  },
-  {
-   "fieldname": "column_break_6oeye",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "water_security",
-   "fieldtype": "Check",
-   "label": "Water Security"
-  },
-  {
-   "default": "0",
-   "fieldname": "security_of_place",
-   "fieldtype": "Check",
-   "label": "Security of place"
-  },
-  {
-   "default": "0",
-   "fieldname": "energy_security",
-   "fieldtype": "Check",
-   "label": "Energy Security"
-  },
-  {
-   "fieldname": "column_break_ywnxg",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "income_security",
-   "fieldtype": "Check",
-   "label": "Income Security"
-  },
-  {
-   "default": "0",
-   "fieldname": "community_health",
-   "fieldtype": "Check",
-   "label": "Community Health"
-  },
-  {
-   "default": "0",
-   "fieldname": "food_security",
-   "fieldtype": "Check",
-   "label": "Food Security"
-  },
-  {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
@@ -325,11 +250,26 @@
    "fieldname": "beneficiaries",
    "fieldtype": "Data",
    "label": "Beneficiaries "
+  },
+  {
+   "fieldname": "section_break_vppam",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "category_json",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "Categories JSON"
+  },
+  {
+   "fieldname": "category_html",
+   "fieldtype": "HTML",
+   "label": "Categories HTML"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-18 12:25:18.165843",
+ "modified": "2024-07-12 20:22:08.609112",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation",

@@ -17,19 +17,7 @@
   "included_in",
   "category_section",
   "json",
-  "poverty_reduction",
-  "inequality",
-  "gender",
-  "industry",
-  "column_break_qvzfz",
-  "environment",
-  "employment",
-  "education",
-  "column_break_5g8fw",
-  "water",
-  "food",
-  "health",
-  "section_break_i56fh",
+  "categories_json",
   "categories_html",
   "section_break_j9xm0",
   "load_categories",
@@ -81,74 +69,6 @@
    "fieldtype": "JSON",
    "hidden": 1,
    "label": "JSON"
-  },
-  {
-   "default": "0",
-   "fieldname": "poverty_reduction",
-   "fieldtype": "Check",
-   "label": "Poverty Reduction"
-  },
-  {
-   "default": "0",
-   "fieldname": "inequality",
-   "fieldtype": "Check",
-   "label": "Inequality"
-  },
-  {
-   "default": "0",
-   "fieldname": "gender",
-   "fieldtype": "Check",
-   "label": "Gender"
-  },
-  {
-   "default": "0",
-   "fieldname": "industry",
-   "fieldtype": "Check",
-   "label": "Industry"
-  },
-  {
-   "fieldname": "column_break_qvzfz",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "environment",
-   "fieldtype": "Check",
-   "label": "Environment"
-  },
-  {
-   "default": "0",
-   "fieldname": "employment",
-   "fieldtype": "Check",
-   "label": "Employment"
-  },
-  {
-   "default": "0",
-   "fieldname": "education",
-   "fieldtype": "Check",
-   "label": "Education"
-  },
-  {
-   "fieldname": "column_break_5g8fw",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "water",
-   "fieldtype": "Check",
-   "label": "Water"
-  },
-  {
-   "default": "0",
-   "fieldname": "food",
-   "fieldtype": "Check",
-   "label": "Food"
-  },
-  {
-   "default": "0",
-   "fieldname": "health",
-   "fieldtype": "Check",
-   "label": "Health"
   },
   {
    "fieldname": "section_break_j9xm0",
@@ -229,17 +149,19 @@
    "label": "Remarks"
   },
   {
-   "fieldname": "section_break_i56fh",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "categories_html",
    "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "categories_json",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "Categories Json"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-10 16:33:31.970767",
+ "modified": "2024-07-12 16:02:47.178992",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Assessment",

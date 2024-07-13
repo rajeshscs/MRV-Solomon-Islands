@@ -31,14 +31,15 @@ def get_all():
         CCDImages.append(child_record.as_dict())
     whatsNew = []
     for child_record in parent_doc.get('add_new_content'):
-        whatsNew.append(child_record.as_dict())
-
+        if(child_record.hide != 1):
+            whatsNew.append(child_record.as_dict())
+    
     result = {
         'parent_data': parent_data,
         'child_table_data': child_table_data,
         'child_table_data2': child_table_data2,
         'CCDImages': CCDImages,
-        'add_new_content': whatsNew,
+        'add_new_content': whatsNew[::-1],
 
     }
 
