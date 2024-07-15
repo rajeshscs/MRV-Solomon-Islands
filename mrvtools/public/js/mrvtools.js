@@ -142,6 +142,7 @@ $(document).on("form-refresh", function(frm) {
 	$.ajax({
 		success:function(){
 			$('[data-fieldtype="Link"]').attr("placeholder","Select")
+			$('[data-fieldtype="Table MultiSelect"]').attr("placeholder","Select")
 			$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
 			$('[class="btn btn-xs btn-secondary grid-add-row"]').on("click",function(){
 				

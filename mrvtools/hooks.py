@@ -25,7 +25,7 @@ app_include_css = "/assets/mrvtools/css/custom_page_design.css"
 app_include_js = ["/assets/mrvtools/js/mrvtools.js","/assets/mrvtools/js/map_defaults.js"]
 # app_include_js = "/assets/mrvtools/js/adaptationreport.js"
 
-website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},]
+website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},{"from_route":"/login","to_route":"custom_login"},]
 
 fixtures = [
     {"doctype":"Project Objective"},

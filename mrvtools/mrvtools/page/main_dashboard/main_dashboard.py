@@ -287,24 +287,17 @@ def get_total_project_ndp():
 
 @frappe.whitelist()
 def get_total_sdg_category_wise():
-	field_list = []
-	get_counts = []
-	meta = frappe.get_meta("SDG Assessment")
-	meta_dict = meta.as_dict()
-	fields = meta_dict["fields"]
-	for field in fields:
-		if field["fieldtype"] == "Check":
-			field_list.append(field["fieldname"])
-	for field in field_list:
-		count =0
-		values=frappe.db.get_all("SDG Assessment",[field])
-		for i in values:
-			for key,value in i.items():
-				if value ==1:
-					count= count+1
-		get_counts.append(count)
-	categories = ['Poverty Reduction', 'Inequality', 'Gender', 'Industry', 'Environment', 'Employment', 'Education', 'Water', 'Food','Health']
-	
+	values=frappe.db.get_all("SDG Assessment",fields=["categories_json"])
+	counts = {}
+	for d in values:
+		categories = json.loads(d['categories_json'])
+		for category, value in categories.items():
+			if category not in counts:
+				counts[category] = 0
+			if value:
+				counts[category] += 1
+	categories = list(counts.keys())
+	get_counts = list(counts.values())
 	return {"data":get_counts,"categories":categories}
 
 @frappe.whitelist()

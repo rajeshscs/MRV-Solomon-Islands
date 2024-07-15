@@ -46,10 +46,11 @@ class Dashboard {
 						box-shadow: #f9fafa 0px 0px 0px 0px !important;
 					}
 					li.treeview.drop-down{
-						display: none !important;
+						display: none !important;	
 					}
 				</style>
 				`)
+				$('.sidebar-menu li:not(:first)').remove();
 		}
 		this.$container = $(`
 		<div class = "all_html"  style="margin:0;">
