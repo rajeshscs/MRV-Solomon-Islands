@@ -145,7 +145,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-17 19:15:06.849896",
+ "modified": "2024-07-19 18:59:34.077532",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "SDG Monitoring Information",
@@ -251,7 +251,7 @@
   }
  ],
  "sort_field": "project_name",
- "sort_order": "DESC",
+ "sort_order": "ASC",
  "states": [],
  "title_field": "project_name",
  "track_changes": 1

@@ -158,7 +158,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-17 19:13:16.556433",
+ "modified": "2024-07-19 18:59:54.624482",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Adaptation Monitoring Information",
@@ -264,7 +264,7 @@
   }
  ],
  "sort_field": "project_name",
- "sort_order": "DESC",
+ "sort_order": "ASC",
  "states": [],
  "title_field": "project_name",
  "track_changes": 1

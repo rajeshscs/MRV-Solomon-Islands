@@ -9,27 +9,20 @@ from frappe.utils import get_site_base_path,now
 def get_total_adaptation_report_data1(year,impact_area,key_sector = None,key_sub_sector = None):
 	try:
 		data = get_datas(year,key_sector,key_sub_sector,impact_area)
-		field_list = []
-		get_counts = []
-		meta = frappe.get_meta("Adaptation")
-		meta_dict = meta.as_dict()
-		fields = meta_dict["fields"]
-		for field in fields:
-			if field["fieldtype"] == "Check":
-				field_list.append(field["fieldname"])
 		first_elements = [sublist[2] for sublist in data]
-		for field in field_list:
-			count =0
-			values=frappe.db.get_all("Adaptation",[field],{'project_id':["in",first_elements]})
-		
-			for i in values:
-				
-				for key,value in i.items():
-					if value ==1:
-						count= count+1
-			get_counts.append(count)
-			
-		categories = ['Forest Health', 'Watershed Health', 'Coastal Health', 'Water Security', 'Security of Place', 'Energy Security', 'Income Security', 'Community Health', 'Food Security']
+		values=frappe.db.get_all("Adaptation",fields=["category_json","name"],filters={'project_id':["in",first_elements]})
+		counts = {}
+		frappe.log_error("values",values)
+		for d in values:
+			if d['category_json']:
+				categories = json.loads(d['category_json'])
+				for category, value in categories.items():
+					if category not in counts:
+						counts[category] = 0
+					if value:
+						counts[category] += 1
+		categories = list(counts.keys())
+		get_counts = list(counts.values())
 		
 		return {"data":get_counts,"categories":categories}
 	except Exception:
@@ -74,7 +67,7 @@ def get_columns():
 	col.append("Financial Closure Date" + ":Data")
 	col.append("Lifetime in Years" + ":Int")
 	col.append("Included In" + ":Data")
-	col.append("Impact Summaries" + ":Data")
+	col.append("Impact Summaries" + ":Text")
 	keys_only = [item.split(':')[0] for item in col]
 	return keys_only
 
@@ -127,22 +120,29 @@ def get_datas(year = None,key_sector = None,key_sub_sector = None,impact_area = 
 				A.project_id
 	"""
 	result = frappe.db.sql(query, as_dict=1)
-	field_list = []
-	meta = frappe.get_meta("Adaptation")
-	meta_dict = meta.as_dict()
-	fields = meta_dict["fields"]
-	for field in fields:
-		if field["fieldtype"] == "Check":
-			field_list.append(field["fieldname"])
+	# field_list = []
+	# meta = frappe.get_meta("Adaptation")
+	# meta_dict = meta.as_dict()
+	# fields = meta_dict["fields"]
+	# for field in fields:
+	# 	if field["fieldtype"] == "Check":
+	# 		field_list.append(field["fieldname"])
 	for each in result:
 		get_list=[]
-		values= frappe.db.get_value("Adaptation",each["name"],field_list,as_dict=1)
-		for key,value in values.items():
-			if value == 1:
-				cur_ele = key.split("_")
-				cur_word = " ".join(cur_ele)
-				resu = cur_word.title()
-				get_list.append(resu)
+		values=frappe.db.get_all("Adaptation",fields=["category_json"],filters={'name':each["name"]})
+		for d in values:
+			if d['category_json']:
+				categories = json.loads(d['category_json'])
+				for key,value in categories.items():
+					if value == True:
+						get_list.append(key)
+		# values= frappe.db.get_value("Adaptation",each["name"],field_list,as_dict=1)
+		# for key,value in values.items():
+		# 	if value == 1:
+		# 		cur_ele = key.split("_")
+		# 		cur_word = " ".join(cur_ele)
+		# 		resu = cur_word.title()
+		# 		get_list.append(resu)
 		resString = ",".join(get_list)
 		each["impact_summaries"] = resString
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]

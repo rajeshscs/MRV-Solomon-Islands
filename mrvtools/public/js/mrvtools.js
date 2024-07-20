@@ -171,6 +171,14 @@ $(document).on("form-refresh", function(frm) {
 	})
 })
 
+$(document).ready(function(){
+	$(".sidebar-menu").on("hover",function(){
+		$('.treeview-menu').on("mouseenter",function(){
+			$(".sidebar-menu").css("scrollbar-width","none !important")
+		})
+	})
+})
+
 frappe.router.on("change", page_changed)
  
 function page_changed(event) {
@@ -181,7 +189,7 @@ function page_changed(event) {
 			
 			setTimeout(() => {
 				
-				$("[class='actions-btn-group'] [class='user-action']").closest('li').css({"display":"none"});
+				$("[class='actions-btn-group hide'] [class='user-action']").closest('li').css({"display":"none"});
 				$("[class='dropdown-divider user-action']").closest('li').css({"display":"none"});
 				$("span.menu-item-label[data-label='Edit']").closest('li').css({"display":"none"});
 				$("span.menu-item-label[data-label='Assign%20To']").closest('li').css({"display":"none"});
@@ -190,6 +198,14 @@ function page_changed(event) {
 				$("span.menu-item-label[data-label='Print']").closest('li').css({"display":"none"});
 			}, 1000);
         }
+		// $(".sidebar-menu .menu").on("mouseenter",function(){
+		// 	if($(this).next().find('.treeview-menu').css('display') == "block"){
+		// 		$("ul.sidebar-menu").append("<style>.sidebar-menu{scrollbar-width:none !important;}</style>")
+		// 	}
+		// 	else{
+		// 		$("ul.sidebar-menu").append("<style>.sidebar-menu{scrollbar-width:thin !important;}</style>")
+		// 	}
+		// })
     })
 }
 

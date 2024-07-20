@@ -34,24 +34,86 @@ def execute(year,impact_area,key_sector = None,key_sub_sector = None):
 
 
 def getColumn():
-	columns = []
-	columns.append("Action" + ":Data")
-	columns.append("Programme" + ":Data")
-	columns.append("Project ID" + ":Link/Project")
-	columns.append("Project Title" + ":Data")
-	columns.append("Objective" + ":Data")
-	columns.append("Key Sector" + ":Data")
-	columns.append("Key Sub-sector" + ":Data")
-	columns.append("Cost in USD" + ":Float")
-	columns.append("Location" + ":Data")
-	columns.append("Implementing entity or entities" + ":Data")
-	columns.append("Other Agency" + ":Data")
-	columns.append("Start Date" + ":Date")
-	columns.append("Lifetime in Years" + ":Int")
-	columns.append("Included In" + ":Data")
-	columns.append("Impact Summaries" + ":Data")
-	keys_only = [item.split(':')[0] for item in columns]
-	return keys_only
+	columns = [
+		{
+			"id": "action",
+			"name": "Action",
+			"width": 200
+		},
+		{
+			"id": "programme",
+			"name": "Programme",
+			"width": 200
+		},
+		{
+			"id": "project_id",
+			"name": "Project ID",
+			"width": 100
+		},
+		{
+			"id": "project_title",
+			"name": "Project Name",
+			"width": 200
+		},
+		{
+			"id": "objective",
+			"name": "Objective",
+			"width": 100
+		},
+		{
+			"id": "key_sector",
+			"name": "Key Sector",
+			"width": 200
+		},
+		{
+			"id": "key_sub_sector",
+			"name": "Key Sub-Sector",
+			"width": 200
+		},
+		{
+			"id": "cost_in_usd",
+			"name": "Cost (USD)",
+			"width": 100
+		},
+		{
+			"id": "location",
+			"name": "Location",
+			"width": 100
+		},
+		{
+			"id": "implementing_entity_or_entities",
+			"name": "Implementing Entity or Entities",
+			"width": 200
+		},
+		{
+			"id": "other_agency",
+			"name": "Other Agency",
+			"width": 200
+		},
+		{
+			"id": "start_date",
+			"name": "Start Date",
+			"width": 100
+		},
+		{
+			"id": "lifetime_in_years",
+			"name": "Lifetime",
+			"width": 100
+		},
+		{
+			"id": "included_in",
+			"name": "Included In",
+			"width": 200
+		},
+		
+		{
+			"id": "impact_summaries",
+			"name": "Impact Summaries",
+			"width":300
+		},
+	]
+	return columns
+	
 
 def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = None):
 	
@@ -102,13 +164,6 @@ def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = No
 				SDG.project_id
 	"""
 	result = frappe.db.sql(query, as_dict=1)
-	field_list = []
-	meta = frappe.get_meta("SDG Assessment")
-	meta_dict = meta.as_dict()
-	fields = meta_dict["fields"]
-	for field in fields:
-		if field["fieldtype"] == "Check":
-			field_list.append(field["fieldname"])
 	for each in result:
 		
 		get_list=[]
@@ -118,8 +173,10 @@ def getData(year = None,key_sector = None,key_sub_sector = None,impact_area = No
 			categories = json.loads(d['categories_json'])
 			for key,value in categories.items():
 				if value == True:
-					get_list.append(key)
-		resString = ",".join(get_list)
+					get_list.append(f'''<div id="'$$'{key}'%%'" style="max-width:50px;height:30px;"><img src="/files/{key}.jpg" style="max-width:50px;height:30px;"></div>''')
+		resString = f"""<div style="display:flex;gap:5px">
+						{"".join(get_list)}
+					</div>"""
 		each["impact_summaries"] = resString
 	values_only = [list({k: v for k, v in item.items() if k != 'name'}.values()) for item in result]
 	return values_only
@@ -133,7 +190,15 @@ def download_excel(columns,data):
 
 	data_list = json.loads(data)
 	column_list = json.loads(columns)
-	data_dict = {column_list[i]: [row[i] for row in data_list] for i in range(len(column_list))}
+	for data in data_list:
+		string = data[-1].replace("\\","").split('id')
+		start_idx = [j.find("$$") for j in string]
+		end_idx = [j.find(r"%%") for j in string]
+		ids = [string[i][start_idx[i]+3:end_idx[i]-1] for i in range(len(start_idx)) if start_idx[i] != -1]
+		data[-1] = ",".join(ids)
+
+		
+	data_dict = {column_list[i]["name"]: [row[i] for row in data_list] for i in range(len(column_list))}
 	export_data = pd.DataFrame(data_dict)
 
 	site_name = get_site_base_path()

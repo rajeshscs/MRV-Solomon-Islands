@@ -46,7 +46,7 @@ class Dashboard {
 						box-shadow: #f9fafa 0px 0px 0px 0px !important;
 					}
 					li.treeview.drop-down{
-						display: none !important;	
+						display: none !important;
 					}
 				</style>
 				`)
@@ -168,11 +168,11 @@ class Dashboard {
 				</div>
 
 				<div class="widget dashboard-widget-box" style="width:48%;float:right;box-shadow: 0px 0px 2px 0px gray;" data-widget-name="4034b678d7">
-					<div class="widget-head">
+					<div class="widget-head" style="display: block;">
 						<div class="widget-label label-1">
-							<div class="widget-title"><span class="ellipsis" id="mitigation_last-year-title"></span></div>
+							<div class="widget-title"><span class="ellipsis" style="overflow: unset" id="mitigation_last-year-title"></span></div>
 						</div>
-						<div class="widget-label label-2">
+						<div class="widget-label label-2" style="float:right;">
 							<div class="widget-title">
 							<span class="ellipsis" style="width: auto;display: flex;flex-direction: column;" id="mitigation_last-year-label"></span>
 							<span class="ellipsis" style="width: 54%;display: flex;flex-direction: column;" flex;" id="mitigation_last-year-value">
@@ -473,7 +473,7 @@ class Dashboard {
 					$("#project_status").append(no_image)
 				}
 				
-				let colors_3 = ["#cce6ff","#b3d9ff","#99ccff","#80bfff","#66b3ff","#4da6ff","#3399ff","#1a8cff","#0080ff","#0073e6","#0066cc","#0059b3","#004d99","#004080","#003366","#00264d","#001a33","#000d1a","#000000"]
+				let colors_3 = ["#d56ef5","#7a7fe5","#10d270","#cc6d0f","#d092e4","#ab428a","#04257b","#625b59","#760f99","#e7a8c9","#c2344f","#3a9f7e","#02cfaa","#37f287","#38a7ac","#1e4f97","#d56ef5","#7a7fe5","#980951","#8e93b3","#0cc2b0","#d2bf5f","#a963e8","#86aaf1","#78d1c4","#6e5ee2","#ff0e4c","#2e5ca0","#ba164a","#cc15f3","#cd91a0","#36ca11","#1e4f97","#5aa393","#0528aa","#10a801","#42d45a","#8f6407","#97969a","#0479b5","#a29ae6","#bc1cf2","#396523"]
 				let mitigation_key_list = []
 				let mitigation_value_list = []
 				for (let i of r.message.mitigation){
@@ -542,7 +542,7 @@ class Dashboard {
 					adaptation_value_list.push(i['count'])
 				}
 				$('#adaptation-title').html("Adaptation Projects - Sector wise")
-				let colors_4 = ["#ffcccc","#ffb3b3","#ff9999","#ff8080","#ff6666","#ff4d4d","#ff3333","#ff1a1a","#ff0000","#e60000","#cc0000","#b30000","#990000","#800000","#660000","#4d0000","#330000","#1a0000","#000000"]
+				let colors_4 = ["#2E8B57","#FF69B4","#6A5ACD","#FF4500","#20B2AA","#FF8C00","#9370DB","#FFDAB9","#8A2BE2","#FFA07A","#00CED1","#FF69B4","#7B68EE","#FF4500","#20B2AA","#FF8C00","#FFC5A6","#FDAC98","#DC8E90","#A97882","#58545F","#B3D9FF","#FFD700","#C7E5E8","#FF6347","#9370DB","#32CD32","#FF1493","#4682B4","#FFD700","#8B4513","#FF6347","#9932CC","#FFA500","#32CD32","#FF1493","#4682B4","#FFD700","#8B4513","#FF6347"]
 				if(adaptation_value_list.length != 0){
 					$('#adaptation-total').html(`<span class="span-1">Total :</span><span class="span-2"> ${adaptation_value_list.reduce((accumulator, currentValue) => accumulator + currentValue)}</span>`)
 					const adaptation_option = {

@@ -380,7 +380,7 @@
  "force_re_route_to_default_view": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-01 13:34:38.968375",
+ "modified": "2024-07-19 18:58:45.239875",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Mitigation Monitoring Information",
@@ -401,7 +401,8 @@
   }
  ],
  "show_name_in_global_search": 1,
- "sort_order": "DESC",
+ "sort_field": "project_name",
+ "sort_order": "ASC",
  "states": [],
  "title_field": "project_name",
  "track_changes": 1

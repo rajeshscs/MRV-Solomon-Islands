@@ -96,6 +96,8 @@
   "other_sector",
   "section_break_cfvgj",
   "edit_button",
+  "section_break_2mbme",
+  "remarks",
   "tab2",
   "ghg_inventory_details",
   "edited_reference_approach",
@@ -1122,11 +1124,20 @@
   {
    "fieldname": "section_break_7r62q",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_2mbme",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-30 12:53:37.510951",
+ "modified": "2024-07-17 17:17:03.147409",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "GHG Inventory",

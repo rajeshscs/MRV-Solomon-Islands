@@ -9,7 +9,8 @@
  "engine": "InnoDB",
  "field_order": [
   "year",
-  "population"
+  "population",
+  "reference"
  ],
  "fields": [
   {
@@ -23,11 +24,16 @@
    "fieldtype": "Table",
    "label": "Population",
    "options": "Livestock Population ChildTable"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Small Text",
+   "label": "Reference"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-03 12:24:51.496610",
+ "modified": "2024-07-17 15:07:55.364276",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Livestock Population Master List",

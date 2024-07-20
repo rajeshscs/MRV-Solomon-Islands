@@ -32,7 +32,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-28 16:06:40.185668",
+ "modified": "2024-07-19 18:52:49.126461",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "IPPU GWP Master List",
@@ -52,7 +52,7 @@
    "write": 1
   }
  ],
- "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_field": "creation",
+ "sort_order": "ASC",
  "states": []
 }

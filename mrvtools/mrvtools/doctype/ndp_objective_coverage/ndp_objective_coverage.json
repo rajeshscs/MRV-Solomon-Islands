@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:ndp_objective",
+ "autoname": "NDS-OBJECTIVE-.##",
  "creation": "2023-07-01 15:55:43.306230",
  "default_view": "List",
  "doctype": "DocType",
@@ -13,14 +13,13 @@
  "fields": [
   {
    "fieldname": "ndp_objective",
-   "fieldtype": "Data",
-   "label": "NDP Objective Coverage",
-   "unique": 1
+   "fieldtype": "Small Text",
+   "label": "NDS Objective Wise"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-01 15:57:08.672890",
+ "modified": "2024-07-19 16:54:51.668598",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "NDP Objective Coverage",
@@ -40,7 +39,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "ndp_objective"
 }

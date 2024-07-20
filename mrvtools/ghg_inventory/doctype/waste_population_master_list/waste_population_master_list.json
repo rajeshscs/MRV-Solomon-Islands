@@ -11,7 +11,8 @@
   "year",
   "rural_population",
   "urban_population",
-  "total_population"
+  "total_population",
+  "reference"
  ],
  "fields": [
   {
@@ -41,11 +42,16 @@
    "fieldtype": "Int",
    "label": "Total Population",
    "read_only": 1
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Small Text",
+   "label": "Reference"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-01 16:38:02.533365",
+ "modified": "2024-07-17 15:08:11.590528",
  "modified_by": "Administrator",
  "module": "GHG Inventory",
  "name": "Waste Population Master List",

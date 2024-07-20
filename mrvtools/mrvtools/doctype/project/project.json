@@ -87,7 +87,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Status",
+   "label": "Project Status",
    "options": "\nPlanning\nPlanned\nAdopted\nUnder Implementation\nImplemented\nOperational\nCompleted",
    "reqd": 1
   },
@@ -308,7 +308,7 @@
    "link_fieldname": "project_id"
   }
  ],
- "modified": "2024-07-04 12:23:16.943535",
+ "modified": "2024-07-17 20:36:42.987189",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project",

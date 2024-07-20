@@ -69,6 +69,65 @@
 {% block page_content %}
 <!-- {{ for_test }} -->
 <div class="main-section">
+	<style>
+		.page-content-wrapper{
+			background-image:url(/assets/mrvtools/login-bgimg.png);
+			background-size: 100% 100%;
+			height:125%;
+		}
+		main.container{
+			margin:0 auto !important;
+		}
+		#page-custom_login{
+			height:70%;
+		}
+		.main-section{
+			display: flex;
+			width: 100%;
+		}
+		.director-content{
+			width: 60%;
+		}
+		.for-login{
+			width: 40%;
+		}
+		.for-login .page-card {
+			padding-top: 25px;
+			padding-bottom: 25px;
+		}
+		.for-login .page-card-head{
+			margin-bottom: 20px;
+		}
+		.for-login .page-card-head img{
+			margin-bottom:0px
+		}
+		.for-forgot{
+			width: 40%;
+		}
+		.for-forgot .page-card {
+			padding-top: 25px;
+			padding-bottom: 25px;
+		}
+		.for-forgot .page-card-head{
+			margin-bottom: 20px;
+		}
+		.for-forgot .page-card-head img{
+			margin-bottom:0px
+		}
+		.director-content{
+			padding-top: 5.5rem;
+			padding-bottom: 5.5rem;
+			padding-left: 4rem;
+			padding-right: 4rem;
+			color: white;
+			font-size: 25px;
+		}
+		.welcome{
+			font-weight: 600;
+			font-size: 35px;
+		}
+		
+	</style>
 	<section class = "director-content">
 		<div class="msg-content">
 			<span class="welcome">Welcome</span>			
@@ -179,63 +238,17 @@
 		</div>
 	</section>
 </div>
-<style>
-	.main-section{
-		display: flex;
-		width: 100%;
-	}
-	.director-content{
-		width: 60%;
-	}
-	.for-login{
-		width: 40%;
-	}
-	.for-login .page-card {
-		padding-top: 25px;
-        padding-bottom: 25px;
-	}
-	.for-login .page-card-head{
-		margin-bottom: 20px;
-	}
-	.for-login .page-card-head img{
-		margin-bottom:0px
-	}
-	.for-forgot{
-		width: 40%;
-	}
-	.for-forgot .page-card {
-		padding-top: 25px;
-        padding-bottom: 25px;
-	}
-	.for-forgot .page-card-head{
-		margin-bottom: 20px;
-	}
-	.for-forgot .page-card-head img{
-		margin-bottom:0px
-	}
-	.director-content{
-		padding-top: 5.5rem;
-		padding-bottom: 5.5rem;
-		padding-left: 4rem;
-		padding-right: 4rem;
-		color: white;
-		font-size: 25px;
-	}
-	.welcome{
-		font-weight: 600;
-		font-size: 35px;
-	}
-</style>
+
 {% endblock %}
 
 {% block script %}
 <script>{% include "templates/includes/login/login.js" %}
 $('.web-footer').remove()
-$('#page-custom_login').css("height","70%")
-$('main.container').attr("style","margin:0 auto !important")
+// $('#page-custom_login').css("height","70%")
+// $('main.container').attr("style","")
 // $('[data-path="login"] main[class="container my-4"]').css("margin","0px !important")
 $('[id="navbarSupportedContent"]').prepend('<p class="heading-main" data-v-2dd66c2c="" style="    color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: sans-serif;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></p>')
-$('[data-path="custom_login"] div.page-content-wrapper').css({"background-image":"url(/assets/mrvtools/login-bgimg.png)", "background-size": "100% 100%","height":"125%"})
+// $('[data-path="custom_login"] div.page-content-wrapper').css({})
 </script>
 {% endblock %}
 

@@ -1,7 +1,9 @@
 {
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:ndp_coverage",
+ "autoname": "MTS-.##",
  "creation": "2023-07-01 16:06:41.339732",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -12,14 +14,13 @@
  "fields": [
   {
    "fieldname": "ndp_coverage",
-   "fieldtype": "Data",
-   "label": "NDP Coverage",
-   "unique": 1
+   "fieldtype": "Small Text",
+   "label": "NDP Coverage"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-01 16:25:13.936024",
+ "modified": "2024-07-19 16:55:26.052121",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "NDP Coverage",
@@ -39,7 +40,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "ndp_coverage"
 }

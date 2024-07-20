@@ -1,23 +1,24 @@
 <template >
   <Header />
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div v-for="(item, index) in data.message.parent_data.carousel_image" :key="index" class="carousel-item" :class="{ active: index === 0 }">
-      <div class="card mx-0 image-overlay cus-card" style="height: 50rem;">
-        <img v-if="item.image" :src="item.image" class="d-block w-100 h-100 carousel_image" alt="...">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div v-for="(item, index) in data.message.parent_data.carousel_image" :key="index" class="carousel-item" :class="{ active: index == 0 }">
+        <div class="card mx-0 image-overlay cus-card" style="height: 50rem;">
+          <img v-if="item.image" :src="item.image" class="d-block w-100 h-100 carousel_image" alt="...">
+        </div>
       </div>
-   </div>
-</div>
-<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-   <i style="font-size: 35px;" class="bi bi-chevron-left bi-2x"></i>
-   <span class="visually-hidden">Previous</span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-   <i style="font-size: 35px;" class="bi bi-chevron-right bi-2x"></i>
-   <span class="visually-hidden">Next</span>
-</button>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <i style="font-size: 35px;" class="bi bi-chevron-left bi-2x"></i>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <i style="font-size: 35px;" class="bi bi-chevron-right bi-2x"></i>
+      <span class="visually-hidden">Next</span>
+    </button>
 
   </div>
+  
   <div>
      <ProjectComponent :data="data" />
      <!-- <hr style="border-color: #8f8f8f;"> -->
@@ -138,6 +139,11 @@ onMounted(() => {
   fetchData();
 });  
 $.ajax({success: ()=> {
+  setTimeout(() => {
+    $('.carousel').carousel({
+      interval: 5000
+    })
+  }, 1000);
  $('.breadcrumb-area').attr('style', "display:none !important;")
 }})
 </script>
@@ -156,6 +162,7 @@ $.ajax({success: ()=> {
    border-radius:0 !important;
    object-fit: cover;
   }
+
   
   .cus-card{
   transition: .2s;

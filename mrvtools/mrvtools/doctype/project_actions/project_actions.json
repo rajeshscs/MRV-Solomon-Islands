@@ -15,6 +15,9 @@
   "sector_affected",
   "sub_sector_affected",
   "national_strategy",
+  "attach_document_1",
+  "attach_document_2",
+  "attach_document_3",
   "column_break_tdmdb",
   "action_description",
   "focus",
@@ -135,11 +138,26 @@
   {
    "fieldname": "column_break_tdmdb",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attach_document_1",
+   "fieldtype": "Attach",
+   "label": "Attach Document 1"
+  },
+  {
+   "fieldname": "attach_document_2",
+   "fieldtype": "Attach",
+   "label": "Attach Document 2"
+  },
+  {
+   "fieldname": "attach_document_3",
+   "fieldtype": "Attach",
+   "label": "Attach Document 3"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-04 12:52:08.739399",
+ "modified": "2024-07-17 15:13:24.512738",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Actions",
