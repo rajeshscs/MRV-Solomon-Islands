@@ -1,5 +1,69 @@
 [
  {
+  "category": "4.B.2.a. Forest land converted to cropland . ",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.B. Cropland",
+  "modified": "2023-09-14 19:46:35.103860",
+  "name": "4.B.2.a. Forest land converted to cropland ."
+ },
+ {
+  "category": "4.F.2.c. Grassland converted  to other land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.F. Other land",
+  "modified": "2023-09-14 19:46:35.362016",
+  "name": "4.F.2.c. Grassland converted  to other land"
+ },
+ {
+  "category": "Cropland converted to Forest Land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.827050",
+  "name": "Cropland converted to Forest Land"
+ },
+ {
+  "category": "Forest land Remaining Forest land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.862160",
+  "name": "Forest land Remaining Forest land"
+ },
+ {
+  "category": "Grassland converted to Forest Land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.871434",
+  "name": "Grassland converted to Forest Land"
+ },
+ {
+  "category": "Other Land converted to Forest Land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.885325",
+  "name": "Other Land converted to Forest Land"
+ },
+ {
+  "category": "Settlements converted to Forest Land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.897770",
+  "name": "Settlements converted to Forest Land"
+ },
+ {
+  "category": "Wetlands converted to Forest Land",
+  "docstatus": 0,
+  "doctype": "Forest Category Master List",
+  "link_category": "4.A. Forest land",
+  "modified": "2023-10-10 17:29:52.908017",
+  "name": "Wetlands converted to Forest Land"
+ },
+ {
   "category": "4.A.1. Forest land remaining forest land",
   "docstatus": 0,
   "doctype": "Forest Category Master List",

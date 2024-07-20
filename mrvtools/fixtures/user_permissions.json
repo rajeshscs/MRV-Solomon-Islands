@@ -3,6 +3,14 @@
   "category": "GHG",
   "docstatus": 0,
   "doctype": "User Permissions",
+  "modified": "2023-07-01 16:09:12.834442",
+  "module": "AFOLU",
+  "name": "AFOLU"
+ },
+ {
+  "category": "GHG",
+  "docstatus": 0,
+  "doctype": "User Permissions",
   "modified": "2023-07-01 16:08:32.243397",
   "module": "Energy",
   "name": "Energy"

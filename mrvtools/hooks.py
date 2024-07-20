@@ -39,7 +39,7 @@ fixtures = [
                 "User Permissions",
                 "Mitigation Non GHG mitigation benefits",
                 "Master Data Test",
-                "Master Data"
+                "Master Data",
                 "SDG Category",
                 "Adaptation Category",
                 "Disbursement Category",

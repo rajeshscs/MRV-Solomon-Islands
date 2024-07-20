@@ -2,6 +2,22 @@
  {
   "docstatus": 0,
   "doctype": "GHG Sub Category",
+  "modified": "2023-09-07 21:00:02.140770",
+  "name": "1.A.4.a.i.  Stationary combustion",
+  "sub_category": "1.A.4.a.i.  Stationary combustion",
+  "sub_sector": "1.A.4. Other sectors"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "GHG Sub Category",
+  "modified": "2023-09-07 21:00:47.458849",
+  "name": "1.A.4.b.i.  Stationary combustion",
+  "sub_category": "1.A.4.b.i.  Stationary combustion",
+  "sub_sector": "1.A.4. Other sectors"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "GHG Sub Category",
   "modified": "2023-07-28 16:12:12.885069",
   "name": "1.A.1.a.i. Electricity generation",
   "sub_category": "1.A.1.a.i. Electricity generation",
