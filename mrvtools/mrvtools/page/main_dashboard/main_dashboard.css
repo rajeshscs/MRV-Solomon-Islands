@@ -1,12 +1,12 @@
 /* .chart-legend{
     display:block !important;
 } */
-.layout-main-section.frappe-card {
+div[id^=page-main-dashboard] .layout-main-section.frappe-card {
     display: inline;
 }
 .widget .widget-head .widget-label .widget-title{
     font-size: 18px;
-}
+} 
 .widget.dashboard-widget-box .widget-head {
     gap: 0px;
 }
