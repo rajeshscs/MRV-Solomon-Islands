@@ -1,4 +1,6 @@
 {
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{objective}",
@@ -21,7 +23,8 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-30 19:14:41.257090",
+ "make_attachments_public": 1,
+ "modified": "2024-07-22 13:03:52.511487",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Objective",

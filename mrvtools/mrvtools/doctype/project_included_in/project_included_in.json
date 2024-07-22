@@ -1,4 +1,6 @@
 {
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{included_in}",
@@ -21,7 +23,8 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-01 15:07:46.700693",
+ "make_attachments_public": 1,
+ "modified": "2024-07-22 13:03:52.962503",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Project Included In",

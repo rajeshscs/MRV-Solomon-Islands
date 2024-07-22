@@ -15,7 +15,7 @@ def getColumns():
 		{
 			"fieldname": "project_id",
 			"label": "Project ID",
-			"fieldtype": 'Data',
+			"fieldtype": 'Link',
 		},
 		{
 			"fieldname": "project_name",

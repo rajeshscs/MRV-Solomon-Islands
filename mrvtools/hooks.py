@@ -61,10 +61,12 @@ fixtures = [
                 "Role",
                 "Custom DocPerm",
                 "Web Page",
-                "File",
-                "Notification"
+                "MrvFrontend",
+                "Notification",
+                "Side Menu Settings",
+                "Side Menu"
             ]
-
+after_install = "mrvtools.mrvtools.after_install.after_install"
 # include js, css files in header of web template
 # web_include_css = "/assets/mrvtools/css/mrvtools.css"
 # web_include_js = "/assets/mrvtools/js/mrvtools.js"

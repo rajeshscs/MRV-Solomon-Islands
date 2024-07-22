@@ -1,4 +1,6 @@
 {
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{module}",
@@ -29,7 +31,8 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-01 16:08:05.005580",
+ "make_attachments_public": 1,
+ "modified": "2024-07-22 13:03:53.643190",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Permissions",
