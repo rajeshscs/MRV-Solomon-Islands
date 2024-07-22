@@ -14,9 +14,7 @@ def load_default_files():
     source_path = frappe.get_app_path("mrvtools")
     file_path = os.path.join(source_path, "public", "mrv_default_files.zip")
     with zipfile.ZipFile(file_path, 'r') as file_data:
-        frappe.log_error("file_data",file_data)
         for file in file_data.infolist():
-            frappe.log_error("FIEL",file)
             if file.is_dir() or file.filename.startswith("__MACOSX/"):
                 continue
             filename = os.path.basename(file.filename)
