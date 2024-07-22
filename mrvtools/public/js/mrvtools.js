@@ -198,6 +198,8 @@ function page_changed(event) {
 				$("span.menu-item-label[data-label='Print']").closest('li').css({"display":"none"});
 			}, 1000);
         }
+		$('[class="heading-main"]').remove()
+		$('<h2 class="heading-main" data-v-2dd66c2c="" style="color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: sans-serif;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-left: 195px;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></h2>').insertBefore($('[class="form-inline fill-width justify-content-end"]'))
 		// $(".sidebar-menu .menu").on("mouseenter",function(){
 		// 	if($(this).next().find('.treeview-menu').css('display') == "block"){
 		// 		$("ul.sidebar-menu").append("<style>.sidebar-menu{scrollbar-width:none !important;}</style>")
@@ -209,11 +211,11 @@ function page_changed(event) {
     })
 }
 
-$.ajax({
-	success:function(){
-			$('<h2 class="heading-main" data-v-2dd66c2c="" style="color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: sans-serif;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-left: 195px;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></h2>').insertBefore($('[class="form-inline fill-width justify-content-end"]'))
-	}
-})
+// $.ajax({
+// 	success:function(){
+// 			$('<h2 class="heading-main" data-v-2dd66c2c="" style="color: rgb(0, 0, 0);font-weight: 700;font-size: 20px;font-family: sans-serif;display: flex;line-height: 1.5;align-items: start;justify-content: start !important;margin-left: 195px;margin-bottom: 0px !important;"> SOLOMON ISLANDS iMRV TOOL <span data-v-2dd66c2c="" style="color: green; margin: 0px 0px 0px 7px;">FOR CLIMATE ACTIONS</span></h2>').insertBefore($('[class="form-inline fill-width justify-content-end"]'))
+// 	}
+// })
 $(document).ready(function(){
 	$('[class="nav-item dropdown dropdown-help dropdown-mobile d-none d-lg-block"]').attr("style","display:none !important")
 	$('[data-fieldtype="Table"] [class="btn-open-row"] [class="hidden-xs edit-grid-row"]').prop("innerText","View")
