@@ -64,7 +64,8 @@ fixtures = [
                 "MrvFrontend",
                 "Notification",
                 "Side Menu Settings",
-                "Side Menu"
+                "Side Menu",
+                "Website Settings"
             ]
 after_install = "mrvtools.mrvtools.after_install.after_install"
 # include js, css files in header of web template
