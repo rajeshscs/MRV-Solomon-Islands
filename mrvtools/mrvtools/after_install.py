@@ -62,7 +62,7 @@ def load_master_data():
             file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
             data = json.load(open(file_path,"r"))
             for j in data:
-                if not frappe.db.exists(j.get("doctype"),j):
+                if not frappe.db.exists(j.get("doctype"),j.get("name")):
                     frappe.log_error("777")
                     doc = frappe.new_doc(j.get("doctype"))
                     doc.update(j)
