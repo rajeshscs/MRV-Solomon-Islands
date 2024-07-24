@@ -32,3 +32,32 @@ def load_default_files():
                 frappe.db.commit()
 
         return file_path
+    
+@frappe.whitelist(allow_guest = True)
+def load_master_data():
+    source_path = frappe.get_app_path("mrvtools")
+    doctype_list = [    "Project Objective","Project Key Sector","Project Key Sub Sector",
+                        "Project Included In","Project Tracking Master","Mitigation Target GHGs",
+                        "NDP Objective Coverage","NDP Coverage","User Permissions",
+                        "Mitigation Non GHG mitigation benefits","Master Data Test","Master Data",
+                        "SDG Category","Adaptation Category","Disbursement Category","GHG Sector",
+                        "GHG Category","GHG Sub Sector","GHG Sub Category",
+                        "Energy Fuel Master List","IPPU GWP Master List",
+                        "Livestock Emission Factor Master List","Waste Population Master List",
+                        "Livestock Population Master List",
+                        "Direct and Indirect Managed Soils Master List",
+                        "Forest Category Master List","IPPU Emission Factors Master List",
+                        "GHG Inventory Report Categories","GHG Inventory Table Name Master List",
+                        "GHG Inventory Report Formulas","Role","Custom DocPerm","Web Page",
+                        "MrvFrontend","Notification","Side Menu Settings","Side Menu",
+                        "Website Settings"
+                    ]
+    for i in doctype_list:
+        file_name = i.lower().replace(" ", "_")
+        file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
+        data = json.load(open(file_path,"r"))
+        for j in data:
+            doc = frappe.new_doc(j.get("doctype"))
+            doc.update(j)
+            doc.insert(ignore_permissions=True)
+            frappe.db.commit()

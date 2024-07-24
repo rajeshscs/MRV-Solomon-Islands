@@ -27,46 +27,6 @@ app_include_js = ["/assets/mrvtools/js/mrvtools.js","/assets/mrvtools/js/map_def
 
 website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'frontend'},{"from_route":"/login","to_route":"custom_login"},]
 
-fixtures = [
-                "Project Objective",
-                "Project Key Sector",
-                "Project Key Sub Sector",
-                "Project Included In",
-                "Project Tracking Master",
-                "Mitigation Target GHGs",
-                "NDP Objective Coverage",
-                "NDP Coverage",
-                "User Permissions",
-                "Mitigation Non GHG mitigation benefits",
-                "Master Data Test",
-                "Master Data",
-                "SDG Category",
-                "Adaptation Category",
-                "Disbursement Category",
-                "GHG Sector",
-                "GHG Category",
-                "GHG Sub Sector",
-                "GHG Sub Category",
-                "Energy Fuel Master List",
-                "IPPU GWP Master List",
-                "Livestock Emission Factor Master List",
-                "Waste Population Master List",
-                "Livestock Population Master List",
-                "Direct and Indirect Managed Soils Master List",
-                "Forest Category Master List",
-                "IPPU Emission Factors Master List",
-                "GHG Inventory Report Categories",
-                "GHG Inventory Table Name Master List",
-                "GHG Inventory Report Formulas",
-                "Role",
-                "Custom DocPerm",
-                "Web Page",
-                "MrvFrontend",
-                "Notification",
-                "Side Menu Settings",
-                "Side Menu",
-                "Website Settings"
-            ]
 after_install = "mrvtools.mrvtools.after_install.after_install"
 # include js, css files in header of web template
 # web_include_css = "/assets/mrvtools/css/mrvtools.css"
