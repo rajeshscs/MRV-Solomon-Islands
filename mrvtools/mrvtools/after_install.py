@@ -63,10 +63,11 @@ def load_master_data():
             data = json.load(open(file_path,"r"))
             for j in data:
                 if not frappe.db.exists(j.get("doctype"),j):
+                    frappe.log_error("777")
                     doc = frappe.new_doc(j.get("doctype"))
                     doc.update(j)
                     doc.insert(ignore_permissions=True)
-                    frappe.log_error("444")
+                    
                     frappe.db.commit()
     except:
         frappe.log_error("Error While insterting Data",frappe.get_traceback())
