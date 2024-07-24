@@ -8,6 +8,7 @@ from frappe.utils import get_files_path
 @frappe.whitelist(allow_guest=True)
 def after_install():
     load_default_files()
+    load_master_data()
 
 @frappe.whitelist(allow_guest=True)
 def load_default_files():
