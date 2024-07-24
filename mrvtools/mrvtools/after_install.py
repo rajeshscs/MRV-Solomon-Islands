@@ -7,8 +7,9 @@ from frappe.utils import get_files_path
 
 @frappe.whitelist(allow_guest=True)
 def after_install():
-    load_default_files()
     load_master_data()
+    frappe.log_error("111")
+    load_default_files()
 
 @frappe.whitelist(allow_guest=True)
 def load_default_files():
@@ -36,6 +37,7 @@ def load_default_files():
     
 @frappe.whitelist(allow_guest = True)
 def load_master_data():
+    frappe.log_error("222")
     source_path = frappe.get_app_path("mrvtools")
     doctype_list = [    "Project Objective","Project Key Sector","Project Key Sub Sector",
                         "Project Included In","Project Tracking Master","Mitigation Target GHGs",
@@ -54,6 +56,7 @@ def load_master_data():
                         "Website Settings"
                     ]
     for i in doctype_list:
+        frappe.log_error("333")
         file_name = i.lower().replace(" ", "_")
         file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
         data = json.load(open(file_path,"r"))
@@ -61,4 +64,5 @@ def load_master_data():
             doc = frappe.new_doc(j.get("doctype"))
             doc.update(j)
             doc.insert(ignore_permissions=True)
+            frappe.log_error("444")
             frappe.db.commit()
