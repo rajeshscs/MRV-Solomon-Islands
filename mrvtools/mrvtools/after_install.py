@@ -51,7 +51,7 @@ def load_master_data():
                             "Forest Category Master List","IPPU Emission Factors Master List",
                             "GHG Inventory Report Categories","GHG Inventory Table Name Master List",
                             "GHG Inventory Report Formulas","Role","Custom DocPerm","Web Page",
-                            "MrvFrontend","Notification","Side Menu Settings","Side Menu",
+                            "MrvFrontend","Notification","Sub Menu Group","Side Menu Settings","Side Menu",
                             "Website Settings"
                         ]
         for i in doctype_list:
