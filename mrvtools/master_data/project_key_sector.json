@@ -36,7 +36,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Plans & Strategy",
   "modified": "2023-07-11 20:33:36.024009",
-  "name": "Plans & Strategy  - Enablers",
+  "name": "Plans & Strategy - Enablers",
   "objective": "Enablers"
  },
  {
@@ -148,7 +148,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Plans & Strategy",
   "modified": "2023-07-11 20:33:36.265811",
-  "name": "Plans & Strategy  - Cross-Cutting",
+  "name": "Plans & Strategy - Cross-Cutting",
   "objective": "Cross-Cutting"
  },
  {
@@ -172,7 +172,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Gender & Youth",
   "modified": "2023-07-11 20:33:36.307182",
-  "name": "Gender & Youth  - Cross-Cutting",
+  "name": "Gender & Youth - Cross-Cutting",
   "objective": "Cross-Cutting"
  },
  {
@@ -220,7 +220,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Human Settlements",
   "modified": "2023-07-11 20:33:36.449098",
-  "name": "Human Settlements  - Adaptation",
+  "name": "Human Settlements - Adaptation",
   "objective": "Adaptation"
  },
  {
@@ -300,7 +300,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Energy Utilisation",
   "modified": "2023-07-11 20:33:36.624196",
-  "name": "Energy Utilisation  - Mitigation",
+  "name": "Energy Utilisation - Mitigation",
   "objective": "Mitigation"
  },
  {
@@ -308,7 +308,7 @@
   "doctype": "Project Key Sector",
   "key_sector": "Energy Generation",
   "modified": "2023-07-11 20:33:36.649118",
-  "name": "Energy Generation  - Mitigation",
+  "name": "Energy Generation - Mitigation",
   "objective": "Mitigation"
  },
  {

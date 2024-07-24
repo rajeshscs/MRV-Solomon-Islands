@@ -122,42 +122,42 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Utilisation  - Mitigation",
+  "key_sector": "Energy Utilisation - Mitigation",
   "key_sub_sector": "Others",
   "modified": "2023-07-11 20:34:06.484275",
-  "name": "Others-Energy Utilisation  - Mitigation"
+  "name": "Others-Energy Utilisation - Mitigation"
  },
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Utilisation  - Mitigation",
+  "key_sector": "Energy Utilisation - Mitigation",
   "key_sub_sector": "Energy Efficiency",
   "modified": "2023-07-11 20:34:06.505775",
-  "name": "Energy Efficiency-Energy Utilisation  - Mitigation"
+  "name": "Energy Efficiency-Energy Utilisation - Mitigation"
  },
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Generation  - Mitigation",
+  "key_sector": "Energy Generation - Mitigation",
   "key_sub_sector": "Energy Infrastructure",
   "modified": "2023-07-11 20:34:06.522055",
-  "name": "Energy Infrastructure -Energy Generation  - Mitigation"
+  "name": "Energy Infrastructure -Energy Generation - Mitigation"
  },
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Generation  - Mitigation",
+  "key_sector": "Energy Generation - Mitigation",
   "key_sub_sector": "Renewable Energy -Off Grid",
   "modified": "2023-07-11 20:34:06.547864",
-  "name": "Renewable Energy -Off Grid-Energy Generation  - Mitigation"
+  "name": "Renewable Energy -Off Grid-Energy Generation - Mitigation"
  },
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Generation  - Mitigation",
+  "key_sector": "Energy Generation - Mitigation",
   "key_sub_sector": "Renewable Energy",
   "modified": "2023-07-11 20:34:06.563882",
-  "name": "Renewable Energy-Energy Generation  - Mitigation"
+  "name": "Renewable Energy-Energy Generation - Mitigation"
  },
  {
   "docstatus": 0,
@@ -210,10 +210,10 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Energy Generation  - Mitigation",
+  "key_sector": "Energy Generation - Mitigation",
   "key_sub_sector": "Others",
   "modified": "2023-07-19 18:55:21.826633",
-  "name": "Others-Energy Generation  - Mitigation"
+  "name": "Others-Energy Generation - Mitigation"
  },
  {
   "docstatus": 0,
@@ -266,7 +266,7 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Human Settlements  - Adaptation",
+  "key_sector": "Human Settlements - Adaptation",
   "key_sub_sector": "Human Settlements",
   "modified": "2023-07-19 19:27:05.968978",
   "name": "Human Settlements-Human Settlements  - Adaptation"
@@ -322,10 +322,10 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Gender & Youth  - Cross-Cutting",
+  "key_sector": "Gender & Youth - Cross-Cutting",
   "key_sub_sector": "Gender & Youth ",
   "modified": "2023-07-19 19:29:56.291227",
-  "name": "Gender & Youth -Gender & Youth  - Cross-Cutting"
+  "name": "Gender & Youth -Gender & Youth - Cross-Cutting"
  },
  {
   "docstatus": 0,
@@ -346,10 +346,10 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Plans & Strategy  - Cross-Cutting",
+  "key_sector": "Plans & Strategy - Cross-Cutting",
   "key_sub_sector": "Plans & Strategy ",
   "modified": "2023-07-19 19:31:27.472338",
-  "name": "Plans & Strategy -Plans & Strategy  - Cross-Cutting"
+  "name": "Plans & Strategy -Plans & Strategy - Cross-Cutting"
  },
  {
   "docstatus": 0,
@@ -458,10 +458,10 @@
  {
   "docstatus": 0,
   "doctype": "Project Key Sub Sector",
-  "key_sector": "Plans & Strategy  - Enablers",
+  "key_sector": "Plans & Strategy - Enablers",
   "key_sub_sector": "Plans & Strategy",
   "modified": "2023-07-19 19:39:04.950041",
-  "name": "Plans & Strategy-Plans & Strategy  - Enablers"
+  "name": "Plans & Strategy-Plans & Strategy - Enablers"
  },
  {
   "docstatus": 0,
