@@ -60,6 +60,15 @@ $(document).on("form-refresh", function(frm) {
 								cur_frm.set_value("workflow_state","Approved")
 								cur_frm.refresh_field("workflow_state")
 								cur_frm.save()
+								frappe.call({
+									method:"mrvtools.mrvtools.doctype.my_approval.my_approval.delete_record",
+									args:{
+										reference_name: cur_frm.doc.name,
+										reference_doctype: cur_frm.doc.doctype
+
+									},
+									async:false
+								})
 							}, () => {
 
 						})
@@ -72,6 +81,15 @@ $(document).on("form-refresh", function(frm) {
 							cur_frm.set_value("workflow_state","Rejected")
 							cur_frm.refresh_field("workflow_state")
 							cur_frm.save()
+							frappe.call({
+								method:"mrvtools.mrvtools.doctype.my_approval.my_approval.delete_record",
+								args:{
+									reference_name: cur_frm.doc.name,
+									reference_doctype: cur_frm.doc.doctype
+
+								},
+								async:false
+							})
 						}, () => {
 							
 						})
@@ -111,6 +129,18 @@ $(document).on("form-refresh", function(frm) {
 								cur_frm.refresh_field("workflow_state")
 								
 								cur_frm.save()
+								frappe.call({
+									method:"mrvtools.mrvtools.doctype.my_approval.my_approval.insert_record",
+									args:{
+										created_by:cur_frm.doc.owner,
+										date: cur_frm.doc.modified,
+										reference_name: cur_frm.doc.name,
+										reference_doctype: cur_frm.doc.doctype,
+										approver:cur_frm.doc.select_approver
+
+									},
+									async:false
+								})
 							}, () => {
 							
 						})

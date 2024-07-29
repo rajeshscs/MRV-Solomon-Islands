@@ -14,7 +14,9 @@ website_redirects = [
     {"source": "/", "target": "/frontend/home"},
 ]  
 
-
+permission_query_conditions = {
+    "My Approval":"mrvtools.mrvtools.doctype.my_approval.my_approval.get_query_conditions"
+}
 # website_route_rules = routes
 
 # Includes in <head>
