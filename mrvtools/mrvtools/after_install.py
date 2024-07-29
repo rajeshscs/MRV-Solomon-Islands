@@ -78,11 +78,10 @@ def load_single_doc():
             file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
             data = json.load(open(file_path,"r"))
             for j in data:
-                if not frappe.db.exists(j.get("doctype"),j.get("name")):
-                    doc = frappe.get_doc(j.get("doctype"))
-                    doc.update(j)
-                    doc.save(ignore_permissions=True)
-                    
-                    frappe.db.commit()
+                doc = frappe.get_doc(j.get("doctype"))
+                doc.update(j)
+                doc.save(ignore_permissions=True)
+                
+                frappe.db.commit()
     except:
         frappe.log_error("Error While insterting Data",frappe.get_traceback())
