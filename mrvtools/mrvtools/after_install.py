@@ -9,6 +9,7 @@ from frappe.utils import get_files_path
 def after_install():
     load_master_data()
     load_default_files()
+    load_single_doc()
 
 @frappe.whitelist(allow_guest=True)
 def load_default_files():
@@ -51,8 +52,7 @@ def load_master_data():
                             "Forest Category Master List","IPPU Emission Factors Master List",
                             "GHG Inventory Report Categories","GHG Inventory Table Name Master List",
                             "GHG Inventory Report Formulas","Role","Custom DocPerm","Web Page",
-                            "MrvFrontend","Notification","Sub Menu Group","Side Menu Settings","Side Menu",
-                            "Website Settings"
+                            "Notification","Sub Menu Group","Side Menu"
                         ]
         for i in doctype_list:
             file_name = i.lower().replace(" ", "_")
@@ -63,6 +63,25 @@ def load_master_data():
                     doc = frappe.new_doc(j.get("doctype"))
                     doc.update(j)
                     doc.insert(ignore_permissions=True)
+                    
+                    frappe.db.commit()
+    except:
+        frappe.log_error("Error While insterting Data",frappe.get_traceback())
+
+@frappe.whitelist(allow_guest = True)
+def load_single_doc():
+    try:
+        source_path = frappe.get_app_path("mrvtools")
+        doctype_list = ["MrvFrontend","Side Menu Settings","Website Settings"]
+        for i in doctype_list:
+            file_name = i.lower().replace(" ", "_")
+            file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
+            data = json.load(open(file_path,"r"))
+            for j in data:
+                if not frappe.db.exists(j.get("doctype"),j.get("name")):
+                    doc = frappe.get_single(j.get("doctype"))
+                    doc.update(j)
+                    doc.save(ignore_permissions=True)
                     
                     frappe.db.commit()
     except:
