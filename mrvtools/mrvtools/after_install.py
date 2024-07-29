@@ -81,7 +81,6 @@ def load_single_doc():
                 doc = frappe.get_doc(j.get("doctype"))
                 doc.update(j)
                 doc.save(ignore_permissions=True)
-                frappe.log_error("DOC",doc)
                 frappe.db.commit()
     except:
         frappe.log_error("Error While insterting Data",frappe.get_traceback())
