@@ -79,7 +79,7 @@ def load_single_doc():
             data = json.load(open(file_path,"r"))
             for j in data:
                 if not frappe.db.exists(j.get("doctype"),j.get("name")):
-                    doc = frappe.get_single(j.get("doctype"))
+                    doc = frappe.get_doc(j.get("doctype"))
                     doc.update(j)
                     doc.save(ignore_permissions=True)
                     
