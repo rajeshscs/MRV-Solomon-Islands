@@ -34,7 +34,7 @@ div[id^=page-List] .custom-actions,
 div[id^=page-List] .menu-btn-group,
 body[data-route^=Form] .menu-btn-group,
 body[data-route^=Form] button[data-original-title="Print"] {
-    display: none;
+    /* display: none; */
 }
 /* .actions-btn-group li{
     display : none

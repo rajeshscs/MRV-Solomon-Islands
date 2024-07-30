@@ -15,7 +15,8 @@ website_redirects = [
 ]  
 
 permission_query_conditions = {
-    "My Approval":"mrvtools.mrvtools.doctype.my_approval.my_approval.get_query_conditions"
+    "My Approval":"mrvtools.mrvtools.doctype.my_approval.my_approval.get_query_conditions",
+    "Approved User":"mrvtools.mrvtools.doctype.approved_user.approved_user.get_query_conditions"
 }
 # website_route_rules = routes
 

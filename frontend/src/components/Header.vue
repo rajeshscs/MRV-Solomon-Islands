@@ -4,7 +4,7 @@
 
     <div style="display: flex; gap: 8px;">
       <div class="site-logo">
-        <router-link to='/home'><img style="color: white"  src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
+        <router-link to='/home'><img style="color: white"  src="../assets/images/Flag_of_the_Solomon_Islands.png" alt="Logo" loading="lazy" class="img-fluid p-2" /></router-link>
       </div>
         <h2 style="
           color: rgb(0, 0, 0);
@@ -112,6 +112,9 @@
           </li>
           <li class="nav-item">
             <router-link to='/knowledgeresource' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/knowledgeresource' }">Knowledge Resource</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to='/new' class="custom-link text-lg " :class="{ 'active-link': $route.path === '/new' }">Whats's New?</router-link>
           </li>
         </ul>
       </div>

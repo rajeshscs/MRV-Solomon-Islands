@@ -2,7 +2,7 @@
   <Header />
   <div class="content">
     <h1 data-aos="fade-right" data-aos-delay="100" style="color: #000; font-weight: 700; font-size: 3rem; font-family: Inter;" class="pt-5 pb-3 text-center">
-      What's <span style="color: green; font-weight: 700;">New</span>
+      What's <span style="color: green; font-weight: 700;">New?</span>
     </h1>
     <div v-if="data.add_new_content.length != 0" class="whats-new-section">
       <div v-for="item in data.add_new_content" :key="item.title" class="news-item">
@@ -227,10 +227,49 @@
     text-decoration: none;
     cursor: pointer;
   }
-  @media (max-width: 576px) {
-    .news-item {
+  @media (max-width: 600px) {
+    .news-header {
       flex-direction: column;
+      flex-wrap: wrap;
     }
+    @media only screen and (max-width: 600px) {
+   .list_image{
+      display:flex;
+      height: 200px !important;
+   }
+   .pr-blw-img-list{
+      flex-direction: column;
+      gap: 24px;
+   }
+
+   .tab_parent{
+       display: flex!important;
+       gap: 5px!important;
+       margin: 0!important;
+       justify-content: space-between;
+       flex-wrap: nowrap!important;
+       overflow: auto!important;
+   }
+   .tab_child{
+      flex: 0 0 auto;
+   }
+   .nav-item a{
+    margin: 0!important;
+    font-size: 11px!important;
+    padding: 5px 10px !important;
+    border: 1px solid #ddd!important;
+   }
+   .tab-menu{
+      margin: auto;
+      margin: 0!important;
+      width: 100%!important;
+      padding-inline: 13px!important;
+   }
+   .tab-content{
+      padding: 0!important;
+      margin-top: 25px!important;
+   }
+}
 }
 
   </style>

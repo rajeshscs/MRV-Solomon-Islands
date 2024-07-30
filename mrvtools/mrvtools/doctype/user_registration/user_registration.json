@@ -53,15 +53,12 @@
   {
    "fieldname": "password",
    "fieldtype": "Password",
-   "in_list_view": 1,
-   "label": "Password",
-   "reqd": 1
+   "label": "Password"
   },
   {
    "fieldname": "confirm_password",
    "fieldtype": "Password",
-   "label": "Confirm Password",
-   "reqd": 1
+   "label": "Confirm Password"
   },
   {
    "fieldname": "role",
@@ -133,7 +130,7 @@
  "is_submittable": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2024-07-22 13:03:36.793172",
+ "modified": "2024-07-29 19:56:01.475508",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "User Registration",

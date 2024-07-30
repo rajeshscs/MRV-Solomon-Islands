@@ -214,7 +214,6 @@ frappe.router.on("change", page_changed)
 function page_changed(event) {
     frappe.after_ajax(function () {
         var route = frappe.get_route();
-		console.log("Route",route);
         if (route[0] == "List") {
 			
 			setTimeout(() => {
@@ -252,3 +251,15 @@ $(document).ready(function(){
 	$("head").append('<style>#page-Workspaces [class="flex col page-actions justify-content-end"]{display:none}</style>');
 	
 })
+
+
+function route_user(){
+	frappe.db.get_value("Approved User",frappe.session.user,'name').then( r => {
+		if(!r.message.name){
+			frappe.set_route("Form","User",frappe.session.user)
+		}
+		else{
+			frappe.set_route("Form","Approved User",frappe.session.user)
+		}
+	})
+}

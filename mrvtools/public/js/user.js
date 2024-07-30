@@ -16,7 +16,7 @@ frappe.ui.form.on('User', {
 				</style>
 				`)
 		}
-        if(cur_frm.doc.doctype == "User"){	
+        if(cur_frm.doc.doctype == "User"){
             $(`[id="page-User"] [class="col-lg-2 layout-side-section"]`).css({"display":"block","margin-left":"95px"});
             $(`[id="page-User"] [class="col layout-main-section-wrapper"]`).css("margin-left","0px");
             $(`[id="page-User"] [class="page-title"]`).css({"margin-left":"95px !important"});

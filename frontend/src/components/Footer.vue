@@ -8,7 +8,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 column">
                     <div class="site-logo" style="padding: 12px;">
                       <router-link to='/home'>
-                        <img src="../assets/images/sig-coa.png" alt="Logo" loading="lazy" class="img-fluid" />
+                        <img src="../assets/images/Flag_of_the_Solomon_Islands.png" alt="Logo" loading="lazy" class="img-fluid" />
                       </router-link>
                     </div>
                     <p class="text-left text-start"></p>
@@ -49,7 +49,7 @@
                       </li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 column">
+                <div class="col-lg-3 col-md-3 col-sm-6">
                     <h3 class="">Our Partners</h3>
                     <div class="row m-0">
                         <div v-for="(item, index) in data.message" :key="index" class="partners">
@@ -129,8 +129,15 @@
     display: flex;
     justify-content: space-around;
   }
-  .column{
-    width: 27% !important;
+  @media (min-width: 700px){
+    .column{
+      width: 27% !important;
+    }
+  }
+  @media (max-width: 400px){
+    .column{
+      width: 100% !important;
+    }
   }
   p,
   li {

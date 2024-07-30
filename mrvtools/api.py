@@ -10,3 +10,8 @@ def get_approvers():
         pluck="name",
         ignore_permissions=True)
     return doc
+
+@frappe.whitelist()
+def route_user():
+    frappe.log_error("FFFFF")
+    frappe.set_route("Form","Approved User",frappe.session.user )
