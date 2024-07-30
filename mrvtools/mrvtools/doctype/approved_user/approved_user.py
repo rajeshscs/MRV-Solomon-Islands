@@ -125,10 +125,12 @@ class ApprovedUser(Document):
 				"enabled" :self.enabled,
 				"roles":roles,
 				"mobile_no": self.mobile_no,
-				"first_name": self.first_name
+				"first_name": self.first_name,
+				"user_image": self.user_image
 			})
-			decrypted_password = get_decrypted_password(doctype = "Approved User", name = self.name, fieldname="password", raise_exception=True)
-			update_password(self.email,pwd = decrypted_password, logout_all_sessions=1)
+			if self.password:
+				decrypted_password = get_decrypted_password(doctype = "Approved User", name = self.name, fieldname="password", raise_exception=True)
+				update_password(self.email,pwd = decrypted_password, logout_all_sessions=1)
 			doc.save(ignore_permissions=True)
 			frappe.db.commit()
 			self.password = ""
