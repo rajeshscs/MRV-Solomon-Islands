@@ -568,7 +568,7 @@
     "parenttype": "Side Menu",
     "report_type": "Query Report",
     "static_link": null,
-    "sub_menu_doc": "User",
+    "sub_menu_doc": "Approved User",
     "sub_menu_icon": "fa fa-user",
     "sub_menu_image_icon": null,
     "sub_menu_label": "Approved Users",
