@@ -72,7 +72,7 @@ def load_master_data():
 def load_single_doc():
     try:
         source_path = frappe.get_app_path("mrvtools")
-        doctype_list = ["MrvFrontend","Side Menu Settings","Website Settings"]
+        doctype_list = ["MrvFrontend","Side Menu Settings","Website Settings","Navbar Settings"]
         for i in doctype_list:
             file_name = i.lower().replace(" ", "_")
             file_path = os.path.join(source_path, "master_data", f"{file_name}.json")
