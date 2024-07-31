@@ -1,11 +1,11 @@
 [
  {
   "address": null,
-  "app_logo": "/files/iMRV Tool Logo.png",
+  "app_logo": "/files/Flag_of_the_Solomon_Islands.png",
   "app_name": "MRV Tool",
   "auto_account_deletion": 72,
   "banner_html": null,
-  "banner_image": "/files/iMRV Tool Logo.png",
+  "banner_image": "/files/Flag_of_the_Solomon_Islands.png",
   "brand_html": null,
   "call_to_action": null,
   "call_to_action_url": null,
@@ -37,7 +37,7 @@
   "route_redirects": [],
   "show_account_deletion_link": 0,
   "show_language_picker": 0,
-  "splash_image": "/files/iMRV Tool Logo.png",
+  "splash_image": "/files/Flag_of_the_Solomon_Islands.png",
   "subdomain": null,
   "title_prefix": null,
   "top_bar_items": [],
