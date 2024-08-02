@@ -65,6 +65,8 @@ class UserRegistration(Document):
 				row.project_tracking = i.project_tracking
 			doc.save(ignore_permissions = True)
 			frappe.db.commit()
+	
+
 
 @frappe.whitelist(allow_guest = True)
 def createUser(formData):
@@ -105,3 +107,36 @@ def createUser(formData):
 		return({"message":"User Registration Successful! Waiting for Approval.","data":[ghgData,projectTrackingData,reportsData]})
 	else:
 		frappe.throw("Email Id Already Registred")
+
+@frappe.whitelist(allow_guest = True)
+def insert_approved_users():
+	users = frappe.db.get_all("User Registration",fields=["*"])
+	for user in users:
+		frappe.log_error(f"{user.email_id}",user)
+		if user.workflow_state == "Approved":
+			if not frappe.db.exists("Approved User",{"email":user.email_id}):
+
+				doc = frappe.new_doc("Approved User")
+				doc.first_name = user.user_name
+				doc.mobile_no = user.contact_number
+				doc.email = user.email_id
+				doc.role = user.role
+				
+				if user.ghg:
+					ghgData = user.ghg
+					for i in ghgData:
+						row = doc.append('ghg',{})
+						row.project_tracking = i.project_tracking
+				if user.project_tracking:
+					projectTrackingData = user.project_tracking
+					for i in projectTrackingData:
+						row = doc.append('project_tracking',{})
+						row.project_tracking = i.project_tracking
+				if user.reports:
+					reportsData = user.reports
+					for i in reportsData:
+						row = doc.append('reports',{})
+						row.project_tracking = i.project_tracking
+				doc.insert(ignore_permissions = True)
+				frappe.db.commit()
+	return({"status":"Success"})

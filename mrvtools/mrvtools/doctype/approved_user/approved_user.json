@@ -74,8 +74,7 @@
    "fieldtype": "Data",
    "label": "Mobile No",
    "options": "Phone",
-   "read_only": 1,
-   "unique": 1
+   "read_only": 1
   },
   {
    "description": "Get your globally recognized avatar from Gravatar.com",
@@ -183,7 +182,7 @@
  "icon": "fa fa-user",
  "image_field": "user_image",
  "links": [],
- "modified": "2024-07-30 18:14:08.048504",
+ "modified": "2024-08-02 15:01:59.256171",
  "modified_by": "Administrator",
  "module": "Mrvtools",
  "name": "Approved User",
